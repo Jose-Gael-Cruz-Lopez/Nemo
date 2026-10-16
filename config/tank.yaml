@@ -1,32 +1,24 @@
+# Version 3 operator checklist. Runtime profile format: config/site.example.json.
+# All geometry in the example is illustrative; measure actual interior at waterline.
 site:
-  id: demo-tank
-  name: Reeftrace demo tank
+  id: CAL-REPLACE
   units: cm
-  origin: inside-lower-left-usable-corner
-
-geometry:
-  width_cm: 60
-  height_cm: 40
-  safe_polygon_cm: [] # Add measured vertices before enabling any motion.
-  obstacles: []
-  deposition_zones: []
-
-sources:
-  - id: inlet-a
-    polygon_cm: []
-  - id: inlet-b
-    polygon_cm: []
-  - id: inlet-c
-    polygon_cm: []
-
-transport:
-  field_file: data/flow_field.npz
-  pump_setting: null
-  water_depth_cm: null
-  interpolation_min_coverage: 0.7
-  random_seed: 7
-
-safety:
-  hardware_enabled: false
-  require_homed_before_move: true
-  max_pump_duration_ms: 1500
+  water_depth_cm: 12 # Starting point from manual; verify delivered pump flooding.
+  runtime_profile: config/site.local.json
+  camera_calibration: config/camera.local.json
+  observation_mask: contained_in_runtime_profile
+collection:
+  mode: manual_net
+  optional_water_sampler_enabled: false
+  max_sample_pulse_ms: 5000
+hardware:
+  camera: Logitech C920s USB data to laptop
+  circulation_pump: Lifegard DC132 independent 5V supply
+  lighting: NEEWER BP66 two panels each on independent 5V supply
+  surface_trap: measured waterline-contact mesh pocket
+  submerged_coral: scenery_not_surface_obstacle
+  arduino: optional_water_sampling_or_separate_dry_bench
+computer:
+  model: ASUS_MODEL_TBD
+  os: OS_TBD
+  gpu_required: false

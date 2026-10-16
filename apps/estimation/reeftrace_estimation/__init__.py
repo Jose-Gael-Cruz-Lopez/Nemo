@@ -1,1 +1,1 @@
-"""Moving-trajectory and stationary-deposition source inference."""
+"""Forward trajectory and retained-endpoint source inference."""

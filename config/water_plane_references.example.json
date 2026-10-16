@@ -1,0 +1,10 @@
+{
+  "calibration_id": "CAL-REPLACE",
+  "measurement_plane": "water_surface",
+  "capture_size": [1920, 1080],
+  "pixel_points": [[100,900],[1800,900],[1800,100],[100,100]],
+  "world_cm_points": [[0,0],[50,0],[50,25],[0,25]],
+  "check_pixel_points": [[950,500],[440,660],[1460,340]],
+  "check_world_cm_points": [[25,12.5],[10,7.5],[40,17.5]],
+  "note": "ILLUSTRATIVE pixels and dimensions only. Replace every value with independent waterline measurements."
+}

@@ -1,0 +1,6 @@
+{
+  "image_corners": [[100, 700], [1100, 700], [1100, 100], [100, 100]],
+  "width_cm": 60,
+  "height_cm": 40,
+  "note": "EXAMPLE ONLY. Replace all four pixels and dimensions with your measured tank. Corner order: bottom-left, bottom-right, top-right, top-left."
+}

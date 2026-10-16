@@ -1,0 +1,9 @@
+{
+  "dataset_id": "cmems_mod_glo_phy_my_0.083deg_P1D-m",
+  "minimum_longitude": -72,
+  "maximum_longitude": -71,
+  "minimum_latitude": 39,
+  "maximum_latitude": 40,
+  "start_datetime": "2020-01-01T00:00:00Z",
+  "end_datetime": "2020-01-02T00:00:00Z"
+}

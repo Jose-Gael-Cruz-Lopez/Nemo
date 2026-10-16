@@ -17,7 +17,6 @@ coverage/
 # Local configuration and data
 .env
 .env.*
-!.env.example
 data/runs/**
 !data/runs/.gitkeep
 *.sqlite3
@@ -26,3 +25,22 @@ data/runs/**
 # Editor / OS
 .DS_Store
 .vscode/
+
+# Generated dashboard metadata and local camera calibration
+dashboard/next-env.d.ts
+dashboard/*.tsbuildinfo
+config/*.local.json
+
+# Evaluator-only source truth and full-frame archives
+data/evaluator/**
+*.avi
+*.mp4
+
+# Local project plan
+/ReefTrace_Final_Plan.pdf
+
+# Downloaded external datasets and trained model artifacts
+data/external/**
+models/**
+.copernicusmarine/
+.copernicusmarine-credentials

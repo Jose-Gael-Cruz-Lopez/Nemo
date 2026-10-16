@@ -1,13 +1,18 @@
+import Link from "next/link";
+import InvestigationConsole from "../components/InvestigationConsole";
+import DatasetConsole from "../components/DatasetConsole";
+import BenchConsole from "../components/BenchConsole";
+
 const stages = ["Observe", "Classify", "Estimate", "Review"];
 
 export default function Home() {
   return (
     <main className="shell">
       <header className="topbar">
-        <a className="brand" href="/" aria-label="Reeftrace home">
+        <Link className="brand" href="/" aria-label="Reeftrace home">
           <span className="brand-mark">R</span>
           <span>reeftrace</span>
-        </a>
+        </Link>
         <span className="system-state"><span className="state-dot" /> LOCAL SYSTEM</span>
       </header>
 
@@ -46,7 +51,7 @@ export default function Home() {
             <div className="flow flow-one" />
             <div className="flow flow-two" />
             <div className="flow flow-three" />
-            <span className="tank-caption">LIVE TRANSPORT MAP</span>
+            <span className="tank-caption">LAYOUT PREVIEW · NO LIVE DATA</span>
           </div>
           <aside className="evidence-panel">
             <p className="eyebrow">LATEST EVIDENCE</p>
@@ -56,6 +61,9 @@ export default function Home() {
         </div>
         <p className="disclaimer">A source match is not a verified geographic attribution. Results depend on the active site model and its validation.</p>
       </section>
+      <InvestigationConsole />
+      <DatasetConsole />
+      <BenchConsole />
       <footer>REEFTRACE <span>·</span> LOCAL DEMONSTRATION CONSOLE</footer>
     </main>
   );

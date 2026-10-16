@@ -1,0 +1,10 @@
+{
+  "computer_model": "ASUS_MODEL_TBD",
+  "os": "WINDOWS_VERSION_TBD",
+  "python_version": "3.12",
+  "camera_index": 0,
+  "opencv_backend": "dshow",
+  "uno_port": "COM_PORT_TBD",
+  "gpu_required": false,
+  "note": "Placeholders only. Confirm actual OS, USB data ports, camera index and Uno COM port on arrival. Circulation pump and lights use separate supplies."
+}
