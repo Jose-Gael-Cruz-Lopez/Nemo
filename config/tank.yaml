@@ -1,0 +1,32 @@
+site:
+  id: demo-tank
+  name: Reeftrace demo tank
+  units: cm
+  origin: inside-lower-left-usable-corner
+
+geometry:
+  width_cm: 60
+  height_cm: 40
+  safe_polygon_cm: [] # Add measured vertices before enabling any motion.
+  obstacles: []
+  deposition_zones: []
+
+sources:
+  - id: inlet-a
+    polygon_cm: []
+  - id: inlet-b
+    polygon_cm: []
+  - id: inlet-c
+    polygon_cm: []
+
+transport:
+  field_file: data/flow_field.npz
+  pump_setting: null
+  water_depth_cm: null
+  interpolation_min_coverage: 0.7
+  random_seed: 7
+
+safety:
+  hardware_enabled: false
+  require_homed_before_move: true
+  max_pump_duration_ms: 1500

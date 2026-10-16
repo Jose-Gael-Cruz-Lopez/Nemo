@@ -1,0 +1,12 @@
+{
+  "calibration_id": "replace-with-unique-id",
+  "created_at": null,
+  "camera_id": null,
+  "image_size_px": [1280, 720],
+  "tank_size_cm": [60.0, 40.0],
+  "homography_image_to_tank": null,
+  "tank_to_gantry": null,
+  "gantry_safe_polygon_mm": [],
+  "validation_residual_cm": null,
+  "approved": false
+}
