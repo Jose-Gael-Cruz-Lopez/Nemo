@@ -42,10 +42,10 @@ Do not buy or cut tubing until the barb fit row says PRESENT.
 | 8 | Two small hose clamps, plus ties for the outlet | Seal the barb; fix the return outlet outside the tracked region | **NOT USED (operator decision)** | Megana, 22:56 UTC | Operator judged the snug push-fit sufficient without hose clamps. Risk accepted: check for leaks at the barb during the first wet run. The return outlet still needs a fixed, marked position (clip, tie or weight outside the tracked region); method recorded in section 2. |
 | 9 | Watertight bin (Sterilite 6 qt or larger) | Interior measured; pump submerged at a stable waterline with overflow margin; collector fits | **PRESENT** | Megana (reported), 22:57 UTC | Watertight; pump fits submerged with overflow margin. Interior dimensions to be recorded in section 2. |
 | 10 | Mesh pocket (Top Fin breeder or a smaller secured pocket cut from its mesh) | Fits with clearance; holds a token for the full declared horizon | **PRESENT** | Megana (reported), 22:57 UTC | Fits with the pump, leaves open water, and can be fixed in place. Token retention over the full horizon is not yet tested. |
-| 11 | Three identical red floating tokens | Float; one clean red detection each; only one used per run; all recovered | **FIT-FAILED** | Megana + Claude, 22:58 UTC | Team has green bottle caps. The tracker detects red only: tracking.py detect_red uses fixed red HSV ranges, and recording calls it from runtime.py. Green caps would never be detected. Resolve by making the caps red (tape, paint or sticker on top) or by a coordinated colour change with Jose. |
+| 11 | Three identical floating tokens (green bottle caps) | Float; one clean detection each (see the token-detection doc); only one used per run; all recovered | **PRESENT (green caps; needs new detector wired in)** | Megana + Claude, 23:13 UTC | Green bottle caps. The red-only tracker cannot see them, so a colour-independent empty-tank-reference detector was built (docs/foreground-token-detection.md). Recording cannot use it until Jose wires it into runtime.py. Caps must be identical, one per run. |
 | 12 | Ruler or tape measure | Centimetre scale | UNCHECKED | | |
 | 13 | Seven water-plane reference marks | At least 4 mapping marks and 3 **different** check marks at the water-surface height (not the bin floor) | UNCHECKED | | |
-| 14 | Stable lighting, tray and towels, dry protected mains outlet | Tracking stable under room or desk light; electronics dry; GFCI outlet; pump unplugged before touching wet parts | UNCHECKED | | |
+| 14 | Stable lighting, tray and towels, dry protected mains outlet, **plain light sheet under the clear bin** | Tracking stable under room or desk light; electronics dry; GFCI outlet; pump unplugged before touching wet parts | UNCHECKED | | |
 
 Not used in this build: Arduino, ESP32-CAM, MIPI camera, relay, servo, motor
 driver, breadboard power, decorative coral and 3D printing. The pump runs only on
@@ -161,13 +161,14 @@ capture origin is `SYNTHETIC_FAKE_CAPTURE` is never physical evidence.
 
 ## 6. Current blockers
 
-1. **Token colour (blocking all tracking).** The team only has green bottle caps, but
-   the tracker detects red only. `detect_red` in `apps/vision/reeftrace_vision/tracking.py`
-   uses fixed red HSV ranges, and recording calls it from `runtime.py`. Offline check
-   (synthetic image, no camera): a red disc gives 1 detection; green discs at HSV
-   (60,204,200) and (63,213,120) give 0. Needed: a coordinated, configurable token colour
-   (vision change plus a Jose-owned `runtime.py` change), tuned from the real cap under
-   rig lighting. Integration request pending with Jose.
+1. **Token detection (blocking recording).** Green caps are invisible to the red-only
+   tracker. A colour-independent detector now exists
+   (`apps/vision/reeftrace_vision/foreground.py`, see `docs/foreground-token-detection.md`).
+   It passes on synthetic frames and on frames built from the team's empty-tank photo.
+   Recording still calls `detect_red`. The reference/token-size endpoints and the
+   `runtime.py` detector switch are a pending integration request to Jose.
+   **Rig action:** put a plain, opaque, light sheet under the clear bin; the patterned
+   carpet shows through and makes the reference refuse under ripple.
 2. **Inventory rows 12–14 not yet checked.**
 3. **No measurements yet** (section 2). Mapping, drift, profiles and receipts depend on them.
 4. **Second layout:** the intervention collector position must be declared and marked
