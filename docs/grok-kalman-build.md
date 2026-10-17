@@ -116,16 +116,15 @@ adapter is implemented and tested with mocks, but no funded live xAI key has bee
 commissioned. Confirm the organizer's interpretation of the specific voice API
 before claiming eligibility. No billing is enabled by this study.
 
-GitHub checks already run on pushes. Any scheduled Grok research prompt must have
-an explicit cadence and remain a planning/review task: no autonomous merges,
-private-data uploads, messages, camera starts or physical actions. A scheduled chat
-is not a repository execution environment. Repository changes still need local
-review, isolated tests and an authenticated push.
+The user's confirmed automation preference is **only GitHub checks on each
+push**. The existing CI workflow runs on every push and pull request, without a
+scheduled trigger. Grok-assisted planning and code review continue when requested;
+repository changes still need local review, isolated tests and an authenticated
+push.
 
-The account's [Grok Automations page](https://grok.com/automations) now shows
-**Tideward — daily ML and physics research**, **Active**, **Daily at 9:00 AM**
-in the displayed account schedule. App notifications are enabled; email is off.
-No connectors or skills were attached. The scheduled prompt points to current
-public `main`, preserves the viewed-data caveats and requests at most one sourced,
-testable next experiment. It cannot establish that any proposed code ran. At
-creation, the UI showed zero runs; no completed scheduled run is claimed.
+The daily research automation created before the cadence answer arrived has been
+**paused**. The account's [Grok Automations page](https://grok.com/automations)
+shows **Tideward — daily ML and physics research**, **Paused**; this state was
+verified after reloading the page on 17 October 2026. Its retained 9:00 AM schedule
+is inactive. The UI showed zero runs. No scheduled Grok research, autonomous
+merges, messages, camera starts or physical actions are enabled by this study.
