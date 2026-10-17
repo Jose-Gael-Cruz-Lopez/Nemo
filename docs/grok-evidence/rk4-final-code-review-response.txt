@@ -1,0 +1,30 @@
+Grok web static-review output, retrieved 17 October 2026. Not repository execution. This advice is reviewed against actual local implementation/tests, not copied blindly.
+
+GrokWorked for 4sCorrected integrals (prior arithmetic rejected).
+The 650→1100 piece is 450⋅(1+300/750)/2=315450\cdot(1+300/750)/2=315450⋅(1+300/750)/2=315 m, equivalently 450−4502/1500=315450-450^2/1500=315450−4502/1500=315 m.
+Thus
+100→1100=6502−10021300+315=632.307692307692 m.100\to1100=\frac{650^2-100^2}{1300}+315=632.307692307692\,\mathrm{m}.100→1100=13006502−1002​+315=632.307692307692m.
+Earlier figures 540 m, 585.641… m and 609.807… m are rejected arithmetic and did not verify any implementation. Tests will recompute the same integrals in exact rational arithmetic.
+Scheduling helper (static draft).
+PythonCopyCopieddef next_step(elapsed, offset, horizon, output_times, forcing_times, step_cap, accepted):
+    """Return a positive representable dt or raise. Never advance time without motion."""
+    if accepted >= MAX_STEPS:
+        raise _Unsupported("STEP_BUDGET_EXCEEDED")
+    t_abs = offset + elapsed                     # highlight: large offset + small elapsed
+    # strict future knot
+    idx = np.searchsorted(forcing_times, t_abs, side="right")
+    if idx >= len(forcing_times):
+        raise _Unsupported("OUTSIDE_FORCING_TIME")
+    targets = [forcing_times[idx] - offset, horizon]
+    targets += [t for t in output_times if t > elapsed]
+    target = min(targets)
+    dt = min(step_cap, target - elapsed)
+    if not math.isfinite(dt) or dt <= 0 or elapsed + dt <= elapsed:
+        raise _Unsupported("TIME_RESOLUTION_EXHAUSTED")  # no silent snap
+    return dt
+Arrival sampling at elapsed+dt retains the existing strict contributing-corner check; a masked corner or an out-of-range time fails closed with no epsilon bridge.
+Diagnostic clarification.
+Event-only sensitivity uses one finest 75 s path. Derive 300 s, 150 s and 75 s chords by downsampling that same path (retain any terminal partial point) and compare status, event kind, event identity and event time across the three geometries of the identical trajectory. Do not compare against independently integrated native 300/150 paths.
+Integration-only sensitivity runs the three solver steps separately, emits positions only on common 300 s output times, and records numeric separations solely at timestamps reached by all three with COMPLETED; missing coverage or status changes stay explicit and partial paths remain in the denominator.
+UI wording.
+“Knot-aligned RK4 removes steps that straddle forcing-time slope breaks and retains the last supported position at the forcing end. On this field the check shows numerical sensitivity to step size; it does not supply physical truth, a confidence interval, or a change to the frozen NOAA results.”

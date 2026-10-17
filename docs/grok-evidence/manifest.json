@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "purpose": "Archive of inspected historical local Grok evidence and new actual RK4 review rounds; never a complete provider export or proof of provider execution.",
+  "source_checkpoint_commit": "662d1ac583b5c6e04aa43e74fdd2340218371934",
+  "contains_private_credentials": false,
+  "files": [
+    {
+      "file": "01-initial-build-prompt.txt",
+      "source_artifact_name": "ReefTrace_Grok_Build_Prompt.txt",
+      "bytes": 35255,
+      "sha256": "dcc024de26cababad49055d0d91cd03026ef75c4c3252a25f9d86b8bc047945e",
+      "role": "saved prompt prepared for the existing Grok project",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "02-source-static-review.txt",
+      "source_artifact_name": "ReefTrace_Grok_Code_Review.txt",
+      "bytes": 4169,
+      "sha256": "130d64490933ade4faa56022a5e3049404c2c96baf47eaa122a7f93601a010cf",
+      "role": "saved Grok static review output; execution assertions are not independently attested here",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "03-case-and-chalk-static-review.txt",
+      "source_artifact_name": "ReefTrace_Grok_Final_Review.txt",
+      "bytes": 1769,
+      "sha256": "f568768f3c49c2759dc7a807a3c2b97014c6f07cc40149a848fd59d269cf4ed0",
+      "role": "saved Grok static review output for commit 3a99477",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "04-initial-build-handoff.txt",
+      "source_artifact_name": "ReefTrace_Grok_Handoff.txt",
+      "bytes": 3038,
+      "sha256": "54f5b0b7ebcdc06383fc1e08d0ba913507b905eb3d725ef4601c7c77708b1d35",
+      "role": "historical local handoff, not a Grok-authored response",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "05-initial-local-verification.json",
+      "source_artifact_name": "ReefTrace_Grok_Final_Verification.json",
+      "bytes": 984,
+      "sha256": "c01e43c1d031534ad93277115dcf89f3da18bacd49504a5304028447db07e0b6",
+      "role": "historical local execution receipt, not Grok execution",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "06-initial-source-bundle-verification.json",
+      "source_artifact_name": "ReefTrace_Grok_Handoff_Verification.json",
+      "bytes": 274,
+      "sha256": "6fa2e6c95ff012493288453752d32354c9b6668fbcf1d52b28202416eccb531b",
+      "role": "historical local source-bundle receipt",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "07-kalman-build-prompt.txt",
+      "source_artifact_name": "grok-kalman-prompt.txt",
+      "bytes": 6573,
+      "sha256": "0530c94f4eeadadd57c2395d51d96c510369c8e5e631295e21a22740dd66c067",
+      "role": "saved prompt prepared for the existing Grok project",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "08-kalman-static-review.txt",
+      "source_artifact_name": "grok-kalman-review.txt",
+      "bytes": 22606,
+      "sha256": "95b1f47214b9dcd23f3b27c4ee6e85084a7c3676021463856457992140372899",
+      "role": "saved Grok review/conversation capture; includes historical drafts and corrections",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "09-kalman-draft-code.txt",
+      "source_artifact_name": "grok-kalman-corrected.py",
+      "bytes": 3533,
+      "sha256": "3211491b5637ec173f4206042df41672a6d4e9b7d42072e1b015a589cf4179c5",
+      "role": "saved draft; not the authoritative current implementation",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "10-fresh-protocol-static-review.txt",
+      "source_artifact_name": "grok-fresh-protocol-review.txt",
+      "bytes": 2537,
+      "sha256": "17d3d375fb15e302d9a95c0dfc648ebc7738ef58b02077110bc1c55686b44164",
+      "role": "saved Grok static protocol review output",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "11-fresh-schema-static-review.txt",
+      "source_artifact_name": "grok-fresh-schema-review.txt",
+      "bytes": 2501,
+      "sha256": "ea3e9ca9a9a3542b7bf3db62dd69ddcd50731d38d3c85bbb7f1c25bc32ef7638",
+      "role": "saved Grok static schema/amendment review output",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "12-fresh-forecast-static-review.txt",
+      "source_artifact_name": "grok-fresh-forecast-review.txt",
+      "bytes": 1514,
+      "sha256": "d309cba3606ad9370caf764e3ae2961e5890dd835d084cb6fa116925e451e8c8",
+      "role": "saved Grok static evaluator review output",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "13-algorithm-and-demo-static-review.txt",
+      "source_artifact_name": "grok-algorithm-demo-review.txt",
+      "bytes": 4628,
+      "sha256": "46055e3c673caf64cb6b1bb2e81c637ecd1de5092d2c0b4cb69eea88e6d665b4",
+      "role": "saved Grok static algorithm/demo review; later corrected in item 14",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "14-final-accounting-conversation-capture.txt",
+      "source_artifact_name": "grok-final-accounting-review.txt",
+      "bytes": 9530,
+      "sha256": "a5062e2d165c066f8c18afdb7104cdc0cccf4119bd6367e325a1446495f3b151",
+      "role": "saved browser accessibility-text capture, including repeated/corrected historical messages",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-review-prompt.txt",
+      "source_artifact_name": "rk4-knot-review-prompt.txt",
+      "bytes": 18615,
+      "sha256": "0d9f7638b60aca4994d09e4461aafe16afe71fa524a68ea190a0ce32f109261d",
+      "role": "actual outbound Grok web prompt: initial forcing-knot and expiry review",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-review-initial-response.txt",
+      "source_artifact_name": "rk4-knot-review-initial-response.txt",
+      "bytes": 5395,
+      "sha256": "eafe86340f63c6506a0be566922373448c45f47c4248c597c2ab882ede2dde0e",
+      "role": "saved Grok static response: includes rejected arithmetic and time-only snap",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-correction-prompt.txt",
+      "source_artifact_name": "rk4-knot-correction-prompt.txt",
+      "bytes": 2366,
+      "sha256": "74558363dfd41520e9bb08707e9d38ffc72dda93e9b68d972099b49758debfc8",
+      "role": "actual outbound Grok web prompt: no-snap contract and arithmetic correction",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-corrected-response.txt",
+      "source_artifact_name": "rk4-knot-corrected-response.txt",
+      "bytes": 3851,
+      "sha256": "9ba237abcd174f45d9a9ad0c637a443ad8259de707c3a5e76bfa89cdf3092048",
+      "role": "saved Grok static response: retains an integral error corrected subsequently",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-final-math-and-code-prompt.txt",
+      "source_artifact_name": "rk4-final-math-and-code-prompt.txt",
+      "bytes": 1977,
+      "sha256": "8cdc935af43c5ef65eec28c81f9137dba9c579fef6176ff5a553a7bee12f7cdf",
+      "role": "actual outbound Grok web prompt: independent integrals and sensitivity contract",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-final-code-review-response.txt",
+      "source_artifact_name": "rk4-final-code-review-response.txt",
+      "bytes": 2828,
+      "sha256": "3b1cc7ee964e5ece4ae6ed3e029e549ddec1c8fab581ff3e12a22a3563da1d49",
+      "role": "saved Grok static response: accidental rejection of valid alternate-horizon integral and restrictive comparison advice not adopted",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-actual-patch-review-prompt.txt",
+      "source_artifact_name": "rk4-actual-patch-review-prompt.txt",
+      "bytes": 24590,
+      "sha256": "b228ee43f706b0394430676d8d265720fb60c6a762a7e00f98be2995c3d004a9",
+      "role": "actual outbound Grok web prompt: actual local scheduling patch and regressions",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-actual-patch-review-response.txt",
+      "source_artifact_name": "rk4-actual-patch-review-response.txt",
+      "bytes": 3017,
+      "sha256": "109fa54c04053751239ef47b0959d4623d995b9a3a1893ec9adeda16ded5b76b",
+      "role": "saved Grok static adversarial response: no actionable defect found, not execution; restrictive COMPLETED-only advice not adopted",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-patch-local-verification.json",
+      "source_artifact_name": "rk4-patch-local-verification.json",
+      "bytes": 5722,
+      "sha256": "ba297bd96e15eb00397db452c3e650713648ccc356cae8ff2c475df484356208",
+      "role": "local Python patch regression and exact pre-patch replay receipt, not Grok execution or new field evidence",
+      "copied_without_text_edits": true
+    }
+  ],
+  "completeness": "Locally available artifacts inspected for this package; not a complete provider export.",
+  "append_checkpoint": "17 October 2026: four actual Grok web RK4 prompt/response rounds and separate local patch-verification receipt."
+}

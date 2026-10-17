@@ -1,0 +1,33 @@
+Review generated in Grok web. Static review, not independent test execution.
+
+Read-only review of codex/software-execution (commit 944e94c / CI 3e068c1)
+
+I fetched and inspected the exact raw files requested (diagnostics.py, adapters/grok/voice.py, apps/api/reeftrace_api/services/runtime.py, apps/api/reeftrace_api/main.py) plus the corresponding unit tests (tests/unit/test_diagnostics.py, tests/test_grok.py) and docs/grok-ml-diagnostic.md. This is a static code review only; I did not execute tests, start the API, or access the repository beyond public raw content.
+
+Findings
+
+No demonstrable defects were identified in the focused areas (training/holdout separation, provenance/hash checks, dimensions, frozen-report narration, STOP/revision races, operator authorization, secret exposure, bounded external requests, or honest sponsor eligibility).
+
+Training/holdout: training_origin_diagnostic (diagnostics.py L111–210) and run_training_diagnostic (L213–249) slice exclusively to records[:TRAIN_COUNT] / training = records[:training_count]. Prefix XY is projected and _forecast is called before any later-training truth is read or projected (L133–142). Final held-out records are never indexed. Tests confirm this with a sentinel object, prefix-length assertions, and byte-for-byte equality of the existing 18/6 run_real_data_example output.
+Provenance: Independent SHA-256 + manifest + identity/count/time checks occur before any diagnostic call (L216–233); tamper tests reject changed CSV even with updated manifest.
+Frozen narration: build_briefing (voice.py L64–148) snapshots and validates the exact source report (status, support table summing to 1, uncalibrated interpretation, safe IDs) and requires the satellite context to match the pinned offline load exactly. Speech text is a deterministic template; satellite is explicitly separated.
+Races / authorization: speak_briefing (runtime.py L49–68) holds the case lock, rechecks revision / evidence_id / STOPPED|RECOVERING state after synthesis, and discards on mismatch. Mutating endpoints including /briefing/audio require the operator dependency (main.py L79–84, L117), which uses hmac.compare_digest. GET briefing is read-only.
+Secrets / bounds: API key is repr=False; failure paths omit upstream bodies; TTS uses a single non-retrying stream with timeout, size limit, and follow_redirects=False (voice.py L162–218). Default is disabled; readiness reports missing key. No live TTS is claimed.
+Eligibility: Code and docs correctly state TTS is wired but disabled (funded credits required) and that Cursor usage is limited; Photon remains off.
+
+The implementation is consistent with the previously reviewed requirements and the published tests.
+
+Short future dataset-expansion plan
+
+Keep the existing single-day 18/6 free-run and the five-origin training-only diagnostic frozen as historical fixtures. For any expansion:
+
+Select additional NOAA GDP hourly QC drifter-days that are temporally and geographically disjoint from 1987-10-03 (and from each other).
+Pre-declare a development set of days and a held-out test set of days before any model comparison.
+Fit or inspect only on development days; evaluate the same three fixed models (stationary, last-drift, ridge AR1) on the untouched test days using chronological free-runs or rolling origins that stay inside each day’s own prefix.
+Report per-day and aggregate metrics without selecting, promoting, or re-tuning any model on the basis of lower errors.
+Retain the same provenance pinning, upstream-interpolation disclaimer, and “single-day / dependent windows do not establish generalization” language.
+
+Official primary sources: NOAA AOML GDP hourly QC dataset drifter_hourly_qc (DOI 10.25921/x46c-3620, ERDDAP metadata at https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.html); NOAA Coral Reef Watch daily global 5 km DHW product version 3.1 (https://coralreefwatch.noaa.gov/product/5km/index_5km_dhw.php and related product pages); xAI TTS endpoint POST https://api.x.ai/v1/tts (https://docs.x.ai/developers/model-capabilities/audio/text-to-speech).
+
+No repository modifications or messages were sent.
+

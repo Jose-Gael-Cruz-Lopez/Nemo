@@ -1,0 +1,50 @@
+Grok
+Worked for 4s
+
+Static review only. No trajectories or model outcomes were acquired; v1 selected zero groups. The amendment does not induce outcome-based tuning: no scores exist, the 223 exclusions, three blocks, five models and no-replacement rule are unchanged, and the edits are limited to a pre-outcome schema/transport correction (unit-row token, timeouts). The v1 global alias catalog is a registry, not a training cohort.
+
+CSV reader fix (unit row, oversized field, invalid UTF-8, absolute deadline)
+
+Python
+Copy
+Copied
+import csv, time
+from io import StringIO
+
+def read_metadata_csv(payload: bytes, *, max_bytes: int, deadline: float):
+    if time.monotonic() > deadline:
+        raise TimeoutError("absolute acquisition deadline exceeded")
+    if len(payload) > max_bytes:
+        raise ValueError("metadata exceeds byte budget")
+    try:
+        text = payload.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError("invalid UTF-8 in metadata") from exc
+    # NOAA ERDDAP: row 0 = names, row 1 = units (expno unit is "count", not "")
+    rows = list(csv.reader(StringIO(text)))
+    if len(rows) < 2 or rows[0] != EXPECTED_COLUMNS:
+        raise ValueError("metadata header mismatch")
+    if rows[1][rows[0].index("expno")] != "count":
+        raise ValueError("expno unit must be count")
+    return rows[2:]  # data only
+
+Tests
+
+Python
+Copy
+Copied
+def test_unit_row_accepts_count():
+    payload = b"ID,time,latitude,longitude,WMO,expno,location_type\n,,degrees_north,degrees_east,,count,\n1,..."
+    assert read_metadata_csv(payload, max_bytes=300_000, deadline=time.monotonic()+10)
+
+def test_oversized_and_bad_utf8():
+    with pytest.raises(ValueError, match="byte budget"):
+        read_metadata_csv(b"x"*300_001, max_bytes=300_000, deadline=time.monotonic()+10)
+    with pytest.raises(ValueError, match="UTF-8"):
+        read_metadata_csv(b"\xff", max_bytes=300_000, deadline=time.monotonic()+10)
+
+def test_deadline():
+    with pytest.raises(TimeoutError):
+        read_metadata_csv(b"ID,...\n", max_bytes=300_000, deadline=time.monotonic()-1)
+
+Adversarial note. Because v1 produced zero selections and zero scores, lengthening timeouts and accepting the official count unit cannot be outcome-driven. Freeze the new protocol hash and the corrected reader hash before any v2 request; any later change after a score appears must fail closed. The honest claim remains previously unscored GDP-ID groups with held future positions, not proven physical independence.

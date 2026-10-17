@@ -1,0 +1,33 @@
+Historical Grok web static-review output, retrieved 17 October 2026. Not repository execution. This response includes incorrect arithmetic and a rejected time-snapping proposal; see subsequent correction before interpreting it.
+
+GrokWorked for 18sStatic review only. No repository execution or remote change is claimed. The completed NOAA study stays frozen.
+(A) Conceptual flaws / edge semantics
+The contract is sound on the two reported failures, with two clarifications required.
+
+Zero/tiny steps. Bounding dt by the next strictly future knot can yield a sub-normal or zero step when offset + elapsed lands within floating-point noise of a knot, or when the remaining time is smaller than ~1e-9 s. The loop must treat any dt < 1e-6 s (the existing minimum used elsewhere) as exact arrival at that knot: advance elapsed to the knot, accept the point if the sample at that exact time is supported, and do not issue an RK4 stage. Otherwise MAX_STEPS can be exhausted by vanishing steps.
+Masked-knot semantics. A step that is shortened to land exactly on a forcing knot must still run the existing strict contributing-corner mask check at the arrival location and time. If any corner is masked, stop with MASKED_CURRENT_CELL and retain the last fully supported position; do not accept the knot sample or continue. “Retain through the forcing end” applies only when the sample at the final forcing time is supported.
+
+No other conceptual flaw is apparent: the RK4 weights, WGS84 metric conversion, bilinear/linear interpolation, and refusal to extrapolate or zero-fill remain correct.
+(B) Code-level patch plan (grounded in the supplied advect_current)
+Inside the while elapsed < horizon loop, replace the single dt = min(step, horizon - elapsed, next_output - elapsed) with:
+
+Compute t_now = offset + elapsed.
+Find the smallest forcing time strictly greater than t_now (binary search on sampler.times). If none exists, break with OUTSIDE_FORCING_TIME after ensuring the track contains the point at current elapsed (already accepted).
+Setdt = min(step, horizon - elapsed, next_output - elapsed, next_knot - t_now).
+If dt < 1e-6, snap: set elapsed to the knot (or horizon/output), sample once at the exact time, accept if supported, and continue. Do not call the four derivative stages.
+Otherwise execute the existing RK4 stages (all samples now lie inside a single forcing interval) and accept as today.
+On any _Unsupported from a stage or from the arrival sample, keep the same PARTIAL/UNSUPPORTED logic already present; never extrapolate.
+
+Leave CurrentSampler.sample, _bracket, the RK4 formula, WGS84 conversion, mask policy, geometry and scoring untouched. Update the method identifier string so the hash changes; do not reuse prior receipts.
+(C) Independent analytic regression cases
+
+Knot-crossing recovery. Uniform u = [0, 1, 0] m/s at t = [0, 650, 1400], v = 0, lat = 0, step = 300 s, output/horizon = 1000 s. Exact piecewise-linear integral = 0⋅650+1⋅350=3500\cdot650 + 1\cdot350 = 3500⋅650+1⋅350=350 m east, plus the linear ramp: displacement = 593.3‾593.\overline{3}593.3 m. After the split, the numerical result must match this value within 1e-6 m relative.
+Forcing-end retention. Last forcing time 1400 s, horizon 1800 s, step 300 s, output 900 s. Must accept the supported path through exactly 1400 s, then return PARTIAL / OUTSIDE_FORCING_TIME with completed_horizon_s == 1400. Must not report 1200 s and must not extrapolate.
+Nonzero offset. Same uniform field, start offset = 100 s. Integral from 100 s to 1000 s of the piecewise-linear u equals 540540540 m. Recover within tolerance.
+Exact-knot masked future. Place a masked corner at the spatial location reached at a forcing knot. The step that would land on that knot must raise MASKED_CURRENT_CELL and leave completed_horizon_s at the previous accepted time.
+Pinned snapshot unchanged. On the default PacIOOS field (knots every 10 800 s) the track latitudes, longitudes and status must be identical to the pre-patch result for the six releases; only the method hash differs.
+
+(D) Plain-words explanation and diagnostic assessment
+RK4 estimates the next position by sampling the current at the start, two midpoints and the end of a short step, then taking a weighted average. When the supplied current changes slope abruptly at a forcing time, a step that straddles that instant mixes two different slopes and drifts from the true integral. Splitting every step at the next forcing time keeps each RK4 sample inside one linear piece, so the integrator follows the supplied field more faithfully. This removes a numerical inconsistency; it does not make the current field itself more accurate, nor does it turn model output into observed plastic motion.
+A separate development diagnostic that re-runs the same path at 300 s, 150 s and 75 s steps, reporting positions only on the common 300 s output times, plus a chord-refinement check on the finest path, is useful for exposing step-size sensitivity. Because the interpolated field is merely continuous (not smooth) at knots and the spatial interpolant is bilinear, the comparison does not constitute independent truth, an error bar, or evidence of universal fourth-order convergence.
+Primary references for integrator practice remain the GMD Parcels paper and the OceanParcels time-step tutorial; neither supplies a plastic-validation claim for this diagnostic.

@@ -1,0 +1,661 @@
+# Tideward documentation archive manifest
+
+Machine-readable source: `manifest.json`. Its SHA-256 is `78a8a611df6998e6a8e83d1aa6e1a45362b0e6a7f08d236aca64b32850fc3e5e`. This is the exact manifest rendered for a native Markdown artifact; it does not publish or commit anything.
+
+```json
+{
+  "schema_version": 1,
+  "kind": "PUBLIC_DOCUMENTATION_WORKING_TREE_SNAPSHOT",
+  "repository_url": "https://github.com/Jose-Gael-Cruz-Lopez/reeftrace",
+  "captured_at_utc": "2026-10-17T19:15:32.660063Z",
+  "git_source_baseline": "662d1ac583b5c6e04aa43e74fdd2340218371934",
+  "working_tree_scope": "Includes numerical-sensitivity documentation not yet pushed at capture; source baseline alone does not identify all archived content.",
+  "source_document_count": 58,
+  "source_bytes": 702933,
+  "source_content_modified": false,
+  "upload_chunk_max_bytes": 650000,
+  "publication_performed": false,
+  "privacy_scan": {
+    "passed": true,
+    "categories": [
+      "home_path",
+      "provider_key",
+      "email_address",
+      "phone_number",
+      "redeemable_credit_code"
+    ],
+    "credential_files_read": false,
+    "private_media_included": false,
+    "redactions_required": false
+  },
+  "index": {
+    "file": "README.md",
+    "bytes": 15423,
+    "sha256": "1c2a398652dbc1aa39146f5b55bfb9d3aa200f3fc295ab58a8c4045785992bcc"
+  },
+  "chunks": [
+    {
+      "file": "01-reference-library.md",
+      "bytes": 633457,
+      "sha256": "4f0d569b77579261f1004e06e90103fba9000bf153e9d58abed7bc7e7177ff78",
+      "document_count": 51,
+      "first_document": 1,
+      "last_document": 51
+    },
+    {
+      "file": "02-reference-library.md",
+      "bytes": 97317,
+      "sha256": "2b41371c84bcb58ae63059220caa8adbc3d7e5fd87120b89dea6ca273c72df86",
+      "document_count": 7,
+      "first_document": 52,
+      "last_document": 58
+    }
+  ],
+  "sources": [
+    {
+      "number": 1,
+      "source_path": "README.md",
+      "bytes": 30803,
+      "sha256": "c7f53f4e6f7a9d6882b0c8358653062ad163026a13d3456e6ec490b6663761d3",
+      "source_status": "modified_working_tree",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 2,
+      "source_path": "adapters/butterbase/README.md",
+      "bytes": 300,
+      "sha256": "aa27feca258e4d3db8845d70ca1e186d60688a622f22fc53339db2c566c5e510",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 3,
+      "source_path": "adapters/chalk/README.md",
+      "bytes": 596,
+      "sha256": "c5701757258789c9b4536b8b3b85a00248bdc7f0981b66d49f16d7ae031f564c",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 4,
+      "source_path": "adapters/local_store/README.md",
+      "bytes": 356,
+      "sha256": "3ead0b53191d11f66c7812326e86287fa980147ed27ae48843f6c7fecd6b9cda",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 5,
+      "source_path": "adapters/photon/README.md",
+      "bytes": 551,
+      "sha256": "4b7df675375f96bc50aebaaf28c5746bae26e3b0bdbae0a777345eb79c0c7646",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 6,
+      "source_path": "data/current_fields/pacioos-current-forecast-v1/README.md",
+      "bytes": 2729,
+      "sha256": "18d35cb1ded0c24f61e8cfaf81967729eae106527081d78470de16208788ba8b",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 7,
+      "source_path": "data/public/noaa-fixed-kalman-diagnostic-v1/README.md",
+      "bytes": 5700,
+      "sha256": "145184828e7c8da3038f757ef440b3d5afedd7fab4dae5337d0f32e95411933f",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 8,
+      "source_path": "data/public/noaa-fresh-drifter-v2/README.md",
+      "bytes": 6446,
+      "sha256": "1415953ef56530018ee241dff40cc8dc5a593e22112195e3d4962752ebc1a269",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 9,
+      "source_path": "data/public/noaa-multidrifter-v1/README.md",
+      "bytes": 5229,
+      "sha256": "68a23fa7800c9d5cbe1fd8494131d225a6a4feb8a1c47ad2efbbf533577bb318",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 10,
+      "source_path": "data/sample_runs/README.md",
+      "bytes": 988,
+      "sha256": "97f55a7a3dc0055f94db7880e264dabf8d7b3d18a8e665216701203b51f31613",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 11,
+      "source_path": "docs/algorithm-contract-audit.md",
+      "bytes": 36617,
+      "sha256": "09970b65de317142483798d51e1a2b39013c41fedf0e2348826e11d977537d0e",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 12,
+      "source_path": "docs/architecture.md",
+      "bytes": 5100,
+      "sha256": "527c9d3c7211ecfb04e901dbc0781547bed7a8eb2550c05b4cb962aae9d6849e",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 13,
+      "source_path": "docs/camera-preview.md",
+      "bytes": 6047,
+      "sha256": "cae6b75e346a656652701d6175560697be48d3e43ffdb9f632792d9fc09e3546",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 14,
+      "source_path": "docs/chalk-user-guide.md",
+      "bytes": 14961,
+      "sha256": "bc5a73f114f0655d20dba015326d2c9365570015c2625343eae9b40143c285b3",
+      "source_status": "untracked_working_tree",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 15,
+      "source_path": "docs/ci.md",
+      "bytes": 8210,
+      "sha256": "8a6c2710c611df4259f34da99b00789e34054e452dd56f7608e813ef0d089ee1",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 16,
+      "source_path": "docs/current-driven-prediction.md",
+      "bytes": 7438,
+      "sha256": "0c856b93e437757d9ba92e57b2cbd9ef6b057dd21b5dbdaf44c0a73d68e1f77a",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 17,
+      "source_path": "docs/datasets.md",
+      "bytes": 14925,
+      "sha256": "6fc66888247636cd26204bf3645c7bea40382be41800b123ebdfec86d8edce43",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 18,
+      "source_path": "docs/execution-plan.md",
+      "bytes": 16711,
+      "sha256": "053d0709416df13ea5470748206ebef790f453d0875808409dfcc44d2dd968f0",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 19,
+      "source_path": "docs/experiment-validation-v2.md",
+      "bytes": 14070,
+      "sha256": "2b3ebea7b132effd088a5827c5004f98d9ce89f9f644c12ac28f2cea1d605e9e",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 20,
+      "source_path": "docs/field-commissioning.md",
+      "bytes": 12821,
+      "sha256": "40bf7ba8e16d2251578ea478a0504083ac1470b8b30e2fded4e621bd0e6732d9",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 21,
+      "source_path": "docs/four-person-build-plan.md",
+      "bytes": 34693,
+      "sha256": "633432b049825a53214cd56dfd64adac2e886405c61964fccd9be57713e46e84",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 22,
+      "source_path": "docs/fresh-noaa-study.md",
+      "bytes": 11257,
+      "sha256": "86855486a2567b7b84fe38a9b472cb42163879c1008ee547f0ea3759b24e7b17",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 23,
+      "source_path": "docs/glass-workspace.md",
+      "bytes": 2874,
+      "sha256": "ed0f86eff7bebe8e6b1c4464dad3918e12beaa03f6d8262c28c3372a6db50f56",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 24,
+      "source_path": "docs/grok-contribution-ledger.md",
+      "bytes": 38096,
+      "sha256": "c75218f65306770e043cec2ff048b60edd7ac19f3ec79ae8256bab562ab4dea8",
+      "source_status": "untracked_working_tree",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 25,
+      "source_path": "docs/grok-evidence/README.md",
+      "bytes": 4168,
+      "sha256": "548eba819922ab58f69c97805f6c3308e1cc1ffd1290286b0ebeb3f56f73a36c",
+      "source_status": "untracked_working_tree",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 26,
+      "source_path": "docs/grok-fresh-build.md",
+      "bytes": 6639,
+      "sha256": "bb2cf0c19e85b2ba858e32e18a36522b16ffb3c7c8dee17d0cda248c991b4aa3",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 27,
+      "source_path": "docs/grok-kalman-build.md",
+      "bytes": 8583,
+      "sha256": "3d5072843526e2d33e1b4f38875c26cbba6c8060964ae369d69a7c820a7b070c",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 28,
+      "source_path": "docs/grok-ml-diagnostic.md",
+      "bytes": 5796,
+      "sha256": "912c8ce8cafcc92af32d0d22687b9dde437f915122753039c57c55067189ef16",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 29,
+      "source_path": "docs/grok-ml-next-study.md",
+      "bytes": 8119,
+      "sha256": "4dfb63c5193c8619b4059c5513279ce4e72bb4af983d65fef96619f01941150e",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 30,
+      "source_path": "docs/grok-motion-ablation.md",
+      "bytes": 6028,
+      "sha256": "dc213fb25261937601e890cca05fd6a57d78b5bf5d2e6b68737d2ce46673b848",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 31,
+      "source_path": "docs/grok-space-context.md",
+      "bytes": 8765,
+      "sha256": "c30d5f24bea0d538b252d4d488e0e3f944c862cf31174a3a52a3f5146bb0645f",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 32,
+      "source_path": "docs/integrated-team-demo.txt",
+      "bytes": 34018,
+      "sha256": "0280be1e76b10eed568397ea845b60908d40b705496cd73706b0ec8fd4e38b43",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 33,
+      "source_path": "docs/integrations.md",
+      "bytes": 18383,
+      "sha256": "c4fca5b171cc5a864d1a99f5f9d6dfa663495cbc19db607839d7e757c75b376f",
+      "source_status": "modified_working_tree",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 34,
+      "source_path": "docs/interface-design.md",
+      "bytes": 3222,
+      "sha256": "4459e3791b8e58438c5bc2ca784a80c6c26b076ed136c94128e59a0aa0b4a686",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 35,
+      "source_path": "docs/ml-experiment-audit.txt",
+      "bytes": 9226,
+      "sha256": "2ddd84b175c5aba86e1792a912128aa26c7a86f2b2bc6658b4b9d420d42fca42",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 36,
+      "source_path": "docs/motion-vector-research.txt",
+      "bytes": 17395,
+      "sha256": "97a9abb4f7cab03c6f7077f31b40cffee922b2e8cc75e59d4a997e3a387cebbb",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 37,
+      "source_path": "docs/next-current-data-study.md",
+      "bytes": 5214,
+      "sha256": "8526b3c0cfe74185a50d5aa5596a90d5ea6155d5f64cadb8c64dccd803c82165",
+      "source_status": "untracked_working_tree",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 38,
+      "source_path": "docs/ocean-prevention.md",
+      "bytes": 11701,
+      "sha256": "4a78495af74428bd6450811ea0ba1bc369b7c3bb94ae0e6d228e411b7bc12124",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 39,
+      "source_path": "docs/physics.md",
+      "bytes": 17430,
+      "sha256": "de4a94f495a2e65156b66124d192323ae1b4fef0607535cfb610a9f817ebe8ad",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 40,
+      "source_path": "docs/prevention-physics.md",
+      "bytes": 6273,
+      "sha256": "aca2162ba091a8c495acf85db53e7033992edbe227002c0f4765c8f345c92787",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 41,
+      "source_path": "docs/prevention-validation-protocol.md",
+      "bytes": 15039,
+      "sha256": "f77acca8a2ba4e0f9780ba329bf7f6d93f6ed047b5f5589c75765dc4d3aed247",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 42,
+      "source_path": "docs/prevention-workflow.md",
+      "bytes": 9696,
+      "sha256": "8ded806adc900c1564c84353c4583ac08e480af6fe91580ffa8b6987d4cfde64",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 43,
+      "source_path": "docs/public-ocean-showcase.md",
+      "bytes": 4229,
+      "sha256": "d85f8103d490261fcc779d9505299cba33a15cf5935c8c61cef58a6b2e6ed019",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 44,
+      "source_path": "docs/research-learning-plan.md",
+      "bytes": 18666,
+      "sha256": "ba7aca9fa3ad6474e4d0dde5cf74fc2133fa98698d7343e86efba657a3808384",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 45,
+      "source_path": "docs/research-real-data.md",
+      "bytes": 13427,
+      "sha256": "7bd446723b6dfe8413e0dba2e31678a00c599629f9af3b5f0ef40b6deab74b18",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 46,
+      "source_path": "docs/research-transport-physics.md",
+      "bytes": 22578,
+      "sha256": "d47d8e2194fa812e6b1fd0bc09e91bd8ae1094c6d4c34b9a2e19c07817b4fd28",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 47,
+      "source_path": "docs/rk4-numerical-quality.md",
+      "bytes": 6177,
+      "sha256": "8b320c22cfb0cae42f6e8db3165bf67337897ff6217d9e9afa8e0bccf5929675",
+      "source_status": "untracked_working_tree",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 48,
+      "source_path": "docs/software-demo-acceptance.md",
+      "bytes": 14984,
+      "sha256": "68893caa7d4c5bd3d0ee88f902112f95f1e0b0a0fcc7e482eebd24cb8766449c",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 49,
+      "source_path": "docs/software-export-contract.md",
+      "bytes": 13472,
+      "sha256": "369d01171a5f1c3a3e4bc8a9c906046cda99ad9aa2507d2962937beebe5aadc1",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 50,
+      "source_path": "docs/software-handoffs.md",
+      "bytes": 18198,
+      "sha256": "e4f7f8fd209a8d61a6ffc607690585e2ab950467e9780d6f1fcb58ba257e36f9",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 51,
+      "source_path": "docs/team-handoff-prompts.md",
+      "bytes": 24924,
+      "sha256": "cfa4e9e92ba5dd29e737eb9b9710db7df324e3469e61d8a09a0a857a49100c3a",
+      "source_status": "tracked_at_baseline",
+      "chunk": "01-reference-library.md"
+    },
+    {
+      "number": 52,
+      "source_path": "docs/tideward-product-guide.md",
+      "bytes": 52845,
+      "sha256": "e2916f0fb3ed15dd8af78e748b6498fe5b12d66b324ba708d3d4f7c4c837ff8d",
+      "source_status": "modified_working_tree",
+      "chunk": "02-reference-library.md"
+    },
+    {
+      "number": 53,
+      "source_path": "docs/trace3-implementation.md",
+      "bytes": 7755,
+      "sha256": "e8896ad122ae43979660b3cd4f80100a4a16c79c6177855dac499cbf38b5b2c4",
+      "source_status": "tracked_at_baseline",
+      "chunk": "02-reference-library.md"
+    },
+    {
+      "number": 54,
+      "source_path": "docs/trace3-research-and-contract.md",
+      "bytes": 13098,
+      "sha256": "71d4c606fcbf43fc30c276ea92fa6c412242a8fc531001d364768fe260986221",
+      "source_status": "tracked_at_baseline",
+      "chunk": "02-reference-library.md"
+    },
+    {
+      "number": 55,
+      "source_path": "docs/verification.md",
+      "bytes": 18364,
+      "sha256": "c37d5f8560e34341096e98a9e13e03c20084498676acfadafd7f228c81143c97",
+      "source_status": "modified_working_tree",
+      "chunk": "02-reference-library.md"
+    },
+    {
+      "number": 56,
+      "source_path": "firmware/reeftrace_arduino/README.md",
+      "bytes": 341,
+      "sha256": "a05b944d7a979e552ea725b61368f53bb5acc32b1e4dce65585ec9a5ca4c7b15",
+      "source_status": "tracked_at_baseline",
+      "chunk": "02-reference-library.md"
+    },
+    {
+      "number": 57,
+      "source_path": "tests/integration/README.md",
+      "bytes": 187,
+      "sha256": "818fb70a282d33a17d36a13dd2c12d14d993c07794f3488d02840b7dbd6fbe06",
+      "source_status": "tracked_at_baseline",
+      "chunk": "02-reference-library.md"
+    },
+    {
+      "number": 58,
+      "source_path": "tests/replay/README.md",
+      "bytes": 475,
+      "sha256": "2fdd56fa8bb916500dde5d076d1655880b3e086ec21af19df984da9b2558b0ac",
+      "source_status": "tracked_at_baseline",
+      "chunk": "02-reference-library.md"
+    }
+  ],
+  "external_canonical_grok_coverage_not_duplicated": [
+    {
+      "source_path": "docs/grok-evidence-bundle.md",
+      "bytes": 255553,
+      "sha256": "3c75184fa189a3cc2c3fea5d1cf390de9709d6864173b6a29f7b6e92dd597ef6",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/01-initial-build-prompt.txt",
+      "bytes": 35255,
+      "sha256": "dcc024de26cababad49055d0d91cd03026ef75c4c3252a25f9d86b8bc047945e",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/02-source-static-review.txt",
+      "bytes": 4169,
+      "sha256": "130d64490933ade4faa56022a5e3049404c2c96baf47eaa122a7f93601a010cf",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/03-case-and-chalk-static-review.txt",
+      "bytes": 1769,
+      "sha256": "f568768f3c49c2759dc7a807a3c2b97014c6f07cc40149a848fd59d269cf4ed0",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/04-initial-build-handoff.txt",
+      "bytes": 3038,
+      "sha256": "54f5b0b7ebcdc06383fc1e08d0ba913507b905eb3d725ef4601c7c77708b1d35",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/07-kalman-build-prompt.txt",
+      "bytes": 6573,
+      "sha256": "0530c94f4eeadadd57c2395d51d96c510369c8e5e631295e21a22740dd66c067",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/08-kalman-static-review.txt",
+      "bytes": 22606,
+      "sha256": "95b1f47214b9dcd23f3b27c4ee6e85084a7c3676021463856457992140372899",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/09-kalman-draft-code.txt",
+      "bytes": 3533,
+      "sha256": "3211491b5637ec173f4206042df41672a6d4e9b7d42072e1b015a589cf4179c5",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/10-fresh-protocol-static-review.txt",
+      "bytes": 2537,
+      "sha256": "17d3d375fb15e302d9a95c0dfc648ebc7738ef58b02077110bc1c55686b44164",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/11-fresh-schema-static-review.txt",
+      "bytes": 2501,
+      "sha256": "ea3e9ca9a9a3542b7bf3db62dd69ddcd50731d38d3c85bbb7f1c25bc32ef7638",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/12-fresh-forecast-static-review.txt",
+      "bytes": 1514,
+      "sha256": "d309cba3606ad9370caf764e3ae2961e5890dd835d084cb6fa116925e451e8c8",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/13-algorithm-and-demo-static-review.txt",
+      "bytes": 4628,
+      "sha256": "46055e3c673caf64cb6b1bb2e81c637ecd1de5092d2c0b4cb69eea88e6d665b4",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/14-final-accounting-conversation-capture.txt",
+      "bytes": 9530,
+      "sha256": "a5062e2d165c066f8c18afdb7104cdc0cccf4119bd6367e325a1446495f3b151",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-actual-patch-review-prompt.txt",
+      "bytes": 24590,
+      "sha256": "b228ee43f706b0394430676d8d265720fb60c6a762a7e00f98be2995c3d004a9",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-actual-patch-review-response.txt",
+      "bytes": 3017,
+      "sha256": "109fa54c04053751239ef47b0959d4623d995b9a3a1893ec9adeda16ded5b76b",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-final-code-review-response.txt",
+      "bytes": 2828,
+      "sha256": "3b1cc7ee964e5ece4ae6ed3e029e549ddec1c8fab581ff3e12a22a3563da1d49",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-final-math-and-code-prompt.txt",
+      "bytes": 1977,
+      "sha256": "8cdc935af43c5ef65eec28c81f9137dba9c579fef6176ff5a553a7bee12f7cdf",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-knot-corrected-response.txt",
+      "bytes": 3851,
+      "sha256": "9ba237abcd174f45d9a9ad0c637a443ad8259de707c3a5e76bfa89cdf3092048",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-knot-correction-prompt.txt",
+      "bytes": 2366,
+      "sha256": "74558363dfd41520e9bb08707e9d38ffc72dda93e9b68d972099b49758debfc8",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-knot-review-initial-response.txt",
+      "bytes": 5395,
+      "sha256": "eafe86340f63c6506a0be566922373448c45f47c4248c597c2ab882ede2dde0e",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-evidence/rk4-knot-review-prompt.txt",
+      "bytes": 18615,
+      "sha256": "0d9f7638b60aca4994d09e4461aafe16afe71fa524a68ea190a0ce32f109261d",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    },
+    {
+      "source_path": "docs/grok-ml-next-prompts.txt",
+      "bytes": 8675,
+      "sha256": "ff7f0843b915bf2cdb35a5a4a640607d533835ec6d78c566c0ec1e91e09a7282",
+      "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."
+    }
+  ],
+  "general_exclusions": [
+    "Private/local/runs, credentials, contacts, camera frames and databases",
+    "Raw datasets/JSON evaluations/executable code/dependencies/generated builds",
+    "Binary PDF/image assets are linked only",
+    "Export directory and builder are excluded to prevent recursion"
+  ]
+}
+```

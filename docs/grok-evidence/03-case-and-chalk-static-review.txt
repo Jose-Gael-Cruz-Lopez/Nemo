@@ -1,0 +1,15 @@
+Grok
+Worked for 18s
+
+Final static review of commit 3a99477b3cb0ede58223f5fe80455472b38b461b
+
+Fetched and inspected only the changed files: adapters/chalk/agent.py, apps/api/reeftrace_api/main.py, dashboard/app/page.tsx, dashboard/app/components/evidence-state.ts, and scripts/e2e_demo.py. This is a read-only static review; no tests were executed here and the in-progress hosted CI run is not claimed to have passed.
+
+No supported new correctness defect.
+
+investigate in adapters/chalk/agent.py now computes request_budget = min(settings.request_timeout_s, remaining turn time) (default 25 s) inside the outer asyncio.timeout_at 60 s deadline, still caps the loop at 9 calls, adds only diagnostic fields on TIMEOUT (timeout_stage, timeout_scope, model_calls_attempted, tools_completed), and performs no retries. Tool/evidence gates in _finish are unchanged.
+create_app in apps/api/reeftrace_api/main.py restricts private-network CORS preflights to the exact origins http://localhost:3000 and http://127.0.0.1:3000 while preserving the existing operator HMAC dependency on mutating routes.
+currentSourceEvidence and canReloadSourceEvidence in dashboard/app/components/evidence-state.ts, used by page.tsx, expose a report or the GET-only “Reload source report” action only when both case_id and evidence_id match the currently selected case; late or mismatched results are discarded. setEvidence clears case-bound answer and analysis.
+audit in scripts/e2e_demo.py fails fast before mutation if Photon is enabled or the camera is running, then verifies the training diagnostic (five origins, test_data_used: false), satellite context, frozen briefing text/hashes, and disabled Voice (no audio request).
+
+The next scientific priority remains blind physical tank trials.

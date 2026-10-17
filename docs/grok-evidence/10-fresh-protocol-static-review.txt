@@ -1,0 +1,44 @@
+Grok
+Worked for 20s
+
+Must-fix issues before acquisition (static). No execution claimed.
+
+Pin the global ID↔WMO identity snapshot. The protocol requires “one positive canonical WMO per ID” and exclusion of every known reserved WMO, yet it only hashes exclusions.json. Without a separate frozen, hashed global ID,WMO&distinct() payload (and its detached SHA-256) written before any per-block metadata query, “known positive reserved WMO” and “candidate snapshot WMO must agree” cannot be re-derived deterministically.
+Treat unresolved reserved aliases as reported, not silently ignored. Keep the stated policy (do not block solely because old aliases are unresolved), but the selection receipt must list every reserved GDP ID whose WMO is missing or ambiguous and set physical_alias_resolution_verified=false. Omitting that list would over-claim alias completeness.
+
+No other must-fix is required for the frozen model set, budgets, no-replacement rule, or 180-cell failure policy.
+
+Minimal pseudocode
+
+Python
+Copy
+Copied
+def rederive_selection(exclusions, identity_bytes, block_metadata_bytes):
+    if sha256(identity_bytes) != PINNED_IDENTITY_SHA:
+        raise ValueError("identity snapshot mismatch")
+    reserved_gdp = set(exclusions["gdp_ids"])
+    reserved_wmo = {row["WMO"] for row in parse(identity_bytes)
+                    if row["ID"] in reserved_gdp and row["WMO"]}
+    unresolved = [i for i in reserved_gdp if not any(
+        r["ID"] == i and r["WMO"] for r in parse(identity_bytes))]
+    selected = []
+    for block in BLOCKS:  # ordered
+        rows = parse(block_metadata_bytes[block["id"]])
+        eligible = []
+        for row in rows:
+            if (row["ID"] in reserved_gdp or row["WMO"] in reserved_wmo
+                    or row["ID"] in {s["ID"] for s in selected}
+                    or not is_positive_unambiguous(row["WMO"], identity_bytes)):
+                continue
+            eligible.append(row["ID"])
+        selected.extend(sorted(set(eligible), key=int)[:2])
+    return selected, unresolved  # freeze these + hashes BEFORE any trajectory request
+
+def forecasts_before_truth(prefix, models):
+    forecasts = {m: model_forecast(prefix, m) for m in models}  # no future access
+    return forecasts  # truth read only after this returns
+
+def account(outcomes, target=180):
+    if len(outcomes) != target or any(o["status"] != "SCORED" for o in outcomes):
+        return {"macro": None, "reason": "INCOMPLETE"}  # per-group rows stay visible
+    return {"macro": equal_group_means(outcomes)}

@@ -1,0 +1,26 @@
+{
+  "commit": "3e068c1de81515f04279d0760022fcbfcb144fce",
+  "local_python_tests_passed": 305,
+  "ruff": "PASS",
+  "dashboard_lint": "PASS",
+  "dashboard_types": "PASS",
+  "dashboard_production_build": "PASS",
+  "github_ci": "PASS",
+  "github_ci_url": "https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/38994984931",
+  "browser_flows": {
+    "noaa_fixed_holdout_replay": "PASS",
+    "grok_training_diagnostic": "PASS",
+    "satellite_context": "PASS",
+    "frozen_briefing_text": "PASS",
+    "voice_without_key_fallback": "PASS"
+  },
+  "chalk_live_investigation": "REPORT_WITH_FROZEN_EVIDENCE",
+  "external_model_latency": "Transient 503/timeout failures observed; safe STOP fallback retained.",
+  "grok_voice_live_call": "NOT_RUN_USER_SELECTED_NO_KEY",
+  "cursor_build": "Two Grok implementation turns completed; subsequent usage cap",
+  "photon_enabled": false,
+  "messages_sent": 0,
+  "billing_changed": false,
+  "hardware_actuation": false,
+  "git_worktree": "CLEAN"
+}

@@ -4,6 +4,8 @@ Tideward helps teams compare where to intercept floating pollution before it rea
 
 **Tideward** is the product name. Repository names, Python packages, environment variables and API identifiers remain **ReefTrace**. The current product is a controlled prototype: its software works without a physical rig, while real tank performance and environmental benefit remain unmeasured.
 
+Start with the [complete product handbook](docs/tideward-product-guide.md) for every feature and graph, and [Chalk in Tideward](docs/chalk-user-guide.md) for the AI integration's job, permissions, current model selection and failure behavior. Historical setup notes retain their original context; the current handbook explains which capabilities are local, public, verified or awaiting physical measurements.
+
 ## Start locally
 
 Use Python 3.12 and Node 20.9+; the verified development environment uses Python 3.12 and Node 24. From the repository root:

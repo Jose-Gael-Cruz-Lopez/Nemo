@@ -1,0 +1,195 @@
+{
+  "current_advection_sha256": "7ad3539b48290244abd7d1de382855f5c242e23b79af2bf15813455951888f9f",
+  "kind": "LOCAL_PATCH_REGRESSION_NOT_NEW_FIELD_EVIDENCE",
+  "new_metadata_only": {
+    "forcing_time_knots_aligned": true
+  },
+  "reference_file": "rk4-prepatch-current-reference.json",
+  "reference_sha256": "953ea1db0f70d920729f3136b75258cafede2dc0fbd361a39699dc64e85ad6b2",
+  "releases": [
+    {
+      "accepted_steps": 72,
+      "exact_track_match": true,
+      "release_id": "release-1",
+      "status": "COMPLETED",
+      "track_point_count": 73
+    },
+    {
+      "accepted_steps": 72,
+      "exact_track_match": true,
+      "release_id": "release-2",
+      "status": "COMPLETED",
+      "track_point_count": 73
+    },
+    {
+      "accepted_steps": 72,
+      "exact_track_match": true,
+      "release_id": "release-3",
+      "status": "COMPLETED",
+      "track_point_count": 73
+    },
+    {
+      "accepted_steps": 72,
+      "exact_track_match": true,
+      "release_id": "release-4",
+      "status": "COMPLETED",
+      "track_point_count": 73
+    },
+    {
+      "accepted_steps": 72,
+      "exact_track_match": true,
+      "release_id": "release-5",
+      "status": "COMPLETED",
+      "track_point_count": 73
+    },
+    {
+      "accepted_steps": 72,
+      "exact_track_match": true,
+      "release_id": "release-6",
+      "status": "COMPLETED",
+      "track_point_count": 73
+    }
+  ],
+  "scenarios": {
+    "downstream-corridor-v2": {
+      "all_release_outcomes_exact_match": true,
+      "baseline_summary": {
+        "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths",
+        "entered_count": 6,
+        "intercepted_count": 0,
+        "no_entry_count": 0,
+        "protected_entry_count_bounds": [
+          6,
+          6
+        ],
+        "protected_entry_fraction_bounds": [
+          1.0,
+          1.0
+        ],
+        "release_count": 6,
+        "unresolved_count": 0
+      },
+      "layouts": [
+        {
+          "id": "central",
+          "label": "Central coverage",
+          "summary": {
+            "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths",
+            "entered_count": 2,
+            "intercepted_count": 4,
+            "no_entry_count": 0,
+            "protected_entry_count_bounds": [
+              2,
+              2
+            ],
+            "protected_entry_fraction_bounds": [
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "release_count": 6,
+            "unresolved_count": 0
+          }
+        },
+        {
+          "id": "flanking",
+          "label": "Flanking coverage",
+          "summary": {
+            "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths",
+            "entered_count": 4,
+            "intercepted_count": 2,
+            "no_entry_count": 0,
+            "protected_entry_count_bounds": [
+              4,
+              4
+            ],
+            "protected_entry_fraction_bounds": [
+              0.6666666666666666,
+              0.6666666666666666
+            ],
+            "release_count": 6,
+            "unresolved_count": 0
+          }
+        }
+      ],
+      "recommendation": {
+        "best_layout_id": "central",
+        "comparison_basis": "strict_nonoverlap_of_model_protected_entry_count_bounds",
+        "reason": "Central coverage has a strictly lower modeled entry range for this frozen scenario.",
+        "status": "BEST_LAYOUT"
+      }
+    },
+    "initial-proxy-v1": {
+      "all_release_outcomes_exact_match": true,
+      "baseline_summary": {
+        "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths",
+        "entered_count": 0,
+        "intercepted_count": 0,
+        "no_entry_count": 6,
+        "protected_entry_count_bounds": [
+          0,
+          0
+        ],
+        "protected_entry_fraction_bounds": [
+          0.0,
+          0.0
+        ],
+        "release_count": 6,
+        "unresolved_count": 0
+      },
+      "layouts": [
+        {
+          "id": "central",
+          "label": "Central coverage",
+          "summary": {
+            "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths",
+            "entered_count": 0,
+            "intercepted_count": 4,
+            "no_entry_count": 2,
+            "protected_entry_count_bounds": [
+              0,
+              0
+            ],
+            "protected_entry_fraction_bounds": [
+              0.0,
+              0.0
+            ],
+            "release_count": 6,
+            "unresolved_count": 0
+          }
+        },
+        {
+          "id": "flanking",
+          "label": "Flanking coverage",
+          "summary": {
+            "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths",
+            "entered_count": 0,
+            "intercepted_count": 2,
+            "no_entry_count": 4,
+            "protected_entry_count_bounds": [
+              0,
+              0
+            ],
+            "protected_entry_fraction_bounds": [
+              0.0,
+              0.0
+            ],
+            "release_count": 6,
+            "unresolved_count": 0
+          }
+        }
+      ],
+      "recommendation": {
+        "best_layout_id": null,
+        "comparison_basis": "strict_nonoverlap_of_model_protected_entry_count_bounds",
+        "reason": "Both hypothetical layouts have the same fully resolved model entry count.",
+        "status": "TIE"
+      }
+    }
+  },
+  "snapshot_sha256": "bb9dae3ae753b5cb1cf01304b7bbe14861c8e1b1ac0514c5947838eb711feeb5",
+  "tests": {
+    "advection_prevention_and_new_knot_regressions": 87,
+    "related_current_and_ocean_api_tests": 99,
+    "ruff": "passed"
+  }
+}

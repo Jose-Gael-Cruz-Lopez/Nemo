@@ -128,7 +128,7 @@ Typical jobs are: explain why a source is Unknown; describe the assumptions behi
 User question + selected evidence
   → operator-authenticated FastAPI endpoint
   → snapshot/revision checks
-  → bounded investigator + allowlisted read tools
+  → bounded investigator + allowlisted evidence and gated case-workflow tools
   → Chalk Model Gateway
   → configured underlying model provider
   → validated structured finish and exact evidence citations
@@ -137,7 +137,9 @@ User question + selected evidence
 
 The gateway endpoint is `https://api.chalk.ai/v1/router/chat/completions`, with a server-held bearer gateway key, matching `X-Chalk-Env-Id` and exact permitted model identifier. Private configuration uses `CHALK_ENABLED`, `CHALK_ROUTER_API_KEY`, `CHALK_ENV_ID`, `CHALK_MODEL` and the configured base URL. Copy values privately into the ignored server configuration; never put actual values in Trov, prompts, browser screenshots, the public deployment or GitHub.
 
-**Chalk gateway credentials and a Google Gemini provider key are different.** The gateway key authorizes access to a Chalk environment/connection; the underlying provider credential funds/authenticates the selected model. Google AI Studio free-tier API access is distinct from a Google Cloud trial and a consumer Gemini subscription. No trial-credit entitlement is assumed by this app. The previously authorized Gemini connection has no gateway-enforced daily token budget because the gateway rejected quota enforcement. Local call/time budgets limit each turn; they are not a billing cap. No paid billing is enabled by this guide.
+**Current local configuration, inspected on 17 October 2026, selects `openai/gpt-6-sol` through Chalk's sponsor router.** The earlier Gemini connection is provisioning history, not the currently selected model. The readiness endpoint reports enabled/ready and deliberately reports `connection_verified: false`; it does not make a model request. Historical successful live turns and a current ready configuration are different evidence. This documentation update changes no credentials, billing or provider settings and sends no model request.
+
+**Chalk gateway credentials and a Google Gemini provider key are different.** The gateway key authorizes access to a Chalk environment/connection; a provider credential authenticates the selected underlying service when that connection requires one. A sponsor-funded router can supply its own model access. Google AI Studio API access is distinct from a Google Cloud trial and a consumer Gemini subscription; those are not a prerequisite for the current sponsor-router selection. No trial-credit entitlement is assumed. The earlier Gemini key was created without a gateway-enforced daily token budget after quota enforcement was rejected. Local call/time budgets limit each turn; they are not a billing cap for any provider.
 
 ### Evidence-specific permissions
 
@@ -145,14 +147,19 @@ The gateway endpoint is `https://api.chalk.ai/v1/router/chat/completions`, with 
 | --- | --- | --- |
 | Source case | `get_case`, `get_source_evidence`, registered sensitivity, observe-again and manual collection proposal, subject to role/state gates | At most nine model calls, limited repeated reads, once per other tool; 25-second per-request cap within a 60-second whole turn; no automatic provider retry/switch |
 | Tank prevention | Case, source report, exact comparison and evaluation snapshot | Must read/cite required evidence; read-only comparison review cannot alter trials or physics; concurrent trial/STOP/recompute invalidates stale response |
-| Ocean prevention | One `get_study_evidence` read for the selected scenario, forcing, method and complete report | At most two bounded model calls and one read; only `REPORT`/`STOP`; cites exactly ocean-comparison and ocean-method identities |
+| Ocean prevention | One `get_study_evidence` read for the selected scenario, forcing, method and complete report | At most two bounded model calls and one read; only `REPORT`/`STOP`; `REPORT` cites exactly ocean-comparison and ocean-method identities |
+| Earlier current diagnostic | Read-only current-forced versus frozen-current forecast evidence and method | At most two bounded model calls and one read; path separation is not measured accuracy |
 | Fresh NOAA study | Frozen study/protocol evidence and aggregate comparison | Read-only `REPORT`/`STOP`; no acquisition, retraining or model promotion |
 
 Source actions can include `REPORT`, `UNKNOWN`, `OBSERVE_MORE`, `REQUEST_APPROVAL` and `STOP`. A collection proposal is an expiring human task; the model never approves it or runs a motor. An agent's `STOP` ends its turn; it does not by itself stop a case or unplug a pump. Numeric scores remain separate authoritative fields; generated prose with prohibited numerical claims is rejected. Evidence citations establish which report was read, not a guarantee that every sentence is correct.
 
+The source investigator is not entirely read-only: registered sensitivity saves an analysis; `observe_again` can save a five-second camera recording in a validated LIVE case; a collection proposal writes a pending manual task. A new recording is not automatically associated across a gap or merged into the frozen source report: operator review is still required. Synthetic/replay source cases cannot request a real recording. Tank/ocean/current/NOAA reviews cannot change scientific results or actuate equipment; saving a review receipt is distinct from modifying trial evidence.
+
 For ocean review, the browser sends `question`, `scenario_id`, `snapshot_sha256`, `method_sha256`, `scenario_sha256` and `report_sha256`. The server rejects a stale selection before the provider call and verifies freshness after it. Hashes bind the actual displayed result; selecting a different scenario cannot silently reuse the old answer.
 
 **Readiness is not live verification.** Configuration may report ready while `connection_verified` remains false. A completed response must explicitly indicate a live model response. Live case, fresh-study and ocean `REPORT` turns were verified during development; outages/timeouts are still possible. No remote Chalk-hosted evaluation deployment is claimed. See [integration contracts and verification history](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/integrations.md) and [Chalk adapter](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/tree/main/adapters/chalk).
+
+For a plain-language walkthrough, example questions, credential distinctions and troubleshooting, see [the Chalk user guide](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/chalk-user-guide.md).
 
 ## 7. Tank prevention and predicted versus recorded results
 
@@ -332,6 +339,8 @@ Legacy live-server E2E commands can contact configured Chalk and read private se
 
 The later camera integration checkpoint passed **1,291 Python tests and 180 frontend tests**, with lint/types/build and the same **137 guarded HTTP PASS / 0 FAIL / 6 expected BLOCKED**. The final native-mode correction additionally passed **31 focused tests** and the separate actual start/stop/restart and multipart-stream verification described in Section 8. Inspect the exact pushed commit's hosted CI separately; a previous suite or the bounded hardware check does not establish physical experiment accuracy or sustained camera reliability.
 
+The subsequent working-tree numerical-quality checkpoint passed **1,331 Python tests, 190 frontend tests and 137 guarded HTTP checks**, with zero HTTP failures and six expected blocked external/physical scopes. Ruff, ESLint, route types, TypeScript and the isolated production build passed. This adds forcing-time-knot alignment and separates smaller integration-step checks from contact-chord checks. The Data Lab disclosure and compact Chalk evidence explicitly say numerical sensitivity is not physical accuracy. At documentation capture, these additions are local work awaiting the final live-flow check and push; they must not be described as already deployed. See [RK4 numerical quality](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/rk4-numerical-quality.md) and [the proposed next current-data study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/next-current-data-study.md).
+
 ## 15. What must be validated next
 
 1. **Tank metrology:** measured water-plane mapping with independent checkpoints; stable camera, waterline, lighting and timestamps. A live image alone completes none of this.
@@ -367,6 +376,7 @@ All links target the existing repository's `main` branch; historical documents r
 | Hardware and camera | [Current camera guide](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/camera-preview.md) · [Rig PDF](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/tideward-rig-guide.pdf) · [Connections visual](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/assets/tideward-rig-connections.png) · [Measured-map visual](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/assets/tideward-rig-measured-map.png) · [Field commissioning](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/field-commissioning.md) |
 | NOAA datasets and ML diagnostics | [Fresh study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/fresh-noaa-study.md) · [Datasets](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/datasets.md) · [Original research](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-real-data.md) · [Motion vectors](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/motion-vector-research.txt) |
 | Chalk, Photon and live-proof boundaries | [Integration contracts](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/integrations.md) · [Chalk source](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/tree/main/adapters/chalk) · [Photon source](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/tree/main/adapters/photon) |
+| Chalk in simple language and private configuration | [Chalk user guide](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/chalk-user-guide.md) |
 | Grok development and disabled Voice | [Fresh build](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-fresh-build.md) · [Kalman record](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-kalman-build.md) · [Satellite/Voice contract](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-space-context.md) |
 | Structure, verification and UI | [Architecture](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/architecture.md) · [Verification](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/verification.md) · [CI](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/ci.md) · [Demo acceptance matrix](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/software-demo-acceptance.md) · [Interface design](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/interface-design.md) |
 | Hosted read-only architecture | [Public ocean showcase](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/public-ocean-showcase.md) · [Live public demo](https://tideward-ocean-demo.vercel.app/demo) |
