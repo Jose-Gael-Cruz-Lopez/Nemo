@@ -1,0 +1,151 @@
+{
+  "schema_version": "field_manifest_v1",
+  "status": "READY",
+  "capture": {
+    "camera_session_id": "usb-fake-synthetic01",
+    "device_index": 1,
+    "backend": "SYNTHETIC_FAKE_CAPTURE",
+    "capture_origin": "SYNTHETIC_FAKE_CAPTURE",
+    "image_size_px": [
+      640,
+      480
+    ]
+  },
+  "calibration": {
+    "calibration_id": "cal-synthetic000001",
+    "content_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+    "validation_count": 3,
+    "mean_error_cm": 0.0281,
+    "max_error_cm": 0.0412,
+    "max_allowed_error_cm": 0.5,
+    "units": "cm"
+  },
+  "recordings": {
+    "training_recording_ids": [
+      "recording-synthetic-train-1",
+      "recording-synthetic-train-2"
+    ],
+    "validation_recording_ids": [
+      "recording-synthetic-valid-1"
+    ],
+    "training_sample_count": 58,
+    "validation_sample_count": 27,
+    "frame_splits_disjoint": true,
+    "timestamp_kind": "host_receipt_not_exposure"
+  },
+  "flow": {
+    "flow_id": "flow-synthetic000001",
+    "content_hash": "2222222222222222222222222222222222222222222222222222222222222222",
+    "data_origin": "MEASURED_TANK",
+    "validation_rmse_cm_s": 0.182,
+    "validation_coverage_fraction": 1.0,
+    "node_count": 9
+  },
+  "profile": {
+    "profile_id": "profile-synthetic01",
+    "content_hash": "3333333333333333333333333333333333333333333333333333333333333333",
+    "data_origin": "MEASURED_TANK",
+    "source_ids": [
+      "A",
+      "B",
+      "C"
+    ],
+    "max_validation_rmse_cm_s": 1.0,
+    "revalidation_max_rmse_cm_s": 1.0
+  },
+  "rig_check_id": null,
+  "rig_change_id": null,
+  "first_observation": {
+    "case_id": "case-synthetic000001",
+    "recording_id": "recording-synthetic-case-1",
+    "mode": "LIVE",
+    "evidence_frame_count": 20
+  },
+  "operator_attestations": {
+    "waterline_unchanged": true,
+    "pump_setting_unchanged": true,
+    "hose_and_pocket_unchanged": true,
+    "camera_and_light_unchanged": true,
+    "coordinates_measured_in_cm": true
+  },
+  "checks": [
+    {
+      "step": "camera_session",
+      "status": "PASSED",
+      "code": "CAMERA_SESSION_CURRENT",
+      "message": "The selected camera session is current and fresh.",
+      "help": ""
+    },
+    {
+      "step": "water_plane_mapping",
+      "status": "PASSED",
+      "code": "MAPPING_APPROVED",
+      "message": "Approved on 3 separate check points; max error 0.0412 cm.",
+      "help": ""
+    },
+    {
+      "step": "drift_recordings",
+      "status": "PASSED",
+      "code": "SPLITS_DISJOINT",
+      "message": "58 training and 27 validation drift samples from disjoint recordings.",
+      "help": ""
+    },
+    {
+      "step": "recorded_flow",
+      "status": "PASSED",
+      "code": "FLOW_VALIDATED",
+      "message": "Held-out RMSE 0.182 cm/s with 100% supported coverage.",
+      "help": ""
+    },
+    {
+      "step": "measured_profile",
+      "status": "PASSED",
+      "code": "PROFILE_ADMITTED",
+      "message": "Measured profile with sources A, B, C.",
+      "help": ""
+    },
+    {
+      "step": "rig_state",
+      "status": "PASSED",
+      "code": "NO_RIG_CHANGE_RECORDED",
+      "message": "No rig disturbance has been recorded.",
+      "help": ""
+    },
+    {
+      "step": "first_source_observation",
+      "status": "PASSED",
+      "code": "OBSERVATION_CURRENT",
+      "message": "A new LIVE source observation passed the existing gate.",
+      "help": ""
+    },
+    {
+      "step": "operator_attestations",
+      "status": "PASSED",
+      "code": "OPERATOR_ATTESTED",
+      "message": "Operator confirmed the physical setup (not independently verified).",
+      "help": ""
+    }
+  ],
+  "warnings": [
+    "SYNTHETIC_FAKE_CAPTURE_NOT_PHYSICAL",
+    "HOST_RECEIPT_TIMESTAMPS_NOT_EXPOSURE",
+    "OPERATOR_ATTESTATIONS_NOT_INDEPENDENTLY_VERIFIED",
+    "SCORES_CONDITIONAL_ON_THIS_FROZEN_SETUP"
+  ],
+  "provenance": {
+    "producer": "reeftrace_api.field_sessions",
+    "gates": "server_reverified_from_stored_artifacts",
+    "hardware_independently_verified": false,
+    "physical_attestation": "operator_attested_not_independently_verified",
+    "excludes": [
+      "source_release_truth",
+      "credentials",
+      "absolute_paths",
+      "raw_camera_images",
+      "free_text_notes"
+    ]
+  },
+  "manifest_id": "fm-233fcd2bdb9e0271",
+  "content_hash": "233fcd2bdb9e0271d19e679564fcd37a1e11477b21873ba2175f140a6d103443",
+  "created_at": 1792195200.0
+}
