@@ -1,0 +1,338 @@
+{
+  "acquisition": {
+    "all_six_sources_downloaded": true,
+    "received_bytes": 754986,
+    "requests": 6,
+    "retained_bytes": 754986,
+    "retries_within_v2_attempt": 0,
+    "trajectory_payloads": 2
+  },
+  "billing_changed": false,
+  "browser": {
+    "both_buoy_groups": true,
+    "live_chalk_REPORT_with_exact_report_and_protocol_citations": true,
+    "numeric_replay_in_reader": false,
+    "scale_and_full_scores_invariant_under_visibility": true,
+    "trajectory_layers_and_hourly_displacement_controls": true,
+    "v1_zero_scored_preserved_and_restored_v2": true,
+    "v2_36_of_36_loaded": true
+  },
+  "camera_activated": false,
+  "captured_at_utc": "2026-10-17T22:08:19.772855+00:00",
+  "chronology": {
+    "acquisition_finished_at_utc": "2026-10-17T22:03:19.879635Z",
+    "acquisition_started_at_utc": "2026-10-17T22:02:50.890695Z",
+    "forecasts_frozen_at_utc": "2026-10-17T22:03:47.184955+00:00",
+    "forecasts_persisted_and_read_back_before_future_numeric_decode": true,
+    "protocol_frozen_at_utc": "2026-10-17T22:02:41.391650Z",
+    "scored_at_utc": "2026-10-17T22:03:47.186880+00:00"
+  },
+  "forecast_file_sha256": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf",
+  "freeze_commit": "23de21c382f972f26e303870aafcadb0c91a7a3e",
+  "frozen_protocol_sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793",
+  "grok_review_disposition": {
+    "accepted": [
+      "Separate pre-GDP-outcome amendment preserving v1",
+      "Narrow byte canonicalization and native float32 representation checks",
+      "Actual coordinate support and no invented curvature",
+      "Retain negative result and do not promote a model"
+    ],
+    "corrected_or_rejected": [
+      "Initial criteria response incorrectly placed current-value decode before GDP requests; later code review explicitly corrected this.",
+      "Post-result wording that every RK4 stage/knot split is exact is not adopted: numerical integration approximates the interpolated field and has finite error.",
+      "Potential field-error, wind/wave, depth or assimilation explanations are hypotheses, not diagnosed causes from this two-buoy study."
+    ]
+  },
+  "hosted_exact_final_head_ci_verified_at_capture": false,
+  "kind": "LOCAL_EXECUTION_NOT_GROK_RESPONSE",
+  "log_identities": {
+    "work/tideward-matched-v2-acquisition.json": {
+      "bytes": 463,
+      "sha256": "f2f2060df7b8c82d4851682428350b50f81f0ef0943aa58f100c713488658c7c"
+    },
+    "work/tideward-matched-v2-build.log": {
+      "bytes": 907,
+      "sha256": "11387d4446f4bdc85251daae95d63344fdb3fa2ba69fca0753adcbb48b6e73e0"
+    },
+    "work/tideward-matched-v2-chalk-browser.txt": {
+      "bytes": 30104,
+      "sha256": "23c1fc7464170ea3997e6b3a6fa6c4ac6865f2e9fe5b7b0b717cbb6065be8492"
+    },
+    "work/tideward-matched-v2-eslint.log": {
+      "bytes": 46,
+      "sha256": "2a39a2b0088eab9372f9ae76e9bbb3badd872aae76be61464acc2a0fe3ac1e51"
+    },
+    "work/tideward-matched-v2-final-full-python.log": {
+      "bytes": 2588,
+      "sha256": "8d6f236efdc3f76ba33d9edf215165c0874f610817853f810ba14c6a85418bb5"
+    },
+    "work/tideward-matched-v2-final-prefreeze.log": {
+      "bytes": 975,
+      "sha256": "5d52fee1627bafbb4cf47875719680f50368abfed5bf0612189ccaf155e6bf09"
+    },
+    "work/tideward-matched-v2-first-score.json": {
+      "bytes": 99409,
+      "sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347"
+    },
+    "work/tideward-matched-v2-full-frontend.log": {
+      "bytes": 34102,
+      "sha256": "60e40f86a09d771e9c3d08b0d214e541d67d14ba99621dedcefe03b4dac827fe"
+    },
+    "work/tideward-matched-v2-offline-http.json": {
+      "bytes": 610100,
+      "sha256": "6d690d9d6585c6b33e76fb445e65be5412f5a19ce1ca77fa00e87c1eea03daa0"
+    },
+    "work/tideward-matched-v2-replay.json": {
+      "bytes": 99409,
+      "sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347"
+    },
+    "work/tideward-matched-v2-ruff.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "work/tideward-matched-v2-typegen.log": {
+      "bytes": 59,
+      "sha256": "adba4af9194e10e47dda75ff0fd0f8c2b756474896d0eba5612799c527ff372a"
+    },
+    "work/tideward-matched-v2-types.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "manifest_sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0",
+  "new_photon_messages_requested": 0,
+  "physical_tank_validation": false,
+  "public_archive_files": {
+    "data/research/matched-current-v2/acquisition-start.json": {
+      "bytes": 402,
+      "sha256": "779cd40cf7ded603256f2012b478fd5fb056e7c87dfd58c189d80da73d9d06df"
+    },
+    "data/research/matched-current-v2/acquisition-start.sha256": {
+      "bytes": 65,
+      "sha256": "de71c07f22d23e3fef5b9ff8342f50d62a8d9e70463ded60653144d63967927a"
+    },
+    "data/research/matched-current-v2/evaluation.json": {
+      "bytes": 99409,
+      "sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347"
+    },
+    "data/research/matched-current-v2/evaluation.sha256": {
+      "bytes": 65,
+      "sha256": "830605dbebd771fb234b8924ef14cfcb0120cc18c255f2038d323f04147b7b35"
+    },
+    "data/research/matched-current-v2/forecasts.json": {
+      "bytes": 27704,
+      "sha256": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf"
+    },
+    "data/research/matched-current-v2/forecasts.sha256": {
+      "bytes": 65,
+      "sha256": "76031f6578badfba0128f5c3063c343c54e4f8a1e16649e1f7fc5fa75aea6452"
+    },
+    "data/research/matched-current-v2/manifest.json": {
+      "bytes": 5597,
+      "sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0"
+    },
+    "data/research/matched-current-v2/manifest.sha256": {
+      "bytes": 65,
+      "sha256": "f252cd8fa80bae84ee017b15d28c1aef190e5c3fbe6769115561815ad4f524a0"
+    },
+    "data/research/matched-current-v2/protocol.json": {
+      "bytes": 14096,
+      "sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793"
+    },
+    "data/research/matched-current-v2/protocol.sha256": {
+      "bytes": 65,
+      "sha256": "837fc19d2672456834448b5f515c8a276e22252e5e9bac1b476493deb2811086"
+    },
+    "data/research/matched-current-v2/raw/drifter-300234066836710.csv": {
+      "bytes": 1828,
+      "sha256": "d226154af32dcb59e6e21a069072cdbd4ed8094efe7f1fa63c9f8d6334a1b9a0"
+    },
+    "data/research/matched-current-v2/raw/drifter-300234066836710.sha256": {
+      "bytes": 65,
+      "sha256": "dac7c2c7d11ed84e6ee1eedf1e74bdb39530b6684d738bdcb4421ff90e60fa81"
+    },
+    "data/research/matched-current-v2/raw/drifter-300534061292930.csv": {
+      "bytes": 1824,
+      "sha256": "4fd7bbdbd85f54ee789c53a9c2f5dc031dbae32413bb6fe7c454999902a7bd7e"
+    },
+    "data/research/matched-current-v2/raw/drifter-300534061292930.sha256": {
+      "bytes": 65,
+      "sha256": "fdf5cb6aa97deaab3e4d449d07865d57d41c2f072b4e80216ff5e9224cd2045e"
+    },
+    "data/research/matched-current-v2/raw/gdp-metadata.das": {
+      "bytes": 18686,
+      "sha256": "460853bbdcd165ebf8eff0a098cb4784a98a2eb3558136edb7583b8d3449ee68"
+    },
+    "data/research/matched-current-v2/raw/gdp-metadata.sha256": {
+      "bytes": 65,
+      "sha256": "f6f7ac3b8fe5db4ce6a95609bc0593db7d48feaaf08a42cbdfa20e2e9c176550"
+    },
+    "data/research/matched-current-v2/raw/gdp-origin-identity.csv": {
+      "bytes": 640,
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    "data/research/matched-current-v2/raw/gdp-origin-identity.sha256": {
+      "bytes": 65,
+      "sha256": "10360f79f7a2f8870f9506bcaee1762e86675e32b277b7f29f881f5543e0a447"
+    },
+    "data/research/matched-current-v2/raw/hycom-currents.nc": {
+      "bytes": 572604,
+      "sha256": "372b1fe68ac4e59a99899fa5c19dbe52ba6c2ee75550200e4ac0138d92dc3888"
+    },
+    "data/research/matched-current-v2/raw/hycom-currents.sha256": {
+      "bytes": 65,
+      "sha256": "4237d9300765fd25bf36294c5071ba75818738019fdb1abed2ad5ff8212d92b9"
+    },
+    "data/research/matched-current-v2/raw/hycom-metadata.sha256": {
+      "bytes": 65,
+      "sha256": "6b1a4fcc0cf0aa9dfc679afa68c4ae44f27186e27eed14d3a2f8a7416b5d5764"
+    },
+    "data/research/matched-current-v2/raw/hycom-metadata.xml": {
+      "bytes": 159404,
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    }
+  },
+  "publication_performed_at_capture": false,
+  "report_sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347",
+  "results": {
+    "automatic_winner_selected": false,
+    "distinct_processed_future_targets": 12,
+    "exact_offline_replay": true,
+    "last_drift_descriptive_error_lower_than_current_only": true,
+    "operational_forecast_skill_verified": false,
+    "physical_validation": false,
+    "planned_cells": 36,
+    "primary": [
+      {
+        "equal_id_macro_ade_m": 3490.11883398436,
+        "equal_id_macro_fde_m": 6069.352856333436,
+        "group_count": 2,
+        "model_id": "stationary",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 1017.6217581778601,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 1970.7472112544315,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 2938.4120735024967,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 3946.766474209055,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 4997.812630428882,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 6069.352856333436,
+            "horizon_hours": 6
+          }
+        ]
+      },
+      {
+        "equal_id_macro_ade_m": 1510.2315897151784,
+        "equal_id_macro_fde_m": 3240.5762017396933,
+        "group_count": 2,
+        "model_id": "last_drift",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 160.50357948977432,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 540.9153518054613,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 1039.4347516157368,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 1664.6392856945859,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 2415.3203679458193,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 3240.5762017396933,
+            "horizon_hours": 6
+          }
+        ]
+      },
+      {
+        "equal_id_macro_ade_m": 5063.020321784228,
+        "equal_id_macro_fde_m": 9151.645051235122,
+        "group_count": 2,
+        "model_id": "current_only",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 1314.106854034407,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 2666.7265163160646,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 4129.690563147813,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 5709.593800785094,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 7406.359145186865,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 9151.645051235122,
+            "horizon_hours": 6
+          }
+        ]
+      }
+    ],
+    "scored_cells": 36
+  },
+  "reviewed_source_commit": "c1e7c2503e141da9a95fc51be027c569cbda7cca",
+  "schema_version": 1,
+  "study_id": "matched-current-gdp-hycom-15m-v2",
+  "verification": {
+    "dependency_consistency": "PASS",
+    "eslint": "PASS",
+    "final_focused_prefreeze_passed": 331,
+    "frontend_passed": 225,
+    "full_python_passed": 1779,
+    "http": {
+      "BLOCKED": 6,
+      "FAIL": 0,
+      "PASS": 174,
+      "complete_live_product_verified": false,
+      "expected_external_scopes_blocked": true,
+      "live_provider_round_trip_verified": false,
+      "physical_validation": false,
+      "software_workflow_passed": true
+    },
+    "isolated_side_effect_guards": {
+      "camera_open_attempts": 0,
+      "photon_poll_attempts": 0,
+      "photon_send_attempts": 0,
+      "provider_http_attempts": 0
+    },
+    "production_build": "PASS",
+    "route_types": "PASS",
+    "ruff": "PASS",
+    "typescript": "PASS",
+    "v1_source_and_all18_file_hashes_preserved": true,
+    "v2_all14_pinned_sources_unchanged": true
+  },
+  "xai_api_used": false
+}

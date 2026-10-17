@@ -1,6 +1,6 @@
 # Saved Grok development evidence
 
-**Latest checkpoint — 17 October 2026:** the original **43-record manifest** and canonical earlier bundle remain unchanged historical evidence. The [additive continuation](../grok-evidence-continuation.md) now preserves **five prompt/response rounds, ten Grok files and separately labeled local records**. Static Grok advice is distinct from the [completed local software verification](../complete-software-verification-20261017.md): **1,641 Python / 223 frontend / 153 HTTP passes**, zero failures and six expected external/physical HTTP blockers, plus a **105-test subset** replay check and separate live Chalk investigations. The [matched-current v1 result](../matched-current-results.md) remains **0/36 scored**; a compatibility v2 is proposed, not implemented or silently retried. Earlier DRAFT/pending statements describe their original capture, not a replacement for this current checkpoint. Exact-new-head hosted CI and physical validation remain separate evidence.
+**Latest v2 checkpoint — 17 October 2026:** the original **43-record manifest** and canonical earlier bundle remain unchanged. The [additive continuation](../grok-evidence-continuation.md) now preserves **nine prompt/response rounds, eighteen Grok files and separately labeled local records**, including four actual v2 criteria/code/final-delta/result rounds. The [v2 result](../matched-current-v2-results.md) scored **36/36** while preserved [v1](../matched-current-results.md) stays **0/36**. Current-only did not improve on last drift; no model is automatically promoted. Pre-acquisition checks passed **1,770 Python / 331 focused subset / 225 frontend**, and later isolated HTTP passed **174 / 0 failures / 6 expected external/physical blockers**. Actual browser controls and separate live Chalk REPORT with exact v2 citations were verified; the final post-acquisition full suite passed **1,779 Python tests** with one upstream dependency warning, alongside **225 frontend** and **174 / 0 failures / 6 blocked HTTP**. Lint/types/build passed; exact-head CI remains pending. Historical DRAFT/no-result statements below describe their capture, not current state. Static Grok advice is not local execution, and no camera, new Photon message, xAI API or billing change was used.
 
 The original fourteen numbered files are byte-identical copies of inspected text
 artifacts saved by the builders. Nine `rk4-*` files preserve four actual
@@ -142,7 +142,7 @@ independent physical truth or a hosted-deployment check. Final commit/push/CI an
 hosted verification remain separate and pending at this archive checkpoint.
 The receipt's exact hashes/fields take precedence over any older checkpoint prose.
 
-## Stage K: matched-current draft, corrected tests and metadata-only evidence
+## Historical Stage K: matched-current draft, corrected tests and metadata-only evidence
 
 Two further actual static design rounds are preserved:
 
@@ -151,7 +151,7 @@ Two further actual static design rounds are preserved:
 2. [Correction prompt](grok-matched-current-design-correction-prompt.txt) →
    [corrected response](grok-matched-current-design-correction-response.txt).
 
-The draft proposes two historical GDP groups, HYCOM at 15 m, stationary and
+At this historical capture, the draft proposed two GDP groups, HYCOM at 15 m, stationary and
 last-drift baselines, and a six-hour current-only comparison. **No new trajectory
 positions, current-vector values, fit, score or physical trial has been acquired
 or executed for this proposed study.** The reader is not implemented/validated and
@@ -195,11 +195,6 @@ copied; use exact public Git commits for source provenance.
 The [single-file Trov bundle](../grok-evidence-bundle.md) embeds this archive and
 the committed research records for an organization-visible publication.
 
-The later [Grok evidence continuation](../grok-evidence-continuation.md) separately
-preserves three additional web-review exchanges (six exact raw text files) and a
-distinct [local 3D verification receipt](tank3d-local-verification.json). Its inline
-manifest covers those additions; the earlier forty-three-file manifest and large
-bundle remain historical snapshots without being silently rewritten. This split
-keeps each native Trov publication below its size limit. The continuation covers
-the unacquired matched-current infrastructure and schematic 3D tank replay, not
-new real-data scores or measured physical validation.
+The later [Grok evidence continuation](../grok-evidence-continuation.md) separately preserves **nine web-review exchanges (eighteen exact Grok text files)** and distinct local execution/decision records. The earliest three exchanges concerned matched-current infrastructure and the schematic 3D view; two later exchanges covered v1 pre-freeze/failure review; four v2 exchanges covered criteria, code, final delta and result interpretation. Its inline manifests cover those additions; the earlier forty-three-file manifest and large bundle remain unchanged historical snapshots.
+
+The criteria response's claim that current depth/time/units checks precede all GDP requests was corrected: current numerical decoding follows serial acquisition and only controls current-only prediction admission. “Every RK4 stage” being exact is rejected as a mathematical overclaim; RK4 approximates the trajectory through an interpolated field. Hypotheses for larger current-only error are not demonstrated causes. The exact wrong advice and later corrections remain visible. The [v2 result/replay guide](../matched-current-v2-results.md) records real 36/36 scores, v1 preservation, pre-GDP-outcome exposure, unchanged source/model contracts and current software evidence; none of these records establishes physical validation or xAI Voice/Imagine API use.

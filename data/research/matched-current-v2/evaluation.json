@@ -1,0 +1,2631 @@
+{
+  "assimilation_independence_verified": false,
+  "automatic_model_promotion": false,
+  "camera_started": false,
+  "context_qc": {
+    "300234066836710": {
+      "first_23_positions_used_by_models": false,
+      "invalid_coordinate_indices": [],
+      "planned_context_rows": 25,
+      "received_context_rows": 25,
+      "used_as_whole_group_admission_gate": false
+    },
+    "300534061292930": {
+      "first_23_positions_used_by_models": false,
+      "invalid_coordinate_indices": [],
+      "planned_context_rows": 25,
+      "received_context_rows": 25,
+      "used_as_whole_group_admission_gate": false
+    }
+  },
+  "current_field": {
+    "approx_east_west_grid_spacing_m_at_midlatitude": [
+      7714.662300334133,
+      7720.551355525227
+    ],
+    "approx_north_south_grid_spacing_m": [
+      4433.776319757633,
+      4434.19918826691
+    ],
+    "array_dimensions": [
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "coordinate_space": "geographic_lonlat_degrees",
+    "invalid_sample_count": 6246,
+    "latitude_range_deg": [
+      25.0,
+      35.0
+    ],
+    "latitude_spacing_degrees_min_max": [
+      0.039997100830078125,
+      0.04000091552734375
+    ],
+    "limitations": [
+      "Model grid spacing is not guaranteed effective physical resolution.",
+      "These geographic fields cannot be passed to the centimetre tank estimator.",
+      "No source attribution, ecological impact or field validation is established."
+    ],
+    "longitude_range_deg": [
+      -80.0,
+      -65.03997802734375
+    ],
+    "longitude_spacing_degrees_min_max": [
+      0.0799560546875,
+      0.08001708984375
+    ],
+    "provenance": {
+      "calendar": "gregorian",
+      "contract_metadata_url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml",
+      "data_kind": "local_model_subset_not_observed_plastic",
+      "issue_time_verified": false,
+      "limitations": [
+        "Local format and byte identity do not verify service transport or product origin.",
+        "The acquisition protocol must separately bind the tile and requested UTC knots.",
+        "Analysis/hindcast valid times do not establish origin-time forecast availability.",
+        "No assimilation independence, drifter skill, plastic accuracy or tank calibration is established."
+      ],
+      "longitude_normalization": "((native_lon+180)%360)-180_without_reordering",
+      "product": "HYCOM_GOFS3.1_GLBy0.08_expt93.0_UV3Z_2022_format_contract",
+      "raw_encoding": {
+        "add_offset": 0,
+        "applied_decimal_scale": 0.001,
+        "decode_count": 1,
+        "dtype": "signed_int16",
+        "fill_and_missing": -30000,
+        "mask_before_scaling": true,
+        "scale_factor_encoding": "exact_pinned_float32"
+      },
+      "sha256": "372b1fe68ac4e59a99899fa5c19dbe52ba6c2ee75550200e4ac0138d92dc3888",
+      "source_bytes": 572604,
+      "source_origin_verified": false,
+      "time_units": "hours since 2000-01-01 00:00:00",
+      "u_variable": "water_u",
+      "v_variable": "water_v",
+      "velocity_units": "m/s"
+    },
+    "selected_depth_m": 15.0,
+    "shape": [
+      3,
+      251,
+      188
+    ],
+    "time_end_utc": "2022-06-01T06:00:00.000000Z",
+    "time_start_utc": "2022-06-01T00:00:00.000000Z",
+    "valid_sample_count": 135318,
+    "velocity_units": "m/s"
+  },
+  "current_field_failure": null,
+  "forecast_file_sha256": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf",
+  "forecast_frozen_at_utc": "2026-10-17T22:03:47.184955+00:00",
+  "forecasts_saved_before_target_coordinate_decode": true,
+  "global_training": false,
+  "heldout_tuning": false,
+  "kind": "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC",
+  "lineage": {
+    "acquisition_start_sha256": "779cd40cf7ded603256f2012b478fd5fb056e7c87dfd58c189d80da73d9d06df",
+    "manifest_sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0",
+    "protocol_sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793",
+    "trusted_identity_sha256": "c7a883cc5a2f938809839d9785fa8477146c5bb26a21d68c1d730afda4543f07"
+  },
+  "operational_causality": false,
+  "physical_alias_resolution_verified": false,
+  "physical_validation": false,
+  "provider_calls": false,
+  "schema_version": 1,
+  "scored_at_utc": "2026-10-17T22:03:47.186880+00:00",
+  "scores": {
+    "automatic_winner_selected": false,
+    "forecast_report": {
+      "all_forecasts_built_before_target_decode": true,
+      "coordinate_method": "origin_anchored_mean_sphere_log_exp_50km_last_drift",
+      "forecast_sha256": "6c4620cc89b73b416edd298d5b6782d59e77e5d5353c5811d5ee60d2d94d4608",
+      "future_positions_used": false,
+      "group_ids": [
+        "300234066836710",
+        "300534061292930"
+      ],
+      "groups": [
+        {
+          "candidates": [
+            {
+              "available_count": 6,
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 1,
+                  "latitude_deg": 29.877075,
+                  "longitude_deg": -74.39551,
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 2,
+                  "latitude_deg": 29.877075,
+                  "longitude_deg": -74.39551,
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 3,
+                  "latitude_deg": 29.877075,
+                  "longitude_deg": -74.39551,
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 4,
+                  "latitude_deg": 29.877075,
+                  "longitude_deg": -74.39551,
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 5,
+                  "latitude_deg": 29.877075,
+                  "longitude_deg": -74.39551,
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 6,
+                  "latitude_deg": 29.877075,
+                  "longitude_deg": -74.39551,
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "completed_horizon_s": 21600,
+              "context_rows_used": 1,
+              "future_positions_used": false,
+              "learned_parameters": 0,
+              "model_id": "stationary",
+              "planned_count": 6,
+              "reason_code": null,
+              "requested_horizon_s": 21600,
+              "status": "COMPLETED"
+            },
+            {
+              "available_count": 6,
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 1,
+                  "latitude_deg": 29.888696309272405,
+                  "longitude_deg": -74.38053250966306,
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 2,
+                  "latitude_deg": 29.900315926628828,
+                  "longitude_deg": -74.36555152704416,
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 3,
+                  "latitude_deg": 29.911933850880224,
+                  "longitude_deg": -74.35056705019805,
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 4,
+                  "latitude_deg": 29.923550080836915,
+                  "longitude_deg": -74.33557907717915,
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 5,
+                  "latitude_deg": 29.935164615308526,
+                  "longitude_deg": -74.32058760604158,
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 6,
+                  "latitude_deg": 29.94677745310405,
+                  "longitude_deg": -74.3055926348392,
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "completed_horizon_s": 21600.0,
+              "context_rows_used": 2,
+              "future_positions_used": false,
+              "last_observed_delta_s": 3600.0,
+              "last_observed_velocity_m_s": [
+                0.4010871543929961,
+                0.3589795664657637
+              ],
+              "learned_parameters": 0,
+              "model_id": "last_drift",
+              "planned_count": 6,
+              "reason_code": null,
+              "requested_horizon_s": 21600,
+              "status": "COMPLETED"
+            },
+            {
+              "advection": {
+                "accepted_steps": 72,
+                "completed_horizon_s": 21600.0,
+                "forcing": {
+                  "provenance": {
+                    "data_kind": "local_model_subset_not_observed_plastic",
+                    "product": "HYCOM_GOFS3.1_GLBy0.08_expt93.0_UV3Z_2022_format_contract",
+                    "sha256": "372b1fe68ac4e59a99899fa5c19dbe52ba6c2ee75550200e4ac0138d92dc3888",
+                    "u_variable": "water_u",
+                    "v_variable": "water_v"
+                  },
+                  "selected_depth_m": 15.0,
+                  "shape": [
+                    3,
+                    251,
+                    188
+                  ],
+                  "time_end_utc": "2022-06-01T06:00:00.000000Z",
+                  "time_start_utc": "2022-06-01T00:00:00.000000Z"
+                },
+                "heldout_buoy_positions_used": false,
+                "kind": "CURRENT_FORCED_PASSIVE_TRACER",
+                "limitations": [
+                  "The supplied current field is model output, not measured waste motion.",
+                  "No windage, object response, beaching, retention or diffusion is inferred.",
+                  "Missing cells and unavailable times stop the track; no extrapolation is used.",
+                  "Forecast causality requires a separately verified issue-time/as-of receipt.",
+                  "Ocean currents do not calibrate the centimetre-scale tank experiment."
+                ],
+                "physical_validation": false,
+                "plastic_motion_validated": false,
+                "reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "schema_version": 1,
+                "solver": {
+                  "forcing_time_knots_aligned": true,
+                  "maximum_step_s": 300.0,
+                  "maximum_steps": 2048,
+                  "method": "RK4_WGS84_METRIC_DERIVATIVES",
+                  "output_step_s": 3600.0,
+                  "position_units": "geographic_degrees",
+                  "spatial_interpolation": "bilinear",
+                  "temporal_interpolation": "linear",
+                  "velocity_units": "m/s"
+                },
+                "status": "COMPLETED",
+                "tank_flow_used": false,
+                "track": [
+                  {
+                    "eastward_m_s": 0.22448921639162756,
+                    "elapsed_s": 0.0,
+                    "latitude_deg": 29.877075,
+                    "longitude_deg": -74.39551,
+                    "northward_m_s": 0.5897421022033972,
+                    "speed_m_s": 0.6310238944662945,
+                    "time_utc": "2022-06-01T00:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.22074055241471008,
+                    "elapsed_s": 3600.0,
+                    "latitude_deg": 29.8958786530853,
+                    "longitude_deg": -74.3872339663111,
+                    "northward_m_s": 0.5705435327153308,
+                    "speed_m_s": 0.6117567443058074,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.22034149581719653,
+                    "elapsed_s": 7200.0,
+                    "latitude_deg": 29.914233430861536,
+                    "longitude_deg": -74.3790202376204,
+                    "northward_m_s": 0.5612471705157428,
+                    "speed_m_s": 0.6029500486697774,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.22653946717483558,
+                    "elapsed_s": 10800.0,
+                    "latitude_deg": 29.932396530764944,
+                    "longitude_deg": -74.3707235545176,
+                    "northward_m_s": 0.5575278636657784,
+                    "speed_m_s": 0.601795188541405,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.2345265455041346,
+                    "elapsed_s": 14400.0,
+                    "latitude_deg": 29.950382403722738,
+                    "longitude_deg": -74.36214789816191,
+                    "northward_m_s": 0.5507888085489021,
+                    "speed_m_s": 0.5986409710075163,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.24888658941371022,
+                    "elapsed_s": 18000.0,
+                    "latitude_deg": 29.968188893270074,
+                    "longitude_deg": -74.3531504562342,
+                    "northward_m_s": 0.5445801043048373,
+                    "speed_m_s": 0.5987587363827406,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.2668254260460665,
+                    "elapsed_s": 21600.0,
+                    "latitude_deg": 29.9857318677499,
+                    "longitude_deg": -74.3435408589431,
+                    "northward_m_s": 0.5358760980628025,
+                    "speed_m_s": 0.5986309384417742,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ]
+              },
+              "available_count": 6,
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 1,
+                  "latitude_deg": 29.8958786530853,
+                  "longitude_deg": -74.3872339663111,
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 2,
+                  "latitude_deg": 29.914233430861536,
+                  "longitude_deg": -74.3790202376204,
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 3,
+                  "latitude_deg": 29.932396530764944,
+                  "longitude_deg": -74.3707235545176,
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 4,
+                  "latitude_deg": 29.950382403722738,
+                  "longitude_deg": -74.36214789816191,
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 5,
+                  "latitude_deg": 29.968188893270074,
+                  "longitude_deg": -74.3531504562342,
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 6,
+                  "latitude_deg": 29.9857318677499,
+                  "longitude_deg": -74.3435408589431,
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "completed_horizon_s": 21600.0,
+              "context_rows_used": 1,
+              "future_positions_used": false,
+              "learned_parameters": 0,
+              "model_id": "current_only",
+              "planned_count": 6,
+              "reason_code": null,
+              "requested_horizon_s": 21600,
+              "status": "COMPLETED"
+            }
+          ],
+          "context_count": 25,
+          "group_id": "300234066836710",
+          "origin_position": {
+            "latitude_deg": 29.877075,
+            "longitude_deg": -74.39551,
+            "time_utc": "2022-06-01T00:00:00Z"
+          }
+        },
+        {
+          "candidates": [
+            {
+              "available_count": 6,
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 1,
+                  "latitude_deg": 28.01351,
+                  "longitude_deg": -74.23357,
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 2,
+                  "latitude_deg": 28.01351,
+                  "longitude_deg": -74.23357,
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 3,
+                  "latitude_deg": 28.01351,
+                  "longitude_deg": -74.23357,
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 4,
+                  "latitude_deg": 28.01351,
+                  "longitude_deg": -74.23357,
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 5,
+                  "latitude_deg": 28.01351,
+                  "longitude_deg": -74.23357,
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 6,
+                  "latitude_deg": 28.01351,
+                  "longitude_deg": -74.23357,
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "completed_horizon_s": 21600,
+              "context_rows_used": 1,
+              "future_positions_used": false,
+              "learned_parameters": 0,
+              "model_id": "stationary",
+              "planned_count": 6,
+              "reason_code": null,
+              "requested_horizon_s": 21600,
+              "status": "COMPLETED"
+            },
+            {
+              "available_count": 6,
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 1,
+                  "latitude_deg": 28.01395292070985,
+                  "longitude_deg": -74.2368800272285,
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 2,
+                  "latitude_deg": 28.014395762127428,
+                  "longitude_deg": -74.24019008168132,
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 3,
+                  "latitude_deg": 28.014838524250596,
+                  "longitude_deg": -74.24350016335433,
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 4,
+                  "latitude_deg": 28.015281207077226,
+                  "longitude_deg": -74.24681027224341,
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 5,
+                  "latitude_deg": 28.01572381060519,
+                  "longitude_deg": -74.25012040834437,
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 6,
+                  "latitude_deg": 28.016166334832366,
+                  "longitude_deg": -74.2534305716531,
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "completed_horizon_s": 21600.0,
+              "context_rows_used": 2,
+              "future_positions_used": false,
+              "last_observed_delta_s": 3600.0,
+              "last_observed_velocity_m_s": [
+                -0.09025958121322958,
+                0.013681947846046677
+              ],
+              "learned_parameters": 0,
+              "model_id": "last_drift",
+              "planned_count": 6,
+              "reason_code": null,
+              "requested_horizon_s": 21600,
+              "status": "COMPLETED"
+            },
+            {
+              "advection": {
+                "accepted_steps": 72,
+                "completed_horizon_s": 21600.0,
+                "forcing": {
+                  "provenance": {
+                    "data_kind": "local_model_subset_not_observed_plastic",
+                    "product": "HYCOM_GOFS3.1_GLBy0.08_expt93.0_UV3Z_2022_format_contract",
+                    "sha256": "372b1fe68ac4e59a99899fa5c19dbe52ba6c2ee75550200e4ac0138d92dc3888",
+                    "u_variable": "water_u",
+                    "v_variable": "water_v"
+                  },
+                  "selected_depth_m": 15.0,
+                  "shape": [
+                    3,
+                    251,
+                    188
+                  ],
+                  "time_end_utc": "2022-06-01T06:00:00.000000Z",
+                  "time_start_utc": "2022-06-01T00:00:00.000000Z"
+                },
+                "heldout_buoy_positions_used": false,
+                "kind": "CURRENT_FORCED_PASSIVE_TRACER",
+                "limitations": [
+                  "The supplied current field is model output, not measured waste motion.",
+                  "No windage, object response, beaching, retention or diffusion is inferred.",
+                  "Missing cells and unavailable times stop the track; no extrapolation is used.",
+                  "Forecast causality requires a separately verified issue-time/as-of receipt.",
+                  "Ocean currents do not calibrate the centimetre-scale tank experiment."
+                ],
+                "physical_validation": false,
+                "plastic_motion_validated": false,
+                "reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "schema_version": 1,
+                "solver": {
+                  "forcing_time_knots_aligned": true,
+                  "maximum_step_s": 300.0,
+                  "maximum_steps": 2048,
+                  "method": "RK4_WGS84_METRIC_DERIVATIVES",
+                  "output_step_s": 3600.0,
+                  "position_units": "geographic_degrees",
+                  "spatial_interpolation": "bilinear",
+                  "temporal_interpolation": "linear",
+                  "velocity_units": "m/s"
+                },
+                "status": "COMPLETED",
+                "tank_flow_used": false,
+                "track": [
+                  {
+                    "eastward_m_s": 0.05561363150210504,
+                    "elapsed_s": 0.0,
+                    "latitude_deg": 28.01351,
+                    "longitude_deg": -74.23357,
+                    "northward_m_s": -0.37024691547923716,
+                    "speed_m_s": 0.3744003932032408,
+                    "time_utc": "2022-06-01T00:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.05187670967835957,
+                    "elapsed_s": 3600.0,
+                    "latitude_deg": 28.00086024850328,
+                    "longitude_deg": -74.23160759457502,
+                    "northward_m_s": -0.4089781277271472,
+                    "speed_m_s": 0.41225514183119116,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.04819189022420476,
+                    "elapsed_s": 7200.0,
+                    "latitude_deg": 27.98690625218611,
+                    "longitude_deg": -74.22978100075036,
+                    "northward_m_s": -0.4505783020202943,
+                    "speed_m_s": 0.4531481706184781,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.046662562783133604,
+                    "elapsed_s": 10800.0,
+                    "latitude_deg": 27.97155544625662,
+                    "longitude_deg": -74.22805277396064,
+                    "northward_m_s": -0.4950052812291675,
+                    "speed_m_s": 0.4971997819893499,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": 0.016385847023766067,
+                    "elapsed_s": 14400.0,
+                    "latitude_deg": 27.955197648340373,
+                    "longitude_deg": -74.22689416648451,
+                    "northward_m_s": -0.5127586037434532,
+                    "speed_m_s": 0.5130203521261334,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": -0.01482371245723881,
+                    "elapsed_s": 18000.0,
+                    "latitude_deg": 27.93819885995194,
+                    "longitude_deg": -74.22686610950076,
+                    "northward_m_s": -0.5344416793238279,
+                    "speed_m_s": 0.5346472211182699,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "eastward_m_s": -0.045852761485558946,
+                    "elapsed_s": 21600.0,
+                    "latitude_deg": 27.920431302603593,
+                    "longitude_deg": -74.22797632632863,
+                    "northward_m_s": -0.5601027748028359,
+                    "speed_m_s": 0.5619765066955094,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ]
+              },
+              "available_count": 6,
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 1,
+                  "latitude_deg": 28.00086024850328,
+                  "longitude_deg": -74.23160759457502,
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 2,
+                  "latitude_deg": 27.98690625218611,
+                  "longitude_deg": -74.22978100075036,
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 3,
+                  "latitude_deg": 27.97155544625662,
+                  "longitude_deg": -74.22805277396064,
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 4,
+                  "latitude_deg": 27.955197648340373,
+                  "longitude_deg": -74.22689416648451,
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 5,
+                  "latitude_deg": 27.93819885995194,
+                  "longitude_deg": -74.22686610950076,
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "horizon_hours": 6,
+                  "latitude_deg": 27.920431302603593,
+                  "longitude_deg": -74.22797632632863,
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "completed_horizon_s": 21600.0,
+              "context_rows_used": 1,
+              "future_positions_used": false,
+              "learned_parameters": 0,
+              "model_id": "current_only",
+              "planned_count": 6,
+              "reason_code": null,
+              "requested_horizon_s": 21600,
+              "status": "COMPLETED"
+            }
+          ],
+          "context_count": 25,
+          "group_id": "300534061292930",
+          "origin_position": {
+            "latitude_deg": 28.01351,
+            "longitude_deg": -74.23357,
+            "time_utc": "2022-06-01T00:00:00Z"
+          }
+        }
+      ],
+      "horizons_s": [
+        3600,
+        7200,
+        10800,
+        14400,
+        18000,
+        21600
+      ],
+      "kind": "MATCHED_CURRENT_FORECASTS",
+      "model_ids": [
+        "stationary",
+        "last_drift",
+        "current_only"
+      ],
+      "operational_forecast_skill_verified": false,
+      "origin_time_utc": "2022-06-01T00:00:00Z",
+      "physical_validation": false,
+      "planned_cell_count": 36,
+      "planned_distinct_target_count": 12,
+      "planned_group_count": 2,
+      "schema_version": 1,
+      "score_method": "mean_radius_sphere_great_circle_metres",
+      "statistical_independence": false
+    },
+    "groups": [
+      {
+        "candidates": [
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 1738.9573139976044,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 1,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.8867,
+                "target_longitude_deg": -74.381294,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 3266.549125404664,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 2,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.894236,
+                "target_longitude_deg": -74.36801,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 4650.806288904074,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 3,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.900463,
+                "target_longitude_deg": -74.355515,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 5902.139254193995,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 4,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.90552,
+                "target_longitude_deg": -74.34382,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 7045.780980282139,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 5,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.909607,
+                "target_longitude_deg": -74.33279,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 8121.756574761635,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 6,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.91361,
+                "target_longitude_deg": -74.322556,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 5120.998256257352,
+              "available_cell_summary_is_full_horizon_ade": true,
+              "coverage_complete": true,
+              "endpoint_fde_m": 8121.756574761635,
+              "endpoint_scored": true,
+              "full_horizon_ade_m": 5120.998256257352,
+              "missing_count": 0,
+              "planned_count": 6,
+              "prefix_is_full_horizon": true,
+              "scored_count": 6,
+              "scored_prefix_count": 6,
+              "scored_prefix_hours": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "scored_prefix_mean_error_m": 5120.998256257352
+            },
+            "model_id": "stationary",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 233.80426970437546,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 1,
+                "latitude_deg": 29.888696309272405,
+                "longitude_deg": -74.38053250966306,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.8867,
+                "target_longitude_deg": -74.381294,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 716.392800183059,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 2,
+                "latitude_deg": 29.900315926628828,
+                "longitude_deg": -74.36555152704416,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.894236,
+                "target_longitude_deg": -74.36801,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 1361.7505102541509,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 3,
+                "latitude_deg": 29.911933850880224,
+                "longitude_deg": -74.35056705019805,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.900463,
+                "target_longitude_deg": -74.355515,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 2156.456722346094,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 4,
+                "latitude_deg": 29.923550080836915,
+                "longitude_deg": -74.33557907717915,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.90552,
+                "target_longitude_deg": -74.34382,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 3075.58446528571,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 5,
+                "latitude_deg": 29.935164615308526,
+                "longitude_deg": -74.32058760604158,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.909607,
+                "target_longitude_deg": -74.33279,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 4034.0989009671275,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 6,
+                "latitude_deg": 29.94677745310405,
+                "longitude_deg": -74.3055926348392,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.91361,
+                "target_longitude_deg": -74.322556,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 1929.6812781234194,
+              "available_cell_summary_is_full_horizon_ade": true,
+              "coverage_complete": true,
+              "endpoint_fde_m": 4034.0989009671275,
+              "endpoint_scored": true,
+              "full_horizon_ade_m": 1929.6812781234194,
+              "missing_count": 0,
+              "planned_count": 6,
+              "prefix_is_full_horizon": true,
+              "scored_count": 6,
+              "scored_prefix_count": 6,
+              "scored_prefix_hours": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "scored_prefix_mean_error_m": 1929.6812781234194
+            },
+            "model_id": "last_drift",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 1170.2878584481653,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 1,
+                "latitude_deg": 29.8958786530853,
+                "longitude_deg": -74.3872339663111,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.8867,
+                "target_longitude_deg": -74.381294,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 2463.897164560101,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 2,
+                "latitude_deg": 29.914233430861536,
+                "longitude_deg": -74.3790202376204,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.894236,
+                "target_longitude_deg": -74.36801,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 3841.4921481028246,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 3,
+                "latitude_deg": 29.932396530764944,
+                "longitude_deg": -74.3707235545176,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.900463,
+                "target_longitude_deg": -74.355515,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 5291.921741953975,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 4,
+                "latitude_deg": 29.950382403722738,
+                "longitude_deg": -74.36214789816191,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.90552,
+                "target_longitude_deg": -74.34382,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 6803.041797411212,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 5,
+                "latitude_deg": 29.968188893270074,
+                "longitude_deg": -74.3531504562342,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.909607,
+                "target_longitude_deg": -74.33279,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 8270.53113245185,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 6,
+                "latitude_deg": 29.9857318677499,
+                "longitude_deg": -74.3435408589431,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.91361,
+                "target_longitude_deg": -74.322556,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 4640.195307154688,
+              "available_cell_summary_is_full_horizon_ade": true,
+              "coverage_complete": true,
+              "endpoint_fde_m": 8270.53113245185,
+              "endpoint_scored": true,
+              "full_horizon_ade_m": 4640.195307154688,
+              "missing_count": 0,
+              "planned_count": 6,
+              "prefix_is_full_horizon": true,
+              "scored_count": 6,
+              "scored_prefix_count": 6,
+              "scored_prefix_hours": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "scored_prefix_mean_error_m": 4640.195307154688
+            },
+            "model_id": "current_only",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          }
+        ],
+        "group_id": "300234066836710",
+        "target_issues": []
+      },
+      {
+        "candidates": [
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 296.28620235811593,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 1,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.013218,
+                "target_longitude_deg": -74.23657,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 674.9452971041985,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 2,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.01112,
+                "target_longitude_deg": -74.23989,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 1226.0178581009197,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 3,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.008474,
+                "target_longitude_deg": -74.24468,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 1991.3936942241155,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 4,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.00571,
+                "target_longitude_deg": -74.25183,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 2949.844280575625,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 5,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.003464,
+                "target_longitude_deg": -74.26138,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 4016.9491379052365,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 6,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.001741,
+                "target_longitude_deg": -74.272255,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 1859.2394117113683,
+              "available_cell_summary_is_full_horizon_ade": true,
+              "coverage_complete": true,
+              "endpoint_fde_m": 4016.9491379052365,
+              "endpoint_scored": true,
+              "full_horizon_ade_m": 1859.2394117113683,
+              "missing_count": 0,
+              "planned_count": 6,
+              "prefix_is_full_horizon": true,
+              "scored_count": 6,
+              "scored_prefix_count": 6,
+              "scored_prefix_hours": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "scored_prefix_mean_error_m": 1859.2394117113683
+            },
+            "model_id": "stationary",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 87.20288927517319,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 1,
+                "latitude_deg": 28.01395292070985,
+                "longitude_deg": -74.2368800272285,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.013218,
+                "target_longitude_deg": -74.23657,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 365.4379034278637,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 2,
+                "latitude_deg": 28.014395762127428,
+                "longitude_deg": -74.24019008168132,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.01112,
+                "target_longitude_deg": -74.23989,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 717.1189929773229,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 3,
+                "latitude_deg": 28.014838524250596,
+                "longitude_deg": -74.24350016335433,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.008474,
+                "target_longitude_deg": -74.24468,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 1172.8218490430777,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 4,
+                "latitude_deg": 28.015281207077226,
+                "longitude_deg": -74.24681027224341,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.00571,
+                "target_longitude_deg": -74.25183,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 1755.0562706059286,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 5,
+                "latitude_deg": 28.01572381060519,
+                "longitude_deg": -74.25012040834437,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.003464,
+                "target_longitude_deg": -74.26138,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 2447.053502512259,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 6,
+                "latitude_deg": 28.016166334832366,
+                "longitude_deg": -74.2534305716531,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.001741,
+                "target_longitude_deg": -74.272255,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 1090.7819013069375,
+              "available_cell_summary_is_full_horizon_ade": true,
+              "coverage_complete": true,
+              "endpoint_fde_m": 2447.053502512259,
+              "endpoint_scored": true,
+              "full_horizon_ade_m": 1090.7819013069375,
+              "missing_count": 0,
+              "planned_count": 6,
+              "prefix_is_full_horizon": true,
+              "scored_count": 6,
+              "scored_prefix_count": 6,
+              "scored_prefix_hours": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "scored_prefix_mean_error_m": 1090.7819013069375
+            },
+            "model_id": "last_drift",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 1457.9258496206487,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 1,
+                "latitude_deg": 28.00086024850328,
+                "longitude_deg": -74.23160759457502,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.013218,
+                "target_longitude_deg": -74.23657,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 2869.5558680720287,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 2,
+                "latitude_deg": 27.98690625218611,
+                "longitude_deg": -74.22978100075036,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.01112,
+                "target_longitude_deg": -74.23989,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 4417.888978192801,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 3,
+                "latitude_deg": 27.97155544625662,
+                "longitude_deg": -74.22805277396064,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.008474,
+                "target_longitude_deg": -74.24468,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 6127.265859616213,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 4,
+                "latitude_deg": 27.955197648340373,
+                "longitude_deg": -74.22689416648451,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.00571,
+                "target_longitude_deg": -74.25183,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 8009.676492962519,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 5,
+                "latitude_deg": 27.93819885995194,
+                "longitude_deg": -74.22686610950076,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.003464,
+                "target_longitude_deg": -74.26138,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 10032.758970018393,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 6,
+                "latitude_deg": 27.920431302603593,
+                "longitude_deg": -74.22797632632863,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.001741,
+                "target_longitude_deg": -74.272255,
+                "target_reason_code": null,
+                "target_status": "AVAILABLE",
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 5485.845336413768,
+              "available_cell_summary_is_full_horizon_ade": true,
+              "coverage_complete": true,
+              "endpoint_fde_m": 10032.758970018393,
+              "endpoint_scored": true,
+              "full_horizon_ade_m": 5485.845336413768,
+              "missing_count": 0,
+              "planned_count": 6,
+              "prefix_is_full_horizon": true,
+              "scored_count": 6,
+              "scored_prefix_count": 6,
+              "scored_prefix_hours": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "scored_prefix_mean_error_m": 5485.845336413768
+            },
+            "model_id": "current_only",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          }
+        ],
+        "group_id": "300534061292930",
+        "target_issues": []
+      }
+    ],
+    "kind": "MATCHED_CURRENT_SCORES",
+    "limitations": [
+      "The 36 model/horizon cells reuse only 12 processed GDP position estimates.",
+      "Paired errors describe only explicitly listed common available cells.",
+      "Whole-group exclusion does not prove independence from HYCOM assimilation.",
+      "Retrospective future-valid forcing lacks a verified historical issue-time cutoff.",
+      "No plastic source, reef protection, tank accuracy or statistical significance is proved."
+    ],
+    "models": [
+      {
+        "metrics": {
+          "available_cell_mean_error_m": 3490.1188339843607,
+          "available_cell_summary_is_full_horizon_ade": true,
+          "coverage_complete": true,
+          "full_horizon_ade_m": 3490.1188339843607,
+          "missing_count": 0,
+          "planned_count": 12,
+          "scored_count": 12
+        },
+        "model_id": "stationary",
+        "per_horizon": [
+          {
+            "available_group_mean_error_m": 1017.6217581778601,
+            "complete_group_mean_error_m": 1017.6217581778601,
+            "coverage_complete": true,
+            "horizon_hours": 1,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 1970.7472112544315,
+            "complete_group_mean_error_m": 1970.7472112544315,
+            "coverage_complete": true,
+            "horizon_hours": 2,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 2938.4120735024967,
+            "complete_group_mean_error_m": 2938.4120735024967,
+            "coverage_complete": true,
+            "horizon_hours": 3,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 3946.766474209055,
+            "complete_group_mean_error_m": 3946.766474209055,
+            "coverage_complete": true,
+            "horizon_hours": 4,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 4997.812630428882,
+            "complete_group_mean_error_m": 4997.812630428882,
+            "coverage_complete": true,
+            "horizon_hours": 5,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 6069.352856333436,
+            "complete_group_mean_error_m": 6069.352856333436,
+            "coverage_complete": true,
+            "horizon_hours": 6,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          }
+        ]
+      },
+      {
+        "metrics": {
+          "available_cell_mean_error_m": 1510.2315897151784,
+          "available_cell_summary_is_full_horizon_ade": true,
+          "coverage_complete": true,
+          "full_horizon_ade_m": 1510.2315897151784,
+          "missing_count": 0,
+          "planned_count": 12,
+          "scored_count": 12
+        },
+        "model_id": "last_drift",
+        "per_horizon": [
+          {
+            "available_group_mean_error_m": 160.50357948977432,
+            "complete_group_mean_error_m": 160.50357948977432,
+            "coverage_complete": true,
+            "horizon_hours": 1,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 540.9153518054613,
+            "complete_group_mean_error_m": 540.9153518054613,
+            "coverage_complete": true,
+            "horizon_hours": 2,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 1039.4347516157368,
+            "complete_group_mean_error_m": 1039.4347516157368,
+            "coverage_complete": true,
+            "horizon_hours": 3,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 1664.6392856945859,
+            "complete_group_mean_error_m": 1664.6392856945859,
+            "coverage_complete": true,
+            "horizon_hours": 4,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 2415.3203679458193,
+            "complete_group_mean_error_m": 2415.3203679458193,
+            "coverage_complete": true,
+            "horizon_hours": 5,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 3240.5762017396933,
+            "complete_group_mean_error_m": 3240.5762017396933,
+            "coverage_complete": true,
+            "horizon_hours": 6,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          }
+        ]
+      },
+      {
+        "metrics": {
+          "available_cell_mean_error_m": 5063.020321784227,
+          "available_cell_summary_is_full_horizon_ade": true,
+          "coverage_complete": true,
+          "full_horizon_ade_m": 5063.020321784227,
+          "missing_count": 0,
+          "planned_count": 12,
+          "scored_count": 12
+        },
+        "model_id": "current_only",
+        "per_horizon": [
+          {
+            "available_group_mean_error_m": 1314.106854034407,
+            "complete_group_mean_error_m": 1314.106854034407,
+            "coverage_complete": true,
+            "horizon_hours": 1,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 2666.7265163160646,
+            "complete_group_mean_error_m": 2666.7265163160646,
+            "coverage_complete": true,
+            "horizon_hours": 2,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 4129.690563147813,
+            "complete_group_mean_error_m": 4129.690563147813,
+            "coverage_complete": true,
+            "horizon_hours": 3,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 5709.593800785094,
+            "complete_group_mean_error_m": 5709.593800785094,
+            "coverage_complete": true,
+            "horizon_hours": 4,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 7406.359145186865,
+            "complete_group_mean_error_m": 7406.359145186865,
+            "coverage_complete": true,
+            "horizon_hours": 5,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          },
+          {
+            "available_group_mean_error_m": 9151.645051235122,
+            "complete_group_mean_error_m": 9151.645051235122,
+            "coverage_complete": true,
+            "horizon_hours": 6,
+            "planned_group_count": 2,
+            "scored_group_count": 2
+          }
+        ]
+      }
+    ],
+    "operational_forecast_skill_verified": false,
+    "origin_time_utc": "2022-06-01T00:00:00Z",
+    "paired_comparisons": [
+      {
+        "analysis_scope": "SECONDARY_COMMON_AVAILABLE_CELLS",
+        "cells": [
+          {
+            "error_a_m": 1738.9573139976044,
+            "error_b_m": 233.80426970437546,
+            "group_id": "300234066836710",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 3266.549125404664,
+            "error_b_m": 716.392800183059,
+            "group_id": "300234066836710",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 4650.806288904074,
+            "error_b_m": 1361.7505102541509,
+            "group_id": "300234066836710",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 5902.139254193995,
+            "error_b_m": 2156.456722346094,
+            "group_id": "300234066836710",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 7045.780980282139,
+            "error_b_m": 3075.58446528571,
+            "group_id": "300234066836710",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 8121.756574761635,
+            "error_b_m": 4034.0989009671275,
+            "group_id": "300234066836710",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          },
+          {
+            "error_a_m": 296.28620235811593,
+            "error_b_m": 87.20288927517319,
+            "group_id": "300534061292930",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 674.9452971041985,
+            "error_b_m": 365.4379034278637,
+            "group_id": "300534061292930",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 1226.0178581009197,
+            "error_b_m": 717.1189929773229,
+            "group_id": "300534061292930",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 1991.3936942241155,
+            "error_b_m": 1172.8218490430777,
+            "group_id": "300534061292930",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 2949.844280575625,
+            "error_b_m": 1755.0562706059286,
+            "group_id": "300534061292930",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 4016.9491379052365,
+            "error_b_m": 2447.053502512259,
+            "group_id": "300534061292930",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": 1979.8872442691818,
+        "mean_error_a_m": 3490.1188339843607,
+        "mean_error_b_m": 1510.2315897151784,
+        "model_a": "stationary",
+        "model_b": "last_drift",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "SECONDARY_COMMON_AVAILABLE_CELLS",
+        "cells": [
+          {
+            "error_a_m": 1738.9573139976044,
+            "error_b_m": 1170.2878584481653,
+            "group_id": "300234066836710",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 3266.549125404664,
+            "error_b_m": 2463.897164560101,
+            "group_id": "300234066836710",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 4650.806288904074,
+            "error_b_m": 3841.4921481028246,
+            "group_id": "300234066836710",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 5902.139254193995,
+            "error_b_m": 5291.921741953975,
+            "group_id": "300234066836710",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 7045.780980282139,
+            "error_b_m": 6803.041797411212,
+            "group_id": "300234066836710",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 8121.756574761635,
+            "error_b_m": 8270.53113245185,
+            "group_id": "300234066836710",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          },
+          {
+            "error_a_m": 296.28620235811593,
+            "error_b_m": 1457.9258496206487,
+            "group_id": "300534061292930",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 674.9452971041985,
+            "error_b_m": 2869.5558680720287,
+            "group_id": "300534061292930",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 1226.0178581009197,
+            "error_b_m": 4417.888978192801,
+            "group_id": "300534061292930",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 1991.3936942241155,
+            "error_b_m": 6127.265859616213,
+            "group_id": "300534061292930",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 2949.844280575625,
+            "error_b_m": 8009.676492962519,
+            "group_id": "300534061292930",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 4016.9491379052365,
+            "error_b_m": 10032.758970018393,
+            "group_id": "300534061292930",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": -1572.9014877998673,
+        "mean_error_a_m": 3490.1188339843607,
+        "mean_error_b_m": 5063.020321784227,
+        "model_a": "stationary",
+        "model_b": "current_only",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "SECONDARY_COMMON_AVAILABLE_CELLS",
+        "cells": [
+          {
+            "error_a_m": 233.80426970437546,
+            "error_b_m": 1170.2878584481653,
+            "group_id": "300234066836710",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 716.392800183059,
+            "error_b_m": 2463.897164560101,
+            "group_id": "300234066836710",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 1361.7505102541509,
+            "error_b_m": 3841.4921481028246,
+            "group_id": "300234066836710",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 2156.456722346094,
+            "error_b_m": 5291.921741953975,
+            "group_id": "300234066836710",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 3075.58446528571,
+            "error_b_m": 6803.041797411212,
+            "group_id": "300234066836710",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 4034.0989009671275,
+            "error_b_m": 8270.53113245185,
+            "group_id": "300234066836710",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          },
+          {
+            "error_a_m": 87.20288927517319,
+            "error_b_m": 1457.9258496206487,
+            "group_id": "300534061292930",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 365.4379034278637,
+            "error_b_m": 2869.5558680720287,
+            "group_id": "300534061292930",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 717.1189929773229,
+            "error_b_m": 4417.888978192801,
+            "group_id": "300534061292930",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 1172.8218490430777,
+            "error_b_m": 6127.265859616213,
+            "group_id": "300534061292930",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 1755.0562706059286,
+            "error_b_m": 8009.676492962519,
+            "group_id": "300534061292930",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 2447.053502512259,
+            "error_b_m": 10032.758970018393,
+            "group_id": "300534061292930",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": -3552.7887320690493,
+        "mean_error_a_m": 1510.2315897151784,
+        "mean_error_b_m": 5063.020321784227,
+        "model_a": "last_drift",
+        "model_b": "current_only",
+        "planned_common_cell_count": 12
+      }
+    ],
+    "physical_validation": false,
+    "planned_cell_count": 36,
+    "planned_distinct_target_count": 12,
+    "planned_group_count": 2,
+    "primary_common_cohort_complete": true,
+    "primary_equal_id_macro_results": [
+      {
+        "equal_id_macro_ade_m": 3490.11883398436,
+        "equal_id_macro_fde_m": 6069.352856333436,
+        "group_count": 2,
+        "model_id": "stationary",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 1017.6217581778601,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 1970.7472112544315,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 2938.4120735024967,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 3946.766474209055,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 4997.812630428882,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 6069.352856333436,
+            "horizon_hours": 6
+          }
+        ]
+      },
+      {
+        "equal_id_macro_ade_m": 1510.2315897151784,
+        "equal_id_macro_fde_m": 3240.5762017396933,
+        "group_count": 2,
+        "model_id": "last_drift",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 160.50357948977432,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 540.9153518054613,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 1039.4347516157368,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 1664.6392856945859,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 2415.3203679458193,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 3240.5762017396933,
+            "horizon_hours": 6
+          }
+        ]
+      },
+      {
+        "equal_id_macro_ade_m": 5063.020321784228,
+        "equal_id_macro_fde_m": 9151.645051235122,
+        "group_count": 2,
+        "model_id": "current_only",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 1314.106854034407,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 2666.7265163160646,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 4129.690563147813,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 5709.593800785094,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 7406.359145186865,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 9151.645051235122,
+            "horizon_hours": 6
+          }
+        ]
+      }
+    ],
+    "primary_paired_comparisons": [
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_COMMON_COHORT",
+        "cells": [
+          {
+            "error_a_m": 1738.9573139976044,
+            "error_b_m": 233.80426970437546,
+            "group_id": "300234066836710",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 3266.549125404664,
+            "error_b_m": 716.392800183059,
+            "group_id": "300234066836710",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 4650.806288904074,
+            "error_b_m": 1361.7505102541509,
+            "group_id": "300234066836710",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 5902.139254193995,
+            "error_b_m": 2156.456722346094,
+            "group_id": "300234066836710",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 7045.780980282139,
+            "error_b_m": 3075.58446528571,
+            "group_id": "300234066836710",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 8121.756574761635,
+            "error_b_m": 4034.0989009671275,
+            "group_id": "300234066836710",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          },
+          {
+            "error_a_m": 296.28620235811593,
+            "error_b_m": 87.20288927517319,
+            "group_id": "300534061292930",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 674.9452971041985,
+            "error_b_m": 365.4379034278637,
+            "group_id": "300534061292930",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 1226.0178581009197,
+            "error_b_m": 717.1189929773229,
+            "group_id": "300534061292930",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 1991.3936942241155,
+            "error_b_m": 1172.8218490430777,
+            "group_id": "300534061292930",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 2949.844280575625,
+            "error_b_m": 1755.0562706059286,
+            "group_id": "300534061292930",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 4016.9491379052365,
+            "error_b_m": 2447.053502512259,
+            "group_id": "300534061292930",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": 1979.8872442691818,
+        "mean_error_a_m": 3490.1188339843607,
+        "mean_error_b_m": 1510.2315897151784,
+        "model_a": "stationary",
+        "model_b": "last_drift",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_COMMON_COHORT",
+        "cells": [
+          {
+            "error_a_m": 1738.9573139976044,
+            "error_b_m": 1170.2878584481653,
+            "group_id": "300234066836710",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 3266.549125404664,
+            "error_b_m": 2463.897164560101,
+            "group_id": "300234066836710",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 4650.806288904074,
+            "error_b_m": 3841.4921481028246,
+            "group_id": "300234066836710",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 5902.139254193995,
+            "error_b_m": 5291.921741953975,
+            "group_id": "300234066836710",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 7045.780980282139,
+            "error_b_m": 6803.041797411212,
+            "group_id": "300234066836710",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 8121.756574761635,
+            "error_b_m": 8270.53113245185,
+            "group_id": "300234066836710",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          },
+          {
+            "error_a_m": 296.28620235811593,
+            "error_b_m": 1457.9258496206487,
+            "group_id": "300534061292930",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 674.9452971041985,
+            "error_b_m": 2869.5558680720287,
+            "group_id": "300534061292930",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 1226.0178581009197,
+            "error_b_m": 4417.888978192801,
+            "group_id": "300534061292930",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 1991.3936942241155,
+            "error_b_m": 6127.265859616213,
+            "group_id": "300534061292930",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 2949.844280575625,
+            "error_b_m": 8009.676492962519,
+            "group_id": "300534061292930",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 4016.9491379052365,
+            "error_b_m": 10032.758970018393,
+            "group_id": "300534061292930",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": -1572.9014877998673,
+        "mean_error_a_m": 3490.1188339843607,
+        "mean_error_b_m": 5063.020321784227,
+        "model_a": "stationary",
+        "model_b": "current_only",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_COMMON_COHORT",
+        "cells": [
+          {
+            "error_a_m": 233.80426970437546,
+            "error_b_m": 1170.2878584481653,
+            "group_id": "300234066836710",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 716.392800183059,
+            "error_b_m": 2463.897164560101,
+            "group_id": "300234066836710",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 1361.7505102541509,
+            "error_b_m": 3841.4921481028246,
+            "group_id": "300234066836710",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 2156.456722346094,
+            "error_b_m": 5291.921741953975,
+            "group_id": "300234066836710",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 3075.58446528571,
+            "error_b_m": 6803.041797411212,
+            "group_id": "300234066836710",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 4034.0989009671275,
+            "error_b_m": 8270.53113245185,
+            "group_id": "300234066836710",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          },
+          {
+            "error_a_m": 87.20288927517319,
+            "error_b_m": 1457.9258496206487,
+            "group_id": "300534061292930",
+            "horizon_hours": 1,
+            "time_utc": "2022-06-01T01:00:00Z"
+          },
+          {
+            "error_a_m": 365.4379034278637,
+            "error_b_m": 2869.5558680720287,
+            "group_id": "300534061292930",
+            "horizon_hours": 2,
+            "time_utc": "2022-06-01T02:00:00Z"
+          },
+          {
+            "error_a_m": 717.1189929773229,
+            "error_b_m": 4417.888978192801,
+            "group_id": "300534061292930",
+            "horizon_hours": 3,
+            "time_utc": "2022-06-01T03:00:00Z"
+          },
+          {
+            "error_a_m": 1172.8218490430777,
+            "error_b_m": 6127.265859616213,
+            "group_id": "300534061292930",
+            "horizon_hours": 4,
+            "time_utc": "2022-06-01T04:00:00Z"
+          },
+          {
+            "error_a_m": 1755.0562706059286,
+            "error_b_m": 8009.676492962519,
+            "group_id": "300534061292930",
+            "horizon_hours": 5,
+            "time_utc": "2022-06-01T05:00:00Z"
+          },
+          {
+            "error_a_m": 2447.053502512259,
+            "error_b_m": 10032.758970018393,
+            "group_id": "300534061292930",
+            "horizon_hours": 6,
+            "time_utc": "2022-06-01T06:00:00Z"
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": -3552.7887320690493,
+        "mean_error_a_m": 1510.2315897151784,
+        "mean_error_b_m": 5063.020321784227,
+        "model_a": "last_drift",
+        "model_b": "current_only",
+        "planned_common_cell_count": 12
+      }
+    ],
+    "schema_version": 1,
+    "scored_cell_count": 36,
+    "statistical_independence": false
+  },
+  "source_receipts": [
+    {
+      "bytes": 18686,
+      "content_encoding": "identity",
+      "content_type": "text/plain",
+      "elapsed_wall_s": 0.24937829101691023,
+      "finished_at_utc": "2026-10-17T22:02:51.140054Z",
+      "http_status": 200,
+      "raw_path": "raw/gdp-metadata.das",
+      "reason": null,
+      "received_bytes": 18686,
+      "request_attempted": true,
+      "response_complete": true,
+      "retained_bytes": 18686,
+      "role": "gdp_metadata",
+      "sha256": "460853bbdcd165ebf8eff0a098cb4784a98a2eb3558136edb7583b8d3449ee68",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das",
+      "started_at_utc": "2026-10-17T22:02:50.890748Z",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 640,
+      "content_encoding": "identity",
+      "content_type": "text/csv",
+      "elapsed_wall_s": 3.6993430830189027,
+      "finished_at_utc": "2026-10-17T22:02:54.590023Z",
+      "http_status": 200,
+      "raw_path": "raw/gdp-origin-identity.csv",
+      "reason": null,
+      "received_bytes": 640,
+      "request_attempted": true,
+      "response_complete": true,
+      "retained_bytes": 640,
+      "role": "gdp_identity",
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00%3A00%3A00Z&latitude%3E=25&latitude%3C=35&longitude%3E=-80&longitude%3C=-65&distinct%28%29",
+      "started_at_utc": "2026-10-17T22:02:51.140370Z",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 159404,
+      "content_encoding": "identity",
+      "content_type": "application/xml",
+      "elapsed_wall_s": 4.195724791032262,
+      "finished_at_utc": "2026-10-17T22:02:55.086415Z",
+      "http_status": 200,
+      "raw_path": "raw/hycom-metadata.xml",
+      "reason": null,
+      "received_bytes": 159404,
+      "request_attempted": true,
+      "response_complete": true,
+      "retained_bytes": 159404,
+      "role": "hycom_metadata",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d",
+      "source_url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml",
+      "started_at_utc": "2026-10-17T22:02:54.590235Z",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 1828,
+      "content_encoding": "identity",
+      "content_type": "text/csv",
+      "elapsed_wall_s": 5.12116108299233,
+      "finished_at_utc": "2026-10-17T22:02:56.011849Z",
+      "http_status": 200,
+      "raw_path": "raw/drifter-300234066836710.csv",
+      "reason": null,
+      "received_bytes": 1828,
+      "request_attempted": true,
+      "response_complete": true,
+      "retained_bytes": 1828,
+      "role": "trajectory:300234066836710",
+      "sha256": "d226154af32dcb59e6e21a069072cdbd4ed8094efe7f1fa63c9f8d6334a1b9a0",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300234066836710%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z",
+      "started_at_utc": "2026-10-17T22:02:55.086680Z",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 1824,
+      "content_encoding": "identity",
+      "content_type": "text/csv",
+      "elapsed_wall_s": 5.820282540982589,
+      "finished_at_utc": "2026-10-17T22:02:56.710976Z",
+      "http_status": 200,
+      "raw_path": "raw/drifter-300534061292930.csv",
+      "reason": null,
+      "received_bytes": 1824,
+      "request_attempted": true,
+      "response_complete": true,
+      "retained_bytes": 1824,
+      "role": "trajectory:300534061292930",
+      "sha256": "4fd7bbdbd85f54ee789c53a9c2f5dc031dbae32413bb6fe7c454999902a7bd7e",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300534061292930%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z",
+      "started_at_utc": "2026-10-17T22:02:56.012411Z",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 572604,
+      "content_encoding": "identity",
+      "content_type": "application/x-netcdf",
+      "elapsed_wall_s": 28.98863891599467,
+      "finished_at_utc": "2026-10-17T22:03:19.879394Z",
+      "http_status": 200,
+      "raw_path": "raw/hycom-currents.nc",
+      "reason": null,
+      "received_bytes": 572604,
+      "request_attempted": true,
+      "response_complete": true,
+      "retained_bytes": 572604,
+      "role": "hycom_currents",
+      "sha256": "372b1fe68ac4e59a99899fa5c19dbe52ba6c2ee75550200e4ac0138d92dc3888",
+      "source_url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022?var=water_u%2Cwater_v&north=35&south=25&west=280&east=295&horizStride=1&time_start=2022-06-01T00%3A00%3A00Z&time_end=2022-06-01T06%3A00%3A00Z&timeStride=1&vertCoord=15&accept=netcdf",
+      "started_at_utc": "2026-10-17T22:02:56.711507Z",
+      "status": "DOWNLOADED"
+    }
+  ],
+  "statistical_independence": false,
+  "store_written": false,
+  "study_id": "matched-current-gdp-hycom-15m-v2"
+}

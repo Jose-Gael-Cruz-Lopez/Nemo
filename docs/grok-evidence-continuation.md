@@ -2657,3 +2657,3814 @@ The earlier manifest remains its unchanged historical capture. This separate man
 ```
 
 End of additive v1 checkpoint. Existing canonical705KB source archive remains unchanged.
+
+
+---
+
+# Additive v2 checkpoint: completed matched currents, negative model result
+
+This checkpoint supersedes the current-state wording in the historical captures above without changing their bytes. The preceding **173,368 bytes** remain an exact prefix; the original 78,008-byte prefix and earlier 705 KB canonical bundle are also unchanged. The continuation now preserves **nine actual prompt/response rounds: eighteen Grok files**, with local records separately labeled. The four new rounds below cover bounded v2 acceptance criteria, exact source review, the final document-pin delta and interpretation of the actual first score in the same existing Grok project. Long prompts may appear in Grok as a native pasted-text attachment; the exact submitted content is preserved here. This is recorded web assistance, not an API call, repository execution by Grok, or a full provider account export.
+
+The distinct v2 was reviewed at source commit `c1e7c25` and formally frozen at `23de21c` before six bounded source requests. Both GDP trajectory bodies and HYCOM forcing were downloaded. All **36/36** model/hour attempts scored, forecasts were persisted before numeric future-target decoding, and offline replay matched the exact first-score bytes. V1 remains **0/36** and unchanged; v2 corrected only the declared metadata and coordinate compatibility gates. It was pre-GDP-outcome, not entirely value-unseen: v1 forcing had already been decoded for diagnosis.
+
+On this fixed two-buoy, six-hour retrospective sample, equal-ID macro ADE was **1,510.2 m last drift**, **3,490.1 m stationary**, and **5,063.0 m current-only RK4**. Greater complexity did not improve this result. These are descriptive errors on twelve distinct processed future position estimates, not independent plastic observations, operational skill or tank/reef benefit. No model was automatically promoted or fitted against the new targets.
+
+Final local checks passed **1,779 Python tests**, **225 frontend tests**, and **174 disposable HTTP checks**, with zero failures and six expected blocked external/physical scopes; lint, types, production build and historical replays passed. Actual browser checks exercised version isolation, both groups, path toggles and hourly displacement with fixed scores/scale. A separate live Chalk **REPORT** cited exactly the v2 report/protocol and stated the negative result, exposure and scientific limits. The isolated process retained zero device/provider/Photon attempts and an unchanged full disposable store. No new Photon test message, camera activation, xAI API use or billing change occurred. Final commit/hosted CI and native Trov publication are separate release checks.
+
+Two pieces of Grok advice remain visible but are not adopted. Its criteria response incorrectly placed current-value validation before GDP requests; the later code review explicitly corrected the acquisition-stage ordering. Its post-result phrase that every RK4 stage is exact is too strong: RK4 approximates the interpolated velocity field and has numerical error. Wind/wave, depth, model/assimilation and representation explanations are hypotheses, not diagnosed causes from this small comparison. Source verification, static model advice, numerical replay, real-world skill and sponsor eligibility remain different evidence.
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-prompt.txt
+
+Kind: **ACTUAL_GROK_WEB_PROMPT**. Original bytes: **35319**. SHA-256: `1c213e6718fc247b1111233bf118a942bca57547bb56f4fd225175ac9325d97a`.
+
+````text
+Final narrow delta to the exact v2 code you just reviewed GO. STATIC review only; no v2 freeze, acquisition, scientific score or model result exists. The immutable proposal said it must be bound by the protocol. We therefore added ONLY: a separate AMENDMENT_DOCUMENTS literal pin for docs/matched-current-v2-amendment.md (22638bytes,SHA16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f); amendment_documents_sha256 in the fixed contract; build_protocol verifies/pins that exact file in metadata_evidence. Existing _require_committed checks every metadata_evidence source before I/O, so the proposal must be committed and unchanged too. No models, queries, coordinate rule, bounds, budgets or denominators changed. The original DRAFT proposal capture will never be edited after this freeze; later implementation/result status will be a separate guide.
+
+Hostile mutation test proves even appending a byte to that proposal rejects before a request/sentinel;50v2protocol/acquisition tests passed after delta. The full local suite passed1770tests at the preceding collection checkpoint; the final changed focused suites are being rerun separately, not misrepresented as part of that earlier full run. Frontend225pass,ESLint/TS/isolatedproductionbuild pass. Allv1bytes preserved. The exact complete updated protocol file below supersedes its previous source hash; other three shown script files unchanged. Give a concise finalGO/NO-GO for this change, conditional on tests and committed freeze, and explicitly do not claim it was already frozen/acquired. Preserve the earlier corrected decoder-after-acquisition ordering.
+
+EXACT UPDATED SOURCE SHA256 1acee1a93a0c78437313bdba0b7f05dba3006a8fc33507896902470c8d90ea1c
+```python
+"""Distinct pre-GDP-outcome v2 amendment; no network, model runs or scoring.
+
+V1 artifacts remain immutable. Its forcing bytes were decoded for compatibility
+diagnosis, so this amendment is not an entirely scientific-value-unseen design.
+"""
+from __future__ import annotations
+
+import ast
+import csv
+import hashlib
+import io
+import json
+import math
+import re
+import subprocess
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from urllib.parse import quote, urlencode
+
+ROOT = Path(__file__).resolve().parents[3]
+DIRECTORY = ROOT / "data/research/matched-current-v2"
+STUDY_ID = "matched-current-gdp-hycom-15m-v2"
+IDENTITY_RELATIVE = "apps/ocean/reeftrace_ocean/matched_current_v2_identity.py"
+MODEL_IDS = ("stationary", "last_drift", "current_only")
+GROUPS = (("300234066836710", "6202613"), ("300534061292930", "4102636"))
+ORIGIN = "2022-06-01T00:00:00Z"
+CONTEXT_START = "2022-05-31T00:00:00Z"
+END = "2022-06-01T06:00:00Z"
+CSV_COLUMNS = ["ID", "time", "latitude", "longitude"]
+CSV_UNITS = ["", "UTC", "degrees_north", "degrees_east"]
+GDP_BASE = "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc"
+HYCOM_BASE = "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022"
+METADATA = {
+    "gdp_metadata": ("gdp-hourly.das", "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"),
+    "gdp_identity": ("gdp-origin-identity-drogue.csv", "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"),
+    "hycom_metadata": ("hycom-2022-ncss-dataset.xml", "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"),
+}
+GDP_CANONICAL_SHA256 = "0570d44d6fd9d09d60a4d57ddaf27cfd4b8529052e1a816ca11fb0216874fefe"
+GDP_CANONICAL_TOKEN = b"2000-01-01T00:00:00Z"
+_UTC_TOKEN = rb"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z"
+_GDP_HISTORY_PATTERN = re.compile(
+    rb'(?m)^    String history "Version v2\.01\.  Metadata from dirall\.dat and deplog\.dat\n'
+    rb'(?P<local>' + _UTC_TOKEN + rb') \(local files\)\n'
+    rb'(?P<request>' + _UTC_TOKEN + rb') '
+    rb'https://erddap\.aoml\.noaa\.gov/gdp/erddap/tabledap/drifter_hourly_qc\.das";\n'
+)
+PRIOR_ARTIFACTS = {
+    "data/research/matched-current-v1/protocol.json":
+        "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6",
+    "data/research/matched-current-v1/manifest.json":
+        "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e",
+    "data/research/matched-current-v1/forecasts.json":
+        "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f",
+    "data/research/matched-current-v1/evaluation.json":
+        "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7",
+    "data/research/matched-current-v1/raw/gdp-metadata.das":
+        "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3",
+    "data/research/matched-current-v1/raw/hycom-currents.nc":
+        "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065",
+    "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json":
+        "b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d",
+}
+AMENDMENT_DOCUMENTS = {
+    "docs/matched-current-v2-amendment.md":
+        "16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f",
+}
+SOURCE_PATHS = (
+    "apps/__init__.py", "apps/ocean/__init__.py", "apps/ocean/reeftrace_ocean/__init__.py",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py",
+    "apps/ocean/reeftrace_ocean/matched_current.py", "apps/ocean/reeftrace_ocean/hycom.py",
+    "apps/ocean/reeftrace_ocean/advection.py", "apps/ocean/reeftrace_ocean/field.py",
+    "apps/ocean/reeftrace_ocean/benchmark.py", "apps/ocean/reeftrace_ocean/data.py",
+    "scripts/freeze_matched_current_v2_protocol.py", "scripts/fetch_matched_current_v2_study.py",
+    "scripts/evaluate_matched_current_v2_study.py", "pyproject.toml",
+)
+ROLE_ORDER = ("gdp_metadata", "gdp_identity", "hycom_metadata",
+              *("trajectory:" + identifier for identifier, _ in GROUPS), "hycom_currents")
+
+
+def sha(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+def canonical_json(value) -> bytes:
+    return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n").encode()
+
+
+def utc() -> str:
+    return datetime.now(UTC).isoformat().replace("+00:00", "Z")
+
+
+def when(value: str) -> datetime:
+    result = datetime.fromisoformat(value)
+    if result.utcoffset() != timedelta(0):
+        raise ValueError("Matched-current timestamps require UTC")
+    return result
+
+
+def read_bytes(path, maximum=12 * 1024 * 1024) -> bytes:
+    with Path(path).open("rb") as stream:
+        value = stream.read(maximum + 1)
+    if len(value) > maximum:
+        raise ValueError("Matched-current artifact exceeds its byte budget")
+    return value
+
+
+def save_json(path, value) -> str:
+    path = Path(path)
+    payload = canonical_json(value)
+    with path.open("xb") as stream:
+        stream.write(payload)
+    with path.with_suffix(".sha256").open("x") as stream:
+        stream.write(sha(payload) + "\n")
+    return sha(payload)
+
+
+def _unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Duplicate JSON key in matched-current artifact")
+        result[key] = value
+    return result
+
+
+def pinned_json(directory, name, expected=None):
+    path = _safe_path(Path(directory), name + ".json")
+    raw = read_bytes(path, 1024 * 1024)
+    digest = sha(raw)
+    if expected is not None and digest != expected or read_bytes(
+        _safe_path(Path(directory), name + ".sha256"), 80
+    ).decode().strip() != digest:
+        raise ValueError("Matched-current artifact hash changed")
+    value = json.loads(raw, object_pairs_hook=_unique_object)
+    if not isinstance(value, dict):
+        raise TypeError("Matched-current artifact requires a JSON object")
+    return value, digest
+
+
+def _safe_path(directory: Path, relative: str) -> Path:
+    path = directory / relative
+    if Path(relative).is_absolute() or ".." in Path(relative).parts:
+        raise ValueError("Unsafe matched-current artifact path")
+    if not path.resolve().is_relative_to(directory.resolve()):
+        raise ValueError("Matched-current artifact escapes its directory")
+    if any((directory / Path(*Path(relative).parts[:i])).is_symlink()
+           for i in range(1, len(Path(relative).parts) + 1)):
+        raise ValueError("Symlinked matched-current artifact is not accepted")
+    return path
+
+
+def _git_head(root: Path) -> str:
+    value = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", value):
+        raise ValueError("Invalid source checkpoint")
+    return value
+
+
+def canonicalize_gdp_metadata(payload: bytes) -> bytes:
+    """Mask exactly the two equal, valid UTC history captures; retain all else."""
+    if not isinstance(payload, bytes) or len(payload) > 256 * 1024:
+        raise ValueError("GDP metadata exceeds the bounded history contract")
+    matches = list(_GDP_HISTORY_PATTERN.finditer(payload))
+    if len(matches) != 1:
+        raise ValueError("GDP metadata requires the exact single pinned history block")
+    match = matches[0]
+    local, request = match.group("local"), match.group("request")
+    if local != request:
+        raise ValueError("GDP history UTC capture pair must agree")
+    try:
+        when(local.decode("ascii"))
+    except (ValueError, UnicodeError, OverflowError) as error:
+        raise ValueError("GDP history capture must be a valid UTC second") from error
+    return (payload[:match.start("local")] + GDP_CANONICAL_TOKEN
+            + payload[match.end("local"):match.start("request")] + GDP_CANONICAL_TOKEN
+            + payload[match.end("request"):])
+
+
+def contract() -> dict:
+    """All acquisition choices are fixed before values; never infer a new query."""
+    identity_query = ("ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth"
+                      "&time=2022-06-01T00:00:00Z&latitude>=25&latitude<=35"
+                      "&longitude>=-80&longitude<=-65&distinct()")
+    sources = {
+        "gdp_metadata": {"url": GDP_BASE + ".das", "raw_path": "raw/gdp-metadata.das",
+                         "max_bytes": 256 * 1024, "depends_on": []},
+        "gdp_identity": {"url": GDP_BASE + ".csv?" + quote(identity_query, safe=",&="),
+                         "raw_path": "raw/gdp-origin-identity.csv",
+                         "max_bytes": 32 * 1024, "depends_on": []},
+        "hycom_metadata": {"url": HYCOM_BASE + "/dataset.xml",
+                           "raw_path": "raw/hycom-metadata.xml",
+                           "max_bytes": 256 * 1024, "depends_on": []},
+    }
+    for role, (_, digest) in METADATA.items():
+        sources[role]["expected_sha256"] = digest
+    sources["gdp_metadata"].update(
+        validation="EXACT_HISTORY_UTC_CAPTURE_PAIR_CANONICAL_SHA256",
+        expected_canonical_sha256=GDP_CANONICAL_SHA256,
+    )
+    for identifier, _ in GROUPS:
+        query = (",".join(CSV_COLUMNS) + f'&ID="{identifier}"'
+                 f"&time>={CONTEXT_START}&time<={END}")
+        sources["trajectory:" + identifier] = {
+            "url": GDP_BASE + ".csv?" + quote(query, safe=",&="),
+            "raw_path": "raw/drifter-" + identifier + ".csv", "max_bytes": 32 * 1024,
+            "depends_on": ["gdp_metadata", "gdp_identity"],
+        }
+    current_query = urlencode([
+        ("var", "water_u,water_v"), ("north", "35"), ("south", "25"),
+        ("west", "280"), ("east", "295"), ("horizStride", "1"),
+        ("time_start", ORIGIN), ("time_end", END), ("timeStride", "1"),
+        ("vertCoord", "15"), ("accept", "netcdf"),
+    ])
+    sources["hycom_currents"] = {
+        "url": HYCOM_BASE + "?" + current_query, "raw_path": "raw/hycom-currents.nc",
+        "max_bytes": 8 * 1024 * 1024, "depends_on": ["hycom_metadata"],
+    }
+    return {
+        "schema_version": 1, "kind": "RETROSPECTIVE_MATCHED_CURRENT_V2_PROTOCOL",
+        "study_id": STUDY_ID, "design_status": "FROZEN_PRE_GDP_OUTCOME_COMPATIBILITY_AMENDMENT",
+        "groups": [{"drifter_id": i, "wmo": w} for i, w in GROUPS], "models": list(MODEL_IDS),
+        "windows": {"context_start_utc": CONTEXT_START, "origin_time_utc": ORIGIN,
+                    "end_utc": END, "context_count": 25, "heldout_count": 6,
+                    "cadence_s": 3600, "horizons_s": list(range(3600, 21601, 3600))},
+        "gdp_schema": {"columns": CSV_COLUMNS, "units": CSV_UNITS, "row_count": 31,
+                       "coordinate_decoding_during_acquisition": False},
+        "forcing": {"source": "HYCOM_GOFS_3.1_GLBy0.08_expt93.0_UV3Z_2022",
+                    "depth_m": 15, "variables": ["water_u", "water_v"],
+                    "native_bbox": {"west": 280, "east": 295, "south": 25, "north": 35},
+                    "times_utc": [ORIGIN, "2022-06-01T03:00:00Z", END],
+                    "native_stride": 1, "longitude": "((lon+180)%360)-180; preserve native indices",
+                    "raw_fill": -30000, "decimal_scale": 0.001, "offset": 0,
+                    "solver_step_s": 300, "output_step_s": 3600, "maximum_samples": 250000,
+                    "maximum_steps": 2048, "maximum_speed_m_s": 10,
+                    "coordinate_encoding": {"dtype": "float64_exact_promoted_float32",
+                        "latitude": {"count": 251, "start": 25, "step": 0.04, "max_float32_ulps": 0},
+                        "longitude": {"count": 188, "start": 280, "step": 0.08,
+                                      "first_label_exact": 280, "max_float32_ulps": 1},
+                        "strictly_increasing": True, "preserve_actual_axes": True,
+                        "expand_support": False}},
+        "budgets": {"requests_max": 6, "total_bytes": 12 * 1024 * 1024,
+                    "connect_timeout_s": 5, "timeout_s": 45, "wall_time_s": 180,
+                    "retries": 0, "redirects": False, "fallback_endpoints": False,
+                    "connections": 1, "accept_encoding": "identity",
+                    "oversize_detection_chunk_bytes": 8192,
+                    "total_bytes_scope": "retained body cap; one detection chunk may exceed it"},
+        "sources": sources, "role_order": list(ROLE_ORDER),
+        "gdp_metadata_history_compatibility": {
+            "method_id": "EXACT_EQUAL_SECOND_RESOLUTION_UTC_HISTORY_PAIR_V1",
+            "history_pattern_ascii": _GDP_HISTORY_PATTERN.pattern.decode("ascii"),
+            "canonical_timestamp_token": GDP_CANONICAL_TOKEN.decode("ascii"),
+            "canonical_seed_sha256": GDP_CANONICAL_SHA256,
+            "capture_pair_must_agree": True, "valid_utc_calendar_required": True,
+            "all_other_bytes_unchanged": True, "raw_response_hash_retained": True,
+        },
+        "pre_outcome_amendment": {
+            "kind": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+            "prior_study_id": "matched-current-gdp-hycom-15m-v1",
+            "prior_artifact_sha256": dict(PRIOR_ARTIFACTS),
+            "prior_gdp_trajectory_payload_count": 0, "prior_scored_cell_count": 0,
+            "prior_forcing_acquired_and_decoded": True,
+            "prior_model_selection_from_scores": False,
+            "changes": ["allowlisted GDP history capture-time compatibility",
+                        "declared native float32 coordinate representation guard"],
+            "unchanged": ["groups", "models", "queries", "depth", "windows", "horizons",
+                          "denominators", "transport budgets", "actual coordinate support"],
+            "v1_preserved": True, "silent_retry": False, "model_or_parameter_tuning": False,
+        },
+        "amendment_documents_sha256": dict(AMENDMENT_DOCUMENTS),
+        "transport_references": [
+            "https://docs.unidata.ucar.edu/tds/current/userguide/ncss_grid.html",
+            "https://www.hycom.org/dataserver/access-methods/ncss",
+        ],
+        "metrics": {"planned_groups": 2, "planned_model_tracks": 6, "planned_cells": 36,
+                    "unique_future_targets": 12, "score": "spherical_great_circle_metres_R6371008.8",
+                    "primary": "equal-ID macro ADE/FDE withheld unless all36 cells scored",
+                    "failures": "retain every planned cell, null error and explicit reasons"},
+        "isolation": {"context_for_models": "origin only; last_drift final two only",
+                      "all_tracks_frozen_before_future_coordinate_access": True,
+                      "no_fitting_or_tuning": True, "no_replacements": True},
+        "flags": {"physical_validation": False, "operational_causality": False,
+                  "assimilation_independence_verified": False, "statistical_independence": False,
+                  "physical_alias_resolution_verified": False, "automatic_model_promotion": False},
+    }
+
+
+def build_protocol(root=None) -> dict:
+    root = Path(root or ROOT)
+    evidence = {}
+    for role, (name, expected) in METADATA.items():
+        path = root / "docs/research-evidence/matched-current-metadata" / name
+        payload = read_bytes(path)
+        if sha(payload) != expected:
+            raise ValueError("Existing matched-current metadata seed changed")
+        evidence[role] = {"path": path.relative_to(root).as_posix(),
+                          "bytes": len(payload), "sha256": expected}
+        if role == "gdp_metadata" and sha(canonicalize_gdp_metadata(payload)) != GDP_CANONICAL_SHA256:
+            raise ValueError("Pinned GDP history canonicalization changed")
+    for name, expected in PRIOR_ARTIFACTS.items():
+        payload = read_bytes(root / name)
+        if sha(payload) != expected:
+            raise ValueError("Prior v1 artifact or compatibility diagnosis changed")
+        evidence[name] = {"path": name, "bytes": len(payload), "sha256": expected}
+    for name, expected in AMENDMENT_DOCUMENTS.items():
+        payload = read_bytes(root / name)
+        if sha(payload) != expected:
+            raise ValueError("V2 amendment proposal document changed")
+        evidence[name] = {"path": name, "bytes": len(payload), "sha256": expected}
+    prior_manifest = json.loads(read_bytes(root / "data/research/matched-current-v1/manifest.json"))
+    prior_report = json.loads(read_bytes(root / "data/research/matched-current-v1/evaluation.json"))
+    trajectories = [row for row in prior_manifest["source_receipts"]
+                    if row["role"].startswith("trajectory:")]
+    if (len(trajectories) != 2 or any(row["status"] != "BLOCKED"
+            or row["request_attempted"] is not False or row["raw_path"] is not None
+            or row["received_bytes"] != 0 for row in trajectories)
+            or prior_report["scores"]["scored_cell_count"] != 0
+            or prior_report["scores"]["planned_cell_count"] != 36
+            or prior_report["scores"]["primary_equal_id_macro_results"] is not None):
+        raise ValueError("Prior v1 exposure no longer supports a pre-GDP-outcome amendment")
+    identity_paths = ("data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv",
+                      "data/public/noaa-fresh-drifter-v2/exclusions.json",
+                      "data/public/noaa-fresh-drifter-v2/selection.json")
+    for name in identity_paths:
+        payload = read_bytes(root / name)
+        evidence[name] = {"path": name, "bytes": len(payload), "sha256": sha(payload)}
+    # New-study identity audit only; no new-study positions, fits or scores are read.
+    rows = list(csv.reader(io.StringIO(read_bytes(root / identity_paths[0]).decode())))
+    if rows[:2] != [["ID", "WMO"], ["", ""]]:
+        raise ValueError("Identity registry schema changed")
+    by_id, by_wmo = {}, {}
+    for row in rows[2:]:
+        if len(row) != 2:
+            raise ValueError("Identity registry row changed")
+        identifier, wmo = row
+        if wmo.isdigit() and int(wmo) > 0:
+            by_id.setdefault(identifier, set()).add(wmo)
+            by_wmo.setdefault(wmo, set()).add(identifier)
+    exclusions = json.loads(read_bytes(root / identity_paths[1]))["reserved_gdp_ids"]
+    selected = json.loads(read_bytes(root / identity_paths[2]))["groups"]
+    exposed = {g["drifter_id"] for g in selected}
+    for identifier, wmo in GROUPS:
+        if (by_id.get(identifier) != {wmo} or by_wmo.get(wmo) != {identifier}
+                or identifier in exclusions or identifier in exposed):
+            raise ValueError("Matched-current identity/exclusion audit failed")
+    return {**contract(), "frozen_at_utc": utc(),
+            "source_checkpoint": {"git_head": _git_head(root),
+                                  "note": "Commit all pinned sources, protocol and identity before values."},
+            "implementation_sha256": {name: sha(read_bytes(root / name)) for name in SOURCE_PATHS},
+            "metadata_evidence": evidence}
+
+
+def freeze_protocol(directory=None, *, root=None) -> dict:
+    """Explicit metadata-only generator. Never called by a public/API reader."""
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/research/matched-current-v2")
+    identity = root / IDENTITY_RELATIVE
+    if directory.exists() or identity.exists():
+        raise ValueError("Matched-current design already exists; never overwrite a freeze")
+    value = build_protocol(root)
+    directory.mkdir(parents=True, exist_ok=False)
+    digest = save_json(directory / "protocol.json", value)
+    identity.parent.mkdir(parents=True, exist_ok=True)
+    with identity.open("x") as stream:
+        stream.write(f'STUDY_ID = {STUDY_ID!r}\nPROTOCOL_SHA256 = {digest!r}\n')
+    return {"study_id": STUDY_ID, "protocol_sha256": digest,
+            "scientific_values_acquired": False, "identity_generated": True,
+            "amendment_scope": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+            "prior_v1_forcing_acquired_and_decoded": True}
+
+
+def _trusted_hash(root: Path) -> str:
+    path = root / IDENTITY_RELATIVE
+    if not path.exists():
+        raise ValueError("Matched-current protocol is not frozen; trusted identity is absent")
+    try:
+        tree = ast.parse(read_bytes(path, 512).decode())
+    except SyntaxError as error:
+        raise ValueError("Untrusted matched-current identity syntax") from error
+    values = {}
+    for node in tree.body:
+        if (not isinstance(node, ast.Assign) or len(node.targets) != 1
+                or not isinstance(node.targets[0], ast.Name) or not isinstance(node.value, ast.Constant)
+                or not isinstance(node.value.value, str) or node.targets[0].id in values):
+            raise ValueError("Untrusted matched-current identity source")
+        values[node.targets[0].id] = node.value.value
+    if (set(values) != {"STUDY_ID", "PROTOCOL_SHA256"} or values["STUDY_ID"] != STUDY_ID
+            or not re.fullmatch(r"[0-9a-f]{64}", values["PROTOCOL_SHA256"])):
+        raise ValueError("Untrusted matched-current identity constants")
+    return values["PROTOCOL_SHA256"]
+
+
+def load_protocol(directory=None, *, root=None):
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/research/matched-current-v2")
+    protocol, digest = pinned_json(directory, "protocol", _trusted_hash(root))
+    expected = contract()
+    if set(protocol) != set(expected) | {"frozen_at_utc", "source_checkpoint",
+                                         "implementation_sha256", "metadata_evidence"}:
+        raise ValueError("Matched-current protocol schema changed")
+    if any(protocol[k] != v for k, v in expected.items()):
+        raise ValueError("Matched-current protocol query, schema or scientific contract changed")
+    when(protocol["frozen_at_utc"])
+    checkpoint = protocol["source_checkpoint"]
+    if (set(checkpoint) != {"git_head", "note"}
+            or not re.fullmatch(r"[0-9a-f]{40}", checkpoint["git_head"])):
+        raise ValueError("Matched-current source checkpoint changed")
+    if set(protocol["implementation_sha256"]) != set(SOURCE_PATHS):
+        raise ValueError("Matched-current dependency set changed")
+    for name, expected_hash in protocol["implementation_sha256"].items():
+        if sha(read_bytes(root / name)) != expected_hash:
+            raise ValueError("Matched-current implementation changed after freeze")
+    expected_evidence = build_protocol(root)["metadata_evidence"]
+    if protocol["metadata_evidence"] != expected_evidence:
+        raise ValueError("Matched-current metadata/identity seed changed after freeze")
+    return protocol, {"protocol_sha256": digest,
+                      "trusted_identity_sha256": sha(read_bytes(root / IDENTITY_RELATIVE, 512))}
+
+
+def validate_trajectory_schema(payload: bytes, identifier: str) -> None:
+    """Validate structure only; coordinate cells deliberately remain undecoded."""
+    try:
+        rows = list(csv.reader(io.StringIO(payload.decode("utf-8")), strict=True))
+    except csv.Error as error:
+        raise ValueError("Malformed GDP trajectory CSV") from error
+    if len(rows) != 33 or rows[:2] != [CSV_COLUMNS, CSV_UNITS]:
+        raise ValueError("GDP trajectory needs exact31-row frozen schema/units")
+    start = when(CONTEXT_START)
+    for index, row in enumerate(rows[2:]):
+        expected = (start + timedelta(hours=index)).isoformat().replace("+00:00", "Z")
+        if len(row) != 4 or row[0] != identifier or row[1] != expected:
+            raise ValueError("GDP trajectory ID or hourly UTC structure changed")
+
+
+def validate_source(role: str, payload: bytes, source: dict) -> None:
+    if role == "gdp_metadata":
+        if sha(canonicalize_gdp_metadata(payload)) != source["expected_canonical_sha256"]:
+            raise ValueError("PINNED_METADATA_CHANGED")
+    elif role in METADATA and sha(payload) != source["expected_sha256"]:
+        raise ValueError("PINNED_METADATA_CHANGED")
+    if role.startswith("trajectory:"):
+        validate_trajectory_schema(payload, role.split(":", 1)[1])
+    if role == "hycom_currents" and not payload.startswith(
+            (b"CDF\x01", b"CDF\x02", b"\x89HDF\r\n\x1a\n")):
+        raise ValueError("HYCOM_RESPONSE_IS_NOT_NETCDF")
+
+
+NETCDF_CONTENT_TYPES = {"application/x-netcdf", "application/x-netcdf4",
+                        "application/netcdf", "application/octet-stream"}
+TRANSPORT_FAILURES = {
+    "HTTPError", "RequestError", "TransportError", "TimeoutException", "NetworkError",
+    "ProtocolError", "ConnectError", "ReadError", "WriteError", "CloseError", "ConnectTimeout",
+    "ReadTimeout", "WriteTimeout", "PoolTimeout", "RemoteProtocolError", "LocalProtocolError",
+    "UnsupportedProtocol", "ProxyError", "DecodingError", "TooManyRedirects", "HTTPStatusError",
+}
+
+
+def _failure_semantics(row, body, spec, dependencies_ok, attempts, received, retained, limits):
+    """Recompute observable failure conditions, not just self-reported status strings."""
+    role, status, reason = row["role"], row["status"], row["reason"]
+    attempted, complete = row["request_attempted"], row["response_complete"]
+    http_status, encoding = row["http_status"], row["content_encoding"]
+    if not dependencies_ok:
+        return (status == "BLOCKED" and reason == "DEPENDENCY_UNAVAILABLE" and not attempted
+                and not complete and http_status is None and row["raw_path"] is None
+                and body is None and row["received_bytes"] == row["retained_bytes"] == 0
+                and encoding is row["content_type"] is None)
+    if status == "BLOCKED":
+        return False
+    if not attempted:
+        exhausted = (row["elapsed_wall_s"] >= limits["wall_time_s"]
+                     or attempts >= limits["requests_max"] or received >= limits["total_bytes"])
+        return (status == "FETCH_FAILED" and reason == "ACQUISITION_BUDGET_EXHAUSTED"
+                and exhausted and not complete and http_status is None and body is None
+                and row["raw_path"] is None and row["received_bytes"] == row["retained_bytes"] == 0
+                and encoding is row["content_type"] is None)
+    if status in {"METADATA_INVALID", "SCHEMA_INVALID"}:
+        expected = "METADATA_INVALID" if role in METADATA else "SCHEMA_INVALID"
+        expected_reason = "PINNED_METADATA_CHANGED" if role in METADATA else "FROZEN_VALUE_SCHEMA_INVALID"
+        if (status != expected or reason != expected_reason or http_status != 200
+                or not complete or body is None or encoding not in {"", "identity"}
+                or role == "hycom_currents" and row["content_type"] not in NETCDF_CONTENT_TYPES):
+            return False
+        try:
+            validate_source(role, body, spec)
+        except (ValueError, UnicodeError, TypeError, OverflowError):
+            return True
+        return False
+    if status != "FETCH_FAILED":
+        return False
+    if reason == "HTTP_ERROR":
+        return complete and http_status is not None and http_status != 200
+    if reason == "CONTENT_ENCODING_MISMATCH":
+        return complete and http_status == 200 and encoding not in {"", "identity", None}
+    if reason == "CONTENT_TYPE_MISMATCH":
+        return (complete and http_status == 200 and encoding in {"", "identity"}
+                and role == "hycom_currents" and row["content_type"] not in NETCDF_CONTENT_TYPES)
+    if complete:
+        return False
+    if reason == "RESPONSE_SIZE_BUDGET":
+        return (http_status is not None and row["received_bytes"] > row["retained_bytes"]
+                and (row["retained_bytes"] == spec["max_bytes"]
+                     or retained + row["retained_bytes"] == limits["total_bytes"]))
+    if reason == "WALL_TIME_BUDGET":
+        return http_status is not None and row["elapsed_wall_s"] >= limits["wall_time_s"]
+    return reason == "ACQUISITION_DEADLINE" or reason in TRANSPORT_FAILURES
+
+
+def load_acquisition(directory=None, *, root=None):
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/research/matched-current-v2")
+    protocol, hashes = load_protocol(directory, root=root)
+    if not (directory / "manifest.json").exists():
+        return protocol, None, hashes, {}
+    manifest, digest = pinned_json(directory, "manifest")
+    start_receipt, start_hash = pinned_json(directory, "acquisition-start")
+    if (manifest.get("study_id") != STUDY_ID or manifest.get("protocol_sha256") != hashes["protocol_sha256"]
+            or manifest.get("trusted_identity_sha256") != hashes["trusted_identity_sha256"]
+            or manifest.get("scientific_scores_computed") is not False
+            or manifest.get("no_replacements") is not True
+            or [r["role"] for r in manifest["source_receipts"]] != list(ROLE_ORDER)):
+        raise ValueError("Matched-current acquisition lineage changed")
+    started, finished = when(manifest["started_at_utc"]), when(manifest["finished_at_utc"])
+    if (started < when(protocol["frozen_at_utc"]) or finished < started
+            or start_receipt.get("study_id") != STUDY_ID
+            or start_receipt.get("protocol_sha256") != hashes["protocol_sha256"]
+            or start_receipt.get("trusted_identity_sha256") != hashes["trusted_identity_sha256"]
+            or start_receipt.get("scientific_scores_computed") is not False
+            or start_receipt.get("git_head_at_acquisition") != manifest.get("git_head_at_acquisition")
+            or not re.fullmatch(r"[0-9a-f]{40}", str(manifest.get("git_head_at_acquisition")))
+            or not when(protocol["frozen_at_utc"]) <= when(start_receipt["started_at_utc"]) <= started):
+        raise ValueError("Matched-current acquisition chronology changed")
+    sources, attempts, received, retained = {}, 0, 0, 0
+    previous_elapsed = 0
+    previous_finished = started
+    statuses = {"DOWNLOADED", "FETCH_FAILED", "BLOCKED", "METADATA_INVALID", "SCHEMA_INVALID"}
+    for row in manifest["source_receipts"]:
+        role = row["role"]
+        spec = protocol["sources"][role]
+        if (row["source_url"] != spec["url"] or row["status"] not in statuses
+                or type(row["request_attempted"]) is not bool
+                or type(row["received_bytes"]) is not int or row["received_bytes"] < 0
+                or type(row["retained_bytes"]) is not int or not 0 <= row["retained_bytes"] <= spec["max_bytes"]
+                or row["bytes"] != row["retained_bytes"]
+                or row["received_bytes"] < row["retained_bytes"]
+                or row["received_bytes"] > row["retained_bytes"] + 8192
+                or type(row["response_complete"]) is not bool
+                or row["http_status"] is not None and (type(row["http_status"]) is not int
+                                                       or not 100 <= row["http_status"] <= 599)
+                or type(row["elapsed_wall_s"]) not in {int, float}
+                or not math.isfinite(row["elapsed_wall_s"])
+                or row["elapsed_wall_s"] < previous_elapsed
+                or when(row["started_at_utc"]) < previous_finished
+                or not when(row["started_at_utc"]) <= when(row["finished_at_utc"]) <= finished):
+            raise ValueError("Matched-current acquisition receipt changed")
+        if row["raw_path"] is None:
+            if row["retained_bytes"] or row["sha256"] is not None:
+                raise ValueError("Missing matched-current raw body changed")
+            body = None
+        else:
+            if row["raw_path"] != spec["raw_path"]:
+                raise ValueError("Matched-current raw path changed")
+            path = _safe_path(directory, row["raw_path"])
+            body = read_bytes(path, spec["max_bytes"])
+            detached = _safe_path(directory, Path(row["raw_path"]).with_suffix(".sha256").as_posix())
+            if (len(body) != row["retained_bytes"] or sha(body) != row["sha256"]
+                    or read_bytes(detached, 80).decode().strip() != sha(body)):
+                raise ValueError("Matched-current raw body hash changed")
+        dependencies_ok = all(sources.get(dep) is not None for dep in spec["depends_on"])
+        if row["status"] == "DOWNLOADED":
+            if (body is None or not dependencies_ok or row["http_status"] != 200
+                    or row["response_complete"] is not True or row["reason"] is not None
+                    or not row["request_attempted"] or row["received_bytes"] != row["retained_bytes"]
+                    or row["content_encoding"] not in {"", "identity"}
+                    or role == "hycom_currents" and row["content_type"] not in NETCDF_CONTENT_TYPES):
+                raise ValueError("Matched-current success contradicts its transport/dependencies")
+            validate_source(role, body, spec)
+            sources[role] = body
+        else:
+            if not _failure_semantics(row, body, spec, dependencies_ok, attempts, received,
+                                      retained, protocol["budgets"]):
+                raise ValueError("Matched-current failure reason contradicts its actual evidence")
+            sources[role] = None
+        attempts += row["request_attempted"]
+        received += row["received_bytes"]
+        retained += row["retained_bytes"]
+        previous_elapsed = row["elapsed_wall_s"]
+        previous_finished = when(row["finished_at_utc"])
+    if (attempts != manifest["requests_attempted"] or attempts > protocol["budgets"]["requests_max"]
+            or received != manifest["response_bytes_received"]
+            or retained != manifest["response_bytes_retained"]
+            or retained > protocol["budgets"]["total_bytes"]
+            or received > protocol["budgets"]["total_bytes"] + 8192):
+        raise ValueError("Matched-current acquisition budget accounting changed")
+    hashes["manifest_sha256"] = digest
+    hashes["acquisition_start_sha256"] = start_hash
+    return protocol, manifest, hashes, sources
+
+```
+````
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-response.txt
+
+Kind: **ACTUAL_GROK_WEB_RESPONSE**. Original bytes: **1070**. SHA-256: `d05261c1925688925ffbf095bf4e938ba7bbb99237d89af10a13dd14e93530c7`.
+
+````text
+**GO for this narrow delta, conditional on the focused suites you are rerunning and on a committed freeze before any I/O.** No freeze, acquisition or score is claimed to have occurred.
+
+The added `AMENDMENT_DOCUMENTS` pin, the `amendment_documents_sha256` contract field, and the `build_protocol` verification that hashes `docs/matched-current-v2-amendment.md` are consistent with the existing `_require_committed` path, which already requires every `metadata_evidence` source to match the committed tree. A one-byte mutation therefore fails before any request or sentinel. No model, query, coordinate rule, bound, budget or denominator is altered. The earlier correction stands: depth/time/velocity encoding is still checked only when the scientific wrapper decodes HYCOM after serial acquisition, and it blocks current-only forecasting, not the GDP trajectory requests.
+
+Commit the updated protocol source, the amendment document, and the generated freeze together. Only after that commit exists and the focused suites pass should the six-role acquisition be run once.
+````
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-code-review-prompt.txt
+
+Kind: **ACTUAL_GROK_WEB_PROMPT**. Original bytes: **64055**. SHA-256: `15c5ab2e8b2773523d788622608f42a2f536855aa1dff2bdedd959a2a807612b`.
+
+````text
+Tideward final v2 implementation review BEFORE any v2 freeze, data request or score. STATIC REVIEW ONLY, not execution. Give GO/NO-GO with concrete code issues. Never claim scientific results or xAI API use. Same existing project; preserve all earlier incorrect advice and corrections in the evidence trail.
+
+Your prior criteria answer is preserved verbatim. Correction to its B third bullet: depth/time/velocity encoding validation occurs when the scientific wrapper decodes HYCOM AFTER the serial acquisition. It blocks current-only forecasting, NOT GDP trajectory requests that have already occurred. GDP dependency blocking happens only on metadata/identity transport gates. Do not repeat the earlier incorrect stage claim. This ordering remains the same as v1, and all candidates are persisted before future numeric coordinate decoding.
+
+Local independent review found the initial coordinate rule allowed west280+1ULP while the proposal said exact280. This was fixed BEFOREfreeze or newGDPvalues: code and contract now require first_label_exact280, latitude251exactroundedf32, longitude188exactpromotedf32 with maxoneULP interior/east, strictincreasing and no nativearraychanges. The matching hostile test now rejects both280-1ULP and280+1ULP, retaining interior/eastallowance. Latboundsexact25/35. Nothing is tuned to outcomes: no v2GDPcontext/futurebodies exist.
+
+Actual local evidence before this review:205combinedreader/API/v2protocol/axes/replaytests passed before the endpoint follow-up; all61newaxes/replaytests and49protocol/acquisitiontests passed after it; frontend17matchedviewtests passed. These overlap and are not summed as independent evidence. Final broader checks will run before freezing. All14v1pinnedsourcehashes andall18v1archivefiles preserved. v1remains0/36. A separate v2 artifactreader/API/versionselector is being added; it cannot forecast/fetch/score. v1 andv2 have distinctliteralidentities andchosen-version snapshot binding; v2 unknown/absentfiles404 instead ofsubstitutingv1. Reconnectingorversionswitch aborts stale UIrequests.
+
+Keep reviewed v2scope: two existingGDPgroups/WMOidentities,25contextfixes,6hourtargets, stationary/last_drift/current_only,15mHYCOMuv3z2022,00/03/06Z, samequeries/tile/stride/budgets. Shared unmodified numerics usebilinearspace/lineartimecurrent samples, geographicWGS84metric derivatives, boundedknot-alignedRK4step<=300s,stopatmasked/outofsupport; no snapping/clamping/syntheticwiggle/fitting. Lastdrift stays finaltwofixes+50kmframe; primarymacroADE/FDE withheldunlessall36cells;12distinctprocessedfuturetargetestimates,notstatisticalindependence. HYCOMalreadydecodedinv1diagnosis, sov2 is pre-GDP-outcome, NOTentirelyvalue-unseen. Allv1artifacthashes/diagnosis bound incontract. No alternativegroups/models/depth/tile or retries are allowed after a poor outcome.
+
+Review exact source below, especially narrowUTCcanonicalization, source/implementation pins, committed freeze pre-I/O, orphanattempt sentinels, recordallfailures, nativecoordinates/masks, immutable byte decode, acquisition/forecast/scorechronology, persistedforecasts before targetdecode and exactreplay. State GO only for the shown implementation conditional on tests and committed freeze; do not claim you ran it or guarantee future requests succeed. Provide at most five actionable findings and explicitly acknowledge corrected pipeline ordering. If GO, explain next safe ordered steps in under8sentences. Do not ask us to change v1, tuneparameters or start billing.
+
+
+EXACT FILE apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py SHA256 e4fb3adbe1f4ec969ffae582a72f74ea6e4470f31298606b939c68c6fa5f1a7a
+```python
+"""Distinct pre-GDP-outcome v2 amendment; no network, model runs or scoring.
+
+V1 artifacts remain immutable. Its forcing bytes were decoded for compatibility
+diagnosis, so this amendment is not an entirely scientific-value-unseen design.
+"""
+from __future__ import annotations
+
+import ast
+import csv
+import hashlib
+import io
+import json
+import math
+import re
+import subprocess
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from urllib.parse import quote, urlencode
+
+ROOT = Path(__file__).resolve().parents[3]
+DIRECTORY = ROOT / "data/research/matched-current-v2"
+STUDY_ID = "matched-current-gdp-hycom-15m-v2"
+IDENTITY_RELATIVE = "apps/ocean/reeftrace_ocean/matched_current_v2_identity.py"
+MODEL_IDS = ("stationary", "last_drift", "current_only")
+GROUPS = (("300234066836710", "6202613"), ("300534061292930", "4102636"))
+ORIGIN = "2022-06-01T00:00:00Z"
+CONTEXT_START = "2022-05-31T00:00:00Z"
+END = "2022-06-01T06:00:00Z"
+CSV_COLUMNS = ["ID", "time", "latitude", "longitude"]
+CSV_UNITS = ["", "UTC", "degrees_north", "degrees_east"]
+GDP_BASE = "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc"
+HYCOM_BASE = "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022"
+METADATA = {
+    "gdp_metadata": ("gdp-hourly.das", "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"),
+    "gdp_identity": ("gdp-origin-identity-drogue.csv", "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"),
+    "hycom_metadata": ("hycom-2022-ncss-dataset.xml", "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"),
+}
+GDP_CANONICAL_SHA256 = "0570d44d6fd9d09d60a4d57ddaf27cfd4b8529052e1a816ca11fb0216874fefe"
+GDP_CANONICAL_TOKEN = b"2000-01-01T00:00:00Z"
+_UTC_TOKEN = rb"[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z"
+_GDP_HISTORY_PATTERN = re.compile(
+    rb'(?m)^    String history "Version v2\.01\.  Metadata from dirall\.dat and deplog\.dat\n'
+    rb'(?P<local>' + _UTC_TOKEN + rb') \(local files\)\n'
+    rb'(?P<request>' + _UTC_TOKEN + rb') '
+    rb'https://erddap\.aoml\.noaa\.gov/gdp/erddap/tabledap/drifter_hourly_qc\.das";\n'
+)
+PRIOR_ARTIFACTS = {
+    "data/research/matched-current-v1/protocol.json":
+        "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6",
+    "data/research/matched-current-v1/manifest.json":
+        "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e",
+    "data/research/matched-current-v1/forecasts.json":
+        "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f",
+    "data/research/matched-current-v1/evaluation.json":
+        "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7",
+    "data/research/matched-current-v1/raw/gdp-metadata.das":
+        "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3",
+    "data/research/matched-current-v1/raw/hycom-currents.nc":
+        "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065",
+    "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json":
+        "b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d",
+}
+SOURCE_PATHS = (
+    "apps/__init__.py", "apps/ocean/__init__.py", "apps/ocean/reeftrace_ocean/__init__.py",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py",
+    "apps/ocean/reeftrace_ocean/matched_current.py", "apps/ocean/reeftrace_ocean/hycom.py",
+    "apps/ocean/reeftrace_ocean/advection.py", "apps/ocean/reeftrace_ocean/field.py",
+    "apps/ocean/reeftrace_ocean/benchmark.py", "apps/ocean/reeftrace_ocean/data.py",
+    "scripts/freeze_matched_current_v2_protocol.py", "scripts/fetch_matched_current_v2_study.py",
+    "scripts/evaluate_matched_current_v2_study.py", "pyproject.toml",
+)
+ROLE_ORDER = ("gdp_metadata", "gdp_identity", "hycom_metadata",
+              *("trajectory:" + identifier for identifier, _ in GROUPS), "hycom_currents")
+
+
+def sha(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+def canonical_json(value) -> bytes:
+    return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n").encode()
+
+
+def utc() -> str:
+    return datetime.now(UTC).isoformat().replace("+00:00", "Z")
+
+
+def when(value: str) -> datetime:
+    result = datetime.fromisoformat(value)
+    if result.utcoffset() != timedelta(0):
+        raise ValueError("Matched-current timestamps require UTC")
+    return result
+
+
+def read_bytes(path, maximum=12 * 1024 * 1024) -> bytes:
+    with Path(path).open("rb") as stream:
+        value = stream.read(maximum + 1)
+    if len(value) > maximum:
+        raise ValueError("Matched-current artifact exceeds its byte budget")
+    return value
+
+
+def save_json(path, value) -> str:
+    path = Path(path)
+    payload = canonical_json(value)
+    with path.open("xb") as stream:
+        stream.write(payload)
+    with path.with_suffix(".sha256").open("x") as stream:
+        stream.write(sha(payload) + "\n")
+    return sha(payload)
+
+
+def _unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("Duplicate JSON key in matched-current artifact")
+        result[key] = value
+    return result
+
+
+def pinned_json(directory, name, expected=None):
+    path = _safe_path(Path(directory), name + ".json")
+    raw = read_bytes(path, 1024 * 1024)
+    digest = sha(raw)
+    if expected is not None and digest != expected or read_bytes(
+        _safe_path(Path(directory), name + ".sha256"), 80
+    ).decode().strip() != digest:
+        raise ValueError("Matched-current artifact hash changed")
+    value = json.loads(raw, object_pairs_hook=_unique_object)
+    if not isinstance(value, dict):
+        raise TypeError("Matched-current artifact requires a JSON object")
+    return value, digest
+
+
+def _safe_path(directory: Path, relative: str) -> Path:
+    path = directory / relative
+    if Path(relative).is_absolute() or ".." in Path(relative).parts:
+        raise ValueError("Unsafe matched-current artifact path")
+    if not path.resolve().is_relative_to(directory.resolve()):
+        raise ValueError("Matched-current artifact escapes its directory")
+    if any((directory / Path(*Path(relative).parts[:i])).is_symlink()
+           for i in range(1, len(Path(relative).parts) + 1)):
+        raise ValueError("Symlinked matched-current artifact is not accepted")
+    return path
+
+
+def _git_head(root: Path) -> str:
+    value = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", value):
+        raise ValueError("Invalid source checkpoint")
+    return value
+
+
+def canonicalize_gdp_metadata(payload: bytes) -> bytes:
+    """Mask exactly the two equal, valid UTC history captures; retain all else."""
+    if not isinstance(payload, bytes) or len(payload) > 256 * 1024:
+        raise ValueError("GDP metadata exceeds the bounded history contract")
+    matches = list(_GDP_HISTORY_PATTERN.finditer(payload))
+    if len(matches) != 1:
+        raise ValueError("GDP metadata requires the exact single pinned history block")
+    match = matches[0]
+    local, request = match.group("local"), match.group("request")
+    if local != request:
+        raise ValueError("GDP history UTC capture pair must agree")
+    try:
+        when(local.decode("ascii"))
+    except (ValueError, UnicodeError, OverflowError) as error:
+        raise ValueError("GDP history capture must be a valid UTC second") from error
+    return (payload[:match.start("local")] + GDP_CANONICAL_TOKEN
+            + payload[match.end("local"):match.start("request")] + GDP_CANONICAL_TOKEN
+            + payload[match.end("request"):])
+
+
+def contract() -> dict:
+    """All acquisition choices are fixed before values; never infer a new query."""
+    identity_query = ("ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth"
+                      "&time=2022-06-01T00:00:00Z&latitude>=25&latitude<=35"
+                      "&longitude>=-80&longitude<=-65&distinct()")
+    sources = {
+        "gdp_metadata": {"url": GDP_BASE + ".das", "raw_path": "raw/gdp-metadata.das",
+                         "max_bytes": 256 * 1024, "depends_on": []},
+        "gdp_identity": {"url": GDP_BASE + ".csv?" + quote(identity_query, safe=",&="),
+                         "raw_path": "raw/gdp-origin-identity.csv",
+                         "max_bytes": 32 * 1024, "depends_on": []},
+        "hycom_metadata": {"url": HYCOM_BASE + "/dataset.xml",
+                           "raw_path": "raw/hycom-metadata.xml",
+                           "max_bytes": 256 * 1024, "depends_on": []},
+    }
+    for role, (_, digest) in METADATA.items():
+        sources[role]["expected_sha256"] = digest
+    sources["gdp_metadata"].update(
+        validation="EXACT_HISTORY_UTC_CAPTURE_PAIR_CANONICAL_SHA256",
+        expected_canonical_sha256=GDP_CANONICAL_SHA256,
+    )
+    for identifier, _ in GROUPS:
+        query = (",".join(CSV_COLUMNS) + f'&ID="{identifier}"'
+                 f"&time>={CONTEXT_START}&time<={END}")
+        sources["trajectory:" + identifier] = {
+            "url": GDP_BASE + ".csv?" + quote(query, safe=",&="),
+            "raw_path": "raw/drifter-" + identifier + ".csv", "max_bytes": 32 * 1024,
+            "depends_on": ["gdp_metadata", "gdp_identity"],
+        }
+    current_query = urlencode([
+        ("var", "water_u,water_v"), ("north", "35"), ("south", "25"),
+        ("west", "280"), ("east", "295"), ("horizStride", "1"),
+        ("time_start", ORIGIN), ("time_end", END), ("timeStride", "1"),
+        ("vertCoord", "15"), ("accept", "netcdf"),
+    ])
+    sources["hycom_currents"] = {
+        "url": HYCOM_BASE + "?" + current_query, "raw_path": "raw/hycom-currents.nc",
+        "max_bytes": 8 * 1024 * 1024, "depends_on": ["hycom_metadata"],
+    }
+    return {
+        "schema_version": 1, "kind": "RETROSPECTIVE_MATCHED_CURRENT_V2_PROTOCOL",
+        "study_id": STUDY_ID, "design_status": "FROZEN_PRE_GDP_OUTCOME_COMPATIBILITY_AMENDMENT",
+        "groups": [{"drifter_id": i, "wmo": w} for i, w in GROUPS], "models": list(MODEL_IDS),
+        "windows": {"context_start_utc": CONTEXT_START, "origin_time_utc": ORIGIN,
+                    "end_utc": END, "context_count": 25, "heldout_count": 6,
+                    "cadence_s": 3600, "horizons_s": list(range(3600, 21601, 3600))},
+        "gdp_schema": {"columns": CSV_COLUMNS, "units": CSV_UNITS, "row_count": 31,
+                       "coordinate_decoding_during_acquisition": False},
+        "forcing": {"source": "HYCOM_GOFS_3.1_GLBy0.08_expt93.0_UV3Z_2022",
+                    "depth_m": 15, "variables": ["water_u", "water_v"],
+                    "native_bbox": {"west": 280, "east": 295, "south": 25, "north": 35},
+                    "times_utc": [ORIGIN, "2022-06-01T03:00:00Z", END],
+                    "native_stride": 1, "longitude": "((lon+180)%360)-180; preserve native indices",
+                    "raw_fill": -30000, "decimal_scale": 0.001, "offset": 0,
+                    "solver_step_s": 300, "output_step_s": 3600, "maximum_samples": 250000,
+                    "maximum_steps": 2048, "maximum_speed_m_s": 10,
+                    "coordinate_encoding": {"dtype": "float64_exact_promoted_float32",
+                        "latitude": {"count": 251, "start": 25, "step": 0.04, "max_float32_ulps": 0},
+                        "longitude": {"count": 188, "start": 280, "step": 0.08,
+                                      "first_label_exact": 280, "max_float32_ulps": 1},
+                        "strictly_increasing": True, "preserve_actual_axes": True,
+                        "expand_support": False}},
+        "budgets": {"requests_max": 6, "total_bytes": 12 * 1024 * 1024,
+                    "connect_timeout_s": 5, "timeout_s": 45, "wall_time_s": 180,
+                    "retries": 0, "redirects": False, "fallback_endpoints": False,
+                    "connections": 1, "accept_encoding": "identity",
+                    "oversize_detection_chunk_bytes": 8192,
+                    "total_bytes_scope": "retained body cap; one detection chunk may exceed it"},
+        "sources": sources, "role_order": list(ROLE_ORDER),
+        "gdp_metadata_history_compatibility": {
+            "method_id": "EXACT_EQUAL_SECOND_RESOLUTION_UTC_HISTORY_PAIR_V1",
+            "history_pattern_ascii": _GDP_HISTORY_PATTERN.pattern.decode("ascii"),
+            "canonical_timestamp_token": GDP_CANONICAL_TOKEN.decode("ascii"),
+            "canonical_seed_sha256": GDP_CANONICAL_SHA256,
+            "capture_pair_must_agree": True, "valid_utc_calendar_required": True,
+            "all_other_bytes_unchanged": True, "raw_response_hash_retained": True,
+        },
+        "pre_outcome_amendment": {
+            "kind": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+            "prior_study_id": "matched-current-gdp-hycom-15m-v1",
+            "prior_artifact_sha256": dict(PRIOR_ARTIFACTS),
+            "prior_gdp_trajectory_payload_count": 0, "prior_scored_cell_count": 0,
+            "prior_forcing_acquired_and_decoded": True,
+            "prior_model_selection_from_scores": False,
+            "changes": ["allowlisted GDP history capture-time compatibility",
+                        "declared native float32 coordinate representation guard"],
+            "unchanged": ["groups", "models", "queries", "depth", "windows", "horizons",
+                          "denominators", "transport budgets", "actual coordinate support"],
+            "v1_preserved": True, "silent_retry": False, "model_or_parameter_tuning": False,
+        },
+        "transport_references": [
+            "https://docs.unidata.ucar.edu/tds/current/userguide/ncss_grid.html",
+            "https://www.hycom.org/dataserver/access-methods/ncss",
+        ],
+        "metrics": {"planned_groups": 2, "planned_model_tracks": 6, "planned_cells": 36,
+                    "unique_future_targets": 12, "score": "spherical_great_circle_metres_R6371008.8",
+                    "primary": "equal-ID macro ADE/FDE withheld unless all36 cells scored",
+                    "failures": "retain every planned cell, null error and explicit reasons"},
+        "isolation": {"context_for_models": "origin only; last_drift final two only",
+                      "all_tracks_frozen_before_future_coordinate_access": True,
+                      "no_fitting_or_tuning": True, "no_replacements": True},
+        "flags": {"physical_validation": False, "operational_causality": False,
+                  "assimilation_independence_verified": False, "statistical_independence": False,
+                  "physical_alias_resolution_verified": False, "automatic_model_promotion": False},
+    }
+
+
+def build_protocol(root=None) -> dict:
+    root = Path(root or ROOT)
+    evidence = {}
+    for role, (name, expected) in METADATA.items():
+        path = root / "docs/research-evidence/matched-current-metadata" / name
+        payload = read_bytes(path)
+        if sha(payload) != expected:
+            raise ValueError("Existing matched-current metadata seed changed")
+        evidence[role] = {"path": path.relative_to(root).as_posix(),
+                          "bytes": len(payload), "sha256": expected}
+        if role == "gdp_metadata" and sha(canonicalize_gdp_metadata(payload)) != GDP_CANONICAL_SHA256:
+            raise ValueError("Pinned GDP history canonicalization changed")
+    for name, expected in PRIOR_ARTIFACTS.items():
+        payload = read_bytes(root / name)
+        if sha(payload) != expected:
+            raise ValueError("Prior v1 artifact or compatibility diagnosis changed")
+        evidence[name] = {"path": name, "bytes": len(payload), "sha256": expected}
+    prior_manifest = json.loads(read_bytes(root / "data/research/matched-current-v1/manifest.json"))
+    prior_report = json.loads(read_bytes(root / "data/research/matched-current-v1/evaluation.json"))
+    trajectories = [row for row in prior_manifest["source_receipts"]
+                    if row["role"].startswith("trajectory:")]
+    if (len(trajectories) != 2 or any(row["status"] != "BLOCKED"
+            or row["request_attempted"] is not False or row["raw_path"] is not None
+            or row["received_bytes"] != 0 for row in trajectories)
+            or prior_report["scores"]["scored_cell_count"] != 0
+            or prior_report["scores"]["planned_cell_count"] != 36
+            or prior_report["scores"]["primary_equal_id_macro_results"] is not None):
+        raise ValueError("Prior v1 exposure no longer supports a pre-GDP-outcome amendment")
+    identity_paths = ("data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv",
+                      "data/public/noaa-fresh-drifter-v2/exclusions.json",
+                      "data/public/noaa-fresh-drifter-v2/selection.json")
+    for name in identity_paths:
+        payload = read_bytes(root / name)
+        evidence[name] = {"path": name, "bytes": len(payload), "sha256": sha(payload)}
+    # New-study identity audit only; no new-study positions, fits or scores are read.
+    rows = list(csv.reader(io.StringIO(read_bytes(root / identity_paths[0]).decode())))
+    if rows[:2] != [["ID", "WMO"], ["", ""]]:
+        raise ValueError("Identity registry schema changed")
+    by_id, by_wmo = {}, {}
+    for row in rows[2:]:
+        if len(row) != 2:
+            raise ValueError("Identity registry row changed")
+        identifier, wmo = row
+        if wmo.isdigit() and int(wmo) > 0:
+            by_id.setdefault(identifier, set()).add(wmo)
+            by_wmo.setdefault(wmo, set()).add(identifier)
+    exclusions = json.loads(read_bytes(root / identity_paths[1]))["reserved_gdp_ids"]
+    selected = json.loads(read_bytes(root / identity_paths[2]))["groups"]
+    exposed = {g["drifter_id"] for g in selected}
+    for identifier, wmo in GROUPS:
+        if (by_id.get(identifier) != {wmo} or by_wmo.get(wmo) != {identifier}
+                or identifier in exclusions or identifier in exposed):
+            raise ValueError("Matched-current identity/exclusion audit failed")
+    return {**contract(), "frozen_at_utc": utc(),
+            "source_checkpoint": {"git_head": _git_head(root),
+                                  "note": "Commit all pinned sources, protocol and identity before values."},
+            "implementation_sha256": {name: sha(read_bytes(root / name)) for name in SOURCE_PATHS},
+            "metadata_evidence": evidence}
+
+
+def freeze_protocol(directory=None, *, root=None) -> dict:
+    """Explicit metadata-only generator. Never called by a public/API reader."""
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/research/matched-current-v2")
+    identity = root / IDENTITY_RELATIVE
+    if directory.exists() or identity.exists():
+        raise ValueError("Matched-current design already exists; never overwrite a freeze")
+    value = build_protocol(root)
+    directory.mkdir(parents=True, exist_ok=False)
+    digest = save_json(directory / "protocol.json", value)
+    identity.parent.mkdir(parents=True, exist_ok=True)
+    with identity.open("x") as stream:
+        stream.write(f'STUDY_ID = {STUDY_ID!r}\nPROTOCOL_SHA256 = {digest!r}\n')
+    return {"study_id": STUDY_ID, "protocol_sha256": digest,
+            "scientific_values_acquired": False, "identity_generated": True,
+            "amendment_scope": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+            "prior_v1_forcing_acquired_and_decoded": True}
+
+
+def _trusted_hash(root: Path) -> str:
+    path = root / IDENTITY_RELATIVE
+    if not path.exists():
+        raise ValueError("Matched-current protocol is not frozen; trusted identity is absent")
+    try:
+        tree = ast.parse(read_bytes(path, 512).decode())
+    except SyntaxError as error:
+        raise ValueError("Untrusted matched-current identity syntax") from error
+    values = {}
+    for node in tree.body:
+        if (not isinstance(node, ast.Assign) or len(node.targets) != 1
+                or not isinstance(node.targets[0], ast.Name) or not isinstance(node.value, ast.Constant)
+                or not isinstance(node.value.value, str) or node.targets[0].id in values):
+            raise ValueError("Untrusted matched-current identity source")
+        values[node.targets[0].id] = node.value.value
+    if (set(values) != {"STUDY_ID", "PROTOCOL_SHA256"} or values["STUDY_ID"] != STUDY_ID
+            or not re.fullmatch(r"[0-9a-f]{64}", values["PROTOCOL_SHA256"])):
+        raise ValueError("Untrusted matched-current identity constants")
+    return values["PROTOCOL_SHA256"]
+
+
+def load_protocol(directory=None, *, root=None):
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/research/matched-current-v2")
+    protocol, digest = pinned_json(directory, "protocol", _trusted_hash(root))
+    expected = contract()
+    if set(protocol) != set(expected) | {"frozen_at_utc", "source_checkpoint",
+                                         "implementation_sha256", "metadata_evidence"}:
+        raise ValueError("Matched-current protocol schema changed")
+    if any(protocol[k] != v for k, v in expected.items()):
+        raise ValueError("Matched-current protocol query, schema or scientific contract changed")
+    when(protocol["frozen_at_utc"])
+    checkpoint = protocol["source_checkpoint"]
+    if (set(checkpoint) != {"git_head", "note"}
+            or not re.fullmatch(r"[0-9a-f]{40}", checkpoint["git_head"])):
+        raise ValueError("Matched-current source checkpoint changed")
+    if set(protocol["implementation_sha256"]) != set(SOURCE_PATHS):
+        raise ValueError("Matched-current dependency set changed")
+    for name, expected_hash in protocol["implementation_sha256"].items():
+        if sha(read_bytes(root / name)) != expected_hash:
+            raise ValueError("Matched-current implementation changed after freeze")
+    expected_evidence = build_protocol(root)["metadata_evidence"]
+    if protocol["metadata_evidence"] != expected_evidence:
+        raise ValueError("Matched-current metadata/identity seed changed after freeze")
+    return protocol, {"protocol_sha256": digest,
+                      "trusted_identity_sha256": sha(read_bytes(root / IDENTITY_RELATIVE, 512))}
+
+
+def validate_trajectory_schema(payload: bytes, identifier: str) -> None:
+    """Validate structure only; coordinate cells deliberately remain undecoded."""
+    try:
+        rows = list(csv.reader(io.StringIO(payload.decode("utf-8")), strict=True))
+    except csv.Error as error:
+        raise ValueError("Malformed GDP trajectory CSV") from error
+    if len(rows) != 33 or rows[:2] != [CSV_COLUMNS, CSV_UNITS]:
+        raise ValueError("GDP trajectory needs exact31-row frozen schema/units")
+    start = when(CONTEXT_START)
+    for index, row in enumerate(rows[2:]):
+        expected = (start + timedelta(hours=index)).isoformat().replace("+00:00", "Z")
+        if len(row) != 4 or row[0] != identifier or row[1] != expected:
+            raise ValueError("GDP trajectory ID or hourly UTC structure changed")
+
+
+def validate_source(role: str, payload: bytes, source: dict) -> None:
+    if role == "gdp_metadata":
+        if sha(canonicalize_gdp_metadata(payload)) != source["expected_canonical_sha256"]:
+            raise ValueError("PINNED_METADATA_CHANGED")
+    elif role in METADATA and sha(payload) != source["expected_sha256"]:
+        raise ValueError("PINNED_METADATA_CHANGED")
+    if role.startswith("trajectory:"):
+        validate_trajectory_schema(payload, role.split(":", 1)[1])
+    if role == "hycom_currents" and not payload.startswith(
+            (b"CDF\x01", b"CDF\x02", b"\x89HDF\r\n\x1a\n")):
+        raise ValueError("HYCOM_RESPONSE_IS_NOT_NETCDF")
+
+
+NETCDF_CONTENT_TYPES = {"application/x-netcdf", "application/x-netcdf4",
+                        "application/netcdf", "application/octet-stream"}
+TRANSPORT_FAILURES = {
+    "HTTPError", "RequestError", "TransportError", "TimeoutException", "NetworkError",
+    "ProtocolError", "ConnectError", "ReadError", "WriteError", "CloseError", "ConnectTimeout",
+    "ReadTimeout", "WriteTimeout", "PoolTimeout", "RemoteProtocolError", "LocalProtocolError",
+    "UnsupportedProtocol", "ProxyError", "DecodingError", "TooManyRedirects", "HTTPStatusError",
+}
+
+
+def _failure_semantics(row, body, spec, dependencies_ok, attempts, received, retained, limits):
+    """Recompute observable failure conditions, not just self-reported status strings."""
+    role, status, reason = row["role"], row["status"], row["reason"]
+    attempted, complete = row["request_attempted"], row["response_complete"]
+    http_status, encoding = row["http_status"], row["content_encoding"]
+    if not dependencies_ok:
+        return (status == "BLOCKED" and reason == "DEPENDENCY_UNAVAILABLE" and not attempted
+                and not complete and http_status is None and row["raw_path"] is None
+                and body is None and row["received_bytes"] == row["retained_bytes"] == 0
+                and encoding is row["content_type"] is None)
+    if status == "BLOCKED":
+        return False
+    if not attempted:
+        exhausted = (row["elapsed_wall_s"] >= limits["wall_time_s"]
+                     or attempts >= limits["requests_max"] or received >= limits["total_bytes"])
+        return (status == "FETCH_FAILED" and reason == "ACQUISITION_BUDGET_EXHAUSTED"
+                and exhausted and not complete and http_status is None and body is None
+                and row["raw_path"] is None and row["received_bytes"] == row["retained_bytes"] == 0
+                and encoding is row["content_type"] is None)
+    if status in {"METADATA_INVALID", "SCHEMA_INVALID"}:
+        expected = "METADATA_INVALID" if role in METADATA else "SCHEMA_INVALID"
+        expected_reason = "PINNED_METADATA_CHANGED" if role in METADATA else "FROZEN_VALUE_SCHEMA_INVALID"
+        if (status != expected or reason != expected_reason or http_status != 200
+                or not complete or body is None or encoding not in {"", "identity"}
+                or role == "hycom_currents" and row["content_type"] not in NETCDF_CONTENT_TYPES):
+            return False
+        try:
+            validate_source(role, body, spec)
+        except (ValueError, UnicodeError, TypeError, OverflowError):
+            return True
+        return False
+    if status != "FETCH_FAILED":
+        return False
+    if reason == "HTTP_ERROR":
+        return complete and http_status is not None and http_status != 200
+    if reason == "CONTENT_ENCODING_MISMATCH":
+        return complete and http_status == 200 and encoding not in {"", "identity", None}
+    if reason == "CONTENT_TYPE_MISMATCH":
+        return (complete and http_status == 200 and encoding in {"", "identity"}
+                and role == "hycom_currents" and row["content_type"] not in NETCDF_CONTENT_TYPES)
+    if complete:
+        return False
+    if reason == "RESPONSE_SIZE_BUDGET":
+        return (http_status is not None and row["received_bytes"] > row["retained_bytes"]
+                and (row["retained_bytes"] == spec["max_bytes"]
+                     or retained + row["retained_bytes"] == limits["total_bytes"]))
+    if reason == "WALL_TIME_BUDGET":
+        return http_status is not None and row["elapsed_wall_s"] >= limits["wall_time_s"]
+    return reason == "ACQUISITION_DEADLINE" or reason in TRANSPORT_FAILURES
+
+
+def load_acquisition(directory=None, *, root=None):
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/research/matched-current-v2")
+    protocol, hashes = load_protocol(directory, root=root)
+    if not (directory / "manifest.json").exists():
+        return protocol, None, hashes, {}
+    manifest, digest = pinned_json(directory, "manifest")
+    start_receipt, start_hash = pinned_json(directory, "acquisition-start")
+    if (manifest.get("study_id") != STUDY_ID or manifest.get("protocol_sha256") != hashes["protocol_sha256"]
+            or manifest.get("trusted_identity_sha256") != hashes["trusted_identity_sha256"]
+            or manifest.get("scientific_scores_computed") is not False
+            or manifest.get("no_replacements") is not True
+            or [r["role"] for r in manifest["source_receipts"]] != list(ROLE_ORDER)):
+        raise ValueError("Matched-current acquisition lineage changed")
+    started, finished = when(manifest["started_at_utc"]), when(manifest["finished_at_utc"])
+    if (started < when(protocol["frozen_at_utc"]) or finished < started
+            or start_receipt.get("study_id") != STUDY_ID
+            or start_receipt.get("protocol_sha256") != hashes["protocol_sha256"]
+            or start_receipt.get("trusted_identity_sha256") != hashes["trusted_identity_sha256"]
+            or start_receipt.get("scientific_scores_computed") is not False
+            or start_receipt.get("git_head_at_acquisition") != manifest.get("git_head_at_acquisition")
+            or not re.fullmatch(r"[0-9a-f]{40}", str(manifest.get("git_head_at_acquisition")))
+            or not when(protocol["frozen_at_utc"]) <= when(start_receipt["started_at_utc"]) <= started):
+        raise ValueError("Matched-current acquisition chronology changed")
+    sources, attempts, received, retained = {}, 0, 0, 0
+    previous_elapsed = 0
+    previous_finished = started
+    statuses = {"DOWNLOADED", "FETCH_FAILED", "BLOCKED", "METADATA_INVALID", "SCHEMA_INVALID"}
+    for row in manifest["source_receipts"]:
+        role = row["role"]
+        spec = protocol["sources"][role]
+        if (row["source_url"] != spec["url"] or row["status"] not in statuses
+                or type(row["request_attempted"]) is not bool
+                or type(row["received_bytes"]) is not int or row["received_bytes"] < 0
+                or type(row["retained_bytes"]) is not int or not 0 <= row["retained_bytes"] <= spec["max_bytes"]
+                or row["bytes"] != row["retained_bytes"]
+                or row["received_bytes"] < row["retained_bytes"]
+                or row["received_bytes"] > row["retained_bytes"] + 8192
+                or type(row["response_complete"]) is not bool
+                or row["http_status"] is not None and (type(row["http_status"]) is not int
+                                                       or not 100 <= row["http_status"] <= 599)
+                or type(row["elapsed_wall_s"]) not in {int, float}
+                or not math.isfinite(row["elapsed_wall_s"])
+                or row["elapsed_wall_s"] < previous_elapsed
+                or when(row["started_at_utc"]) < previous_finished
+                or not when(row["started_at_utc"]) <= when(row["finished_at_utc"]) <= finished):
+            raise ValueError("Matched-current acquisition receipt changed")
+        if row["raw_path"] is None:
+            if row["retained_bytes"] or row["sha256"] is not None:
+                raise ValueError("Missing matched-current raw body changed")
+            body = None
+        else:
+            if row["raw_path"] != spec["raw_path"]:
+                raise ValueError("Matched-current raw path changed")
+            path = _safe_path(directory, row["raw_path"])
+            body = read_bytes(path, spec["max_bytes"])
+            detached = _safe_path(directory, Path(row["raw_path"]).with_suffix(".sha256").as_posix())
+            if (len(body) != row["retained_bytes"] or sha(body) != row["sha256"]
+                    or read_bytes(detached, 80).decode().strip() != sha(body)):
+                raise ValueError("Matched-current raw body hash changed")
+        dependencies_ok = all(sources.get(dep) is not None for dep in spec["depends_on"])
+        if row["status"] == "DOWNLOADED":
+            if (body is None or not dependencies_ok or row["http_status"] != 200
+                    or row["response_complete"] is not True or row["reason"] is not None
+                    or not row["request_attempted"] or row["received_bytes"] != row["retained_bytes"]
+                    or row["content_encoding"] not in {"", "identity"}
+                    or role == "hycom_currents" and row["content_type"] not in NETCDF_CONTENT_TYPES):
+                raise ValueError("Matched-current success contradicts its transport/dependencies")
+            validate_source(role, body, spec)
+            sources[role] = body
+        else:
+            if not _failure_semantics(row, body, spec, dependencies_ok, attempts, received,
+                                      retained, protocol["budgets"]):
+                raise ValueError("Matched-current failure reason contradicts its actual evidence")
+            sources[role] = None
+        attempts += row["request_attempted"]
+        received += row["received_bytes"]
+        retained += row["retained_bytes"]
+        previous_elapsed = row["elapsed_wall_s"]
+        previous_finished = when(row["finished_at_utc"])
+    if (attempts != manifest["requests_attempted"] or attempts > protocol["budgets"]["requests_max"]
+            or received != manifest["response_bytes_received"]
+            or retained != manifest["response_bytes_retained"]
+            or retained > protocol["budgets"]["total_bytes"]
+            or received > protocol["budgets"]["total_bytes"] + 8192):
+        raise ValueError("Matched-current acquisition budget accounting changed")
+    hashes["manifest_sha256"] = digest
+    hashes["acquisition_start_sha256"] = start_hash
+    return protocol, manifest, hashes, sources
+
+```
+
+
+EXACT FILE scripts/fetch_matched_current_v2_study.py SHA256 0e0995e6dfc34fd39e1b9388483b31e89751c87b7b92b006a75dd4259b71d5e1
+```python
+"""Explicit immutable six-role acquisition; never fits, forecasts or scores models."""
+from __future__ import annotations
+
+import argparse
+import json
+import signal
+import subprocess
+import threading
+import time
+from contextlib import contextmanager
+from pathlib import Path
+from urllib.parse import urlsplit
+
+import httpx
+
+from apps.ocean.reeftrace_ocean.matched_current_v2_protocol import (
+    DIRECTORY,
+    IDENTITY_RELATIVE,
+    NETCDF_CONTENT_TYPES,
+    ROLE_ORDER,
+    ROOT,
+    STUDY_ID,
+    contract,
+    load_protocol,
+    save_json,
+    sha,
+    utc,
+    validate_source,
+)
+
+
+class DeadlineExpired(TimeoutError):
+    """Real I/O deadline; a peer cannot extend the budget by trickling bytes."""
+
+
+@contextmanager
+def _deadline(seconds):
+    if threading.current_thread() is not threading.main_thread() or not hasattr(signal, "setitimer"):
+        raise RuntimeError("Strict acquisition deadlines require the main-thread CLI")
+    if signal.getitimer(signal.ITIMER_REAL)[0] > 0:
+        raise RuntimeError("Cannot replace an existing acquisition alarm")
+    previous = signal.getsignal(signal.SIGALRM)
+
+    def expired(_signum, _frame):
+        raise DeadlineExpired("Acquisition deadline")
+
+    signal.signal(signal.SIGALRM, expired)
+    signal.setitimer(signal.ITIMER_REAL, seconds)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous)
+
+
+def _require_committed(root, directory, protocol):
+    """The root must commit reviewed code and the generated freeze before I/O."""
+    root, directory = Path(root), Path(directory)
+    head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    paths = [*protocol["implementation_sha256"],
+             *(row["path"] for row in protocol["metadata_evidence"].values()), IDENTITY_RELATIVE,
+             (directory / "protocol.json").relative_to(root).as_posix(),
+             (directory / "protocol.sha256").relative_to(root).as_posix()]
+    for name in paths:
+        try:
+            committed = subprocess.check_output(["git", "show", f"{head}:{name}"], cwd=root,
+                                                stderr=subprocess.DEVNULL)
+        except subprocess.CalledProcessError as error:
+            raise ValueError("Commit the matched-current freeze and sources before acquisition") from error
+        if (root / name).read_bytes() != committed:
+            raise ValueError("Uncommitted matched-current source/freeze cannot acquire values")
+    return head
+
+
+class Budget:
+    def __init__(self, client, protocol, directory):
+        self.client, self.directory = client, Path(directory)
+        self.limits = protocol["budgets"]
+        self.started = time.monotonic()
+        self.requests = self.received = self.retained = 0
+
+    def fetch(self, role, spec, *, blocked=False):
+        """Only the fixed protocol URL/path is accepted, never a caller query."""
+        if spec != contract()["sources"].get(role):
+            raise ValueError("Unknown matched-current query, role or filename")
+        started = utc()
+        body = bytearray()
+        status = None
+        complete = attempted = False
+        reason = "DEPENDENCY_UNAVAILABLE" if blocked else None
+        encoding = content_type = None
+        remaining = self.limits["wall_time_s"] - (time.monotonic() - self.started)
+        if reason is None and (remaining <= 0 or self.requests >= self.limits["requests_max"]
+                               or self.received >= self.limits["total_bytes"]):
+            reason = "ACQUISITION_BUDGET_EXHAUSTED"
+        received = 0
+        if reason is None:
+            uri = urlsplit(spec["url"])
+            if (uri.scheme != "https" or uri.hostname not in {
+                    "erddap.aoml.noaa.gov", "ncss.hycom.org"} or uri.username or uri.password
+                    or uri.fragment or uri.port not in {None, 443}):
+                raise ValueError("Unsafe matched-current source URI")
+            attempted = True
+            self.requests += 1
+            duration = min(float(self.limits["timeout_s"]), remaining)
+            try:
+                with _deadline(duration), self.client.stream(
+                    "GET", spec["url"], headers={"Accept-Encoding": "identity"},
+                    follow_redirects=False,
+                    timeout=httpx.Timeout(duration, connect=min(duration, 5)),
+                ) as response:
+                    status = response.status_code
+                    encoding = response.headers.get("content-encoding", "identity").lower()
+                    content_type = response.headers.get("content-type", "").split(";", 1)[0].lower()
+                    for chunk in response.iter_raw(chunk_size=8192):
+                        received += len(chunk)
+                        self.received += len(chunk)
+                        allowed = min(spec["max_bytes"] - len(body),
+                                      self.limits["total_bytes"] - self.retained)
+                        retained = chunk[:max(0, allowed)]
+                        body.extend(retained)
+                        self.retained += len(retained)
+                        if len(retained) < len(chunk):
+                            reason = "RESPONSE_SIZE_BUDGET"
+                            break
+                        if time.monotonic() - self.started >= self.limits["wall_time_s"]:
+                            reason = "WALL_TIME_BUDGET"
+                            break
+                    else:
+                        complete = True
+                if reason is None:
+                    if status != 200:
+                        reason = "HTTP_ERROR"
+                    elif encoding not in {"", "identity"}:
+                        reason = "CONTENT_ENCODING_MISMATCH"
+                    elif role == "hycom_currents" and content_type not in NETCDF_CONTENT_TYPES:
+                        reason = "CONTENT_TYPE_MISMATCH"
+            except DeadlineExpired:
+                complete = False
+                reason = "ACQUISITION_DEADLINE"
+            except httpx.HTTPError as error:
+                complete = False
+                reason = type(error).__name__
+        raw_path = spec["raw_path"] if status is not None else None
+        if raw_path is not None:
+            path = self.directory / raw_path
+            with path.open("xb") as stream:
+                stream.write(body)
+            with path.with_suffix(".sha256").open("x") as stream:
+                stream.write(sha(body) + "\n")
+        row = {
+            "role": role, "status": "BLOCKED" if blocked else
+            "DOWNLOADED" if attempted and complete and reason is None else "FETCH_FAILED",
+            "reason": reason, "source_url": spec["url"], "raw_path": raw_path,
+            "sha256": sha(body) if raw_path is not None else None,
+            "bytes": len(body), "received_bytes": received, "retained_bytes": len(body),
+            "request_attempted": attempted, "http_status": status,
+            "response_complete": complete, "content_type": content_type,
+            "content_encoding": encoding, "started_at_utc": started, "finished_at_utc": utc(),
+            "elapsed_wall_s": time.monotonic() - self.started,
+        }
+        if row["status"] == "DOWNLOADED":
+            try:
+                validate_source(role, bytes(body), spec)
+            except (ValueError, UnicodeError, KeyError, TypeError, OverflowError):
+                row.update(status="METADATA_INVALID" if "expected_sha256" in spec else
+                           "SCHEMA_INVALID", reason="PINNED_METADATA_CHANGED" if
+                           "expected_sha256" in spec else "FROZEN_VALUE_SCHEMA_INVALID")
+        return row, bytes(body) if row["status"] == "DOWNLOADED" else None
+
+
+def acquire_study(directory=None, *, client=None, root=None):
+    """Explicit CLI/test entry only. Public report readers must not call this."""
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/research/matched-current-v2")
+    protocol, hashes = load_protocol(directory, root=root)
+    if any((directory / name).exists() for name in (
+        "raw", "acquisition-start.json", "acquisition-start.sha256",
+        "manifest.json", "manifest.sha256",
+    )):
+        raise ValueError("Acquisition already attempted; never overwrite or replace a failure")
+    head = _require_committed(root, directory, protocol)
+    # Exclusive sentinel survives crashes, so a failed/partial attempt is not retried silently.
+    save_json(directory / "acquisition-start.json", {
+        "study_id": STUDY_ID, **hashes, "started_at_utc": utc(),
+        "git_head_at_acquisition": head, "scientific_scores_computed": False,
+    })
+    (directory / "raw").mkdir(exist_ok=False)
+    owned = client is None
+    if owned:
+        client = httpx.Client(
+            timeout=httpx.Timeout(45, connect=5), follow_redirects=False,
+            limits=httpx.Limits(max_connections=1, max_keepalive_connections=1),
+            headers={"Accept-Encoding": "identity"},
+        )
+    budget = Budget(client, protocol, directory)
+    started = utc()
+    sources, receipts = {}, []
+    try:
+        for role in ROLE_ORDER:
+            spec = protocol["sources"][role]
+            blocked = any(sources.get(dep) is None for dep in spec["depends_on"])
+            row, payload = budget.fetch(role, spec, blocked=blocked)
+            receipts.append(row)
+            sources[role] = payload
+        manifest = {
+            "schema_version": 1, "study_id": STUDY_ID, **hashes,
+            "started_at_utc": started, "finished_at_utc": utc(),
+            "git_head_at_acquisition": head, "source_receipts": receipts,
+            "requests_attempted": budget.requests, "response_bytes_received": budget.received,
+            "response_bytes_retained": budget.retained, "scientific_scores_computed": False,
+            "no_replacements": True,
+        }
+        digest = save_json(directory / "manifest.json", manifest)
+        return {"study_id": STUDY_ID, **hashes, "manifest_sha256": digest,
+                "requests_attempted": budget.requests,
+                "downloaded_trajectories": sum(sources["trajectory:" + i] is not None
+                                               for i, _ in protocol_groups(protocol)),
+                "current_values_downloaded": sources["hycom_currents"] is not None,
+                "scientific_scores_computed": False}
+    finally:
+        if owned:
+            client.close()
+
+
+def protocol_groups(protocol):
+    return [(row["drifter_id"], row["wmo"]) for row in protocol["groups"]]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=DIRECTORY)
+    print(json.dumps(acquire_study(parser.parse_args().output_dir), indent=2))
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+EXACT FILE scripts/freeze_matched_current_v2_protocol.py SHA256 a2dc1cde53ee2847ff66f6070abf7333434b0f854e391b470ee7a4e688ab9f21
+```python
+"""Explicit metadata-only freeze; does not acquire scientific values or score models."""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+
+from apps.ocean.reeftrace_ocean.matched_current_v2_protocol import DIRECTORY, freeze_protocol
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=DIRECTORY)
+    args = parser.parse_args()
+    print(json.dumps(freeze_protocol(args.output_dir), indent=2))
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+
+EXACT FILE scripts/evaluate_matched_current_v2_study.py SHA256 c44213fedf68bfbea441d59dd93ee4ed9b4214bbdf5858277729c3d8a6ac4282
+```python
+"""Explicit first score or immutable offline replay of the distinct v2 study.
+
+V1 failures remain immutable. V2 changes coordinate-encoding admission only;
+shared model definitions, physical units, trajectories and scoring are unchanged.
+
+Acquisition is a separate command. This wrapper saves all fixed-model forecasts
+before decoding any reserved future coordinates. Public readers must only read
+the resulting frozen artifacts; importing this module does not score anything.
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import io
+import json
+import math
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+
+import numpy as np
+
+from apps.ocean.reeftrace_ocean.hycom import load_hycom_field_bytes
+from apps.ocean.reeftrace_ocean.matched_current import (
+    GROUP_IDS,
+    HORIZONS_S,
+    MODEL_IDS,
+    ORIGIN,
+    build_matched_current_forecasts,
+    forecast_sha256,
+    score_matched_current_forecasts,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+DIRECTORY = ROOT / "data/research/matched-current-v2"
+EXPECTED_TIMES = tuple(
+    (ORIGIN + timedelta(hours=hour)).isoformat().replace("+00:00", "Z")
+    for hour in range(-24, 7)
+)
+
+
+def canonical_json(value: dict) -> bytes:
+    return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n").encode()
+
+
+def _sha(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _save(path: Path, value: dict) -> str:
+    raw = canonical_json(value)
+    with path.open("xb") as stream:
+        stream.write(raw)
+    with path.with_suffix(".sha256").open("x") as stream:
+        stream.write(_sha(raw) + "\n")
+    return _sha(raw)
+
+
+def _pinned(path: Path) -> tuple[dict, str]:
+    with path.open("rb") as stream:
+        raw = stream.read(4_194_305)
+    if len(raw) > 4_194_304:
+        raise ValueError("Matched-current result exceeds the frozen local byte budget")
+    with path.with_suffix(".sha256").open("rb") as stream:
+        detached = stream.read(81)
+    if len(detached) > 80 or detached.decode("ascii").strip() != _sha(raw):
+        raise ValueError("Matched-current result detached hash changed")
+    value = json.loads(raw)
+    if not isinstance(value, dict):
+        raise TypeError("Matched-current result must be an object")
+    return value, _sha(raw)
+
+
+def _utc_clock(value, label: str) -> datetime:
+    """Require a usable UTC receipt clock, including during immutable replay."""
+    try:
+        when = datetime.fromisoformat(value) if isinstance(value, str) else None
+        if when is None or when.utcoffset() != timedelta(0):
+            raise ValueError
+    except (TypeError, ValueError, OverflowError):
+        raise ValueError(f"Invalid UTC {label} timestamp") from None
+    return when
+
+
+def _forecast_chronology(document: dict, manifest: dict) -> datetime:
+    frozen = _utc_clock(document.get("frozen_at_utc"), "forecast")
+    if frozen < _utc_clock(manifest.get("finished_at_utc"), "acquisition manifest"):
+        raise ValueError("Forecast receipt predates acquisition manifest completion")
+    for receipt in manifest["source_receipts"]:
+        if frozen < _utc_clock(receipt.get("finished_at_utc"), "acquisition"):
+            raise ValueError("Forecast receipt predates acquisition completion")
+    return frozen
+
+
+def parse_position_strings(raw: bytes, group_id: str) -> tuple[list[dict], list[dict]]:
+    """Validate only CSV identity/structure/time; do not decode coordinates here."""
+    try:
+        rows = list(csv.reader(io.StringIO(raw.decode("utf-8")), strict=True))
+    except (UnicodeDecodeError, csv.Error) as error:
+        raise ValueError("GDP_CSV_INVALID") from error
+    if (len(rows) != 33 or rows[0] != ["ID", "time", "latitude", "longitude"]
+            or rows[1] != ["", "UTC", "degrees_north", "degrees_east"]):
+        raise ValueError("GDP_CSV_SCHEMA_OR_COUNT_CHANGED")
+    result = []
+    for row, expected_time in zip(rows[2:], EXPECTED_TIMES, strict=True):
+        if len(row) != 4 or row[0] != group_id or row[1] != expected_time:
+            raise ValueError("GDP_ID_OR_EXACT_HOURLY_SCHEDULE_CHANGED")
+        result.append({"drifter_id": group_id, "time_utc": row[1],
+                       "latitude_deg": row[2], "longitude_deg": row[3]})
+    return result[:25], result[25:]
+
+
+def _context_qc(context: list[dict]) -> dict:
+    """Descriptive past-only QC, called after forecasts are frozen, not a gate."""
+    invalid = []
+    for index, row in enumerate(context):
+        try:
+            latitude, longitude = float(row["latitude_deg"]), float(row["longitude_deg"])
+            valid = (math.isfinite(latitude) and math.isfinite(longitude)
+                     and -90 <= latitude <= 90 and -180 <= longitude <= 180)
+        except (TypeError, ValueError, OverflowError):
+            valid = False
+        if not valid:
+            invalid.append(index)
+    return {"planned_context_rows": 25, "received_context_rows": len(context),
+            "invalid_coordinate_indices": invalid, "used_as_whole_group_admission_gate": False,
+            "first_23_positions_used_by_models": False}
+
+
+def _native_axis_contract(field) -> None:
+    """Accept only the reviewed native representation; never snap its labels.
+
+    Generic raw decoding already requires float64 NetCDF coordinate variables.
+    The native numbers stored in those variables must be exact promoted
+    float32 labels. Latitude follows its rounded nominal lattice exactly;
+    longitude allows at most one float32 ULP from its rounded nominal lattice.
+    These are encoding checks, not interpolation/physics error tolerances.
+    """
+    latitude = field.latitude_deg
+    longitude = field.longitude_deg
+    if (latitude.shape != (251,) or longitude.shape != (188,)
+            or latitude.dtype != np.dtype("float64")
+            or longitude.dtype != np.dtype("float64")
+            or not np.isfinite(latitude).all() or not np.isfinite(longitude).all()
+            or not np.all(np.diff(latitude) > 0) or not np.all(np.diff(longitude) > 0)):
+        raise ValueError("HYCOM_V2_NATIVE_AXIS_COUNT_DTYPE_OR_MONOTONICITY_CHANGED")
+    # The generic reader normalized the actual native longitude values without
+    # sorting. In this fixed western Atlantic tile, adding 360 reverses that
+    # exact binary operation; interpolation keeps the original normalized array.
+    native_longitude = longitude + 360.0
+    latitude_nominal = (25.0 + 0.04 * np.arange(251)).astype(np.float32)
+    longitude_nominal = (280.0 + 0.08 * np.arange(188)).astype(np.float32)
+    if (not np.array_equal(latitude, latitude.astype(np.float32).astype(np.float64))
+            or not np.array_equal(native_longitude,
+                                  native_longitude.astype(np.float32).astype(np.float64))):
+        raise ValueError("HYCOM_V2_NATIVE_LABELS_NOT_EXACT_FLOAT32_PROMOTED_TO_FLOAT64")
+    if not np.array_equal(latitude, latitude_nominal.astype(np.float64)):
+        raise ValueError("HYCOM_V2_LATITUDE_ROUNDED_FLOAT32_LATTICE_CHANGED")
+    longitude_error = np.abs(native_longitude - longitude_nominal.astype(np.float64))
+    longitude_ulp = np.spacing(longitude_nominal).astype(np.float64)
+    if (np.any(longitude_error > longitude_ulp)
+            or latitude[0] < 25.0 or latitude[-1] > 35.0
+            or native_longitude[0] != 280.0 or native_longitude[-1] > 295.0):
+        raise ValueError("HYCOM_V2_LONGITUDE_ENCODING_ULP_OR_NATIVE_BOUNDS_CHANGED")
+    expected_shape = (3, 251, 188)
+    if (field.eastward_m_s.shape != expected_shape
+            or field.northward_m_s.shape != expected_shape
+            or field.valid_mask.shape != expected_shape
+            or field.valid_mask.dtype != np.dtype("bool")):
+        raise ValueError("HYCOM_V2_NATIVE_ARRAY_SHAPE_OR_MASK_CHANGED")
+
+
+def _study_field(payload: bytes):
+    field = load_hycom_field_bytes(payload)
+    expected = np.array(["2022-06-01T00:00:00", "2022-06-01T03:00:00",
+                         "2022-06-01T06:00:00"], dtype="datetime64[us]")
+    if not np.array_equal(field.time_utc, expected):
+        raise ValueError("HYCOM_REQUESTED_THREE_TIMES_CHANGED")
+    if field.selected_depth_m != 15.0:
+        raise ValueError("HYCOM_REQUESTED_SINGLETON_FIFTEEN_METRE_DEPTH_CHANGED")
+    _native_axis_contract(field)
+    return field
+
+
+def _inputs(directory: Path):
+    from apps.ocean.reeftrace_ocean.matched_current_v2_protocol import load_acquisition
+
+    protocol, manifest, hashes, sources = load_acquisition(directory)
+    if manifest is None:
+        raise ValueError("Matched-current acquisition has not been attempted; no first score is possible")
+    if ([group["drifter_id"] for group in protocol["groups"]] != list(GROUP_IDS)
+            or protocol["models"] != list(MODEL_IDS)
+            or protocol["windows"]["horizons_s"] != list(HORIZONS_S)
+            or protocol["windows"]["origin_time_utc"] != EXPECTED_TIMES[24]):
+        raise ValueError("Frozen protocol and model implementation identities disagree")
+    receipts = {receipt["role"]: receipt for receipt in manifest["source_receipts"]}
+    contexts, targets, failures = {}, {}, {}
+    for group_id in GROUP_IDS:
+        role = "trajectory:" + group_id
+        raw = sources.get(role)
+        if raw is None:
+            failures[group_id] = receipts[role]["reason"] or receipts[role]["status"]
+            continue
+        try:
+            contexts[group_id], targets[group_id] = parse_position_strings(raw, group_id)
+        except ValueError as error:
+            failures[group_id] = str(error)
+    forcing, current_failure = None, None
+    current = receipts["hycom_currents"]
+    if sources.get("hycom_currents") is not None:
+        try:
+            forcing = _study_field(sources["hycom_currents"])
+        except (ValueError, ImportError) as error:
+            current_failure = str(error)
+        else:
+            # The decoder consumes the immutable bytes already returned by
+            # acquisition verification. Retain this independent digest check as
+            # a guard against a changed decoder contract or wrong object.
+            if (forcing.metadata.get("sha256") != current["sha256"]
+                    or forcing.metadata.get("sha256") != _sha(sources["hycom_currents"])):
+                raise ValueError("HYCOM decoded byte identity differs from verified acquisition provenance")
+    else:
+        current_failure = current["reason"] or current["status"]
+    fields = {group_id: forcing for group_id in GROUP_IDS} if forcing is not None else {}
+    current_failures = {group_id: current_failure for group_id in GROUP_IDS} if current_failure else {}
+    forecasts = build_matched_current_forecasts(
+        contexts, fields, failures_by_group=failures, current_failures_by_group=current_failures,
+    )
+    return protocol, manifest, hashes, contexts, targets, forecasts, forcing, current_failure
+
+
+def evaluate_study(directory: Path = DIRECTORY, *, first_score: bool = False) -> dict:
+    directory = Path(directory)
+    forecast_path = directory / "forecasts.json"
+    result_path = directory / "evaluation.json"
+    if first_score and any(path.exists() for path in (
+        forecast_path, result_path, forecast_path.with_suffix(".sha256"),
+        result_path.with_suffix(".sha256"),
+    )):
+        raise ValueError("A first-score attempt already exists; preserve its artifacts")
+    if not first_score and not result_path.is_file():
+        raise ValueError("Study is not scored; replay never performs a first score")
+    (protocol, manifest, hashes, contexts, targets, forecasts,
+     forcing, current_failure) = _inputs(directory)
+    lineage = {key: value for key, value in hashes.items() if key.endswith("sha256")}
+    forecast_document = {
+        "schema_version": 1, "kind": "FROZEN_MATCHED_CURRENT_FORECASTS",
+        "study_id": protocol["study_id"], "lineage": lineage,
+        "forecasts": forecasts, "future_coordinates_decoded": False,
+    }
+    if first_score:
+        forecast_document["frozen_at_utc"] = datetime.now(UTC).isoformat()
+        _forecast_chronology(forecast_document, manifest)
+        forecast_file_hash = _save(forecast_path, forecast_document)
+    else:
+        saved, forecast_file_hash = _pinned(forecast_path)
+        if {key: value for key, value in saved.items() if key != "frozen_at_utc"} != forecast_document:
+            raise ValueError("Saved forecast receipt differs from exact frozen inputs or implementation")
+        forecast_document = saved
+    frozen_at = _forecast_chronology(forecast_document, manifest)
+    frozen_result = None
+    if not first_score:
+        frozen_result, _ = _pinned(result_path)
+        if _utc_clock(frozen_result.get("scored_at_utc"), "score") < frozen_at:
+            raise ValueError("Score timestamp predates its forecast receipt")
+    # This readback proves the persisted object exists before any target number
+    # is decoded. Hashes identify the prior forecasts, not an external attestation.
+    saved, digest = _pinned(forecast_path)
+    if (digest != forecast_file_hash or saved != forecast_document
+            or forecast_sha256(saved["forecasts"]) != saved["forecasts"]["forecast_sha256"]):
+        raise ValueError("Forecast readback identity changed before scoring")
+    scores = score_matched_current_forecasts(forecasts, targets)
+    report = {
+        "schema_version": 1, "kind": "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC",
+        "study_id": protocol["study_id"], "lineage": lineage,
+        "forecast_file_sha256": forecast_file_hash,
+        "forecast_frozen_at_utc": forecast_document["frozen_at_utc"],
+        "forecasts_saved_before_target_coordinate_decode": True,
+        "source_receipts": manifest["source_receipts"],
+        "context_qc": {group_id: _context_qc(contexts.get(group_id, [])) for group_id in GROUP_IDS},
+        "current_field": forcing.summary() if forcing is not None else None,
+        "current_field_failure": current_failure,
+        "scores": scores,
+        "physical_validation": False, "operational_causality": False,
+        "assimilation_independence_verified": False,
+        "physical_alias_resolution_verified": False, "statistical_independence": False,
+        "global_training": False, "heldout_tuning": False, "automatic_model_promotion": False,
+        "provider_calls": False, "camera_started": False, "store_written": False,
+    }
+    if first_score:
+        report["scored_at_utc"] = datetime.now(UTC).isoformat()
+        if _utc_clock(report["scored_at_utc"], "score") < frozen_at:
+            raise ValueError("Score timestamp predates its forecast receipt")
+        _save(result_path, report)
+    else:
+        if {key: value for key, value in frozen_result.items() if key != "scored_at_utc"} != report:
+            raise ValueError("Offline replay differs from the saved first score")
+        report = frozen_result
+    return report
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--directory", type=Path, default=DIRECTORY)
+    parser.add_argument("--first-score", action="store_true",
+                        help="Explicitly save forecasts and first scores after frozen acquisition.")
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+    report = evaluate_study(args.directory, first_score=args.first_score)
+    payload = canonical_json(report)
+    if args.output:
+        with args.output.open("xb") as stream:
+            stream.write(payload)
+    else:
+        print(payload.decode(), end="")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+````
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-code-review-response.txt
+
+Kind: **ACTUAL_GROK_WEB_RESPONSE**. Original bytes: **2186**. SHA-256: `98993ad666754d76108e00275b7f964aa363c8095298568162092e2f815dd3a2`.
+
+````text
+**GO for the shown v2 implementation, conditional on the local tests you already ran and on a committed freeze before any I/O.** No execution is claimed here, and no scientific result is asserted. The earlier incorrect stage claim is corrected: depth/time/velocity encoding is checked only when the scientific wrapper decodes HYCOM after serial acquisition; it blocks current-only forecasting, not the GDP trajectory requests. GDP dependency blocking remains limited to the metadata/identity transport gates. All candidates are still persisted before any future numeric coordinate is decoded.
+
+**Actionable findings (none material enough to withhold GO)**  
+1. No defect in the narrow UTC canonicalization: exactly one history block, the two tokens must be equal valid UTC seconds, and every other byte is retained.  
+2. No defect in the axis contract as now written: first longitude label exact 280, latitude exact rounded float32, interior/east longitude ≤ one float32 ULP, strict increase, no snap or support expansion.  
+3. No defect in chronology or isolation: acquisition-start sentinel, sequential non-overlapping receipts, forecast frozen and re-read before target decode, exact replay excluding capture clocks.  
+4. No defect in failure retention: blocked, metadata-invalid and schema-invalid rows stay in the 36-cell plan; primary macro remains null unless all 36 score.  
+5. No defect in the pre-GDP-outcome disclosure: v2 binds the v1 artifact hashes and the prior zero-score state; it does not rewrite v1 or claim value-unseen status.
+
+**Next safe ordered steps**  
+Commit the reviewed sources, the generated protocol, and the identity file. Confirm the freeze commit contains every pinned hash and that v1 artifacts are unchanged. Only then run the six-role acquisition once. After the manifest is written, run the first-score path so forecasts are saved and re-read before any future coordinate is decoded. Replay the frozen artifacts and confirm byte identity excluding the capture clocks. Display any partial result with the 36-cell denominator and withhold the primary macro unless all 36 cells score. Do not tune, replace groups, or alter depth/tile after outcomes.
+````
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-criteria-prompt.txt
+
+Kind: **ACTUAL_GROK_WEB_PROMPT**. Original bytes: **4748**. SHA-256: `1742506bbc741f5a0af86cc8b2a2459979590a8499afc1264780fb9be8eb0473`.
+
+````text
+Tideward continuation in the SAME existing project. Static scientific/code-planning review only: do not claim execution, API access, new data, model improvement, physical validation or track eligibility. No xAI API/billing. Preserve your earlier v1 failure review rather than treating it as a new successful study.
+
+Authoritative current state:
+- Main de6b2a87, full local verification1641Python/223frontend/153HTTP0fail6blocked; hosted CI39071741449 all3jobs success. Those are software checks, not model skill.
+- v1 matched-current protocol210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6; manifest4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e; forecastfile4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f; evaluation354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7. Immutable archive data/research/matched-current-v1. All18files and14pinned numerical sources remain unchanged.
+- v1 made4requests: metadataDAS/history mismatch, exact640Bidentity, exact159404BHYCOMmetadata,572604BNetCDF. Both GDP trajectory requests blocked: NO acquired context/future trajectory bodies. All36planned model-hour cells null; no model ranking.
+- HYCOM forcing was already decoded for compatibility diagnosis. A future v2 is PRE-GDP-OUTCOME, never entirely value-unseen or first-ever attempt. The earlier failure is disclosed.
+
+We are implementing a DISTINCT v2 compatibility amendment, not rewriting v1. Same two GDP/WMOgroups300234066836710/6202613 and300534061292930/4102636. Same25hourlycontext31May2022 through1June00Z,6laterhourlytargets; same stationary,last_drift,current_only; shared unmodified numerical models/RK4; HYCOM15m uv3z2022,00/03/06Z, native tile25..35N280..295E stride1. Same max6requests/12MiB/180swall/45srequest/0retry/0redirect/fallback, retained failures and all36cells/12distinctprocessed future estimates. No parameter fit, model selection, velocity tuning, group replacement, changed tile or depth. Forecasts all saved and read back before any future coordinate is decoded. Exact replay must reproduce first-score bytes excluding the fixed capture clocks.
+
+Only two compatibility corrections proposed before new GDP positions:
+1. Metadata: canonicalize ONLY two valid full-second UTC request-capture tokens inside history, attached to exact '(local files)' line and exact https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das URL line. Preserve all other bytes incl Versionv2.01, units, schema and history text. Raw acquired bytes/hash retained. Reject any other difference/malformeddate/duplicate token context. Two tokens should refer to same capture time; any broad history removal is forbidden.
+2. Axes: exact native count251latitude and188longitude, strictly increasing. All decoded labels exactfloat32promotedfloat64. Latitude exactly float32(25+.04*i) promoted to float64. Native longitude labels within <=ONE float32 ULP of rounded nominal float32(280+.08*i), no snapping. Native exact actuallabels/masks preserved. Actual v1east294.96002197265625 means normalized -65.03997802734375: never invent -65degree support. Missing/coarsened/shifted/beyondULP/nondeclaredencoding/depth/time/units must reject. Generic NetCDF reader remains unchanged, verifies f64 coordinate storage and pinned packed-short velocity encoding.
+
+For review, answer:
+A. Give a concise GO/NO-GO design decision and any concrete flaw; do not approve unseen implementation.
+B. Specify hostile tests that distinguish accepted representational drift from a scientifically different dataset, including lower/upper longitude endpoints and duplicate timestamp contexts.
+C. Explain what RK4 does in this setting in two simple sentences, and the exact equations for geographic east/north m/s to lat/lon derivatives. Separate numerical integration error, interpolation error and current-model error. We use WGS84 metres-per-degree, bilinear space/linear time, step<=300s split at forcing knots, no extrapolation and no zero-fill.
+D. Define how a future partial or complete result must be shown in Data Lab/Chalk: do not select a winner from unequal available supports; primarymacroADE/FDE only all36, partialcommon supports secondary, no learnedML/operational/plastic/reef/tank claims. If any scope is incompatible, say so directly.
+
+Verified primary references for context: OceanParcels official tutorial https://docs.oceanparcels.org/en/latest/user_guide/examples/tutorial_dt_integrators.html (RK4 four stages/timestep); NOAA https://www.aoml.noaa.gov/phod/gdp/data.php (processed hourly interpolated data); NOAA https://www.aoml.noaa.gov/phod/gdp/faq.php (droguecenter15m, wind/wave effects after loss). Treat these as documentation, not a request to fetch scientific positions.
+````
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-criteria-response.txt
+
+Kind: **ACTUAL_GROK_WEB_RESPONSE**. Original bytes: **2765**. SHA-256: `c205c464df49093942dbef3d9cecfd7e8182ce8ff66329f843bfc5bf242ee0d5`.
+
+````text
+**A. Design decision**  
+**GO for a distinct v2 protocol, conditional on the two corrections remaining exactly as stated.** No flaw that invalidates the amendment is present, provided: (1) only the two full-second UTC tokens on the exact `(local files)` line and the exact DAS URL line are canonicalized, both must match the same capture time, and every other byte (including `Version v2.01`) is preserved; (2) latitude labels are exact `float32(25+0.04*i)` promotions and longitude labels lie within one float32 ULP of `float32(280+0.08*i)` with no snapping; (3) sampling uses the actual saved coordinates, so the observed eastern end near −65.04° is never extended to −65°; (4) v2 carries a new protocol/code hash, binds to the v1 diagnosis, and discloses that HYCOM bytes were already decoded. This is not approval of an unseen implementation, not a rewrite of v1, and not a claim of improved skill.
+
+**B. Hostile tests**  
+- DAS bytes differing only in the two allow-listed timestamps (same capture time) pass; a third timestamp, a malformed date, a duplicate token in another context, or any change to version/units/schema blocks.  
+- Longitude labels at the lower end (280°) and upper end (within one ULP of 294.96°) are accepted and sampled as-is; a label two ULPs away, a coarsened count, a shifted origin, or a request that invents support at exactly −65° is rejected with the cell retained.  
+- A file whose float64 labels are not exact float32 promotions, or whose depth/time/units differ, fails closed before any trajectory request.
+
+**C. RK4 in this setting**  
+RK4 estimates the next geographic position by sampling the current at the start, two midpoints and the end of a short step, then taking a weighted average; steps are split at forcing knots so no stage crosses a slope break.  
+With east/north velocities \(u,v\) in m/s and WGS84 metres-per-degree \((m_\lambda,m_\phi)\),  
+\[
+\frac{d\phi}{dt}=\frac{v}{m_\phi},\qquad\frac{d\lambda}{dt}=\frac{u}{m_\lambda}.
+\]  
+Numerical integration error is the residual of the RK4 step on the interpolated field; interpolation error is the bilinear/linear reconstruction of \(u,v\); current-model error is the difference between the HYCOM analysis and the true water motion. None of these is plastic or tank accuracy.
+
+**D. Display rules**  
+Data Lab and Chalk must show “36 planned cells, \(N\) scored, primary withheld” whenever \(N<36\). Primary equal-ID macro ADE/FDE appears only when all 36 cells score. Partial common-support summaries are labelled secondary with explicit counts, IDs and times; no winner is selected from unequal supports. No learned-ML, operational, plastic, reef or tank claim is permitted. The v1 failure text remains visible and is not replaced by a v2 success.
+````
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-result-review-prompt.txt
+
+Kind: **ACTUAL_GROK_WEB_PROMPT**. Original bytes: **9181**. SHA-256: `4e357cbc2763fc12a75fbd8e8df886860eacfaa3c19302bcc084620ff0703cfb`.
+
+````text
+Actual v2 first score now exists and offline replay was byte-identical. This is POST-OUTCOME interpretation only; do not tune/addmodels/replacementIDs or rewrite the frozen attempt. Main local source c1e7c25 and formalfreeze23de21c preceded6fixedrequests. All6sourcebodies downloaded (18686Bmetadata,640Bidentity,159404BHYCOMmetadata,1828/1824BtrajectoryCSV,572604BNetCDF). BothGDPcontext/futurepayloads were obtained only AFTER the newfreeze; all6fixedtracks were saved and read back before futurecoordinates numericdecode. V1still0/36unchanged. V2waspre-GDP-outcome, not entirelyvalue-unseen becausev1forcingalreadydecoded. No xAIAPI/billing/Voice, no newPhotonmessage/camera.
+
+Read exact saved aggregate summary below, then give a candid concise interpretation. Current-onlyRK4 was WORSE thanstationary andlastdrift on this2group6h test. Do not celebrate complexphysics or implyGroktraineda superiorMLmodel. Explain why a mathematicallycorrectRK4 integrator can still forecastworse thanlastdrift, distinguish verificationofsolver vsfieldrepresentation/modelskill, and name3futureindependentmeasurement/researchgates that would be useful without modifying orre-scoringthisstudy. Causalreasons are hypothesesonly, not shownbythesemetrics. ExplainwhatDataLab/Chalkshouldsay, and what claimmay be made for the demo. We needa usable honest product notdecorativecurvature. No automaticmodelpromotion, no globalgeneralizationfrom12processedfutureestimates. Staticanalysisonly; do notclaimyouexecutedcode orverifiedthenumericalscore.
+
+{
+  "study_id": "matched-current-gdp-hycom-15m-v2",
+  "report_sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347",
+  "protocol_sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793",
+  "coverage": {
+    "planned": 36,
+    "scored": 36,
+    "distinct_processed_targets": 12
+  },
+  "primary": [
+    {
+      "equal_id_macro_ade_m": 3490.11883398436,
+      "equal_id_macro_fde_m": 6069.352856333436,
+      "group_count": 2,
+      "model_id": "stationary",
+      "per_horizon_mean_error_m": [
+        {
+          "error_m": 1017.6217581778601,
+          "horizon_hours": 1
+        },
+        {
+          "error_m": 1970.7472112544315,
+          "horizon_hours": 2
+        },
+        {
+          "error_m": 2938.4120735024967,
+          "horizon_hours": 3
+        },
+        {
+          "error_m": 3946.766474209055,
+          "horizon_hours": 4
+        },
+        {
+          "error_m": 4997.812630428882,
+          "horizon_hours": 5
+        },
+        {
+          "error_m": 6069.352856333436,
+          "horizon_hours": 6
+        }
+      ]
+    },
+    {
+      "equal_id_macro_ade_m": 1510.2315897151784,
+      "equal_id_macro_fde_m": 3240.5762017396933,
+      "group_count": 2,
+      "model_id": "last_drift",
+      "per_horizon_mean_error_m": [
+        {
+          "error_m": 160.50357948977432,
+          "horizon_hours": 1
+        },
+        {
+          "error_m": 540.9153518054613,
+          "horizon_hours": 2
+        },
+        {
+          "error_m": 1039.4347516157368,
+          "horizon_hours": 3
+        },
+        {
+          "error_m": 1664.6392856945859,
+          "horizon_hours": 4
+        },
+        {
+          "error_m": 2415.3203679458193,
+          "horizon_hours": 5
+        },
+        {
+          "error_m": 3240.5762017396933,
+          "horizon_hours": 6
+        }
+      ]
+    },
+    {
+      "equal_id_macro_ade_m": 5063.020321784228,
+      "equal_id_macro_fde_m": 9151.645051235122,
+      "group_count": 2,
+      "model_id": "current_only",
+      "per_horizon_mean_error_m": [
+        {
+          "error_m": 1314.106854034407,
+          "horizon_hours": 1
+        },
+        {
+          "error_m": 2666.7265163160646,
+          "horizon_hours": 2
+        },
+        {
+          "error_m": 4129.690563147813,
+          "horizon_hours": 3
+        },
+        {
+          "error_m": 5709.593800785094,
+          "horizon_hours": 4
+        },
+        {
+          "error_m": 7406.359145186865,
+          "horizon_hours": 5
+        },
+        {
+          "error_m": 9151.645051235122,
+          "horizon_hours": 6
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "group_id": "300234066836710",
+      "candidate_metrics": [
+        {
+          "model_id": "stationary",
+          "metrics": {
+            "available_cell_mean_error_m": 5120.998256257352,
+            "available_cell_summary_is_full_horizon_ade": true,
+            "coverage_complete": true,
+            "endpoint_fde_m": 8121.756574761635,
+            "endpoint_scored": true,
+            "full_horizon_ade_m": 5120.998256257352,
+            "missing_count": 0,
+            "planned_count": 6,
+            "prefix_is_full_horizon": true,
+            "scored_count": 6,
+            "scored_prefix_count": 6,
+            "scored_prefix_hours": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "scored_prefix_mean_error_m": 5120.998256257352
+          }
+        },
+        {
+          "model_id": "last_drift",
+          "metrics": {
+            "available_cell_mean_error_m": 1929.6812781234194,
+            "available_cell_summary_is_full_horizon_ade": true,
+            "coverage_complete": true,
+            "endpoint_fde_m": 4034.0989009671275,
+            "endpoint_scored": true,
+            "full_horizon_ade_m": 1929.6812781234194,
+            "missing_count": 0,
+            "planned_count": 6,
+            "prefix_is_full_horizon": true,
+            "scored_count": 6,
+            "scored_prefix_count": 6,
+            "scored_prefix_hours": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "scored_prefix_mean_error_m": 1929.6812781234194
+          }
+        },
+        {
+          "model_id": "current_only",
+          "metrics": {
+            "available_cell_mean_error_m": 4640.195307154688,
+            "available_cell_summary_is_full_horizon_ade": true,
+            "coverage_complete": true,
+            "endpoint_fde_m": 8270.53113245185,
+            "endpoint_scored": true,
+            "full_horizon_ade_m": 4640.195307154688,
+            "missing_count": 0,
+            "planned_count": 6,
+            "prefix_is_full_horizon": true,
+            "scored_count": 6,
+            "scored_prefix_count": 6,
+            "scored_prefix_hours": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "scored_prefix_mean_error_m": 4640.195307154688
+          }
+        }
+      ]
+    },
+    {
+      "group_id": "300534061292930",
+      "candidate_metrics": [
+        {
+          "model_id": "stationary",
+          "metrics": {
+            "available_cell_mean_error_m": 1859.2394117113683,
+            "available_cell_summary_is_full_horizon_ade": true,
+            "coverage_complete": true,
+            "endpoint_fde_m": 4016.9491379052365,
+            "endpoint_scored": true,
+            "full_horizon_ade_m": 1859.2394117113683,
+            "missing_count": 0,
+            "planned_count": 6,
+            "prefix_is_full_horizon": true,
+            "scored_count": 6,
+            "scored_prefix_count": 6,
+            "scored_prefix_hours": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "scored_prefix_mean_error_m": 1859.2394117113683
+          }
+        },
+        {
+          "model_id": "last_drift",
+          "metrics": {
+            "available_cell_mean_error_m": 1090.7819013069375,
+            "available_cell_summary_is_full_horizon_ade": true,
+            "coverage_complete": true,
+            "endpoint_fde_m": 2447.053502512259,
+            "endpoint_scored": true,
+            "full_horizon_ade_m": 1090.7819013069375,
+            "missing_count": 0,
+            "planned_count": 6,
+            "prefix_is_full_horizon": true,
+            "scored_count": 6,
+            "scored_prefix_count": 6,
+            "scored_prefix_hours": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "scored_prefix_mean_error_m": 1090.7819013069375
+          }
+        },
+        {
+          "model_id": "current_only",
+          "metrics": {
+            "available_cell_mean_error_m": 5485.845336413768,
+            "available_cell_summary_is_full_horizon_ade": true,
+            "coverage_complete": true,
+            "endpoint_fde_m": 10032.758970018393,
+            "endpoint_scored": true,
+            "full_horizon_ade_m": 5485.845336413768,
+            "missing_count": 0,
+            "planned_count": 6,
+            "prefix_is_full_horizon": true,
+            "scored_count": 6,
+            "scored_prefix_count": 6,
+            "scored_prefix_hours": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "scored_prefix_mean_error_m": 5485.845336413768
+          }
+        }
+      ]
+    }
+  ],
+  "automatic_winner_selected": false,
+  "current_field_shape": [
+    3,
+    251,
+    188
+  ],
+  "current_field_depth": 15.0
+}
+````
+
+## Exact source: docs/grok-evidence/grok-matched-current-v2-result-review-response.txt
+
+Kind: **ACTUAL_GROK_WEB_RESPONSE**. Original bytes: **2239**. SHA-256: `25c7a160e2c14599e2a0801deab3adc66b5b3df868f3819d2aae7f2f8e452f4d`.
+
+````text
+**Post-outcome interpretation (static).** No code was executed here and the frozen attempt is not rewritten.
+
+On the two pre-declared groups the equal-ID macro ADE/FDE are last-drift 1510 m / 3241 m, stationary 3490 m / 6069 m, and current-only RK4 5063 m / 9152 m. Current-only is worse on both groups and at every horizon. The negative result is retained; no model is promoted.
+
+A mathematically correct RK4 integrator only follows the velocity field it is given. If the 15 m HYCOM analysis at the three knots does not match the actual water motion that carried the drogued buoy—because of analysis error, missing wind/wave effects, assimilation of later information, or the difference between a 15 m drogue and the field’s effective depth—the integrated path will diverge even though every RK4 stage and knot split is exact. Solver verification (the code implements the declared integrator) is therefore separate from field representation and from predictive skill. The 36 cells reuse only 12 processed future estimates; the result is a retrospective diagnostic, not operational skill or statistical independence.
+
+**Three future gates (no re-score of this study).**  
+1. Independent physical tank tracks with measured per-layout flow fields.  
+2. A pre-registered comparison against archived issue-time forecasts (not analysis/hindcast valid times).  
+3. An assimilation-input audit confirming whether these GDP observations or close derivatives entered the HYCOM field.
+
+**Data Lab / Chalk.** Display all three aggregates, the label “last-drift lowest on this two-group cohort,” the 36/36 coverage, and the flags `retrospective`, `not operational`, `not independent`, `not plastic/tank`. Do not highlight current-only as a winner or imply a trained model. Chalk may quote only the frozen receipt IDs and these numbers; it must refuse any prompt that converts the result into a probability, a promoted model, or a reef/plastic claim.
+
+**Demo claim that may be made.** “On this frozen two-group, six-hour retrospective comparison the simple last-drift baseline had lower descriptive error than both stationary and the 15 m HYCOM-driven RK4. The integrator ran as specified; the current field did not improve the forecast.”
+````
+
+## Exact source: docs/grok-evidence/matched-current-v2-local-verification.json
+
+Kind: **LOCAL_EXECUTION_NOT_GROK_RESPONSE**. Original bytes: **12409**. SHA-256: `23e9cbaefb177d876744d3815cdecf4bac67afeb56ba9a9fd713e3a25b3965e2`.
+
+````text
+{
+  "acquisition": {
+    "all_six_sources_downloaded": true,
+    "received_bytes": 754986,
+    "requests": 6,
+    "retained_bytes": 754986,
+    "retries_within_v2_attempt": 0,
+    "trajectory_payloads": 2
+  },
+  "billing_changed": false,
+  "browser": {
+    "both_buoy_groups": true,
+    "live_chalk_REPORT_with_exact_report_and_protocol_citations": true,
+    "numeric_replay_in_reader": false,
+    "scale_and_full_scores_invariant_under_visibility": true,
+    "trajectory_layers_and_hourly_displacement_controls": true,
+    "v1_zero_scored_preserved_and_restored_v2": true,
+    "v2_36_of_36_loaded": true
+  },
+  "camera_activated": false,
+  "captured_at_utc": "2026-10-17T22:08:19.772855+00:00",
+  "chronology": {
+    "acquisition_finished_at_utc": "2026-10-17T22:03:19.879635Z",
+    "acquisition_started_at_utc": "2026-10-17T22:02:50.890695Z",
+    "forecasts_frozen_at_utc": "2026-10-17T22:03:47.184955+00:00",
+    "forecasts_persisted_and_read_back_before_future_numeric_decode": true,
+    "protocol_frozen_at_utc": "2026-10-17T22:02:41.391650Z",
+    "scored_at_utc": "2026-10-17T22:03:47.186880+00:00"
+  },
+  "forecast_file_sha256": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf",
+  "freeze_commit": "23de21c382f972f26e303870aafcadb0c91a7a3e",
+  "frozen_protocol_sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793",
+  "grok_review_disposition": {
+    "accepted": [
+      "Separate pre-GDP-outcome amendment preserving v1",
+      "Narrow byte canonicalization and native float32 representation checks",
+      "Actual coordinate support and no invented curvature",
+      "Retain negative result and do not promote a model"
+    ],
+    "corrected_or_rejected": [
+      "Initial criteria response incorrectly placed current-value decode before GDP requests; later code review explicitly corrected this.",
+      "Post-result wording that every RK4 stage/knot split is exact is not adopted: numerical integration approximates the interpolated field and has finite error.",
+      "Potential field-error, wind/wave, depth or assimilation explanations are hypotheses, not diagnosed causes from this two-buoy study."
+    ]
+  },
+  "hosted_exact_final_head_ci_verified_at_capture": false,
+  "kind": "LOCAL_EXECUTION_NOT_GROK_RESPONSE",
+  "log_identities": {
+    "work/tideward-matched-v2-acquisition.json": {
+      "bytes": 463,
+      "sha256": "f2f2060df7b8c82d4851682428350b50f81f0ef0943aa58f100c713488658c7c"
+    },
+    "work/tideward-matched-v2-build.log": {
+      "bytes": 907,
+      "sha256": "11387d4446f4bdc85251daae95d63344fdb3fa2ba69fca0753adcbb48b6e73e0"
+    },
+    "work/tideward-matched-v2-chalk-browser.txt": {
+      "bytes": 30104,
+      "sha256": "23c1fc7464170ea3997e6b3a6fa6c4ac6865f2e9fe5b7b0b717cbb6065be8492"
+    },
+    "work/tideward-matched-v2-eslint.log": {
+      "bytes": 46,
+      "sha256": "2a39a2b0088eab9372f9ae76e9bbb3badd872aae76be61464acc2a0fe3ac1e51"
+    },
+    "work/tideward-matched-v2-final-full-python.log": {
+      "bytes": 2588,
+      "sha256": "8d6f236efdc3f76ba33d9edf215165c0874f610817853f810ba14c6a85418bb5"
+    },
+    "work/tideward-matched-v2-final-prefreeze.log": {
+      "bytes": 975,
+      "sha256": "5d52fee1627bafbb4cf47875719680f50368abfed5bf0612189ccaf155e6bf09"
+    },
+    "work/tideward-matched-v2-first-score.json": {
+      "bytes": 99409,
+      "sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347"
+    },
+    "work/tideward-matched-v2-full-frontend.log": {
+      "bytes": 34102,
+      "sha256": "60e40f86a09d771e9c3d08b0d214e541d67d14ba99621dedcefe03b4dac827fe"
+    },
+    "work/tideward-matched-v2-offline-http.json": {
+      "bytes": 610100,
+      "sha256": "6d690d9d6585c6b33e76fb445e65be5412f5a19ce1ca77fa00e87c1eea03daa0"
+    },
+    "work/tideward-matched-v2-replay.json": {
+      "bytes": 99409,
+      "sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347"
+    },
+    "work/tideward-matched-v2-ruff.log": {
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "work/tideward-matched-v2-typegen.log": {
+      "bytes": 59,
+      "sha256": "adba4af9194e10e47dda75ff0fd0f8c2b756474896d0eba5612799c527ff372a"
+    },
+    "work/tideward-matched-v2-types.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "manifest_sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0",
+  "new_photon_messages_requested": 0,
+  "physical_tank_validation": false,
+  "public_archive_files": {
+    "data/research/matched-current-v2/acquisition-start.json": {
+      "bytes": 402,
+      "sha256": "779cd40cf7ded603256f2012b478fd5fb056e7c87dfd58c189d80da73d9d06df"
+    },
+    "data/research/matched-current-v2/acquisition-start.sha256": {
+      "bytes": 65,
+      "sha256": "de71c07f22d23e3fef5b9ff8342f50d62a8d9e70463ded60653144d63967927a"
+    },
+    "data/research/matched-current-v2/evaluation.json": {
+      "bytes": 99409,
+      "sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347"
+    },
+    "data/research/matched-current-v2/evaluation.sha256": {
+      "bytes": 65,
+      "sha256": "830605dbebd771fb234b8924ef14cfcb0120cc18c255f2038d323f04147b7b35"
+    },
+    "data/research/matched-current-v2/forecasts.json": {
+      "bytes": 27704,
+      "sha256": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf"
+    },
+    "data/research/matched-current-v2/forecasts.sha256": {
+      "bytes": 65,
+      "sha256": "76031f6578badfba0128f5c3063c343c54e4f8a1e16649e1f7fc5fa75aea6452"
+    },
+    "data/research/matched-current-v2/manifest.json": {
+      "bytes": 5597,
+      "sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0"
+    },
+    "data/research/matched-current-v2/manifest.sha256": {
+      "bytes": 65,
+      "sha256": "f252cd8fa80bae84ee017b15d28c1aef190e5c3fbe6769115561815ad4f524a0"
+    },
+    "data/research/matched-current-v2/protocol.json": {
+      "bytes": 14096,
+      "sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793"
+    },
+    "data/research/matched-current-v2/protocol.sha256": {
+      "bytes": 65,
+      "sha256": "837fc19d2672456834448b5f515c8a276e22252e5e9bac1b476493deb2811086"
+    },
+    "data/research/matched-current-v2/raw/drifter-300234066836710.csv": {
+      "bytes": 1828,
+      "sha256": "d226154af32dcb59e6e21a069072cdbd4ed8094efe7f1fa63c9f8d6334a1b9a0"
+    },
+    "data/research/matched-current-v2/raw/drifter-300234066836710.sha256": {
+      "bytes": 65,
+      "sha256": "dac7c2c7d11ed84e6ee1eedf1e74bdb39530b6684d738bdcb4421ff90e60fa81"
+    },
+    "data/research/matched-current-v2/raw/drifter-300534061292930.csv": {
+      "bytes": 1824,
+      "sha256": "4fd7bbdbd85f54ee789c53a9c2f5dc031dbae32413bb6fe7c454999902a7bd7e"
+    },
+    "data/research/matched-current-v2/raw/drifter-300534061292930.sha256": {
+      "bytes": 65,
+      "sha256": "fdf5cb6aa97deaab3e4d449d07865d57d41c2f072b4e80216ff5e9224cd2045e"
+    },
+    "data/research/matched-current-v2/raw/gdp-metadata.das": {
+      "bytes": 18686,
+      "sha256": "460853bbdcd165ebf8eff0a098cb4784a98a2eb3558136edb7583b8d3449ee68"
+    },
+    "data/research/matched-current-v2/raw/gdp-metadata.sha256": {
+      "bytes": 65,
+      "sha256": "f6f7ac3b8fe5db4ce6a95609bc0593db7d48feaaf08a42cbdfa20e2e9c176550"
+    },
+    "data/research/matched-current-v2/raw/gdp-origin-identity.csv": {
+      "bytes": 640,
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    "data/research/matched-current-v2/raw/gdp-origin-identity.sha256": {
+      "bytes": 65,
+      "sha256": "10360f79f7a2f8870f9506bcaee1762e86675e32b277b7f29f881f5543e0a447"
+    },
+    "data/research/matched-current-v2/raw/hycom-currents.nc": {
+      "bytes": 572604,
+      "sha256": "372b1fe68ac4e59a99899fa5c19dbe52ba6c2ee75550200e4ac0138d92dc3888"
+    },
+    "data/research/matched-current-v2/raw/hycom-currents.sha256": {
+      "bytes": 65,
+      "sha256": "4237d9300765fd25bf36294c5071ba75818738019fdb1abed2ad5ff8212d92b9"
+    },
+    "data/research/matched-current-v2/raw/hycom-metadata.sha256": {
+      "bytes": 65,
+      "sha256": "6b1a4fcc0cf0aa9dfc679afa68c4ae44f27186e27eed14d3a2f8a7416b5d5764"
+    },
+    "data/research/matched-current-v2/raw/hycom-metadata.xml": {
+      "bytes": 159404,
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    }
+  },
+  "publication_performed_at_capture": false,
+  "report_sha256": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347",
+  "results": {
+    "automatic_winner_selected": false,
+    "distinct_processed_future_targets": 12,
+    "exact_offline_replay": true,
+    "last_drift_descriptive_error_lower_than_current_only": true,
+    "operational_forecast_skill_verified": false,
+    "physical_validation": false,
+    "planned_cells": 36,
+    "primary": [
+      {
+        "equal_id_macro_ade_m": 3490.11883398436,
+        "equal_id_macro_fde_m": 6069.352856333436,
+        "group_count": 2,
+        "model_id": "stationary",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 1017.6217581778601,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 1970.7472112544315,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 2938.4120735024967,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 3946.766474209055,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 4997.812630428882,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 6069.352856333436,
+            "horizon_hours": 6
+          }
+        ]
+      },
+      {
+        "equal_id_macro_ade_m": 1510.2315897151784,
+        "equal_id_macro_fde_m": 3240.5762017396933,
+        "group_count": 2,
+        "model_id": "last_drift",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 160.50357948977432,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 540.9153518054613,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 1039.4347516157368,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 1664.6392856945859,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 2415.3203679458193,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 3240.5762017396933,
+            "horizon_hours": 6
+          }
+        ]
+      },
+      {
+        "equal_id_macro_ade_m": 5063.020321784228,
+        "equal_id_macro_fde_m": 9151.645051235122,
+        "group_count": 2,
+        "model_id": "current_only",
+        "per_horizon_mean_error_m": [
+          {
+            "error_m": 1314.106854034407,
+            "horizon_hours": 1
+          },
+          {
+            "error_m": 2666.7265163160646,
+            "horizon_hours": 2
+          },
+          {
+            "error_m": 4129.690563147813,
+            "horizon_hours": 3
+          },
+          {
+            "error_m": 5709.593800785094,
+            "horizon_hours": 4
+          },
+          {
+            "error_m": 7406.359145186865,
+            "horizon_hours": 5
+          },
+          {
+            "error_m": 9151.645051235122,
+            "horizon_hours": 6
+          }
+        ]
+      }
+    ],
+    "scored_cells": 36
+  },
+  "reviewed_source_commit": "c1e7c2503e141da9a95fc51be027c569cbda7cca",
+  "schema_version": 1,
+  "study_id": "matched-current-gdp-hycom-15m-v2",
+  "verification": {
+    "dependency_consistency": "PASS",
+    "eslint": "PASS",
+    "final_focused_prefreeze_passed": 331,
+    "frontend_passed": 225,
+    "full_python_passed": 1779,
+    "http": {
+      "BLOCKED": 6,
+      "FAIL": 0,
+      "PASS": 174,
+      "complete_live_product_verified": false,
+      "expected_external_scopes_blocked": true,
+      "live_provider_round_trip_verified": false,
+      "physical_validation": false,
+      "software_workflow_passed": true
+    },
+    "isolated_side_effect_guards": {
+      "camera_open_attempts": 0,
+      "photon_poll_attempts": 0,
+      "photon_send_attempts": 0,
+      "provider_http_attempts": 0
+    },
+    "production_build": "PASS",
+    "route_types": "PASS",
+    "ruff": "PASS",
+    "typescript": "PASS",
+    "v1_source_and_all18_file_hashes_preserved": true,
+    "v2_all14_pinned_sources_unchanged": true
+  },
+  "xai_api_used": false
+}
+````
+
+## Exact source: docs/research-evidence/matched-current-v2-prefreeze-review.json
+
+Kind: **LOCAL_PREFREEZE_REVIEW_NOT_GROK_RESPONSE**. Original bytes: **5707**. SHA-256: `4730b2227c527f68c92048bb647b4d933c7ba8e53c157a94de089b4f522c630f`.
+
+````text
+{
+  "amendment_scope": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+  "decision": "GO_FOR_DISTINCT_COMMITTED_FREEZE_THEN_ONE_ACQUISITION",
+  "environment": {
+    "httpx": "0.28.1",
+    "netCDF4": "1.7.5",
+    "numpy": "2.5.4",
+    "python": "3.12.14",
+    "scipy": "1.18.1",
+    "xarray": "2026.9.0"
+  },
+  "grok_evidence": [
+    {
+      "bytes": 35319,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-prompt.txt",
+      "sha256": "1c213e6718fc247b1111233bf118a942bca57547bb56f4fd225175ac9325d97a"
+    },
+    {
+      "bytes": 1070,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-response.txt",
+      "sha256": "d05261c1925688925ffbf095bf4e938ba7bbb99237d89af10a13dd14e93530c7"
+    },
+    {
+      "bytes": 64055,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-prompt.txt",
+      "sha256": "15c5ab2e8b2773523d788622608f42a2f536855aa1dff2bdedd959a2a807612b"
+    },
+    {
+      "bytes": 2186,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-response.txt",
+      "sha256": "98993ad666754d76108e00275b7f964aa363c8095298568162092e2f815dd3a2"
+    },
+    {
+      "bytes": 4748,
+      "path": "docs/grok-evidence/grok-matched-current-v2-criteria-prompt.txt",
+      "sha256": "1742506bbc741f5a0af86cc8b2a2459979590a8499afc1264780fb9be8eb0473"
+    },
+    {
+      "bytes": 2765,
+      "path": "docs/grok-evidence/grok-matched-current-v2-criteria-response.txt",
+      "sha256": "c205c464df49093942dbef3d9cecfd7e8182ce8ff66329f843bfc5bf242ee0d5"
+    }
+  ],
+  "implementation_sha256": {
+    "apps/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "apps/ocean/__init__.py": "cf9af3c0df838bc3ad56bb6d64e80f23050996cee00f73d12917ec93145caee0",
+    "apps/ocean/reeftrace_ocean/__init__.py": "369e9a05e5a186262ef597d44ac27bc3c00383cf690182da45db0dbcce4be977",
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde",
+    "apps/ocean/reeftrace_ocean/data.py": "4883727618060510a13182825cba6c1edb052ce539fee22b6048eef7dfe3de87",
+    "apps/ocean/reeftrace_ocean/field.py": "4cec7e6f8a50a6fd45d67d738e883880f5cb02e208ee907403f4255f11b5bb83",
+    "apps/ocean/reeftrace_ocean/hycom.py": "cc6cc61b6024ffa02cf9a86debb38730b43dddd238199ad351f951ddb87ccd38",
+    "apps/ocean/reeftrace_ocean/matched_current.py": "6b04dfee255141b292f90f5c427030a8ad4d8f6eb499df4a7b289046fac93aaa",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py": "1acee1a93a0c78437313bdba0b7f05dba3006a8fc33507896902470c8d90ea1c",
+    "pyproject.toml": "6b6d25181ec13cacf18b861b9a97f4be9bde1e4a97eb2a1058abccc05b1ba3f5",
+    "scripts/evaluate_matched_current_v2_study.py": "c44213fedf68bfbea441d59dd93ee4ed9b4214bbdf5858277729c3d8a6ac4282",
+    "scripts/fetch_matched_current_v2_study.py": "0e0995e6dfc34fd39e1b9388483b31e89751c87b7b92b006a75dd4259b71d5e1",
+    "scripts/freeze_matched_current_v2_protocol.py": "a2dc1cde53ee2847ff66f6070abf7333434b0f854e391b470ee7a4e688ab9f21"
+  },
+  "limitations": [
+    "Static Grok review is not execution or a correctness guarantee.",
+    "Original incorrect decoder-before-GDP-request advice is retained and explicitly corrected.",
+    "No xAI API, billing, camera activation or new Photon message.",
+    "Actual acquisition and scoring must remain separate immutable operations."
+  ],
+  "logs": [
+    {
+      "bytes": 2588,
+      "path": "work/tideward-matched-v2-full-python.log",
+      "sha256": "6056fcd5b43f45c12f3a6547eb1a0f43399db9ca52f1efc54821f21d80a9acef"
+    },
+    {
+      "bytes": 975,
+      "path": "work/tideward-matched-v2-final-prefreeze.log",
+      "sha256": "5d52fee1627bafbb4cf47875719680f50368abfed5bf0612189ccaf155e6bf09"
+    },
+    {
+      "bytes": 34102,
+      "path": "work/tideward-matched-v2-full-frontend.log",
+      "sha256": "60e40f86a09d771e9c3d08b0d214e541d67d14ba99621dedcefe03b4dac827fe"
+    },
+    {
+      "bytes": 46,
+      "path": "work/tideward-matched-v2-eslint.log",
+      "sha256": "2a39a2b0088eab9372f9ae76e9bbb3badd872aae76be61464acc2a0fe3ac1e51"
+    },
+    {
+      "bytes": 59,
+      "path": "work/tideward-matched-v2-typegen.log",
+      "sha256": "adba4af9194e10e47dda75ff0fd0f8c2b756474896d0eba5612799c527ff372a"
+    },
+    {
+      "bytes": 0,
+      "path": "work/tideward-matched-v2-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 907,
+      "path": "work/tideward-matched-v2-build.log",
+      "sha256": "11387d4446f4bdc85251daae95d63344fdb3fa2ba69fca0753adcbb48b6e73e0"
+    },
+    {
+      "bytes": 19,
+      "path": "work/tideward-matched-v2-ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "prior_forcing_acquired_and_decoded": true,
+  "prior_gdp_trajectory_payloads": 0,
+  "prior_scored_cells": 0,
+  "prior_v1_files_unchanged": true,
+  "prior_v1_sources_unchanged": true,
+  "reviewed_at_utc": "2026-10-17T22:02:20.243535+00:00",
+  "schema_version": 1,
+  "scientific_result": false,
+  "study_id": "matched-current-gdp-hycom-15m-v2",
+  "v2_protocol_frozen": false,
+  "v2_scientific_values_acquired": false,
+  "v2_scores_computed": false,
+  "verification": {
+    "dependency_consistency": "PASS",
+    "eslint": "PASS",
+    "final_focused_tests": 331,
+    "frontend_tests": 225,
+    "full_python_checkpoint": 1770,
+    "full_python_checkpoint_before_last_document_pin_and_http_test_delta": true,
+    "isolated_build": "PASS",
+    "route_types": "PASS",
+    "ruff": "PASS",
+    "typescript": "PASS"
+  }
+}
+````
+
+## Exact source: docs/matched-current-v2-amendment.md
+
+Kind: **IMMUTABLE_PRE_GDP_OUTCOME_PROPOSAL_CAPTURE_NOT_RESULT**. Original bytes: **22638**. SHA-256: `16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f`.
+
+````text
+# Matched-current v2: a pre-GDP-outcome compatibility proposal
+
+Proposal checkpoint: **17 October 2026**. **DRAFT — not implemented, frozen,
+acquired or scored.** This document proposes two narrowly bounded input
+compatibility changes. It is not permission to rerun a failed study, a new
+scientific result, or a replacement for the immutable v1 record. The numerical
+models and comparison question remain fixed.
+
+## 1. Why an amendment is being considered
+
+The [v1 result](matched-current-results.md) retains **0/36 scored model-hour
+cells**, null primary comparisons and both planned GDP groups. Its one bounded
+attempt made four requests and retained 751,334 response bytes. Both GDP
+trajectory requests were blocked before an attempt; **no GDP trajectory body or
+later target coordinates were obtained**. Two input guards prevented a useful
+comparison:
+
+1. The acquired NOAA DAS differed from its seed in exactly two request-history
+   capture-time tokens. Every other metadata byte was identical.
+2. HYCOM's native float64 coordinate variables contained labels exactly
+   representable as float32 values promoted to float64. The study wrapper's
+   `1e-9 degree` adjacent-spacing guard rejected their encoding variation.
+
+The [saved-byte diagnosis](matched-current-v1-compatibility-diagnosis.md) and
+[machine receipt](research-evidence/matched-current-v1-compatibility-diagnosis.json)
+establish those observations. They do not establish current accuracy or model
+skill. The original exclusions, models, scores and guards must not be edited to
+make v1 pass.
+
+**Exposure disclosure:** the HYCOM forcing bytes have already been acquired and
+decoded for compatibility inspection. Therefore v2 can be described as
+**pre-GDP-outcome**, never as an entirely scientific-value-unseen first design.
+No scored comparison was available to choose a model, parameter or tolerance.
+Future selection must not use the known current values to change the region,
+objects, dates, depth, models or denominators.
+
+## 2. Preserve and bind the original evidence
+
+The public v1 archive is `data/research/matched-current-v1`. Its 18 original files
+were relocated byte-identically from the earlier `data/public` path; the
+[location receipt](research-evidence/matched-current-v1-archive-location.json)
+preserves that history. Older diagnosis paths identify the earlier capture, not
+a second scientific attempt.
+
+| Preserved v1 artifact | SHA-256 |
+| --- | --- |
+| Protocol | `210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6` |
+| Acquisition manifest | `4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e` |
+| Forecast receipt file | `4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f` |
+| Evaluation file | `354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7` |
+| HYCOM current body | `7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065` |
+
+Any later v2 protocol must name these predecessor identities, this proposal and
+its reviewed implementation hashes. It needs a **distinct study ID, trusted
+protocol identity, directory, acquisition sentinel, manifest, forecast receipt,
+first-score report and eventual result pin**. A v2 result must appear beside the
+failed v1 attempt, not overwrite or relabel it. No v2 identity is generated by
+this document.
+
+## 3. Everything that stays fixed
+
+| Contract | Unchanged choice |
+| --- | --- |
+| GDP/WMO group 1 | `300234066836710` / `6202613` |
+| GDP/WMO group 2 | `300534061292930` / `4102636` |
+| Metadata selection | The existing fixed-origin identity/drogue selection and saved registry/exclusion provenance; unresolved physical-alias limitations stay disclosed |
+| Processed observation product | NOAA hourly `drifter_hourly_qc` endpoint, whose pinned metadata identify **v2.01**; do not silently substitute the website's v2.01.1 release |
+| Context | 25 hourly fixes, **31 May 2022 00:00 UTC through 1 June 2022 00:00 UTC**, inclusive |
+| Origin | **1 June 2022 00:00 UTC** |
+| Targets | Six later hourly fixes, **01:00–06:00 UTC**, same target for every candidate at each group/hour |
+| Candidates | `stationary`, `last_drift`, `current_only`, in the same order |
+| Current product | HYCOM GOFS 3.1, GLBy0.08/expt93.0 UV3Z, 2022 NCSS |
+| Requested subset | Native longitude **280–295 degrees**, latitude **25–35 degrees**, horizontal stride **1**, `water_u,water_v`, exactly **15 m** |
+| Current times | **00:00, 03:00 and 06:00 UTC** on 1 June 2022; no earlier fields or substituted knots |
+| Numerical horizon | **21,600 s**, hourly output; no 24-hour extension |
+| Maximum requested RK4 step | **300 s**, with the existing smaller support/stability limits and exact output/knot boundaries |
+| Hard transport/model bounds | At most 250,000 current samples, 2,048 accepted integration steps and supported current speed at most **10 m/s** |
+| Planned denominator | **2 groups × 3 candidates × 6 hours = 36 cells**, reusing **12** distinct later processed position estimates |
+| Primary result | Equal-ID macro ADE/FDE and primary paired comparison only when **all 36 cells score** |
+| Failure policy | Retain both IDs, every candidate/hour, explicit reasons and null missing errors; no replacements or automatic winner |
+
+The two metadata-admissible drogue states are unchanged: group 1's reported loss
+is after the six-hour window, and group 2 has the documented attached/fill state.
+They are retrospective metadata, not measured instantaneous drag-depth proof.
+NOAA describes the positions as quality-controlled, interpolated hourly data,
+and the standard drogue center is approximately 15 m. Drogued buoy motion is not
+surface-plastic motion. [NOAA data](https://www.aoml.noaa.gov/phod/gdp/data.php),
+[NOAA drogue explanation](https://www.aoml.noaa.gov/phod/gdp/faq.php).
+
+The existing request URLs, dependency order and per-source body caps stay fixed:
+GDP metadata 256 KiB; origin identity 32 KiB; HYCOM metadata 256 KiB; each GDP
+trajectory 32 KiB; HYCOM currents 8 MiB. The attempt remains at most **six
+requests**, **12 MiB retained response bodies**, **180 s wall time**, **45 s
+request timeout**, **5 s connect timeout**, one connection, zero retries, no
+redirects and no alternate endpoints. The existing maximum 8,192-byte oversize
+detection chunk is disclosed separately from retained-body capacity. A metadata
+failure still blocks its dependent trajectories; a current failure does not
+silently change the candidate definitions.
+
+## 4. Amendment A: exactly two metadata capture-time tokens
+
+The existing seed DAS is 18,686 bytes, SHA-256
+`66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39`.
+The v1 acquired DAS is also 18,686 bytes, SHA-256
+`9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3`.
+The proposed compatibility operation is **byte-preserving outside exactly two
+timestamp spans**, not general DAS parsing/reserialization or removal of
+`history`.
+
+The frozen rule should require one occurrence of this exact history structure:
+
+```text
+    String history "Version v2.01.  Metadata from dirall.dat and deplog.dat
+<CAPTURE_UTC> (local files)
+<CAPTURE_UTC> https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das";
+```
+
+Only the two `<CAPTURE_UTC>` spans may vary. Each must be a valid, canonical
+20-character UTC timestamp of the form `YYYY-MM-DDTHH:MM:SSZ`; require both
+capture strings to agree, as in the inspected seed and v1 response. Preserve the
+literal spaces, newline bytes, version, URL, suffixes and every other byte. A
+seed-derived canonical byte string replaces only those two validated spans with
+fixed markers. A new response is accepted only when the same operation produces
+**exactly the frozen seed-derived canonical bytes and SHA-256**. The canonical
+digest and exact implementation must be generated, reviewed and pinned before
+any GDP value request; this proposal invents no digest.
+
+Keep every raw response, raw SHA-256, exact capture strings and compatibility
+receipt. A raw-hash difference must remain visible even when the narrow
+compatibility gate accepts it. Reject missing/duplicate blocks, invalid dates,
+fractional/local timestamps, disagreement between the two strings, changed
+version/schema/units/institution/interpolation metadata, another URL, another
+history line or any byte change outside the two spans. Do not normalize
+whitespace, line endings, attributes or the entire history field.
+
+Origin identity metadata retain their original exact-byte gate, SHA-256
+`fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339`.
+HYCOM metadata retain their exact-byte gate, SHA-256
+`741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d`.
+This is not a general permission to accept new metadata.
+
+## 5. Amendment B: bounded native-coordinate encoding
+
+The accepted coordinate arrays must still have double-precision encoded scalar
+labels, exact declared units, no packed coordinate scaling, finite values and
+the same native orientation and counts. The proposed study-specific rule is:
+
+1. Require **251 increasing latitude labels** and **188 increasing native
+   longitude labels**, preserving their original index order. Require latitude
+   endpoints exactly **25 and 35**, native west endpoint exactly **280**, and
+   every actual label within the original requested rectangle.
+2. Form the nominal decimal latitude lattice `25 + 0.04 i`, for `i=0…250`, and
+   longitude lattice `280 + 0.08 j`, for `j=0…187`. Freeze how those decimal
+   expressions are formed and rounded once to nearest IEEE-754 float32; avoid
+   accumulated float32 multiplication/addition as an alternative lattice.
+3. Require each saved float64 coordinate to equal an **exact float32 value
+   promoted to float64**. Latitude must equal the rounded nominal float32
+   lattice exactly. Each positive native longitude label may differ by at most
+   **one neighboring float32 representable value** from its rounded nominal
+   lattice label. An integer ULP-distance check or equivalent frozen exact
+   neighbor comparison is preferable to a broad decimal `allclose` tolerance.
+4. Reject changed count, reversed/duplicate/nonmonotonic labels, shifted or
+   coarsened grids, a label outside the requested bounds, a nondeclared
+   coordinate encoding, or a longitude difference beyond one ULP. Keep the
+   existing exact time/depth/velocity metadata checks unchanged.
+5. **Interpolate using the actual accepted saved coordinates**, never the
+   nominal decimal lattice or the rounded comparison lattice. The encoding
+   test is admission logic, not a coordinate transform or support extension.
+
+In the saved v1 file all 251 latitudes equal their rounded nominal labels.
+Longitude has 98 exact matches, 44 one-ULP-lower labels and 46 one-ULP-higher
+labels. One native longitude ULP in this tile is `0.000030517578125 degrees`.
+These are saved-byte observations motivating a bounded rule, not a pattern to
+force on new scientific data. Do not require a score-improving path or specific
+current value to accept a coordinate array.
+
+The saved native east edge is **294.96002197265625 degrees**, normalized to
+**−65.03997802734375 degrees**. There is no node at nominal **295/−65 degrees**.
+Normalize actual longitude labels by `((lon + 180) % 360) - 180`, without sorting,
+seam stitching, snapping, padding or adding a node. Keep domain exits and masks;
+do not fill an uncovered edge with a nearest or zero current.
+
+Raw velocity decoding stays fixed: signed int16 `water_u/water_v`, raw fill and
+missing sentinel **−30000**, mask either missing component **before scaling**,
+validate the pinned float32 scale/offset attributes, then apply the reviewed
+decimal **0.001 exactly once in float64**, offset zero, velocities in m/s. Do not
+replace that decoder with float32 multiplication, automatic CF decoding or an
+already decoded array. The singleton depth must be exactly **15 m positive
+down**, and times remain the three exact requested UTC knots.
+
+## 6. What RK4 does, in plain language and equations
+
+Current-only treats a drifter as a passive point carried by the supplied
+eastward/northward current field. At each small time interval, **Runge–Kutta 4
+(RK4)** samples four proposed velocities: the start, two halfway estimates and
+the end. Their weighted average advances the point. Curvature can arise because
+the supplied field changes with both position and time; the solver adds no
+random wiggle and fits no trajectory to the later observation.
+
+For position `p = [latitude, longitude]` in degrees and currents `(u,v)` in m/s,
+the implementation uses local WGS84 metres per degree, `m_lat(phi)` and
+`m_lon(phi)`:
+
+```text
+dp/dt = f(t,p) = [v(t,p) / m_lat(latitude),
+                  u(t,p) / m_lon(latitude)]
+
+k1 = f(t, p)
+k2 = f(t + h/2, p + h k1/2)
+k3 = f(t + h/2, p + h k2/2)
+k4 = f(t + h,   p + h k3)
+p_next = p + h (k1 + 2k2 + 2k3 + k4)/6
+```
+
+Here `h` is seconds, and each `k` is degrees per second. With WGS84 semimajor axis
+`a = 6,378,137 m`, flattening `f_e = 1/298.257223563`, eccentricity squared
+`e² = f_e(2−f_e)`, and latitude `phi` in radians:
+
+```text
+N = a / sqrt(1 − e² sin²(phi))
+M = a(1 − e²) / (1 − e² sin²(phi))^(3/2)
+m_lon = (pi/180) N |cos(phi)|
+m_lat = (pi/180) M
+```
+
+Spatial interpolation remains bilinear and time interpolation linear, using
+only the contributing supported cells. The accepted step is at most 300 s,
+half the shortest forcing interval, and one quarter of the smallest geographic
+cell divided by the maximum supported current speed when nonzero. Steps end at
+the next requested hourly output, the next forcing knot and the six-hour end.
+No positive interval is skipped by advancing the clock alone. A masked stage or
+out-of-domain/time sample stops the integration as `UNSUPPORTED` or `PARTIAL`;
+only already supported positions survive. An accepted partial tail is not
+interpolated into a missing hourly output.
+
+This is numerical integration of a prescribed field, **not a 3D fluid solver**.
+A smaller timestep may improve numerical precision while the field or passive
+object assumption remains wrong. The official
+[OceanParcels integrator tutorial](https://docs.oceanparcels.org/en/latest/user_guide/examples/tutorial_dt_integrators.html)
+likewise illustrates the four RK4 stages and timestep tradeoffs. It is a
+reference for the method, not an additional implementation used by this study.
+
+## 7. Independent v1 implementation audit: scope to preserve
+
+This proposal's source inspection covered
+`matched_current_protocol.py`, `matched_current.py`, `hycom.py`, `advection.py`,
+the WGS84 metric helper, the spherical baseline frame, and the acquisition/
+evaluation wrappers. **No source was changed and no model or score was run for
+this inspection.** A v2 copy must preserve these less-visible contracts:
+
+- **Inputs, not a fitted context model.** Stationary and current-only use only
+  the origin position. Last drift uses only the final two context positions,
+  exactly one hour apart. The other 23 context positions are descriptive QC;
+  their numeric QC is not a whole-group admission gate or a training fit.
+- **Baseline geometry.** Last drift uses the existing origin-anchored mean-sphere
+  log/exp local frame and its **50 km** geometry limit. Its position or horizon
+  can become partial/unsupported at that limit. Do not replace it with a new
+  degree extrapolation, WGS84 baseline or relaxed geometry budget inside a
+  compatibility amendment. The score remains mean-radius spherical
+  great-circle distance with radius **6,371,008.8 m**; the current integrator's
+  WGS84 metric is a separate declared method.
+- **Exact schedule.** CSV schema, units, both IDs, 31 hourly rows and exact UTC
+  ordering are validated while coordinate strings remain undecoded. All six
+  candidate forecasts are persisted and read back before numeric future-target
+  decoding. A model sees neither another group's track nor reserved targets.
+  This is an auditable local order, not an external cryptographic attestation.
+- **Immutable forcing bytes.** The evaluator decodes the already verified byte
+  object, not a reopened path. Check the decoded forcing SHA against the same
+  acquisition receipt. Preserve raw-mask and all-masked behavior; an all-masked
+  current is `UNSUPPORTED / CURRENT_FIELD_ALL_MASKED`, not zero velocity.
+- **Clock chain and one attempt.** Protocol precedes the exclusive acquisition
+  sentinel; serial source clocks lie inside the acquisition window; forecast
+  freeze follows both manifest completion and every source completion; score
+  follows forecast freeze. Orphan sentinels/sidecars, existing raw directories,
+  failed attempts or first-score artifacts block overwrite/retry.
+- **All failures remain.** Allocate all 36 cells before candidate attempts. A
+  six-hour ADE requires six scored hourly cells for that group/model; FDE needs
+  the six-hour cell. A partial available-cell mean or contiguous scored-prefix
+  mean is explicitly secondary. Pairwise comparisons use the exact common
+  scored group/hour cells and report their support; they do not discard all
+  partial candidates. Primary macro/paired results remain null unless all
+  36 cells score. No automatic winner, promotion or significance claim is added.
+- **Frozen dependencies and namespace.** v1 pins 14 implementation/dependency
+  paths, including package initializers and `pyproject.toml`. Keep those bytes
+  unchanged so v1 and the older fresh-study replays remain reproducible. The v1
+  control-plane code is hardbound to its own study ID and trusted identity.
+  v2 therefore requires separately reviewed identity/control-plane modules or
+  another isolated mechanism, not changing v1 constants or making its loader
+  accept a different protocol. Freeze the full transitive implementation set
+  for the new namespace before scientific acquisition.
+- **Read-only product boundary.** Public result readers, Data Lab and Chalk may
+  read only an externally pinned saved result; they must never fetch, freeze,
+  build, score or repair the study. A structural reader pass is not a numerical
+  replay. New API/UI access must not mutate tank cases, trial ledgers, camera,
+  pump, Photon or provider settings.
+
+These observations identify preservation risks for a future v2 implementation;
+they are not a completed audit of code that does not exist yet.
+
+## 8. Review and operator gates, in order
+
+1. **Design review.** Review this exact two-part amendment and exposure history.
+   Accept fixed IDs, dates, product, actual support, three models, bounds and
+   denominators. Record rejected broader suggestions. A new design decision is
+   required for anything outside these two compatibility changes.
+2. **Isolated implementation and invented fixtures.** Implement the separate
+   control plane without editing v1's pinned files. Pin strict history matching,
+   decimal-to-float32 lattice construction and ULP comparison. Test accepted
+   encoding examples and hostile changed units/version/history/URL, duplicate
+   blocks, invalid dates, count/stride/depth/time changes, two-ULP coordinates,
+   nonpromoted values, missing masks and wrong-file races. Include both mask-
+   interrupted RK4 cases: three knots `0,3,6 h`, start `3 h`, mask at `6 h`
+   yields zero supported elapsed time; four knots `0,3,6,9 h`, same start and
+   six-hour horizon, mask at `9 h` yields only the supported three-hour prefix.
+   These invented fixtures do not score either planned drifter.
+3. **Independent regression review.** Verify model/evaluator behavior against the
+   unchanged v1 code, failure denominators and clock ordering. Run historical
+   v1 and six-group fresh replays unchanged. Compare compatibility-accepted
+   coordinate arrays to their actual saved axes, never snapped substitutes.
+4. **Formal freeze before new GDP outcome acquisition.** Commit reviewed source,
+   full transitive hashes, dependency/environment identities, exact queries,
+   source caps, canonical metadata digest, encoding rules, exposure disclosure,
+   predecessor hashes and new trusted protocol identity. Commit the generated
+   freeze too. A document marked DRAFT does not satisfy this gate.
+5. **One explicit bounded acquisition.** Only after the committed freeze and
+   operator go-ahead, run the distinct v2 acquisition once. Preserve every
+   response and failed dependency in its original slot, with start/finish
+   clocks, raw/canonical hashes and request budgets. No fallback, replacement,
+   repeated attempt or changed query follows failure. If existing v1 forcing
+   is to be reused rather than reacquired, that different source/transport
+   lineage must be explicitly reviewed and frozen beforehand; do not silently
+   claim a reused body was newly fetched.
+6. **Forecast freeze, then explicit first score.** Persist all forecasts and
+   hashes before numeric target access; record one first score and replay it
+   offline. Retain 36 cells even if none score. A partial result cannot become
+   a primary winner through a later UI/filter choice.
+7. **Read-only integration and publication.** Only after successful artifact
+   validation, pin the exact v2 report/forecast/manifest and expose a separately
+   labeled Data Lab/Chalk result. Display v1 failure and v2 outcome side by
+   side, primary support/nulls, actual axes/depth, masks and exposure. Test stale
+   hashes, credential changes, absent/corrupt files and no-side-effect guards.
+   Publish implementation/test/CI evidence separately from scientific results.
+
+**Current gate status: proposal only.** No new protocol identity, acquisition,
+forecast, score, v2 API result or model promotion is created by this draft.
+
+## 9. What even a successful v2 would establish
+
+It would be a small, retrospective **processed buoy-position diagnostic** at
+15 m, using analysis fields valid during the later six hours. It would not prove
+that those fields were available at the forecast origin, that HYCOM did not
+assimilate related observations, that physical aliases are complete, or that
+the two groups/12 targets are statistically independent. Keep
+`operational_causality`, `assimilation_independence_verified`,
+`physical_alias_resolution_verified`, `statistical_independence`,
+`physical_validation` and automatic promotion false unless separately proved.
+
+No learned fit, neural model, residual, windage coefficient, Stokes correction,
+diffusion tuning, shoreline behavior, plastic-source attribution, tank accuracy
+or reef-protection skill is added. A future improvement in error would support
+only the declared comparison on its reported support. Independent physical
+trials and broader, properly separated empirical studies remain different work.
+````
+
+## Exact source: docs/matched-current-v2-results.md
+
+Kind: **LOCAL_RESULT_GUIDE_NOT_GROK_RESPONSE**. Original bytes: **17553**. SHA-256: `aa985bf2a8ef96fce2b8355975193238edad0147fe757e4f2bbd8dbd9c7d2298`.
+
+````text
+# Matched-current v2: complete acquisition, a negative current-only result
+
+Checkpoint: **17 October 2026**. The separately identified v2 compatibility
+amendment was reviewed, committed, frozen and committed again before its one
+bounded scientific acquisition. All six source requests downloaded, both planned
+GDP trajectory payloads were retained, all six candidate tracks completed, and
+**36/36 planned model-hour cells scored**. The first score was saved and exact
+offline replay completed. The preserved [v1 attempt](matched-current-results.md)
+still has **0/36 scored cells**; it was not overwritten or repaired.
+
+On these **two buoy groups and twelve distinct later processed position
+estimates**, last-observed drift has the lowest reported average and six-hour
+endpoint errors. HYCOM current-only has larger errors than last drift, and larger
+equal-ID macro errors than stationary. This is a useful negative result for the
+declared current-only candidate on this small retrospective sample. It does not
+select an operational winner, promote a model or demonstrate plastic/reef/tank
+skill.
+
+## 1. What was compared
+
+| Contract | Actual fixed v2 comparison |
+| --- | --- |
+| Study ID | `matched-current-gdp-hycom-15m-v2` |
+| Group 1 | GDP `300234066836710`, WMO `6202613` |
+| Group 2 | GDP `300534061292930`, WMO `4102636` |
+| Processed observations | NOAA hourly `drifter_hourly_qc`, actual endpoint metadata v2.01 |
+| Context | 25 hourly fixes, **31 May 2022 00:00 UTC–1 June 2022 00:00 UTC**, inclusive |
+| Origin | **1 June 2022 00:00 UTC** |
+| Reserved later positions | **01:00–06:00 UTC**, six hourly targets per group |
+| Stationary | Origin position only |
+| Last observed drift | Final two context fixes, one hour apart; unchanged bounded origin-anchored mean-sphere log/exp propagation |
+| Current-only | Origin position plus HYCOM GOFS 3.1 GLBy0.08/expt93.0 UV3Z 2022 currents at exactly 15 m |
+| Forcing | Same actual subset for both groups; three UTC knots at **00:00, 03:00 and 06:00** |
+| Solver | Existing knot-aligned RK4, maximum requested step 300 s, hourly outputs, six-hour horizon; 72 accepted steps per current-only track in this run |
+| Denominator | Two groups × three candidates × six horizons = **36 cells**, reusing only **12** later processed position estimates |
+| Score | Spherical great-circle position error in metres, radius 6,371,008.8 m; unchanged scoring method |
+
+The 25 context fixes are not a learned training set. The first 23 are descriptive
+QC, not inputs to these models or a whole-group quality exclusion. Stationary and
+current-only use only the origin. Last drift uses only the final two context
+positions. Neither model definitions nor parameters were changed after seeing
+the outcome.
+
+NOAA describes these as quality-controlled, interpolated hourly buoy data. They
+are processed position estimates, not raw independent instantaneous observations
+of plastic. A standard GDP drogue is centered around 15 m, but that does not make
+a drogued buoy equivalent to loose surface debris.
+[NOAA data](https://www.aoml.noaa.gov/phod/gdp/data.php),
+[NOAA drogue explanation](https://www.aoml.noaa.gov/phod/gdp/faq.php).
+
+## 2. Results and how to read them
+
+**ADE** is the mean position miss across the six hourly targets, first calculated
+within each GDP group and then averaged with equal group weight. **FDE** is the
+six-hour endpoint miss, likewise averaged equally across the two groups. Lower
+means closer to those saved processed buoy positions; it is not a calibrated
+probability, pollution-source probability or predicted reef damage.
+
+| Fixed candidate | Equal-ID macro ADE, m | Equal-ID macro FDE, m | Scored cells |
+| --- | ---: | ---: | ---: |
+| Stationary | 3,490.1188 | 6,069.3529 | 12/12 |
+| Last observed drift | 1,510.2316 | 3,240.5762 | 12/12 |
+| HYCOM current-only | 5,063.0203 | 9,151.6451 | 12/12 |
+
+Primary complete-cohort summaries and all three primary pairwise comparisons are
+available because **every one of the 36 cells scored**. Each pair compares the
+same twelve group/hour targets. These are repeated uses of twelve processed
+positions, not 36 independent scientific observations or three independent
+cohorts. Rounding in the table is for reading; the saved JSON retains the values.
+
+The group-level values make the heterogeneity visible:
+
+| GDP group | Candidate | Six-hour ADE, m | Six-hour FDE, m |
+| --- | --- | ---: | ---: |
+| `300234066836710` | Stationary | 5,120.9983 | 8,121.7566 |
+| `300234066836710` | Last observed drift | 1,929.6813 | 4,034.0989 |
+| `300234066836710` | HYCOM current-only | 4,640.1953 | 8,270.5311 |
+| `300534061292930` | Stationary | 1,859.2394 | 4,016.9491 |
+| `300534061292930` | Last observed drift | 1,090.7819 | 2,447.0535 |
+| `300534061292930` | HYCOM current-only | 5,485.8453 | 10,032.7590 |
+
+Current-only's mean error is lower than stationary in the first group but higher
+in the second, and it does not improve on last drift in either group's complete
+six-hour summaries. That is not proof that HYCOM is generally inaccurate or that
+last drift always wins. No statistical significance, general forecast skill or
+causal reason for the error difference was established. Missing physics, object
+response, processed observation error and coarse forcing support are possible
+limitations to investigate, not diagnosed explanations from these scores.
+
+The record keeps `automatic_winner_selected=false`,
+`automatic_model_promotion=false`, `heldout_tuning=false` and
+`global_training=false`. An empirical finding can be reported without replacing
+the application's transport model or intervention decision.
+
+## 3. The amendment and its exposure history
+
+The frozen [v2 proposal](matched-current-v2-amendment.md) remains unchanged as a
+pre-acquisition document. Its DRAFT and “not yet acquired” statements describe
+that earlier checkpoint; this result guide records the later executed steps.
+
+The amendment changed only two input-admission rules:
+
+1. NOAA metadata allow exactly two equal, valid UTC history capture-time tokens
+   to differ. The full remaining byte string must match the frozen seed-derived
+   canonical hash. Raw bodies and their distinct raw hashes remain retained.
+2. The study-specific HYCOM axis guard accepts declared native float32 label
+   encoding inside double coordinate variables: exact rounded latitude lattice,
+   longitude within one float32 ULP of the rounded nominal lattice, exact native
+   west label 280, fixed counts/orientation/bounds and actual support retained.
+
+The models, IDs, query URLs, context/target times, current depth/knots, raw
+velocity decoding, masks, solver, metrics, all denominators and transport budgets
+were unchanged. No coordinate was snapped, no nominal −65-degree east node was
+added, and no missing current was filled with zero.
+
+**This was pre-GDP-outcome, not entirely scientific-value-unseen.** v1 had no GDP
+trajectory payload or score, but its HYCOM forcing had already been acquired and
+decoded for compatibility diagnosis. That exposure was recorded before v2
+freezing. The successful v2 is a new, explicitly identified attempt after review,
+not a silent retry of v1 or an outcome-tuned tolerance change. The two attempts
+must not be pooled as four new buoys or independent studies.
+
+## 4. Committed chronology and source receipts
+
+The saved protocol and acquisition record bind two separate pre-value commits:
+
+| Event | Saved identity or UTC clock |
+| --- | --- |
+| Reviewed implementation checkpoint | [`c1e7c2503e141da9a95fc51be027c569cbda7cca`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/c1e7c2503e141da9a95fc51be027c569cbda7cca) |
+| Protocol generated | **2026-10-17 22:02:41.391650 UTC** |
+| Protocol/identity freeze committed; acquisition Git head | [`23de21c382f972f26e303870aafcadb0c91a7a3e`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/23de21c382f972f26e303870aafcadb0c91a7a3e) |
+| Exclusive acquisition sentinel | **22:02:50.869312 UTC** |
+| Manifest acquisition window | **22:02:50.890695–22:03:19.879635 UTC** |
+| All fixed forecasts persisted | **22:03:47.184955 UTC** |
+| First score saved | **22:03:47.186880 UTC** |
+
+All times above are 17 October 2026. The local clock chain and committed source
+checks preserve execution order; they are not an external attestation. CSV
+structure, identity and exact times were checked while coordinate cells remained
+strings. Numeric target decoding occurred only after all forecasts were saved
+and read back. Later exact offline replay recomputed the fixed result and
+matched the saved first score.
+
+The attempt made **six requests**, all `DOWNLOADED`, with **754,986 received and
+retained body bytes**. No fallback, retry or replacement followed the result.
+
+| Source role | Body bytes | Raw SHA-256 |
+| --- | ---: | --- |
+| NOAA DAS metadata | 18,686 | `460853bbdcd165ebf8eff0a098cb4784a98a2eb3558136edb7583b8d3449ee68` |
+| Origin identity/drogue CSV | 640 | `fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339` |
+| HYCOM metadata XML | 159,404 | `741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d` |
+| GDP `300234066836710` trajectory CSV | 1,828 | `d226154af32dcb59e6e21a069072cdbd4ed8094efe7f1fa63c9f8d6334a1b9a0` |
+| GDP `300534061292930` trajectory CSV | 1,824 | `4fd7bbdbd85f54ee789c53a9c2f5dc031dbae32413bb6fe7c454999902a7bd7e` |
+| HYCOM current NetCDF | 572,604 | `372b1fe68ac4e59a99899fa5c19dbe52ba6c2ee75550200e4ac0138d92dc3888` |
+
+Preserved source URLs and per-request clocks are in the manifest. At acquisition,
+metadata and CSV structural gates enforce their declared dependencies. Detailed
+NetCDF depth/time/units/axis decoding happens **after acquisition** and controls
+current-only prediction admission; it does not precede the earlier serial GDP
+trajectory requests. A static review claiming all such guards fail before any
+trajectory request would misdescribe this pipeline.
+
+## 5. Actual current support, not an expanded nominal tile
+
+The accepted array shape is **3 × 251 × 188** for time/latitude/longitude, with
+**135,318 valid and 6,246 invalid samples**. Invalid cells remain masked. The
+latitude support is **25–35 degrees**, and actual normalized longitude support
+is **−80 to −65.03997802734375 degrees**. The requested nominal east edge is not
+an additional observed node. Selected depth is exactly **15 m**, and retained
+forcing times are midnight, three hours and six hours.
+
+At the tile's middle latitude, approximate native spacing is **7.715–7.721 km
+east–west** and **4.434 km north–south**. Grid spacing is not guaranteed effective
+physical resolution. RK4 samples this prescribed field with bilinear space and
+linear time interpolation; it neither solves new fluid dynamics nor learns
+subgrid behavior. The [amendment's RK4 explanation](matched-current-v2-amendment.md#6-what-rk4-does-in-plain-language-and-equations)
+describes the four-stage method and exact time-knot stops.
+
+The generic decoder's `source_origin_verified=false` and
+`issue_time_verified=false` remain deliberately distinct from transport receipts.
+Local format/byte validation alone cannot establish origin or historical
+forecast availability; the acquisition manifest separately records where the
+bytes were fetched. Neither receipt proves assimilation independence.
+
+## 6. Durable artifact identities and offline reproduction
+
+All study artifacts are public under `data/research/matched-current-v2`. Keep the
+trusted result identity separate from the original protocol identity.
+
+| Artifact | Body bytes | SHA-256 |
+| --- | ---: | --- |
+| `protocol.json` | 14,096 | `fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793` |
+| `acquisition-start.json` | 402 | `779cd40cf7ded603256f2012b478fd5fb056e7c87dfd58c189d80da73d9d06df` |
+| `manifest.json` | 5,597 | `352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0` |
+| `forecasts.json` | 27,704 | `41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf` |
+| `evaluation.json` | 99,409 | `e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347` |
+| Trusted protocol identity module | — | `c7a883cc5a2f938809839d9785fa8477146c5bb26a21d68c1d730afda4543f07` |
+| Trusted result identity module | — | `001b0f533b21550df22978abf1370a9d39a05b8929789b5be698ba93fb979caf` |
+
+From the repository root, these are **read/replay commands**, not acquisition or
+first-score commands:
+
+```sh
+PYTHONPATH=. .venv/bin/python scripts/evaluate_matched_current_v2_study.py \
+  --directory data/research/matched-current-v2
+
+PYTHONPATH=. .venv/bin/python -c 'import json; from apps.ocean.reeftrace_ocean.matched_current_result import load_frozen_matched_current_result; print(json.dumps(load_frozen_matched_current_result(study_version="v2"), indent=2))'
+```
+
+The first command is an actual numerical replay of fixed artifacts. The second
+is a pure bounded reader: it verifies the externally pinned identity, lineage,
+clock/shape/metric structure and exact snapshot, and returns
+`numeric_replay_verified:false`. That flag must not be changed merely because a
+separate replay was performed. Neither command fetches, re-freezes, repairs or
+changes the saved study.
+
+## 7. Data Lab, Chalk and HTTP verification
+
+In Data Lab, choose **Study version → v2 · compatibility amendment**, then
+**Load matched-current study**. The preserved original attempt remains available
+through the v1 selector. Loading reads saved evidence; it does not acquire or
+perform a first score. The path checkboxes and selected-group/hour controls alter
+what is visible, not the frozen axes or numerical denominator. Recorded paths
+mean later processed buoy positions; the three other paths are the frozen
+candidate predictions. Hourly displacement arrows connect saved hourly fixes;
+they are not independent measurements of instantaneous water velocity.
+
+The public GET endpoint is:
+
+```text
+/api/v1/research/matched-current?study_version=v2
+```
+
+Omitting the version preserves v1 API compatibility. Unknown versions return
+422; missing trusted evidence returns 404; invalid or crossed identities return
+409. The selected operator-protected Chalk request carries `study_version`,
+`report_sha256` and `protocol_sha256`. The server binds the exact selected study
+before a model turn and checks the full snapshot again afterward. Its sole
+research tool reads the saved evidence and v2 exposure declaration. It cannot
+acquire data, train, score, mutate a case, write a trial, open a camera, control a
+pump or send a Photon message. REPORT must cite the exact selected report and
+protocol. Provider availability and a meaningful explanation are separate from
+the deterministic result.
+
+The extended **disposable, provider-disabled HTTP run passed 174 checks, zero
+failures and six expected external/physical scopes blocked**, in **16.851 s**.
+It verified v1's unchanged 0/36 ledger, explicit v1 selection, v2's full envelope
+against the authoritative pure reader, all 36 slots, selected version identity,
+422 unknown versions, 401 missing operator access, and 409 cross-version/stale
+report pins. Disabled v2 Chalk returned bounded `STOP / NOT_CONFIGURED` with
+exactly the same evidence; an opaque digest proved the entire disposable SQLite
+store unchanged. All four camera/provider/Photon-send/Photon-poll attempt guards
+remained zero. The live application/store was untouched.
+
+The local receipt is `work/tideward-matched-v2-offline-http.json`, **610,100 bytes**,
+SHA-256 `6d690d9d6585c6b33e76fb445e65be5412f5a19ce1ca77fa00e87c1eea03daa0`,
+with its adjacent `.log`, in the parent task workspace. This receipt proves a
+software-only workflow, **not a live Chalk round trip or physical product**.
+The six blocked isolated scopes stay blocked. Separately, the actual browser
+showed both GDP groups, path toggles/hourly arrows, invariant scales/metrics,
+a switch to v1's 0/36 and back to v2's 36/36. A live Chalk REPORT cited the exact
+selected v2 report/protocol. Those are distinct live/browser checks, not a
+provider call by the disposable harness.
+
+The pre-acquisition checkpoint passed **1,770 Python / 331 focused subset /
+225 frontend** checks. The final post-acquisition full suite passed **1,779
+Python tests**, with one upstream dependency warning, alongside **225 frontend**
+and the **174 / 0 failures / 6 blocked** HTTP result. Lint, types and production
+build passed. The focused subset is not an additional independent scientific
+sample. Exact-head hosted CI needs its own release evidence and remains pending
+at this documentation checkpoint.
+
+## 8. What remains unvalidated
+
+The accepted current field is retrospective analysis with future valid times.
+No historical origin-time issue receipt, assimilation exclusion, complete
+physical-alias resolution, statistical independence or forecast-causality claim
+was verified. Both selected objects are buoys, the horizon is six hours, and the
+sample is too small to justify general model selection. The exact same groups
+and repeated processed targets underlie every candidate comparison.
+
+There was no learned fit, residual/windage/Stokes/diffusion tuning, plastic source
+attribution, pollution interception experiment, tank calibration or reef-benefit
+measurement. These ocean results must not calibrate a centimetre tank or turn
+conditional modeled prevention into measured effectiveness. No physical release,
+camera activation, new Photon message, xAI API use or paid billing was part of
+this v2 HTTP verification. Independent field/tank trajectories and an explicitly
+reviewed broader evaluation remain separate next steps.
+````
+
+## Exact source: data/research/matched-current-v2/protocol.json
+
+Kind: **FROZEN_V2_PROTOCOL_NOT_GROK_RESPONSE**. Original bytes: **14096**. SHA-256: `fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793`.
+
+````text
+{
+  "amendment_documents_sha256": {
+    "docs/matched-current-v2-amendment.md": "16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f"
+  },
+  "budgets": {
+    "accept_encoding": "identity",
+    "connect_timeout_s": 5,
+    "connections": 1,
+    "fallback_endpoints": false,
+    "oversize_detection_chunk_bytes": 8192,
+    "redirects": false,
+    "requests_max": 6,
+    "retries": 0,
+    "timeout_s": 45,
+    "total_bytes": 12582912,
+    "total_bytes_scope": "retained body cap; one detection chunk may exceed it",
+    "wall_time_s": 180
+  },
+  "design_status": "FROZEN_PRE_GDP_OUTCOME_COMPATIBILITY_AMENDMENT",
+  "flags": {
+    "assimilation_independence_verified": false,
+    "automatic_model_promotion": false,
+    "operational_causality": false,
+    "physical_alias_resolution_verified": false,
+    "physical_validation": false,
+    "statistical_independence": false
+  },
+  "forcing": {
+    "coordinate_encoding": {
+      "dtype": "float64_exact_promoted_float32",
+      "expand_support": false,
+      "latitude": {
+        "count": 251,
+        "max_float32_ulps": 0,
+        "start": 25,
+        "step": 0.04
+      },
+      "longitude": {
+        "count": 188,
+        "first_label_exact": 280,
+        "max_float32_ulps": 1,
+        "start": 280,
+        "step": 0.08
+      },
+      "preserve_actual_axes": true,
+      "strictly_increasing": true
+    },
+    "decimal_scale": 0.001,
+    "depth_m": 15,
+    "longitude": "((lon+180)%360)-180; preserve native indices",
+    "maximum_samples": 250000,
+    "maximum_speed_m_s": 10,
+    "maximum_steps": 2048,
+    "native_bbox": {
+      "east": 295,
+      "north": 35,
+      "south": 25,
+      "west": 280
+    },
+    "native_stride": 1,
+    "offset": 0,
+    "output_step_s": 3600,
+    "raw_fill": -30000,
+    "solver_step_s": 300,
+    "source": "HYCOM_GOFS_3.1_GLBy0.08_expt93.0_UV3Z_2022",
+    "times_utc": [
+      "2022-06-01T00:00:00Z",
+      "2022-06-01T03:00:00Z",
+      "2022-06-01T06:00:00Z"
+    ],
+    "variables": [
+      "water_u",
+      "water_v"
+    ]
+  },
+  "frozen_at_utc": "2026-10-17T22:02:41.391650Z",
+  "gdp_metadata_history_compatibility": {
+    "all_other_bytes_unchanged": true,
+    "canonical_seed_sha256": "0570d44d6fd9d09d60a4d57ddaf27cfd4b8529052e1a816ca11fb0216874fefe",
+    "canonical_timestamp_token": "2000-01-01T00:00:00Z",
+    "capture_pair_must_agree": true,
+    "history_pattern_ascii": "(?m)^    String history \"Version v2\\.01\\.  Metadata from dirall\\.dat and deplog\\.dat\\n(?P<local>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z) \\(local files\\)\\n(?P<request>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z) https://erddap\\.aoml\\.noaa\\.gov/gdp/erddap/tabledap/drifter_hourly_qc\\.das\";\\n",
+    "method_id": "EXACT_EQUAL_SECOND_RESOLUTION_UTC_HISTORY_PAIR_V1",
+    "raw_response_hash_retained": true,
+    "valid_utc_calendar_required": true
+  },
+  "gdp_schema": {
+    "columns": [
+      "ID",
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "coordinate_decoding_during_acquisition": false,
+    "row_count": 31,
+    "units": [
+      "",
+      "UTC",
+      "degrees_north",
+      "degrees_east"
+    ]
+  },
+  "groups": [
+    {
+      "drifter_id": "300234066836710",
+      "wmo": "6202613"
+    },
+    {
+      "drifter_id": "300534061292930",
+      "wmo": "4102636"
+    }
+  ],
+  "implementation_sha256": {
+    "apps/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "apps/ocean/__init__.py": "cf9af3c0df838bc3ad56bb6d64e80f23050996cee00f73d12917ec93145caee0",
+    "apps/ocean/reeftrace_ocean/__init__.py": "369e9a05e5a186262ef597d44ac27bc3c00383cf690182da45db0dbcce4be977",
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde",
+    "apps/ocean/reeftrace_ocean/data.py": "4883727618060510a13182825cba6c1edb052ce539fee22b6048eef7dfe3de87",
+    "apps/ocean/reeftrace_ocean/field.py": "4cec7e6f8a50a6fd45d67d738e883880f5cb02e208ee907403f4255f11b5bb83",
+    "apps/ocean/reeftrace_ocean/hycom.py": "cc6cc61b6024ffa02cf9a86debb38730b43dddd238199ad351f951ddb87ccd38",
+    "apps/ocean/reeftrace_ocean/matched_current.py": "6b04dfee255141b292f90f5c427030a8ad4d8f6eb499df4a7b289046fac93aaa",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py": "1acee1a93a0c78437313bdba0b7f05dba3006a8fc33507896902470c8d90ea1c",
+    "pyproject.toml": "6b6d25181ec13cacf18b861b9a97f4be9bde1e4a97eb2a1058abccc05b1ba3f5",
+    "scripts/evaluate_matched_current_v2_study.py": "c44213fedf68bfbea441d59dd93ee4ed9b4214bbdf5858277729c3d8a6ac4282",
+    "scripts/fetch_matched_current_v2_study.py": "0e0995e6dfc34fd39e1b9388483b31e89751c87b7b92b006a75dd4259b71d5e1",
+    "scripts/freeze_matched_current_v2_protocol.py": "a2dc1cde53ee2847ff66f6070abf7333434b0f854e391b470ee7a4e688ab9f21"
+  },
+  "isolation": {
+    "all_tracks_frozen_before_future_coordinate_access": true,
+    "context_for_models": "origin only; last_drift final two only",
+    "no_fitting_or_tuning": true,
+    "no_replacements": true
+  },
+  "kind": "RETROSPECTIVE_MATCHED_CURRENT_V2_PROTOCOL",
+  "metadata_evidence": {
+    "data/public/noaa-fresh-drifter-v2/exclusions.json": {
+      "bytes": 10625,
+      "path": "data/public/noaa-fresh-drifter-v2/exclusions.json",
+      "sha256": "40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e"
+    },
+    "data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv": {
+      "bytes": 318597,
+      "path": "data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv",
+      "sha256": "a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82"
+    },
+    "data/public/noaa-fresh-drifter-v2/selection.json": {
+      "bytes": 7839,
+      "path": "data/public/noaa-fresh-drifter-v2/selection.json",
+      "sha256": "831c90e39790786b2368c7ce79fb8f2265e9fc24b3048671cd15b9f4123131b4"
+    },
+    "data/research/matched-current-v1/evaluation.json": {
+      "bytes": 63563,
+      "path": "data/research/matched-current-v1/evaluation.json",
+      "sha256": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7"
+    },
+    "data/research/matched-current-v1/forecasts.json": {
+      "bytes": 17133,
+      "path": "data/research/matched-current-v1/forecasts.json",
+      "sha256": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f"
+    },
+    "data/research/matched-current-v1/manifest.json": {
+      "bytes": 5441,
+      "path": "data/research/matched-current-v1/manifest.json",
+      "sha256": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e"
+    },
+    "data/research/matched-current-v1/protocol.json": {
+      "bytes": 8845,
+      "path": "data/research/matched-current-v1/protocol.json",
+      "sha256": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6"
+    },
+    "data/research/matched-current-v1/raw/gdp-metadata.das": {
+      "bytes": 18686,
+      "path": "data/research/matched-current-v1/raw/gdp-metadata.das",
+      "sha256": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3"
+    },
+    "data/research/matched-current-v1/raw/hycom-currents.nc": {
+      "bytes": 572604,
+      "path": "data/research/matched-current-v1/raw/hycom-currents.nc",
+      "sha256": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065"
+    },
+    "docs/matched-current-v2-amendment.md": {
+      "bytes": 22638,
+      "path": "docs/matched-current-v2-amendment.md",
+      "sha256": "16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f"
+    },
+    "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json": {
+      "bytes": 9544,
+      "path": "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json",
+      "sha256": "b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d"
+    },
+    "gdp_identity": {
+      "bytes": 640,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv",
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    "gdp_metadata": {
+      "bytes": 18686,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-hourly.das",
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    "hycom_metadata": {
+      "bytes": 159404,
+      "path": "docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    }
+  },
+  "metrics": {
+    "failures": "retain every planned cell, null error and explicit reasons",
+    "planned_cells": 36,
+    "planned_groups": 2,
+    "planned_model_tracks": 6,
+    "primary": "equal-ID macro ADE/FDE withheld unless all36 cells scored",
+    "score": "spherical_great_circle_metres_R6371008.8",
+    "unique_future_targets": 12
+  },
+  "models": [
+    "stationary",
+    "last_drift",
+    "current_only"
+  ],
+  "pre_outcome_amendment": {
+    "changes": [
+      "allowlisted GDP history capture-time compatibility",
+      "declared native float32 coordinate representation guard"
+    ],
+    "kind": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+    "model_or_parameter_tuning": false,
+    "prior_artifact_sha256": {
+      "data/research/matched-current-v1/evaluation.json": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7",
+      "data/research/matched-current-v1/forecasts.json": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f",
+      "data/research/matched-current-v1/manifest.json": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e",
+      "data/research/matched-current-v1/protocol.json": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6",
+      "data/research/matched-current-v1/raw/gdp-metadata.das": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3",
+      "data/research/matched-current-v1/raw/hycom-currents.nc": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065",
+      "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json": "b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d"
+    },
+    "prior_forcing_acquired_and_decoded": true,
+    "prior_gdp_trajectory_payload_count": 0,
+    "prior_model_selection_from_scores": false,
+    "prior_scored_cell_count": 0,
+    "prior_study_id": "matched-current-gdp-hycom-15m-v1",
+    "silent_retry": false,
+    "unchanged": [
+      "groups",
+      "models",
+      "queries",
+      "depth",
+      "windows",
+      "horizons",
+      "denominators",
+      "transport budgets",
+      "actual coordinate support"
+    ],
+    "v1_preserved": true
+  },
+  "role_order": [
+    "gdp_metadata",
+    "gdp_identity",
+    "hycom_metadata",
+    "trajectory:300234066836710",
+    "trajectory:300534061292930",
+    "hycom_currents"
+  ],
+  "schema_version": 1,
+  "source_checkpoint": {
+    "git_head": "c1e7c2503e141da9a95fc51be027c569cbda7cca",
+    "note": "Commit all pinned sources, protocol and identity before values."
+  },
+  "sources": {
+    "gdp_identity": {
+      "depends_on": [],
+      "expected_sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+      "max_bytes": 32768,
+      "raw_path": "raw/gdp-origin-identity.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00%3A00%3A00Z&latitude%3E=25&latitude%3C=35&longitude%3E=-80&longitude%3C=-65&distinct%28%29"
+    },
+    "gdp_metadata": {
+      "depends_on": [],
+      "expected_canonical_sha256": "0570d44d6fd9d09d60a4d57ddaf27cfd4b8529052e1a816ca11fb0216874fefe",
+      "expected_sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39",
+      "max_bytes": 262144,
+      "raw_path": "raw/gdp-metadata.das",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das",
+      "validation": "EXACT_HISTORY_UTC_CAPTURE_PAIR_CANONICAL_SHA256"
+    },
+    "hycom_currents": {
+      "depends_on": [
+        "hycom_metadata"
+      ],
+      "max_bytes": 8388608,
+      "raw_path": "raw/hycom-currents.nc",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022?var=water_u%2Cwater_v&north=35&south=25&west=280&east=295&horizStride=1&time_start=2022-06-01T00%3A00%3A00Z&time_end=2022-06-01T06%3A00%3A00Z&timeStride=1&vertCoord=15&accept=netcdf"
+    },
+    "hycom_metadata": {
+      "depends_on": [],
+      "expected_sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d",
+      "max_bytes": 262144,
+      "raw_path": "raw/hycom-metadata.xml",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml"
+    },
+    "trajectory:300234066836710": {
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ],
+      "max_bytes": 32768,
+      "raw_path": "raw/drifter-300234066836710.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300234066836710%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z"
+    },
+    "trajectory:300534061292930": {
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ],
+      "max_bytes": 32768,
+      "raw_path": "raw/drifter-300534061292930.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300534061292930%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z"
+    }
+  },
+  "study_id": "matched-current-gdp-hycom-15m-v2",
+  "transport_references": [
+    "https://docs.unidata.ucar.edu/tds/current/userguide/ncss_grid.html",
+    "https://www.hycom.org/dataserver/access-methods/ncss"
+  ],
+  "windows": {
+    "cadence_s": 3600,
+    "context_count": 25,
+    "context_start_utc": "2022-05-31T00:00:00Z",
+    "end_utc": "2022-06-01T06:00:00Z",
+    "heldout_count": 6,
+    "horizons_s": [
+      3600,
+      7200,
+      10800,
+      14400,
+      18000,
+      21600
+    ],
+    "origin_time_utc": "2022-06-01T00:00:00Z"
+  }
+}
+````
+
+## V2 additive source manifest
+
+```json
+{
+  "schema_version": 1,
+  "previous_prefix_bytes": 173368,
+  "previous_prefix_sha256": "c5b7e396c4cd9aceac775a1498e58dade89dbd2d3783177a3fb66a2690e5cf27",
+  "actual_grok_rounds_added": 4,
+  "total_grok_rounds_in_continuation": 9,
+  "files": [
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-prompt.txt",
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "bytes": 35319,
+      "sha256": "1c213e6718fc247b1111233bf118a942bca57547bb56f4fd225175ac9325d97a"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-response.txt",
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "bytes": 1070,
+      "sha256": "d05261c1925688925ffbf095bf4e938ba7bbb99237d89af10a13dd14e93530c7"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-prompt.txt",
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "bytes": 64055,
+      "sha256": "15c5ab2e8b2773523d788622608f42a2f536855aa1dff2bdedd959a2a807612b"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-response.txt",
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "bytes": 2186,
+      "sha256": "98993ad666754d76108e00275b7f964aa363c8095298568162092e2f815dd3a2"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-criteria-prompt.txt",
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "bytes": 4748,
+      "sha256": "1742506bbc741f5a0af86cc8b2a2459979590a8499afc1264780fb9be8eb0473"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-criteria-response.txt",
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "bytes": 2765,
+      "sha256": "c205c464df49093942dbef3d9cecfd7e8182ce8ff66329f843bfc5bf242ee0d5"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-result-review-prompt.txt",
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "bytes": 9181,
+      "sha256": "4e357cbc2763fc12a75fbd8e8df886860eacfaa3c19302bcc084620ff0703cfb"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-v2-result-review-response.txt",
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "bytes": 2239,
+      "sha256": "25c7a160e2c14599e2a0801deab3adc66b5b3df868f3819d2aae7f2f8e452f4d"
+    },
+    {
+      "path": "docs/grok-evidence/matched-current-v2-local-verification.json",
+      "kind": "LOCAL_EXECUTION_NOT_GROK_RESPONSE",
+      "bytes": 12409,
+      "sha256": "23e9cbaefb177d876744d3815cdecf4bac67afeb56ba9a9fd713e3a25b3965e2"
+    },
+    {
+      "path": "docs/research-evidence/matched-current-v2-prefreeze-review.json",
+      "kind": "LOCAL_PREFREEZE_REVIEW_NOT_GROK_RESPONSE",
+      "bytes": 5707,
+      "sha256": "4730b2227c527f68c92048bb647b4d933c7ba8e53c157a94de089b4f522c630f"
+    },
+    {
+      "path": "docs/matched-current-v2-amendment.md",
+      "kind": "IMMUTABLE_PRE_GDP_OUTCOME_PROPOSAL_CAPTURE_NOT_RESULT",
+      "bytes": 22638,
+      "sha256": "16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f"
+    },
+    {
+      "path": "docs/matched-current-v2-results.md",
+      "kind": "LOCAL_RESULT_GUIDE_NOT_GROK_RESPONSE",
+      "bytes": 17553,
+      "sha256": "aa985bf2a8ef96fce2b8355975193238edad0147fe757e4f2bbd8dbd9c7d2298"
+    },
+    {
+      "path": "data/research/matched-current-v2/protocol.json",
+      "kind": "FROZEN_V2_PROTOCOL_NOT_GROK_RESPONSE",
+      "bytes": 14096,
+      "sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793"
+    }
+  ]
+}
+```
