@@ -1,0 +1,233 @@
+{
+  "budgets": {
+    "accept_encoding": "identity",
+    "connect_timeout_s": 5,
+    "connections": 1,
+    "fallback_endpoints": false,
+    "oversize_detection_chunk_bytes": 8192,
+    "redirects": false,
+    "requests_max": 6,
+    "retries": 0,
+    "timeout_s": 45,
+    "total_bytes": 12582912,
+    "total_bytes_scope": "retained body cap; one detection chunk may exceed it",
+    "wall_time_s": 180
+  },
+  "design_status": "FROZEN_BEFORE_SCIENTIFIC_VALUE_ACQUISITION",
+  "flags": {
+    "assimilation_independence_verified": false,
+    "automatic_model_promotion": false,
+    "operational_causality": false,
+    "physical_alias_resolution_verified": false,
+    "physical_validation": false,
+    "statistical_independence": false
+  },
+  "forcing": {
+    "decimal_scale": 0.001,
+    "depth_m": 15,
+    "longitude": "((lon+180)%360)-180; preserve native indices",
+    "maximum_samples": 250000,
+    "maximum_speed_m_s": 10,
+    "maximum_steps": 2048,
+    "native_bbox": {
+      "east": 295,
+      "north": 35,
+      "south": 25,
+      "west": 280
+    },
+    "native_stride": 1,
+    "offset": 0,
+    "output_step_s": 3600,
+    "raw_fill": -30000,
+    "solver_step_s": 300,
+    "source": "HYCOM_GOFS_3.1_GLBy0.08_expt93.0_UV3Z_2022",
+    "times_utc": [
+      "2022-06-01T00:00:00Z",
+      "2022-06-01T03:00:00Z",
+      "2022-06-01T06:00:00Z"
+    ],
+    "variables": [
+      "water_u",
+      "water_v"
+    ]
+  },
+  "frozen_at_utc": "2026-10-17T21:11:18.655451Z",
+  "gdp_schema": {
+    "columns": [
+      "ID",
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "coordinate_decoding_during_acquisition": false,
+    "row_count": 31,
+    "units": [
+      "",
+      "UTC",
+      "degrees_north",
+      "degrees_east"
+    ]
+  },
+  "groups": [
+    {
+      "drifter_id": "300234066836710",
+      "wmo": "6202613"
+    },
+    {
+      "drifter_id": "300534061292930",
+      "wmo": "4102636"
+    }
+  ],
+  "implementation_sha256": {
+    "apps/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "apps/ocean/__init__.py": "cf9af3c0df838bc3ad56bb6d64e80f23050996cee00f73d12917ec93145caee0",
+    "apps/ocean/reeftrace_ocean/__init__.py": "369e9a05e5a186262ef597d44ac27bc3c00383cf690182da45db0dbcce4be977",
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde",
+    "apps/ocean/reeftrace_ocean/data.py": "4883727618060510a13182825cba6c1edb052ce539fee22b6048eef7dfe3de87",
+    "apps/ocean/reeftrace_ocean/field.py": "4cec7e6f8a50a6fd45d67d738e883880f5cb02e208ee907403f4255f11b5bb83",
+    "apps/ocean/reeftrace_ocean/hycom.py": "cc6cc61b6024ffa02cf9a86debb38730b43dddd238199ad351f951ddb87ccd38",
+    "apps/ocean/reeftrace_ocean/matched_current.py": "6b04dfee255141b292f90f5c427030a8ad4d8f6eb499df4a7b289046fac93aaa",
+    "apps/ocean/reeftrace_ocean/matched_current_protocol.py": "8c92dc156accd0c93264c833c55a146f300214a7c96741f2e6db2404f36fad86",
+    "pyproject.toml": "6b6d25181ec13cacf18b861b9a97f4be9bde1e4a97eb2a1058abccc05b1ba3f5",
+    "scripts/evaluate_matched_current_study.py": "3439a5853e855fad9c7bbae98dc77ba30f7f19faa3dcf3cd13ea169aa4e1f014",
+    "scripts/fetch_matched_current_study.py": "8165f31b211ebd54e0d377b26acc32094f69d22959c67055d636234401475622",
+    "scripts/freeze_matched_current_protocol.py": "f6a8910fa6278502dec5a68265a596f582a7a117d6fade03d1cefbec01a06e45"
+  },
+  "isolation": {
+    "all_tracks_frozen_before_future_coordinate_access": true,
+    "context_for_models": "origin only; last_drift final two only",
+    "no_fitting_or_tuning": true,
+    "no_replacements": true
+  },
+  "kind": "RETROSPECTIVE_MATCHED_CURRENT_PROTOCOL",
+  "metadata_evidence": {
+    "data/public/noaa-fresh-drifter-v2/exclusions.json": {
+      "bytes": 10625,
+      "path": "data/public/noaa-fresh-drifter-v2/exclusions.json",
+      "sha256": "40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e"
+    },
+    "data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv": {
+      "bytes": 318597,
+      "path": "data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv",
+      "sha256": "a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82"
+    },
+    "data/public/noaa-fresh-drifter-v2/selection.json": {
+      "bytes": 7839,
+      "path": "data/public/noaa-fresh-drifter-v2/selection.json",
+      "sha256": "831c90e39790786b2368c7ce79fb8f2265e9fc24b3048671cd15b9f4123131b4"
+    },
+    "gdp_identity": {
+      "bytes": 640,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv",
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    "gdp_metadata": {
+      "bytes": 18686,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-hourly.das",
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    "hycom_metadata": {
+      "bytes": 159404,
+      "path": "docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    }
+  },
+  "metrics": {
+    "failures": "retain every planned cell, null error and explicit reasons",
+    "planned_cells": 36,
+    "planned_groups": 2,
+    "planned_model_tracks": 6,
+    "primary": "equal-ID macro ADE/FDE withheld unless all36 cells scored",
+    "score": "spherical_great_circle_metres_R6371008.8",
+    "unique_future_targets": 12
+  },
+  "models": [
+    "stationary",
+    "last_drift",
+    "current_only"
+  ],
+  "role_order": [
+    "gdp_metadata",
+    "gdp_identity",
+    "hycom_metadata",
+    "trajectory:300234066836710",
+    "trajectory:300534061292930",
+    "hycom_currents"
+  ],
+  "schema_version": 1,
+  "source_checkpoint": {
+    "git_head": "1584a2238083d7ac4b11815897f1396880a4b827",
+    "note": "Commit all pinned sources, protocol and identity before values."
+  },
+  "sources": {
+    "gdp_identity": {
+      "depends_on": [],
+      "expected_sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+      "max_bytes": 32768,
+      "raw_path": "raw/gdp-origin-identity.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00%3A00%3A00Z&latitude%3E=25&latitude%3C=35&longitude%3E=-80&longitude%3C=-65&distinct%28%29"
+    },
+    "gdp_metadata": {
+      "depends_on": [],
+      "expected_sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39",
+      "max_bytes": 262144,
+      "raw_path": "raw/gdp-metadata.das",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das"
+    },
+    "hycom_currents": {
+      "depends_on": [
+        "hycom_metadata"
+      ],
+      "max_bytes": 8388608,
+      "raw_path": "raw/hycom-currents.nc",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022?var=water_u%2Cwater_v&north=35&south=25&west=280&east=295&horizStride=1&time_start=2022-06-01T00%3A00%3A00Z&time_end=2022-06-01T06%3A00%3A00Z&timeStride=1&vertCoord=15&accept=netcdf"
+    },
+    "hycom_metadata": {
+      "depends_on": [],
+      "expected_sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d",
+      "max_bytes": 262144,
+      "raw_path": "raw/hycom-metadata.xml",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml"
+    },
+    "trajectory:300234066836710": {
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ],
+      "max_bytes": 32768,
+      "raw_path": "raw/drifter-300234066836710.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300234066836710%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z"
+    },
+    "trajectory:300534061292930": {
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ],
+      "max_bytes": 32768,
+      "raw_path": "raw/drifter-300534061292930.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300534061292930%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z"
+    }
+  },
+  "study_id": "matched-current-gdp-hycom-15m-v1",
+  "transport_references": [
+    "https://docs.unidata.ucar.edu/tds/current/userguide/ncss_grid.html",
+    "https://www.hycom.org/dataserver/access-methods/ncss"
+  ],
+  "windows": {
+    "cadence_s": 3600,
+    "context_count": 25,
+    "context_start_utc": "2022-05-31T00:00:00Z",
+    "end_utc": "2022-06-01T06:00:00Z",
+    "heldout_count": 6,
+    "horizons_s": [
+      3600,
+      7200,
+      10800,
+      14400,
+      18000,
+      21600
+    ],
+    "origin_time_utc": "2022-06-01T00:00:00Z"
+  }
+}

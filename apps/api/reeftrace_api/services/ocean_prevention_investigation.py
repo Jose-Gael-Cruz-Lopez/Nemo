@@ -6,6 +6,7 @@ import asyncio
 import copy
 import hashlib
 import json
+import math
 import re
 
 from adapters.chalk.research import investigate_study
@@ -49,6 +50,13 @@ release and reef geometry, ideal interception, missing windage, waves, buoyancy,
 diffusion, shoreline and retention effects. This is not source attribution, a
 GDP drifter validation, tank calibration, physical validation or proof of coral
 protection. No automatic model promotion is authorized.
+When numerical_sensitivity is present, distinguish its two separate experiments:
+solver steps change at fixed output times for path separation, while event chords
+are downsampled from one fixed fine path. The finest path is not observed truth.
+Small numerical differences or stable event decisions are precision checks, not
+physical accuracy, forecast skill, ML improvement, error bars or proof of
+fourth-order convergence. Preserve incomplete forcing and missing comparison
+coverage. Do not call partial or unsupported integration a successful check.
 This is read-only research. Never request acquisition, training, case changes,
 trial writes, collection, camera, pump, hardware, messaging or Photon actions.
 Use REPORT for grounded explanation of available results or explicit blockers;
@@ -145,6 +153,9 @@ def snapshot_identity(report: dict) -> tuple[str, str, str, str]:
     if (recommendation.get("status") != expected_status
             or recommendation.get("best_layout_id") != winner):
         raise ValueError("Ocean comparison recommendation contradicts its entry bounds")
+    if "numerical_sensitivity" in report:
+        _validate_numerical_sensitivity(
+            report["numerical_sensitivity"], scenario["releases"], scenario["layouts"])
     return identities
 
 
@@ -174,6 +185,199 @@ def _validate_outcomes(row: dict, releases: list[str]) -> None:
             or summary.get("protected_entry_fraction_bounds")
             != [lower / len(releases), upper / len(releases)]):
         raise ValueError("Ocean comparison unresolved-entry bounds changed")
+
+
+def _validate_numerical_sensitivity(value: dict, release_rows: list[dict],
+                                    layout_rows: list[dict]) -> None:
+    """Accept legacy absence, but never silently trust malformed new evidence."""
+    # The scenario was checked against the full report and its own digest above.
+    # Diagnostic levels cannot jointly invent a different requested duration.
+    releases = [row["id"] for row in release_rows]
+    release_horizons = {row["id"]: row.get("horizon_s") for row in release_rows}
+    layout_ids = [row["id"] for row in layout_rows]
+    collector_ids = {row["id"]: {segment["id"] for segment in row.get("segments", [])}
+                     for row in layout_rows}
+    def require(condition):
+        if not condition:
+            raise ValueError("Ocean numerical sensitivity evidence is inconsistent")
+
+    def number(value, nullable=False):
+        return ((nullable and value is None) or
+                (type(value) in (int, float) and math.isfinite(value) and value >= 0))
+
+    def counts(value):
+        require(isinstance(value, dict) and set(value) == {"COMPLETED", "PARTIAL", "UNSUPPORTED"})
+        require(all(type(count) is int and count >= 0 for count in value.values())
+                and sum(value.values()) == len(releases))
+
+    def forcing(row):
+        status, reason = row["forcing_status"], row["forcing_reason_code"]
+        requested, completed = row["requested_horizon_s"], row["completed_horizon_s"]
+        require(status in {"COMPLETED", "PARTIAL", "UNSUPPORTED"}
+                and number(requested) and requested > 0 and number(completed)
+                and requested == release_horizons[row["release_id"]]
+                and completed <= requested)
+        require((status == "COMPLETED" and completed == requested and reason is None)
+                or (status != "COMPLETED" and isinstance(reason, str) and bool(reason)
+                    and (0 < completed < requested if status == "PARTIAL" else completed == 0)))
+
+    def event_outcome(row, allowed_collectors):
+        forcing(row)
+        event = row["event_kind"]
+        if event is not None:
+            require((row["status"], event) in {
+                ("IDEALIZED_INTERCEPTION", "IDEALIZED_CAPTURE"),
+                ("ENTERED_PROTECTED_ZONE", "PROTECTED_ZONE_ENTRY")})
+            require(number(row["event_elapsed_s"])
+                    and row["event_elapsed_s"] <= row["completed_horizon_s"]
+                    and row["track_end_elapsed_s"] == row["event_elapsed_s"])
+            require((isinstance(row["segment_id"], str) and row["segment_id"] in allowed_collectors)
+                    if event == "IDEALIZED_CAPTURE" else row["segment_id"] is None)
+        else:
+            require(row["status"] in {"NO_ENTRY_WITHIN_HORIZON", "UNRESOLVED"}
+                    and row["segment_id"] is row["event_elapsed_s"] is None)
+            require((row["status"] == "NO_ENTRY_WITHIN_HORIZON")
+                    is (row["forcing_status"] == "COMPLETED"))
+            end = row["track_end_elapsed_s"]
+            require((end is None and row["forcing_status"] == "UNSUPPORTED")
+                    or (number(end) and end == row["completed_horizon_s"]))
+
+    try:
+        require(all(number(horizon) and horizon > 0 for horizon in release_horizons.values()))
+        require(isinstance(value, dict) and type(value["schema_version"]) is int
+                and value["schema_version"] == 1 and value["kind"] == "OCEAN_NUMERICAL_SENSITIVITY"
+                and value["scope"] == "separate_diagnostic_reruns_do_not_replace_main_decision_paths"
+                and type(value["release_count"]) is int and value["release_count"] == len(releases)
+                and value["diagnostic_advection_runs_per_release"] == 4)
+        require(all(value[key] is False for key in (
+            "physical_validation", "independent_truth_used", "model_parameters_tuned")))
+        integration, events = value["integration"], value["events"]
+        require(integration["output_step_s"] == 300 and integration["reference_solver_step_s"] == 75)
+        require([row["solver_step_s"] for row in integration["levels"]] == [300, 150, 75])
+        reference_integrations = integration["levels"][-1]["releases"]
+        complete = True
+        for level in integration["levels"]:
+            require(level["release_count"] == len(releases) and level["output_step_s"] == 300)
+            counts(level["forcing_status_counts"])
+            rows = level["releases"]
+            require([row["release_id"] for row in rows] == releases)
+            require(level["forcing_status_counts"] == {
+                status: sum(row["forcing_status"] == status for row in rows)
+                for status in ("COMPLETED", "PARTIAL", "UNSUPPORTED")})
+            comparable = 0
+            for row, reference in zip(rows, reference_integrations, strict=True):
+                forcing(row)
+                require(row["requested_horizon_s"] == reference["requested_horizon_s"])
+                comparison = row["comparison"]
+                require(all(comparison["reference_" + key] == reference[key] for key in (
+                    "forcing_status", "forcing_reason_code", "completed_horizon_s")))
+                count = comparison["common_positive_time_count"]
+                require(type(count) is int and count >= 0)
+                require(comparison["status"] == ("COMPARED" if count else "NO_COMMON_POSITIVE_TIME"))
+                require(comparison["both_completed"] is (
+                    row["forcing_status"] == comparison["reference_forcing_status"] == "COMPLETED"))
+                for key in ("max_separation_m", "rms_separation_m", "last_common_separation_m",
+                            "last_common_elapsed_s"):
+                    require(number(comparison[key], nullable=True)
+                            and (comparison[key] is not None) == bool(count))
+                if count:
+                    require(0 < comparison["last_common_elapsed_s"] <= min(
+                        row["completed_horizon_s"], comparison["reference_completed_horizon_s"]))
+                    require(comparison["rms_separation_m"] <= comparison["max_separation_m"]
+                            and comparison["last_common_separation_m"] <= comparison["max_separation_m"])
+                    if level["solver_step_s"] == 75:
+                        require(all(comparison[key] == 0 for key in (
+                            "max_separation_m", "rms_separation_m", "last_common_separation_m")))
+                    comparable += 1
+                if comparison["both_completed"]:
+                    require(count == math.ceil(row["requested_horizon_s"] / 300)
+                            and comparison["last_common_elapsed_s"] == row["requested_horizon_s"])
+                complete &= row["forcing_status"] == "COMPLETED"
+            require(type(level["comparable_release_count"]) is int
+                    and level["comparable_release_count"] == comparable)
+            maximum = max((row["comparison"]["max_separation_m"] for row in rows
+                           if row["comparison"]["max_separation_m"] is not None), default=None)
+            require(level["max_separation_m"] == maximum)
+        require(events["solver_step_s"] == events["reference_chord_interval_s"] == 75
+                and events["same_fine_tracks_downsampled"] is True
+                and events["terminal_accepted_partial_point_retained"] is True)
+        counts(events["forcing_status_counts"])
+        complete &= events["forcing_status_counts"]["COMPLETED"] == len(releases)
+        require([row["chord_interval_s"] for row in events["levels"]] == [300, 150, 75])
+        reference_recommendation = events["levels"][-1]["recommendation"]
+        reference_rows = [events["levels"][-1]["baseline"], *events["levels"][-1]["layouts"]]
+        fine_coverage = reference_rows[0]["outcomes"]
+        for level in events["levels"]:
+            require(level["release_count"] == len(releases))
+            require([row["id"] for row in level["layouts"]] == layout_ids)
+            require(level["baseline"]["id"] == "no-interceptor")
+            outcomes = []
+            for row, reference in zip([level["baseline"], *level["layouts"]], reference_rows, strict=True):
+                _validate_outcomes(row, releases)
+                require([item["release_id"] for item in row["outcomes"]] == releases)
+                require(events["forcing_status_counts"] == {
+                    status: sum(outcome["forcing_status"] == status for outcome in row["outcomes"])
+                    for status in ("COMPLETED", "PARTIAL", "UNSUPPORTED")})
+                for outcome, ref, fine in zip(row["outcomes"], reference["outcomes"],
+                                               fine_coverage, strict=True):
+                    event_outcome(outcome, collector_ids.get(row["id"], set()))
+                    require(all(outcome[key] == fine[key] for key in (
+                        "forcing_status", "forcing_reason_code", "requested_horizon_s",
+                        "completed_horizon_s")))
+                    identity = ("status", "event_kind", "segment_id")
+                    resolved = outcome["status"] != "UNRESOLVED" and ref["status"] != "UNRESOLVED"
+                    matches = resolved and all(outcome[key] == ref[key] for key in identity)
+                    expected = ("UNRESOLVED" if not resolved else
+                                "MATCHED_EVENT" if matches and outcome["event_kind"] else
+                                "MATCHED_NO_EVENT" if matches else "CHANGED_OUTCOME")
+                    require(outcome["comparison_status"] == expected)
+                    if expected == "MATCHED_EVENT":
+                        require(number(outcome["event_elapsed_s"]) and number(ref["event_elapsed_s"])
+                                and outcome["event_time_difference_s"] == abs(
+                                    outcome["event_elapsed_s"] - ref["event_elapsed_s"]))
+                outcomes.extend(row["outcomes"])
+            for outcome in outcomes:
+                require(outcome["forcing_status"] in {"COMPLETED", "PARTIAL", "UNSUPPORTED"})
+                require(outcome["comparison_status"] in {
+                    "MATCHED_EVENT", "MATCHED_NO_EVENT", "CHANGED_OUTCOME", "UNRESOLVED"})
+                difference = outcome["event_time_difference_s"]
+                require(number(difference, nullable=True)
+                        and (difference is not None) == (outcome["comparison_status"] == "MATCHED_EVENT"))
+                if outcome["comparison_status"] == "MATCHED_EVENT":
+                    require(outcome["status"] != "UNRESOLVED" and outcome["event_kind"] in {
+                        "IDEALIZED_CAPTURE", "PROTECTED_ZONE_ENTRY"})
+            comparison = level["comparison_to_finest"]
+            left, right = [row["summary"]["protected_entry_count_bounds"] for row in level["layouts"]]
+            winner = (layout_ids[0] if left[1] < right[0] else
+                      layout_ids[1] if right[1] < left[0] else None)
+            status = ("BEST_LAYOUT" if winner else "TIE" if
+                      left[0] == left[1] == right[0] == right[1] else "INDETERMINATE")
+            require(level["recommendation"]["status"] == status
+                    and level["recommendation"]["best_layout_id"] == winner)
+            require(comparison["outcome_comparison_count"] == len(releases) * 3)
+            for name, status in (("matched_event_count", "MATCHED_EVENT"),
+                                 ("matched_no_event_count", "MATCHED_NO_EVENT"),
+                                 ("changed_outcome_count", "CHANGED_OUTCOME"),
+                                 ("unresolved_comparison_count", "UNRESOLVED")):
+                require(type(comparison[name]) is int
+                        and comparison[name] == sum(row["comparison_status"] == status for row in outcomes))
+            require(comparison["recommendation_agrees"] is all(
+                level["recommendation"][key] == reference_recommendation[key]
+                for key in ("status", "best_layout_id")))
+            require(comparison["max_matched_event_time_difference_s"] == max(
+                (row["event_time_difference_s"] for row in outcomes
+                 if row["event_time_difference_s"] is not None), default=None))
+        summary = value["summary"]
+        require(summary["all_integrations_completed"] is bool(complete)
+                and summary["event_recommendation_agrees_at_all_levels"] is all(
+                    row["comparison_to_finest"]["recommendation_agrees"] for row in events["levels"]))
+        require(summary["integration_max_separation_m"] == max(
+            (row["max_separation_m"] for row in integration["levels"]
+             if row["max_separation_m"] is not None), default=None))
+        require(isinstance(value["limitations"], list)
+                and all(isinstance(item, str) for item in value["limitations"]))
+    except (KeyError, TypeError, IndexError) as error:
+        raise ValueError("Ocean numerical sensitivity evidence is malformed") from error
 
 
 class OceanPreventionBackend:
@@ -216,6 +420,36 @@ def _compact_summary(report: dict) -> dict:
 
     summary["baseline"] = compact_layout(report["baseline"])
     summary["layouts"] = [compact_layout(row) for row in report["layouts"]]
+    numerical = report.get("numerical_sensitivity")
+    if isinstance(numerical, dict):
+        summary["numerical_sensitivity"] = {
+            "kind": numerical["kind"], "release_count": numerical["release_count"],
+            "scope": numerical["scope"], "summary": numerical["summary"],
+            **{key: numerical[key] for key in (
+                "physical_validation", "independent_truth_used", "model_parameters_tuned",
+                "diagnostic_advection_runs_per_release")},
+            "integration": {
+                "output_step_s": numerical["integration"]["output_step_s"],
+                "reference_solver_step_s": numerical["integration"]["reference_solver_step_s"],
+                "levels": [{key: row[key] for key in (
+                    "solver_step_s", "output_step_s", "release_count", "forcing_status_counts",
+                    "max_separation_m", "comparable_release_count")}
+                    for row in numerical["integration"]["levels"]],
+            },
+            "events": {
+                "solver_step_s": numerical["events"]["solver_step_s"],
+                "same_fine_tracks_downsampled": numerical["events"]["same_fine_tracks_downsampled"],
+                "forcing_status_counts": numerical["events"]["forcing_status_counts"],
+                "levels": [{"chord_interval_s": row["chord_interval_s"],
+                            "baseline": row["baseline"]["summary"],
+                            "layouts": [{"id": item["id"], "summary": item["summary"]}
+                                        for item in row["layouts"]],
+                            "recommendation": row["recommendation"],
+                            "comparison_to_finest": row["comparison_to_finest"]}
+                           for row in numerical["events"]["levels"]],
+            },
+            "limitations": numerical["limitations"],
+        }
     summary["interpretation"] = (
         "Real model currents, hypothetical releases, illustrative reef proxy and ideal absorbing "
         "lines. A conditional simulated entry comparison, not measured waste accuracy, "

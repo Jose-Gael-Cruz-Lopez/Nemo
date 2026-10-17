@@ -1,0 +1,79 @@
+{
+  "kind": "LOCAL_RELATIVE_TIME_REGRESSION_NOT_NEW_FIELD_EVIDENCE",
+  "reference_sha256": "953ea1db0f70d920729f3136b75258cafede2dc0fbd361a39699dc64e85ad6b2",
+  "advection_sha256": "b3c4e8ca0765d8daeed2dba6c61ae2d399d9750e4fddb5a595c0ddc4b1823352",
+  "paths": [
+    {
+      "release_id": "release-1",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-2",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-3",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-4",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-5",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-6",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    }
+  ],
+  "comparisons": {
+    "downstream-corridor-v2": {
+      "all_release_outcomes_exact_match": true,
+      "baseline_summary_exact_match": true,
+      "all_recorded_layout_fields_exact_match": true,
+      "recommendation_exact_match": true,
+      "entry_counts": [
+        2,
+        4
+      ],
+      "recommendation": "BEST_LAYOUT"
+    },
+    "initial-proxy-v1": {
+      "all_release_outcomes_exact_match": true,
+      "baseline_summary_exact_match": true,
+      "all_recorded_layout_fields_exact_match": true,
+      "recommendation_exact_match": true,
+      "entry_counts": [
+        0,
+        0
+      ],
+      "recommendation": "TIE"
+    }
+  },
+  "provider_calls": false,
+  "hardware_actions": false,
+  "tests": {
+    "related_tests_passed": 234,
+    "ruff": "passed"
+  }
+}

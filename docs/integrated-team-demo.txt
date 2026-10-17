@@ -72,6 +72,16 @@ The complete API, method and next-measurement guide is docs/ocean-prevention.md.
 
 In “Prevention”, deliberately click “Tank experiment & trial ledger”, then “Load prevention demo”. This retains the original centimetre-scale software experiment: its own synthetic source case, baseline/intervention layouts, protected-zone proxy and hand-authored synthetic trial records. It does not inherit an ocean prediction or automatically reuse the observation selected in Investigations.
 
+SHOW THE TANK IN 3D
+
+1) In the selected saved comparison, choose “Open 3D tank”. It reads that frozen comparison and current trial-evaluation identity; no camera, pump or new simulation is started.
+2) Choose “Baseline”, then “Intervention”. The stock synthetic model predicts entry for 100/100 particles from each source in baseline, and 0/100 with intervention. Read the selected comparison's actual displayed numbers; the 3D lines are only representative paths, not the full ensemble.
+3) Inspect the labelled source regions, mesh footprint and protected-zone proxy. Use “Overhead”, drag or arrow keys to orbit, and “Reset 3D view”. The walls, pump/tubing and dry webcam are schematic. The example's 40 × 30 cm footprint is not a measurement of our bin; water depth is unknown.
+4) Click “Play saved path”, change speed, pause or scrub “Model elapsed time”. Toggle saved paths, coordinate grid, labels, frozen flow vectors and schematic equipment. Choosing one release source filters the picture; the result explicitly continues to summarize all declared sources.
+5) Read “Operator-reported physical outcomes: Not captured”. The disabled recorded-capture clock is deliberate when there is no linked real recording. Future eligible recordings retain capture-start time and tracking gaps; the app does not equate it with token-release time or invent position errors.
+6) Use the existing “Ask Chalk about prevention” below. It explains the same frozen prediction and separate trial ledger. Confirm “Live model response: yes” and exact evidence citations if the provider succeeds; keep failures explicit. A 3D animation is not physical validation.
+7) “Close 3D tank” releases its graphics resources. “Accessible 2D layout maps” remains the fallback. Full scene/evidence contracts are in docs/tank-simulator.md.
+
 “Has it worked in recorded trials?” keeps the physical and synthetic outcome counts visible. Expand “Review recorded outcomes” for the detailed ledgers and trial controls. Zero operator-reported physical outcomes is the actual current result, not a hidden success.
 
 What the visuals mean:

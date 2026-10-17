@@ -1,0 +1,74 @@
+{
+  "actions": {
+    "billing_change": false,
+    "camera_activation": false,
+    "new_photon_message": false,
+    "provider_call": false,
+    "pump_control": false,
+    "xai_api_call": false
+  },
+  "actual_evidence": {
+    "physical_trials": 0,
+    "positional_error_metrics": null,
+    "preexisting_synthetic_ledger_rows": 2,
+    "recordings": [],
+    "release_alignment": "MISSING",
+    "status": "NOT_CAPTURED"
+  },
+  "comparison_id": "prevention_comparison-35ae7f4be069463b",
+  "date": "2026-10-17",
+  "evaluation_snapshot_hash": "65e2ecd71bc4c29b000e8fd73c91bbafed2cd39a9bd07df10b528774ed04c479",
+  "kind": "TANK3D_LIVE_SOFTWARE_RECHECK",
+  "limitations": [
+    "Schematic equipment and unknown depth",
+    "Saved surface-path replay, not volumetric fluid simulation",
+    "Synthetic ensemble counts do not establish physical interception efficiency",
+    "No aligned real tank trajectory or ecological outcome"
+  ],
+  "live_browser": {
+    "close_disposes_canvas": true,
+    "keyboard_orbit": true,
+    "layer_toggles": true,
+    "layout_selection": true,
+    "lifecycle_check_comparison_id": "prevention_comparison-c1fbb310374149c7",
+    "lifecycle_check_scope": "Same simulator component; close/reopen tested before selecting the API-verified saved comparison",
+    "new_console_errors": [],
+    "playback_completed_s": 20,
+    "rendered": true,
+    "reopen_has_one_canvas": true,
+    "reset_and_overhead": true,
+    "scrub_verified_s": 6,
+    "source_filter_preserves_full_counts": true
+  },
+  "numerical_report_sha256": "53fcc107a4d32be907e84ab2addc99f9d95acf50aceb64a62157fbf42f652b63",
+  "saved_synthetic_results": {
+    "baseline_zone_entries": 300,
+    "frozen_vectors_per_layout": 9,
+    "horizon_s": 20,
+    "intervention_zone_entries": 0,
+    "particles_per_layout": 300,
+    "representative_paths": 36,
+    "source_count": 3,
+    "water_plane_cm": [
+      40,
+      30
+    ]
+  },
+  "scene_api": {
+    "cache_control": "no-store",
+    "malformed_snapshot": 422,
+    "missing_comparison": 404,
+    "saved_scientific_rows_equal": true,
+    "snapshot_bindings_verified": true,
+    "stale_snapshot": 409,
+    "status": 200
+  },
+  "scene_sha256": "1988a8c90a405689a08ad25aeb7388a9ebe2cc515681f377b1ce9f30fc97f166",
+  "schema_version": 1,
+  "scope": "Saved synthetic comparison to live read-only API and browser 3D replay; no physical experiment",
+  "screenshot": {
+    "camera_frames_included": false,
+    "path": "docs/assets/tideward-3d-demo-20261017.png",
+    "sha256": "4fedb761b7ef4d3263307781b7935dfcd55697b64abc4bfe9237e121e4a629f5"
+  }
+}

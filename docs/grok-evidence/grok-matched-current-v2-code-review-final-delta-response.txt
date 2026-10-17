@@ -1,0 +1,5 @@
+**GO for this narrow delta, conditional on the focused suites you are rerunning and on a committed freeze before any I/O.** No freeze, acquisition or score is claimed to have occurred.
+
+The added `AMENDMENT_DOCUMENTS` pin, the `amendment_documents_sha256` contract field, and the `build_protocol` verification that hashes `docs/matched-current-v2-amendment.md` are consistent with the existing `_require_committed` path, which already requires every `metadata_evidence` source to match the committed tree. A one-byte mutation therefore fails before any request or sentinel. No model, query, coordinate rule, bound, budget or denominator is altered. The earlier correction stands: depth/time/velocity encoding is still checked only when the scientific wrapper decodes HYCOM after serial acquisition, and it blocks current-only forecasting, not the GDP trajectory requests.
+
+Commit the updated protocol source, the amendment document, and the generated freeze together. Only after that commit exists and the focused suites pass should the six-role acquisition be run once.

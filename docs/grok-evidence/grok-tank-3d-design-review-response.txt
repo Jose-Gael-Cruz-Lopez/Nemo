@@ -1,0 +1,27 @@
+Grok
+Worked for 12s
+
+Static review only. No code was executed and no physical benefit is claimed. The existing comparison remains the source of truth; the scene is a read-only view.
+
+(A) Bugs to prevent (tied to the serializer)
+Decimated paths are not metrics. _paths selects min(MAX_PATHS, N) particles and min(MAX_PATH_POINTS, T) time indices. The 36 display paths (≤80 points) must never be used to recompute zone-entry, capture, or benefit fractions. Headline counts stay on the full competing-absorber ensemble.
+supported is first-event/horizon only. detail["supported"][particle] covers nodes until first absorption or horizon, not every later point. Do not animate a path as “supported truth” past its first event, and do not drop an unsupported particle from the denominator.
+Nominal paths are collector-only illustrations. display_paths are built from the collector-only actual ensemble. The scene must label them as such; the competing-zone metrics live in results, not in the drawn lines.
+Time alignment. Simulation t_s starts at release t=0. Camera t_s starts at capture start and is not a verified release. Never set recording t=0 equal to sim release, never nearest-particle-match, and never compute RMSE. Positional error stays null; capture clock stays UNALIGNED; release anchor stays MISSING.
+Physical versus synthetic. Whitelist only linked physical recordings that match layout/profile/calibration/session/prospective-capture/unique ID. Return timed cm segments with gaps; no images or private paths. Synthetic ledger rows never appear as physical outcomes.
+Visual interpolation. Scrub/playback interpolation is display-only. Orbit, filter or speed changes must not alter scores, hashes or the frozen comparison.
+Unmeasured geometry. Bounds are the 40×30 cm synthetic demo, not measured bin dimensions. Render XY at z=0; tank extrusion, pump, tube and camera are schematic. Coral proxy is visual only.
+(B) Beginner 3D hierarchy
+Scene (large): tank rectangle at z=0, protected zone, collector polygons, three source markers A/B/C, optional schematic pump/tube/camera.
+Transport: toggle baseline/intervention; source checkboxes; path/grid/vector/label toggles. Solid = recorded (when present), dashed = simulated free path, star = first event.
+Time: play/pause, scrub, speed; sim clock and, separately, capture clock (labelled unaligned).
+Scores (fixed panel): existing first-passage counts and bounds; never live-recomputed.
+Fallback: the existing 2D maps remain available; reduced-motion pauses the render.
+(C) Test cases
+Unsupported first event: a particle with supported=false shows no animated “supported” prefix; its cell stays in the denominator; recommendation remains withheld if any particle is unsupported.
+Decimation: after loading, displayed point count ≤80 and path count ≤6 per source/layout; recomputing entry counts from the displayed points does not equal the stored full-ensemble metrics.
+Stale scene: changing comparison ID or evaluation_snapshot_hash clears the previous scene; a late response for the old ID is discarded.
+Future physical recording: a linked recording with matching hashes returns gapped cm segments, capture_clock=UNALIGNED, release_anchor=MISSING, positional_error=null; an unlinked or hash-mismatched recording is rejected. Synthetic trials never satisfy the physical whitelist.
+(D) One small implementation recommendation
+
+Add a single derived first_event_s = min(zone_entry_s, capture_s) (or horizon if both null) on each exported path and clamp the animated polyline to t ≤ first_event_s when supported is true; when supported is false, draw the path only as an unsupported illustration with no event marker. This uses existing serializer fields, adds no measurement, and prevents the scene from implying post-event support or a physical result.

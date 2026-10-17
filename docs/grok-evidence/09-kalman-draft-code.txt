@@ -1,0 +1,84 @@
+import numpy as np
+
+_MAX_LOCAL_M = 50_000.0
+_MIN_DT_S = 1e-6
+_MAX_PREFIX_S = 7 * 86400
+_MAX_HORIZON_S = 24 * 3600
+
+def _check_cov(P, name):
+    if P.shape != (4, 4) or not np.isfinite(P).all():
+        raise ValueError(f"{name} non-finite")
+    if not np.allclose(P, P.T, atol=1e-8):
+        raise ValueError(f"{name} not symmetric")
+    # PSD via eigenvalues of symmetrized matrix
+    ev = np.linalg.eigvalsh(0.5 * (P + P.T))
+    if np.any(ev < -1e-8):
+        raise ValueError(f"{name} not PSD")
+
+def kalman_cv_forecast(prefix_times_s, prefix_xy_m, forecast_times_s, *,
+                       position_std_m=100.0, acceleration_spectral_density_m2_s3=1e-6):
+    t = np.asarray(prefix_times_s, float)
+    z = np.asarray(prefix_xy_m, float)
+    tf = np.asarray(forecast_times_s, float)
+    if t.ndim != 1 or not 8 <= len(t) <= 100 or z.shape != (len(t), 2):
+        raise ValueError("prefix requires 8..100 finite times and matching (n,2) positions")
+    if tf.ndim != 1 or not 1 <= len(tf) <= 12:
+        raise ValueError("forecast_times requires 1..12 entries; empty is invalid")
+    if not np.isfinite(t).all() or not np.isfinite(z).all() or not np.isfinite(tf).all():
+        raise ValueError("non-finite input")
+    if not (np.all(np.diff(t) >= _MIN_DT_S) and np.all(np.diff(tf) >= _MIN_DT_S) and tf[0] > t[-1]):
+        raise ValueError("times must be strictly increasing by >=1e-6 s; forecasts after prefix")
+    if t[-1] - t[0] > _MAX_PREFIX_S or tf[-1] - t[-1] > _MAX_HORIZON_S:
+        raise ValueError("prefix duration >7 d or forecast horizon >24 h")
+    if np.linalg.norm(z, axis=1).max() > _MAX_LOCAL_M:
+        raise ValueError("prefix positions exceed 50 km")
+    q = float(acceleration_spectral_density_m2_s3)
+    sig = float(position_std_m)
+    if not (np.isfinite(q) and q > 0 and np.isfinite(sig) and sig > 0):
+        raise ValueError("noise parameters must be positive finite")
+    r = sig ** 2
+    # state at t1 from first two observations only
+    dt0 = t[1] - t[0]
+    v0 = (z[1] - z[0]) / dt0
+    x = np.array([z[1, 0], z[1, 1], v0[0], v0[1]])
+    P = np.block([
+        [r * np.eye(2), (r / dt0) * np.eye(2)],
+        [(r / dt0) * np.eye(2), (2 * r / dt0**2) * np.eye(2)],
+    ])
+    _check_cov(P, "P_init")
+    H = np.array([[1., 0, 0, 0], [0, 1, 0, 0]])
+    R = r * np.eye(2)
+    def FQ(dt):
+        F = np.eye(4)
+        F[0, 2] = F[1, 3] = dt
+        a, b, c = dt**3 / 3, dt**2 / 2, dt
+        Q = q * np.block([[a*np.eye(2), b*np.eye(2)], [b*np.eye(2), c*np.eye(2)]])
+        return F, Q
+    # filter i=2 onward
+    for i in range(2, len(t)):
+        F, Q = FQ(t[i] - t[i-1])
+        x = F @ x
+        P = F @ P @ F.T + Q
+        _check_cov(P, "P_pred")
+        S = H @ P @ H.T + R
+        K = np.linalg.solve(S.T, (H @ P).T).T   # K = solve(S, H@P).T
+        IKH = np.eye(4) - K @ H
+        P = IKH @ P @ IKH.T + K @ R @ K.T
+        _check_cov(P, "P_upd")
+        x = x + K @ (z[i] - H @ x)
+    # free-run from filtered state at last prefix time; no future updates
+    means, covs = [], []
+    t_cur, x_cur, P_cur = t[-1], x.copy(), P.copy()
+    for t_next in tf:
+        F, Q = FQ(t_next - t_cur)
+        x_cur = F @ x_cur
+        P_cur = F @ P_cur @ F.T + Q
+        _check_cov(P_cur, "P_forecast")
+        mean = x_cur[:2].copy()
+        if np.linalg.norm(mean) > _MAX_LOCAL_M:
+            raise ValueError("predicted mean exceeds 50 km")
+        means.append(mean)
+        c = P_cur[:2, :2]
+        covs.append(0.5 * (c + c.T))
+        t_cur = t_next
+    return np.asarray(means), np.asarray(covs)

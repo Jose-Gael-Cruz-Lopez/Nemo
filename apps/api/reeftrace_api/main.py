@@ -9,9 +9,9 @@ from pathlib import Path
 
 import yaml
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import JSONResponse, Response, StreamingResponse
 
 from apps.vision.reeftrace_vision.calibration import fit_homography
 from apps.vision.reeftrace_vision.tracking import flow_samples
@@ -20,6 +20,7 @@ from .api.v1.endpoints.current_forecast import create_current_forecast_router
 from .api.v1.endpoints.field_sessions import create_field_sessions_router
 from .api.v1.endpoints.fresh_physics import create_fresh_physics_router
 from .api.v1.endpoints.health import router as health_router
+from .api.v1.endpoints.matched_current import create_matched_current_router
 from .api.v1.endpoints.method_validation import create_method_validation_router
 from .api.v1.endpoints.ocean_prevention import create_ocean_prevention_router
 from .core.settings import Settings
@@ -36,6 +37,7 @@ from .schemas.contracts import (
 )
 from .schemas.prevention import ComparisonInput, TrialInput
 from .schemas.validation_reports import PreventionQuestion, ValidationReportInput
+from .services.camera_stream import MJPEG_BOUNDARY, iter_camera_mjpeg
 from .services.evidence_export import export_comparison
 from .services.runtime import Runtime
 from .services.validation_reports import (
@@ -116,6 +118,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(create_method_validation_router(), prefix="/api/v1")
     app.include_router(create_field_sessions_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_fresh_physics_router(runtime, operator), prefix="/api/v1")
+    app.include_router(create_matched_current_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_current_forecast_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_ocean_prevention_router(runtime, operator), prefix="/api/v1")
 
@@ -255,6 +258,17 @@ def create_app(settings: Settings | None = None):
     @app.get("/api/v1/prevention/comparisons/{comparison_id}")
     def prevention_comparison(comparison_id: str):
         return runtime.prevention.comparison_detail(comparison_id)
+
+    @app.get("/api/v1/prevention/comparisons/{comparison_id}/scene")
+    def prevention_scene(comparison_id: str, request: Request, response: Response,
+                         evaluation_snapshot_hash: str = Query(pattern=r"^[0-9a-f]{64}$")):
+        from .services.tank_scene import build_tank_scene
+
+        response.headers["Cache-Control"] = "no-store"
+        comparison = runtime.store.get("prevention_comparison", comparison_id)
+        if comparison["data_origin"] == "MEASURED_TANK":
+            operator(request)
+        return build_tank_scene(runtime, comparison_id, evaluation_snapshot_hash)
 
     @app.get("/api/v1/prevention/comparisons/{comparison_id}/export", dependencies=[Depends(operator)])
     def prevention_export(comparison_id: str):
@@ -402,6 +416,22 @@ def create_app(settings: Settings | None = None):
         _, metadata = runtime.camera.image()
         return Response(metadata["jpeg"], media_type="image/jpeg",
                         headers={"Cache-Control": "no-store", "X-Frame-Id": str(metadata["sequence"])})
+
+    @app.get("/api/v1/camera/stream.mjpg")
+    async def camera_stream(request: Request, session_id: str = Query(min_length=1, max_length=80)):
+        try:
+            status, _ = runtime.camera.preview_snapshot()
+        except ValueError as error:
+            raise HTTPException(503, str(error),
+                                headers={"Cache-Control": "no-store"}) from None
+        if status["session_id"] != session_id:
+            raise HTTPException(409, "Camera session changed; reconnect the live preview",
+                                headers={"Cache-Control": "no-store"})
+        return StreamingResponse(
+            iter_camera_mjpeg(runtime.camera, request, session_id),
+            media_type=f"multipart/x-mixed-replace; boundary={MJPEG_BOUNDARY}",
+            headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
+        )
 
     @app.post("/api/v1/camera/record", dependencies=[Depends(operator)])
     async def record(body: RecordInput):

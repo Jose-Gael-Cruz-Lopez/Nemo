@@ -1,0 +1,21 @@
+.header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.stack { display: grid; gap: 16px; min-width: 0; }
+.note { margin: 0; font-size: 12px; line-height: 1.8; color: #526f83; }
+.summary { padding: 15px 17px; background: #edf7fd; border: 1px solid #cce3ef; font-size: 13px; color: #315d77; }
+.summary strong { font-weight: 550; }
+.summary p { margin: 7px 0 0; font-size: 11px; line-height: 1.7; }
+.controls { display: flex; align-items: end; flex-wrap: wrap; gap: 14px; }
+.label { display: grid; flex: 1; gap: 6px; color: #42657b; font-size: 11px; min-width: 170px; }
+.label select, .label textarea { width: 100%; min-width: 0; padding: 10px; border: 1px solid #c6dfed; border-radius: 0; background: var(--glass-strong,#fff); color: var(--ink); font: inherit; }
+.checkbox { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #42657b; padding-bottom: 12px; }
+.checkbox input { accent-color: #087fac; }
+.plotFrame { margin: 0; border: 1px solid #d3e6f0; background: #f8fcff; min-width: 0; }
+.plot { display: block; width: 100%; height: auto; max-height: 430px; }
+.plotFrame figcaption { padding: 0 16px 15px; }
+.empty { padding: 22px; border: 1px solid #d0e4f0; background: #f4faff; color: #42657b; font-size: 12px; line-height: 1.8; }
+.empty p { margin: 8px 0 0; }
+.chalk { display: grid; gap: 12px; padding: 17px; border: 1px solid #cce3ef; background: #f3faff; }
+.chalk h3 { font-size: 15px; font-weight: 550; margin: 0; color: #315d77; }
+.answer { padding: 15px; border: 1px solid #d0e5ef; background: #fff; color: #315d77; font-size: 12px; line-height: 1.8; }
+.identity { font-size: 10px; color: #526f83; overflow-wrap: anywhere; }
+@media(max-width:650px) { .header { align-items: flex-start; } .controls { align-items: stretch; } .label { min-width: 100%; } .checkbox { padding-bottom: 0; } }

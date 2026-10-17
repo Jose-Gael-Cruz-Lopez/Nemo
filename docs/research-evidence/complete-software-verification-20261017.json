@@ -1,0 +1,140 @@
+{
+  "automated": {
+    "dependency_consistency": "PASS",
+    "eslint": "PASS",
+    "frontend_failures": 0,
+    "frontend_tests_passed": 223,
+    "isolated_http": {
+      "BLOCKED": 6,
+      "FAIL": 0,
+      "PASS": 153,
+      "complete_live_product_verified": false,
+      "expected_external_scopes_blocked": true,
+      "live_provider_round_trip_verified": false,
+      "physical_validation": false,
+      "software_workflow_passed": true
+    },
+    "production_build": "PASS",
+    "python_failures": 0,
+    "python_tests_passed": 1641,
+    "reader_api_replay_fresh_process_passed": 105,
+    "route_types": "PASS",
+    "ruff": "PASS",
+    "typescript": "PASS"
+  },
+  "browser": {
+    "data_lab_all_nine_diagnostic_actions": true,
+    "historical_fresh_study_planned": 180,
+    "historical_fresh_study_scored": 180,
+    "mobile": {
+      "page_width_px": 390,
+      "plot_help_touch_verified": true,
+      "viewport_width_px": 390
+    },
+    "observations_loaded": true,
+    "ocean_arrow_clock": true,
+    "ocean_entry_counts": {
+      "central": 2,
+      "denominator": 6,
+      "flanking": 4,
+      "no_interception": 6
+    },
+    "ocean_layer_and_release_controls": true,
+    "original_proxy_control": "TIE_ZERO_OF_SIX",
+    "ranked_unknown_invalid_verified": true,
+    "rk4_and_contact_sensitivity_disclosure": true,
+    "source_recomputed": true,
+    "source_sensitivity": true,
+    "three_dimensional_scene": {
+      "full_ensemble_counts_filter_invariant": true,
+      "layout_source_and_layer_controls": true,
+      "one_lazy_canvas": true,
+      "orbit": true,
+      "overhead_and_reset": true,
+      "physical_records": 0,
+      "scrub_and_play_pause": true,
+      "vertical_geometry_measured": false
+    }
+  },
+  "checkpoint": "2026-10-17 complete software workflow",
+  "evidence_files": [
+    {
+      "bytes": 2428,
+      "path": "work/tideward-complete-python.log",
+      "sha256": "b1b865edf7348b724f1b3f6270bf83be3d598173628fc0cc0dc6f827cd021c66"
+    },
+    {
+      "bytes": 19,
+      "path": "work/tideward-complete-ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "bytes": 34577,
+      "path": "work/tideward-complete-frontend.log",
+      "sha256": "cb652efb1861549c9ce901597414fbe174256d77b6ea7561cae036149407d7d6"
+    },
+    {
+      "bytes": 46,
+      "path": "work/tideward-complete-eslint.log",
+      "sha256": "2a39a2b0088eab9372f9ae76e9bbb3badd872aae76be61464acc2a0fe3ac1e51"
+    },
+    {
+      "bytes": 59,
+      "path": "work/tideward-complete-typegen.log",
+      "sha256": "adba4af9194e10e47dda75ff0fd0f8c2b756474896d0eba5612799c527ff372a"
+    },
+    {
+      "bytes": 0,
+      "path": "work/tideward-complete-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 906,
+      "path": "work/tideward-complete-build.log",
+      "sha256": "1025adfcb62fee8c86e8c734e7c97268e7351a6e519ac14d43f50310fd1a2b32"
+    },
+    {
+      "bytes": 607423,
+      "path": "work/tideward-complete-offline-http.json",
+      "sha256": "6225156ccd68eef69855bbcfe37b5f62cb3c9abc58a81a72f60062cfcefe26bb"
+    },
+    {
+      "bytes": 90963,
+      "path": "work/tideward-complete-final-matched-live.json",
+      "sha256": "966cdf81f5d49bfe33d1436bd42334d54f97e5ca1f3317e91681de76338273de"
+    }
+  ],
+  "fixes": [
+    "Direct immutable verified forcing-byte decoding.",
+    "Acquisition/forecast/score clock and orphan sidecar guards.",
+    "Byte-identical later archive relocation preserves historical exclusion inventory.",
+    "Credential changes remount and abort the prior matched Chalk request.",
+    "Chalk prompt distinguishes rejected coordinate contract from changed physical currents."
+  ],
+  "live_chalk": {
+    "all_live_model_response": true,
+    "matched_current_final_prompt": "REPORT",
+    "matched_current_initial": "REPORT",
+    "matched_exact_citations": [
+      "matched-current-report:354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7",
+      "matched-current-protocol:210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6"
+    ],
+    "matched_final_cases_unchanged": true,
+    "ocean_prevention": "REPORT",
+    "source": "REPORT"
+  },
+  "remaining_boundaries": {
+    "camera_opened": false,
+    "compatibility_amendment_v2": "PROPOSED_NOT_IMPLEMENTED",
+    "complete_physical_product_verified": false,
+    "new_matched_study_planned_cells": 36,
+    "new_matched_study_primary": null,
+    "new_matched_study_scored_cells": 0,
+    "new_photon_messages_sent": 0,
+    "paid_billing_enabled": false,
+    "photon_settings_changed": false,
+    "real_tank_trials_performed": 0,
+    "xai_api_used": false
+  },
+  "schema_version": 1
+}

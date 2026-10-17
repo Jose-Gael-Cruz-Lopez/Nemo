@@ -1,0 +1,20 @@
+Grok
+Worked for 5s
+
+Static interpretation only. v1 is not rewritten and no skill is claimed.
+
+Why zero results is valid. The study planned 36 cells and scored 0 because both GDP trajectory requests were blocked by an exact-hash mismatch on two volatile history timestamps, and the HYCOM wrapper rejected coordinate labels that are exact float32 values stored as float64. No model was run on future positions, no ID was replaced, and the 36-cell matrix with null errors is the correct blocked-study outcome. It is a transport/schema failure, not a model failure.
+
+v2 amendment review.
+
+Accept normalizing only the two validated UTC capture-history tokens (the exact (local files) line and the exact DAS URL line). Retain every other byte, including version, schema, units and the acquired raw hashes. Reject any other history, units or version change.
+Accept validating that native labels are exact float32 promotions and lie within one float32 ULP of the rounded nominal lattice, while sampling uses the actual saved coordinates. Do not snap to the nominal grid or expand support past the observed end at approximately −65.04°.
+Flaw to keep explicit: the HYCOM bytes have already been decoded, so v2 is a pre-GDP-outcome encoding correction, not an entirely value-unseen first design. It must carry a new protocol/code hash, bind to this diagnosis, and disclose the v1 failure. No velocity tuning, model selection, ID replacement, depth/tile change or hidden retry is authorized.
+
+UI / Chalk during v1 failure. Display “Acquisition blocked: 0 of 2 GDP trajectories retrieved; 36 planned cells, 0 scored; primary comparison withheld.” Do not show a winner, a probability, or a claim that currents were tested. Chalk may cite only the frozen receipt IDs and the two explicit block reasons; it must refuse any prompt that treats the null result as model skill or as plastic/reef evidence.
+
+Three E2E regressions.
+
+DAS bytes that differ only in the two allow-listed timestamps pass; any other byte change (version, units, schema) blocks the trajectory requests.
+A HYCOM file whose longitude labels are exact float32 and within one ULP of the nominal lattice is accepted, but sampling at exactly −65.0° (beyond the actual −65.04° end) returns OUTSIDE_CURRENT_DOMAIN and retains the cell.
+Replay of the frozen v1 artifacts still yields 36 cells, 0 scored, primary null, and refuses to overwrite the original receipt.

@@ -1123,7 +1123,7 @@ code {
 }
 .camera-grid {
   display: grid;
-  grid-template-columns: minmax(0,1.5fr) minmax(260px,1fr);
+  grid-template-columns: minmax(0,1fr);
   gap: 21px;
   align-items: start;
 }
@@ -2097,6 +2097,36 @@ meter.score-track::-moz-meter-bar {
 }
 .camera-grid .device-controls {
   margin: 18px 0;
+}
+.camera-controls-row {
+  display: grid;
+  grid-template-columns: minmax(130px,170px) auto minmax(180px,1fr);
+  align-items: end;
+  gap: 16px;
+}
+.camera-controls-row > label {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.camera-controls-row input {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: white;
+  color: var(--ink);
+}
+.camera-controls-row .device-controls {
+  margin: 0;
+}
+.camera-control-hint .settings-note {
+  margin: 0;
+}
+@media (max-width: 800px) {
+  .camera-controls-row { grid-template-columns: minmax(0,1fr); align-items: start; }
 }
 .camera-grid .card-link {
   font-size: 10px;

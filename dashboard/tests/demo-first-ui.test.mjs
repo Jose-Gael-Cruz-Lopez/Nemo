@@ -68,6 +68,30 @@ test("Overview has three explicit demo steps, distinguishes separate examples an
   assert.equal((renderToStaticMarkup(React.createElement(DemoGuide, { disabled: true, onTrace: noAction, onPrevention: noAction, onChalk: noAction })).match(/disabled=""/g) ?? []).length, 3);
 });
 
+test("Camera puts the live preview before collapsed tank commissioning and advanced JSON", () => {
+  const file = resolve("app/workspace/page.tsx");
+  const compiled = ts.transpileModule(readFileSync(file, "utf8"), { compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
+  const mod = { exports: {} };
+  new Function("require", "module", "exports", compiled)(name => {
+    // Select the real Camera branch without opening a browser/device or running effects.
+    if (name === "react") return { ...React, useState: initial => React.useState(initial === "overview" ? "camera" : initial) };
+    if (name === "next/navigation") return { useRouter: () => ({ push() {} }) };
+    if (name.endsWith(".module.css")) return { __esModule: true, default: new Proxy({}, { get: (_, key) => String(key) }) };
+    if (name.startsWith(".")) {
+      const base = resolve(dirname(file), name);
+      return component([base, `${base}.tsx`, `${base}.ts`].find(candidate => existsSync(candidate)));
+    }
+    return require(name);
+  }, mod, mod.exports);
+  const html = render(React.createElement(mod.exports.default)), visible = defaultVisible(html);
+  assert.ok(html.indexOf("<h1>Camera</h1>") < html.indexOf(">Live camera</h2>"));
+  assert.ok(html.indexOf(">Live camera</h2>") < html.indexOf("Calibrate a tank and record trials when ready"));
+  assert.match(html, /<details class="details-panel"><summary>Calibrate a tank and record trials when ready<\/summary>/);
+  assert.ok(html.indexOf("Calibrate a tank and record trials when ready") < html.indexOf("Calibration request JSON"));
+  assert.match(visible, /Live USB preview first/);
+  assert.doesNotMatch(visible, /Field commissioning|Mapping pixel points|Calibration request JSON|Measured profile/);
+});
+
 test("Data Lab defaults to one changing-current comparison and keeps historical benchmarks closed", () => {
   const html = render(React.createElement(RealDataLab, { api: "" }));
   const visible = defaultVisible(html);

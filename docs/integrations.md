@@ -8,6 +8,17 @@ dataclasses and inject credentials once. Never send credentials to the browser.
 
 ## Current live verification status — 17 October 2026
 
+### Current configuration versus historical provisioning
+
+The current local server configuration was inspected on 17 October 2026 and selects
+`openai/gpt-6-sol` through `https://api.chalk.ai/v1/router`. Status reports Chalk
+enabled/ready; `connection_verified: false` remains a deliberate readiness-only
+signal. Inspecting it does not make a model request. The Gemini provisioning and
+earlier live-audit paragraphs below are historical checkpoints, not a statement
+that Gemini is the model selected today. This documentation update makes no model
+calls and changes no credentials, provider connections, billing or Photon settings.
+See [the Chalk user guide](chalk-user-guide.md) for the complete feature walkthrough.
+
 The final expanded local HTTP audit completed with **27 PASS, 0 FAIL and
 3 BLOCKED** checks, including a real Chalk REPORT, the training-only diagnostic,
 satellite provenance and frozen briefings. Its blockers are physical webcam/tank
@@ -22,7 +33,7 @@ One human question arrived from the paired Mac. Chalk generated a case-grounded 
 
 Software-only audit scripts deliberately require Photon off and never send messages. Their earlier disabled-Photon blocker is historical evidence of that audit, not the current authorization setting. Private receipts and contacts remain local; neither a ready worker nor HTTP acceptance alone proves delivery.
 
-The existing Google Gemini free-tier key was connected to the teammate-authorized Chalk environment using the native Gemini provider. Chalk's connection test succeeded and discovered 63 models. A new gateway key was issued privately, restricted to that Gemini connection. The user approved connection-wide model scope because Chalk's key picker did not expose the discovered model list. The user separately approved omitting a gateway daily token budget because Chalk's server rejected budgeted keys with `quota enforcement is disabled (set ROUTER_QUOTA_BACKEND)`. **There is no gateway-enforced daily token cap.** ReefTrace requests only `gemini/gemini-3.8-flash`, retains its bounded tool/request deadlines, and Google billing remains on the existing free tier.
+During earlier Gemini provisioning, the existing Google Gemini free-tier key was connected to the teammate-authorized Chalk environment using the native Gemini provider. Chalk's connection test succeeded and discovered 63 models. A gateway key was issued privately, restricted to that Gemini connection. The user approved connection-wide model scope because Chalk's key picker did not expose the discovered model list. The user separately approved omitting a gateway daily token budget because Chalk's server rejected budgeted keys with `quota enforcement is disabled (set ROUTER_QUOTA_BACKEND)`. **That historical key had no gateway-enforced daily token cap.** At that checkpoint ReefTrace requested `gemini/gemini-3.8-flash` and retained bounded tool/request deadlines; Google billing was left on the existing free tier. The current sponsor-router selection is stated above and must not be inferred from these historical settings.
 
 A real gateway request returned HTTP 200. An initial investigation hit a transient provider HTTP 503 after reading the case; a later bounded investigation completed with `provider: chalk`, `live_model_response: true`, `action: REPORT`, successful case/source tool reads and the actual frozen evidence ID. The exact source report remained unchanged and retained `SYNTHETIC` and `physical_validation: false`. Later rehearsals also timed out before the first model response or after a case read. The application now gives each request up to 25 seconds within its original 60-second whole-turn cap and returns safe stage diagnostics on timeout. After that fix and API restart, the final expanded HTTP audit again completed a genuine REPORT, preserving the exact source evidence. This is evidence of that successful turn, not a guarantee of future provider availability. Private local receipts record results without publishing credentials. Readiness remains a configuration check (`connection_verified: false`); a separate successful investigation is the live evidence. No remote Chalk evaluation run has been deployed.
 
@@ -81,6 +92,14 @@ The adapter never authorizes a recovery task or switches a pump. A
 REQUEST_APPROVAL finish only cites a proposal already created by the local backend.
 Runtime cancels invocation-owned proposals after failure, cancellation, STOP or an
 unused proposal finish; an expiry alone would leave an approval-capable orphan.
+
+Source investigations can perform gated workflow writes: the registered sensitivity
+tool saves an analysis; `observe_again` can save a genuine five-second recording in
+a validated LIVE case; `propose_collection` creates an expiring manual-net task.
+The recording does not update the source report or join tracks across a gap, and
+requires operator association review. Synthetic/replay cases cannot record through
+this tool. Prevention and research investigators cannot mutate scientific results,
+trials or hardware; the application can separately save their review receipts.
 
 For a remote sponsor evaluation, use frozen fixture backends, `chalkcompute` tasks,
 and the [evaluation quick start](https://docs.chalk.ai/docs/evaluations/quick-start).

@@ -1,0 +1,15 @@
+Grok
+Worked for 21s
+
+Static review only. No files were fetched, no tests executed, and no implementation claims are made for the in-progress Trace 1/Trace 2 changes. Process hashes and timestamps below are treated as provenance records supplied by the team, not independently verified against NOAA or system clocks.
+
+At most three supported defects in the preregistration/coverage interpretation
+
+Incomplete basin coverage is an operational failure, not a completed pre-registered sample.
+The protocol declared two trajectories from each of three basins (target 6). The Indian metadata request timed out and was not replaced, leaving four acquired IDs and PARTIAL_COVERAGE (96 of 144 model-horizon slots). A four-group mean is therefore conditional on the acquired cohort only. It does not estimate the pre-registered three-basin design, because the missing basin was lost to a post-protocol timeout rather than to a frozen metadata rule that applies uniformly. Reporting the four-group figure without the explicit “acquired-cohort conditional, Indian basin absent” qualifier would overstate coverage.
+“First 2 numeric IDs” is not fully deterministic unless response order is pinned.
+Selection used the first two numeric drifter IDs present in each dated regional metadata query. If “first” means response order rather than a pinned sort of the ID set, the rule is not reproducible across ERDDAP responses. The selection-freeze hash (18533ebe…) locks whatever list was obtained, but does not by itself prove that a re-query would return the same order. The interpretation should state whether the frozen list is the sorted ID set or the raw response order; otherwise the selection step remains only partially specified.
+Process timestamps are not independent verification of data chronology.
+The protocol hash timestamp (2026-10-17T05:40:21.798819Z) and the selection-freeze hash establish that those artifacts existed at the claimed moments in the local process. They do not independently confirm that the acquired 24 h windows match the declared 2000/2010/2020 dates, that no later fixes from the same drifters were inspected, or that the NOAA product timestamps are free of upstream interpolation effects. Those checks require the pinned CSV/metadata bytes themselves. test_data_used: true is correct for the new evaluation scores; the old training-only report correctly remains false.
+
+No other material defect in the stated coverage arithmetic (4 × 4 × 6 = 96 versus 6 × 4 × 6 = 144) or in the rule that group macros are emitted only when every declared acquired group completes is supported by the description given. Upstream hourly interpolation continues to limit any real-time claim even across distinct IDs. No plastic-source or coral-benefit inference is warranted.

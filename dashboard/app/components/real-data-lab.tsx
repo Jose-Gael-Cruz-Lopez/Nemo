@@ -12,6 +12,7 @@ import { CohortVectors } from "./cohort-vectors";
 import { KalmanDiagnostic } from "./kalman-diagnostic";
 import { FreshDrifterStudy } from "./fresh-drifter-study";
 import { OceanPrevention } from "./ocean-prevention";
+import { MatchedCurrentStudy } from "./matched-current-study";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -84,6 +85,7 @@ export function RealDataLab({ api }: { api: string }) {
     <div className="page-heading"><div><p className="kicker">Data Lab · ocean mode</p><h1>Follow the flow. Compare protection.</h1><p className="page-description">One plot for changing-current paths, interception layouts and the protected area.</p></div></div>
     <OceanPrevention api={api} />
     <details className="card"><summary>Research details and historical buoy validation</summary><div className="card-body data-lab-results">
+    <MatchedCurrentStudy api={api} />
     <p className="settings-note">These historical NOAA benchmarks cover different places and dates from the ocean comparison. They test motion models separately; they are not additional trajectories for its map.</p>
     <FreshDrifterStudy api={api} />
     <button className="secondary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running reference replay…" : "Run reference buoy replay"}</button>

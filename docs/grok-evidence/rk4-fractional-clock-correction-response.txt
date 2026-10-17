@@ -1,0 +1,12 @@
+GrokWorked for 5sRevised static review. Prior arithmetic errors and the earlier endorsement of an absolute-epoch progress guard remain rejected in the record. Independent prototyping shows that offset + target <= offset + elapsed falsely censors supported motion: a local step from 45.29670899999999 to the exact knot 45.296709 has positive representable dt ≈ 7e-15, yet recomposed epoch offsets alias. That guard must not be retained.
+Single local axis. Sampling, knot scheduling, acceptance and the progress test all use the same elapsed coordinate formed from integer datetime differences to the requested start. No reconstruction via offset + elapsed occurs. Integer differences are computed with Python int (or checked wide arithmetic) before any NumPy timedelta conversion, avoiding overflow on 1900–2100 spans.
+Why target > elapsed, finite dt > 0 and strict support are sufficient.
+Once every time that enters sample or the knot search is already on the local axis, the only ways a step can be invalid are: non-finite or non-positive dt, failure of target > elapsed (no representable progress on that axis), or a strict contributing-corner/domain rejection at the arrival sample. No additional absolute-epoch comparison is required for safety; the old guard rejects cases the local axis accepts. A positive sub-ULP-for-absolute-epoch interval is integrated on the local axis if target > elapsed holds; if local progress itself is not representable, the step fails closed with TIME_STEP_NOT_REPRESENTABLE and the last supported position is kept. Time is never advanced without a position update, and no epsilon or clamp is introduced.
+Assertions that reject bad progress without rejecting the positive-ULP example.
+
+dt non-finite, dt <= 0, or target <= elapsed → TIME_STEP_NOT_REPRESENTABLE, position unchanged.
+The concrete case elapsed = 45.29670899999999, target = 45.296709 → accepts the step, integrates, and does not raise.
+Arrival sample that requires a masked contributing corner or lies outside the forcing interval → existing MASKED_CURRENT_CELL / OUTSIDE_FORCING_TIME, last accepted point retained.
+One-microsecond-past-final-knot horizon → PARTIAL at the exact final supported local time.
+
+The former “unrepresentable absolute-time progress” expectation is not scientific correctness; coarse absolute serialization is distinct from representable local integration. No claim is made that any numerical agreement constitutes physical accuracy or a model improvement.

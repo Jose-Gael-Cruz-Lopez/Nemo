@@ -1,0 +1,502 @@
+{
+  "schema_version": 1,
+  "purpose": "Archive of inspected historical local Grok evidence and actual static review rounds, with separately labeled local execution receipts and metadata-only draft-study sources; never a complete provider export, proof of Grok execution or new physical validation.",
+  "source_checkpoint_commit": "662d1ac583b5c6e04aa43e74fdd2340218371934",
+  "contains_private_credentials": false,
+  "files": [
+    {
+      "file": "01-initial-build-prompt.txt",
+      "source_artifact_name": "ReefTrace_Grok_Build_Prompt.txt",
+      "bytes": 35255,
+      "sha256": "dcc024de26cababad49055d0d91cd03026ef75c4c3252a25f9d86b8bc047945e",
+      "role": "saved prompt prepared for the existing Grok project",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "02-source-static-review.txt",
+      "source_artifact_name": "ReefTrace_Grok_Code_Review.txt",
+      "bytes": 4169,
+      "sha256": "130d64490933ade4faa56022a5e3049404c2c96baf47eaa122a7f93601a010cf",
+      "role": "saved Grok static review output; execution assertions are not independently attested here",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "03-case-and-chalk-static-review.txt",
+      "source_artifact_name": "ReefTrace_Grok_Final_Review.txt",
+      "bytes": 1769,
+      "sha256": "f568768f3c49c2759dc7a807a3c2b97014c6f07cc40149a848fd59d269cf4ed0",
+      "role": "saved Grok static review output for commit 3a99477",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "04-initial-build-handoff.txt",
+      "source_artifact_name": "ReefTrace_Grok_Handoff.txt",
+      "bytes": 3038,
+      "sha256": "54f5b0b7ebcdc06383fc1e08d0ba913507b905eb3d725ef4601c7c77708b1d35",
+      "role": "historical local handoff, not a Grok-authored response",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "05-initial-local-verification.json",
+      "source_artifact_name": "ReefTrace_Grok_Final_Verification.json",
+      "bytes": 984,
+      "sha256": "c01e43c1d031534ad93277115dcf89f3da18bacd49504a5304028447db07e0b6",
+      "role": "historical local execution receipt, not Grok execution",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "06-initial-source-bundle-verification.json",
+      "source_artifact_name": "ReefTrace_Grok_Handoff_Verification.json",
+      "bytes": 274,
+      "sha256": "6fa2e6c95ff012493288453752d32354c9b6668fbcf1d52b28202416eccb531b",
+      "role": "historical local source-bundle receipt",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "07-kalman-build-prompt.txt",
+      "source_artifact_name": "grok-kalman-prompt.txt",
+      "bytes": 6573,
+      "sha256": "0530c94f4eeadadd57c2395d51d96c510369c8e5e631295e21a22740dd66c067",
+      "role": "saved prompt prepared for the existing Grok project",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "08-kalman-static-review.txt",
+      "source_artifact_name": "grok-kalman-review.txt",
+      "bytes": 22606,
+      "sha256": "95b1f47214b9dcd23f3b27c4ee6e85084a7c3676021463856457992140372899",
+      "role": "saved Grok review/conversation capture; includes historical drafts and corrections",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "09-kalman-draft-code.txt",
+      "source_artifact_name": "grok-kalman-corrected.py",
+      "bytes": 3533,
+      "sha256": "3211491b5637ec173f4206042df41672a6d4e9b7d42072e1b015a589cf4179c5",
+      "role": "saved draft; not the authoritative current implementation",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "10-fresh-protocol-static-review.txt",
+      "source_artifact_name": "grok-fresh-protocol-review.txt",
+      "bytes": 2537,
+      "sha256": "17d3d375fb15e302d9a95c0dfc648ebc7738ef58b02077110bc1c55686b44164",
+      "role": "saved Grok static protocol review output",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "11-fresh-schema-static-review.txt",
+      "source_artifact_name": "grok-fresh-schema-review.txt",
+      "bytes": 2501,
+      "sha256": "ea3e9ca9a9a3542b7bf3db62dd69ddcd50731d38d3c85bbb7f1c25bc32ef7638",
+      "role": "saved Grok static schema/amendment review output",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "12-fresh-forecast-static-review.txt",
+      "source_artifact_name": "grok-fresh-forecast-review.txt",
+      "bytes": 1514,
+      "sha256": "d309cba3606ad9370caf764e3ae2961e5890dd835d084cb6fa116925e451e8c8",
+      "role": "saved Grok static evaluator review output",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "13-algorithm-and-demo-static-review.txt",
+      "source_artifact_name": "grok-algorithm-demo-review.txt",
+      "bytes": 4628,
+      "sha256": "46055e3c673caf64cb6b1bb2e81c637ecd1de5092d2c0b4cb69eea88e6d665b4",
+      "role": "saved Grok static algorithm/demo review; later corrected in item 14",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "14-final-accounting-conversation-capture.txt",
+      "source_artifact_name": "grok-final-accounting-review.txt",
+      "bytes": 9530,
+      "sha256": "a5062e2d165c066f8c18afdb7104cdc0cccf4119bd6367e325a1446495f3b151",
+      "role": "saved browser accessibility-text capture, including repeated/corrected historical messages",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-review-prompt.txt",
+      "source_artifact_name": "rk4-knot-review-prompt.txt",
+      "bytes": 18615,
+      "sha256": "0d9f7638b60aca4994d09e4461aafe16afe71fa524a68ea190a0ce32f109261d",
+      "role": "actual outbound Grok web prompt: initial forcing-knot and expiry review",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-review-initial-response.txt",
+      "source_artifact_name": "rk4-knot-review-initial-response.txt",
+      "bytes": 5395,
+      "sha256": "eafe86340f63c6506a0be566922373448c45f47c4248c597c2ab882ede2dde0e",
+      "role": "saved Grok static response: includes rejected arithmetic and time-only snap",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-correction-prompt.txt",
+      "source_artifact_name": "rk4-knot-correction-prompt.txt",
+      "bytes": 2366,
+      "sha256": "74558363dfd41520e9bb08707e9d38ffc72dda93e9b68d972099b49758debfc8",
+      "role": "actual outbound Grok web prompt: no-snap contract and arithmetic correction",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-knot-corrected-response.txt",
+      "source_artifact_name": "rk4-knot-corrected-response.txt",
+      "bytes": 3851,
+      "sha256": "9ba237abcd174f45d9a9ad0c637a443ad8259de707c3a5e76bfa89cdf3092048",
+      "role": "saved Grok static response: retains an integral error corrected subsequently",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-final-math-and-code-prompt.txt",
+      "source_artifact_name": "rk4-final-math-and-code-prompt.txt",
+      "bytes": 1977,
+      "sha256": "8cdc935af43c5ef65eec28c81f9137dba9c579fef6176ff5a553a7bee12f7cdf",
+      "role": "actual outbound Grok web prompt: independent integrals and sensitivity contract",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-final-code-review-response.txt",
+      "source_artifact_name": "rk4-final-code-review-response.txt",
+      "bytes": 2828,
+      "sha256": "3b1cc7ee964e5ece4ae6ed3e029e549ddec1c8fab581ff3e12a22a3563da1d49",
+      "role": "saved Grok static response: accidental rejection of valid alternate-horizon integral and restrictive comparison advice not adopted",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-actual-patch-review-prompt.txt",
+      "source_artifact_name": "rk4-actual-patch-review-prompt.txt",
+      "bytes": 24590,
+      "sha256": "b228ee43f706b0394430676d8d265720fb60c6a762a7e00f98be2995c3d004a9",
+      "role": "actual outbound Grok web prompt: actual local scheduling patch and regressions",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-actual-patch-review-response.txt",
+      "source_artifact_name": "rk4-actual-patch-review-response.txt",
+      "bytes": 3017,
+      "sha256": "109fa54c04053751239ef47b0959d4623d995b9a3a1893ec9adeda16ded5b76b",
+      "role": "saved Grok static adversarial response: no actionable defect found, not execution; restrictive COMPLETED-only advice not adopted",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "rk4-patch-local-verification.json",
+      "source_artifact_name": "rk4-patch-local-verification.json",
+      "bytes": 5722,
+      "sha256": "ba297bd96e15eb00397db452c3e650713648ccc356cae8ff2c475df484356208",
+      "role": "local Python patch regression and exact pre-patch replay receipt, not Grok execution or new field evidence",
+      "copied_without_text_edits": true
+    },
+    {
+      "file": "15-motion-ablation-code-assistance.txt",
+      "source_artifact_name": "grok-motion-ablation-code.txt",
+      "source_relative_path": "work/grok-motion-ablation-code.txt",
+      "bytes": 6362,
+      "sha256": "f1f2d6c29ae051d55a8b060570e431e5fc8f3f4eb7153ff74674cda059e78345",
+      "role": "saved Grok code-assistance response with draft functions/regression sketches; static assistance, not executed code or the authoritative implementation",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "16-motion-ablation-static-review.txt",
+      "source_artifact_name": "grok-motion-ablation-review.txt",
+      "source_relative_path": "work/grok-motion-ablation-review.txt",
+      "bytes": 2010,
+      "sha256": "de38f43baa4da379e3fd1945330a291558ae22fc621070ac377c4932e2f3759c",
+      "role": "saved Grok static review of the pasted ablation implementation; no repository fetch or test execution claimed",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "17-multidrifter-design-assistance.txt",
+      "source_artifact_name": "grok-multidrifter-design.txt",
+      "source_relative_path": "work/grok-multidrifter-design.txt",
+      "bytes": 4778,
+      "sha256": "31f4bb12a3f418afa10a144b8b29bfed43e96381f832bf35f0a0da3b7a30cd0f",
+      "role": "saved Grok protocol/design draft; contains placeholder/global-variable sketches, not standalone accepted executable code",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "18-multidrifter-final-static-review.txt",
+      "source_artifact_name": "grok-multidrifter-final-review.txt",
+      "source_relative_path": "work/grok-multidrifter-final-review.txt",
+      "bytes": 1937,
+      "sha256": "bf916eb4fcfe99ab0ffe98297be8d6b45d8378f549cee400322f8910c178709e",
+      "role": "saved Grok static source review of the supplied four-group implementation; not a local execution receipt",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "19-cohort-coverage-static-review.txt",
+      "source_artifact_name": "grok-cohort-review.txt",
+      "source_relative_path": "work/grok-cohort-review.txt",
+      "bytes": 2794,
+      "sha256": "62ecf81f70e1392cbf0b5fe1fbe4fe80bbccbf54dc8dd2001c2965ec00ba9b1d",
+      "role": "saved Grok static coverage/preregistration interpretation; the sorting critique is advice to check, not proof of a sorting defect",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "20-trace3-review-conversation-capture.txt",
+      "source_artifact_name": "grok-trace3-review.txt",
+      "source_relative_path": "work/grok-trace3-review.txt",
+      "bytes": 14010,
+      "sha256": "e4318edde4f00317e4d4103ae447b26cacc3a487a403e8884dc7a884df105428",
+      "role": "partial browser conversation capture covering prevention and unpublished Trace 3 design; starts mid-sentence and includes UI/repeated context, not a complete provider export",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "21-ml-response-page-capture.txt",
+      "source_artifact_name": "grok-ml-response-page.txt",
+      "source_relative_path": "work/grok-ml-response-page.txt",
+      "bytes": 55755,
+      "sha256": "0be1b87683836203f1ff226bd633915ab7e41e47afe4f2298c4ae40b8d7e512d",
+      "role": "larger browser accessibility-text capture with historical ML prompt/response/project context and UI; overlaps earlier records, not independent execution or a complete provider export",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "22-final-review-page-capture.txt",
+      "source_artifact_name": "grok-final-review-page.txt",
+      "source_relative_path": "work/grok-final-review-page.txt",
+      "bytes": 48054,
+      "sha256": "ca024a9ab0551f248c5996594893d0bddf96f1ffc10c4688cd7a476ab7b774d9",
+      "role": "larger browser accessibility-text capture with earlier benchmark/static-review history and UI; overlapping source context, not a complete provider export or test execution",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "rk4-fractional-clock-review-prompt.txt",
+      "source_artifact_name": "rk4-fractional-clock-review-prompt.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-review-prompt.txt",
+      "bytes": 2342,
+      "sha256": "3104b894bb8a8096d384d3684fc2a875141bc468cdb126ca6e6151d70085cc45",
+      "role": "actual outbound static repair-review prompt; synthetic fractional-time fixture, not a new field experiment",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-fractional-clock-review-response.txt",
+      "source_artifact_name": "rk4-fractional-clock-review-response.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-review-response.txt",
+      "bytes": 2864,
+      "sha256": "713d019aeb67b2039b1657922b270aa85df1a6e5c4053b3255d3eeca6b4a1367",
+      "role": "saved static response with rejected advice to retain an absolute-epoch progress guard; no execution",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-fractional-clock-correction-prompt.txt",
+      "source_artifact_name": "rk4-fractional-clock-correction-prompt.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-correction-prompt.txt",
+      "bytes": 1696,
+      "sha256": "744be333b508ae39d800d928e21ff865626625729411ab5df501cbd6156353b2",
+      "role": "actual correction prompt rejecting the epoch guard using a reported bounded prototype; not a formal suite receipt",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-fractional-clock-correction-response.txt",
+      "source_artifact_name": "rk4-fractional-clock-correction-response.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-correction-response.txt",
+      "bytes": 2498,
+      "sha256": "62ea38ce4758000f192a60a44e6fa68da46d7e3d808db05e67d8956d49d214d1",
+      "role": "saved corrected static response explicitly rejecting the old epoch guard; local-axis support/progress discussion, not execution",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-relative-time-verification.json",
+      "source_artifact_name": "rk4-relative-time-verification.json",
+      "source_relative_path": "../work/rk4-relative-time-verification.json",
+      "bytes": 2158,
+      "sha256": "8682ee4651110f5d5be220f304ca1a95e82584138044f78b99d4a96dac7957f9",
+      "role": "separate local execution receipt: 234 related tests/Ruff and six exact snapshot tracks plus both scenarios unchanged; not Grok execution or new field/physical validation",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-final-relative-implementation-review-prompt.txt",
+      "source_artifact_name": "rk4-final-relative-implementation-review-prompt.txt",
+      "source_relative_path": "../work/rk4-final-relative-implementation-review-prompt.txt",
+      "bytes": 32153,
+      "sha256": "f0f598fe9613a7819de1f7262256b063eee345376ee08b8a919d2e8e7af5600e",
+      "role": "Stage J actual outbound implementation-review prompt with current source/regressions; static review input, not model execution",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage J implementation review or Stage K draft feasibility design review; saved provider text, not execution."
+    },
+    {
+      "file": "rk4-final-relative-implementation-review-response.txt",
+      "source_artifact_name": "rk4-final-relative-implementation-review-response.txt",
+      "source_relative_path": "../work/rk4-final-relative-implementation-review-response.txt",
+      "bytes": 2404,
+      "sha256": "9c78aa7220cd18dd8af239d1c295c09e5bfc827d8e12f785021b5eb9b5d120da",
+      "role": "Stage J static review finding direct CurrentSampler time_origin lacked the explicit supported-calendar guard; no execution claimed",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage J implementation review or Stage K draft feasibility design review; saved provider text, not execution."
+    },
+    {
+      "file": "grok-matched-current-design-review-prompt.txt",
+      "source_artifact_name": "grok-matched-current-design-review-prompt.txt",
+      "source_relative_path": "../work/grok-matched-current-design-review-prompt.txt",
+      "bytes": 16788,
+      "sha256": "43485bea66664e53e4f152590bfccfec67a6d836d26916f143bc25a6c9fe077a",
+      "role": "Stage K actual outbound pre-acquisition design-review prompt; draft metadata-only feasibility study, no scientific-value acquisition",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage J implementation review or Stage K draft feasibility design review; saved provider text, not execution."
+    },
+    {
+      "file": "grok-matched-current-design-review-response.txt",
+      "source_artifact_name": "grok-matched-current-design-review-response.txt",
+      "source_relative_path": "../work/grok-matched-current-design-review-response.txt",
+      "bytes": 4368,
+      "sha256": "1ce25012167a9ec3c3709e0fbc5f4d881613270db3b9b918466ca4c4a869d04f",
+      "role": "Stage K initial static design advice; preserves rejected longitude fixture and incorrect immediate-unsupported/PARTIAL expectation",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage J implementation review or Stage K draft feasibility design review; saved provider text, not execution."
+    },
+    {
+      "file": "grok-matched-current-design-correction-prompt.txt",
+      "source_artifact_name": "grok-matched-current-design-correction-prompt.txt",
+      "source_relative_path": "../work/grok-matched-current-design-correction-prompt.txt",
+      "bytes": 1600,
+      "sha256": "1684af70667c39470cd898f856d5fd979f5bdfb8ec85be71123dbdeee291c52b",
+      "role": "Stage K correction rejecting weak longitude and partial-prefix tests and clarifying context/assimilation boundaries; no scientific values or scores",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage J implementation review or Stage K draft feasibility design review; saved provider text, not execution."
+    },
+    {
+      "file": "grok-matched-current-design-correction-response.txt",
+      "source_artifact_name": "grok-matched-current-design-correction-response.txt",
+      "source_relative_path": "../work/grok-matched-current-design-correction-response.txt",
+      "bytes": 1834,
+      "sha256": "ec239ac84085adf1bd76b3ebd1c696bd02ae689bc03d020d321c5ee5b7a24810",
+      "role": "Stage K corrected static test proposal with four time knots; accepted as a reader-test design, not an implemented/executed study",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage J implementation review or Stage K draft feasibility design review; saved provider text, not execution."
+    },
+    {
+      "file": "rk4-final-local-verification.json",
+      "source_artifact_name": "rk4-final-local-verification.json",
+      "bytes": 11751,
+      "sha256": "1612a9f06f9ee76eddcced606ff0db5c06ff2fd164bd46268513ca0da8865df6",
+      "role": "Stage J safe local post-guard verification receipt:1365 Python/191 frontend/137 guarded HTTP tests, exact recorded prepatch comparison scope, local browser and final-identity live Chalk; not Grok execution, hosted CI or physical validation",
+      "copied_without_text_edits": true,
+      "inventory_append": "Safe root-generated local execution receipt; pending final scientific commit/hosted CI at capture."
+    }
+  ],
+  "completeness": "Forty-three locally saved raw Grok/local-receipt artifacts plus separately manifested draft-study/public metadata sources; overlapping/partial captures do not establish unique turns or a complete provider export.",
+  "append_checkpoint": "17 October 2026: four actual Grok web RK4 prompt/response rounds and separate local patch-verification receipt.",
+  "artifact_count": 43,
+  "rediscovered_append_source_baseline": "d42a386b17628fdf135f38c59542aeb4b65587c3",
+  "rediscovered_append_scan": {
+    "new_artifact_count": 8,
+    "new_source_bytes": 135700,
+    "source_bytes_preserved": true,
+    "categories": [
+      "home_path",
+      "provider_key",
+      "email_address",
+      "phone_number",
+      "redeemable_credit_code"
+    ],
+    "findings": 0,
+    "provider_calls": false,
+    "code_execution_claimed": false
+  },
+  "fractional_clock_append": {
+    "stage": "I",
+    "artifact_count": 5,
+    "prompt_response_pairs": 2,
+    "local_execution_receipts": 1,
+    "new_source_bytes": 11558,
+    "privacy_findings": 0,
+    "source_bytes_preserved": true,
+    "related_tests_passed": 234,
+    "ruff": "passed",
+    "pinned_track_count": 6,
+    "fixed_scenario_count": 2,
+    "full_integration_live_verification": "pending",
+    "new_field_or_physical_evidence": false,
+    "reported_prototype_24_of_492_is_formal_suite_count": false,
+    "external_500_case_chat_report_claimed_as_local_execution": false
+  },
+  "final_append_scan": {
+    "six_prompt_response_files": 6,
+    "source_bytes": 59147,
+    "private_pattern_findings": 0,
+    "source_bytes_preserved": true,
+    "new_provider_calls_by_archivist": false
+  },
+  "supporting_draft_metadata": [
+    {
+      "file": "docs/research-evidence/matched-current-metadata/gdp-hourly.das",
+      "bytes": 18686,
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39",
+      "role": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+    },
+    {
+      "file": "docs/research-evidence/matched-current-metadata/gdp-hourly.dds",
+      "bytes": 1312,
+      "sha256": "758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad",
+      "role": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+    },
+    {
+      "file": "docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv",
+      "bytes": 640,
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+      "role": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+    },
+    {
+      "file": "docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml",
+      "bytes": 159404,
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d",
+      "role": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+    },
+    {
+      "file": "docs/research-evidence/matched-current-metadata/receipt.json",
+      "bytes": 2640,
+      "sha256": "56328dff9fe82945fe0756967e1334a55471a5735f9e846bae721a186e88c993",
+      "role": "Safe derived metadata-only transport receipt; no scientific values, positions, scores or frozen protocol"
+    }
+  ],
+  "supporting_draft_study": {
+    "file": "docs/matched-current-study-plan.md",
+    "bytes": 22788,
+    "sha256": "5d29d877faeb010582189b5e97a0438f6021e3d42ebc2576306b1fd75f31a7c6",
+    "status": "DRAFT_NOT_FROZEN_NO_SCIENTIFIC_VALUE_ACQUISITION"
+  },
+  "public_metadata_privacy_note": "Exact NOAA DAS includes its public institutional contact twice; this is public source-institution metadata, not a private user contact. Other private-pattern findings: zero.",
+  "final_implementation_append": {
+    "stage": "J",
+    "static_prompt_response_pairs": 1,
+    "safe_local_verification_receipts": 1,
+    "python_passed": 1365,
+    "frontend_passed": 191,
+    "guarded_http_passed": 137,
+    "guarded_http_failed": 0,
+    "expected_external_or_physical_blockers": 6,
+    "live_chalk_report_with_final_identities": true,
+    "prepatch_comparison_scope": "six track arrays and recursive recorded layout fields plus baseline outcomes checked with unchanged event evaluator; not equality of unrecorded fields",
+    "final_scientific_commit_and_hosted_ci": "pending_at_receipt_capture",
+    "physical_validation": false
+  },
+  "matched_current_design_append": {
+    "stage": "K",
+    "actual_static_prompt_response_pairs": 2,
+    "study_status": "DRAFT_NOT_FROZEN",
+    "reader_implemented_and_verified": false,
+    "scientific_trajectory_positions_acquired": false,
+    "current_vector_values_acquired": false,
+    "model_fits_or_scores_computed": false,
+    "physical_trials": 0,
+    "metadata_bodies": 4,
+    "safe_derived_receipts": 1,
+    "rejected_initial_longitude_test": "[0,0.08] does not exercise western Atlantic normalization",
+    "rejected_initial_partial_test": "masking first future knot before positive motion is UNSUPPORTED, not PARTIAL",
+    "accepted_corrected_test_design_not_execution": "[280,281] normalization and separate immediate-unsupported/four-knot partial-prefix cases"
+  }
+}

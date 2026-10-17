@@ -5,17 +5,18 @@
  * /field-sessions endpoints only re-verify those artifacts and freeze a receipt.
  * Lane 3 mounts this component; props are documented in docs/field-commissioning.md.
  */
-import Image from "next/image";
-import { useCallback, useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ATTESTATION_KEYS, DRAFT_KEY, addRecording, buildCalibrationRequest, buildFieldRequest, buildFlowRequest, buildProfile, canFreeze,
   decodeDraft, deriveSteps, encodeDraft, failureNotice, invalidateAfter, newDraft, parseCalibration, parseCameraStatus, parseCase,
-  parseFlow, parseManifestDetail, parsePreflight, parseProfile, parseRecording, parseRigCheck, previewPixel, requestKey,
-  type AttestationKey, type CameraStatus, type Draft, type LengthUnit, type ManifestDetail, type Preflight, type StepId, type StepView,
+  parseFlow, parseManifestDetail, parsePreflight, parseProfile, parseRecording, parseRigCheck, requestKey,
+  type AttestationKey, type CalibrationReport, type CameraStatus, type Draft, type LengthUnit, type ManifestDetail, type Preflight, type StepId, type StepView,
 } from "./field-workflow-state";
 import styles from "./field-workflow.module.css";
 import { RecordedFlowVectors } from "./recorded-flow-vectors";
 import { RecordedFlowTrajectories } from "./recorded-flow-trajectories";
+import { CalibrationCameraPreview } from "./camera-plane";
+import type { Point } from "./camera-grid-state";
 
 type Request = <T>(path: string, body?: unknown, options?: { signal?: AbortSignal; independent?: boolean }) => Promise<T>;
 export type FieldWorkflowProps = {
@@ -28,6 +29,9 @@ export type FieldWorkflowProps = {
   onBusyChange?: (busy: boolean) => void;
   onOpenCase?: (caseId: string) => void;
   blocked?: boolean;
+  /** Closed setup retains the draft without a second hidden camera connection. */
+  previewActive?: boolean;
+  onMappingChange?: (mapping: CalibrationReport | null) => void;
 };
 
 const TITLES: Record<StepId, string> = {
@@ -63,7 +67,7 @@ function Step({ item, n, children }: { item: StepView; n: number; children: Reac
   </section>;
 }
 
-export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOperator, onBusyChange, onOpenCase, blocked = false }: FieldWorkflowProps) {
+export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOperator, onBusyChange, onOpenCase, blocked = false, onMappingChange, previewActive = true }: FieldWorkflowProps) {
   // Restored after mount: the server render has no sessionStorage, so reading it during render would not hydrate.
   const [draft, setDraft] = useState<Draft>(newDraft);
   const [restored, setRestored] = useState(false);
@@ -76,7 +80,6 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const [notice, setNotice] = useState("");
   const [pickTarget, setPickTarget] = useState<"mapping" | "check">("mapping");
   const [rigChecks, setRigChecks] = useState<Record<string, boolean>>({});
-  const [tick, setTick] = useState(0);
   const mounted = useRef(true);
   const running = useRef(false);
 
@@ -92,7 +95,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const refreshCamera = useCallback(async () => {
     try {
       const status = await request<{ camera: unknown }>("/status", undefined, { independent: true });
-      if (mounted.current) { setCamera(parseCameraStatus(status.camera)); setTick(value => value + 1); }
+      if (mounted.current) setCamera(parseCameraStatus(status.camera));
     } catch { if (mounted.current) setCamera(null); }
   }, [request]);
 
@@ -129,6 +132,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const steps = deriveSteps(draft, camera, preflight, preflightKey);
   const view = (id: StepId) => steps.find(step => step.id === id)!;
   const sessionCurrent = !!camera?.fresh && camera.session_id === draft.cameraSessionId;
+  useEffect(() => { onMappingChange?.(sessionCurrent ? draft.calibration : null); }, [onMappingChange, sessionCurrent, draft.calibration]);
   const duration = Number(draft.durationS);
   const durationValid = Number.isFinite(duration) && duration >= 1 && duration <= 20;
 
@@ -136,13 +140,11 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
     return parseRecording(await request<unknown>("/camera/record", { ...body, duration_s: duration }));
   }
 
-  function pick(event: MouseEvent<HTMLImageElement>) {
+  function pick([x, y]: Point) {
     if (locked || !sessionCurrent) return;
     if (!camera?.width || !camera.height) return;
-    const box = event.currentTarget.getBoundingClientRect();
-    const [x, y] = previewPixel(event.clientX - box.left, event.clientY - box.top, box.width, box.height, camera.width, camera.height);
     const key = pickTarget === "mapping" ? "mappingPixels" : "checkPixels";
-    update(current => ({ ...current, [key]: `${current[key].trim() ? current[key].trimEnd() + "\n" : ""}${x}, ${y}` }));
+    update(current => ({ ...current, [key]: `${current[key].trim() ? current[key].trimEnd() + "\n" : ""}${x.toFixed(1)}, ${y.toFixed(1)}` }));
   }
 
   const rigView = view("rig_state");
@@ -172,7 +174,8 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
 
       <Step item={view("water_plane_mapping")} n={2}>
         <div className={styles.form}>
-          {sessionCurrent && camera?.width && camera.height ? <div className={styles.preview}><Image unoptimized width={camera.width} height={camera.height} src={`${apiBase}/api/v1/camera/frame.jpg?t=${tick}`} alt="Latest frame. Click a mark to add its pixel position." onClick={pick} /></div> : <p className={styles.explain}>A preview appears when the selected session has fresh frames.</p>}
+          {sessionCurrent && camera?.width && camera.height ? <div className={styles.preview}><CalibrationCameraPreview visible={previewActive} apiBase={apiBase} width={camera.width} height={camera.height} sessionId={camera.session_id} active={sessionCurrent} calibration={draft.calibration} onPick={pick} /></div> : <p className={styles.explain}>A preview appears when the selected session has fresh frames.</p>}
+          <p className={styles.explain}>Choose one fixed water-surface corner as (0, 0), +x to the right and +y away from you. Measure at the actual water level, not the tank bottom. Use at least four spread-out mapping marks and three separate check marks. The image pixel axes and your tank axes may point differently.</p>
           <div className={styles.grid2}>
             <label>Clicking the preview adds to<select value={pickTarget} disabled={locked} onChange={event => setPickTarget(event.target.value as "mapping" | "check")}><option value="mapping">Mapping pixel points</option><option value="check">Check pixel points</option></select></label>
             <label>Measured unit<select value={draft.unit} disabled={locked} onChange={event => field("unit")(event.target.value as LengthUnit)}><option value="cm">Centimetres</option><option value="mm">Millimetres</option><option value="in">Inches</option></select></label>
@@ -185,7 +188,8 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
           </div>
           <label>Check-point tolerance (cm, declared before fitting)<input inputMode="decimal" value={draft.maxErrorCm} disabled={locked} onChange={event => field("maxErrorCm")(event.target.value)} /></label>
           <div className={styles.actions}><button className="primary-button" disabled={locked || !sessionCurrent} onClick={() => void run("Fitting and validating the mapping", async () => {
-            const calibration = parseCalibration(await request<unknown>("/vision/calibrate", buildCalibrationRequest(draft, camera)));
+            const body = buildCalibrationRequest(draft, camera);
+            const calibration = parseCalibration(await request<unknown>("/vision/calibrate", body), body.pixel_points);
             update(current => ({ ...invalidateAfter(current, "water_plane_mapping"), calibration }));
             if (!calibration.approved) setNotice("The mapping was saved but not approved. Recording stays blocked until a new mapping passes.");
           })}>Fit and validate mapping</button></div>
@@ -194,6 +198,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
 
       <Step item={view("drift_recordings")} n={3}>
         <div className={styles.form}>
+          <p className={styles.explain}>After mapping: vₓ = (x₂ − x₁) / Δt and vᵧ = (y₂ − y₁) / Δt, in cm/s. The software uses recorded timestamps and never converts pump GPH into token speed. A live image alone does not supply measured velocity.</p>
           <label>Recording length (1–20 s)<input inputMode="decimal" value={draft.durationS} disabled={locked} onChange={event => field("durationS")(event.target.value)} /></label>
           <p className={styles.explain}>Release one token per run and keep it in view. Gaps or a second token split the track; they are never joined.</p>
           <div className={styles.actions}>

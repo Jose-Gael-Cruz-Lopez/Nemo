@@ -5,6 +5,7 @@ import { BRAND_NAME } from "./brand";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Icon } from "./icons";
 import { ValidationWorkspace } from "./validation-report";
+import { TankSimulator } from "./tank-simulator";
 import { validationAnswerMatches } from "./validation-report-state";
 import type { SourceProfile } from "./source-map";
 import { canCorrectRejectedTrial, currentPreventionAnswer, decodePendingTrial, definitiveTrialStatus, parseProtectedZone, pendingTrialKey, safeInvestigationFailure, sourceCaseChanged, validTrialObservation, type PendingTrial, type TrialSubmission } from "./prevention-state";
@@ -215,7 +216,8 @@ export function ComparisonDetail({ report, cases, disabled, request, mutate, onU
     <section className="card"><div className={`card-header ${styles.header}`}><div><h2 className="card-title">{c.name}</h2><p className="card-subtitle">Will a collector reduce entry into the protected area?</p></div><span className={`pill ${c.data_origin === "SYNTHETIC" ? "amber" : "neutral"}`}>{c.data_origin === "SYNTHETIC" ? "SYNTHETIC DEMONSTRATION" : "Measured layout inputs"}</span></div><div className="card-body">
       {!current && <p className={styles.scope} role="status"><strong>Archived comparison.</strong> Its source case was stopped, changed or recomputed. Read its frozen evidence; create a fresh comparison before adding trials or asking Chalk.</p>}
       <div className={styles.badges}><span className="pill">Source evidence: {c.source_evidence_status}</span><span className="pill">{c.horizon_s}s horizon</span></div>
-      <div className={styles.maps}><LayoutMap profile={c.baseline_profile} zone={c.protected_zone_cm} label="Baseline" paths={numerical.nominal_paths} /><LayoutMap profile={c.intervention_profile} zone={c.protected_zone_cm} label="Intervention" paths={numerical.nominal_paths} /></div>
+      <TankSimulator key={`${c.id}:${report.evaluation.snapshot_hash}`} comparisonId={c.id} evaluationHash={report.evaluation.snapshot_hash} current={current} request={request} operatorConnected={operatorConnected} onRequireOperator={onRequireOperator} measured={c.data_origin === "MEASURED_TANK"} />
+      <details className="details-panel"><summary>Accessible 2D layout maps</summary><div className={styles.maps}><LayoutMap profile={c.baseline_profile} zone={c.protected_zone_cm} label="Baseline" paths={numerical.nominal_paths} /><LayoutMap profile={c.intervention_profile} zone={c.protected_zone_cm} label="Intervention" paths={numerical.nominal_paths} /></div></details>
       <div className={styles.mapLegend}><span><i className={`${styles.key} ${styles.protectedKey}`} />Protected-zone proxy</span><span><i className={`${styles.key} ${styles.trapKey}`} />Collector / retention area</span><span><i className={`${styles.key} ${styles.pathKey}`} />Representative simulated route</span></div>
     </div></section>
     <section className="card"><div className="card-header"><div><h2 className="card-title">Which layout lets fewer tokens through?</h2><p className="card-subtitle">Simulation only · {readable(numerical.status)}</p></div></div><div className="card-body">

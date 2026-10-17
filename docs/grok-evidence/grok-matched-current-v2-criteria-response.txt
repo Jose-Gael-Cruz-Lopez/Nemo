@@ -1,0 +1,18 @@
+**A. Design decision**  
+**GO for a distinct v2 protocol, conditional on the two corrections remaining exactly as stated.** No flaw that invalidates the amendment is present, provided: (1) only the two full-second UTC tokens on the exact `(local files)` line and the exact DAS URL line are canonicalized, both must match the same capture time, and every other byte (including `Version v2.01`) is preserved; (2) latitude labels are exact `float32(25+0.04*i)` promotions and longitude labels lie within one float32 ULP of `float32(280+0.08*i)` with no snapping; (3) sampling uses the actual saved coordinates, so the observed eastern end near −65.04° is never extended to −65°; (4) v2 carries a new protocol/code hash, binds to the v1 diagnosis, and discloses that HYCOM bytes were already decoded. This is not approval of an unseen implementation, not a rewrite of v1, and not a claim of improved skill.
+
+**B. Hostile tests**  
+- DAS bytes differing only in the two allow-listed timestamps (same capture time) pass; a third timestamp, a malformed date, a duplicate token in another context, or any change to version/units/schema blocks.  
+- Longitude labels at the lower end (280°) and upper end (within one ULP of 294.96°) are accepted and sampled as-is; a label two ULPs away, a coarsened count, a shifted origin, or a request that invents support at exactly −65° is rejected with the cell retained.  
+- A file whose float64 labels are not exact float32 promotions, or whose depth/time/units differ, fails closed before any trajectory request.
+
+**C. RK4 in this setting**  
+RK4 estimates the next geographic position by sampling the current at the start, two midpoints and the end of a short step, then taking a weighted average; steps are split at forcing knots so no stage crosses a slope break.  
+With east/north velocities \(u,v\) in m/s and WGS84 metres-per-degree \((m_\lambda,m_\phi)\),  
+\[
+\frac{d\phi}{dt}=\frac{v}{m_\phi},\qquad\frac{d\lambda}{dt}=\frac{u}{m_\lambda}.
+\]  
+Numerical integration error is the residual of the RK4 step on the interpolated field; interpolation error is the bilinear/linear reconstruction of \(u,v\); current-model error is the difference between the HYCOM analysis and the true water motion. None of these is plastic or tank accuracy.
+
+**D. Display rules**  
+Data Lab and Chalk must show “36 planned cells, \(N\) scored, primary withheld” whenever \(N<36\). Primary equal-ID macro ADE/FDE appears only when all 36 cells score. Partial common-support summaries are labelled secondary with explicit counts, IDs and times; no winner is selected from unequal supports. No learned-ML, operational, plastic, reef or tank claim is permitted. The v1 failure text remains visible and is not replaced by a v2 success.

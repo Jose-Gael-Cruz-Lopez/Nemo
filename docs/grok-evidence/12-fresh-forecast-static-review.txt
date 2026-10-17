@@ -1,0 +1,14 @@
+Grok
+Worked for 33s
+
+Static review only. No execution or accuracy claim.
+
+No must-fix numerical or causality bug.
+
+Forecasts before future coordinates. _prepare builds every model track from the 18-point prefix (xy, times) and future times only. Future latitude_deg/longitude_deg properties are read only later in _score via _point(..., limited=False). All 30 tracks (6 groups × 5 models) are therefore materialized before any future position access.
+Free-running vectors. Velocity residuals start from forecast_anchor (filtered state for Kalman, raw last prefix position otherwise) and then step with predicted versus observed displacements. No reset to truth.
+Invalid future truth. Any unavailable held-out point sets full_truth=False, withholds the whole model track, stores nullable points, and leaves the 6 cells failed. Far future truth uses limited=False and is not rejected by the 50 km forecast-domain cap; forecast means still pass through frame.to_latlon (50 km enforced).
+Failure accounting. scored counts only complete scored rows; failed_outcomes = attempted - scored; common-target metrics and COMPLETED are emitted only when scored==180. Per-group rows remain visible on partial failure.
+Intervals. Schema enforcement of exact hourly UTC windows makes adjacent intervals unique by construction; no additional silent filter is applied.
+
+The implementation matches the frozen protocol’s causality and accounting rules. No change is required before the local leakage tests and the pre-score freeze.

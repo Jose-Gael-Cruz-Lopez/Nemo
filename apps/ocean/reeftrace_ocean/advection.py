@@ -72,7 +72,7 @@ class CurrentSampler:
     are rejected rather than stitched or extrapolated.
     """
 
-    def __init__(self, field: OceanField):
+    def __init__(self, field: OceanField, *, time_origin: np.datetime64 | None = None):
         if not isinstance(field, OceanField):
             raise TypeError("An OceanField with geographic coordinates and m/s velocities is required")
         self.field = field
@@ -91,7 +91,19 @@ class CurrentSampler:
             raise ValueError("Current times are outside the bounded calendar")
         if len(when) < 2 or np.any(np.diff(when) <= np.timedelta64(0, "s")):
             raise ValueError("Current forcing needs at least two strictly increasing times")
-        self.epoch = when[0]
+        if time_origin is not None and (not isinstance(time_origin, np.datetime64)
+                                        or np.isnat(time_origin)):
+            raise ValueError("Current time origin must be a decoded finite datetime64")
+        if time_origin is not None and (
+            time_origin < np.datetime64("1900-01-01")
+            or time_origin >= np.datetime64("2101-01-01")
+        ):
+            raise ValueError("Current time origin is outside the bounded calendar")
+        self.epoch = when[0] if time_origin is None else time_origin
+        # Subtract the integer datetime coordinates before converting to float.
+        # Integration uses its requested start as origin, avoiding offset+t
+        # cancellation that can put an exact supported knot one ULP out of range.
+        # The default public sampler remains relative to the first forcing time.
         self.times = np.asarray((when - self.epoch) / np.timedelta64(1, "s"), dtype=float)
         if not np.isfinite(self.times).all():
             raise ValueError("Current time coordinates exceed the finite representation")
@@ -174,7 +186,9 @@ def advect_current(field: OceanField, *, latitude_deg: float, longitude_deg: flo
     This bounded ocean diagnostic never changes source/prevention tank evidence.
     Invalid configuration raises ValueError. Missing forcing stops with an
     explicit UNSUPPORTED/PARTIAL report and the last valid accepted position.
-    No extrapolation, zero-filled masks, clipping or stochastic wiggles occur.
+    Steps end at forcing-time knots so no RK4 stage spans a time-interpolation
+    derivative break. No extrapolation, zero-filled masks or stochastic wiggles
+    occur, and positive intervals are never skipped by advancing time alone.
     """
     horizon = _positive(horizon_s, "horizon_s", MAX_HORIZON_S)
     step = _positive(step_s, "step_s", 3600)
@@ -186,11 +200,14 @@ def advect_current(field: OceanField, *, latitude_deg: float, longitude_deg: flo
         raise ValueError("Starting coordinates must be nonpolar geographic degrees")
     longitude = (float(longitude_deg) + 180) % 360 - 180
     start = _start(start_time_utc)
-    sampler = CurrentSampler(field)
     start64 = np.datetime64(start.replace(tzinfo=None), "us")
-    offset = float((start64 - sampler.epoch) / np.timedelta64(1, "s"))
+    sampler = CurrentSampler(field, time_origin=start64)
     step = min(step, sampler.step_limit_s, output_step)
-    if not math.isfinite(step) or step <= 0 or math.ceil(horizon / step) + math.ceil(horizon / output_step) > MAX_STEPS:
+    forcing_elapsed = sampler.times
+    knot_splits = int(np.count_nonzero((forcing_elapsed > 0) & (forcing_elapsed < horizon)))
+    if (not math.isfinite(step) or step <= 0
+            or math.ceil(horizon / step) + math.ceil(horizon / output_step)
+            + knot_splits > MAX_STEPS):
         raise ValueError("Advection would exceed its bounded step budget")
     state = np.array([float(latitude_deg), longitude])
     elapsed = 0.0
@@ -199,14 +216,14 @@ def advect_current(field: OceanField, *, latitude_deg: float, longitude_deg: flo
     accepted_steps = 0
 
     def point(t: float, position: np.ndarray) -> dict:
-        u, v = sampler.sample(float(position[0]), float(position[1]), offset + t)
+        u, v = sampler.sample(float(position[0]), float(position[1]), t)
         return {"time_utc": (start + timedelta(seconds=t)).isoformat().replace("+00:00", "Z"),
                 "elapsed_s": t, "latitude_deg": float(position[0]),
                 "longitude_deg": float(position[1]), "eastward_m_s": u,
                 "northward_m_s": v, "speed_m_s": math.hypot(u, v)}
 
     def derivative(t: float, position: np.ndarray) -> np.ndarray:
-        u, v = sampler.sample(float(position[0]), float(position[1]), offset + t)
+        u, v = sampler.sample(float(position[0]), float(position[1]), t)
         metres_lon, metres_lat = _wgs84_metres_per_degree(float(position[0]))
         return np.array([v / metres_lat, u / metres_lon])
 
@@ -216,15 +233,22 @@ def advect_current(field: OceanField, *, latitude_deg: float, longitude_deg: flo
         while elapsed < horizon:
             if accepted_steps >= MAX_STEPS:
                 raise _Unsupported("STEP_BUDGET_EXCEEDED")
-            dt = min(step, horizon - elapsed, next_output - elapsed)
+            knot_index = int(np.searchsorted(forcing_elapsed, elapsed, side="right"))
+            if knot_index >= len(forcing_elapsed):
+                raise _Unsupported("OUTSIDE_FORCING_TIME")
+            target = min(elapsed + step, horizon, next_output,
+                         float(forcing_elapsed[knot_index]))
+            dt = target - elapsed
+            if not math.isfinite(dt) or dt <= 0 or target <= elapsed:
+                raise _Unsupported("TIME_STEP_NOT_REPRESENTABLE")
             k1 = derivative(elapsed, state)
             k2 = derivative(elapsed + dt / 2, state + dt * k1 / 2)
             k3 = derivative(elapsed + dt / 2, state + dt * k2 / 2)
-            k4 = derivative(elapsed + dt, state + dt * k3)
+            k4 = derivative(target, state + dt * k3)
             candidate = state + dt * (k1 + 2 * k2 + 2 * k3 + k4) / 6
-            accepted_point = point(elapsed + dt, candidate)
+            accepted_point = point(target, candidate)
             state = candidate
-            elapsed += dt
+            elapsed = target
             accepted_steps += 1
             if elapsed >= next_output:
                 track.append(accepted_point)
@@ -243,6 +267,7 @@ def advect_current(field: OceanField, *, latitude_deg: float, longitude_deg: flo
         "solver": {"method": "RK4_WGS84_METRIC_DERIVATIVES", "maximum_step_s": step,
                    "output_step_s": output_step, "spatial_interpolation": "bilinear",
                    "temporal_interpolation": "linear", "velocity_units": "m/s",
+                   "forcing_time_knots_aligned": True,
                    "position_units": "geographic_degrees", "maximum_steps": MAX_STEPS},
         "forcing": {"time_start_utc": str(field.time_utc[0]) + "Z",
                     "time_end_utc": str(field.time_utc[-1]) + "Z",

@@ -1,0 +1,342 @@
+{
+  "amendment_documents_sha256": {
+    "docs/matched-current-v2-amendment.md": "16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f"
+  },
+  "budgets": {
+    "accept_encoding": "identity",
+    "connect_timeout_s": 5,
+    "connections": 1,
+    "fallback_endpoints": false,
+    "oversize_detection_chunk_bytes": 8192,
+    "redirects": false,
+    "requests_max": 6,
+    "retries": 0,
+    "timeout_s": 45,
+    "total_bytes": 12582912,
+    "total_bytes_scope": "retained body cap; one detection chunk may exceed it",
+    "wall_time_s": 180
+  },
+  "design_status": "FROZEN_PRE_GDP_OUTCOME_COMPATIBILITY_AMENDMENT",
+  "flags": {
+    "assimilation_independence_verified": false,
+    "automatic_model_promotion": false,
+    "operational_causality": false,
+    "physical_alias_resolution_verified": false,
+    "physical_validation": false,
+    "statistical_independence": false
+  },
+  "forcing": {
+    "coordinate_encoding": {
+      "dtype": "float64_exact_promoted_float32",
+      "expand_support": false,
+      "latitude": {
+        "count": 251,
+        "max_float32_ulps": 0,
+        "start": 25,
+        "step": 0.04
+      },
+      "longitude": {
+        "count": 188,
+        "first_label_exact": 280,
+        "max_float32_ulps": 1,
+        "start": 280,
+        "step": 0.08
+      },
+      "preserve_actual_axes": true,
+      "strictly_increasing": true
+    },
+    "decimal_scale": 0.001,
+    "depth_m": 15,
+    "longitude": "((lon+180)%360)-180; preserve native indices",
+    "maximum_samples": 250000,
+    "maximum_speed_m_s": 10,
+    "maximum_steps": 2048,
+    "native_bbox": {
+      "east": 295,
+      "north": 35,
+      "south": 25,
+      "west": 280
+    },
+    "native_stride": 1,
+    "offset": 0,
+    "output_step_s": 3600,
+    "raw_fill": -30000,
+    "solver_step_s": 300,
+    "source": "HYCOM_GOFS_3.1_GLBy0.08_expt93.0_UV3Z_2022",
+    "times_utc": [
+      "2022-06-01T00:00:00Z",
+      "2022-06-01T03:00:00Z",
+      "2022-06-01T06:00:00Z"
+    ],
+    "variables": [
+      "water_u",
+      "water_v"
+    ]
+  },
+  "frozen_at_utc": "2026-10-17T22:02:41.391650Z",
+  "gdp_metadata_history_compatibility": {
+    "all_other_bytes_unchanged": true,
+    "canonical_seed_sha256": "0570d44d6fd9d09d60a4d57ddaf27cfd4b8529052e1a816ca11fb0216874fefe",
+    "canonical_timestamp_token": "2000-01-01T00:00:00Z",
+    "capture_pair_must_agree": true,
+    "history_pattern_ascii": "(?m)^    String history \"Version v2\\.01\\.  Metadata from dirall\\.dat and deplog\\.dat\\n(?P<local>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z) \\(local files\\)\\n(?P<request>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z) https://erddap\\.aoml\\.noaa\\.gov/gdp/erddap/tabledap/drifter_hourly_qc\\.das\";\\n",
+    "method_id": "EXACT_EQUAL_SECOND_RESOLUTION_UTC_HISTORY_PAIR_V1",
+    "raw_response_hash_retained": true,
+    "valid_utc_calendar_required": true
+  },
+  "gdp_schema": {
+    "columns": [
+      "ID",
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "coordinate_decoding_during_acquisition": false,
+    "row_count": 31,
+    "units": [
+      "",
+      "UTC",
+      "degrees_north",
+      "degrees_east"
+    ]
+  },
+  "groups": [
+    {
+      "drifter_id": "300234066836710",
+      "wmo": "6202613"
+    },
+    {
+      "drifter_id": "300534061292930",
+      "wmo": "4102636"
+    }
+  ],
+  "implementation_sha256": {
+    "apps/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "apps/ocean/__init__.py": "cf9af3c0df838bc3ad56bb6d64e80f23050996cee00f73d12917ec93145caee0",
+    "apps/ocean/reeftrace_ocean/__init__.py": "369e9a05e5a186262ef597d44ac27bc3c00383cf690182da45db0dbcce4be977",
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde",
+    "apps/ocean/reeftrace_ocean/data.py": "4883727618060510a13182825cba6c1edb052ce539fee22b6048eef7dfe3de87",
+    "apps/ocean/reeftrace_ocean/field.py": "4cec7e6f8a50a6fd45d67d738e883880f5cb02e208ee907403f4255f11b5bb83",
+    "apps/ocean/reeftrace_ocean/hycom.py": "cc6cc61b6024ffa02cf9a86debb38730b43dddd238199ad351f951ddb87ccd38",
+    "apps/ocean/reeftrace_ocean/matched_current.py": "6b04dfee255141b292f90f5c427030a8ad4d8f6eb499df4a7b289046fac93aaa",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py": "1acee1a93a0c78437313bdba0b7f05dba3006a8fc33507896902470c8d90ea1c",
+    "pyproject.toml": "6b6d25181ec13cacf18b861b9a97f4be9bde1e4a97eb2a1058abccc05b1ba3f5",
+    "scripts/evaluate_matched_current_v2_study.py": "c44213fedf68bfbea441d59dd93ee4ed9b4214bbdf5858277729c3d8a6ac4282",
+    "scripts/fetch_matched_current_v2_study.py": "0e0995e6dfc34fd39e1b9388483b31e89751c87b7b92b006a75dd4259b71d5e1",
+    "scripts/freeze_matched_current_v2_protocol.py": "a2dc1cde53ee2847ff66f6070abf7333434b0f854e391b470ee7a4e688ab9f21"
+  },
+  "isolation": {
+    "all_tracks_frozen_before_future_coordinate_access": true,
+    "context_for_models": "origin only; last_drift final two only",
+    "no_fitting_or_tuning": true,
+    "no_replacements": true
+  },
+  "kind": "RETROSPECTIVE_MATCHED_CURRENT_V2_PROTOCOL",
+  "metadata_evidence": {
+    "data/public/noaa-fresh-drifter-v2/exclusions.json": {
+      "bytes": 10625,
+      "path": "data/public/noaa-fresh-drifter-v2/exclusions.json",
+      "sha256": "40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e"
+    },
+    "data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv": {
+      "bytes": 318597,
+      "path": "data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv",
+      "sha256": "a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82"
+    },
+    "data/public/noaa-fresh-drifter-v2/selection.json": {
+      "bytes": 7839,
+      "path": "data/public/noaa-fresh-drifter-v2/selection.json",
+      "sha256": "831c90e39790786b2368c7ce79fb8f2265e9fc24b3048671cd15b9f4123131b4"
+    },
+    "data/research/matched-current-v1/evaluation.json": {
+      "bytes": 63563,
+      "path": "data/research/matched-current-v1/evaluation.json",
+      "sha256": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7"
+    },
+    "data/research/matched-current-v1/forecasts.json": {
+      "bytes": 17133,
+      "path": "data/research/matched-current-v1/forecasts.json",
+      "sha256": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f"
+    },
+    "data/research/matched-current-v1/manifest.json": {
+      "bytes": 5441,
+      "path": "data/research/matched-current-v1/manifest.json",
+      "sha256": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e"
+    },
+    "data/research/matched-current-v1/protocol.json": {
+      "bytes": 8845,
+      "path": "data/research/matched-current-v1/protocol.json",
+      "sha256": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6"
+    },
+    "data/research/matched-current-v1/raw/gdp-metadata.das": {
+      "bytes": 18686,
+      "path": "data/research/matched-current-v1/raw/gdp-metadata.das",
+      "sha256": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3"
+    },
+    "data/research/matched-current-v1/raw/hycom-currents.nc": {
+      "bytes": 572604,
+      "path": "data/research/matched-current-v1/raw/hycom-currents.nc",
+      "sha256": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065"
+    },
+    "docs/matched-current-v2-amendment.md": {
+      "bytes": 22638,
+      "path": "docs/matched-current-v2-amendment.md",
+      "sha256": "16e62db0f2a22cee8650cb18f592d7488c9c71cb23f4ebc562c770ca3e58287f"
+    },
+    "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json": {
+      "bytes": 9544,
+      "path": "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json",
+      "sha256": "b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d"
+    },
+    "gdp_identity": {
+      "bytes": 640,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv",
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    "gdp_metadata": {
+      "bytes": 18686,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-hourly.das",
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    "hycom_metadata": {
+      "bytes": 159404,
+      "path": "docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    }
+  },
+  "metrics": {
+    "failures": "retain every planned cell, null error and explicit reasons",
+    "planned_cells": 36,
+    "planned_groups": 2,
+    "planned_model_tracks": 6,
+    "primary": "equal-ID macro ADE/FDE withheld unless all36 cells scored",
+    "score": "spherical_great_circle_metres_R6371008.8",
+    "unique_future_targets": 12
+  },
+  "models": [
+    "stationary",
+    "last_drift",
+    "current_only"
+  ],
+  "pre_outcome_amendment": {
+    "changes": [
+      "allowlisted GDP history capture-time compatibility",
+      "declared native float32 coordinate representation guard"
+    ],
+    "kind": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+    "model_or_parameter_tuning": false,
+    "prior_artifact_sha256": {
+      "data/research/matched-current-v1/evaluation.json": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7",
+      "data/research/matched-current-v1/forecasts.json": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f",
+      "data/research/matched-current-v1/manifest.json": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e",
+      "data/research/matched-current-v1/protocol.json": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6",
+      "data/research/matched-current-v1/raw/gdp-metadata.das": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3",
+      "data/research/matched-current-v1/raw/hycom-currents.nc": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065",
+      "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json": "b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d"
+    },
+    "prior_forcing_acquired_and_decoded": true,
+    "prior_gdp_trajectory_payload_count": 0,
+    "prior_model_selection_from_scores": false,
+    "prior_scored_cell_count": 0,
+    "prior_study_id": "matched-current-gdp-hycom-15m-v1",
+    "silent_retry": false,
+    "unchanged": [
+      "groups",
+      "models",
+      "queries",
+      "depth",
+      "windows",
+      "horizons",
+      "denominators",
+      "transport budgets",
+      "actual coordinate support"
+    ],
+    "v1_preserved": true
+  },
+  "role_order": [
+    "gdp_metadata",
+    "gdp_identity",
+    "hycom_metadata",
+    "trajectory:300234066836710",
+    "trajectory:300534061292930",
+    "hycom_currents"
+  ],
+  "schema_version": 1,
+  "source_checkpoint": {
+    "git_head": "c1e7c2503e141da9a95fc51be027c569cbda7cca",
+    "note": "Commit all pinned sources, protocol and identity before values."
+  },
+  "sources": {
+    "gdp_identity": {
+      "depends_on": [],
+      "expected_sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+      "max_bytes": 32768,
+      "raw_path": "raw/gdp-origin-identity.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00%3A00%3A00Z&latitude%3E=25&latitude%3C=35&longitude%3E=-80&longitude%3C=-65&distinct%28%29"
+    },
+    "gdp_metadata": {
+      "depends_on": [],
+      "expected_canonical_sha256": "0570d44d6fd9d09d60a4d57ddaf27cfd4b8529052e1a816ca11fb0216874fefe",
+      "expected_sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39",
+      "max_bytes": 262144,
+      "raw_path": "raw/gdp-metadata.das",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das",
+      "validation": "EXACT_HISTORY_UTC_CAPTURE_PAIR_CANONICAL_SHA256"
+    },
+    "hycom_currents": {
+      "depends_on": [
+        "hycom_metadata"
+      ],
+      "max_bytes": 8388608,
+      "raw_path": "raw/hycom-currents.nc",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022?var=water_u%2Cwater_v&north=35&south=25&west=280&east=295&horizStride=1&time_start=2022-06-01T00%3A00%3A00Z&time_end=2022-06-01T06%3A00%3A00Z&timeStride=1&vertCoord=15&accept=netcdf"
+    },
+    "hycom_metadata": {
+      "depends_on": [],
+      "expected_sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d",
+      "max_bytes": 262144,
+      "raw_path": "raw/hycom-metadata.xml",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml"
+    },
+    "trajectory:300234066836710": {
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ],
+      "max_bytes": 32768,
+      "raw_path": "raw/drifter-300234066836710.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300234066836710%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z"
+    },
+    "trajectory:300534061292930": {
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ],
+      "max_bytes": 32768,
+      "raw_path": "raw/drifter-300534061292930.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300534061292930%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z"
+    }
+  },
+  "study_id": "matched-current-gdp-hycom-15m-v2",
+  "transport_references": [
+    "https://docs.unidata.ucar.edu/tds/current/userguide/ncss_grid.html",
+    "https://www.hycom.org/dataserver/access-methods/ncss"
+  ],
+  "windows": {
+    "cadence_s": 3600,
+    "context_count": 25,
+    "context_start_utc": "2022-05-31T00:00:00Z",
+    "end_utc": "2022-06-01T06:00:00Z",
+    "heldout_count": 6,
+    "horizons_s": [
+      3600,
+      7200,
+      10800,
+      14400,
+      18000,
+      21600
+    ],
+    "origin_time_utc": "2022-06-01T00:00:00Z"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "amendment_scope": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+  "decision": "GO_FOR_DISTINCT_COMMITTED_FREEZE_THEN_ONE_ACQUISITION",
+  "environment": {
+    "httpx": "0.28.1",
+    "netCDF4": "1.7.5",
+    "numpy": "2.5.4",
+    "python": "3.12.14",
+    "scipy": "1.18.1",
+    "xarray": "2026.9.0"
+  },
+  "grok_evidence": [
+    {
+      "bytes": 35319,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-prompt.txt",
+      "sha256": "1c213e6718fc247b1111233bf118a942bca57547bb56f4fd225175ac9325d97a"
+    },
+    {
+      "bytes": 1070,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-final-delta-response.txt",
+      "sha256": "d05261c1925688925ffbf095bf4e938ba7bbb99237d89af10a13dd14e93530c7"
+    },
+    {
+      "bytes": 64055,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-prompt.txt",
+      "sha256": "15c5ab2e8b2773523d788622608f42a2f536855aa1dff2bdedd959a2a807612b"
+    },
+    {
+      "bytes": 2186,
+      "path": "docs/grok-evidence/grok-matched-current-v2-code-review-response.txt",
+      "sha256": "98993ad666754d76108e00275b7f964aa363c8095298568162092e2f815dd3a2"
+    },
+    {
+      "bytes": 4748,
+      "path": "docs/grok-evidence/grok-matched-current-v2-criteria-prompt.txt",
+      "sha256": "1742506bbc741f5a0af86cc8b2a2459979590a8499afc1264780fb9be8eb0473"
+    },
+    {
+      "bytes": 2765,
+      "path": "docs/grok-evidence/grok-matched-current-v2-criteria-response.txt",
+      "sha256": "c205c464df49093942dbef3d9cecfd7e8182ce8ff66329f843bfc5bf242ee0d5"
+    }
+  ],
+  "implementation_sha256": {
+    "apps/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "apps/ocean/__init__.py": "cf9af3c0df838bc3ad56bb6d64e80f23050996cee00f73d12917ec93145caee0",
+    "apps/ocean/reeftrace_ocean/__init__.py": "369e9a05e5a186262ef597d44ac27bc3c00383cf690182da45db0dbcce4be977",
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde",
+    "apps/ocean/reeftrace_ocean/data.py": "4883727618060510a13182825cba6c1edb052ce539fee22b6048eef7dfe3de87",
+    "apps/ocean/reeftrace_ocean/field.py": "4cec7e6f8a50a6fd45d67d738e883880f5cb02e208ee907403f4255f11b5bb83",
+    "apps/ocean/reeftrace_ocean/hycom.py": "cc6cc61b6024ffa02cf9a86debb38730b43dddd238199ad351f951ddb87ccd38",
+    "apps/ocean/reeftrace_ocean/matched_current.py": "6b04dfee255141b292f90f5c427030a8ad4d8f6eb499df4a7b289046fac93aaa",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py": "1acee1a93a0c78437313bdba0b7f05dba3006a8fc33507896902470c8d90ea1c",
+    "pyproject.toml": "6b6d25181ec13cacf18b861b9a97f4be9bde1e4a97eb2a1058abccc05b1ba3f5",
+    "scripts/evaluate_matched_current_v2_study.py": "c44213fedf68bfbea441d59dd93ee4ed9b4214bbdf5858277729c3d8a6ac4282",
+    "scripts/fetch_matched_current_v2_study.py": "0e0995e6dfc34fd39e1b9388483b31e89751c87b7b92b006a75dd4259b71d5e1",
+    "scripts/freeze_matched_current_v2_protocol.py": "a2dc1cde53ee2847ff66f6070abf7333434b0f854e391b470ee7a4e688ab9f21"
+  },
+  "limitations": [
+    "Static Grok review is not execution or a correctness guarantee.",
+    "Original incorrect decoder-before-GDP-request advice is retained and explicitly corrected.",
+    "No xAI API, billing, camera activation or new Photon message.",
+    "Actual acquisition and scoring must remain separate immutable operations."
+  ],
+  "logs": [
+    {
+      "bytes": 2588,
+      "path": "work/tideward-matched-v2-full-python.log",
+      "sha256": "6056fcd5b43f45c12f3a6547eb1a0f43399db9ca52f1efc54821f21d80a9acef"
+    },
+    {
+      "bytes": 975,
+      "path": "work/tideward-matched-v2-final-prefreeze.log",
+      "sha256": "5d52fee1627bafbb4cf47875719680f50368abfed5bf0612189ccaf155e6bf09"
+    },
+    {
+      "bytes": 34102,
+      "path": "work/tideward-matched-v2-full-frontend.log",
+      "sha256": "60e40f86a09d771e9c3d08b0d214e541d67d14ba99621dedcefe03b4dac827fe"
+    },
+    {
+      "bytes": 46,
+      "path": "work/tideward-matched-v2-eslint.log",
+      "sha256": "2a39a2b0088eab9372f9ae76e9bbb3badd872aae76be61464acc2a0fe3ac1e51"
+    },
+    {
+      "bytes": 59,
+      "path": "work/tideward-matched-v2-typegen.log",
+      "sha256": "adba4af9194e10e47dda75ff0fd0f8c2b756474896d0eba5612799c527ff372a"
+    },
+    {
+      "bytes": 0,
+      "path": "work/tideward-matched-v2-types.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 907,
+      "path": "work/tideward-matched-v2-build.log",
+      "sha256": "11387d4446f4bdc85251daae95d63344fdb3fa2ba69fca0753adcbb48b6e73e0"
+    },
+    {
+      "bytes": 19,
+      "path": "work/tideward-matched-v2-ruff.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "prior_forcing_acquired_and_decoded": true,
+  "prior_gdp_trajectory_payloads": 0,
+  "prior_scored_cells": 0,
+  "prior_v1_files_unchanged": true,
+  "prior_v1_sources_unchanged": true,
+  "reviewed_at_utc": "2026-10-17T22:02:20.243535+00:00",
+  "schema_version": 1,
+  "scientific_result": false,
+  "study_id": "matched-current-gdp-hycom-15m-v2",
+  "v2_protocol_frozen": false,
+  "v2_scientific_values_acquired": false,
+  "v2_scores_computed": false,
+  "verification": {
+    "dependency_consistency": "PASS",
+    "eslint": "PASS",
+    "final_focused_tests": 331,
+    "frontend_tests": 225,
+    "full_python_checkpoint": 1770,
+    "full_python_checkpoint_before_last_document_pin_and_http_test_delta": true,
+    "isolated_build": "PASS",
+    "route_types": "PASS",
+    "ruff": "PASS",
+    "typescript": "PASS"
+  }
+}

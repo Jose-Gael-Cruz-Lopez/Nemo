@@ -33,7 +33,7 @@ EXPECTED_BLOCKERS = {"Chalk live model verification", "physical webcam/tank cali
                      "live Chalk prevention response", "live Chalk validation review"}
 
 CHILD = r'''
-import atexit, json, os
+import atexit, hashlib, json, os
 from pathlib import Path
 import cv2, httpx, uvicorn
 counts = {"camera_open_attempts": 0, "provider_http_attempts": 0,
@@ -58,6 +58,12 @@ app = create_app(Settings(_env_file=None, data_dir=Path(os.environ["AUDIT_STORE"
 @app.get("/__offline_audit__/identity")
 def identity():
     return {"nonce": os.environ["AUDIT_PROCESS_NONCE"]}
+@app.get("/__offline_audit__/store-digest")
+def store_digest():
+    # Opaque digest only, inside the disposable process; no live store is opened.
+    with app.state.runtime.store.connection() as db:
+        payload = "\n".join(db.iterdump()).encode()
+    return {"sha256": hashlib.sha256(payload).hexdigest()}
 atexit.register(lambda: guard_path.write_text(json.dumps(counts)))
 uvicorn.run(app, host="127.0.0.1", port=int(os.environ["AUDIT_PORT"]), log_level="warning")
 '''
@@ -248,6 +254,72 @@ def main(argv=None):
     return int(not result["summary"]["software_workflow_passed"])
 
 
+def matched_version_checks(req, check, *, v1_snapshot, store_digest, root=ROOT):
+    """Verify fixed version selection using frozen artifacts only; no scoring.
+
+    Until the distinct v2 result identity exists, absence must remain HTTP404.
+    A present identity must pass the authoritative pure reader and exact HTTP
+    envelope comparison; no fallback or fabricated expected numeric result.
+    """
+    base = "/research/matched-current"
+    check("explicit matched-current v1 selection preserves the historical envelope",
+          req(base + "?study_version=v1", auth=False) == v1_snapshot)
+    v1_identity = v1_snapshot["artifact_identity"]
+    for version in ("v3", "V2", "untrusted-module"):
+        req(base + "?study_version=" + version, expected=422, auth=False)
+        req(base + "/investigate", {
+            "study_version": version, "question": "Explain this saved result.",
+            "report_sha256": v1_identity["report_sha256"],
+            "protocol_sha256": v1_identity["protocol_sha256"]}, expected=422)
+    identity_path = Path(root) / (
+        "apps/ocean/reeftrace_ocean/matched_current_v2_result_identity.py")
+    if not identity_path.is_file():
+        req(base + "?study_version=v2", expected=404, auth=False)
+        return {"status": "TRUSTED_RESULT_ABSENT_HTTP404", "study_version": "v2"}
+
+    from apps.ocean.reeftrace_ocean.matched_current_result import load_frozen_matched_current_result
+
+    authoritative = load_frozen_matched_current_result(root=root, study_version="v2")
+    selected = req(base + "?study_version=v2", auth=False)
+    check("v2 HTTP envelope equals the authoritative pinned artifact reader", selected == authoritative)
+    report, identity = selected["report"], selected["artifact_identity"]
+    scores = report["scores"]
+    check("v2 keeps its selected identity, full denominator and no automatic promotion",
+        report["study_id"] == identity["study_id"] == "matched-current-gdp-hycom-15m-v2"
+        and identity["integrity_verified"] is identity["result_pin_verified"] is True
+        and identity["numeric_replay_verified"] is False
+        and scores["planned_group_count"] == len(scores["groups"]) == 2
+        and scores["planned_cell_count"] == 36
+        and scores["planned_distinct_target_count"] == 12
+        and sum(len(model["cells"]) for group in scores["groups"]
+                for model in group["candidates"]) == 36
+        and not scores["automatic_winner_selected"]
+        and report["automatic_model_promotion"] is False
+        and report["physical_validation"] is False)
+    question = {"study_version": "v2", "question": "Explain this saved amendment and its limits.",
+        "report_sha256": identity["report_sha256"], "protocol_sha256": identity["protocol_sha256"]}
+    before = store_digest()
+    req(base + "/investigate", question, expected=401, auth=False)
+    req(base + "/investigate", {**question,
+        "report_sha256": v1_identity["report_sha256"],
+        "protocol_sha256": v1_identity["protocol_sha256"]}, expected=409)
+    for key in ("report_sha256", "protocol_sha256"):
+        req(base + "/investigate", {**question, key: "0" * 64}, expected=409)
+    review = req(base + "/investigate", question)
+    check("disabled v2 Chalk preserves exact evidence and the full disposable store",
+        review["action"] == "STOP" and review["failure_code"] == "NOT_CONFIGURED"
+        and review["live_model_response"] is False
+        and review["research_report"] == report
+        and review["artifact_identity"] == identity
+        and review["store_written"] is review["hardware_actuation"] is False
+        and store_digest() == before)
+    return {"status": "TRUSTED_RESULT_READ_ONLY_VERIFIED", "study_version": "v2",
+        "report_sha256": identity["report_sha256"],
+        "protocol_sha256": identity["protocol_sha256"],
+        "planned_cells": scores["planned_cell_count"],
+        "scored_cells": scores["scored_cell_count"], "store_unchanged": True}
+
+
 def extra(result, api, token):
     checks = result["extra_checks"]
 
@@ -262,6 +334,14 @@ def extra(result, api, token):
                 headers={"Authorization": "Bearer " + token} if auth else {}, json=body)
             check(f"HTTP {response.request.method} {path.split('?')[0]} → {expected}", response.status_code == expected)
             return response.json()
+
+        def store_digest():
+            response = client.get(api + "/__offline_audit__/store-digest")
+            check("opaque disposable store digest is available", response.status_code == 200)
+            digest = response.json()["sha256"]
+            check("disposable store digest is bounded SHA256", isinstance(digest, str)
+                  and len(digest) == 64 and set(digest) <= set("0123456789abcdef"))
+            return digest
 
         status = req("/status")
         check("isolated providers, automatic replies, camera and actuation remain disabled",
@@ -282,6 +362,18 @@ def extra(result, api, token):
             "horizon_s": 20, "particles": 40, "trials_per_source": 2})
         comparison_id = detail["comparison"]["id"]
         base = "/prevention/comparisons/" + comparison_id
+        scene_query = "?evaluation_snapshot_hash=" + detail["evaluation"]["snapshot_hash"]
+        scene = req(base + "/scene" + scene_query, auth=False)
+        check("3D scene is a read-only view of the exact full tank comparison",
+            scene["kind"] == "TANK_RIG_SCENE"
+            and scene["evaluation_snapshot_hash"] == detail["evaluation"]["snapshot_hash"]
+            and scene["physical_validation"] is False
+            and scene["actual"]["reported_physical_trial_count"] == 0
+            and scene["actual"]["positional_error_metrics"] is None
+            and scene["vertical"]["measured_depth_cm"] is None
+            and len(scene["simulation"]["paths"]) <= 36
+            and req(base) == detail)
+        req(base + "/scene?evaluation_snapshot_hash=" + "0" * 64, expected=409, auth=False)
         blank = {"trial_key": "extra-no-entry", "layout": "baseline", "source_id": "A",
             "data_origin": "SYNTHETIC_DEMO", "outcome": "no_entry", "entry_time_s": None,
             "interception_time_s": None, "token_accounted": True, "physical_confirmed": False,
@@ -330,6 +422,43 @@ def extra(result, api, token):
         cohort = req("/research/cohort-vectors")
         kalman = req("/research/kalman-diagnostic")
         fresh = req("/research/fresh-physics")
+        matched = req("/research/matched-current", auth=False)
+        matched_report, matched_identity = matched["report"], matched["artifact_identity"]
+        matched_scores = matched_report["scores"]
+        check("matched-current frozen failure ledger preserves both groups and all 36 cells",
+            matched_identity["integrity_verified"] is True
+            and matched_identity["result_pin_verified"] is True
+            and matched_identity["numeric_replay_verified"] is False
+            and matched_scores["planned_group_count"] == len(matched_scores["groups"]) == 2
+            and matched_scores["planned_cell_count"] == 36
+            and matched_scores["planned_distinct_target_count"] == 12
+            and sum(len(model["cells"]) for group in matched_scores["groups"]
+                    for model in group["candidates"]) == 36
+            and matched_report["physical_validation"] is False)
+        check("unavailable matched-current study never becomes a successful result",
+            matched_scores["scored_cell_count"] == 0
+            and matched_scores["primary_equal_id_macro_results"] is None
+            and matched_scores["primary_paired_comparisons"] is None
+            and not matched_scores["automatic_winner_selected"]
+            and all(cell["error_m"] is None for group in matched_scores["groups"]
+                    for model in group["candidates"] for cell in model["cells"]))
+        matched_question = {"question": "Explain the acquisition blockers and remaining uncertainty.",
+            "report_sha256": matched_identity["report_sha256"],
+            "protocol_sha256": matched_identity["protocol_sha256"]}
+        req("/research/matched-current/investigate", matched_question, expected=401, auth=False)
+        req("/research/matched-current/investigate", {
+            **matched_question, "report_sha256": "0" * 64}, expected=409)
+        matched_review = req("/research/matched-current/investigate", matched_question)
+        check("disabled Chalk preserves the pinned matched-current evidence without side effects",
+            matched_review["action"] == "STOP"
+            and matched_review["failure_code"] == "NOT_CONFIGURED"
+            and matched_review["live_model_response"] is False
+            and matched_review["research_report"] == matched_report
+            and matched_review["artifact_identity"] == matched_identity
+            and matched_review["store_written"] is False
+            and matched_review["hardware_actuation"] is False)
+        result["evidence"]["matched_current_v2"] = matched_version_checks(
+            req, check, v1_snapshot=matched, store_digest=store_digest)
         fresh_coverage = fresh["coverage"]
         check("fresh study keeps the frozen requested cohort and all missing or failed outcomes",
             fresh["kind"] == "FRESH_NOAA_DRIFTER_STUDY"
@@ -455,6 +584,8 @@ def extra(result, api, token):
             fixed_kalman_coverage=kalman["coverage"],
             fresh_study_coverage=fresh_coverage,
             fresh_study_snapshot_sha256=snapshot_hash,
+            matched_current_report_sha256=matched_identity["report_sha256"],
+            matched_current_scored_cells=matched_scores["scored_cell_count"],
             current_forecast_snapshot_sha256=currents["snapshot_sha256"],
             current_forecast_method_sha256=currents["method_sha256"],
             ocean_prevention_report_sha256=ocean["report_sha256"],

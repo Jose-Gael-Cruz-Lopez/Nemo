@@ -1,0 +1,167 @@
+ for 7s":
+        - generic: Worked for 7s
+      - paragraph:
+        - strong: Acknowledged corrections.
+        - text: UNKNOWN and INVALID are scientific SourceReport statuses, not values of the stored CaseState enum; a case may remain INVESTIGATE while its source report is invalid. Chalk finish(action=STOP) ends only the bounded model turn and does not call Store.stop_case. An explicit case stop increments revision, cancels proposed or awaiting-human tasks, and archives comparisons by lineage. The trial API accepts an out-of-plan release order but records order_followed=false; it rejects duplicate or conflicting trial keys and quota violations, so order is not server-enforced. Stock source “Load demo” and stock prevention “Load demo” use separate synthetic case fixtures; a guide must not imply one case continues through both. Trajectory plots use metre axes for both X and Y, with hours as point labels; they are not time-versus-position charts.
+      - paragraph:
+        - strong: One software-only next mathematical audit (Aarush handoff, synthetic fixtures only).
+        - text: Audit discrete probability-mass and first-passage conservation on the existing synthetic particle fixtures, without altering any frozen model, noise value, physics threshold or completed NOAA study.
+      - paragraph:
+        - strong: Invariants.
+      - list:
+        - text: After every time step the sum of probability mass on free particles, absorbed protected-zone particles and absorbed collector particles equals 1 within
+        - math:
+          - generic: "10"
+          - generic: −
+          - generic: "12"
+        - text: "1"
+        - text: "0"
+        - generic: −12
+        - text: .
+        - text: A particle that has entered the protected zone or a collector at step
+        - math:
+          - generic: k
+        - generic: k
+        - text: remains in that absorbing set for all later steps.
+        - listitem: The reported first-passage time equals the earliest step at which the particle’s position lies inside the corresponding polygon, using the same seeded time nodes as the production stepper.
+        - listitem: Unsupported or out-of-domain particles are counted in the denominator and never dropped.
+      - paragraph:
+        - strong: Failure cases.
+      - list:
+        - listitem: Inject a single particle that should be absorbed at a known step; assert mass is conserved and the first-passage index matches.
+        - listitem: Force one particle outside the domain; assert it is retained as unsupported and the robust-recommendation flag is withheld.
+        - listitem: Replay the identical fixture twice; assert identical mass vectors and passage times (idempotent under fixed seed).
+      - paragraph: No equation, threshold or NOAA artifact is modified.
+    - group "Grok":
+      - button "Copy response":
+      - button "Like":
+      - button "Dislike":
+      - button "Regenerate":
+      - button "More actions":
+    - article "You":
+      - heading "You" [level=2]
+      - paragraph: "Code-grounded correction for your proposed audit: destination categories are Z=protected-zone first competing absorption, T=any configured non-zone retention trap, F=no event by horizon; Z+T+F=N exactly. Support S is orthogonal, giving six disjoint cells Z&S, Z&~S, T&S, T&~S, F&S, F&~S. Unsupported_count cannot be added as a fourth destination. Equal 1/N particle weights; no source/age priors here. Overlapping/touching/nonfinite profiles rejected at config validation, not dropped particles. Admitted initially unsupported particles retain N. Production checks finite seeded nodes and reflected segments for event ordering; do not promise exact continuous flow or invent 1e-12. Independent six-cell synthetic example all counts 1, unsupported 3 gives zone bounds 1/6..4/6. Review these invariants for conceptual error and describe in <=250 words how a judge should read the two layout maps and uncertainty bounds without believing it proves tank benefit. All current 180 NOAA outcomes frozen, last drift best, no parameter/code/data changes requested. Existing Grok research automation paused and only push CI."
+    - button "Edit":
+    - group "You":
+      - button "Edit":
+      - button "Copy":
+      - button "Save":
+    - article "Grok":
+      - heading "Grok" [level=2]
+      - button "Worked for 6s":
+        - generic: Worked for 6s
+      - paragraph:
+        - strong: Invariant review.
+        - text: "The corrected partition is conceptually sound. Destinations are mutually exclusive and exhaustive: Z (protected-zone first competing absorption), T (any configured non-zone retention trap), and F (no event by horizon) satisfy"
+        - math:
+          - generic: Z
+          - generic: +
+          - generic: T
+          - generic: +
+          - generic: F
+          - generic: =
+          - generic: "N"
+        - generic: Z +
+        - generic: T +
+        - generic: F =
+        - generic: "N"
+        - text: exactly. Support
+        - math:
+          - generic: S
+        - generic: S
+        - text: is an orthogonal attribute, yielding the six disjoint cells
+        - math:
+          - generic: Z
+          - generic: "&"
+          - generic: S
+        - generic: Z&S
+        - text: ","
+        - math:
+          - generic: Z
+          - generic: "&"
+          - generic: ∼
+          - generic: S
+        - generic: Z& ∼
+        - generic: S
+        - text: ","
+        - math:
+          - generic: T
+          - generic: "&"
+          - generic: S
+        - generic: T&S
+        - text: ","
+        - math:
+          - generic: T
+          - generic: "&"
+          - generic: ∼
+          - generic: S
+        - generic: T& ∼
+        - generic: S
+        - text: ","
+        - math:
+          - generic: F
+          - generic: "&"
+          - generic: S
+        - generic: F&S
+        - text: ","
+        - math:
+          - generic: F
+          - generic: "&"
+          - generic: ∼
+          - generic: S
+        - generic: F& ∼
+        - generic: S
+        - text: . Unsupported count is therefore not a fourth destination and must not be added to
+        - math:
+          - generic: Z
+          - generic: +
+          - generic: T
+          - generic: +
+          - generic: F
+        - generic: Z +
+        - generic: T +
+        - generic: F
+        - text: . Equal
+        - math:
+          - generic: "1"
+          - generic: /
+          - generic: "N"
+        - generic: 1/N
+        - text: particle weights with no source or age priors are consistent with the existing unweighted first-passage design. Overlapping, touching or non-finite profiles are rejected at configuration validation rather than by dropping particles, and initially unsupported but admitted particles remain inside
+        - math:
+          - generic: "N"
+        - generic: "N"
+        - text: . Production ordering uses finite seeded nodes and reflected segments; no claim of exact continuous-flow integration or a specific floating-point tolerance is required.
+      - paragraph:
+        - strong: How a judge should read the maps and bounds.
+        - text: Each layout map shows the same declared particle set under one frozen flow and one frozen collector arrangement. A particle is counted in Z only if the protected-zone polygon is the first absorbing set it meets, in T if a non-zone trap absorbs it first, and in F if neither occurs by the horizon. The six-cell split further marks whether that particle’s prefix was supported. The reported zone bounds (for example 1/6 to 4/6 when three of six cells are unsupported) are the minimum and maximum fraction of the fixed
+        - math:
+          - generic: "N"
+        - generic: "N"
+        - text: that can be placed in Z once unsupported particles are assigned entirely against or entirely for the zone. These bounds are accounting statements about the synthetic particle set under the declared polygons and seeded steps. They do not measure a physical tank current, do not incorporate release-rate or effort controls, and do not demonstrate that either layout reduces debris reaching a protected area. A lower upper bound on one layout is a numerical comparison only; it becomes evidence of benefit solely after independent physical trials with measured per-layout flows, pre-registered releases, and an evaluation ledger that keeps truth separate from the prediction path. All 180 NOAA outcomes remain frozen, last-drift remains the lowest descriptive aggregate, and no parameter, code or data change is proposed.
+    - group "Grok":
+      - button "Copy response":
+      - button "Like":
+      - button "Dislike":
+      - button "Regenerate":
+      - button "More actions":
+    - button "Rewrite for judge clarity and add uncertainty bounds":
+      - generic: Rewrite for judge clarity and add uncertainty bounds
+    - button "Explain the six disjoint cells":
+      - generic: Explain the six disjoint cells
+    - button "Draft a short summary in simpler terms":
+      - generic: Draft a short summary in simpler terms
+  - textbox "Ask Grok anything" [active]:
+    - paragraph: Ask anything
+  - button "Attach":
+  - 'button "Model: Fast"':
+    - generic: Fast
+  - button "Dictation (⌃D)":
+  - button "Submit" [disabled]:
+    - generic: Type a message to send
+  - generic: Attach to message
+  - generic: Drop here to add files to your message
+- region "Notifications alt+T"
+- status: Grok finished responding
+- alert
+- alert: ReefTrace NOAA Drifter Benchmark Audit and Rolling-Origin Patch - Grok

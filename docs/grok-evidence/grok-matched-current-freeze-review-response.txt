@@ -1,0 +1,28 @@
+Grok
+Worked for 37s
+
+Pre-acquisition review (static). No values acquired, no scores computed, no physical validation claimed. The frozen six-ID study is untouched.
+
+(A) Necessary fixes, with exact failure examples
+Last-drift 50 km chart bound is a model failure, not a group drop.
+SphericalLocalFrame.to_xy raises when the penultimate fix is more than 50 km from the origin.
+Failure example: penultimate 60 km from origin, origin finite. Last-drift must mark all six of its horizons failed (CHART_BOUND) and retain no predictions; stationary (origin repeated) and current-only must still produce their tracks. Dropping the whole group would violate the 36-cell denominator.
+Do not apply the AEQD 50 km bound to current-only or to future truth.
+Current-only uses the existing geographic RK4. A later wrap of its output through to_latlon would censor a valid 6-hour path that simply left the 50 km disk.
+Failure example: RK4 ends 70 km from origin inside the HYCOM tile. The prediction must remain scorable; only last-drift is chart-limited. Future truth outside 50 km or outside the tile is still scored if finite.
+Exact 3600 s between penultimate and origin.
+Failure example: penultimate timestamp is 2022-05-31T22:00Z (gap). Last-drift must fail all six horizons (DT_NOT_3600); do not invent a velocity. Stationary and current-only proceed if the origin fix is valid. Earlier 23 positions remain QC-only and cannot suppress these.
+Native axis, not requested bbox, defines support.
+Failure example: NCSS returns a last longitude that normalizes to −65.04 while the request was −65. A sample at exactly −65.0 must raise OUTSIDE_CURRENT_DOMAIN. Do not manufacture the missing edge.
+Encoding-aware CF rejection.
+Failure example: scale_factor arrives as float64 0.001 or as np.float32(0.001)+eps. The acquisition fails closed, the group stays in the 36, and no silent re-decode occurs. Mask raw −30000 before the single np.float32(0.001) multiply.
+(B) Contracts safe to freeze
+IDs 300234066836710/6202613 and 300534061292930/4102636; origin 2022-06-01T00Z; 25 context hours; six targets T01–T06; 36 cells; no replacements.
+Stationary = origin repeated. Last-drift = origin-anchored AEQD, final two fixes only, actual dt 3600 s, R=6371008.8. Current-only = origin position + HYCOM 15 m at 00/03/06Z only, knot-aligned RK4, horizon 21600 s, max step 300 s, output 3600 s; only exact accepted output hours scored; PARTIAL stays partial.
+No GDP velocity, no residual/windage/diffusion, no coefficient fit.
+Longitude ((lon+180)%360)-180; raw receipts; six sequential GETs with the stated byte/time caps; baselines may exist if HYCOM transport fails and GDP is valid.
+Primary equal-ID macro only when all 36 cells are scorable; otherwise primary is null and any subset summary is explicitly labelled.
+Flags: retrospective forcing diagnostic; issue-time availability, assimilation independence, physical-alias resolution and statistical independence all false/unverified. No plastic/tank/reef claim.
+(C) One independent synthetic test of causal input isolation
+
+Build two synthetic groups. Context positions 1–23 are set to a sentinel that raises if read. Penultimate and origin are finite and 3600 s apart. HYCOM is the four-time partial fixture (start 3 h, mask only 9 h, raw short u=500). Call the model helper with (context, field) only—no future argument. Assert: (1) all six candidate tracks are produced and hashed before any future lat/lon string is parsed to float; (2) mutating positions 1–23 does not change any track; (3) mutating the penultimate changes only last-drift; (4) current-only displacement on the supported 3 h prefix is 5400 m and status PARTIAL; (5) the 36-cell matrix still contains every horizon, with null errors on unscored cells. No real GDP or HYCOM values are used.

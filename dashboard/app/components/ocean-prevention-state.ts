@@ -1,3 +1,5 @@
+import { validateOceanNumerics, type OceanNumericalSensitivity } from "./ocean-numerics-state.ts";
+
 /** Read-only ocean comparison: real modeled forcing, hypothetical geometry and releases. */
 export type OceanXY = [number, number];
 export type OceanGeo = { latitude_deg: number; longitude_deg: number };
@@ -19,6 +21,7 @@ export type OceanPreventionReport = {
   forcing: { source_url: string; metadata_url: string; product_url: string; attribution: string; captured_at_utc: string; valid_start_utc: string; valid_end_utc: string; model_issue_time_utc: string | null; depth_m: number; [key: string]: unknown };
   method: { trajectory: "dynamic_current_advection_only"; equation: string; solver: string; spatial_interpolation: string; temporal_interpolation: string; step_s: number; output_step_s: number; geometry_frame: OceanFrame; event_model: Record<string, unknown>; identical_unmodified_forcing_for_every_layout: true; paths_integrated_once_per_release: true; barriers_modify_flow: false; capture_efficiency_assumption: string; winner_rule: string };
   validation: { measured_track_available: false; physical_validation: false; plastic_motion_validated: false; forecast_skill_established: false; interception_benefit_established: false; real_reef_boundary_used: false; tank_flow_used: false; heldout_buoy_positions_used: false; measured_entry_count: null; measured_intercepted_count: null };
+  numerical_sensitivity?: OceanNumericalSensitivity;
   vector_frames?: OceanVectorFrame[]; vector_speed_scale_m_s?: number; display_bounds_xy_m: { x_m: OceanXY; y_m: OceanXY }; limitations: string[];
 };
 export type OceanPreventionAnswer = { schema_version: 1; kind: "OCEAN_PREVENTION_INVESTIGATION"; scope: "READ_ONLY_OCEAN_PREVENTION"; scenario_id: string; action: "REPORT" | "STOP"; provider: "chalk"; live_model_response: boolean; explanation: string; evidence_ids: string[]; snapshot_sha256: string; method_sha256: string; scenario_sha256: string; report_sha256: string; research_report: OceanPreventionReport; store_written: false; physical_validation: false; hardware_actuation: false; failure_code?: string };
@@ -146,6 +149,7 @@ export function validateOceanPrevention(value: unknown): OceanPreventionReport {
         || !f.vectors.every(v => object(v) && geo(v) && finite(v.eastward_m_s) && finite(v.northward_m_s) && Math.hypot(v.eastward_m_s, v.northward_m_s) <= 10 && (v.x_m === undefined && v.y_m === undefined || finite(v.x_m) && finite(v.y_m) && consistentPosition(v, [v.x_m, v.y_m], frame)))) return fail();
     }
   }
+  if (Object.hasOwn(value, "numerical_sensitivity")) validateOceanNumerics(value.numerical_sensitivity, { releases, scenario: { horizon_s: scenario.horizon_s, releases: scenario.releases as OceanRelease[] }, baseline: base, layouts });
   return value as OceanPreventionReport;
 }
 export function validateOceanPreventionAnswer(value: unknown, report: OceanPreventionReport): OceanPreventionAnswer {

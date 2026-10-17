@@ -1,0 +1,2221 @@
+{
+  "report": {
+    "source_receipts": [
+      {
+        "bytes": 123,
+        "content_encoding": "identity",
+        "content_type": "text/plain",
+        "elapsed_wall_s": 1.0,
+        "finished_at_utc": "2026-01-01T00:00:02Z",
+        "http_status": 200,
+        "raw_path": null,
+        "reason": null,
+        "received_bytes": 123,
+        "request_attempted": true,
+        "response_complete": true,
+        "retained_bytes": 123,
+        "role": "gdp_metadata",
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "source_url": "https://example.invalid/invented-fixture-only",
+        "started_at_utc": "2026-01-01T00:00:01Z",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 123,
+        "content_encoding": "identity",
+        "content_type": "text/plain",
+        "elapsed_wall_s": 1.0,
+        "finished_at_utc": "2026-01-01T00:00:02Z",
+        "http_status": 200,
+        "raw_path": null,
+        "reason": null,
+        "received_bytes": 123,
+        "request_attempted": true,
+        "response_complete": true,
+        "retained_bytes": 123,
+        "role": "gdp_identity",
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "source_url": "https://example.invalid/invented-fixture-only",
+        "started_at_utc": "2026-01-01T00:00:01Z",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 123,
+        "content_encoding": "identity",
+        "content_type": "text/plain",
+        "elapsed_wall_s": 1.0,
+        "finished_at_utc": "2026-01-01T00:00:02Z",
+        "http_status": 200,
+        "raw_path": null,
+        "reason": null,
+        "received_bytes": 123,
+        "request_attempted": true,
+        "response_complete": true,
+        "retained_bytes": 123,
+        "role": "hycom_metadata",
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "source_url": "https://example.invalid/invented-fixture-only",
+        "started_at_utc": "2026-01-01T00:00:01Z",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 123,
+        "content_encoding": "identity",
+        "content_type": "text/plain",
+        "elapsed_wall_s": 1.0,
+        "finished_at_utc": "2026-01-01T00:00:02Z",
+        "http_status": 200,
+        "raw_path": null,
+        "reason": null,
+        "received_bytes": 123,
+        "request_attempted": true,
+        "response_complete": true,
+        "retained_bytes": 123,
+        "role": "trajectory:300234066836710",
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "source_url": "https://example.invalid/invented-fixture-only",
+        "started_at_utc": "2026-01-01T00:00:01Z",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 123,
+        "content_encoding": "identity",
+        "content_type": "text/plain",
+        "elapsed_wall_s": 1.0,
+        "finished_at_utc": "2026-01-01T00:00:02Z",
+        "http_status": 200,
+        "raw_path": null,
+        "reason": null,
+        "received_bytes": 123,
+        "request_attempted": true,
+        "response_complete": true,
+        "retained_bytes": 123,
+        "role": "trajectory:300534061292930",
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "source_url": "https://example.invalid/invented-fixture-only",
+        "started_at_utc": "2026-01-01T00:00:01Z",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 123,
+        "content_encoding": "identity",
+        "content_type": "application/x-netcdf",
+        "elapsed_wall_s": 1.0,
+        "finished_at_utc": "2026-01-01T00:00:02Z",
+        "http_status": 200,
+        "raw_path": null,
+        "reason": null,
+        "received_bytes": 123,
+        "request_attempted": true,
+        "response_complete": true,
+        "retained_bytes": 123,
+        "role": "hycom_currents",
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "source_url": "https://example.invalid/invented-fixture-only",
+        "started_at_utc": "2026-01-01T00:00:01Z",
+        "status": "DOWNLOADED"
+      }
+    ],
+    "schema_version": 1,
+    "kind": "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC",
+    "statistical_independence": false,
+    "forecasts_saved_before_target_coordinate_decode": true,
+    "context_qc": {
+      "300234066836710": {
+        "first_23_positions_used_by_models": false,
+        "invalid_coordinate_indices": [],
+        "planned_context_rows": 25,
+        "received_context_rows": 25,
+        "used_as_whole_group_admission_gate": false
+      },
+      "300534061292930": {
+        "first_23_positions_used_by_models": false,
+        "invalid_coordinate_indices": [],
+        "planned_context_rows": 25,
+        "received_context_rows": 25,
+        "used_as_whole_group_admission_gate": false
+      }
+    },
+    "physical_alias_resolution_verified": false,
+    "forecast_file_sha256": "b6b4b56b48c1f16828d43d958e0dd82ec5a1c4b5c34126764ea3fc6858c39649",
+    "scores": {
+      "automatic_winner_selected": false,
+      "forecast_report": {
+        "all_forecasts_built_before_target_decode": true,
+        "coordinate_method": "origin_anchored_mean_sphere_log_exp_50km_last_drift",
+        "forecast_sha256": "929fd05cbac196619a9cd6c07809b7169d2debb8c4f6591c7b3f4a782777b1e5",
+        "future_positions_used": false,
+        "group_ids": [
+          "300234066836710",
+          "300534061292930"
+        ],
+        "groups": [
+          {
+            "candidates": [
+              {
+                "available_count": 6,
+                "cells": [
+                  {
+                    "elapsed_s": 3600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 1,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 7200,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 2,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 10800,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 3,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 14400,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 4,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 18000,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 5,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 21600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 6,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ],
+                "completed_horizon_s": 21600,
+                "context_rows_used": 1,
+                "future_positions_used": false,
+                "learned_parameters": 0,
+                "model_id": "stationary",
+                "planned_count": 6,
+                "reason_code": null,
+                "requested_horizon_s": 21600,
+                "status": "COMPLETED"
+              },
+              {
+                "available_count": 6,
+                "cells": [
+                  {
+                    "elapsed_s": 3600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 1,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 7200,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 2,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 10800,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 3,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 14400,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 4,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 18000,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 5,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 21600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 6,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ],
+                "completed_horizon_s": 21600.0,
+                "context_rows_used": 2,
+                "future_positions_used": false,
+                "last_observed_delta_s": 3600.0,
+                "last_observed_velocity_m_s": [
+                  -0.0,
+                  -0.0
+                ],
+                "learned_parameters": 0,
+                "model_id": "last_drift",
+                "planned_count": 6,
+                "reason_code": null,
+                "requested_horizon_s": 21600,
+                "status": "COMPLETED"
+              },
+              {
+                "advection": {
+                  "accepted_steps": 72,
+                  "completed_horizon_s": 21600.0,
+                  "forcing": {
+                    "provenance": {
+                      "data_kind": "local_model_subset_not_observed_plastic",
+                      "product": "HYCOM_GOFS3.1_GLBy0.08_expt93.0_UV3Z_2022_format_contract",
+                      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                      "u_variable": "water_u",
+                      "v_variable": "water_v"
+                    },
+                    "selected_depth_m": 15.0,
+                    "shape": [
+                      3,
+                      2,
+                      2
+                    ],
+                    "time_end_utc": "2022-06-01T06:00:00.000000Z",
+                    "time_start_utc": "2022-06-01T00:00:00.000000Z"
+                  },
+                  "heldout_buoy_positions_used": false,
+                  "kind": "CURRENT_FORCED_PASSIVE_TRACER",
+                  "limitations": [
+                    "The supplied current field is model output, not measured waste motion.",
+                    "No windage, object response, beaching, retention or diffusion is inferred.",
+                    "Missing cells and unavailable times stop the track; no extrapolation is used.",
+                    "Forecast causality requires a separately verified issue-time/as-of receipt.",
+                    "Ocean currents do not calibrate the centimetre-scale tank experiment."
+                  ],
+                  "physical_validation": false,
+                  "plastic_motion_validated": false,
+                  "reason_code": null,
+                  "requested_horizon_s": 21600.0,
+                  "schema_version": 1,
+                  "solver": {
+                    "forcing_time_knots_aligned": true,
+                    "maximum_step_s": 300.0,
+                    "maximum_steps": 2048,
+                    "method": "RK4_WGS84_METRIC_DERIVATIVES",
+                    "output_step_s": 3600.0,
+                    "position_units": "geographic_degrees",
+                    "spatial_interpolation": "bilinear",
+                    "temporal_interpolation": "linear",
+                    "velocity_units": "m/s"
+                  },
+                  "status": "COMPLETED",
+                  "tank_flow_used": false,
+                  "track": [
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 0.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T00:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 3600.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T01:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 7200.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T02:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 10800.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T03:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 14400.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T04:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 18000.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T05:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 21600.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T06:00:00Z"
+                    }
+                  ]
+                },
+                "available_count": 6,
+                "cells": [
+                  {
+                    "elapsed_s": 3600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 1,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 7200,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 2,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 10800,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 3,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 14400,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 4,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 18000,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 5,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 21600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 6,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ],
+                "completed_horizon_s": 21600.0,
+                "context_rows_used": 1,
+                "future_positions_used": false,
+                "learned_parameters": 0,
+                "model_id": "current_only",
+                "planned_count": 6,
+                "reason_code": null,
+                "requested_horizon_s": 21600,
+                "status": "COMPLETED"
+              }
+            ],
+            "context_count": 25,
+            "group_id": "300234066836710",
+            "origin_position": {
+              "latitude_deg": 30.0,
+              "longitude_deg": -75.0,
+              "time_utc": "2022-06-01T00:00:00Z"
+            }
+          },
+          {
+            "candidates": [
+              {
+                "available_count": 6,
+                "cells": [
+                  {
+                    "elapsed_s": 3600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 1,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 7200,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 2,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 10800,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 3,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 14400,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 4,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 18000,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 5,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 21600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 6,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ],
+                "completed_horizon_s": 21600,
+                "context_rows_used": 1,
+                "future_positions_used": false,
+                "learned_parameters": 0,
+                "model_id": "stationary",
+                "planned_count": 6,
+                "reason_code": null,
+                "requested_horizon_s": 21600,
+                "status": "COMPLETED"
+              },
+              {
+                "available_count": 6,
+                "cells": [
+                  {
+                    "elapsed_s": 3600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 1,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 7200,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 2,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 10800,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 3,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 14400,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 4,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 18000,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 5,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 21600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 6,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ],
+                "completed_horizon_s": 21600.0,
+                "context_rows_used": 2,
+                "future_positions_used": false,
+                "last_observed_delta_s": 3600.0,
+                "last_observed_velocity_m_s": [
+                  -0.0,
+                  -0.0
+                ],
+                "learned_parameters": 0,
+                "model_id": "last_drift",
+                "planned_count": 6,
+                "reason_code": null,
+                "requested_horizon_s": 21600,
+                "status": "COMPLETED"
+              },
+              {
+                "advection": {
+                  "accepted_steps": 72,
+                  "completed_horizon_s": 21600.0,
+                  "forcing": {
+                    "provenance": {
+                      "data_kind": "local_model_subset_not_observed_plastic",
+                      "product": "HYCOM_GOFS3.1_GLBy0.08_expt93.0_UV3Z_2022_format_contract",
+                      "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                      "u_variable": "water_u",
+                      "v_variable": "water_v"
+                    },
+                    "selected_depth_m": 15.0,
+                    "shape": [
+                      3,
+                      2,
+                      2
+                    ],
+                    "time_end_utc": "2022-06-01T06:00:00.000000Z",
+                    "time_start_utc": "2022-06-01T00:00:00.000000Z"
+                  },
+                  "heldout_buoy_positions_used": false,
+                  "kind": "CURRENT_FORCED_PASSIVE_TRACER",
+                  "limitations": [
+                    "The supplied current field is model output, not measured waste motion.",
+                    "No windage, object response, beaching, retention or diffusion is inferred.",
+                    "Missing cells and unavailable times stop the track; no extrapolation is used.",
+                    "Forecast causality requires a separately verified issue-time/as-of receipt.",
+                    "Ocean currents do not calibrate the centimetre-scale tank experiment."
+                  ],
+                  "physical_validation": false,
+                  "plastic_motion_validated": false,
+                  "reason_code": null,
+                  "requested_horizon_s": 21600.0,
+                  "schema_version": 1,
+                  "solver": {
+                    "forcing_time_knots_aligned": true,
+                    "maximum_step_s": 300.0,
+                    "maximum_steps": 2048,
+                    "method": "RK4_WGS84_METRIC_DERIVATIVES",
+                    "output_step_s": 3600.0,
+                    "position_units": "geographic_degrees",
+                    "spatial_interpolation": "bilinear",
+                    "temporal_interpolation": "linear",
+                    "velocity_units": "m/s"
+                  },
+                  "status": "COMPLETED",
+                  "tank_flow_used": false,
+                  "track": [
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 0.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T00:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 3600.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T01:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 7200.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T02:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 10800.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T03:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 14400.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T04:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 18000.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T05:00:00Z"
+                    },
+                    {
+                      "eastward_m_s": 0.0,
+                      "elapsed_s": 21600.0,
+                      "latitude_deg": 30.0,
+                      "longitude_deg": -75.0,
+                      "northward_m_s": 0.0,
+                      "speed_m_s": 0.0,
+                      "time_utc": "2022-06-01T06:00:00Z"
+                    }
+                  ]
+                },
+                "available_count": 6,
+                "cells": [
+                  {
+                    "elapsed_s": 3600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 1,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T01:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 7200,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 2,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T02:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 10800,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 3,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T03:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 14400,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 4,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T04:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 18000,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 5,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T05:00:00Z"
+                  },
+                  {
+                    "elapsed_s": 21600,
+                    "forecast_reason_code": null,
+                    "forecast_status": "AVAILABLE",
+                    "horizon_hours": 6,
+                    "latitude_deg": 30.0,
+                    "longitude_deg": -75.0,
+                    "time_utc": "2022-06-01T06:00:00Z"
+                  }
+                ],
+                "completed_horizon_s": 21600.0,
+                "context_rows_used": 1,
+                "future_positions_used": false,
+                "learned_parameters": 0,
+                "model_id": "current_only",
+                "planned_count": 6,
+                "reason_code": null,
+                "requested_horizon_s": 21600,
+                "status": "COMPLETED"
+              }
+            ],
+            "context_count": 25,
+            "group_id": "300534061292930",
+            "origin_position": {
+              "latitude_deg": 30.0,
+              "longitude_deg": -75.0,
+              "time_utc": "2022-06-01T00:00:00Z"
+            }
+          }
+        ],
+        "horizons_s": [
+          3600,
+          7200,
+          10800,
+          14400,
+          18000,
+          21600
+        ],
+        "kind": "MATCHED_CURRENT_FORECASTS",
+        "model_ids": [
+          "stationary",
+          "last_drift",
+          "current_only"
+        ],
+        "operational_forecast_skill_verified": false,
+        "origin_time_utc": "2022-06-01T00:00:00Z",
+        "physical_validation": false,
+        "planned_cell_count": 36,
+        "planned_distinct_target_count": 12,
+        "planned_group_count": 2,
+        "schema_version": 1,
+        "score_method": "mean_radius_sphere_great_circle_metres",
+        "statistical_independence": false
+      },
+      "groups": [
+        {
+          "candidates": [
+            {
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "error_m": null,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 1,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "TARGET_UNAVAILABLE",
+                  "target_latitude_deg": null,
+                  "target_longitude_deg": null,
+                  "target_reason_code": "TARGET_INVALID_COORDINATE",
+                  "target_status": "UNAVAILABLE",
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 2,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 3,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 4,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 5,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 6,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "metrics": {
+                "available_cell_mean_error_m": 0.0,
+                "available_cell_summary_is_full_horizon_ade": false,
+                "coverage_complete": false,
+                "endpoint_fde_m": 0.0,
+                "endpoint_scored": true,
+                "full_horizon_ade_m": null,
+                "missing_count": 1,
+                "planned_count": 6,
+                "prefix_is_full_horizon": false,
+                "scored_count": 5,
+                "scored_prefix_count": 0,
+                "scored_prefix_hours": [],
+                "scored_prefix_mean_error_m": null
+              },
+              "model_id": "stationary",
+              "prediction_reason_code": null,
+              "prediction_status": "COMPLETED"
+            },
+            {
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "error_m": null,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 1,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "TARGET_UNAVAILABLE",
+                  "target_latitude_deg": null,
+                  "target_longitude_deg": null,
+                  "target_reason_code": "TARGET_INVALID_COORDINATE",
+                  "target_status": "UNAVAILABLE",
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 2,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 3,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 4,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 5,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 6,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "metrics": {
+                "available_cell_mean_error_m": 0.0,
+                "available_cell_summary_is_full_horizon_ade": false,
+                "coverage_complete": false,
+                "endpoint_fde_m": 0.0,
+                "endpoint_scored": true,
+                "full_horizon_ade_m": null,
+                "missing_count": 1,
+                "planned_count": 6,
+                "prefix_is_full_horizon": false,
+                "scored_count": 5,
+                "scored_prefix_count": 0,
+                "scored_prefix_hours": [],
+                "scored_prefix_mean_error_m": null
+              },
+              "model_id": "last_drift",
+              "prediction_reason_code": null,
+              "prediction_status": "COMPLETED"
+            },
+            {
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "error_m": null,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 1,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "TARGET_UNAVAILABLE",
+                  "target_latitude_deg": null,
+                  "target_longitude_deg": null,
+                  "target_reason_code": "TARGET_INVALID_COORDINATE",
+                  "target_status": "UNAVAILABLE",
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 2,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 3,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 4,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 5,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300234066836710",
+                  "horizon_hours": 6,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "metrics": {
+                "available_cell_mean_error_m": 0.0,
+                "available_cell_summary_is_full_horizon_ade": false,
+                "coverage_complete": false,
+                "endpoint_fde_m": 0.0,
+                "endpoint_scored": true,
+                "full_horizon_ade_m": null,
+                "missing_count": 1,
+                "planned_count": 6,
+                "prefix_is_full_horizon": false,
+                "scored_count": 5,
+                "scored_prefix_count": 0,
+                "scored_prefix_hours": [],
+                "scored_prefix_mean_error_m": null
+              },
+              "model_id": "current_only",
+              "prediction_reason_code": null,
+              "prediction_status": "COMPLETED"
+            }
+          ],
+          "group_id": "300234066836710",
+          "target_issues": [
+            {
+              "reason_code": "TARGET_INVALID_COORDINATE",
+              "time_utc": "2022-06-01T01:00:00Z"
+            }
+          ]
+        },
+        {
+          "candidates": [
+            {
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 1,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 2,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 3,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 4,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 5,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 6,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "stationary",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "metrics": {
+                "available_cell_mean_error_m": 0.0,
+                "available_cell_summary_is_full_horizon_ade": true,
+                "coverage_complete": true,
+                "endpoint_fde_m": 0.0,
+                "endpoint_scored": true,
+                "full_horizon_ade_m": 0.0,
+                "missing_count": 0,
+                "planned_count": 6,
+                "prefix_is_full_horizon": true,
+                "scored_count": 6,
+                "scored_prefix_count": 6,
+                "scored_prefix_hours": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ],
+                "scored_prefix_mean_error_m": 0.0
+              },
+              "model_id": "stationary",
+              "prediction_reason_code": null,
+              "prediction_status": "COMPLETED"
+            },
+            {
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 1,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 2,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 3,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 4,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 5,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 6,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "last_drift",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "metrics": {
+                "available_cell_mean_error_m": 0.0,
+                "available_cell_summary_is_full_horizon_ade": true,
+                "coverage_complete": true,
+                "endpoint_fde_m": 0.0,
+                "endpoint_scored": true,
+                "full_horizon_ade_m": 0.0,
+                "missing_count": 0,
+                "planned_count": 6,
+                "prefix_is_full_horizon": true,
+                "scored_count": 6,
+                "scored_prefix_count": 6,
+                "scored_prefix_hours": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ],
+                "scored_prefix_mean_error_m": 0.0
+              },
+              "model_id": "last_drift",
+              "prediction_reason_code": null,
+              "prediction_status": "COMPLETED"
+            },
+            {
+              "cells": [
+                {
+                  "elapsed_s": 3600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 1,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T01:00:00Z"
+                },
+                {
+                  "elapsed_s": 7200,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 2,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T02:00:00Z"
+                },
+                {
+                  "elapsed_s": 10800,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 3,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T03:00:00Z"
+                },
+                {
+                  "elapsed_s": 14400,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 4,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T04:00:00Z"
+                },
+                {
+                  "elapsed_s": 18000,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 5,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T05:00:00Z"
+                },
+                {
+                  "elapsed_s": 21600,
+                  "error_m": 0.0,
+                  "forecast_reason_code": null,
+                  "forecast_status": "AVAILABLE",
+                  "group_id": "300534061292930",
+                  "horizon_hours": 6,
+                  "latitude_deg": 30.0,
+                  "longitude_deg": -75.0,
+                  "model_id": "current_only",
+                  "score_status": "SCORED",
+                  "target_latitude_deg": 30.0,
+                  "target_longitude_deg": -75.0,
+                  "target_reason_code": null,
+                  "target_status": "AVAILABLE",
+                  "time_utc": "2022-06-01T06:00:00Z"
+                }
+              ],
+              "metrics": {
+                "available_cell_mean_error_m": 0.0,
+                "available_cell_summary_is_full_horizon_ade": true,
+                "coverage_complete": true,
+                "endpoint_fde_m": 0.0,
+                "endpoint_scored": true,
+                "full_horizon_ade_m": 0.0,
+                "missing_count": 0,
+                "planned_count": 6,
+                "prefix_is_full_horizon": true,
+                "scored_count": 6,
+                "scored_prefix_count": 6,
+                "scored_prefix_hours": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6
+                ],
+                "scored_prefix_mean_error_m": 0.0
+              },
+              "model_id": "current_only",
+              "prediction_reason_code": null,
+              "prediction_status": "COMPLETED"
+            }
+          ],
+          "group_id": "300534061292930",
+          "target_issues": []
+        }
+      ],
+      "kind": "MATCHED_CURRENT_SCORES",
+      "limitations": [
+        "The 36 model/horizon cells reuse only 12 processed GDP position estimates.",
+        "Paired errors describe only explicitly listed common available cells.",
+        "Whole-group exclusion does not prove independence from HYCOM assimilation.",
+        "Retrospective future-valid forcing lacks a verified historical issue-time cutoff.",
+        "No plastic source, reef protection, tank accuracy or statistical significance is proved."
+      ],
+      "models": [
+        {
+          "metrics": {
+            "available_cell_mean_error_m": 0.0,
+            "available_cell_summary_is_full_horizon_ade": false,
+            "coverage_complete": false,
+            "full_horizon_ade_m": null,
+            "missing_count": 1,
+            "planned_count": 12,
+            "scored_count": 11
+          },
+          "model_id": "stationary",
+          "per_horizon": [
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": null,
+              "coverage_complete": false,
+              "horizon_hours": 1,
+              "planned_group_count": 2,
+              "scored_group_count": 1
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 2,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 3,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 4,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 5,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 6,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            }
+          ]
+        },
+        {
+          "metrics": {
+            "available_cell_mean_error_m": 0.0,
+            "available_cell_summary_is_full_horizon_ade": false,
+            "coverage_complete": false,
+            "full_horizon_ade_m": null,
+            "missing_count": 1,
+            "planned_count": 12,
+            "scored_count": 11
+          },
+          "model_id": "last_drift",
+          "per_horizon": [
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": null,
+              "coverage_complete": false,
+              "horizon_hours": 1,
+              "planned_group_count": 2,
+              "scored_group_count": 1
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 2,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 3,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 4,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 5,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 6,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            }
+          ]
+        },
+        {
+          "metrics": {
+            "available_cell_mean_error_m": 0.0,
+            "available_cell_summary_is_full_horizon_ade": false,
+            "coverage_complete": false,
+            "full_horizon_ade_m": null,
+            "missing_count": 1,
+            "planned_count": 12,
+            "scored_count": 11
+          },
+          "model_id": "current_only",
+          "per_horizon": [
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": null,
+              "coverage_complete": false,
+              "horizon_hours": 1,
+              "planned_group_count": 2,
+              "scored_group_count": 1
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 2,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 3,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 4,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 5,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            },
+            {
+              "available_group_mean_error_m": 0.0,
+              "complete_group_mean_error_m": 0.0,
+              "coverage_complete": true,
+              "horizon_hours": 6,
+              "planned_group_count": 2,
+              "scored_group_count": 2
+            }
+          ]
+        }
+      ],
+      "operational_forecast_skill_verified": false,
+      "origin_time_utc": "2022-06-01T00:00:00Z",
+      "paired_comparisons": [
+        {
+          "analysis_scope": "SECONDARY_COMMON_AVAILABLE_CELLS",
+          "cells": [
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T02:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T03:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T04:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T05:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T06:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T01:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T02:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T03:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T04:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T05:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T06:00:00Z"
+            }
+          ],
+          "common_scored_count": 11,
+          "coverage_complete": false,
+          "mean_delta_a_minus_b_m": 0.0,
+          "mean_error_a_m": 0.0,
+          "mean_error_b_m": 0.0,
+          "model_a": "stationary",
+          "model_b": "last_drift",
+          "planned_common_cell_count": 12
+        },
+        {
+          "analysis_scope": "SECONDARY_COMMON_AVAILABLE_CELLS",
+          "cells": [
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T02:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T03:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T04:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T05:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T06:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T01:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T02:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T03:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T04:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T05:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T06:00:00Z"
+            }
+          ],
+          "common_scored_count": 11,
+          "coverage_complete": false,
+          "mean_delta_a_minus_b_m": 0.0,
+          "mean_error_a_m": 0.0,
+          "mean_error_b_m": 0.0,
+          "model_a": "stationary",
+          "model_b": "current_only",
+          "planned_common_cell_count": 12
+        },
+        {
+          "analysis_scope": "SECONDARY_COMMON_AVAILABLE_CELLS",
+          "cells": [
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T02:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T03:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T04:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T05:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300234066836710",
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T06:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T01:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T02:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T03:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T04:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T05:00:00Z"
+            },
+            {
+              "error_a_m": 0.0,
+              "error_b_m": 0.0,
+              "group_id": "300534061292930",
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T06:00:00Z"
+            }
+          ],
+          "common_scored_count": 11,
+          "coverage_complete": false,
+          "mean_delta_a_minus_b_m": 0.0,
+          "mean_error_a_m": 0.0,
+          "mean_error_b_m": 0.0,
+          "model_a": "last_drift",
+          "model_b": "current_only",
+          "planned_common_cell_count": 12
+        }
+      ],
+      "physical_validation": false,
+      "planned_cell_count": 36,
+      "planned_distinct_target_count": 12,
+      "planned_group_count": 2,
+      "primary_common_cohort_complete": false,
+      "primary_equal_id_macro_results": null,
+      "primary_paired_comparisons": null,
+      "schema_version": 1,
+      "scored_cell_count": 33,
+      "statistical_independence": false
+    },
+    "global_training": false,
+    "forecast_frozen_at_utc": "2026-01-01T00:00:04Z",
+    "lineage": {
+      "acquisition_start_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "manifest_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "protocol_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "trusted_identity_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "operational_causality": false,
+    "scored_at_utc": "2026-01-01T00:00:05Z",
+    "automatic_model_promotion": false,
+    "provider_calls": false,
+    "current_field_failure": null,
+    "store_written": false,
+    "assimilation_independence_verified": false,
+    "camera_started": false,
+    "current_field": {
+      "approx_east_west_grid_spacing_m_at_midlatitude": [
+        1447294.2037634477,
+        1447294.2037634477
+      ],
+      "approx_north_south_grid_spacing_m": [
+        1108524.4249561708,
+        1108524.4249561708
+      ],
+      "array_dimensions": [
+        "time",
+        "latitude",
+        "longitude"
+      ],
+      "coordinate_space": "geographic_lonlat_degrees",
+      "invalid_sample_count": 0,
+      "latitude_range_deg": [
+        25.0,
+        35.0
+      ],
+      "latitude_spacing_degrees_min_max": [
+        10.0,
+        10.0
+      ],
+      "limitations": [
+        "Model grid spacing is not guaranteed effective physical resolution.",
+        "These geographic fields cannot be passed to the centimetre tank estimator.",
+        "No source attribution, ecological impact or field validation is established."
+      ],
+      "longitude_range_deg": [
+        -80.0,
+        -65.0
+      ],
+      "longitude_spacing_degrees_min_max": [
+        15.0,
+        15.0
+      ],
+      "provenance": {
+        "calendar": "gregorian",
+        "contract_metadata_url": "https://example.invalid/invented-metadata",
+        "data_kind": "local_model_subset_not_observed_plastic",
+        "issue_time_verified": false,
+        "limitations": [
+          "Invented test summary, not an acquired current field."
+        ],
+        "longitude_normalization": "((native_lon+180)%360)-180_without_reordering",
+        "product": "HYCOM_GOFS3.1_GLBy0.08_expt93.0_UV3Z_2022_format_contract",
+        "raw_encoding": {
+          "add_offset": 0,
+          "applied_decimal_scale": 0.001,
+          "decode_count": 1,
+          "dtype": "signed_int16",
+          "fill_and_missing": -30000,
+          "mask_before_scaling": true,
+          "scale_factor_encoding": "exact_pinned_float32"
+        },
+        "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "source_bytes": 123,
+        "source_origin_verified": false,
+        "time_units": "hours since 2000-01-01 00:00:00",
+        "u_variable": "water_u",
+        "v_variable": "water_v",
+        "velocity_units": "m/s"
+      },
+      "selected_depth_m": 15.0,
+      "shape": [
+        3,
+        2,
+        2
+      ],
+      "time_end_utc": "2022-06-01T06:00:00.000000Z",
+      "time_start_utc": "2022-06-01T00:00:00.000000Z",
+      "valid_sample_count": 12,
+      "velocity_units": "m/s"
+    },
+    "physical_validation": false,
+    "heldout_tuning": false,
+    "study_id": "matched-current-gdp-hycom-15m-v1"
+  },
+  "artifact_identity": {
+    "schema_version": 1,
+    "study_id": "matched-current-gdp-hycom-15m-v1",
+    "report_sha256": "6cef5f160b6eaabc309ef99889f02eef28ba856dca9bfb3c5476cc92e984ecdc",
+    "forecast_file_sha256": "b6b4b56b48c1f16828d43d958e0dd82ec5a1c4b5c34126764ea3fc6858c39649",
+    "forecast_sha256": "929fd05cbac196619a9cd6c07809b7169d2debb8c4f6591c7b3f4a782777b1e5",
+    "protocol_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "trusted_protocol_identity_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "manifest_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "acquisition_start_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "integrity_verified": true,
+    "numeric_replay_verified": false,
+    "verification_scope": "FROZEN_ARTIFACT_LINEAGE_AND_STRUCTURE_NOT_NUMERIC_REPLAY",
+    "result_pin_verified": true,
+    "pin_source": "TRUSTED_RESULT_IDENTITY",
+    "result_identity_file_sha256": "2e2ccaf1dfb36730867ef2116fc8184d385d93fcde070e31ef0c1ec1bb811af6"
+  }
+}

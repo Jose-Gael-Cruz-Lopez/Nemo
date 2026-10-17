@@ -1,0 +1,28 @@
+Grok
+Worked for 41s
+
+GO with conditions (static advice only). No execution, acquisition, scores or physical validation is claimed. The frozen six-ID study stays untouched.
+
+The reviewed contracts are sufficient to freeze and acquire once, provided the local fixes already identified are present in the freeze commit:
+
+HYCOM decode consumes only the already hash-verified immutable bytes (no path reopen that could accept a swapped file).
+Forecast frozen_at_utc is ≥ manifest finished_at_utc and ≥ every source finished_at_utc.
+Orphan manifest or acquisition-start hash sentinels are rejected before any GET.
+Per-role clocks are sequential and non-overlapping.
+An all-masked current field yields CURRENT_FIELD_ALL_MASKED / UNSUPPORTED and stays in the 36-cell denominator.
+
+Checked and acceptable to freeze
+
+Geometry / encoding. Native longitude ((lon+180)%360)-180 with seam rejection; depth exactly 15 m positive-down (distinct from a surface-plastic object); raw int16, exact pinned float32 scale_factor/add_offset attributes, fill −30000 masked before a single decimal float64 0.001 multiply.
+Isolation. Last-drift uses only the final two context fixes with exact dt = 3600 s and origin-anchored AEQD; current-only starts at the origin position and receives only the 00/03/06Z field; all 36 forecast cells are built and receipt-frozen before any future coordinate is decoded to float.
+Accounting. 36 planned cells reuse 12 dependent targets; primary equal-ID macro is emitted only when all 36 are scored; unsupported prefixes, masks and missing targets retain null errors and explicit reasons.
+Transport. Single connection, no retries/redirects, identity encoding, role order with dependency blocking, byte/time caps, NCSS URI fixed to west=280/east=295 and the three UTC knots.
+Claim scope. Flags correctly keep the study a retrospective future-valid analysis diagnostic: operational_causality, assimilation_independence_verified and statistical_independence are false. No as-of operational skill is asserted.
+
+Three independent regression examples
+
+Encoding. A NetCDF whose scale_factor attribute is float64 0.001 (or an adjacent float32) fails closed as metadata invalid; raw short 500 with the pinned float32 attribute and fill −30000 becomes exactly 0.5 m/s after one decimal multiply, and a fill value never becomes −30 m/s.
+Isolation / chronology. Mutating context positions 1–23 does not change any of the six tracks; the forecast receipt hash is written and re-read before any future lat/lon string is parsed; a forecast timestamp earlier than the manifest or any source finish is rejected.
+Denominator / mask. An all-masked 15 m tile, or a partial prefix that completes 00Z→03Z then fails at 06Z, leaves all 36 cells present, sets primary macro to null, and does not drop the group or zero-fill the missing velocities.
+
+No alternative selection, held-out fitting, zero-fill, ID replacement or protocol change after outcomes is authorized. A GO here is design acceptance only.

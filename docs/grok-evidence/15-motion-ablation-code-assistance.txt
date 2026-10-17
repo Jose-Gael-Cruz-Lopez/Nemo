@@ -1,0 +1,122 @@
+Grok
+Worked for 15s
+
+Static code assistance only. Current public diagnostics.py and benchmark.py (commit d3cda23) were inspected. No tests were executed here. Existing 18/6 benchmark and training diagnostic outputs/fixture bytes remain untouched.
+
+1. mean_drift_forecast
+Python
+Copy
+Copied
+import math
+import numpy as np
+
+def mean_drift_forecast(prefix_xy, steps: int, step_s: float):
+    """Mean-velocity free-run. Exactly AR(1) with velocity-transition matrix = 0.
+
+    mean_velocity = (last - first) / ((n - 1) * step_s)
+    forecast[h] = last + h * step_s * mean_velocity
+    Returns (predictions[steps, 2], parameters with learned_parameters=2).
+    """
+    xy = np.asarray(prefix_xy, dtype=float)
+    if type(steps) is not int or not 1 <= steps <= 12:
+        raise ValueError("steps must be an explicit Python int in 1..12")
+    if isinstance(step_s, bool) or not isinstance(step_s, (int, float)) or not math.isfinite(step_s) or step_s <= 0:
+        raise ValueError("step_s must be a positive finite number")
+    if xy.ndim != 2 or xy.shape[1] != 2 or xy.shape[0] < 2:
+        raise ValueError("prefix_xy must be (n, 2) with n >= 2")
+    if not np.isfinite(xy).all():
+        raise ValueError("prefix_xy must be finite")
+    n = xy.shape[0]
+    mean_velocity = (xy[-1] - xy[0]) / ((n - 1) * step_s)
+    if not np.isfinite(mean_velocity).all():
+        raise ValueError("mean velocity must be finite")
+    predictions = xy[-1] + np.arange(1, steps + 1, dtype=float)[:, None] * step_s * mean_velocity
+    if not np.isfinite(predictions).all():
+        raise ValueError("forecast must be finite")
+    return predictions, {
+        "learned_parameters": 2,
+        "mean_velocity_m_s": mean_velocity.tolist(),
+        "velocity_transition_matrix": [[0.0, 0.0], [0.0, 0.0]],
+        "equivalent_to": "ridge_ar1_with_velocity_memory_matrix_zeroed",
+    }
+2. paired_error_summary
+Python
+Copy
+Copied
+def paired_error_summary(candidate_errors, baseline_errors) -> dict:
+    """Aligned-origin paired comparison. Delta = candidate - baseline (negative is better).
+
+    Relative MAE skill = 1 - sum(candidate)/sum(baseline).
+    Baseline sum == 0 yields skill=None and reason ZERO_BASELINE_ERROR; never Inf/NaN.
+    """
+    if not isinstance(candidate_errors, (list, tuple)) or not isinstance(baseline_errors, (list, tuple)):
+        raise ValueError("errors must be lists")
+    if len(candidate_errors) != len(baseline_errors) or not candidate_errors:
+        raise ValueError("aligned nonempty lists required")
+    cand = []
+    base = []
+    for c, b in zip(candidate_errors, baseline_errors, strict=True):
+        if isinstance(c, bool) or isinstance(b, bool) or not isinstance(c, (int, float)) or not isinstance(b, (int, float)):
+            raise ValueError("errors must be finite non-negative numbers, not bool")
+        if not math.isfinite(c) or not math.isfinite(b) or c < 0 or b < 0:
+            raise ValueError("errors must be finite and non-negative")
+        cand.append(float(c))
+        base.append(float(b))
+    deltas = [c - b for c, b in zip(cand, base, strict=True)]
+    sum_c = sum(cand)
+    sum_b = sum(base)
+    if sum_b == 0:
+        skill, reason = None, "ZERO_BASELINE_ERROR"
+    else:
+        skill, reason = 1.0 - sum_c / sum_b, None
+    return {
+        "aligned_origin_count": len(deltas),
+        "mean_delta_m": sum(deltas) / len(deltas),
+        "median_delta_m": float(np.median(deltas)),
+        "min_delta_m": min(deltas),
+        "max_delta_m": max(deltas),
+        "lower_count": sum(d < 0 for d in deltas),
+        "equal_count": sum(d == 0 for d in deltas),
+        "higher_count": sum(d > 0 for d in deltas),
+        "relative_mae_skill": skill,
+        "skill_reason": reason,
+    }
+3. Four regression cases (prefix-only / forecasts-before-scoring)
+text
+Copy
+Copied
+# R1: forecasts exist before any future truth is projected
+events = []
+def to_xy(...): events.append(("xy", lat, lon)); ...
+def forecast(...): events.append(("forecast", model, n)); ...
+# After run on prefixes 8..12:
+# first event of type "forecast" occurs while only prefix coords have been projected;
+# first later-training coord appears only after the three (or four) forecasts for that origin.
+
+# R2: sentinel held-out objects never accessed
+guarded = records[:18] + [_HeldoutSentinel()]*6
+report = motion_ablation(guarded)
+assert report["split"]["training_count"] == 18
+assert report["test_data_used"] is False
+# last scored time <= 1987-10-03T17:00:00Z
+
+# R3: mutating a later training position changes only later-origin scores
+mutated = records.copy(); mutate(mutated[16])
+# predictions for origins whose prefix ends before index 16 are identical;
+# aggregates differ.
+
+# R4: existing 18/6 benchmark JSON is byte-identical after the ablation module is imported and called
+before = json.dumps(run_real_data_example(), sort_keys=True, allow_nan=False)
+motion_ablation(...)
+after = json.dumps(run_real_data_example(), sort_keys=True, allow_nan=False)
+assert before == after
+Implementation review notes
+Place the two functions in a new apps/ocean/reeftrace_ocean/ablation.py. Reuse SphericalLocalFrame, great_circle_distance_m, MAX_LOCAL_DISTANCE_M, MIN_FIT_COUNT, provenance constants and the existing prefix loop pattern from diagnostics.py. Do not modify benchmark.py or diagnostics.py.
+Report kind: TRAINING_ONLY_MOTION_ABLATION, schema_version: 1. Origins 8..12, 6 horizons, models ("stationary", "last_drift", "mean_drift", "ridge_ar1"). Include aggregates and paired ridge summaries versus the three baselines via paired_error_summary.
+Flags: test_data_used: false, model_selection_performed: false, calibrated_probability: false, physical_validation: false, automatic_model_promotion: false.
+For each origin, project only training[:prefix_count], call all four forecasts, then project/score the next 6 training positions. Never index past the training window.
+mean_drift has learned_parameters: 2 (the two mean-velocity components). It is the zero-memory special case of the existing ridge AR(1).
+Reject bool/float counts, malformed shapes, non-finite or negative errors, and unmatched lists exactly as shown. No downloads, providers, or random splits.
+A model may lose to last_drift or mean_drift; do not assert that ridge must win. No source or ecological inference from buoy positions.
+
+You will integrate, test locally, browser-walk and push.

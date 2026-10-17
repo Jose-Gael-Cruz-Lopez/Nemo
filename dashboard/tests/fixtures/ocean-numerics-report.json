@@ -1,0 +1,1447 @@
+{
+  "schema_version": 1,
+  "kind": "OCEAN_NUMERICAL_SENSITIVITY",
+  "release_count": 6,
+  "scope": "separate_diagnostic_reruns_do_not_replace_main_decision_paths",
+  "physical_validation": false,
+  "independent_truth_used": false,
+  "model_parameters_tuned": false,
+  "diagnostic_advection_runs_per_release": 4,
+  "integration": {
+    "output_step_s": 300.0,
+    "reference_solver_step_s": 75.0,
+    "comparison_metric": "fixed_scenario_frame_Euclidean_separation_m",
+    "positive_time_matching": "exact_common_accepted_output_times_only",
+    "levels": [
+      {
+        "solver_step_s": 300.0,
+        "output_step_s": 300.0,
+        "release_count": 6,
+        "forcing_status_counts": {
+          "COMPLETED": 6,
+          "PARTIAL": 0,
+          "UNSUPPORTED": 0
+        },
+        "releases": [
+          {
+            "release_id": "release-1",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0008397775205383981,
+              "rms_separation_m": 0.0003132759522641365,
+              "last_common_separation_m": 0.0008397775205383981,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-2",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0004474288854245184,
+              "rms_separation_m": 0.00010905845092565261,
+              "last_common_separation_m": 0.0004474288854245184,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-3",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 8.859558508359602e-05,
+              "rms_separation_m": 6.232281434463429e-05,
+              "last_common_separation_m": 8.859558508359602e-05,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-4",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.00023018624928083364,
+              "rms_separation_m": 0.00016124130361328773,
+              "last_common_separation_m": 0.00023018624928083364,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-5",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.00020432197855196741,
+              "rms_separation_m": 0.00016096324970836385,
+              "last_common_separation_m": 0.00020432197855196741,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-6",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.00043943530752533,
+              "rms_separation_m": 0.00031673754768091276,
+              "last_common_separation_m": 0.00043943530752533,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          }
+        ],
+        "max_separation_m": 0.0008397775205383981,
+        "comparable_release_count": 6
+      },
+      {
+        "solver_step_s": 150.0,
+        "output_step_s": 300.0,
+        "release_count": 6,
+        "forcing_status_counts": {
+          "COMPLETED": 6,
+          "PARTIAL": 0,
+          "UNSUPPORTED": 0
+        },
+        "releases": [
+          {
+            "release_id": "release-1",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.00016872240731832412,
+              "rms_separation_m": 9.203503770032907e-05,
+              "last_common_separation_m": 0.00016872240731832412,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-2",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0003256624869267225,
+              "rms_separation_m": 7.416292155702305e-05,
+              "last_common_separation_m": 0.0003256624869267225,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-3",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 8.784597173988674e-05,
+              "rms_separation_m": 6.163280426963017e-05,
+              "last_common_separation_m": 8.784597173988674e-05,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-4",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 4.723660104034744e-05,
+              "rms_separation_m": 3.3063395120076934e-05,
+              "last_common_separation_m": 4.723660104034744e-05,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-5",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.00021184485587591714,
+              "rms_separation_m": 0.00016748109398150276,
+              "last_common_separation_m": 0.00021184485587591714,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-6",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 2.9606914591292153e-05,
+              "rms_separation_m": 2.0496693039125137e-05,
+              "last_common_separation_m": 2.9606914591292153e-05,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          }
+        ],
+        "max_separation_m": 0.0003256624869267225,
+        "comparable_release_count": 6
+      },
+      {
+        "solver_step_s": 75.0,
+        "output_step_s": 300.0,
+        "release_count": 6,
+        "forcing_status_counts": {
+          "COMPLETED": 6,
+          "PARTIAL": 0,
+          "UNSUPPORTED": 0
+        },
+        "releases": [
+          {
+            "release_id": "release-1",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0,
+              "rms_separation_m": 0.0,
+              "last_common_separation_m": 0.0,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-2",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0,
+              "rms_separation_m": 0.0,
+              "last_common_separation_m": 0.0,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-3",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0,
+              "rms_separation_m": 0.0,
+              "last_common_separation_m": 0.0,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-4",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0,
+              "rms_separation_m": 0.0,
+              "last_common_separation_m": 0.0,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-5",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0,
+              "rms_separation_m": 0.0,
+              "last_common_separation_m": 0.0,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          },
+          {
+            "release_id": "release-6",
+            "forcing_status": "COMPLETED",
+            "forcing_reason_code": null,
+            "requested_horizon_s": 21600.0,
+            "completed_horizon_s": 21600.0,
+            "comparison": {
+              "status": "COMPARED",
+              "common_positive_time_count": 72,
+              "last_common_elapsed_s": 21600.0,
+              "max_separation_m": 0.0,
+              "rms_separation_m": 0.0,
+              "last_common_separation_m": 0.0,
+              "both_completed": true,
+              "reference_completed_horizon_s": 21600.0,
+              "reference_forcing_status": "COMPLETED",
+              "reference_forcing_reason_code": null
+            }
+          }
+        ],
+        "max_separation_m": 0.0,
+        "comparable_release_count": 6
+      }
+    ]
+  },
+  "events": {
+    "solver_step_s": 75.0,
+    "reference_chord_interval_s": 75.0,
+    "same_fine_tracks_downsampled": true,
+    "terminal_accepted_partial_point_retained": true,
+    "forcing_status_counts": {
+      "COMPLETED": 6,
+      "PARTIAL": 0,
+      "UNSUPPORTED": 0
+    },
+    "levels": [
+      {
+        "chord_interval_s": 300.0,
+        "release_count": 6,
+        "baseline": {
+          "id": "no-interceptor",
+          "label": "No-interceptor context",
+          "summary": {
+            "release_count": 6,
+            "entered_count": 6,
+            "intercepted_count": 0,
+            "no_entry_count": 0,
+            "unresolved_count": 0,
+            "protected_entry_count_bounds": [
+              6,
+              6
+            ],
+            "protected_entry_fraction_bounds": [
+              1.0,
+              1.0
+            ],
+            "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+          },
+          "outcomes": [
+            {
+              "release_id": "release-1",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 13270.83973717503,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 13270.83973717503,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.07978480895508255
+            },
+            {
+              "release_id": "release-2",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 13778.200713711702,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 13778.200713711702,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.025166174362311722
+            },
+            {
+              "release_id": "release-3",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 14327.602313734318,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 14327.602313734318,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.08831504422596481
+            },
+            {
+              "release_id": "release-4",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 14924.214114808628,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 14924.214114808628,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.0968729914220603
+            },
+            {
+              "release_id": "release-5",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 15584.305039766568,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 15584.305039766568,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.021233625995591865
+            },
+            {
+              "release_id": "release-6",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 16323.577161273734,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 16323.577161273734,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.13279091648473695
+            }
+          ]
+        },
+        "layouts": [
+          {
+            "id": "central",
+            "label": "Central coverage",
+            "summary": {
+              "release_count": 6,
+              "entered_count": 2,
+              "intercepted_count": 4,
+              "no_entry_count": 0,
+              "unresolved_count": 0,
+              "protected_entry_count_bounds": [
+                2,
+                2
+              ],
+              "protected_entry_fraction_bounds": [
+                0.3333333333333333,
+                0.3333333333333333
+              ],
+              "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+            },
+            "outcomes": [
+              {
+                "release_id": "release-1",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 13270.83973717503,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 13270.83973717503,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.07978480895508255
+              },
+              {
+                "release_id": "release-2",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 13778.200713711702,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 13778.200713711702,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.025166174362311722
+              },
+              {
+                "release_id": "release-3",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 5865.569340786884,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5865.569340786884,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.15228635432777082
+              },
+              {
+                "release_id": "release-4",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6074.156503114961,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6074.156503114961,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.1294546003200594
+              },
+              {
+                "release_id": "release-5",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6307.618561411477,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6307.618561411477,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.014425959302570845
+              },
+              {
+                "release_id": "release-6",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6575.52961722442,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6575.52961722442,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0510263660153214
+              }
+            ]
+          },
+          {
+            "id": "flanking",
+            "label": "Flanking coverage",
+            "summary": {
+              "release_count": 6,
+              "entered_count": 4,
+              "intercepted_count": 2,
+              "no_entry_count": 0,
+              "unresolved_count": 0,
+              "protected_entry_count_bounds": [
+                4,
+                4
+              ],
+              "protected_entry_fraction_bounds": [
+                0.6666666666666666,
+                0.6666666666666666
+              ],
+              "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+            },
+            "outcomes": [
+              {
+                "release_id": "release-1",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "southern-line",
+                "event_elapsed_s": 5492.15512755805,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5492.15512755805,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.10410872090960765
+              },
+              {
+                "release_id": "release-2",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "southern-line",
+                "event_elapsed_s": 5672.04042948369,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5672.04042948369,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.04129610400104866
+              },
+              {
+                "release_id": "release-3",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 14327.602313734318,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 14327.602313734318,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.08831504422596481
+              },
+              {
+                "release_id": "release-4",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 14924.214114808628,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 14924.214114808628,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0968729914220603
+              },
+              {
+                "release_id": "release-5",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 15584.305039766568,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 15584.305039766568,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.021233625995591865
+              },
+              {
+                "release_id": "release-6",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 16323.577161273734,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 16323.577161273734,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.13279091648473695
+              }
+            ]
+          }
+        ],
+        "recommendation": {
+          "status": "BEST_LAYOUT",
+          "best_layout_id": "central",
+          "reason": "Central coverage has a strictly lower modeled entry range for this frozen scenario.",
+          "comparison_basis": "strict_nonoverlap_of_model_protected_entry_count_bounds"
+        },
+        "comparison_to_finest": {
+          "recommendation_agrees": true,
+          "matched_event_count": 18,
+          "matched_no_event_count": 0,
+          "changed_outcome_count": 0,
+          "unresolved_comparison_count": 0,
+          "outcome_comparison_count": 18,
+          "max_matched_event_time_difference_s": 0.15228635432777082
+        }
+      },
+      {
+        "chord_interval_s": 150.0,
+        "release_count": 6,
+        "baseline": {
+          "id": "no-interceptor",
+          "label": "No-interceptor context",
+          "summary": {
+            "release_count": 6,
+            "entered_count": 6,
+            "intercepted_count": 0,
+            "no_entry_count": 0,
+            "unresolved_count": 0,
+            "protected_entry_count_bounds": [
+              6,
+              6
+            ],
+            "protected_entry_fraction_bounds": [
+              1.0,
+              1.0
+            ],
+            "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+          },
+          "outcomes": [
+            {
+              "release_id": "release-1",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 13270.89308454147,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 13270.89308454147,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.02643744251508906
+            },
+            {
+              "release_id": "release-2",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 13778.217443774007,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 13778.217443774007,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.008436112057097489
+            },
+            {
+              "release_id": "release-3",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 14327.661036560909,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 14327.661036560909,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.02959221763558162
+            },
+            {
+              "release_id": "release-4",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 14924.278935885437,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 14924.278935885437,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.032051914613475674
+            },
+            {
+              "release_id": "release-5",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 15584.31916393975,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 15584.31916393975,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.007109452813892858
+            },
+            {
+              "release_id": "release-6",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 16323.697271288338,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 16323.697271288338,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.012680901880230522
+            }
+          ]
+        },
+        "layouts": [
+          {
+            "id": "central",
+            "label": "Central coverage",
+            "summary": {
+              "release_count": 6,
+              "entered_count": 2,
+              "intercepted_count": 4,
+              "no_entry_count": 0,
+              "unresolved_count": 0,
+              "protected_entry_count_bounds": [
+                2,
+                2
+              ],
+              "protected_entry_fraction_bounds": [
+                0.3333333333333333,
+                0.3333333333333333
+              ],
+              "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+            },
+            "outcomes": [
+              {
+                "release_id": "release-1",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 13270.89308454147,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 13270.89308454147,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.02643744251508906
+              },
+              {
+                "release_id": "release-2",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 13778.217443774007,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 13778.217443774007,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.008436112057097489
+              },
+              {
+                "release_id": "release-3",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 5865.425203452255,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5865.425203452255,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.00814901969897619
+              },
+              {
+                "release_id": "release-4",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6074.07053148015,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6074.07053148015,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.043482965508701454
+              },
+              {
+                "release_id": "release-5",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6307.608978383245,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6307.608978383245,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.00484293107092526
+              },
+              {
+                "release_id": "release-6",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6575.495503805016,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6575.495503805016,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.016912946611228108
+              }
+            ]
+          },
+          {
+            "id": "flanking",
+            "label": "Flanking coverage",
+            "summary": {
+              "release_count": 6,
+              "entered_count": 4,
+              "intercepted_count": 2,
+              "no_entry_count": 0,
+              "unresolved_count": 0,
+              "protected_entry_count_bounds": [
+                4,
+                4
+              ],
+              "protected_entry_fraction_bounds": [
+                0.6666666666666666,
+                0.6666666666666666
+              ],
+              "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+            },
+            "outcomes": [
+              {
+                "release_id": "release-1",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "southern-line",
+                "event_elapsed_s": 5492.076237062907,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5492.076237062907,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.025218225767275726
+              },
+              {
+                "release_id": "release-2",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "southern-line",
+                "event_elapsed_s": 5672.012775689327,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5672.012775689327,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0136423096382714
+              },
+              {
+                "release_id": "release-3",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 14327.661036560909,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 14327.661036560909,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.02959221763558162
+              },
+              {
+                "release_id": "release-4",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 14924.278935885437,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 14924.278935885437,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.032051914613475674
+              },
+              {
+                "release_id": "release-5",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 15584.31916393975,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 15584.31916393975,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.007109452813892858
+              },
+              {
+                "release_id": "release-6",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 16323.697271288338,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 16323.697271288338,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.012680901880230522
+              }
+            ]
+          }
+        ],
+        "recommendation": {
+          "status": "BEST_LAYOUT",
+          "best_layout_id": "central",
+          "reason": "Central coverage has a strictly lower modeled entry range for this frozen scenario.",
+          "comparison_basis": "strict_nonoverlap_of_model_protected_entry_count_bounds"
+        },
+        "comparison_to_finest": {
+          "recommendation_agrees": true,
+          "matched_event_count": 18,
+          "matched_no_event_count": 0,
+          "changed_outcome_count": 0,
+          "unresolved_comparison_count": 0,
+          "outcome_comparison_count": 18,
+          "max_matched_event_time_difference_s": 0.043482965508701454
+        }
+      },
+      {
+        "chord_interval_s": 75.0,
+        "release_count": 6,
+        "baseline": {
+          "id": "no-interceptor",
+          "label": "No-interceptor context",
+          "summary": {
+            "release_count": 6,
+            "entered_count": 6,
+            "intercepted_count": 0,
+            "no_entry_count": 0,
+            "unresolved_count": 0,
+            "protected_entry_count_bounds": [
+              6,
+              6
+            ],
+            "protected_entry_fraction_bounds": [
+              1.0,
+              1.0
+            ],
+            "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+          },
+          "outcomes": [
+            {
+              "release_id": "release-1",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 13270.919521983986,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 13270.919521983986,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.0
+            },
+            {
+              "release_id": "release-2",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 13778.225879886064,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 13778.225879886064,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.0
+            },
+            {
+              "release_id": "release-3",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 14327.690628778544,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 14327.690628778544,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.0
+            },
+            {
+              "release_id": "release-4",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 14924.31098780005,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 14924.31098780005,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.0
+            },
+            {
+              "release_id": "release-5",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 15584.326273392564,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 15584.326273392564,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.0
+            },
+            {
+              "release_id": "release-6",
+              "status": "ENTERED_PROTECTED_ZONE",
+              "event_kind": "PROTECTED_ZONE_ENTRY",
+              "segment_id": null,
+              "event_elapsed_s": 16323.709952190218,
+              "forcing_status": "COMPLETED",
+              "forcing_reason_code": null,
+              "requested_horizon_s": 21600.0,
+              "completed_horizon_s": 21600.0,
+              "track_end_elapsed_s": 16323.709952190218,
+              "comparison_status": "MATCHED_EVENT",
+              "event_time_difference_s": 0.0
+            }
+          ]
+        },
+        "layouts": [
+          {
+            "id": "central",
+            "label": "Central coverage",
+            "summary": {
+              "release_count": 6,
+              "entered_count": 2,
+              "intercepted_count": 4,
+              "no_entry_count": 0,
+              "unresolved_count": 0,
+              "protected_entry_count_bounds": [
+                2,
+                2
+              ],
+              "protected_entry_fraction_bounds": [
+                0.3333333333333333,
+                0.3333333333333333
+              ],
+              "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+            },
+            "outcomes": [
+              {
+                "release_id": "release-1",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 13270.919521983986,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 13270.919521983986,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-2",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 13778.225879886064,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 13778.225879886064,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-3",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 5865.417054432556,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5865.417054432556,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-4",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6074.027048514641,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6074.027048514641,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-5",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6307.604135452174,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6307.604135452174,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-6",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "central-line",
+                "event_elapsed_s": 6575.4785908584045,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 6575.4785908584045,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              }
+            ]
+          },
+          {
+            "id": "flanking",
+            "label": "Flanking coverage",
+            "summary": {
+              "release_count": 6,
+              "entered_count": 4,
+              "intercepted_count": 2,
+              "no_entry_count": 0,
+              "unresolved_count": 0,
+              "protected_entry_count_bounds": [
+                4,
+                4
+              ],
+              "protected_entry_fraction_bounds": [
+                0.6666666666666666,
+                0.6666666666666666
+              ],
+              "denominator_policy": "all_fixed_releases_including_missing_forcing_and_partial_paths"
+            },
+            "outcomes": [
+              {
+                "release_id": "release-1",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "southern-line",
+                "event_elapsed_s": 5492.05101883714,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5492.05101883714,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-2",
+                "status": "IDEALIZED_INTERCEPTION",
+                "event_kind": "IDEALIZED_CAPTURE",
+                "segment_id": "southern-line",
+                "event_elapsed_s": 5671.999133379689,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 5671.999133379689,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-3",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 14327.690628778544,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 14327.690628778544,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-4",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 14924.31098780005,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 14924.31098780005,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-5",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 15584.326273392564,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 15584.326273392564,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              },
+              {
+                "release_id": "release-6",
+                "status": "ENTERED_PROTECTED_ZONE",
+                "event_kind": "PROTECTED_ZONE_ENTRY",
+                "segment_id": null,
+                "event_elapsed_s": 16323.709952190218,
+                "forcing_status": "COMPLETED",
+                "forcing_reason_code": null,
+                "requested_horizon_s": 21600.0,
+                "completed_horizon_s": 21600.0,
+                "track_end_elapsed_s": 16323.709952190218,
+                "comparison_status": "MATCHED_EVENT",
+                "event_time_difference_s": 0.0
+              }
+            ]
+          }
+        ],
+        "recommendation": {
+          "status": "BEST_LAYOUT",
+          "best_layout_id": "central",
+          "reason": "Central coverage has a strictly lower modeled entry range for this frozen scenario.",
+          "comparison_basis": "strict_nonoverlap_of_model_protected_entry_count_bounds"
+        },
+        "comparison_to_finest": {
+          "recommendation_agrees": true,
+          "matched_event_count": 18,
+          "matched_no_event_count": 0,
+          "changed_outcome_count": 0,
+          "unresolved_comparison_count": 0,
+          "outcome_comparison_count": 18,
+          "max_matched_event_time_difference_s": 0.0
+        }
+      }
+    ]
+  },
+  "summary": {
+    "integration_max_separation_m": 0.0008397775205383981,
+    "event_recommendation_agrees_at_all_levels": true,
+    "all_integrations_completed": true,
+    "meaning": "numerical sensitivity only; no physical accuracy or ML skill established"
+  },
+  "limitations": [
+    "The finest numerical path is a comparison reference, not observed truth or an error bound.",
+    "Step differences do not establish fourth-order convergence, forecast skill or physical accuracy.",
+    "Only common positive accepted times are compared; missing or censored coverage stays explicit.",
+    "Event time differences are compared only for resolved outcomes with the same event kind and collector identity.",
+    "Partial or unsupported forcing is not numerical success, even when an earlier ideal geometric event is resolved.",
+    "Chord refinement can still miss brief or tangent contacts; it does not improve the forcing grid or measure collector efficiency.",
+    "No model promotion, scientific validation, tank calibration or hardware action is performed."
+  ]
+}

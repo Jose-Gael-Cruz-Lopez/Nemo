@@ -1,0 +1,14 @@
+**Post-outcome interpretation (static).** No code was executed here and the frozen attempt is not rewritten.
+
+On the two pre-declared groups the equal-ID macro ADE/FDE are last-drift 1510 m / 3241 m, stationary 3490 m / 6069 m, and current-only RK4 5063 m / 9152 m. Current-only is worse on both groups and at every horizon. The negative result is retained; no model is promoted.
+
+A mathematically correct RK4 integrator only follows the velocity field it is given. If the 15 m HYCOM analysis at the three knots does not match the actual water motion that carried the drogued buoy—because of analysis error, missing wind/wave effects, assimilation of later information, or the difference between a 15 m drogue and the field’s effective depth—the integrated path will diverge even though every RK4 stage and knot split is exact. Solver verification (the code implements the declared integrator) is therefore separate from field representation and from predictive skill. The 36 cells reuse only 12 processed future estimates; the result is a retrospective diagnostic, not operational skill or statistical independence.
+
+**Three future gates (no re-score of this study).**  
+1. Independent physical tank tracks with measured per-layout flow fields.  
+2. A pre-registered comparison against archived issue-time forecasts (not analysis/hindcast valid times).  
+3. An assimilation-input audit confirming whether these GDP observations or close derivatives entered the HYCOM field.
+
+**Data Lab / Chalk.** Display all three aggregates, the label “last-drift lowest on this two-group cohort,” the 36/36 coverage, and the flags `retrospective`, `not operational`, `not independent`, `not plastic/tank`. Do not highlight current-only as a winner or imply a trained model. Chalk may quote only the frozen receipt IDs and these numbers; it must refuse any prompt that converts the result into a probability, a promoted model, or a reef/plastic claim.
+
+**Demo claim that may be made.** “On this frozen two-group, six-hour retrospective comparison the simple last-drift baseline had lower descriptive error than both stationary and the 15 m HYCOM-driven RK4. The integrator ran as specified; the current field did not improve the forecast.”

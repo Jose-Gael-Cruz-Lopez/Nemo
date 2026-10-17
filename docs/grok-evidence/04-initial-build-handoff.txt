@@ -1,0 +1,54 @@
+ReefTrace — Grok build handoff
+
+Current repository branch:
+https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/tree/codex/software-execution
+Commit: 3e068c1de81515f04279d0760022fcbfcb144fce
+
+Grok project and review conversation:
+https://grok.com/project/709fdaeb-06db-41bd-843b-81f567b993da?tab=conversations&chat=139b9a9d-215a-47f0-9f1f-81db9103e724
+
+Automation:
+GitHub Actions runs Python tests, Ruff, the pinned NOAA replay, dashboard lint,
+type checks and production build on every push and pull request. It needs no
+provider keys, has no hardware access, and disables all sponsor transports.
+The hosted run passed both jobs:
+https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/38994984931
+
+What was actually built with Grok:
+Grok web reviewed real benchmark source and authored a diagnostic proposal.
+Cursor with its Grok model implemented and tested the new diagnostic in two turns.
+Root review corrected validation, prediction-before-truth access and the wrapper's
+pinned verification. The live Data Lab now shows five dependent training origins
+alongside the unchanged 18-training/6-heldout benchmark.
+A real NOAA satellite-derived historical reef heat-stress fixture, chart, provenance,
+and deterministic frozen-evidence briefing are integrated into investigations.
+The server-side xAI TTS client is connected to explicit operator controls, preserves
+case/evidence binding, guards STOP and limits time/audio size.
+
+Local validation:
+305 Python tests passed. Ruff, Next route types, TypeScript, lint and isolated
+production build passed. Browser clicks verified the real NOAA replay, new training
+diagnostic, satellite context, briefing text and disabled-voice fallback.
+A live Chalk/Gemini investigation returned REPORT grounded in the unchanged source
+report. External model timeouts/503 responses can still occur and fail safely.
+
+Current boundaries:
+Grok Voice remains disabled: user chose finishing without a live xAI key.
+No live TTS request or completed Voice-API challenge eligibility is claimed.
+Cursor reached its existing usage limit; no paid upgrade or API billing was enabled.
+Photon remains disabled. No test messages or automatic replies were sent.
+Camera/tank physical commissioning remains separate from software verification.
+
+Run locally from the reeftrace folder:
+.venv/bin/python scripts/dev.py
+Then open http://127.0.0.1:3000/ and use Data lab.
+Investigations has Load satellite context and Read briefing text.
+Never upload .env, work/, data/local/, recordings or private route data to Grok.
+Use the sanitized source ZIP/context file or exact public branch instead.
+
+Next useful Grok task:
+Review the existing dataset plan and propose predeclared additional NOAA drifter days
+with disjoint development and test groups. Keep the current historical fixtures frozen;
+report all tested days, do not tune on heldout errors, and never label buoy forecasts
+as plastic-source ground truth. Deliver reviewable patches and meaningful tests;
+state clearly which code was executed and which is only proposed.

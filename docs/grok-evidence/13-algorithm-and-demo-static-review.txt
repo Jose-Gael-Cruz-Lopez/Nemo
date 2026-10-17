@@ -1,0 +1,305 @@
+Grok
+
+State and transition audit (static). The displayed contracts match the frozen implementation. State is 
+[
+𝑥
+,
+𝑦
+,
+𝑣
+𝑥
+,
+𝑣
+𝑦
+]
+⊤
+[x,y,v
+x
+	​
+
+,v
+y
+	​
+
+]
+⊤
+ (m, m/s).
+
+𝐹
+(
+Δ
+𝑡
+)
+=
+[
+𝐼
+2
+	
+Δ
+𝑡
+ 
+𝐼
+2
+
+
+0
+	
+𝐼
+2
+]
+,
+𝑄
+(
+Δ
+𝑡
+)
+=
+𝑞
+[
+(
+Δ
+𝑡
+)
+3
+/
+3
+	
+(
+Δ
+𝑡
+)
+2
+/
+2
+
+
+(
+Δ
+𝑡
+)
+2
+/
+2
+	
+Δ
+𝑡
+]
+⊗
+𝐼
+2
+F(Δt)=[
+I
+2
+	​
+
+0
+	​
+
+ΔtI
+2
+	​
+
+I
+2
+	​
+
+	​
+
+],Q(Δt)=q[
+(Δt)
+3
+/3
+(Δt)
+2
+/2
+	​
+
+(Δt)
+2
+/2
+Δt
+	​
+
+]⊗I
+2
+	​
+
+
+with 
+𝑞
+=
+1
+×
+10
+−
+6
+ 
+m
+2
+/
+s
+3
+q=1×10
+−6
+m
+2
+/s
+3
+. 
+𝐻
+=
+[
+𝐼
+2
+ 
+0
+]
+H=[I
+2
+	​
+
+ 0], 
+𝑅
+=
+(
+100
+ 
+m
+)
+2
+𝐼
+2
+=
+10000
+ 
+m
+2
+𝐼
+2
+R=(100m)
+2
+I
+2
+	​
+
+=10000m
+2
+I
+2
+	​
+
+ (not 
+100
+ 
+m
+2
+100m
+2
+). Initialization at the second prefix position uses the first-difference velocity and the correlated 
+𝑃
+𝑝
+𝑝
+=
+𝑟
+𝐼
+P
+pp
+	​
+
+=rI, 
+𝑃
+𝑝
+𝑣
+=
+(
+𝑟
+/
+Δ
+𝑡
+)
+𝐼
+P
+pv
+	​
+
+=(r/Δt)I, 
+𝑃
+𝑣
+𝑣
+=
+(
+2
+𝑟
+/
+Δ
+𝑡
+2
+)
+𝐼
+P
+vv
+	​
+
+=(2r/Δt
+2
+)I. Later updates use 
+𝐾
+=
+s
+o
+l
+v
+e
+(
+𝑆
+,
+𝐻
+@
+𝑃
+)
+⊤
+K=solve(S,H@P)
+⊤
+ and the Joseph form. The six-hour free-run applies no future measurement update. Ellipse hits compare the observation residual to 
+𝑃
+𝑥
+𝑦
++
+𝑅
+P
+xy
+	​
+
++R, not to latent 
+𝑃
+P alone. Ridge uses fixed 
+𝛼
+=
+1
+α=1 and spectral-radius cap 0.98 on its own 18-position prefix. NOAA metre results and tank centimetre work remain distinct; the 100 m noise is not transferable.
+
+Failure modes that must stay visible. Incomplete prefix, non-monotonic or sub-microsecond 
+Δ
+𝑡
+Δt, non-finite or out-of-domain (50 km) forecast mean, singular innovation covariance, and any missing held-out truth all produce explicit failed cells. Common-cohort ADE/FDE/vector-RMSE are withheld unless all 180 cells score. Nominal ellipse-hit counts are labeled non-calibrated. The ten unresolved old aliases and physical_alias_resolution_verified=false remain displayed. No parameter is changed to hide these.
+
+Kalman state versus application case state. The Kalman vector is a latent motion estimate inside one prefix. Application UNKNOWN means the source estimator could not rank candidates; INVALID means calibration or association failed; STOP freezes a case against further mutation; a revision or archived plan means the bound evidence ID no longer matches. These are orthogonal. Source relative support is a conditional score on a declared candidate set, not a calibrated probability. Tank diffusion and first trap entry are a separate particle comparison on measured layouts; they do not inherit NOAA buoy parameters.
+
+Demo-first three-step story.
+
+Observe and trace: load the synthetic trajectory, compute source support, show Ranked / Unknown / Invalid.
+Compare two interception layouts: freeze baseline and intervention, display first zone entry versus capture-before-entry with unsupported paths kept in the denominator.
+Explain and verify: open the frozen evidence IDs, read the deterministic briefing, and confirm satellite context did not alter the source ranking.
+
+Graph legends: solid line = recorded path, dashed line = free-run forecast, filled dot = start, axes in hours and equal metres. No caption may imply measured currents or a plastic source. Protocol hashes, noise assumptions and full receipts move to a details drawer; synthetic / physical / unresolved flags stay on the main card.
+
+Correction of prior claim. One complete held-out tank track does not authorize a layout decision. The application requires independently measured flow fields per layout, spatial and path-coverage gates, rig revalidation, a frozen comparison plan, and independent releases whose truth is stored only in the evaluation ledger. Three exploratory tracks may fail those gates; negative or incomplete results remain visible.
+
+Bounded primary-source proposals. Continue to cite only the NOAA AOML GDP hourly and real-time pages for interpolation and WMO-mapping caveats, and the Copernicus multi-year physics product page for assimilation limits. No new acquisition or score is requested in this study.
+
+Software-only handoff prompts.
+
+Megana: verify the three-step demo path, legend clarity, and that synthetic/physical/unresolved flags survive browser zoom and screen-reader traversal; no hardware changes.
+Aarush: add export/validator tests that an archived plan cannot explain current evidence, that trial-key replay is idempotent, and that a missing outcome cell withholds the common macro while preserving the failed row.
+
+No frozen algorithm, noise value, provider credential, Photon message or automation change is in scope.

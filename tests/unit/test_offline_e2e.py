@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import os
 import subprocess
@@ -136,3 +137,125 @@ def test_invalid_total_deadline_rejected_before_any_server_can_start(seconds, mo
     monkeypatch.setattr(subprocess, "Popen", forbidden)
     with pytest.raises(ValueError, match="deadline"):
         audit.run_audit(seconds)
+
+
+def version_fixture(version, *, scored=0):
+    """Minimal invented HTTP envelope; never a real forecast or scored study."""
+    return {"report": {"study_id": "matched-current-gdp-hycom-15m-" + version,
+        "physical_validation": False, "automatic_model_promotion": False,
+        "scores": {"planned_group_count": 2, "planned_cell_count": 36,
+            "planned_distinct_target_count": 12, "scored_cell_count": scored,
+            "automatic_winner_selected": False,
+            "groups": [{"candidates": [{"cells": [{} for _ in range(6)]}
+                                        for _ in range(3)]} for _ in range(2)]}},
+        "artifact_identity": {"study_id": "matched-current-gdp-hycom-15m-" + version,
+            "report_sha256": ("a" if version == "v1" else "c") * 64,
+            "protocol_sha256": ("b" if version == "v1" else "d") * 64,
+            "integrity_verified": True, "result_pin_verified": True,
+            "numeric_replay_verified": False}}
+
+
+def version_requests(v1, v2=None, *, mutate_review=None):
+    calls = []
+
+    def req(path, body=None, *, expected=200, auth=True):
+        calls.append((path, copy.deepcopy(body), expected, auth))
+        version = (body or {}).get("study_version", path.partition("study_version=")[2] or "v1")
+        status, result = 200, None
+        if version not in {"v1", "v2"}:
+            status = 422
+        elif version == "v2" and v2 is None:
+            status = 404
+        elif body is None:
+            result = v1 if version == "v1" else v2
+        elif not auth:
+            status = 401
+        else:
+            selected = v1 if version == "v1" else v2
+            identity = selected["artifact_identity"]
+            if any(body[key] != identity[key] for key in ("report_sha256", "protocol_sha256")):
+                status = 409
+            else:
+                result = {"action": "STOP", "failure_code": "NOT_CONFIGURED",
+                    "live_model_response": False, "research_report": selected["report"],
+                    "artifact_identity": identity, "store_written": False,
+                    "hardware_actuation": False}
+                if mutate_review:
+                    mutate_review(result)
+        assert status == expected
+        return copy.deepcopy(result)
+
+    return req, calls
+
+
+def checked(name, passed, **detail):
+    assert passed, name
+
+
+def test_version_audit_absent_identity_demands_404_without_reader_or_fallback(tmp_path, monkeypatch):
+    from apps.ocean.reeftrace_ocean import matched_current_result as reader
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("Absent v2 identity attempted reader, store or invented evidence")
+
+    monkeypatch.setattr(reader, "load_frozen_matched_current_result", forbidden)
+    v1 = version_fixture("v1")
+    req, calls = version_requests(v1)
+    result = audit.matched_version_checks(req, checked, v1_snapshot=v1,
+                                          store_digest=forbidden, root=tmp_path)
+    assert result == {"status": "TRUSTED_RESULT_ABSENT_HTTP404", "study_version": "v2"}
+    assert calls[-1] == ("/research/matched-current?study_version=v2", None, 404, False)
+    assert not any(body and body.get("study_version") == "v2" for _, body, _, _ in calls)
+
+
+@pytest.mark.parametrize("scored", [0, 18, 36])
+def test_version_audit_accepts_authoritative_results_without_assuming_v2_numeric_outcome(
+    tmp_path, monkeypatch, scored,
+):
+    from apps.ocean.reeftrace_ocean import matched_current_result as reader
+
+    path = tmp_path / "apps/ocean/reeftrace_ocean/matched_current_v2_result_identity.py"
+    path.parent.mkdir(parents=True)
+    path.write_text("# invented presence marker, never imported\n")
+    v1, v2 = version_fixture("v1"), version_fixture("v2", scored=scored)
+    loads = []
+
+    def load(**kwargs):
+        loads.append(kwargs)
+        return copy.deepcopy(v2)
+
+    monkeypatch.setattr(reader, "load_frozen_matched_current_result", load)
+    req, calls = version_requests(v1, v2)
+    result = audit.matched_version_checks(req, checked, v1_snapshot=v1,
+                                          store_digest=lambda: "e" * 64, root=tmp_path)
+    assert loads == [{"root": tmp_path, "study_version": "v2"}]
+    assert result["scored_cells"] == scored and result["planned_cells"] == 36
+    assert result["store_unchanged"] is True
+    assert any(body and body.get("study_version") == "v2" and expected == 409
+               and body["report_sha256"] == v1["artifact_identity"]["report_sha256"]
+               for _, body, expected, _ in calls)
+
+
+@pytest.mark.parametrize("change", ["reader_mismatch", "wrong_version", "promoted", "store_write"])
+def test_version_audit_fails_changed_reader_identity_promotion_or_store(tmp_path, monkeypatch, change):
+    from apps.ocean.reeftrace_ocean import matched_current_result as reader
+
+    path = tmp_path / "apps/ocean/reeftrace_ocean/matched_current_v2_result_identity.py"
+    path.parent.mkdir(parents=True)
+    path.write_text("# invented presence marker\n")
+    v1, v2 = version_fixture("v1"), version_fixture("v2")
+    authoritative = copy.deepcopy(v2)
+    if change == "reader_mismatch":
+        v2["report"]["scores"]["scored_cell_count"] = 1
+    elif change == "wrong_version":
+        v2["report"]["study_id"] = v1["report"]["study_id"]
+        authoritative = copy.deepcopy(v2)
+    elif change == "promoted":
+        v2["report"]["automatic_model_promotion"] = True
+        authoritative = copy.deepcopy(v2)
+    monkeypatch.setattr(reader, "load_frozen_matched_current_result", lambda **kwargs: authoritative)
+    req, _ = version_requests(v1, v2)
+    digests = iter(["e" * 64, "f" * 64] if change == "store_write" else ["e" * 64] * 2)
+    with pytest.raises(AssertionError):
+        audit.matched_version_checks(req, checked, v1_snapshot=v1,
+                                     store_digest=lambda: next(digests), root=tmp_path)

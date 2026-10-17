@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "kind": "LOCAL_RK4_QUALITY_VERIFICATION_NOT_PHYSICAL_VALIDATION",
+  "created_at_utc": "2026-10-17T19:47:31.341286+00:00",
+  "git_head_at_capture": "a65536c08cecf86cddf1a7b38191e4a2cfec34bf",
+  "scientific_code_not_yet_committed_at_capture": true,
+  "source_sha256": {
+    "apps/api/reeftrace_api/services/ocean_prevention_investigation.py": "094c217d0c3414465152494ce6bf9974e90e2159006aa4bac3406a6f527c69ae",
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/ocean_prevention.py": "939a30e0ac376ab62cd14835931dc1d661db24946962668d93a85222c30b822f",
+    "dashboard/app/components/ocean-prevention-state.ts": "1ce98c357af9c89c59aee4d2f10a5439dee604bdb2b3b6e92da5ab0c4628f275",
+    "dashboard/app/components/ocean-prevention.tsx": "031bcbb5b357041715abef0485092deafb73d93d45c5f7bd270b026e62caf065",
+    "dashboard/showcase/ocean-reports.json": "62eb8d3b5780957f91f5d897e4112fdccab73c5cea4dab25e5f6d79036ef5196",
+    "dashboard/tsconfig.json": "80dcd7e53437160e52c6200c0c5f766bb4a8940161006485a9d235ba7bb26069",
+    "apps/ocean/reeftrace_ocean/ocean_numerics.py": "50492f8e5e3a66915df680f83d9ffcc0bee710ba53a843c34225f7577e48ca8f",
+    "dashboard/app/components/ocean-numerics-state.ts": "b3bf62f241de4d9f0220a83054f172dd60042affd43393ef8945c29fc774c860",
+    "dashboard/app/components/ocean-numerics.tsx": "8e6368a8654fcf61b0d44627a4e2d1eda43f5aeec5ad89e03c0ad70163e63dc2",
+    "dashboard/tests/fixtures/ocean-numerics-report.json": "d1a9749f5d6f7a1d8ac124c91d9e7abbedccffe3323f2482ef0b72ab832fe893",
+    "dashboard/tests/ocean-numerics.test.mjs": "dfad0d5a9813f39669e7cdb8981f31cb1e41ef7c8e2528cb9c37cfd230ab875f",
+    "tests/integration/test_ocean_numerics_evidence.py": "6ebfcc2d7c31915908640c110692c87b40415c7208ef607eac61a8d04a2893af",
+    "tests/unit/test_advection_time_knots.py": "b56c1df014603be9dd72bd38b86ee816c591456121e25e7b0de8befcc6349a56",
+    "tests/unit/test_ocean_numerics.py": "1b9e84b4e97b4cd5ee78ce53e58476153de2153f3e58d6e03b919c2d57501a7b"
+  },
+  "isolated_source_copy_matches_all_changed_code": true,
+  "tests": {
+    "python_passed": 1365,
+    "python_warnings": 1,
+    "frontend_passed": 191,
+    "guarded_http": {
+      "PASS": 137,
+      "FAIL": 0,
+      "BLOCKED": 6,
+      "software_workflow_passed": true,
+      "expected_external_scopes_blocked": true,
+      "complete_live_product_verified": false,
+      "physical_validation": false,
+      "live_provider_round_trip_verified": false
+    },
+    "ruff": "passed",
+    "eslint": "passed",
+    "typescript": "passed",
+    "production_build": "passed",
+    "hosted_ci": "pending_exact_scientific_commit"
+  },
+  "prepatch_reference_sha256": "953ea1db0f70d920729f3136b75258cafede2dc0fbd361a39699dc64e85ad6b2",
+  "paths": [
+    {
+      "release_id": "release-1",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-2",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-3",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-4",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-5",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-6",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    }
+  ],
+  "comparisons": {
+    "downstream-corridor-v2": {
+      "all_prepatch_recorded_layout_fields_exact_match": true,
+      "baseline_summary_exact_match": true,
+      "baseline_outcomes_match_unchanged_event_evaluator_on_prepatch_paths": true,
+      "recommendation_exact_match": true,
+      "entry_counts": [
+        2,
+        4
+      ],
+      "recommendation": "BEST_LAYOUT",
+      "reference_scope": "Saved layout summary is compared recursively on recorded fields; derived entry-reduction field was not in that capture."
+    },
+    "initial-proxy-v1": {
+      "all_prepatch_recorded_layout_fields_exact_match": true,
+      "baseline_summary_exact_match": true,
+      "baseline_outcomes_match_unchanged_event_evaluator_on_prepatch_paths": true,
+      "recommendation_exact_match": true,
+      "entry_counts": [
+        0,
+        0
+      ],
+      "recommendation": "TIE",
+      "reference_scope": "Saved layout summary is compared recursively on recorded fields; derived entry-reduction field was not in that capture."
+    }
+  },
+  "fractional_clock_reproducer": {
+    "status": "COMPLETED",
+    "completed_horizon_s": 566.734631,
+    "east_displacement_m": 283.36731550000025,
+    "expected_east_displacement_m": 283.3673155,
+    "independent_exact_constant_speed_integral": true
+  },
+  "browser": {
+    "checked_at": "2026-10-17T19:42:12.837Z",
+    "fixed_viewbox_under_filters": true,
+    "viewbox": "132 0 456 484",
+    "observed_layout_entries": {
+      "central": "2 of 6",
+      "flanking": "4 of 6"
+    },
+    "current_time_slider_test": "keyboard End showed 2026-10-18 00:00 UTC, Home restored origin",
+    "chalk_region_text": "Explain this comparison with Chalk\n\nChalk reads this exact current snapshot, method and scenario. It cannot change the numerical result or manufacture a winning layout.\n\nAsk Chalk about these layouts\n\nREPORT. In this forecast snapshot, central coverage has fewer modeled reef-proxy entries than flanking coverage for the same hypothetical releases; no comparison tracks are unresolved. Chosen after viewing a preview, this illustrative what-if is not an independent test: coarse current support, ideal geometric interception, and omitted windage, waves, buoyancy, diffusion, shoreline and retention effects preclude a measured-benefit claim. Solver-step changes at fixed output times and event-chord downsampling from one fine path check numerical precision, not physical accuracy; missing tracks would retain full-denominator bounds. Independently measure debris paths, collector interception and retention, and outcomes at a mapped reef before claiming real protection; modeled entry is not coral damage.\n\nREPORT \u00b7 Live Chalk response\n\nIn this forecast snapshot, central coverage has fewer modeled reef-proxy entries than flanking coverage for the same hypothetical releases; no comparison tracks are unresolved. Chosen after viewing a preview, this illustrative what-if is not an independent test: coarse current support, ideal geometric interception, and omitted windage, waves, buoyancy, diffusion, shoreline and retention effects preclude a measured-benefit claim. Solver-step changes at fixed output times and event-chord downsampling from one fine path check numerical precision, not physical accuracy; missing tracks would retain full-denominator bounds. Independently measure debris paths, collector interception and retention, and outcomes at a mapped reef before claiming real protection; modeled entry is not coral damage.\n\nComparison evidence citations\n[\n  \"ocean-comparison:572e69e4cbcffa2d77f14e994dc2a59a7df9c35e6a16e2265c3a88b8daba238e\",\n  \"ocean-method:d6764ba36c7fd323c122b0969c6a0b176c35e75ed056db93c13e74af042528ca\"\n]",
+    "numerical_disclosure_text": "Does a smaller time step change the result?\n\nRK4 samples the current at the start, two estimated midpoints and an estimated endpoint, then combines those slopes. Smaller steps refine this calculation; they do not supply new current measurements.\n\nThe layout recommendation is unchanged across the tested contact intervals. All six releases complete the forcing horizon in every numerical run.\n\n1 \u00b7 Change the integration step\n\nRequested RK4 steps of 300, 150 and 75 seconds are compared only at common accepted output times, 300 seconds apart. The 75-second run is a numerical reference, not observed truth. Actual substeps may be shortened at forcing knots, spatial limits or the horizon.\n\nPosition sensitivity \u00b7 the same six hypothetical releases\nRequested step\tLargest separation from 75 s\tComparable releases\tForcing coverage\n300 s\t0.00084 m\t6 / 6\t6 complete \u00b7 0 partial \u00b7 0 unavailable\n150 s\t0.000326 m\t6 / 6\t6 complete \u00b7 0 partial \u00b7 0 unavailable\n75 s \u00b7 reference\t0 m \u00b7 self-comparison\t6 / 6\t6 complete \u00b7 0 partial \u00b7 0 unavailable\n\nLargest position difference across these numerical runs: 0.00084 m. A comparable prefix can still end before the requested six-hour horizon; it is not a complete forecast.\n\n2 \u00b7 Change only the contact-check spacing\n\nAll three rows reuse the same fine trajectory, integrated and saved every 75 seconds. Selecting points 300, 150 or 75 seconds apart changes only the straight chords used to find first reef or interceptor contact. The terminal accepted point is retained even for partial paths.\n\nPredicted reef-entry bounds \u00b7 denominator stays six per layout\nContact spacing\tNo interceptor\tLayout A\tLayout B\tRecommendation\n300 s\t6 / 6\t2 / 6 \u00b7 0 unresolved\t4 / 6 \u00b7 0 unresolved\tLayout A\n150 s\t6 / 6\t2 / 6 \u00b7 0 unresolved\t4 / 6 \u00b7 0 unresolved\tLayout A\n75 s\t6 / 6\t2 / 6 \u00b7 0 unresolved\t4 / 6 \u00b7 0 unresolved\tLayout A\n\nLayout A: Central coverage. Layout B: Flanking coverage. Missing or unsupported outcomes stay in the upper entry bound; they never become zero entries.\n\nContact matching and incomplete comparisons\n\nNumerical precision is not physical accuracy. The forcing is still roughly 4 km / three-hour model data. Agreement does not establish fourth-order convergence, improved ML skill, real collection efficiency or reef protection. No tank observations or independent truth enter this check, and it does not replace the main layout decision paths.",
+    "control_scenario": {
+      "old_report_and_review_cleared": true,
+      "central_entries": "0 of 6",
+      "flanking_entries": "0 of 6",
+      "recommendation_heading": "The two layouts tie in this scenario."
+    },
+    "data_lab": {
+      "combined_plot_count": 1,
+      "disclosure_initially_closed": true,
+      "shares_same_numerical_text": true
+    }
+  },
+  "live_chalk": {
+    "action": "REPORT",
+    "live_model_response_verified": true,
+    "expected_exact_evidence_ids": [
+      "ocean-comparison:572e69e4cbcffa2d77f14e994dc2a59a7df9c35e6a16e2265c3a88b8daba238e",
+      "ocean-method:d6764ba36c7fd323c122b0969c6a0b176c35e75ed056db93c13e74af042528ca"
+    ],
+    "report_sha256": "572e69e4cbcffa2d77f14e994dc2a59a7df9c35e6a16e2265c3a88b8daba238e",
+    "method_sha256": "d6764ba36c7fd323c122b0969c6a0b176c35e75ed056db93c13e74af042528ca",
+    "numeric_summary": {
+      "integration_max_separation_m": 0.0008397775205383981,
+      "event_recommendation_agrees_at_all_levels": true,
+      "all_integrations_completed": true,
+      "meaning": "numerical sensitivity only; no physical accuracy or ML skill established"
+    }
+  },
+  "provider_network_calls_in_offline_checks": 0,
+  "new_photon_test_messages_sent": 0,
+  "photon_settings_changed": false,
+  "xai_api_calls": 0,
+  "paid_billing_enabled": false,
+  "camera_started_by_this_verification": false,
+  "physical_trials_run": 0,
+  "physical_validation": false,
+  "new_matched_current_study": "draft_metadata_only_no_trajectory_or_current_values_acquired_no_scores"
+}

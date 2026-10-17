@@ -1,0 +1,32 @@
+{
+  "acquisition_repeated": false,
+  "all_original_file_bytes_preserved": true,
+  "archive_directory": "data/research/matched-current-v1",
+  "files": {
+    "acquisition-start.json": "17780b5eb69dbcd47c800baec1c844c9e650c227e80bef7940d6cba26b1cd800",
+    "acquisition-start.sha256": "021e00fb42a25b383e45cfb610045c2bff6dbe040378086678d24be7cd2b4380",
+    "evaluation.json": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7",
+    "evaluation.sha256": "5815269a3e9e43fd7f50dbc98bfbad57d87d5ae03554256d2176ae25bf1cf0eb",
+    "forecasts.json": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f",
+    "forecasts.sha256": "7a5fa11162aba3dc18ac212b00b3874488b82a8523a871c49e20a7ce3cd169c5",
+    "manifest.json": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e",
+    "manifest.sha256": "83d5a06d8e74da2154b78eef3b8e095d71f572c1de218bb900ef988e21ee5270",
+    "protocol.json": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6",
+    "protocol.sha256": "c416abffccfdb3850ecc9f895eedc8539b96332d59299b425a3d1cd58f1faa68",
+    "raw/gdp-metadata.das": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3",
+    "raw/gdp-metadata.sha256": "7334349451791ddecda2a4e18bd751d0bdc89f462bb3cf5bebb18a5f362d9ec5",
+    "raw/gdp-origin-identity.csv": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+    "raw/gdp-origin-identity.sha256": "10360f79f7a2f8870f9506bcaee1762e86675e32b277b7f29f881f5543e0a447",
+    "raw/hycom-currents.nc": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065",
+    "raw/hycom-currents.sha256": "420a563520b620f8279896f5011711363adaf2847332e2c01950734c441e4411",
+    "raw/hycom-metadata.sha256": "6b1a4fcc0cf0aa9dfc679afa68c4ae44f27186e27eed14d3a2f8a7416b5d5764",
+    "raw/hycom-metadata.xml": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+  },
+  "future_study_rule": "Include this later archive explicitly in future exposure inventories.",
+  "models_or_scores_changed": false,
+  "original_directory": "data/public/matched-current-v1",
+  "original_freeze_commit": "c62e745",
+  "reason": "Later study archive must not alter the historical all-existing-public-fixture exclusion snapshot.",
+  "schema_version": 1,
+  "visibility": "Public repository archive; directory name does not imply private access."
+}

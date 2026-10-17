@@ -6,6 +6,7 @@ as BLOCKED, never replaced by a pretend live response or physical measurement.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 from datetime import UTC, datetime
@@ -68,6 +69,27 @@ def audit(api="http://127.0.0.1:8000", *, token):
                   plan["comparison"]["source_evidence_id"] == source["id"]
                   and numeric["physical_validation"] is False and len(numeric["results"]) >= 3
                   and numeric["layouts"]["baseline"]["profile_hash"] != numeric["layouts"]["intervention"]["profile_hash"])
+            scene_url = base + "/scene?evaluation_snapshot_hash=" + plan["evaluation"]["snapshot_hash"]
+            scene = request(scene_url, auth=False)
+            scene_hash = scene.pop("scene_sha256")
+            check("3D scene is a read-only hash-bound view of the frozen comparison",
+                  scene["kind"] == "TANK_RIG_SCENE" and scene["comparison_id"] == comparison_id
+                  and scene["evaluation_snapshot_hash"] == plan["evaluation"]["snapshot_hash"]
+                  and scene_hash == hashlib.sha256(json.dumps(
+                      scene, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
+                  and request(base) == plan)
+            check("3D forecasts retain the complete ensemble rather than count display paths",
+                  scene["results"]["rows"][0]["baseline"]["particles"] == numeric["particles_per_source"]
+                  and all(len(path["points"]) <= 80 and path["counts_derived_from_path"] is False
+                          and (not path["points"] if path["support_status"] == "UNSUPPORTED_PATH_WITHHELD"
+                               else all(point["t_s"] <= path["display_stop_s"] for point in path["points"]))
+                          for path in scene["simulation"]["paths"]))
+            check("3D rig does not invent depth, measured motion or release alignment",
+                  scene["vertical"]["measured_depth_cm"] is None
+                  and scene["physical_validation"] is False and scene["actual"]["status"] == "NOT_CAPTURED"
+                  and scene["actual"]["recordings"] == []
+                  and scene["actual"]["clock"] == "CAPTURE_START_UNALIGNED"
+                  and scene["actual"]["positional_error_metrics"] is None)
             trial = {"trial_key": "http-a-baseline", "layout": "baseline", "source_id": "A",
                      "data_origin": "SYNTHETIC_DEMO", "outcome": "zone_entry", "entry_time_s": 15,
                      "interception_time_s": 18, "token_accounted": True, "physical_confirmed": False,
@@ -95,6 +117,12 @@ def audit(api="http://127.0.0.1:8000", *, token):
                   and synthetic["plan"]["complete"] is False
                   and synthetic["supports_causal_claim"] is False
                   and evaluation["snapshot_hash"] != second["evaluation"]["snapshot_hash"])
+            request(scene_url, expected=409, auth=False)
+            updated_scene = request(base + "/scene?evaluation_snapshot_hash=" + evaluation["snapshot_hash"], auth=False)
+            check("3D rejects stale evaluation identity and reflects separate updated synthetic outcomes",
+                  updated_scene["results"]["by_origin"] == evaluation["by_origin"]
+                  and updated_scene["actual"]["reported_physical_trial_count"] == 0
+                  and updated_scene["numerical_report_sha256"] == scene["numerical_report_sha256"])
             request(base + "/trials", {**trial, "trial_key": "false-physical",
                 "data_origin": "OPERATOR_REPORTED_PHYSICAL", "physical_confirmed": True}, expected=409)
             check("synthetic layouts reject physical measurement claims", True)
@@ -124,6 +152,11 @@ def audit(api="http://127.0.0.1:8000", *, token):
             request(base + "/investigate", {"text": "Continue"}, expected=409)
             check("STOP preserves readable history and blocks new writes", archive["is_current"] is False
                   and len(archive["trials"]) == 3)
+            archived_scene = request(base + "/scene?evaluation_snapshot_hash=" + archive["evaluation"]["snapshot_hash"], auth=False)
+            check("archived 3D comparison remains readable without reviving the experiment",
+                  archived_scene["is_current"] is False
+                  and archived_scene["archive_reason"] == "CASE_CHANGED_OR_STOPPED"
+                  and request("/cases/" + case["id"])["state"] == "STOPPED")
             final = request("/status")
             check("Photon and camera remain off after the complete workflow",
                   final["photon"]["enabled"] is False and final["camera"]["running"] is False)

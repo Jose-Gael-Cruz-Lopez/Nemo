@@ -1,0 +1,225 @@
+{
+  "gdp_metadata": {
+    "acquired": {
+      "bytes": 18686,
+      "path": "data/public/matched-current-v1/raw/gdp-metadata.das",
+      "sha256": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3"
+    },
+    "acquired_history_capture_utc": "2026-10-17T21:11:25Z",
+    "all_other_bytes_identical": true,
+    "changed_line_count": 2,
+    "changes": [
+      {
+        "acquired": "2026-10-17T21:11:25Z (local files)",
+        "line_number": 425,
+        "seed": "2026-10-17T19:34:52Z (local files)"
+      },
+      {
+        "acquired": "2026-10-17T21:11:25Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das\";",
+        "line_number": 426,
+        "seed": "2026-10-17T19:34:52Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das\";"
+      }
+    ],
+    "identity_csv": {
+      "acquired": {
+        "bytes": 640,
+        "path": "data/public/matched-current-v1/raw/gdp-origin-identity.csv",
+        "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+      },
+      "byte_identical": true,
+      "seed": {
+        "bytes": 640,
+        "path": "docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv",
+        "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+      }
+    },
+    "only_exact_two_capture_timestamp_tokens_differ": true,
+    "scientific_interpretation": "Raw-hash mismatch is caused by volatile request-history capture timestamps, with no observed schema/unit/version difference. Both GDP trajectory requests were blocked.",
+    "seed": {
+      "bytes": 18686,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-hourly.das",
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    "seed_history_capture_utc": "2026-10-17T19:34:52Z"
+  },
+  "hycom": {
+    "actual_normalized_longitude_bounds_deg": [
+      -80.0,
+      -65.03997802734375
+    ],
+    "axes": {
+      "lat": {
+        "all_coordinates_exact_promoted_float32": true,
+        "coordinate_units": "degrees_north",
+        "count": 251,
+        "encoded_dtype": "float64",
+        "first": 25.0,
+        "last": 35.0,
+        "max_absolute_coordinate_difference_from_nominal_decimal_deg": 1.8310546892053026e-06,
+        "max_absolute_coordinate_difference_from_rounded_float32_lattice_deg": 0.0,
+        "max_absolute_spacing_difference_from_nominal_deg": 2.8991699218758327e-06,
+        "maximum_absolute_ulp_difference": 0.0,
+        "nominal_decimal_lattice": {
+          "increment": 0.04,
+          "start": 25.0
+        },
+        "rounded_nominal_float32_ulp_difference_counts": {
+          "0": 251
+        },
+        "spacing_max": 0.04000091552734375,
+        "spacing_min": 0.039997100830078125,
+        "strictly_increasing": true
+      },
+      "lon": {
+        "all_coordinates_exact_promoted_float32": true,
+        "coordinate_units": "degrees_east",
+        "count": 188,
+        "encoded_dtype": "float64",
+        "first": 280.0,
+        "last": 294.96002197265625,
+        "max_absolute_coordinate_difference_from_nominal_decimal_deg": 3.4179687474988896e-05,
+        "max_absolute_coordinate_difference_from_rounded_float32_lattice_deg": 3.0517578125e-05,
+        "max_absolute_spacing_difference_from_nominal_deg": 4.3945312500001665e-05,
+        "maximum_absolute_ulp_difference": 1.0,
+        "nominal_decimal_lattice": {
+          "increment": 0.08,
+          "start": 280.0
+        },
+        "rounded_nominal_float32_ulp_difference_counts": {
+          "-1": 44,
+          "0": 98,
+          "1": 46
+        },
+        "spacing_max": 0.08001708984375,
+        "spacing_min": 0.0799560546875,
+        "strictly_increasing": true
+      }
+    },
+    "current_file": {
+      "bytes": 572604,
+      "path": "data/public/matched-current-v1/raw/hycom-currents.nc",
+      "sha256": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065"
+    },
+    "metadata_acquired": {
+      "bytes": 159404,
+      "path": "data/public/matched-current-v1/raw/hycom-metadata.xml",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    },
+    "metadata_byte_identical": true,
+    "metadata_seed": {
+      "bytes": 159404,
+      "path": "docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    },
+    "scientific_interpretation": "Actual double coordinate labels are exact float32 promotions. Quantization explains the failed spacing check; it does not justify changing currents, expanding support or claiming physical accuracy.",
+    "selected_depth_m": 15,
+    "unchanged_generic_reader_accepted": true,
+    "unchanged_wrapper_rejection": "HYCOM_REQUESTED_NATIVE_TILE_OR_STRIDE_CHANGED",
+    "valid_time_knots_utc": [
+      "2022-06-01T00:00:00Z",
+      "2022-06-01T03:00:00Z",
+      "2022-06-01T06:00:00Z"
+    ],
+    "wrapper_nominal_spacing_tolerance_deg": 1e-09
+  },
+  "kind": "MATCHED_CURRENT_V1_SAVED_BYTES_COMPATIBILITY_DIAGNOSIS",
+  "recommendation": {
+    "coordinate_rule": "Before any new GDP outcome request, explicitly review and freeze native coordinate-count/lattice/float32-encoding checks. Retain exactly the actual supported axes for interpolation. Observed latitude equals the rounded float32 decimal lattice; observed longitude is within one float32 ULP of that lattice. These observations motivate a reviewed encoding contract, not a model-score-selected tolerance.",
+    "disclosure": "No GDP trajectory payload or scored model outcome was obtained in v1. HYCOM forcing bytes were already acquired and decoded; therefore any v2 design is pre-GDP-outcome, not an entirely scientific-value-unseen first attempt. Encoding inspection must not be represented as model validation or used to select models.",
+    "gdp_rule": "Review an allowlist matching only the two valid UTC capture-time tokens in the exact history field. Preserve the version/text, every other metadata byte, and raw bytes plus raw SHA256 receipts. Reject units/schema/version or other history changes. Do not remove the whole history field.",
+    "no_support_expansion": "Never snap coordinates, add a nominal longitude295 node, interpolate outside the actual tile or change depth/IDs/models after outcomes.",
+    "preserve_v1": true,
+    "retain_unchanged": [
+      "GDP and WMO identities",
+      "context/origin/target windows",
+      "three model definitions",
+      "six horizons and full planned denominators",
+      "depth, current product, variables, tile, stride and current time knots",
+      "transport requests/time/byte limits",
+      "no fitting, tuning, replacement or automatic promotion"
+    ],
+    "status": "REVIEW_PROPOSAL_ONLY",
+    "type": "EXPLICIT_V2_PRE_GDP_OUTCOME_METADATA_AND_COORDINATE_ENCODING_AMENDMENT"
+  },
+  "reviewed_at_utc": "2026-10-17T21:15:21.413262Z",
+  "schema_version": 1,
+  "scope": {
+    "amendment_implemented": false,
+    "gdp_trajectory_coordinates_exported": false,
+    "model_runs_for_diagnosis": 0,
+    "new_network_requests": 0,
+    "new_protocol_frozen": false,
+    "physical_validation": false,
+    "saved_local_bytes_only": true,
+    "velocity_values_exported": false
+  },
+  "source_checkpoint_git_head": "c62e7457d3fcc11181aacd1792bcf0803083f115",
+  "v1": {
+    "artifacts": {
+      "acquisition-start": {
+        "bytes": 402,
+        "path": "data/public/matched-current-v1/acquisition-start.json",
+        "sha256": "17780b5eb69dbcd47c800baec1c844c9e650c227e80bef7940d6cba26b1cd800"
+      },
+      "evaluation": {
+        "bytes": 63563,
+        "path": "data/public/matched-current-v1/evaluation.json",
+        "sha256": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7"
+      },
+      "forecasts": {
+        "bytes": 17133,
+        "path": "data/public/matched-current-v1/forecasts.json",
+        "sha256": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f"
+      },
+      "manifest": {
+        "bytes": 5441,
+        "path": "data/public/matched-current-v1/manifest.json",
+        "sha256": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e"
+      },
+      "protocol": {
+        "bytes": 8845,
+        "path": "data/public/matched-current-v1/protocol.json",
+        "sha256": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6"
+      }
+    },
+    "current_field_failure": "HYCOM_REQUESTED_NATIVE_TILE_OR_STRIDE_CHANGED",
+    "distinct_future_targets_planned": 12,
+    "downloaded_gdp_trajectory_roles": 0,
+    "planned_model_horizon_cells": 36,
+    "requests_attempted": 4,
+    "response_bytes_received": 751334,
+    "scored_model_horizon_cells": 0,
+    "status_by_role": {
+      "gdp_identity": {
+        "reason": null,
+        "request_attempted": true,
+        "status": "DOWNLOADED"
+      },
+      "gdp_metadata": {
+        "reason": "PINNED_METADATA_CHANGED",
+        "request_attempted": true,
+        "status": "METADATA_INVALID"
+      },
+      "hycom_currents": {
+        "reason": null,
+        "request_attempted": true,
+        "status": "DOWNLOADED"
+      },
+      "hycom_metadata": {
+        "reason": null,
+        "request_attempted": true,
+        "status": "DOWNLOADED"
+      },
+      "trajectory:300234066836710": {
+        "reason": "DEPENDENCY_UNAVAILABLE",
+        "request_attempted": false,
+        "status": "BLOCKED"
+      },
+      "trajectory:300534061292930": {
+        "reason": "DEPENDENCY_UNAVAILABLE",
+        "request_attempted": false,
+        "status": "BLOCKED"
+      }
+    }
+  }
+}
