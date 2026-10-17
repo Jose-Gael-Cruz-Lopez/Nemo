@@ -1,14 +1,22 @@
-# Tideward: current product handbook (native USB build)
+# Nemo: current product handbook (native USB build)
 
-Current documentation checkpoint: **17 October 2026**. Repository: [Jose-Gael-Cruz-Lopez/reeftrace](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace). **Tideward** is the product name; ReefTrace remains the repository, package and API name.
+Current documentation checkpoint: **17 October 2026**. Repository: [Jose-Gael-Cruz-Lopez/reeftrace](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace). **Nemo** is the product name; ReefTrace remains the repository, package and API name.
 
-This is the current complete guide. It supersedes **Tideward — complete product handbook · 17 October 2026**, including that earlier version's pending USB restart investigation, and older setup notes that assume a C920s camera, disabled Photon, or a single default constant-velocity ocean graph. Earlier Trov entries remain reference history. Older study protocols and verification receipts remain historical records rather than being rewritten. The source-controlled guide and its linked technical documents are the detailed reference; the Trov Product document is the team-facing copy.
+This is the current complete guide. It supersedes **Nemo — complete product handbook · 17 October 2026**, including that earlier version's pending USB restart investigation, and older setup notes that assume a C920s camera, disabled Photon, or a single default constant-velocity ocean graph. Earlier Trov entries remain reference history. Older study protocols and verification receipts remain historical records rather than being rewritten. The source-controlled guide and its linked technical documents are the detailed reference; the Trov Product document is the team-facing copy.
 
-**Latest matched-current checkpoint — 17 October 2026:** the separately frozen [v2 comparison](matched-current-v2-results.md) acquired both GDP payloads and scored **36/36 cells**; HYCOM current-only had larger errors than last drift on these two groups, without automatic promotion. Preserved [v1](matched-current-results.md) remains **0/36**. The pre-acquisition checks passed **1,770 Python / 331 focused subset / 225 frontend**, and the later disposable HTTP run passed **174 / 0 failures / 6 expected external/physical blockers**. Browser version/layer/group/hour controls and a separate live Chalk REPORT with exact v2 citations were verified. The final post-acquisition full suite passed **1,779 Python tests** with one upstream dependency warning; frontend is **225 passed** and HTTP **174 / 0 / 6 blocked**. Lint/types/build passed; exact-head hosted CI remains pending. The earlier [complete software verification](complete-software-verification-20261017.md) and receipts below retain their capture-time results; no camera, new Photon message, xAI API or billing change was used for this update.
+**Historical matched-current checkpoint — 17 October 2026:** the separately frozen [v2 comparison](matched-current-v2-results.md) acquired both GDP payloads and scored **36/36 cells**; HYCOM current-only had larger errors than last drift on these two groups, without automatic promotion. Preserved [v1](matched-current-results.md) remains **0/36**. The pre-acquisition checks passed **1,770 Python / 331 focused subset / 225 frontend**, and the later disposable HTTP run passed **174 / 0 failures / 6 expected external/physical blockers**. Browser version/layer/group/hour controls and a separate live Chalk REPORT with exact v2 citations were verified. The final post-acquisition full suite passed **1,779 Python tests** with one upstream dependency warning; frontend is **225 passed** and HTTP **174 / 0 / 6 blocked**. Lint/types/build passed; exact-head hosted CI remains pending. The earlier [complete software verification](complete-software-verification-20261017.md) and receipts below retain their capture-time results; no camera, new Photon message, xAI API or billing change was used for this update.
+
+## Current product update — Nemo
+
+The product and one-word landing hero are now **Nemo**. The hero uses the same **Rajdhani** headline typeface verified on the Blue Marine reference, self-hosted with its Open Font License. The opening slogan, landing narration/voice choices/captions and manual motion buttons have been removed. Automatic reduced-motion and hidden-tab suspension remain. Existing research/package/API/evidence identifiers are unchanged. See [the current landing guide](ocean-landing-journey.md).
+
+A separate [origin-residual development result](origin-residual-results.md) now preserves **48/48 model/hour cells on twelve already-viewed processed buoy positions**. Its initial-motion-plus-current candidate has descriptively lower error in both groups, with macro ADE **1,030.049 m**, versus last drift **1,510.232 m** and current-only **5,063.020 m**. This was developed after viewing the preceding result; it is not an untouched test, learned correction, identified physical cause or promoted operational model. The frozen v1/v2 studies stay unchanged. Its pinned public read-only API and authenticated bounded Chalk review are implemented; the new Data Lab card is not connected yet. A local exact numerical replay reproduced the saved forecasts/scores without rewriting them. API tests used a mocked provider, so a live Chalk round trip for this diagnostic is still unverified.
+
+Historical checkpoint counts and pending-at-capture CI wording below retain their original scope. The latest release must be checked against its exact commit. Software checks do not establish physical tank or reef benefit.
 
 ## 1. What the product does
 
-Tideward helps a team ask where floating pollution could come from, compare where to intercept it before it reaches a protected area, and preserve evidence for checking whether the intervention actually worked. It combines a local camera experiment, numerical transport models, public ocean research and a bounded AI evidence interpreter.
+Nemo helps a team ask where floating pollution could come from, compare where to intercept it before it reaches a protected area, and preserve evidence for checking whether the intervention actually worked. It combines a local camera experiment, numerical transport models, public ocean research and a bounded AI evidence interpreter.
 
 The software has three distinct evidence environments:
 
@@ -44,7 +52,7 @@ The launcher never silently changes sponsor enable flags. A new API process with
 
 ### Public Vercel ocean demonstration
 
-[Open the Tideward public ocean demo](https://tideward-ocean-demo.vercel.app/demo).
+[Open the Nemo public ocean demo](https://tideward-ocean-demo.vercel.app/demo).
 
 This deployment is deliberately a **read-only ocean showcase**, using checked exported numerical snapshots and the same comparison interface. It includes both fixed scenarios, trajectory/layer checkboxes, release filtering, current arrows, time selection and method disclosures. It has no connection to the Mac webcam, local SQLite, local operator access, Chalk, Photon or xAI credentials. A disabled Chalk control explains this boundary; it does not masquerade a saved answer as a live model response.
 
@@ -61,7 +69,7 @@ The Vercel setting is `TIDEWARD_PUBLIC_SHOWCASE=true`. `/`, `/workspace` and `/l
 | Data Lab | The same single ocean comparison, with controlled overlays | Historical NOAA studies, model tables, motion/uncertainty diagnostics, data provenance and research explanation |
 | Settings/operator controls | Inspect configuration readiness and connect local operator access | No browser exposure of permanent provider keys or promise that readiness equals a successful service request |
 
-Scientific details remain available without forcing a first-time presenter to read every field. The interface uses the light-blue Tideward palette, sharp-edged panels, visible units and concise result summaries.
+Scientific details remain available without forcing a first-time presenter to read every field. The interface uses the light-blue Nemo palette, sharp-edged panels, visible units and concise result summaries.
 
 ## 4. Ocean prevention: the default demonstration
 

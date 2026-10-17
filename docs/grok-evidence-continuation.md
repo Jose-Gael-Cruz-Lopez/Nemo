@@ -7800,3 +7800,329 @@ The real HYCOM residual candidate has not been run. The DOP853 check is syntheti
   "total_grok_rounds_in_continuation": 11
 }
 ```
+
+
+## Additive origin-residual result review — twelfth actual Grok round
+
+Checkpoint: **17 October 2026**. The public product is now **Nemo**; original
+ReefTrace/Tideward package, repository and evidence identifiers remain stable.
+This addition preserves the complete preceding **456,934-byte** continuation,
+SHA-256 `a160166c510934052bacce375a92ab0819d00eee91229933f99b03f597f599df`.
+The current continuation contains **twelve actual Grok web review rounds /
+twenty-four capture files**. Earlier prompts, responses, Stage M's unscored
+checkpoint and the original canonical bundle remain unchanged.
+
+### Current result and local disposition
+
+The separately saved [origin-residual result](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/origin-residual-results.md)
+has **48/48** model/hour cells on **twelve already-viewed processed GDP targets**.
+Its equal-ID macro ADE/FDE are **1,030.0495 m / 2,355.9582 m**, compared with
+last drift **1,510.2316 m / 3,240.5762 m**, stationary **3,490.1188 m / 6,069.3529 m**,
+and current-only **5,063.0203 m / 9,151.6451 m**. Residual group ADE/FDE are
+**1,570.4495 m / 3,327.6312 m** and **489.6494 m / 1,384.2851 m**, lower than the
+other candidates on both group aggregates. The original three candidates' results
+are retained. This does not assert that every individual hour improves.
+
+Accepted interpretation from the actual result review preserves twelve-target
+reuse, the two-group scope, previously viewed outcomes, unfitted constant local
+ENU discrepancy and the distinction between descriptive error and general skill.
+This is **post-outcome exploratory development**, not a learned model, untouched
+confirmation, significance result, independence claim, diagnosed physical cause,
+automatic promotion or tank/plastic/reef validation. The first score and all
+frozen source artifacts remain unchanged; no new parameter or model mode is chosen
+from this review.
+
+**Correction to raw response D:** its phrase that an external pin is “still
+required for publication” is outdated relative to the submitted source context.
+The implementation already has a separately committed literal result identity
+and an anchored read-only API/Chalk integration. That software trust anchor is
+**not independent external attestation** of execution or scientific validity.
+The result identity is
+`d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27`;
+report/protocol pins remain separately identified. The raw response is retained
+exactly; this correction must accompany its interpretation.
+
+The response correctly identifies that the new **Data Lab diagnostic card is not
+connected at this review checkpoint**. Implemented endpoint contracts do not prove
+browser integration, live Chalk success or deployment. Subsequent work needs its
+own verification and release evidence. The existing default reader continues to
+report `numeric_replay_verified:false` because its own scope is saved-byte and
+lineage verification; it must not inherit another process's numerical claim.
+
+### Separate local execution — not Grok output
+
+Root's saved `LOCAL_EXACT_NUMERICAL_REPLAY_NOT_NEW_FIRST_SCORE` receipt records
+one independent local rebuild of all four forecast candidates and their scores:
+**forecast equality true, score equality true and all saved artifact bytes
+unchanged**. It retains 48/48 cells, twelve previously viewed targets, no new
+acquisition/provider calls and no physical validation. This is a local numerical
+replay of the one saved diagnostic, not a second first score, overwritten result,
+independent dataset, external attestation or new Grok execution. The receipt's
+artifact hashes were read and matched the current eight saved files while this
+addendum was prepared. The default reader's narrower verification flag remains
+unchanged.
+
+The local receipt is a separate execution record rather than an added Grok turn.
+Its exact captured file identity is listed in the additive manifest below. The
+**40 focused synthetic contracts**, **49 new API tests** and **98 adjacent API
+regressions** are different/subset verification scopes and are not summed into a
+new full-suite or hosted count. Existing historical CI at `33280da7` remains a
+separate exact-commit checkpoint. No full-suite/hosted success for the current
+changes is invented here.
+
+### Proposed next cohort — not frozen, selected or acquired
+
+The review proposes a metadata-only whole-GDP-ID cohort, for example **six new
+groups**, with all previously viewed identities and known aliases excluded.
+The candidate equations, four models, fixed horizon, origin/context rules,
+matched forcing, mask/cadence/failure policy and all planned slots would need a
+new protocol frozen before outcomes. All forecasts would be saved/read back
+before numeric future-coordinate decoding; complete primary summaries would
+require every planned cell, with available-support summaries explicitly secondary.
+
+This is a **proposal only**: no new protocol is frozen, no six identities are
+selected and no new trajectory/current acquisition has occurred. New-to-project
+logical IDs would still not establish physical independence, absence from
+upstream assimilation or historical issue-time availability. No cohort is
+chosen, replaced or tuned because the present residual result looks favorable.
+
+The documentation and review make no xAI API call, spend no credits, change no
+billing/provider settings, send no Photon message, start no camera and operate
+no hardware. Public raw captures contain no credentials, private contacts,
+camera frames, database or shared-chat transcript.
+
+### Exact twelfth-round saved captures
+
+#### grok-origin-residual-result-review-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-result-review-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Bytes: **7,790**; SHA-256: `358c98f3c5708f7cbddf9b726695d9e08da3c710c2e04330d264703362fb5a5f`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+Continue the same ReefTrace research project. The public product is now named Nemo; stable repository/package/evidence IDs remain unchanged. This is a STATIC interpretation and next-study contract review, not a request to execute code, access credentials, acquire data or use the xAI API. The source repository is https://github.com/Jose-Gael-Cruz-Lopez/reeftrace .
+
+Your reviewed constant local-ENU residual candidate was frozen in committed sources before one actual first score. Its result now EXISTS. The first three candidates reproduce the original v2 descriptive scores. All four forecasts were written and read back before numeric target decoding in this new diagnostic. The two groups and twelve processed future positions had already been viewed in the preceding v2 study; the method was proposed after seeing that result. There is no coefficient fit, decay tuning, clipping, learned model or automatic promotion. Source v1/v2 artifacts and all14 frozen v2 sources are unchanged. Root independently rebuilt the four forecasts and scores once locally: exact equality and unchanged saved artifact bytes. This is local replay, not external attestation, physical validation or independent forecasting. Other local checks:40 synthetic contract tests,49 new API tests/98 adjacent regressions; none establishes scientific skill. A separate externally pinned public GET and authenticated bounded read-only Chalk REPORT endpoint are implemented. Data Lab's new diagnostic card is not yet connected. Do not claim it is.
+
+Actual saved result summary follows:
+{
+  "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1",
+  "scope": "POST_OUTCOME_EXPLORATORY",
+  "previously_viewed_targets": 12,
+  "coverage": {
+    "planned": 48,
+    "scored": 48
+  },
+  "macro": [
+    {
+      "equal_id_macro_ade_m": 3490.11883398436,
+      "equal_id_macro_fde_m": 6069.352856333436,
+      "group_count": 2,
+      "model_id": "stationary"
+    },
+    {
+      "equal_id_macro_ade_m": 1510.2315897151784,
+      "equal_id_macro_fde_m": 3240.5762017396933,
+      "group_count": 2,
+      "model_id": "last_drift"
+    },
+    {
+      "equal_id_macro_ade_m": 5063.020321784228,
+      "equal_id_macro_fde_m": 9151.645051235122,
+      "group_count": 2,
+      "model_id": "current_only"
+    },
+    {
+      "equal_id_macro_ade_m": 1030.0494632017758,
+      "equal_id_macro_fde_m": 2355.9581696532323,
+      "group_count": 2,
+      "model_id": "origin_residual_current"
+    }
+  ],
+  "groups": [
+    {
+      "id": "300234066836710",
+      "candidates": [
+        {
+          "model": "stationary",
+          "metrics": {
+            "available_cell_mean_error_m": 5120.998256257352,
+            "coverage_complete": true,
+            "endpoint_fde_m": 8121.756574761635,
+            "full_horizon_ade_m": 5120.998256257352,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "last_drift",
+          "metrics": {
+            "available_cell_mean_error_m": 1929.6812781234194,
+            "coverage_complete": true,
+            "endpoint_fde_m": 4034.0989009671275,
+            "full_horizon_ade_m": 1929.6812781234194,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "current_only",
+          "metrics": {
+            "available_cell_mean_error_m": 4640.195307154688,
+            "coverage_complete": true,
+            "endpoint_fde_m": 8270.53113245185,
+            "full_horizon_ade_m": 4640.195307154688,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "origin_residual_current",
+          "metrics": {
+            "available_cell_mean_error_m": 1570.4494966198938,
+            "coverage_complete": true,
+            "endpoint_fde_m": 3327.6312288398913,
+            "full_horizon_ade_m": 1570.4494966198938,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "300534061292930",
+      "candidates": [
+        {
+          "model": "stationary",
+          "metrics": {
+            "available_cell_mean_error_m": 1859.2394117113683,
+            "coverage_complete": true,
+            "endpoint_fde_m": 4016.9491379052365,
+            "full_horizon_ade_m": 1859.2394117113683,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "last_drift",
+          "metrics": {
+            "available_cell_mean_error_m": 1090.7819013069375,
+            "coverage_complete": true,
+            "endpoint_fde_m": 2447.053502512259,
+            "full_horizon_ade_m": 1090.7819013069375,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "current_only",
+          "metrics": {
+            "available_cell_mean_error_m": 5485.845336413768,
+            "coverage_complete": true,
+            "endpoint_fde_m": 10032.758970018393,
+            "full_horizon_ade_m": 5485.845336413768,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "origin_residual_current",
+          "metrics": {
+            "available_cell_mean_error_m": 489.6494297836579,
+            "coverage_complete": true,
+            "endpoint_fde_m": 1384.2851104665729,
+            "full_horizon_ade_m": 489.6494297836579,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        }
+      ]
+    }
+  ],
+  "method_commit": "744832594c6327459d3003291e08685d9d483bb0",
+  "clocks": {
+    "method": "2026-10-17T23:10:44.279528+00:00",
+    "forecasts": "2026-10-17T23:10:44.298723+00:00",
+    "score": "2026-10-17T23:10:44.300622+00:00"
+  },
+  "identity": {
+    "externally_trusted_pin_required_for_publication": true,
+    "forecast_file_sha256": "727e2ce329148c31194bd6fc7b17c39da8b83923439140b9eef5c378376cc0d1",
+    "kind": "ORIGIN_RESIDUAL_LOCAL_RESULT_IDENTITY",
+    "protocol_sha256": "e1073f84e83b2ea078d0890972659e778f87238c417287d8adf70e3649587163",
+    "report_sha256": "801d7192ba138817f242401ae6706562f2b8c5c34306219ee37e04a2af2299c8",
+    "schema_version": 1,
+    "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1"
+  },
+  "identity_sha256": "d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27"
+}
+
+Please return a concise adversarial review with exactly these sections:
+A) What can be said about the actual numerical result, and what cannot be claimed. Include the per-group consistency, twelve-target reuse and post-outcome limitations without treating48 cells as48 independent samples.
+B) Give one plain-language Data Lab sentence and one bounded Chalk explanation that explain what the initial residual contributes while naming its assumptions. Do not call it a learned correction, identified windage/current bias, operational forecast or a tank/reef outcome.
+C) Specify a concrete next external-data protocol BEFORE any new outcome values are viewed: whole GDP identities/alias exclusions, metadata-only selection, minimum cohort/common forcing support, one origin/context/horizon, fixed four candidates, retained failure cells, prior forecast/readback, all-result denominators and a primary comparison. Do not pick a favorable geographic subset or tune using these two outcomes. Distinguish a new-to-project cohort from upstream retrospective/assimilation independence that cannot be established.
+D) Identify actual blockers or missing evidence in this result package rather than speculate that you executed tests. Do not invent measurements, data access, p-values, error bars, keys, wins, sponsor qualification, external runs or live Voice/Imagine usage. Do not change the current model after this outcome; propose any new variation as a separately named future study.
+
+``````
+
+#### grok-origin-residual-result-review-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-result-review-response.txt
+
+Role: `ACTUAL_GROK_WEB_RESPONSE`. Bytes: **3,004**; SHA-256: `b5fee7b16f53c5ddd34092c724e3d25b874da3beed909ad0b821368e17cb50b6`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+**A. What the result supports, and what it does not.**  
+On the two already-viewed groups the equal-ID macro ADE/FDE are origin-residual 1030 m / 2356 m, last-drift 1510 m / 3241 m, stationary 3490 m / 6069 m, and current-only 5063 m / 9152 m. The residual is lower on both groups (1570 m / 3328 m and 490 m / 1384 m). The first three candidates match the frozen v2 scores. All 48 cells scored, but they reuse only the same 12 processed future positions that were already seen; they are not 48 independent samples. The method was specified after the v2 outcome, uses a constant local east/north residual with no fit, decay or clip, and remains a post-outcome exploratory diagnostic. It does not establish operational skill, assimilation independence, statistical significance, or any plastic/tank/reef effect.
+
+**B. Display language.**  
+Data Lab: “On this already-viewed two-group diagnostic a constant local residual of last-drift velocity minus the origin HYCOM current reduced descriptive error relative to the other three candidates; the residual is not a learned correction and the targets were previously scored.”  
+Chalk: “The origin-residual candidate adds a single constant east/north offset, computed only from the final two context fixes and the HYCOM value at the origin, to a copy of the 15 m field and integrates it with the existing knot-aligned RK4. On these two groups its descriptive error was lower; the offset bundles object, forcing and processing discrepancy, is not an identified wind or bias coefficient, and the 48 cells reuse 12 already-viewed positions.”
+
+**C. Next external-data protocol (before any new outcomes are viewed).**  
+Freeze a new protocol that selects whole GDP identities by metadata only, excludes every previously viewed ID and known alias, and requires a minimum cohort (for example six groups) with common forcing support at the origin and the three knots. Use one origin, the final two context fixes, and a six-hour horizon. Keep the same four candidates, no coefficient, no decay, no clip. Retain every planned cell on transport, mask or cadence failure. Save and read back all forecasts before any future coordinate is decoded. Primary equal-ID macro only when every planned cell scores; otherwise withhold it and label any common-support summary secondary. Do not choose a geographic subset or alter the residual using the present two outcomes. A new-to-project logical-ID cohort is not the same as upstream assimilation or issue-time independence, which this design cannot establish.
+
+**D. Blockers and missing evidence in this package.**  
+The result is a local replay with an external pin still required for publication; no independent external attestation is present. Data Lab’s diagnostic card is not connected. No new trajectories, issue-time archive, or assimilation-input audit exist. No error bars, p-values or confirmatory cohort are available. The current model is not changed; any variation must be a separately named future study.
+``````
+
+### Twelfth-round additive source manifest
+
+```json
+{
+  "actual_grok_rounds_added": 1,
+  "files": [
+    {
+      "bytes": 7790,
+      "path": "docs/grok-evidence/grok-origin-residual-result-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "sha256": "358c98f3c5708f7cbddf9b726695d9e08da3c710c2e04330d264703362fb5a5f"
+    },
+    {
+      "bytes": 3004,
+      "path": "docs/grok-evidence/grok-origin-residual-result-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "sha256": "b5fee7b16f53c5ddd34092c724e3d25b874da3beed909ad0b821368e17cb50b6"
+    }
+  ],
+  "independent_external_attestation": false,
+  "kind": "ADDITIVE_ORIGIN_RESIDUAL_RESULT_REVIEW_MANIFEST",
+  "new_full_suite_or_hosted_run_claimed": false,
+  "next_six_group_cohort_status": "PROPOSED_NOT_FROZEN_SELECTED_OR_ACQUIRED",
+  "previous_prefix_bytes": 456934,
+  "previous_prefix_sha256": "a160166c510934052bacce375a92ab0819d00eee91229933f99b03f597f599df",
+  "schema_version": 1,
+  "separate_local_execution_receipt": {
+    "artifact_bytes_unchanged": true,
+    "bytes": 1879,
+    "forecast_exact": true,
+    "kind": "LOCAL_EXACT_NUMERICAL_REPLAY_NOT_NEW_FIRST_SCORE",
+    "new_first_score": false,
+    "not_grok_response": true,
+    "scores_exact": true,
+    "sha256": "41ff2f8e13e07b70c520bd45ea726cdd53effe433ce4118fec6e466c93478417"
+  },
+  "total_grok_capture_files_in_continuation": 24,
+  "total_grok_rounds_in_continuation": 12
+}
+```

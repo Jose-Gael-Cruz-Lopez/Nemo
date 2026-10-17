@@ -1,0 +1,60 @@
+{
+  "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+  "automatic_model_promotion": false,
+  "coefficient_fitting": false,
+  "confirmatory": false,
+  "decay_or_clipping": false,
+  "forecast_and_score_clock_kind": "local_execution_receipt_not_external_attestation",
+  "frozen_at_utc": "2026-10-17T23:10:44.279528+00:00",
+  "groups": [
+    "300234066836710",
+    "300534061292930"
+  ],
+  "horizons_s": [
+    3600,
+    7200,
+    10800,
+    14400,
+    18000,
+    21600
+  ],
+  "hourly_output_s": 3600,
+  "kind": "POST_OUTCOME_EXPLORATORY_METHOD_CONTRACT",
+  "maximum_horizon_s": 21600,
+  "maximum_speed_m_s": 10,
+  "method_source_sha256": {
+    "apps/ocean/reeftrace_ocean/origin_residual.py": "37b84b13bb085651ae2b5b1140b6bc43d8ad5897719eb34b7b525cd8709fa02e",
+    "scripts/evaluate_origin_residual_diagnostic.py": "961a5f75b0dcbec7287f7815260c010ef53a0a0f9ad26447d2265e80881a84d9",
+    "tests/unit/test_origin_residual.py": "d0ff8188f9d17c89700968cd4e40a951f5980aacf73351aa5f7bce2c9d9b0de1"
+  },
+  "models": [
+    "stationary",
+    "last_drift",
+    "current_only",
+    "origin_residual_current"
+  ],
+  "origin_time_utc": "2022-06-01T00:00:00Z",
+  "physical_validation": false,
+  "planned_cell_count": 48,
+  "planned_distinct_target_count": 12,
+  "previously_viewed_target_outcomes": true,
+  "primary_requires_all_cells": true,
+  "requested_step_s": 300,
+  "residual": "v_last_origin_mean_sphere_minus_current_at_origin",
+  "residual_transport": "constant_local_east_north_m_s",
+  "reviewed_code_commit": "744832594c6327459d3003291e08685d9d483bb0",
+  "schema_version": 1,
+  "source_acquisition_lineage": {
+    "acquisition_start_sha256": "779cd40cf7ded603256f2012b478fd5fb056e7c87dfd58c189d80da73d9d06df",
+    "manifest_sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0",
+    "protocol_sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793",
+    "trusted_identity_sha256": "c7a883cc5a2f938809839d9785fa8477146c5bb26a21d68c1d730afda4543f07"
+  },
+  "source_artifact_pins": {
+    "evaluation.json": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347",
+    "forecasts.json": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf",
+    "manifest.json": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0"
+  },
+  "source_study_id": "matched-current-gdp-hycom-15m-v2",
+  "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1"
+}

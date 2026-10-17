@@ -1,3 +1,36 @@
+# Nemo: current result and historical development design
+
+**Current checkpoint — 17 October 2026:** the separately identified exploratory
+candidate has been scored once after its exact methods were committed at
+`744832594c6327459d3003291e08685d9d483bb0`. All **48/48 planned cells** scored on
+**12 already-viewed processed GDP targets**. Equal-ID macro ADE/FDE are
+**1,030.0495 m / 2,355.9582 m**, descriptively lower than the other three candidates
+in this sample and in both groups' aggregates. No learned-model, unseen-test,
+causal, tank/reef or promotion claim follows.
+
+The **twelfth actual Grok review** now discusses that saved result; the archive
+contains **12 rounds / 24 captures**. A separate local numerical replay matched
+all four forecasts and scores exactly, with every saved artifact byte unchanged.
+This is not a second first score or independent external attestation. The default
+reader still correctly returns `numeric_replay_verified:false`: its own scope is
+saved-byte/lineage verification rather than numerical execution.
+
+The [dated local software checkpoint](research-evidence/nemo-origin-residual-20261017-local-checkpoint.json)
+records **1,898 Python tests, 233 frontend tests, Ruff/ESLint and production build
+passed**, plus **174 guarded HTTP passes / zero failures / six expected blocked
+scopes**. The **49 new endpoint tests / 98 adjacent API regressions** use mocked or
+disabled providers; they do not establish a live Chalk response and are not added
+to the full-suite count. Hosted exact-commit, browser and physical validation
+remain separate. Read the [result, tables, clocks and identities](origin-residual-results.md).
+
+**The complete development text below is retained as a pre-score historical
+capture.** Its “under review/no result scored” statements describe that earlier
+checkpoint. Nemo is the current product name; historical Tideward/ReefTrace
+names and exact captures remain unchanged. No new cohort has been frozen,
+selected or acquired, and the one first-score directory must not be overwritten.
+
+---
+
 # Current plus initial observed motion: exploratory development
 
 Checkpoint: 17 October 2026. **Implementation under review; no result for this

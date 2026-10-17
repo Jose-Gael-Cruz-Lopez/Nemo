@@ -1,0 +1,149 @@
+{
+  "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+  "automatic_model_promotion": false,
+  "captured_at_utc": "2026-10-17T23:32:47.946091+00:00",
+  "distinct_previously_viewed_targets": 12,
+  "frozen_method_source_sha256": {
+    "apps/ocean/reeftrace_ocean/origin_residual.py": "37b84b13bb085651ae2b5b1140b6bc43d8ad5897719eb34b7b525cd8709fa02e",
+    "scripts/evaluate_origin_residual_diagnostic.py": "961a5f75b0dcbec7287f7815260c010ef53a0a0f9ad26447d2265e80881a84d9",
+    "tests/unit/test_origin_residual.py": "d0ff8188f9d17c89700968cd4e40a951f5980aacf73351aa5f7bce2c9d9b0de1"
+  },
+  "grok_evidence": {
+    "actual_capture_files": 24,
+    "actual_review_rounds_in_continuation": 12,
+    "independent_external_attestation": false,
+    "latest_round": "Origin-residual result review; static advice, not execution",
+    "next_six_group_cohort": "PROPOSED_NOT_FROZEN_SELECTED_OR_ACQUIRED"
+  },
+  "identity_sha256": "d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27",
+  "kind": "NEMO_ORIGIN_RESIDUAL_LOCAL_SOFTWARE_CHECKPOINT",
+  "physical_validation": false,
+  "planned_cells": 48,
+  "plastic_or_reef_skill_established": false,
+  "previously_viewed_target_outcomes": true,
+  "privacy": {
+    "absolute_user_paths_included": false,
+    "credentials_or_configuration_values_included": false,
+    "private_contacts_frames_recordings_database_included": false,
+    "raw_logs_published": false
+  },
+  "product_name": "Nemo",
+  "publication": {
+    "current_exact_head_hosted_ci_verified": false,
+    "native_trov_publication_verified_by_this_receipt": false,
+    "new_checkpoint_commit_performed_by_receipt_author": false,
+    "new_checkpoint_push_performed_by_receipt_author": false
+  },
+  "schema_version": 1,
+  "scope": "Recorded local software checks and a separate exact exploratory numerical replay; not hosted, browser, live-provider or physical validation",
+  "scored_cells": 48,
+  "side_effects_of_this_receipt_preparation": {
+    "billing_changed": false,
+    "camera_opened": false,
+    "data_or_method_modified": false,
+    "hardware_actuation": false,
+    "new_acquisition": false,
+    "photon_messages": false,
+    "provider_calls": false,
+    "tests_or_scoring_rerun": false
+  },
+  "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1",
+  "verification": {
+    "eslint": {
+      "command": "npm run lint",
+      "log_bytes": 46,
+      "log_sha256": "2a39a2b0088eab9372f9ae76e9bbb3badd872aae76be61464acc2a0fe3ac1e51",
+      "passed": true
+    },
+    "frontend_node_tests": {
+      "cancelled": 0,
+      "failed": 0,
+      "later_checkpoint_log_sha256": "946d0b4c867b3121b6af3847425fdb502646d5d0ad9d3e5c610f412596fc7585",
+      "log_bytes": 34972,
+      "log_sha256": "0e6302b61f7a0893ecb31b85cd3b8bf9484044180c3e8eadf11c05cd1bcb58de",
+      "passed": 233,
+      "skipped": 0,
+      "warning_scope": "Node module-type warnings; private filesystem paths omitted"
+    },
+    "full_python_suite": {
+      "elapsed_seconds": 276.37,
+      "failed": 0,
+      "log_bytes": 2748,
+      "log_sha256": "9f9f98c27c0cac4d4b4f7adf3ce9737d92774b749c60839830f303fa7dc3bef9",
+      "passed": 1898,
+      "warning_scope": "Upstream Starlette/httpx deprecation; private filesystem path omitted",
+      "warnings": 1
+    },
+    "isolated_http": {
+      "captured_at_utc": "2026-10-17T23:19:13.808481+00:00",
+      "complete_live_product_verified": false,
+      "expected_blocked": 6,
+      "failed": 0,
+      "guard_counts": {
+        "camera_open_attempts": 0,
+        "photon_poll_attempts": 0,
+        "photon_send_attempts": 0,
+        "provider_http_attempts": 0
+      },
+      "live_provider_round_trip_verified": false,
+      "passed": 174,
+      "receipt_bytes": 610101,
+      "receipt_sha256": "43c41536c6cca26abfb477fc3582a51c8ebf5bca156dc7fe98fe13a0e0b0660b",
+      "software_workflow_passed": true
+    },
+    "origin_residual_api": {
+      "adjacent_combined_tests_passed": 98,
+      "captured_at_utc": "2026-10-17T23:17:12.595528+00:00",
+      "counts_are_subsets_not_added_to_full_suite": true,
+      "new_tests_passed": 49,
+      "no_first_score_or_rescore_by_api_tests": true,
+      "provider_transport": "Mocked or disabled; no live Chalk round trip",
+      "receipt_bytes": 1284,
+      "receipt_sha256": "016fc013439f28285b2e9a1254fd6c02d1fad6241f76273cfdfc9447e8f4c706",
+      "source_sha256": {
+        "apps/api/reeftrace_api/api/v1/endpoints/origin_residual.py": "5e40ec1479124e5a0ec547d0e46b0217c4dc793990e51d904e4273096a93ea8b",
+        "apps/api/reeftrace_api/services/origin_residual_investigation.py": "7e0c08bf9bc66ee81970821e7d715957c4f27e953f38a869d0b478b52e3612e3",
+        "apps/ocean/reeftrace_ocean/origin_residual_result_identity.py": "1b543a0f0e54f95886291fd20a359b20476e8ffd703cdb468832d4d1aa2ec34f",
+        "tests/unit/test_origin_residual_api.py": "f1d589927ab9c315ce50089c5cb51501f4f65932001dedf83e2b0b2742b73c9a"
+      }
+    },
+    "production_build": {
+      "evidence_kind": "Recorded completed checkpoint production-build log",
+      "log_bytes": 907,
+      "log_sha256": "d3a5f4f064bed210b8d4967d1f622a5fff8908fd16c3d5b5f3b999778316e3a6",
+      "passed": true,
+      "route_generation_completed": true,
+      "typescript_phase_completed": true
+    },
+    "ruff": {
+      "command": ".venv/bin/python -m ruff check apps adapters scripts tests",
+      "evidence_kind": "Root actual bounded execution report supplied during receipt preparation; no separate saved log",
+      "exit_code": 0,
+      "output": "All checks passed!",
+      "passed": true
+    },
+    "separate_local_numeric_replay": {
+      "artifact_sha256": {
+        "evaluation.json": "801d7192ba138817f242401ae6706562f2b8c5c34306219ee37e04a2af2299c8",
+        "evaluation.sha256": "c7100779049ef59f88521f0bb78ba98f0e523e8c04f4b2eff3ed14035bc3f623",
+        "forecasts.json": "727e2ce329148c31194bd6fc7b17c39da8b83923439140b9eef5c378376cc0d1",
+        "forecasts.sha256": "1e1fdff40ade9ab5b9516f115cfe7b63d878060844051b71b06edbc98c2cb9c3",
+        "identity.json": "d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27",
+        "identity.sha256": "381ab98c877848ad13ad105acfe292b816e546f2d9bc10534128c32643baa575",
+        "protocol.json": "e1073f84e83b2ea078d0890972659e778f87238c417287d8adf70e3649587163",
+        "protocol.sha256": "0ebcf2ed26464f4cbff41b4fb5fcf79d98e405db2f37c0c00240bfd49160cf4e"
+      },
+      "default_reader_numeric_replay_verified": false,
+      "forecast_exact": true,
+      "kind": "LOCAL_EXACT_NUMERICAL_REPLAY_NOT_NEW_FIRST_SCORE",
+      "new_acquisition": false,
+      "new_first_score": false,
+      "provider_calls": false,
+      "reader_flag_scope": "Default reader verifies saved bytes and lineage only; this separate process does not change its claim",
+      "receipt_bytes": 1879,
+      "receipt_sha256": "41ff2f8e13e07b70c520bd45ea726cdd53effe433ce4118fec6e466c93478417",
+      "saved_artifact_bytes_unchanged": true,
+      "scores_exact": true
+    }
+  }
+}

@@ -26,30 +26,23 @@ function component(path) {
   }, mod, mod.exports);
   return mod.exports;
 }
-const { JOURNEY_CHAPTERS, legacyWorkspaceDestination, journeyProgress, motionAllowed, createJourneyNarrator } = component("app/landing-journey-state.ts");
+const { JOURNEY_CHAPTERS, legacyWorkspaceDestination, journeyProgress, motionAllowed } = component("app/landing-journey-state.ts");
 const { default: Landing } = component("app/page.tsx");
 
-function audioHarness({ fail = false } = {}) {
-  const states = [], messages = [];
-  let cancellations = 0;
-  const engine = { cancel() { cancellations++; }, speak(message) { if (fail) throw new Error("Browser speech unavailable"); messages.push(message); } };
-  const narrator = createJourneyNarrator(engine, text => ({ text }), state => states.push(state));
-  return { narrator, states, messages, cancellations: () => cancellations };
-}
 
 test("five distinct chapters link to real software routes and preserve evidence boundaries", () => {
   assert.deepEqual(JOURNEY_CHAPTERS.map(chapter => chapter.id), ["welcome", "observe", "trace", "prevent", "verify"]);
   for (const chapter of JOURNEY_CHAPTERS) {
-    assert.ok(chapter.narration.length > 100);
+    assert.ok(chapter.detail.length > 40);
+    assert.ok(chapter.detail.split(/\s+/).length <= 20);
+    assert.ok(!("eyebrow" in chapter));
     assert.match(chapter.href, /^\/(demo|workspace)(#(investigations|prevention|data))?$/);
     assert.ok(chapter.secondaryHref.startsWith("#journey-") || chapter.secondaryHref === "/workspace");
   }
-  assert.match(JOURNEY_CHAPTERS[0].narration, /illustrative.*synthetic.*physical validation is pending/i);
-  assert.match(JOURNEY_CHAPTERS[2].narration, /not a calibrated probability/);
-  assert.match(JOURNEY_CHAPTERS[2].narration, /Chalk.*cannot change it/);
-  assert.match(JOURNEY_CHAPTERS[3].narration, /separate.*tank replay/i);
-  assert.match(JOURNEY_CHAPTERS[4].narration, /simple drift baseline performed better/);
-  assert.match(JOURNEY_CHAPTERS[4].evidence, /does not validate plastic motion/);
+  assert.deepEqual(JOURNEY_CHAPTERS.map(chapter => chapter.heading), ["Nemo", "Observe the drift.", "Find possible sources.", "Compare interception layouts.", "Check the evidence."]);
+  assert.match(JOURNEY_CHAPTERS[2].evidence, /does not identify a polluter/);
+  assert.match(JOURNEY_CHAPTERS[3].evidence, /separate; neither establishes measured reef protection/);
+  assert.match(JOURNEY_CHAPTERS[4].evidence, /do not validate plastic motion/);
 });
 
 test("legacy observation links preserve view and safely encoded bounded case identity", () => {
@@ -71,55 +64,12 @@ test("journey progress uses actual available scroll extent, clamps overscroll an
   for (const dimensions of [[0, 0, 0], [20, 900, 1000], [NaN, 5000, 1000], [0, Infinity, 1]]) assert.equal(journeyProgress(...dimensions), 0);
 });
 
-test("reduced motion, manual pause or hidden tab each independently prevents visual motion", () => {
-  for (const reducedMotion of [false, true]) for (const paused of [false, true]) for (const hidden of [false, true]) {
-    assert.equal(motionAllowed({ reducedMotion, paused, hidden }), !reducedMotion && !paused && !hidden);
+test("reduced motion or a hidden tab each independently prevents visual motion", () => {
+  for (const reducedMotion of [false, true]) for (const hidden of [false, true]) {
+    assert.equal(motionAllowed({ reducedMotion, hidden }), !reducedMotion && !hidden);
   }
 });
 
-test("narrator is silent until explicit play and confirms speaking only from native start", () => {
-  const h = audioHarness();
-  assert.deepEqual(h.states, []); assert.equal(h.messages.length, 0); assert.equal(h.cancellations(), 0);
-  h.narrator.play(JOURNEY_CHAPTERS[0].narration);
-  assert.deepEqual(h.states, ["off", "loading"]);
-  assert.equal(h.messages[0].text, JOURNEY_CHAPTERS[0].narration);
-  assert.equal(h.messages[0].lang, "en-US");
-  h.messages[0].onstart(); assert.equal(h.states.at(-1), "speaking");
-  h.messages[0].onend(); assert.equal(h.states.at(-1), "off");
-});
-
-test("chapter or visibility stop cancels speech and ignores late native events", () => {
-  const h = audioHarness(); h.narrator.play("First chapter");
-  const original = h.messages[0]; original.onstart(); h.narrator.stop();
-  const count = h.states.length;
-  original.onstart(); original.onerror(); original.onend();
-  assert.equal(h.states.length, count); assert.equal(h.states.at(-1), "off");
-  assert.equal(h.cancellations(), 2);
-});
-
-test("a second explicit chapter narration invalidates callbacks from the older utterance", () => {
-  const h = audioHarness(); h.narrator.play("Old"); h.narrator.play("New");
-  h.messages[1].onstart(); assert.equal(h.states.at(-1), "speaking");
-  const count = h.states.length; h.messages[0].onend(); h.messages[0].onerror();
-  assert.equal(h.states.length, count); assert.equal(h.states.at(-1), "speaking");
-});
-
-test("unmount disposes narration, cancels speech and prevents future work or updates", () => {
-  const h = audioHarness(); h.narrator.play("Chapter"); h.narrator.dispose();
-  const count = h.states.length, cancelled = h.cancellations();
-  h.messages[0].onstart(); h.messages[0].onend(); h.narrator.play("After leaving"); h.narrator.stop();
-  assert.equal(h.states.length, count); assert.equal(h.messages.length, 1); assert.ok(h.cancellations() >= cancelled);
-});
-
-test("unsupported or failed native speech is reported without pretending audio played", () => {
-  const states = [];
-  const unsupported = createJourneyNarrator(null, () => assert.fail("Unsupported speech must not construct utterances"), state => states.push(state));
-  unsupported.play("Caption stays readable"); assert.deepEqual(states, ["off", "unsupported"]);
-  const failed = audioHarness({ fail: true }); failed.narrator.play("Browser rejected speech");
-  assert.equal(failed.states.at(-1), "error"); assert.ok(!failed.states.includes("speaking"));
-  const native = audioHarness(); native.narrator.play("Later native error"); native.messages[0].onerror();
-  assert.equal(native.states.at(-1), "error");
-});
 
 test("rendered entry stays usable and truthful before client effects or media load", () => {
   const html = renderToStaticMarkup(React.createElement(Landing));
@@ -127,12 +77,14 @@ test("rendered entry stays usable and truthful before client effects or media lo
   assert.equal((html.match(/data-journey-chapter=/g) ?? []).length, 5);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.equal((html.match(/<h2\b/g) ?? []).length, 4);
-  assert.match(html, /Start journey/); assert.match(html, /Without voice/); assert.match(html, /With narration/);
+  assert.match(html, /Start journey/);
+  assert.equal((html.match(/<button\b/g) ?? []).length, 1);
+  assert.doesNotMatch(html, /Pause motion|Resume motion|Reduced motion|OBSERVE\. TRACE\. PREVENT\.|EXPECTED IS ONLY HALF THE STORY|BEGIN WITH WHAT YOU CAN SEE|Honest limits|Every drift/);
+  assert.match(html, /<h1[^>]*><strong>Nemo<\/strong><\/h1>/);
+  assert.doesNotMatch(html, /narration|captions|Listen|Without voice|With voice|Mute narration|type="radio"|<audio/i);
   assert.match(html, /href="\/workspace"[^>]*>Skip journey/);
   assert.match(html, /href="\/login"/); assert.match(html, /href="\/workspace#data"/);
   assert.match(html, /role="progressbar"[^>]+aria-valuenow="0"/);
-  assert.match(html, /Voice is off\. Listening is always your choice/);
-  assert.match(html, /Read chapter narration/);
   assert.match(html, /Illustrative ocean · synthetic software demo · physical validation pending/);
   assert.match(html, /poster="\/tideward-ocean-hero\.png"/);
   assert.match(html, /preload="none"/); assert.doesNotMatch(html, /autoPlay|autoplay/);
@@ -208,4 +160,19 @@ test("entered state without an explicit Start click never steals focus", () => {
   assert.ok(target?.props.ref);
   target.props.ref.current = { focus: () => assert.fail("Scroll-based entry must retain current focus") };
   h.commitEntryFocusEffect();
+});
+
+test("reference headline fonts are bundled locally at their declared weights", () => {
+  const css = readFileSync(resolve("app/landing.module.css"), "utf8");
+  for (const [weight, name] of [[400, "Regular"], [500, "Medium"], [700, "Bold"]]) {
+    const filename = `Rajdhani-${name}.ttf`;
+    const font = readFileSync(resolve("public/fonts/rajdhani", filename));
+    assert.equal(font.readUInt32BE(0), 0x00010000, `${filename} must be a real TrueType font`);
+    assert.ok(font.length > 10_000);
+    assert.match(css, new RegExp(`src:url\\('/fonts/rajdhani/${filename}'\\).*?font-weight:${weight};font-display:swap`));
+  }
+  assert.match(readFileSync(resolve("public/fonts/rajdhani/OFL.txt"), "utf8"), /SIL OPEN FONT LICENSE/);
+  assert.match(css, /\.title\{font-family:"Rajdhani"/);
+  assert.match(css, /\.welcomeChapter \.title\{font-weight:700/);
+  assert.doesNotMatch(css, /Impact|fonts\.googleapis\.com|fonts\.gstatic\.com/);
 });

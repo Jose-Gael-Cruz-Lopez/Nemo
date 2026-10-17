@@ -1,46 +1,36 @@
-# Tideward ocean landing journey
+# Nemo ocean landing journey
 
-The landing page is a presentation layer. It introduces the existing workspace without changing observations, scientific reports, provider settings, camera state, or Photon replies.
+Nemo is the current product name. `reeftrace`, existing package/API names, immutable evidence IDs and historical Tideward documents retain their identifiers. The landing introduces the existing workspace without changing observations, scientific reports, provider settings, camera state or Photon replies.
 
-## Reference and adaptation
+## Current design
 
 Reference: [Blue Marine Foundation — The Sea We Breathe](https://www.bluemarinefoundation.com/the-sea-we-breathe/journeys/marine-protected-areas/?section=12).
 
-The browser review captured the entry frame, entry fade, continuing underwater motion, story presentation, route navigation, and audio control. It did not verify every frame or all twelve source sections. The implementation adapts those observed patterns with original Tideward wording, branding and generated ocean media; it does not reuse Blue Marine's wildlife assets, narration or scientific readouts.
+The browser review captured the entry frame, entry fade, continuing underwater motion, story presentation, route navigation and typography. It did not verify every frame or all twelve source sections. Nemo adapts those observed patterns with original wording, branding and generated ocean media.
 
-| Observed reference pattern | Tideward implementation |
-| --- | --- |
-| Full-screen ocean scene and slow movement | One muted 10-second Higgsfield video, a still fallback, restrained light/particle layers |
-| Outlined first line and solid second line | Five readable chapter headlines with short explanatory text |
-| Minimal upper navigation | Journey, Evidence, Open workspace; compact mobile header |
-| Curved route and chapter points | Five native anchor links with current-step indication |
-| Globe and expedition readouts | Decorative globe, actual scroll progress and chapter name; no invented location, depth or temperature |
-| Entry and audio controls | Explicit voice choice; per-chapter listen/mute; readable full-script captions |
+- The hero is the single word **Nemo**. The old opening slogan is removed.
+- The exact reference headline family is **Rajdhani**: the live reference entry heading computed to Rajdhani 700, and its story headings to Rajdhani 500. The local page uses those weights, not Impact or a merely named fallback.
+- Font files are self-hosted from the official [Google Fonts Rajdhani source](https://github.com/google/fonts/tree/main/ofl/rajdhani), with its SIL Open Font License preserved at `dashboard/public/fonts/rajdhani/OFL.txt`. No Google font request is needed at runtime or build time.
+- There is no landing narration, voice choice, Listen/Mute button, audio status or caption panel. There are no Pause/Resume motion buttons.
+- One original muted ocean video, a still fallback and restrained light/particle layers provide the background.
+- The five native scroll chapters are Welcome → Observe → Trace → Prevent → Verify. Each links directly into the corresponding working feature.
+- A curved route, decorative globe and real scroll progress introduce the journey without fabricated depth, temperature, coordinates or environmental readings.
+- The workspace, read-only software demo and operator login remain available without completing the journey.
 
-The chapters are Welcome → Observe → Trace → Prevent → Verify. Each offers a direct route into the corresponding working feature. The workspace, demo and operator login remain available without listening or completing the journey.
+## Motion and accessibility
 
-## Motion, voice and accessibility
+Native scrolling and anchors remain available; no scroll interception or heavyweight 3D landing renderer is used. The page respects `prefers-reduced-motion` automatically and suspends video/CSS motion when hidden. The poster remains visible when video fails or reduced motion is requested. Scroll progress updates at most once per animation frame, with resize-aware extent calculation; chapter state follows visible section height.
 
-- Native scrolling and anchor navigation; no scroll interception or heavyweight 3D landing renderer.
-- The poster stays visible when video fails or the visitor requests reduced motion. Playback pauses when the page is hidden or Pause motion is selected.
-- Scroll progress updates at most once per animation frame, with resize-aware extent calculation. Chapter state follows visible section height.
-- Voice uses the browser's speech engine after an explicit choice or Listen action. It does not call xAI, Chalk or another paid API. Availability and voice quality depend on the browser/operating system.
-- “Narration playing” is shown only after the native speech start event. Errors/unsupported engines retain the complete captions. Changing chapter, hiding or leaving the page cancels narration.
-- Entry activation transfers keyboard focus to the revealed demo action. Scrolling into the journey never steals focus.
-- Mobile layouts reserve a separate bottom control rail. Caption text, motion controls and chapter navigation remain accessible.
+Explicit **Start journey** activation transfers keyboard focus to the revealed demo action. Scrolling into the journey does not steal focus. Mobile layouts keep the chapter content separate from the progress display. Text is real selectable text, with local-font fallback and normal keyboard links.
 
-## Media provenance
+## Media provenance and scientific limits
 
-`dashboard/public/tideward-ocean-journey.mp4` was generated with the connected Higgsfield MCP, model `seedance_2_5`, 10 seconds, 1080p, 16:9, audio disabled. The prompt requested original luminous cyan/azure water, restrained reef scenery, open space for typography, slow camera motion, no text, logo, charts, people or robotics. The full submitted prompt, generation identifier and media hash are recorded in [the media receipt](research-evidence/ocean-landing-media-20261017.json).
+`dashboard/public/tideward-ocean-journey.mp4` was generated with the connected Higgsfield MCP, model `seedance_2_5`, 10 seconds, 1080p, 16:9, audio disabled. The original asset filename remains stable. The full prompt, generation identifier and hash are in [the media receipt](research-evidence/ocean-landing-media-20261017.json).
 
-The ocean is illustrative. Neither the background nor the landing animation is an observation, numerical ocean simulation, or physical experiment. Existing Data Lab results and tank validation boundaries remain explicit.
+The ocean is illustrative. Neither the background nor its animation is an observation, numerical ocean simulation or physical experiment. Data Lab results and tank validation boundaries remain explicit. The page makes no provider request and does not enable xAI, Chalk or Photon.
 
-## Verification checkpoint
+## Verification history
 
-- All **237 frontend tests** passed, including 12 landing tests for routing, scroll/motion state, narrator lifecycle and explicit-entry focus behavior.
-- Targeted ESLint and TypeScript checks passed. An isolated production build compiled all routes successfully without disturbing the running local server.
-- Browser verification covered desktop 1274 × 748 and narrow 335 × 647 layouts, native entry focus, chapter navigation/current-step/progress, generated video decoding/playback, pause/resume, captions, confirmed native speech start in the in-app browser and cancellation on chapter change.
-- The video decoded as 1920 × 1080, 10.041667 seconds, muted, ready state 4, with no media error. Voice playback was not independently verified in every browser; the Chrome background session did not consistently show an active speech state.
-- No scientific-model outcome or physical protection claim follows from these presentation checks.
+The earlier narrated Tideward landing passed 237 frontend tests and a production build, documented in its [historical receipt](research-evidence/ocean-landing-verification-20261017.json). That receipt describes its capture-time interface, not the current silent design.
 
-The preceding committed baseline `33280da7` has its own green hosted CI (1,809 Python tests, 225 frontend tests, 174 HTTP passes and six expected blocked hardware/provider checks). That historical run is not evidence for these subsequent landing changes.
+The silent Nemo revision retains eight focused tests covering legacy routes, bounded scroll progress, automatic motion preferences/visibility, explicit-entry focus, the absence of removed controls and actual bundled font data/weights. Full frontend, browser and production-build results for the final pushed revision must be recorded separately. Completed presentation tests do not establish source probabilities, plastic-prediction skill, a measured tank result or reef benefit.
