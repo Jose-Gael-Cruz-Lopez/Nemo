@@ -1,0 +1,14 @@
+.card { margin-top: 20px; }
+.header { flex-wrap: wrap; gap: 12px; }
+.stack { display: grid; gap: 16px; min-width: 0; }
+.scope { margin: 0; color: #665475; font-size: 12px; line-height: 1.8; }
+.coverage { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.coverage > div { display: grid; gap: 6px; padding: 16px; border: 1px solid #e0d5ef; border-radius: 14px; background: var(--glass-strong, #fff); }
+.coverage strong { color: #65418c; font-size: 25px; font-weight: 550; line-height: 1.2; }
+.coverage span { color: #685575; font-size: 11px; line-height: 1.7; }
+.warning { padding: 16px 18px; border: 1px solid #e7d3a7; border-radius: 13px; background: #fcf5e7; color: #77571e; font-size: 12px; line-height: 1.8; }
+.warning p { margin: 6px 0 0; }
+.foldTable { min-width: 760px; }
+.limits { margin: 14px 0 0; padding-left: 18px; color: #6d587a; font-size: 11px; line-height: 1.9; }
+.limits li + li { margin-top: 6px; }
+@media (max-width: 600px) { .coverage { grid-template-columns: 1fr; } .header > button { width: 100%; } }

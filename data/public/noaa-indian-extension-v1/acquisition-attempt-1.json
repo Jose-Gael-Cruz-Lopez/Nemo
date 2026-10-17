@@ -1,0 +1,10 @@
+{
+  "attempt_at_utc": "2026-10-17T06:54:44.693097+00:00",
+  "protocol_sha256": "0e50adc9118e991e4f9f0d7f629502bc4d4dca7b23d098c8d81c410078b90301",
+  "stage": "official_dataset_info",
+  "status": "UNAVAILABLE_BEFORE_SELECTION",
+  "selected_ids": [],
+  "trajectory_payloads_fetched": false,
+  "evaluation_outcomes_computed": false,
+  "note": "Bounded first request failed; no selection, trajectory access or evaluation. Next pre-outcome amendment reuses an existing pinned NOAA metadata snapshot."
+}

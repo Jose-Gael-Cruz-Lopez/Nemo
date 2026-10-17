@@ -1,0 +1,39 @@
+{
+  "blocks": [
+    {
+      "block_id": "indian-2010",
+      "candidate_count": 0,
+      "http_status": null,
+      "raw_path": "raw/metadata-indian-2010.csv",
+      "reason": "ConnectTimeout",
+      "reserved_excluded_ids": [],
+      "retrieved_at_utc": "2026-10-17T06:54:51.786292+00:00",
+      "selected_ids": [],
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,expno,location_type&time=2010-06-01T00%3A00%3A00Z&latitude%3E=-40&latitude%3C=20&longitude%3E=40&longitude%3C=100",
+      "status": "FETCH_FAILED"
+    }
+  ],
+  "dataset_metadata": {
+    "bytes": 32265,
+    "freshly_downloaded": false,
+    "raw_path": "raw/dataset-info.json",
+    "retrieved_at_utc": "2026-10-17T05:48:56.189870+00:00",
+    "sha256": "22799a625c750856f50b93a919a89c8660b0569db7da4058102e6a53d7eb9373",
+    "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+    "status": "REUSED_PINNED_METADATA"
+  },
+  "evaluation_outcomes_computed": false,
+  "excluded_previously_viewed_ids": [
+    "12730",
+    "12731",
+    "300234063243480",
+    "300234063472530",
+    "8707978"
+  ],
+  "frozen_at_utc": "2026-10-17T06:55:02.836559+00:00",
+  "groups": [],
+  "protocol_sha256": "e07c5acef71c08ae0bb4e39fa94e904cd9d5a7bea9b7fab5c7e785d6ae6ce2f2",
+  "schema_version": 1,
+  "study_id": "noaa-indian-extension-retrospective-v1",
+  "trajectory_payloads_fetched": false
+}

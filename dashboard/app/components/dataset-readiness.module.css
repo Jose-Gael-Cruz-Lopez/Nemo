@@ -1,0 +1,29 @@
+.card { margin-top: 20px; }
+.header { flex-wrap: wrap; gap: 14px; }
+.stack { display: grid; gap: 16px; min-width: 0; }
+.intro { max-width: 850px; margin: 0; color: #655675; line-height: 1.8; font-size: 12px; }
+.metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.metrics > div { display: grid; gap: 6px; padding: 17px; border: 1px solid #e0d5ef; border-radius: 14px; background: var(--glass-strong, #fff); }
+.metrics strong { font-size: 26px; color: #61428d; font-weight: 550; line-height: 1.2; }
+.metrics span { color: #675976; font-size: 11px; line-height: 1.6; }
+.blocked { padding: 15px 17px; border: 1px solid #e7d5ac; border-radius: 13px; color: #755823; background: #fcf6e9; font-size: 12px; line-height: 1.8; }
+.blocked p { margin: 5px 0 0; }
+.receipt { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.receipt p { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+.datasets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.dataset { min-width: 0; padding: 20px; border: 1px solid #dfd2ef; border-radius: 17px; background: rgb(255 255 255 / 82%); }
+.datasetHead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 17px; }
+.datasetType { color: #7b5b9e; font-size: 10px; letter-spacing: .9px; text-transform: uppercase; }
+.dataset h4 { margin: 0 0 10px; color: #49335f; font-size: 15px; line-height: 1.5; font-weight: 550; }
+.dataset p { color: #685575; font-size: 11px; line-height: 1.8; }
+.dataset .role { color: #5d4379; font-weight: 550; }
+.requirements { margin-top: 16px; padding-top: 13px; border-top: 1px solid #e4dbed; }
+.requirements summary { color: #72538d; font-size: 11px; }
+.requirements ul, .limitations { margin: 12px 0 0; padding-left: 17px; color: #695677; font-size: 11px; line-height: 1.85; }
+.requirements li + li, .limitations li + li { margin-top: 6px; }
+.dataset .limit { margin: 17px 0 0; padding-top: 14px; border-top: 1px solid #e4dbed; color: #776142; }
+.identity { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 8px 14px; margin: 14px 0; font-size: 11px; color: var(--muted); }
+.identity dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 1100px) { .datasets { grid-template-columns: 1fr; } .dataset { padding: 18px; } }
+@media (max-width: 600px) { .metrics { grid-template-columns: 1fr; } .header > button { width: 100%; } .identity { grid-template-columns: 1fr; gap: 4px; } .identity dd { margin-bottom: 8px; } }
+@media (prefers-reduced-transparency: reduce) { .dataset { background: #fff; } }

@@ -177,7 +177,7 @@ def test_dashboard_spawn_is_offline_loopback_and_excludes_server_secrets(ready_r
     assert kwargs["cwd"] == ready_root / "dashboard"
     assert "shell" not in kwargs
     assert not any(key.startswith(("CHALK_", "PHOTON_", "REEFTRACE_")) for key in kwargs["env"])
-    assert kwargs["env"]["NEXT_PUBLIC_API_BASE_URL"] == "http://127.0.0.1:8000"
+    assert kwargs["env"]["NEXT_PUBLIC_API_BASE_URL"] == ""
     assert kwargs.get("start_new_session") if os.name == "posix" else kwargs["creationflags"]
 
 

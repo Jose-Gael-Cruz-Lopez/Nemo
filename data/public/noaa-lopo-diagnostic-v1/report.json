@@ -1,0 +1,1262 @@
+{
+  "automatic_model_promotion": false,
+  "calibrated_probability": false,
+  "coverage": {
+    "attempted_outcomes": 120,
+    "failed_outcomes": 0,
+    "folds": 4,
+    "horizons": 6,
+    "models": 5,
+    "scored_outcomes": 120
+  },
+  "data_origin": "REAL_HISTORICAL_NOAA_DRIFTERS_ALREADY_VIEWED",
+  "design_status": "POST_HOC_ALREADY_VIEWED_DRIFTERS_NOT_INDEPENDENT_TEST",
+  "folds": [
+    {
+      "held_out_canonical_id": "12730",
+      "held_out_drifter_id": "12730",
+      "parameters": {
+        "held_group_used_to_fit_shared_matrix": false,
+        "learned_transition_parameters": 4,
+        "maximum_spectral_radius": 0.98,
+        "ridge_alpha": 1.0,
+        "spectral_radius_before_constraint": 0.9297275578838206,
+        "training_drifters": 3,
+        "training_residual_scale_m_s": 0.15348913787423216,
+        "training_velocity_pairs": 48,
+        "velocity_transition_matrix_row_vector_convention": [
+          [
+            0.8400456213084673,
+            -0.2712200021491107
+          ],
+          [
+            0.3133475799552462,
+            0.9278153243221673
+          ]
+        ]
+      },
+      "training_canonical_ids": [
+        "12731",
+        "300234063243480",
+        "300234063472530"
+      ],
+      "training_drifter_ids": [
+        "12731",
+        "300234063243480",
+        "300234063472530"
+      ]
+    },
+    {
+      "held_out_canonical_id": "12731",
+      "held_out_drifter_id": "12731",
+      "parameters": {
+        "held_group_used_to_fit_shared_matrix": false,
+        "learned_transition_parameters": 4,
+        "maximum_spectral_radius": 0.98,
+        "ridge_alpha": 1.0,
+        "spectral_radius_before_constraint": 0.8007457195530348,
+        "training_drifters": 3,
+        "training_residual_scale_m_s": 0.1502325262097908,
+        "training_velocity_pairs": 48,
+        "velocity_transition_matrix_row_vector_convention": [
+          [
+            0.5938963844597767,
+            -0.2185459507327428
+          ],
+          [
+            0.331998227430935,
+            0.9574680937724094
+          ]
+        ]
+      },
+      "training_canonical_ids": [
+        "12730",
+        "300234063243480",
+        "300234063472530"
+      ],
+      "training_drifter_ids": [
+        "12730",
+        "300234063243480",
+        "300234063472530"
+      ]
+    },
+    {
+      "held_out_canonical_id": "300234063243480",
+      "held_out_drifter_id": "300234063243480",
+      "parameters": {
+        "held_group_used_to_fit_shared_matrix": false,
+        "learned_transition_parameters": 4,
+        "maximum_spectral_radius": 0.98,
+        "ridge_alpha": 1.0,
+        "spectral_radius_before_constraint": 0.7829310830662196,
+        "training_drifters": 3,
+        "training_residual_scale_m_s": 0.16015173567556845,
+        "training_velocity_pairs": 48,
+        "velocity_transition_matrix_row_vector_convention": [
+          [
+            0.5998011722609382,
+            -0.19223525857817733
+          ],
+          [
+            0.356592764538611,
+            0.9076864196194115
+          ]
+        ]
+      },
+      "training_canonical_ids": [
+        "12730",
+        "12731",
+        "300234063472530"
+      ],
+      "training_drifter_ids": [
+        "12730",
+        "12731",
+        "300234063472530"
+      ]
+    },
+    {
+      "held_out_canonical_id": "300234063472530",
+      "held_out_drifter_id": "300234063472530",
+      "parameters": {
+        "held_group_used_to_fit_shared_matrix": false,
+        "learned_transition_parameters": 4,
+        "maximum_spectral_radius": 0.98,
+        "ridge_alpha": 1.0,
+        "spectral_radius_before_constraint": 0.5545609432723203,
+        "training_drifters": 3,
+        "training_residual_scale_m_s": 0.07724116796580764,
+        "training_velocity_pairs": 48,
+        "velocity_transition_matrix_row_vector_convention": [
+          [
+            0.1415125520508641,
+            0.020390801574879453
+          ],
+          [
+            0.5508702885958291,
+            0.5273663409279385
+          ]
+        ]
+      },
+      "training_canonical_ids": [
+        "12730",
+        "12731",
+        "300234063243480"
+      ],
+      "training_drifter_ids": [
+        "12730",
+        "12731",
+        "300234063243480"
+      ]
+    }
+  ],
+  "identity_scope": "GDP logical ID identity map only; WMO-to-GDP physical alias resolution not verified",
+  "implementation_receipt": {
+    "already_viewed_data": true,
+    "evaluator_sha256": "8ba079b7dd84af12e3780e5db2b0ac7bb464fa3c10ba7c79f54eaa35cc770125",
+    "frozen_before_first_new_pooled_score_at_utc": "2026-10-17T06:58:58.586911+00:00",
+    "new_pooled_outcomes_computed": false,
+    "protocol_sha256": "198ebac9e216298cbd7d60ada7bcc18b1ac30bac837f4f7e94a1e402bef3a2e6"
+  },
+  "independent_evaluation": false,
+  "kind": "LEAVE_ONE_DRIFTER_OUT_DIAGNOSTIC",
+  "limitations": [
+    "All four trajectories and originalholdout results were already inspected; this is post-hoc transfer research, not new generalization evidence.",
+    "NOAA hourly interpolation may use future raw fixes upstream.",
+    "Ocean and deployment dependence unresolved; no significance, operational, plastic-source or reef-benefit claim.",
+    "A matrix fitted on geographically separated ENU residuals is a statistical transfer hypothesis, not an established physical ocean model."
+  ],
+  "model_selection_performed": false,
+  "models": [
+    {
+      "id": "stationary",
+      "mean_trajectory_error_m": 2911.2980731059383
+    },
+    {
+      "id": "last_drift",
+      "mean_trajectory_error_m": 1579.8504306438947
+    },
+    {
+      "id": "mean_drift",
+      "mean_trajectory_error_m": 1846.7125920928752
+    },
+    {
+      "id": "ridge_ar1",
+      "mean_trajectory_error_m": 729.365075219436
+    },
+    {
+      "id": "pooled_residual_ar1",
+      "mean_trajectory_error_m": 1711.1998776403673
+    }
+  ],
+  "original_study_unchanged": true,
+  "outcomes": [
+    {
+      "drifter_id": "12730",
+      "error_m": 555.3499168885522,
+      "horizon_hours": 1,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 940.8429092829676,
+      "horizon_hours": 2,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 599.7959400745849,
+      "horizon_hours": 3,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 503.55145573269505,
+      "horizon_hours": 4,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 678.0114448848228,
+      "horizon_hours": 5,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1444.1605613156,
+      "horizon_hours": 6,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 219.21012247719702,
+      "horizon_hours": 1,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 368.95212608748864,
+      "horizon_hours": 2,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 834.5128978350216,
+      "horizon_hours": 3,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1512.6669472668402,
+      "horizon_hours": 4,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 2258.87059175658,
+      "horizon_hours": 5,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 3131.685441793568,
+      "horizon_hours": 6,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 676.1133064375946,
+      "horizon_hours": 1,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1198.5867156256975,
+      "horizon_hours": 2,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1003.0316119928304,
+      "horizon_hours": 3,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 945.1587453714584,
+      "horizon_hours": 4,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 966.0373238503407,
+      "horizon_hours": 5,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1763.0207746283431,
+      "horizon_hours": 6,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 994.9749937579485,
+      "horizon_hours": 1,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1356.7127534351293,
+      "horizon_hours": 2,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1270.3366939767113,
+      "horizon_hours": 3,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1164.7449636751262,
+      "horizon_hours": 4,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1180.4284393749306,
+      "horizon_hours": 5,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1944.8630943721178,
+      "horizon_hours": 6,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 331.80481665683936,
+      "horizon_hours": 1,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 811.0035607910268,
+      "horizon_hours": 2,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 1386.4961607677315,
+      "horizon_hours": 3,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 2014.8449504952557,
+      "horizon_hours": 4,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 2624.0798479669365,
+      "horizon_hours": 5,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12730",
+      "error_m": 3723.9667440855337,
+      "horizon_hours": 6,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 1184.9464356543735,
+      "horizon_hours": 1,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 2423.864577817878,
+      "horizon_hours": 2,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 3688.702277035305,
+      "horizon_hours": 3,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 4715.284267281492,
+      "horizon_hours": 4,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 5358.752280683705,
+      "horizon_hours": 5,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 6001.170371416282,
+      "horizon_hours": 6,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 393.6979777736323,
+      "horizon_hours": 1,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 843.0153513535752,
+      "horizon_hours": 2,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 1457.6489763887957,
+      "horizon_hours": 3,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 1091.2183867065667,
+      "horizon_hours": 4,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 1891.3279122381407,
+      "horizon_hours": 5,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 2322.057700526239,
+      "horizon_hours": 6,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 223.60396232599885,
+      "horizon_hours": 1,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 515.2844469526167,
+      "horizon_hours": 2,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 892.3783002254609,
+      "horizon_hours": 3,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 871.8336013598849,
+      "horizon_hours": 4,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 516.0901804856279,
+      "horizon_hours": 5,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 289.21865541623873,
+      "horizon_hours": 6,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 268.0988992670569,
+      "horizon_hours": 1,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 548.189587363792,
+      "horizon_hours": 2,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 964.3531276270213,
+      "horizon_hours": 3,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 448.44784445526017,
+      "horizon_hours": 4,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 516.0051912975975,
+      "horizon_hours": 5,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 413.78130153019964,
+      "horizon_hours": 6,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 193.05452138697356,
+      "horizon_hours": 1,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 312.26005715679906,
+      "horizon_hours": 2,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 535.2642405696184,
+      "horizon_hours": 3,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 406.45538157907237,
+      "horizon_hours": 4,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 333.40527751482205,
+      "horizon_hours": 5,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "12731",
+      "error_m": 872.8089431300388,
+      "horizon_hours": 6,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 1118.4030780634064,
+      "horizon_hours": 1,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 2221.342885338923,
+      "horizon_hours": 2,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 3412.7250359763293,
+      "horizon_hours": 3,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 4716.369476046541,
+      "horizon_hours": 4,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 6016.262150154722,
+      "horizon_hours": 5,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 7229.680485389355,
+      "horizon_hours": 6,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 87.23596600520735,
+      "horizon_hours": 1,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 169.1267292119276,
+      "horizon_hours": 2,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 170.91358706162427,
+      "horizon_hours": 3,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 96.38421393593306,
+      "horizon_hours": 4,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 285.70015858506645,
+      "horizon_hours": 5,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 579.4683860550182,
+      "horizon_hours": 6,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 407.0110016393038,
+      "horizon_hours": 1,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 756.574193955998,
+      "horizon_hours": 2,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 1086.9932841567118,
+      "horizon_hours": 3,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 1509.4984355180056,
+      "horizon_hours": 4,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 2077.421678689166,
+      "horizon_hours": 5,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 2730.9318957817604,
+      "horizon_hours": 6,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 38.79522080145433,
+      "horizon_hours": 1,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 57.09140027985963,
+      "horizon_hours": 2,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 68.3608266151083,
+      "horizon_hours": 3,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 214.28324369388648,
+      "horizon_hours": 4,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 441.9953689504395,
+      "horizon_hours": 5,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 683.7083083208828,
+      "horizon_hours": 6,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 182.48857290550484,
+      "horizon_hours": 1,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 428.1388501080043,
+      "horizon_hours": 2,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 795.913142732413,
+      "horizon_hours": 3,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 1347.3835705679755,
+      "horizon_hours": 4,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 2013.092180706747,
+      "horizon_hours": 5,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "error_m": 2702.4813823533937,
+      "horizon_hours": 6,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 808.08478601302,
+      "horizon_hours": 1,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 1562.4868579290317,
+      "horizon_hours": 2,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 2339.4798230349206,
+      "horizon_hours": 3,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 3167.867716829211,
+      "horizon_hours": 4,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 4089.679581963997,
+      "horizon_hours": 5,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 5094.339439734799,
+      "horizon_hours": 6,
+      "model_id": "stationary",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 354.4196543731058,
+      "horizon_hours": 1,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 1166.7998714067658,
+      "horizon_hours": 2,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 2280.6240854998186,
+      "horizon_hours": 3,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 3728.6420630664306,
+      "horizon_hours": 4,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 5410.835510378511,
+      "horizon_hours": 5,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 7261.395677670418,
+      "horizon_hours": 6,
+      "model_id": "last_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 1466.8135025735066,
+      "horizon_hours": 1,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 2777.518146127294,
+      "horizon_hours": 2,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 3969.46971948625,
+      "horizon_hours": 3,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 5002.295406852505,
+      "horizon_hours": 4,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 5925.436219413388,
+      "horizon_hours": 5,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 6750.7811013630235,
+      "horizon_hours": 6,
+      "model_id": "mean_drift",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 133.18345911728957,
+      "horizon_hours": 1,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 297.9337993604601,
+      "horizon_hours": 2,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 565.1064893322757,
+      "horizon_hours": 3,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 880.451452192425,
+      "horizon_hours": 4,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 1283.4483972202527,
+      "horizon_hours": 5,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 1769.4669492492367,
+      "horizon_hours": 6,
+      "model_id": "ridge_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 726.982434296553,
+      "horizon_hours": 1,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 1730.8535738775445,
+      "horizon_hours": 2,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 2829.253014911947,
+      "horizon_hours": 3,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 3908.135110334565,
+      "horizon_hours": 4,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 4944.551170050912,
+      "horizon_hours": 5,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "error_m": 5914.079558422605,
+      "horizon_hours": 6,
+      "model_id": "pooled_residual_ar1",
+      "reason_codes": [],
+      "status": "SCORED"
+    }
+  ],
+  "physical_alias_resolution_verified": false,
+  "physical_validation": false,
+  "protocol_sha256": "198ebac9e216298cbd7d60ada7bcc18b1ac30bac837f4f7e94a1e402bef3a2e6",
+  "schema_version": 1,
+  "status": "COMPLETED",
+  "test_data_used": true,
+  "trajectory_summaries": [
+    {
+      "drifter_id": "12730",
+      "mean_error_m": 786.9520380298704,
+      "model_id": "stationary"
+    },
+    {
+      "drifter_id": "12730",
+      "mean_error_m": 1387.649687869449,
+      "model_id": "last_drift"
+    },
+    {
+      "drifter_id": "12730",
+      "mean_error_m": 1091.9914129843776,
+      "model_id": "mean_drift"
+    },
+    {
+      "drifter_id": "12730",
+      "mean_error_m": 1318.6768230986606,
+      "model_id": "ridge_ar1"
+    },
+    {
+      "drifter_id": "12730",
+      "mean_error_m": 1815.366013460554,
+      "model_id": "pooled_residual_ar1"
+    },
+    {
+      "drifter_id": "12731",
+      "mean_error_m": 3895.4533683148397,
+      "model_id": "stationary"
+    },
+    {
+      "drifter_id": "12731",
+      "mean_error_m": 1333.1610508311585,
+      "model_id": "last_drift"
+    },
+    {
+      "drifter_id": "12731",
+      "mean_error_m": 551.4015244609714,
+      "model_id": "mean_drift"
+    },
+    {
+      "drifter_id": "12731",
+      "mean_error_m": 526.4793252568212,
+      "model_id": "ridge_ar1"
+    },
+    {
+      "drifter_id": "12731",
+      "mean_error_m": 442.20807022288733,
+      "model_id": "pooled_residual_ar1"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "mean_error_m": 4119.13051849488,
+      "model_id": "stationary"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "mean_error_m": 231.47150680912947,
+      "model_id": "last_drift"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "mean_error_m": 1428.0717482901575,
+      "model_id": "mean_drift"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "mean_error_m": 250.70572811027182,
+      "model_id": "ridge_ar1"
+    },
+    {
+      "drifter_id": "300234063243480",
+      "mean_error_m": 1244.9162832290065,
+      "model_id": "pooled_residual_ar1"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "mean_error_m": 2843.656367584163,
+      "model_id": "stationary"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "mean_error_m": 3367.1194770658417,
+      "model_id": "last_drift"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "mean_error_m": 4315.385682635994,
+      "model_id": "mean_drift"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "mean_error_m": 821.59842441199,
+      "model_id": "ridge_ar1"
+    },
+    {
+      "drifter_id": "300234063472530",
+      "mean_error_m": 3342.3091436490213,
+      "model_id": "pooled_residual_ar1"
+    }
+  ]
+}

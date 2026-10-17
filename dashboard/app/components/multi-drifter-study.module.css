@@ -1,9 +1,9 @@
 .card { margin-top: 20px; }
 .stack { display: grid; gap: 14px; min-width: 0; }
 .header { flex-wrap: wrap; gap: 12px; }
-.scope { margin: 0; padding: 12px; color: #655c77; background: #faf8fc; border: 1px solid #e8e2ef; border-radius: 5px; font-size: 11px; line-height: 1.75; }
+.scope { margin: 0; padding: 12px; color: #69547e; background: #f5effd; border: 1px solid #e2d6f2; border-radius: 12px; font-size: 11px; line-height: 1.75; }
 .coverage { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.coverage > div { display: grid; gap: 6px; border: 1px solid var(--line); border-radius: 5px; padding: 14px; }
+.coverage > div { display: grid; gap: 6px; border: 1px solid #e1d7ee; border-radius: 14px; padding: 16px; background: var(--glass-strong); }
 .coverage strong { font-size: 23px; font-weight: 500; color: var(--ink); }
 .coverage span { color: var(--muted); font-size: 10px; line-height: 1.6; }
 .table { min-width: 760px; }

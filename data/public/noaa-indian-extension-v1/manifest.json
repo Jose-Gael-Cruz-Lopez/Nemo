@@ -1,0 +1,25 @@
+{
+  "acquired_at_utc": "2026-10-17T06:55:02.838043+00:00",
+  "evaluation_outcomes_computed": false,
+  "no_replacements": true,
+  "protocol_sha256": "e07c5acef71c08ae0bb4e39fa94e904cd9d5a7bea9b7fab5c7e785d6ae6ce2f2",
+  "schema_version": 1,
+  "selection_sha256": "857e907f6a66f7b97dbe2aaee8c9f214774010005b5f17949f45c5591a5e440c",
+  "source": {
+    "base_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv",
+    "dataset_id": "drifter_hourly_qc",
+    "license_name": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "metadata_snapshot": {
+      "freshly_downloaded": false,
+      "path": "data/public/noaa-multidrifter-v1/raw/dataset-info.json",
+      "retrieved_at_utc": "2026-10-17T05:48:56.189870+00:00",
+      "sha256": "22799a625c750856f50b93a919a89c8660b0569db7da4058102e6a53d7eb9373"
+    },
+    "metadata_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+    "product_doi": "10.25921/x46c-3620",
+    "provider": "NOAA AOML Global Drifter Program"
+  },
+  "study_id": "noaa-indian-extension-retrospective-v1",
+  "trajectories": []
+}

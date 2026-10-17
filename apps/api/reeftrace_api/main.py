@@ -96,10 +96,19 @@ def create_app(settings: Settings | None = None):
 
     def operator(request: Request):
         if not settings.local_token:
-            raise HTTPException(503, "Set REEFTRACE_LOCAL_TOKEN before changing local state")
+            raise HTTPException(503, "Set REEFTRACE_LOCAL_TOKEN before changing local state",
+                                headers={"Cache-Control": "no-store"})
         auth = request.headers.get("Authorization", "")
-        if not hmac.compare_digest(auth, "Bearer " + settings.local_token):
-            raise HTTPException(401, "Operator token required")
+        if not hmac.compare_digest(auth.encode("utf-8"),
+                                   ("Bearer " + settings.local_token).encode("utf-8")):
+            raise HTTPException(401, "Operator token required",
+                                headers={"Cache-Control": "no-store"})
+
+    @app.get("/api/v1/operator/session", dependencies=[Depends(operator)])
+    def operator_session(response: Response):
+        """Verify local operator access without changing state or contacting a provider."""
+        response.headers["Cache-Control"] = "no-store"
+        return {"authenticated": True, "scope": "local_operator"}
 
     app.include_router(create_method_validation_router(), prefix="/api/v1")
     app.include_router(create_field_sessions_router(runtime, operator), prefix="/api/v1")
@@ -146,6 +155,22 @@ def create_app(settings: Settings | None = None):
             return run_multidrifter_study()
         except (FileNotFoundError, PermissionError):
             raise HTTPException(503, "The pinned multi-drifter study is unavailable locally") from None
+
+    @app.get("/api/v1/research/dataset-readiness")
+    def dataset_readiness():
+        from apps.ocean.reeftrace_ocean.dataset_readiness import load_dataset_readiness
+        try:
+            return load_dataset_readiness()
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(503, "The pinned acquisition receipts are unavailable locally") from None
+
+    @app.get("/api/v1/research/lopo-diagnostic")
+    def lopo_diagnostic():
+        from apps.ocean.reeftrace_ocean.lopo import run_lopo_diagnostic
+        try:
+            return run_lopo_diagnostic()
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(503, "The pinned transfer diagnostic is unavailable locally") from None
 
     @app.get("/api/v1/cases/{case_id}/briefing")
     def briefing(case_id: str):

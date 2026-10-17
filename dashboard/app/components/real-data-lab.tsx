@@ -5,6 +5,8 @@ import { Icon } from "./icons";
 import { TrainingDiagnostic } from "./training-diagnostic";
 import { MotionAblation } from "./motion-ablation";
 import { MultiDrifterStudy } from "./multi-drifter-study";
+import { DatasetReadiness } from "./dataset-readiness";
+import { TransferDiagnostic } from "./transfer-diagnostic";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -89,5 +91,7 @@ export function RealDataLab({ api }: { api: string }) {
     <TrainingDiagnostic api={api} />
     <MotionAblation api={api} />
     <MultiDrifterStudy api={api} />
+    <TransferDiagnostic api={api} />
+    <DatasetReadiness api={api} />
   </>;
 }

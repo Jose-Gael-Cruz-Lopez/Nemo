@@ -11,10 +11,10 @@
 .scope {
   margin: 0 0 17px;
   padding: 11px 13px;
-  border: 1px solid #e8e2ef;
-  border-radius: 5px;
-  color: #746781;
-  background: #faf8fc;
+  border: 1px solid #e2d6f2;
+  border-radius: 12px;
+  color: #69547e;
+  background: #f5effd;
   font-size: 11px;
   line-height: 1.65;
 }

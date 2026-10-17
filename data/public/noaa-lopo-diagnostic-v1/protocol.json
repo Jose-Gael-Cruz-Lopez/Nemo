@@ -1,0 +1,51 @@
+{
+  "automatic_model_promotion": false,
+  "design_status": "POST_HOC_ALREADY_VIEWED_DRIFTERS_NOT_INDEPENDENT_TEST",
+  "drifter_ids": [
+    "12730",
+    "12731",
+    "300234063243480",
+    "300234063472530"
+  ],
+  "folds": "leave one entire GDP logical ID out of pooled transition fitting; target prefix still conditions anchor/mean/last velocity",
+  "frozen_before_first_new_pooled_score_at_utc": "2026-10-17T06:58:02.191770+00:00",
+  "horizons_hours": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "identity_scope": "GDP logical ID identity map only; WMO-to-GDP physical alias resolution not verified",
+  "limitations": [
+    "All four trajectories and originalholdout results were already inspected; this is post-hoc transfer research, not new generalization evidence.",
+    "NOAA hourly interpolation may use future raw fixes upstream.",
+    "Ocean and deployment dependence unresolved; no significance, operational, plastic-source or reef-benefit claim.",
+    "A matrix fitted on geographically separated ENU residuals is a statistical transfer hypothesis, not an established physical ocean model."
+  ],
+  "metric": "great-circle metre errors at each1..6h; descriptive equal-drifter mean of six horizon errors; all120attempts explicit; withhold macro if any outcome fails",
+  "model_ids": [
+    "stationary",
+    "last_drift",
+    "mean_drift",
+    "ridge_ar1",
+    "pooled_residual_ar1"
+  ],
+  "model_selection_performed": false,
+  "original_study_unchanged": true,
+  "pooled_model": {
+    "alpha": 1.0,
+    "geographic_coordinates": "spherical local xy east/north approximation inherited from existing benchmark",
+    "matrix_parameters": 4,
+    "maximum_spectral_radius": 0.98,
+    "prediction": "target prefix mean and last velocity condition shared learned transition; six free-run hourly integrations; no truth updates",
+    "target_prefix_fitting_shared_matrix": false,
+    "training": "other3 prefixes only; own prefix mean removed from each trajectory velocity; 16 transition pairs per training ID; shared RMS residual scaling from training only; solve ridge normal equation"
+  },
+  "prefix_count": 18,
+  "schema_version": 1,
+  "source_protocol_sha256": "e8ad0cec2b48fa0e516a03b0bc14c42ba2f055439e534878f3db55def4d25845",
+  "study_id": "noaa-lopo-diagnostic-v1",
+  "tuning_on_holdout": false
+}

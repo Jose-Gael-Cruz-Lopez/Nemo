@@ -235,7 +235,7 @@ def start_child(name: str, report: Preflight) -> OwnedChild:
         environment = {k: v for k, v in environment.items()
                        if not k.startswith(("CHALK_", "PHOTON_", "REEFTRACE_"))}
         environment.update({
-            "NEXT_PUBLIC_API_BASE_URL": "http://127.0.0.1:8000",
+            "NEXT_PUBLIC_API_BASE_URL": "",
             "NPM_CONFIG_UPDATE_NOTIFIER": "false", "NPM_CONFIG_AUDIT": "false",
             "NPM_CONFIG_FUND": "false",
         })
