@@ -1,5 +1,7 @@
 # Saved Grok development evidence
 
+**Latest checkpoint — 17 October 2026:** the original **43-record manifest** and canonical earlier bundle remain unchanged historical evidence. The [additive continuation](../grok-evidence-continuation.md) now preserves **five prompt/response rounds, ten Grok files and separately labeled local records**. Static Grok advice is distinct from the [completed local software verification](../complete-software-verification-20261017.md): **1,641 Python / 223 frontend / 153 HTTP passes**, zero failures and six expected external/physical HTTP blockers, plus a **105-test subset** replay check and separate live Chalk investigations. The [matched-current v1 result](../matched-current-results.md) remains **0/36 scored**; a compatibility v2 is proposed, not implemented or silently retried. Earlier DRAFT/pending statements describe their original capture, not a replacement for this current checkpoint. Exact-new-head hosted CI and physical validation remain separate evidence.
+
 The original fourteen numbered files are byte-identical copies of inspected text
 artifacts saved by the builders. Nine `rk4-*` files preserve four actual
 Grok prompt/response rounds and a separate local Python verification receipt.

@@ -282,6 +282,18 @@ def extra(result, api, token):
             "horizon_s": 20, "particles": 40, "trials_per_source": 2})
         comparison_id = detail["comparison"]["id"]
         base = "/prevention/comparisons/" + comparison_id
+        scene_query = "?evaluation_snapshot_hash=" + detail["evaluation"]["snapshot_hash"]
+        scene = req(base + "/scene" + scene_query, auth=False)
+        check("3D scene is a read-only view of the exact full tank comparison",
+            scene["kind"] == "TANK_RIG_SCENE"
+            and scene["evaluation_snapshot_hash"] == detail["evaluation"]["snapshot_hash"]
+            and scene["physical_validation"] is False
+            and scene["actual"]["reported_physical_trial_count"] == 0
+            and scene["actual"]["positional_error_metrics"] is None
+            and scene["vertical"]["measured_depth_cm"] is None
+            and len(scene["simulation"]["paths"]) <= 36
+            and req(base) == detail)
+        req(base + "/scene?evaluation_snapshot_hash=" + "0" * 64, expected=409, auth=False)
         blank = {"trial_key": "extra-no-entry", "layout": "baseline", "source_id": "A",
             "data_origin": "SYNTHETIC_DEMO", "outcome": "no_entry", "entry_time_s": None,
             "interception_time_s": None, "token_accounted": True, "physical_confirmed": False,
@@ -330,6 +342,41 @@ def extra(result, api, token):
         cohort = req("/research/cohort-vectors")
         kalman = req("/research/kalman-diagnostic")
         fresh = req("/research/fresh-physics")
+        matched = req("/research/matched-current", auth=False)
+        matched_report, matched_identity = matched["report"], matched["artifact_identity"]
+        matched_scores = matched_report["scores"]
+        check("matched-current frozen failure ledger preserves both groups and all 36 cells",
+            matched_identity["integrity_verified"] is True
+            and matched_identity["result_pin_verified"] is True
+            and matched_identity["numeric_replay_verified"] is False
+            and matched_scores["planned_group_count"] == len(matched_scores["groups"]) == 2
+            and matched_scores["planned_cell_count"] == 36
+            and matched_scores["planned_distinct_target_count"] == 12
+            and sum(len(model["cells"]) for group in matched_scores["groups"]
+                    for model in group["candidates"]) == 36
+            and matched_report["physical_validation"] is False)
+        check("unavailable matched-current study never becomes a successful result",
+            matched_scores["scored_cell_count"] == 0
+            and matched_scores["primary_equal_id_macro_results"] is None
+            and matched_scores["primary_paired_comparisons"] is None
+            and not matched_scores["automatic_winner_selected"]
+            and all(cell["error_m"] is None for group in matched_scores["groups"]
+                    for model in group["candidates"] for cell in model["cells"]))
+        matched_question = {"question": "Explain the acquisition blockers and remaining uncertainty.",
+            "report_sha256": matched_identity["report_sha256"],
+            "protocol_sha256": matched_identity["protocol_sha256"]}
+        req("/research/matched-current/investigate", matched_question, expected=401, auth=False)
+        req("/research/matched-current/investigate", {
+            **matched_question, "report_sha256": "0" * 64}, expected=409)
+        matched_review = req("/research/matched-current/investigate", matched_question)
+        check("disabled Chalk preserves the pinned matched-current evidence without side effects",
+            matched_review["action"] == "STOP"
+            and matched_review["failure_code"] == "NOT_CONFIGURED"
+            and matched_review["live_model_response"] is False
+            and matched_review["research_report"] == matched_report
+            and matched_review["artifact_identity"] == matched_identity
+            and matched_review["store_written"] is False
+            and matched_review["hardware_actuation"] is False)
         fresh_coverage = fresh["coverage"]
         check("fresh study keeps the frozen requested cohort and all missing or failed outcomes",
             fresh["kind"] == "FRESH_NOAA_DRIFTER_STUDY"
@@ -455,6 +502,8 @@ def extra(result, api, token):
             fixed_kalman_coverage=kalman["coverage"],
             fresh_study_coverage=fresh_coverage,
             fresh_study_snapshot_sha256=snapshot_hash,
+            matched_current_report_sha256=matched_identity["report_sha256"],
+            matched_current_scored_cells=matched_scores["scored_cell_count"],
             current_forecast_snapshot_sha256=currents["snapshot_sha256"],
             current_forecast_method_sha256=currents["method_sha256"],
             ocean_prevention_report_sha256=ocean["report_sha256"],

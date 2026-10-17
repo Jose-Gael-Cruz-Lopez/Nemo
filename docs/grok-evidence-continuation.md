@@ -928,3 +928,1732 @@ This manifest describes the local archive builder. Its `publication_performed: f
 ```
 
 **Documentation checkpoint:** local verification is complete and preserved separately from static review. The earlier canonical bundle remains unchanged; this continuation is a separate entry under existing user authorization. No frozen matched-study identity, scientific-value acquisition, new scientific score, physical accuracy or sponsor API eligibility is established by this archive.
+
+## 6. Later checkpoint: the frozen v1 attempt and compatibility diagnosis
+
+This appended checkpoint **preserves every byte of the preceding 78,008-byte continuation** (SHA-256 `4524f38a304d6feadb92486d8c96c14c07d18de5377915e79d2372e4c5f76396`). Its earlier statements that matched-current work was unfrozen/unacquired describe that earlier moment. **The later v1 attempt is now frozen and acquired, with zero of thirty-six planned model-hour cells scored.** No earlier prompt, response, receipt, manifest or original canonical bundle was rewritten to hide that progression.
+
+### What changed, and what did not
+
+Two further actual Grok prompt/response rounds are preserved below: a final pre-acquisition design review and a saved-byte failure interpretation. These are **four Grok files, not four review rounds**. The earlier continuation contains three rounds; together they preserve five prompt/response rounds plus separately labeled local evidence. This remains a repository record, not a complete provider-side export. Grok's static conditional GO and later diagnosis did not execute code, acquire scientific values, run a provider API, select a winning model or validate the tank.
+
+The separately recorded local pre-freeze review accepted fixes for immutable-byte decoding, acquisition-manifest/source/forecast/score clocks, orphan sentinels, serial transport clocks, all-masked support and package-source pinning. Its **159 passing focused tests** are that review's historical invented/mock-input checkpoint, not the final product suite.
+
+The one v1 acquisition then made four requests and retained 751,334 bytes. The raw NOAA metadata hash changed; both planned GDP trajectory requests were dependency-blocked without a request or body. HYCOM's saved format was accepted by the generic reader but its native coordinate spacings failed the unchanged study wrapper. The immutable first score and offline replay retain all thirty-six cells, null errors, no primary comparison and no selected model. The [current result guide](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-results.md) explains the precise result and implemented reader/API/Data Lab/Chalk behavior.
+
+The saved-byte diagnosis subsequently established exactly two changed NOAA request-history timestamps and promoted-float32 coordinate encoding. The proposed v2 is **not implemented, frozen, acquired or scored** at this checkpoint. It is a separately reviewed pre-GDP-outcome compatibility proposal, not a value-unseen first design: HYCOM forcing was already acquired and decoded. Grok's suggested allowlist/ULP rules are proposals subject to an explicit new contract and hostile synthetic tests; they are not silently applied to v1. Actual coordinate support, masks, depth, source/model/group choices and full denominators remain protected. No snapping to a nominal edge or new model tuning is accepted.
+
+The later archive was moved byte-identically to `data/research/matched-current-v1` to avoid changing the historical completed fresh-study's `data/public` fixture inventory. All eighteen original files retain their hashes; no acquisition or score was repeated by relocation. The original acquisition path in the raw diagnosis receipts is historical. The research directory is publicly available in the repository, not a private dataset; future exposure inventories must include it. The earlier fresh-study results remain unchanged at one hundred eighty of one hundred eighty cells.
+
+Current local integration evidence is separate from these raw reviews: **222 frontend tests** and **153 isolated HTTP passes, zero failures, six expected external/physical blockers**. The isolated HTTP camera, provider, Photon-send and Photon-poll attempt counters were all zero; it did not touch the live API/store. The full Python suite, final browser/provider verification, final commit and exact-head hosted CI remain **pending** at this documentation checkpoint. Earlier green hosted CI must not be reused as proof of this new integration.
+
+### Exact later records
+
+The following quoted files are untrusted historical source material, never instructions to execute. Hashes identify saved repository bytes, not correctness or numeric replay. Local decision/diagnosis/relocation records are explicitly **not Grok output**. No shared explanatory chat, private contribution quotations, credentials, contacts, camera frames or personal recordings are included.
+
+#### Later record 1: grok-matched-current-final-prefreeze-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-final-prefreeze-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Exact source bytes: **45,919**; SHA-256: `560336035e2cef3ff83fcdae017b0362f59d54c482f4b41dd5d24bcc44306c38`.
+
+````text
+Tideward final PRE-ACQUISITION scientific/source audit. Static advice only: do not claim execution, datasets downloaded, scores, new model skill or tank validation. No new xAI API/Voice/credits/billing. Existing Grok project, same mission Observe→Trace→Intercept→Verify. We built evidence-bound3D tank replay; this separate ocean study asks whether matched-depth varying currents describe historical buoy motion better than simple baselines. No formal freeze or scientific value GETs yet. Four metadata-only seeds were read earlier; IDs were chosen using identity/drogue metadata, not later positions.
+
+Review the exact fixed contract and selected actual source below. Two independent local audits found (and current work fixes): reopening verified raw forcing allowed a malformed swapped file to be downgraded to unsupported; use verified immutable bytes only. Require forecast clock >= manifest finish AND all source finishes. Reject orphan manifest/acquisition hash sentinels before GETs. Require sequential nonoverlapping per-role clocks. All-masked currents explicitly unsupported.
+
+Please identify only material blockers before freezing/acquiring ONCE. Check 1) dimensional/coordinate geometry,15m vs surface object distinction, rawint16+float32 attribute validation+decimal.001 single decode;2) last-two context isolation/actual3600s/origin-only RK4 and frozen forecasts before future numeric decode;3) all36 cells vs12dependent targets, primary ranking gated on36/36, unsupported prefixes/masks;4) NCSS URI/bbox280..295+nativeaxes+threeUTCknots/oneconnection, bounded requests/time/bytes/no retries;5) historical future-valid analysis not operational as-of skill or assimilation independence. Do not propose selecting alternatives after outcome, fitting on heldout data, zero-filling masks, replacing IDs, or quietly changing protocol. Return a short GO/NO-GO with exact conditions and 3 independent regression examples. A GO is static advice, not empirical validation.
+
+FROZEN-CANDIDATE CONTRACT (not formally frozen yet):
+
+{
+  "schema_version": 1,
+  "kind": "RETROSPECTIVE_MATCHED_CURRENT_PROTOCOL",
+  "study_id": "matched-current-gdp-hycom-15m-v1",
+  "design_status": "FROZEN_BEFORE_SCIENTIFIC_VALUE_ACQUISITION",
+  "groups": [
+    {
+      "drifter_id": "300234066836710",
+      "wmo": "6202613"
+    },
+    {
+      "drifter_id": "300534061292930",
+      "wmo": "4102636"
+    }
+  ],
+  "models": [
+    "stationary",
+    "last_drift",
+    "current_only"
+  ],
+  "windows": {
+    "context_start_utc": "2022-05-31T00:00:00Z",
+    "origin_time_utc": "2022-06-01T00:00:00Z",
+    "end_utc": "2022-06-01T06:00:00Z",
+    "context_count": 25,
+    "heldout_count": 6,
+    "cadence_s": 3600,
+    "horizons_s": [
+      3600,
+      7200,
+      10800,
+      14400,
+      18000,
+      21600
+    ]
+  },
+  "gdp_schema": {
+    "columns": [
+      "ID",
+      "time",
+      "latitude",
+      "longitude"
+    ],
+    "units": [
+      "",
+      "UTC",
+      "degrees_north",
+      "degrees_east"
+    ],
+    "row_count": 31,
+    "coordinate_decoding_during_acquisition": false
+  },
+  "forcing": {
+    "source": "HYCOM_GOFS_3.1_GLBy0.08_expt93.0_UV3Z_2022",
+    "depth_m": 15,
+    "variables": [
+      "water_u",
+      "water_v"
+    ],
+    "native_bbox": {
+      "west": 280,
+      "east": 295,
+      "south": 25,
+      "north": 35
+    },
+    "times_utc": [
+      "2022-06-01T00:00:00Z",
+      "2022-06-01T03:00:00Z",
+      "2022-06-01T06:00:00Z"
+    ],
+    "native_stride": 1,
+    "longitude": "((lon+180)%360)-180; preserve native indices",
+    "raw_fill": -30000,
+    "decimal_scale": 0.001,
+    "offset": 0,
+    "solver_step_s": 300,
+    "output_step_s": 3600,
+    "maximum_samples": 250000,
+    "maximum_steps": 2048,
+    "maximum_speed_m_s": 10
+  },
+  "budgets": {
+    "requests_max": 6,
+    "total_bytes": 12582912,
+    "connect_timeout_s": 5,
+    "timeout_s": 45,
+    "wall_time_s": 180,
+    "retries": 0,
+    "redirects": false,
+    "fallback_endpoints": false,
+    "connections": 1,
+    "accept_encoding": "identity",
+    "oversize_detection_chunk_bytes": 8192,
+    "total_bytes_scope": "retained body cap; one detection chunk may exceed it"
+  },
+  "sources": {
+    "gdp_metadata": {
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das",
+      "raw_path": "raw/gdp-metadata.das",
+      "max_bytes": 262144,
+      "depends_on": [],
+      "expected_sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    "gdp_identity": {
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00%3A00%3A00Z&latitude%3E=25&latitude%3C=35&longitude%3E=-80&longitude%3C=-65&distinct%28%29",
+      "raw_path": "raw/gdp-origin-identity.csv",
+      "max_bytes": 32768,
+      "depends_on": [],
+      "expected_sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    "hycom_metadata": {
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml",
+      "raw_path": "raw/hycom-metadata.xml",
+      "max_bytes": 262144,
+      "depends_on": [],
+      "expected_sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    },
+    "trajectory:300234066836710": {
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300234066836710%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z",
+      "raw_path": "raw/drifter-300234066836710.csv",
+      "max_bytes": 32768,
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ]
+    },
+    "trajectory:300534061292930": {
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude&ID=%22300534061292930%22&time%3E=2022-05-31T00%3A00%3A00Z&time%3C=2022-06-01T06%3A00%3A00Z",
+      "raw_path": "raw/drifter-300534061292930.csv",
+      "max_bytes": 32768,
+      "depends_on": [
+        "gdp_metadata",
+        "gdp_identity"
+      ]
+    },
+    "hycom_currents": {
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022?var=water_u%2Cwater_v&north=35&south=25&west=280&east=295&horizStride=1&time_start=2022-06-01T00%3A00%3A00Z&time_end=2022-06-01T06%3A00%3A00Z&timeStride=1&vertCoord=15&accept=netcdf",
+      "raw_path": "raw/hycom-currents.nc",
+      "max_bytes": 8388608,
+      "depends_on": [
+        "hycom_metadata"
+      ]
+    }
+  },
+  "role_order": [
+    "gdp_metadata",
+    "gdp_identity",
+    "hycom_metadata",
+    "trajectory:300234066836710",
+    "trajectory:300534061292930",
+    "hycom_currents"
+  ],
+  "transport_references": [
+    "https://docs.unidata.ucar.edu/tds/current/userguide/ncss_grid.html",
+    "https://www.hycom.org/dataserver/access-methods/ncss"
+  ],
+  "metrics": {
+    "planned_groups": 2,
+    "planned_model_tracks": 6,
+    "planned_cells": 36,
+    "unique_future_targets": 12,
+    "score": "spherical_great_circle_metres_R6371008.8",
+    "primary": "equal-ID macro ADE/FDE withheld unless all36 cells scored",
+    "failures": "retain every planned cell, null error and explicit reasons"
+  },
+  "isolation": {
+    "context_for_models": "origin only; last_drift final two only",
+    "all_tracks_frozen_before_future_coordinate_access": true,
+    "no_fitting_or_tuning": true,
+    "no_replacements": true
+  },
+  "flags": {
+    "physical_validation": false,
+    "operational_causality": false,
+    "assimilation_independence_verified": false,
+    "statistical_independence": false,
+    "physical_alias_resolution_verified": false,
+    "automatic_model_promotion": false
+  }
+}
+
+
+SOURCE apps/ocean/reeftrace_ocean/hycom.py SHA256 cc6cc61b6024ffa02cf9a86debb38730b43dddd238199ad351f951ddb87ccd38
+
+def normalize_native_longitudes(values) -> np.ndarray:
+    """Normalize the actual native indices; never sort, stitch or expand support."""
+    native = np.asarray(values, dtype=float)
+    _require(native.ndim == 1 and native.size > 0 and np.isfinite(native).all(),
+             "longitude must be a nonempty finite one-dimensional axis")
+    _require(bool(np.all((native >= 0) & (native < 360))) and _monotonic(native),
+             "native longitude must be strictly monotonic in [0,360)")
+    normalized = ((native + 180.0) % 360.0) - 180.0
+    _require(_monotonic(normalized) and np.ptp(native) < 180 and np.ptp(normalized) < 180,
+             "longitude tile crosses a seam or has unsupported extent")
+    return normalized
+
+def _scalar_attribute(variable, name: str, *, kind: str, size: int, expected) -> None:
+    _require(name in variable.ncattrs(), f"{variable.name} is missing {name}")
+    value = np.asarray(variable.getncattr(name))
+    _require(value.ndim == 0 and value.dtype.kind == kind and value.dtype.itemsize == size,
+             f"{variable.name}.{name} has an unexpected encoded scalar type")
+    _require(bool(value == expected), f"{variable.name}.{name} changed its pinned encoding")
+
+def _raw_velocity(dataset, name: str) -> np.ndarray:
+    _require(name in dataset.variables, f"missing velocity {name}")
+    variable = dataset.variables[name]
+    dtype = np.dtype(variable.dtype)
+    _require(variable.dimensions == DIMS and dtype.kind == "i" and dtype.itemsize == 2,
+             f"{name} must be raw signed int16 with dimensions time depth lat lon")
+    _require("units" in variable.ncattrs() and variable.getncattr("units") == "m/s",
+             f"{name} must declare exactly m/s")
+    _require("_Unsigned" not in variable.ncattrs(), f"{name} unsigned reinterpretation is unsupported")
+    _scalar_attribute(variable, "_FillValue", kind="i", size=2, expected=np.int16(FILL))
+    _scalar_attribute(variable, "missing_value", kind="i", size=2, expected=np.int16(FILL))
+    _scalar_attribute(variable, "scale_factor", kind="f", size=4, expected=np.float32("0.001"))
+    _scalar_attribute(variable, "add_offset", kind="f", size=4, expected=np.float32(0))
+    raw = np.asarray(variable[:])
+    _require(raw.dtype.kind == "i" and raw.dtype.itemsize == 2,
+             f"{name} was automatically decoded before the raw reader")
+    return raw[:, 0, :, :]
+
+def load_hycom_field_bytes(payload: bytes, *, max_samples: int = MAX_SAMPLES,
+                           max_file_bytes: int = MAX_FILE_BYTES) -> OceanField:
+    """Decode one immutable bounded byte object, with no path reopening or I/O.
+
+    Public provenance contains a byte digest and reviewed format contract, not a
+    machine path, copied global attributes or proof of scientific acquisition.
+    Missing either velocity component masks both; missing currents are not zero.
+    The acquisition wrapper passes its already hash-verified bytes to this seam,
+    so a later filesystem change cannot become different or unavailable forcing.
+    """
+    _reader_budgets(max_samples, max_file_bytes)
+    _require(type(payload) is bytes, "the decoder requires immutable bytes")
+    _require(0 < len(payload) <= max_file_bytes, "local bytes exceed their byte budget")
+    try:
+        from netCDF4 import Dataset
+    except ImportError as error:
+        raise ImportError("Install the ocean extra to read local HYCOM NetCDF") from error
+    try:
+        dataset = Dataset("hycom-local-subset", mode="r", memory=payload)
+    except (OSError, ValueError, RuntimeError) as error:
+        raise ValueError("HYCOM_METADATA_ERROR: bytes are not a supported NetCDF file") from error
+    with dataset:
+        # Disable both automatic masking and scaling before ANY variable reads.
+        dataset.set_auto_maskandscale(False)
+        _require(set(DIMS) <= set(dataset.dimensions), "missing native coordinate dimensions")
+        shape = tuple(len(dataset.dimensions[name]) for name in DIMS)
+        _require(shape[0] >= 2 and shape[1] == 1 and shape[2] >= 2 and shape[3] >= 2,
+                 "subset needs time knots, a singleton 15 m depth, and a rectilinear tile")
+        _require(math.prod(shape) <= max_samples, "subset exceeds its sample budget")
+        depth = _axis(dataset, "depth", "m")
+        _require(depth.size == 1 and depth[0] == DEPTH_M
+                 and "positive" in dataset.variables["depth"].ncattrs()
+                 and dataset.variables["depth"].getncattr("positive") == "down",
+                 "depth must be exactly 15 m positive down")
+        when = _time(dataset)
+        latitude = _axis(dataset, "lat", "degrees_north")
+        native_longitude = _axis(dataset, "lon", "degrees_east")
+        _require(_monotonic(latitude) and bool(np.all((latitude >= -80) & (latitude <= 85))),
+                 "latitude must be strictly monotonic in supported nonpolar HYCOM degrees")
+        longitude = normalize_native_longitudes(native_longitude)
+        raw_u, raw_v = _raw_velocity(dataset, "water_u"), _raw_velocity(dataset, "water_v")
+        valid = (raw_u != FILL) & (raw_v != FILL)
+        # Mask in integer space BEFORE multiplying once by the reviewed decimal.
+        east = np.full(raw_u.shape, np.nan, dtype=float)
+        north = np.full(raw_v.shape, np.nan, dtype=float)
+        east[valid], north[valid] = raw_u[valid].astype(float) * SCALE, raw_v[valid].astype(float) * SCALE
+        _require(bool(np.all(np.hypot(east[valid], north[valid]) <= 10)),
+                 "supported current speed exceeds the bounded integrator's m/s limit")
+    metadata = {
+        "product": "HYCOM_GOFS3.1_GLBy0.08_expt93.0_UV3Z_2022_format_contract",
+        "contract_metadata_url": METADATA_URL, "sha256": hashlib.sha256(payload).hexdigest(),
+        "source_bytes": len(payload), "u_variable": "water_u", "v_variable": "water_v",
+        "velocity_units": "m/s", "data_kind": "local_model_subset_not_observed_plastic",
+        "source_origin_verified": False, "issue_time_verified": False,
+        "calendar": "gregorian", "time_units": TIME_UNITS,
+        "longitude_normalization": "((native_lon+180)%360)-180_without_reordering",
+        "raw_encoding": {"dtype": "signed_int16", "fill_and_missing": FILL,
+                         "scale_factor_encoding": "exact_pinned_float32",
+                         "applied_decimal_scale": SCALE, "add_offset": 0,
+                         "mask_before_scaling": True, "decode_count": 1},
+        "limitations": [
+            "Local format and byte identity do not verify service transport or product origin.",
+            "The acquisition protocol must separately bind the tile and requested UTC knots.",
+            "Analysis/hindcast valid times do not establish origin-time forecast availability.",
+            "No assimilation independence, drifter skill, plastic accuracy or tank calibration is established.",
+        ],
+    }
+    return OceanField(when, longitude, latitude, east, north, valid, DEPTH_M, metadata)
+
+
+SOURCE apps/ocean/reeftrace_ocean/matched_current.py SHA256 6b04dfee255141b292f90f5c427030a8ad4d8f6eb499df4a7b289046fac93aaa
+
+def _last_drift(candidate: dict, context: Sequence, group_id: str,
+                origin_position: tuple[float, float]) -> None:
+    try:
+        before_time, before_lat, before_lon = _position(context[-2], group_id)
+        dt = (ORIGIN - before_time).total_seconds()
+        if dt <= 0:
+            raise ValueError("NONPOSITIVE_CONTEXT_DELTA")
+        if dt != CONTEXT_STEP_S:
+            raise ValueError("CONTEXT_CADENCE_MISMATCH")
+        frame = SphericalLocalFrame(*origin_position)
+        velocity = -frame.to_xy(before_lat, before_lon) / dt
+        candidate["last_observed_delta_s"] = dt
+        candidate["last_observed_velocity_m_s"] = velocity.tolist()
+    except ValueError as error:
+        reason = str(error)
+        if "50 km" in reason:
+            reason = "LOCAL_GEOMETRY_BUDGET_EXCEEDED"
+        _fail(candidate, reason)
+        return
+    for cell in candidate["cells"]:
+        try:
+            latitude, longitude = frame.to_latlon(velocity * cell["elapsed_s"])
+        except ValueError:
+            _fail(candidate, "LOCAL_GEOMETRY_BUDGET_EXCEEDED",
+                  status="PARTIAL" if candidate["available_count"] else "UNSUPPORTED")
+            return
+        _put(cell, latitude, longitude)
+        candidate["available_count"] += 1
+        candidate["completed_horizon_s"] = float(cell["elapsed_s"])
+    candidate["status"] = "COMPLETED"
+
+def _current(candidate: dict, field: OceanField | None,
+             origin_position: tuple[float, float], failure: str | None) -> None:
+    if field is None:
+        _fail(candidate, failure or "CURRENT_FIELD_UNAVAILABLE", status="UNSUPPORTED")
+        return
+    try:
+        result = advect_current(
+            field, latitude_deg=origin_position[0], longitude_deg=origin_position[1],
+            start_time_utc=ORIGIN, horizon_s=HORIZONS_S[-1], step_s=300,
+            output_step_s=3600,
+        )
+    except (ValueError, TypeError, OverflowError) as error:
+        if (isinstance(field, OceanField)
+                and str(error) == "Valid current samples must be finite and nonempty"
+                and not np.asarray(field.valid_mask).any()):
+            _fail(candidate, "CURRENT_FIELD_ALL_MASKED", status="UNSUPPORTED")
+            return
+        _fail(candidate, "CURRENT_CONFIGURATION_INVALID")
+        return
+    candidate["advection"] = result
+    candidate["status"] = result["status"]
+    candidate["reason_code"] = result["reason_code"]
+    candidate["completed_horizon_s"] = result["completed_horizon_s"]
+    # No nearest point, interpolation, clamping or projection of a partial tail
+    # into an unobserved hourly output. The solver explicitly emits these times.
+    accepted = {point["elapsed_s"]: point for point in result["track"]}
+    for cell in candidate["cells"]:
+        point = accepted.get(cell["elapsed_s"])
+        if point is not None:
+            _put(cell, point["latitude_deg"], point["longitude_deg"])
+            candidate["available_count"] += 1
+        else:
+            cell["forecast_reason_code"] = result["reason_code"] or "HOURLY_OUTPUT_UNAVAILABLE"
+
+def build_matched_current_forecasts(
+    context_by_group: Mapping[str, Sequence[PositionInput]],
+    current_fields_by_group: Mapping[str, OceanField] | None = None,
+    *,
+    failures_by_group: Mapping[str, str] | None = None,
+    current_failures_by_group: Mapping[str, str] | None = None,
+) -> dict:
+    """Build all 36 forecast cells without receiving/decoding reserved targets.
+
+    ``failures_by_group`` describes context transport/identity failures when a
+    context is absent. ``current_failures_by_group`` describes current transport
+    failures independently. Unused/extraneous group keys are rejected, not added
+    to the planned cohort. Missing fixed groups remain six-cell candidate rows.
+    """
+    supplied = (context_by_group, current_fields_by_group or {}, failures_by_group or {},
+                current_failures_by_group or {})
+    if any(not isinstance(item, Mapping) for item in supplied):
+        raise ValueError("Group inputs must be mappings")
+    if any(set(item) - set(GROUP_IDS) for item in supplied):
+        raise ValueError("Only the two fixed group IDs are allowed")
+    # Allocate the entire Cartesian plan before even the first candidate attempt.
+    groups = [{"group_id": group_id, "context_count": 0, "origin_position": None,
+               "candidates": [_candidate(model_id) for model_id in MODEL_IDS]}
+              for group_id in GROUP_IDS]
+    for group in groups:
+        group_id = group["group_id"]
+        context = context_by_group.get(group_id)
+        candidates = group["candidates"]
+        if isinstance(context, Sequence) and not isinstance(context, (str, bytes)):
+            group["context_count"] = len(context)
+        if (not isinstance(context, Sequence) or isinstance(context, (str, bytes))
+                or len(context) != CONTEXT_COUNT):
+            reason = (failures_by_group or {}).get(group_id, "CONTEXT_COUNT_INVALID")
+            for candidate in candidates:
+                _fail(candidate, reason)
+            continue
+        try:
+            when, latitude, longitude = _position(context[-1], group_id)
+            if when != ORIGIN:
+                raise ValueError("ORIGIN_TIME_MISMATCH")
+        except ValueError as error:
+            for candidate in candidates:
+                _fail(candidate, f"ORIGIN_{error}")
+            continue
+        origin = (latitude, longitude)
+        group["origin_position"] = {
+            "time_utc": ORIGIN_TIME_UTC, "latitude_deg": latitude, "longitude_deg": longitude,
+        }
+        stationary, last_drift, current = candidates
+        for cell in stationary["cells"]:
+            _put(cell, latitude, longitude)
+        stationary.update({"status": "COMPLETED", "completed_horizon_s": HORIZONS_S[-1],
+                           "available_count": len(HORIZONS_S)})
+        _last_drift(last_drift, context, group_id, origin)
+        _current(current, (current_fields_by_group or {}).get(group_id), origin,
+                 (current_failures_by_group or {}).get(group_id))
+    report = {
+        "schema_version": SCHEMA_VERSION, "kind": "MATCHED_CURRENT_FORECASTS",
+        "origin_time_utc": ORIGIN_TIME_UTC,
+        "group_ids": list(GROUP_IDS), "model_ids": list(MODEL_IDS),
+        "horizons_s": list(HORIZONS_S), "planned_group_count": len(GROUP_IDS),
+        "planned_cell_count": PLANNED_CELLS,
+        "planned_distinct_target_count": PLANNED_DISTINCT_TARGETS,
+        "all_forecasts_built_before_target_decode": True,
+        "future_positions_used": False,
+        "coordinate_method": "origin_anchored_mean_sphere_log_exp_50km_last_drift",
+        "score_method": "mean_radius_sphere_great_circle_metres",
+        "statistical_independence": False, "operational_forecast_skill_verified": False,
+        "physical_validation": False, "groups": groups,
+    }
+    report["forecast_sha256"] = forecast_sha256(report)
+    return report
+
+def score_matched_current_forecasts(
+    forecasts: dict, reserved_targets_by_group: Mapping[str, Sequence[PositionInput]],
+) -> dict:
+    """Score immutable prior forecasts; retain missing/bad targets and all cells."""
+    _validate_forecasts(forecasts)
+    if (not isinstance(reserved_targets_by_group, Mapping)
+            or set(reserved_targets_by_group) - set(GROUP_IDS)):
+        raise ValueError("Reserved targets must be keyed by the two fixed group IDs")
+    groups = []
+    all_cells: dict[str, list[dict]] = {model_id: [] for model_id in MODEL_IDS}
+    for group in forecasts["groups"]:
+        group_id = group["group_id"]
+        targets, issues = _targets(reserved_targets_by_group.get(group_id), group_id)
+        candidates = []
+        for forecast in group["candidates"]:
+            cells = []
+            for predicted in forecast["cells"]:
+                cell = copy.deepcopy(predicted)
+                cell["group_id"] = group_id
+                cell["model_id"] = forecast["model_id"]
+                target = targets.get(cell["time_utc"], "MISSING_TARGET")
+                cell["target_status"] = "AVAILABLE" if isinstance(target, tuple) else "UNAVAILABLE"
+                cell["target_reason_code"] = None if isinstance(target, tuple) else target
+                cell["target_latitude_deg"] = target[0] if isinstance(target, tuple) else None
+                cell["target_longitude_deg"] = target[1] if isinstance(target, tuple) else None
+                cell["error_m"] = None
+                if cell["forecast_status"] != "AVAILABLE":
+                    cell["score_status"] = "FORECAST_UNAVAILABLE"
+                elif not isinstance(target, tuple):
+                    cell["score_status"] = "TARGET_UNAVAILABLE"
+                else:
+                    cell["score_status"] = "SCORED"
+                    cell["error_m"] = great_circle_distance_m(
+                        (cell["latitude_deg"], cell["longitude_deg"]), target,
+                    )
+                cells.append(cell)
+            metrics = _metrics(cells, len(HORIZONS_S))
+            prefix = list(itertools.takewhile(lambda cell: cell["score_status"] == "SCORED", cells))
+            metrics.update({
+                "endpoint_fde_m": cells[-1]["error_m"],
+                "endpoint_scored": cells[-1]["score_status"] == "SCORED",
+                "scored_prefix_count": len(prefix),
+                "scored_prefix_hours": [cell["horizon_hours"] for cell in prefix],
+                "scored_prefix_mean_error_m": (
+                    math.fsum(cell["error_m"] for cell in prefix) / len(prefix) if prefix else None
+                ),
+                "prefix_is_full_horizon": len(prefix) == len(HORIZONS_S),
+            })
+            candidates.append({"model_id": forecast["model_id"],
+                               "prediction_status": forecast["status"],
+                               "prediction_reason_code": forecast["reason_code"],
+                               "metrics": metrics, "cells": cells})
+            all_cells[forecast["model_id"]].extend(cells)
+        groups.append({"group_id": group_id, "target_issues": issues, "candidates": candidates})
+    models = []
+    for model_id, cells in all_cells.items():
+        horizons = []
+        for horizon in HORIZONS_S:
+            selected = [cell for cell in cells if cell["elapsed_s"] == horizon]
+            metrics = _metrics(selected, len(GROUP_IDS))
+            horizons.append({
+                "horizon_hours": horizon // 3600,
+                "planned_group_count": len(GROUP_IDS), "scored_group_count": metrics["scored_count"],
+                "coverage_complete": metrics["coverage_complete"],
+                "available_group_mean_error_m": metrics["available_cell_mean_error_m"],
+                "complete_group_mean_error_m": metrics["full_horizon_ade_m"],
+            })
+        models.append({"model_id": model_id, "metrics": _metrics(cells, PLANNED_DISTINCT_TARGETS),
+                       "per_horizon": horizons})
+    paired = []
+    for model_a, model_b in itertools.combinations(MODEL_IDS, 2):
+        common = []
+        for cell_a, cell_b in zip(all_cells[model_a], all_cells[model_b], strict=True):
+            if cell_a["score_status"] == cell_b["score_status"] == "SCORED":
+                common.append({"group_id": cell_a["group_id"], "time_utc": cell_a["time_utc"],
+                               "horizon_hours": cell_a["horizon_hours"],
+                               "error_a_m": cell_a["error_m"], "error_b_m": cell_b["error_m"]})
+        paired.append({
+            "model_a": model_a, "model_b": model_b,
+            "planned_common_cell_count": PLANNED_DISTINCT_TARGETS,
+            "common_scored_count": len(common),
+            "coverage_complete": len(common) == PLANNED_DISTINCT_TARGETS,
+            "analysis_scope": "SECONDARY_COMMON_AVAILABLE_CELLS",
+            "mean_error_a_m": math.fsum(cell["error_a_m"] for cell in common) / len(common)
+            if common else None,
+            "mean_error_b_m": math.fsum(cell["error_b_m"] for cell in common) / len(common)
+            if common else None,
+            "mean_delta_a_minus_b_m": math.fsum(
+                cell["error_a_m"] - cell["error_b_m"] for cell in common
+            ) / len(common) if common else None,
+            "cells": common,
+        })
+    complete = sum(model["metrics"]["scored_count"] for model in models) == PLANNED_CELLS
+    primary = None
+    if complete:
+        primary = []
+        for model_index, model_id in enumerate(MODEL_IDS):
+            metrics = [group["candidates"][model_index]["metrics"] for group in groups]
+            primary.append({
+                "model_id": model_id, "group_count": len(GROUP_IDS),
+                "equal_id_macro_ade_m": math.fsum(
+                    metric["full_horizon_ade_m"] for metric in metrics
+                ) / len(GROUP_IDS),
+                "equal_id_macro_fde_m": math.fsum(
+                    metric["endpoint_fde_m"] for metric in metrics
+                ) / len(GROUP_IDS),
+                "per_horizon_mean_error_m": [
+                    {"horizon_hours": horizon // 3600,
+                     "error_m": math.fsum(group["candidates"][model_index]["cells"][index]["error_m"]
+                                          for group in groups) / len(GROUP_IDS)}
+                    for index, horizon in enumerate(HORIZONS_S)
+                ],
+            })
+    primary_paired = copy.deepcopy(paired) if complete else None
+    if primary_paired is not None:
+        for pair in primary_paired:
+            pair["analysis_scope"] = "PRIMARY_COMPLETE_COMMON_COHORT"
+    return {
+        "schema_version": SCHEMA_VERSION, "kind": "MATCHED_CURRENT_SCORES",
+        "origin_time_utc": ORIGIN_TIME_UTC,
+        "planned_group_count": len(GROUP_IDS), "planned_cell_count": PLANNED_CELLS,
+        "scored_cell_count": sum(model["metrics"]["scored_count"] for model in models),
+        "planned_distinct_target_count": PLANNED_DISTINCT_TARGETS,
+        "forecast_report": copy.deepcopy(forecasts), "groups": groups,
+        "models": models, "paired_comparisons": paired,
+        "primary_common_cohort_complete": complete,
+        "primary_equal_id_macro_results": primary,
+        "primary_paired_comparisons": primary_paired,
+        "statistical_independence": False, "automatic_winner_selected": False,
+        "operational_forecast_skill_verified": False, "physical_validation": False,
+        "limitations": [
+            "The 36 model/horizon cells reuse only 12 processed GDP position estimates.",
+            "Paired errors describe only explicitly listed common available cells.",
+            "Whole-group exclusion does not prove independence from HYCOM assimilation.",
+            "Retrospective future-valid forcing lacks a verified historical issue-time cutoff.",
+            "No plastic source, reef protection, tank accuracy or statistical significance is proved.",
+        ],
+    }
+
+
+SOURCE scripts/evaluate_matched_current_study.py SHA256 3439a5853e855fad9c7bbae98dc77ba30f7f19faa3dcf3cd13ea169aa4e1f014
+
+def _forecast_chronology(document: dict, manifest: dict) -> datetime:
+    frozen = _utc_clock(document.get("frozen_at_utc"), "forecast")
+    if frozen < _utc_clock(manifest.get("finished_at_utc"), "acquisition manifest"):
+        raise ValueError("Forecast receipt predates acquisition manifest completion")
+    for receipt in manifest["source_receipts"]:
+        if frozen < _utc_clock(receipt.get("finished_at_utc"), "acquisition"):
+            raise ValueError("Forecast receipt predates acquisition completion")
+    return frozen
+
+def _study_field(payload: bytes):
+    field = load_hycom_field_bytes(payload)
+    expected = np.array(["2022-06-01T00:00:00", "2022-06-01T03:00:00",
+                         "2022-06-01T06:00:00"], dtype="datetime64[us]")
+    if not np.array_equal(field.time_utc, expected):
+        raise ValueError("HYCOM_REQUESTED_THREE_TIMES_CHANGED")
+    # This tolerance checks the encoding of native double coordinate labels;
+    # the sampler still uses their exact actual support, never this tolerance.
+    tolerance = 1e-9
+    for axis, lower, upper, spacing in (
+        (field.latitude_deg, 25.0, 35.0, 0.04),
+        (field.longitude_deg, -80.0, -65.0, 0.08),
+    ):
+        if (axis.min() < lower - tolerance or axis.max() > upper + tolerance
+                or not np.allclose(np.abs(np.diff(axis)), spacing, rtol=0, atol=tolerance)):
+            raise ValueError("HYCOM_REQUESTED_NATIVE_TILE_OR_STRIDE_CHANGED")
+    return field
+
+def _inputs(directory: Path):
+    from apps.ocean.reeftrace_ocean.matched_current_protocol import load_acquisition
+
+    protocol, manifest, hashes, sources = load_acquisition(directory)
+    if manifest is None:
+        raise ValueError("Matched-current acquisition has not been attempted; no first score is possible")
+    if ([group["drifter_id"] for group in protocol["groups"]] != list(GROUP_IDS)
+            or protocol["models"] != list(MODEL_IDS)
+            or protocol["windows"]["horizons_s"] != list(HORIZONS_S)
+            or protocol["windows"]["origin_time_utc"] != EXPECTED_TIMES[24]):
+        raise ValueError("Frozen protocol and model implementation identities disagree")
+    receipts = {receipt["role"]: receipt for receipt in manifest["source_receipts"]}
+    contexts, targets, failures = {}, {}, {}
+    for group_id in GROUP_IDS:
+        role = "trajectory:" + group_id
+        raw = sources.get(role)
+        if raw is None:
+            failures[group_id] = receipts[role]["reason"] or receipts[role]["status"]
+            continue
+        try:
+            contexts[group_id], targets[group_id] = parse_position_strings(raw, group_id)
+        except ValueError as error:
+            failures[group_id] = str(error)
+    forcing, current_failure = None, None
+    current = receipts["hycom_currents"]
+    if sources.get("hycom_currents") is not None:
+        try:
+            forcing = _study_field(sources["hycom_currents"])
+        except (ValueError, ImportError) as error:
+            current_failure = str(error)
+        else:
+            # The decoder consumes the immutable bytes already returned by
+            # acquisition verification. Retain this independent digest check as
+            # a guard against a changed decoder contract or wrong object.
+            if (forcing.metadata.get("sha256") != current["sha256"]
+                    or forcing.metadata.get("sha256") != _sha(sources["hycom_currents"])):
+                raise ValueError("HYCOM decoded byte identity differs from verified acquisition provenance")
+    else:
+        current_failure = current["reason"] or current["status"]
+    fields = {group_id: forcing for group_id in GROUP_IDS} if forcing is not None else {}
+    current_failures = {group_id: current_failure for group_id in GROUP_IDS} if current_failure else {}
+    forecasts = build_matched_current_forecasts(
+        contexts, fields, failures_by_group=failures, current_failures_by_group=current_failures,
+    )
+    return protocol, manifest, hashes, contexts, targets, forecasts, forcing, current_failure
+
+def evaluate_study(directory: Path = DIRECTORY, *, first_score: bool = False) -> dict:
+    directory = Path(directory)
+    forecast_path = directory / "forecasts.json"
+    result_path = directory / "evaluation.json"
+    if first_score and any(path.exists() for path in (
+        forecast_path, result_path, forecast_path.with_suffix(".sha256"),
+        result_path.with_suffix(".sha256"),
+    )):
+        raise ValueError("A first-score attempt already exists; preserve its artifacts")
+    if not first_score and not result_path.is_file():
+        raise ValueError("Study is not scored; replay never performs a first score")
+    (protocol, manifest, hashes, contexts, targets, forecasts,
+     forcing, current_failure) = _inputs(directory)
+    lineage = {key: value for key, value in hashes.items() if key.endswith("sha256")}
+    forecast_document = {
+        "schema_version": 1, "kind": "FROZEN_MATCHED_CURRENT_FORECASTS",
+        "study_id": protocol["study_id"], "lineage": lineage,
+        "forecasts": forecasts, "future_coordinates_decoded": False,
+    }
+    if first_score:
+        forecast_document["frozen_at_utc"] = datetime.now(UTC).isoformat()
+        _forecast_chronology(forecast_document, manifest)
+        forecast_file_hash = _save(forecast_path, forecast_document)
+    else:
+        saved, forecast_file_hash = _pinned(forecast_path)
+        if {key: value for key, value in saved.items() if key != "frozen_at_utc"} != forecast_document:
+            raise ValueError("Saved forecast receipt differs from exact frozen inputs or implementation")
+        forecast_document = saved
+    frozen_at = _forecast_chronology(forecast_document, manifest)
+    frozen_result = None
+    if not first_score:
+        frozen_result, _ = _pinned(result_path)
+        if _utc_clock(frozen_result.get("scored_at_utc"), "score") < frozen_at:
+            raise ValueError("Score timestamp predates its forecast receipt")
+    # This readback proves the persisted object exists before any target number
+    # is decoded. Hashes identify the prior forecasts, not an external attestation.
+    saved, digest = _pinned(forecast_path)
+    if (digest != forecast_file_hash or saved != forecast_document
+            or forecast_sha256(saved["forecasts"]) != saved["forecasts"]["forecast_sha256"]):
+        raise ValueError("Forecast readback identity changed before scoring")
+    scores = score_matched_current_forecasts(forecasts, targets)
+    report = {
+        "schema_version": 1, "kind": "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC",
+        "study_id": protocol["study_id"], "lineage": lineage,
+        "forecast_file_sha256": forecast_file_hash,
+        "forecast_frozen_at_utc": forecast_document["frozen_at_utc"],
+        "forecasts_saved_before_target_coordinate_decode": True,
+        "source_receipts": manifest["source_receipts"],
+        "context_qc": {group_id: _context_qc(contexts.get(group_id, [])) for group_id in GROUP_IDS},
+        "current_field": forcing.summary() if forcing is not None else None,
+        "current_field_failure": current_failure,
+        "scores": scores,
+        "physical_validation": False, "operational_causality": False,
+        "assimilation_independence_verified": False,
+        "physical_alias_resolution_verified": False, "statistical_independence": False,
+        "global_training": False, "heldout_tuning": False, "automatic_model_promotion": False,
+        "provider_calls": False, "camera_started": False, "store_written": False,
+    }
+    if first_score:
+        report["scored_at_utc"] = datetime.now(UTC).isoformat()
+        if _utc_clock(report["scored_at_utc"], "score") < frozen_at:
+            raise ValueError("Score timestamp predates its forecast receipt")
+        _save(result_path, report)
+    else:
+        if {key: value for key, value in frozen_result.items() if key != "scored_at_utc"} != report:
+            raise ValueError("Offline replay differs from the saved first score")
+        report = frozen_result
+    return report
+
+
+SOURCE scripts/fetch_matched_current_study.py SHA256 8165f31b211ebd54e0d377b26acc32094f69d22959c67055d636234401475622
+
+class Budget:
+    def __init__(self, client, protocol, directory):
+        self.client, self.directory = client, Path(directory)
+        self.limits = protocol["budgets"]
+        self.started = time.monotonic()
+        self.requests = self.received = self.retained = 0
+
+    def fetch(self, role, spec, *, blocked=False):
+        """Only the fixed protocol URL/path is accepted, never a caller query."""
+        if spec != contract()["sources"].get(role):
+            raise ValueError("Unknown matched-current query, role or filename")
+        started = utc()
+        body = bytearray()
+        status = None
+        complete = attempted = False
+        reason = "DEPENDENCY_UNAVAILABLE" if blocked else None
+        encoding = content_type = None
+        remaining = self.limits["wall_time_s"] - (time.monotonic() - self.started)
+        if reason is None and (remaining <= 0 or self.requests >= self.limits["requests_max"]
+                               or self.received >= self.limits["total_bytes"]):
+            reason = "ACQUISITION_BUDGET_EXHAUSTED"
+        received = 0
+        if reason is None:
+            uri = urlsplit(spec["url"])
+            if (uri.scheme != "https" or uri.hostname not in {
+                    "erddap.aoml.noaa.gov", "ncss.hycom.org"} or uri.username or uri.password
+                    or uri.fragment or uri.port not in {None, 443}):
+                raise ValueError("Unsafe matched-current source URI")
+            attempted = True
+            self.requests += 1
+            duration = min(float(self.limits["timeout_s"]), remaining)
+            try:
+                with _deadline(duration), self.client.stream(
+                    "GET", spec["url"], headers={"Accept-Encoding": "identity"},
+                    follow_redirects=False,
+                    timeout=httpx.Timeout(duration, connect=min(duration, 5)),
+                ) as response:
+                    status = response.status_code
+                    encoding = response.headers.get("content-encoding", "identity").lower()
+                    content_type = response.headers.get("content-type", "").split(";", 1)[0].lower()
+                    for chunk in response.iter_raw(chunk_size=8192):
+                        received += len(chunk)
+                        self.received += len(chunk)
+                        allowed = min(spec["max_bytes"] - len(body),
+                                      self.limits["total_bytes"] - self.retained)
+                        retained = chunk[:max(0, allowed)]
+                        body.extend(retained)
+                        self.retained += len(retained)
+                        if len(retained) < len(chunk):
+                            reason = "RESPONSE_SIZE_BUDGET"
+                            break
+                        if time.monotonic() - self.started >= self.limits["wall_time_s"]:
+                            reason = "WALL_TIME_BUDGET"
+                            break
+                    else:
+                        complete = True
+                if reason is None:
+                    if status != 200:
+                        reason = "HTTP_ERROR"
+                    elif encoding not in {"", "identity"}:
+                        reason = "CONTENT_ENCODING_MISMATCH"
+                    elif role == "hycom_currents" and content_type not in NETCDF_CONTENT_TYPES:
+                        reason = "CONTENT_TYPE_MISMATCH"
+            except DeadlineExpired:
+                complete = False
+                reason = "ACQUISITION_DEADLINE"
+            except httpx.HTTPError as error:
+                complete = False
+                reason = type(error).__name__
+        raw_path = spec["raw_path"] if status is not None else None
+        if raw_path is not None:
+            path = self.directory / raw_path
+            with path.open("xb") as stream:
+                stream.write(body)
+            with path.with_suffix(".sha256").open("x") as stream:
+                stream.write(sha(body) + "\n")
+        row = {
+            "role": role, "status": "BLOCKED" if blocked else
+            "DOWNLOADED" if attempted and complete and reason is None else "FETCH_FAILED",
+            "reason": reason, "source_url": spec["url"], "raw_path": raw_path,
+            "sha256": sha(body) if raw_path is not None else None,
+            "bytes": len(body), "received_bytes": received, "retained_bytes": len(body),
+            "request_attempted": attempted, "http_status": status,
+            "response_complete": complete, "content_type": content_type,
+            "content_encoding": encoding, "started_at_utc": started, "finished_at_utc": utc(),
+            "elapsed_wall_s": time.monotonic() - self.started,
+        }
+        if row["status"] == "DOWNLOADED":
+            try:
+                validate_source(role, bytes(body), spec)
+            except (ValueError, UnicodeError, KeyError, TypeError, OverflowError):
+                row.update(status="METADATA_INVALID" if "expected_sha256" in spec else
+                           "SCHEMA_INVALID", reason="PINNED_METADATA_CHANGED" if
+                           "expected_sha256" in spec else "FROZEN_VALUE_SCHEMA_INVALID")
+        return row, bytes(body) if row["status"] == "DOWNLOADED" else None
+
+def acquire_study(directory=None, *, client=None, root=None):
+    """Explicit CLI/test entry only. Public report readers must not call this."""
+    root = Path(root or ROOT)
+    directory = Path(directory or root / "data/public/matched-current-v1")
+    protocol, hashes = load_protocol(directory, root=root)
+    if any((directory / name).exists() for name in (
+        "raw", "acquisition-start.json", "acquisition-start.sha256",
+        "manifest.json", "manifest.sha256",
+    )):
+        raise ValueError("Acquisition already attempted; never overwrite or replace a failure")
+    head = _require_committed(root, directory, protocol)
+    # Exclusive sentinel survives crashes, so a failed/partial attempt is not retried silently.
+    save_json(directory / "acquisition-start.json", {
+        "study_id": STUDY_ID, **hashes, "started_at_utc": utc(),
+        "git_head_at_acquisition": head, "scientific_scores_computed": False,
+    })
+    (directory / "raw").mkdir(exist_ok=False)
+    owned = client is None
+    if owned:
+        client = httpx.Client(
+            timeout=httpx.Timeout(45, connect=5), follow_redirects=False,
+            limits=httpx.Limits(max_connections=1, max_keepalive_connections=1),
+            headers={"Accept-Encoding": "identity"},
+        )
+    budget = Budget(client, protocol, directory)
+    started = utc()
+    sources, receipts = {}, []
+    try:
+        for role in ROLE_ORDER:
+            spec = protocol["sources"][role]
+            blocked = any(sources.get(dep) is None for dep in spec["depends_on"])
+            row, payload = budget.fetch(role, spec, blocked=blocked)
+            receipts.append(row)
+            sources[role] = payload
+        manifest = {
+            "schema_version": 1, "study_id": STUDY_ID, **hashes,
+            "started_at_utc": started, "finished_at_utc": utc(),
+            "git_head_at_acquisition": head, "source_receipts": receipts,
+            "requests_attempted": budget.requests, "response_bytes_received": budget.received,
+            "response_bytes_retained": budget.retained, "scientific_scores_computed": False,
+            "no_replacements": True,
+        }
+        digest = save_json(directory / "manifest.json", manifest)
+        return {"study_id": STUDY_ID, **hashes, "manifest_sha256": digest,
+                "requests_attempted": budget.requests,
+                "downloaded_trajectories": sum(sources["trajectory:" + i] is not None
+                                               for i, _ in protocol_groups(protocol)),
+                "current_values_downloaded": sources["hycom_currents"] is not None,
+                "scientific_scores_computed": False}
+    finally:
+        if owned:
+            client.close()
+````
+
+#### Later record 2: grok-matched-current-final-prefreeze-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-final-prefreeze-response.txt
+
+Role: `SAVED_GROK_STATIC_REVIEW_RESPONSE`. Exact source bytes: **3,003**; SHA-256: `8f7ed71fa710ce9afc9db681f8894d21f368b533f70eb36f04211cf9655302e8`.
+
+````text
+Grok
+Worked for 41s
+
+GO with conditions (static advice only). No execution, acquisition, scores or physical validation is claimed. The frozen six-ID study stays untouched.
+
+The reviewed contracts are sufficient to freeze and acquire once, provided the local fixes already identified are present in the freeze commit:
+
+HYCOM decode consumes only the already hash-verified immutable bytes (no path reopen that could accept a swapped file).
+Forecast frozen_at_utc is ≥ manifest finished_at_utc and ≥ every source finished_at_utc.
+Orphan manifest or acquisition-start hash sentinels are rejected before any GET.
+Per-role clocks are sequential and non-overlapping.
+An all-masked current field yields CURRENT_FIELD_ALL_MASKED / UNSUPPORTED and stays in the 36-cell denominator.
+
+Checked and acceptable to freeze
+
+Geometry / encoding. Native longitude ((lon+180)%360)-180 with seam rejection; depth exactly 15 m positive-down (distinct from a surface-plastic object); raw int16, exact pinned float32 scale_factor/add_offset attributes, fill −30000 masked before a single decimal float64 0.001 multiply.
+Isolation. Last-drift uses only the final two context fixes with exact dt = 3600 s and origin-anchored AEQD; current-only starts at the origin position and receives only the 00/03/06Z field; all 36 forecast cells are built and receipt-frozen before any future coordinate is decoded to float.
+Accounting. 36 planned cells reuse 12 dependent targets; primary equal-ID macro is emitted only when all 36 are scored; unsupported prefixes, masks and missing targets retain null errors and explicit reasons.
+Transport. Single connection, no retries/redirects, identity encoding, role order with dependency blocking, byte/time caps, NCSS URI fixed to west=280/east=295 and the three UTC knots.
+Claim scope. Flags correctly keep the study a retrospective future-valid analysis diagnostic: operational_causality, assimilation_independence_verified and statistical_independence are false. No as-of operational skill is asserted.
+
+Three independent regression examples
+
+Encoding. A NetCDF whose scale_factor attribute is float64 0.001 (or an adjacent float32) fails closed as metadata invalid; raw short 500 with the pinned float32 attribute and fill −30000 becomes exactly 0.5 m/s after one decimal multiply, and a fill value never becomes −30 m/s.
+Isolation / chronology. Mutating context positions 1–23 does not change any of the six tracks; the forecast receipt hash is written and re-read before any future lat/lon string is parsed; a forecast timestamp earlier than the manifest or any source finish is rejected.
+Denominator / mask. An all-masked 15 m tile, or a partial prefix that completes 00Z→03Z then fails at 06Z, leaves all 36 cells present, sets primary macro to null, and does not drop the group or zero-fill the missing velocities.
+
+No alternative selection, held-out fitting, zero-fill, ID replacement or protocol change after outcomes is authorized. A GO here is design acceptance only.
+````
+
+#### Later record 3: grok-matched-current-failure-review-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-failure-review-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Exact source bytes: **9,097**; SHA-256: `d5dad9fa6a4404618c36144964e06fc99ae7c5cfbe393954d62ac0f1fb56d98b`.
+
+````text
+Tideward follow-up: actual v1 acquisition is now frozen, scored once and exactly replayed. STATIC interpretation only, not execution. No API/Voice/spending. Never rewrite v1 or claim improved skill. The original six-group NOAA study and tank simulator remain separate. User now asks exhaustive end-to-end verification.
+
+Actual outcome:4requests,0GDPtrajectorypayloads,36plannedcells/0scored,primarynull. Identitymetadata andHYCOMmetadata unchanged; currentNetCDF572604bytes received. Forecasts persisted before future numeric decoding; noGDPfuturepositions exist. Read the exact saved-byte diagnosis below.
+
+Please explain why zero results is a valid blocked-study outcome rather than model failure; identify any flaw in the proposed narrowly bounded PRE-GDP-OUTCOME v2 compatibility amendment. No velocity tuning/model selection/IDreplacement/depth/tilechange, no hiddenretry. The forcing bytes have already been decoded and encoding inspected, so v2 cannot be called entirely value-unseen. A new protocol/codehash/dataattempt would be required. Give concise acceptance/rejection of normalizing ONLY the two validatedUTCcapture-historytokens, retaining fullschema/version/units/otherbytes; and validating explicitfloat32-origin coordinate labels against native nominal lattice with declaredquantizationbound while sampling ACTUALcoordinates. Do not tell us to snap to a nominal grid, expand support, overwrite old protocol or reuseholdoutoutcomes. Also specify what the UI/Chalk must say during v1 failure, and3 usefulE2E regressions.
+
+# Matched-current v1: saved-byte compatibility diagnosis
+
+Review date: **17 October 2026**. This review uses only already saved v1 files.
+It makes **no new request, model run, numerical score, protocol freeze or code
+amendment**. The machine-readable source identities and axis calculations are in
+[the diagnosis receipt](research-evidence/matched-current-v1-compatibility-diagnosis.json).
+
+## What happened
+
+The immutable v1 attempt made four requests, retained 751,334 response bytes and
+blocked both planned GDP trajectory requests. Its saved first score and replay
+retain **all 36 planned model/horizon cells**, with **zero scored cells** and null
+errors. It obtained no GDP trajectory payload and selected no model. The twelve
+planned future position estimates remain unavailable.
+
+Two compatibility guards caused the failure:
+
+1. NOAA's metadata response differed from the seed in two request-history
+   timestamps, so the exact raw-hash gate blocked both GDP trajectory requests.
+2. The downloaded HYCOM file passed the unchanged generic reader, but the study
+   wrapper rejected native coordinate spacings against an overly tight decimal
+   lattice tolerance. The actual coordinate labels show float32 rounding even
+   though the NetCDF coordinate variables are stored as float64.
+
+The guards preserved their failures. This document proposes an explicit,
+reviewable v2 compatibility amendment; it does not turn the v1 attempt into a
+successful comparison or authorize a hidden retry.
+
+## NOAA: exactly two volatile history timestamps
+
+Both seed and acquired DAS files contain **18,686 bytes**. Their full hashes are:
+
+| File | SHA256 |
+| --- | --- |
+| Metadata seed | `66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39` |
+| Acquired v1 response | `9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3` |
+
+Only lines **425–426** differ. In the `history` field, both capture timestamps
+changed from `2026-10-17T19:34:52Z` to `2026-10-17T21:11:25Z`:
+
+```diff
+-2026-10-17T19:34:52Z (local files)
++2026-10-17T21:11:25Z (local files)
+-2026-10-17T19:34:52Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das";
++2026-10-17T21:11:25Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das";
+```
+
+Replacing those exact two old capture-time tokens with the acquired tokens makes
+the seed bytes identical to the acquired bytes. Every other byte is unchanged,
+including the `Version v2.01` history line, schema, units and metadata text. This
+is evidence of a volatile request-history field; it is not evidence that an
+unexpected units, version or schema change should be accepted.
+
+The acquired origin identity/drogue CSV is byte-identical to its **640-byte**
+seed, SHA256
+`fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339`.
+The selected IDs and identity metadata did not change. Both trajectory requests
+remain recorded as `BLOCKED / DEPENDENCY_UNAVAILABLE`, with no body and no
+request attempt.
+
+## HYCOM: coordinate encoding, not a changed current model
+
+The acquired HYCOM metadata XML is byte-identical to its **159,404-byte** seed,
+SHA256
+`741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d`.
+The current file contains **572,604 bytes**, SHA256
+`7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065`.
+
+The unchanged generic reader accepts its requested UTC knots at midnight, three
+hours and six hours, and the declared fifteen-metre depth. The unchanged study
+wrapper reports `HYCOM_REQUESTED_NATIVE_TILE_OR_STRIDE_CHANGED`. This review
+exports no current-vector values and runs no advection or model comparison.
+
+| Saved coordinate property | Latitude | Native longitude |
+| --- | --- | --- |
+| NetCDF variable dtype | float64 | float64 |
+| Coordinate count | 251 | 188 |
+| Actual first and last labels | 25 to 35° | 280 to 294.96002197265625° |
+| Nominal increment | 0.04° | 0.08° |
+| Smallest actual adjacent increment | 0.039997100830078125° | 0.0799560546875° |
+| Largest actual adjacent increment | 0.04000091552734375° | 0.08001708984375° |
+| Largest increment difference from nominal | 0.0000028991699218758° | 0.0000439453125° |
+| Labels exactly representable as float32 | Every label | Every label |
+
+The arrays are strictly increasing. Every saved float64 label equals an exact
+float32 value promoted to float64. Against the predeclared decimal lattices
+`25 + 0.04 × i` and `280 + 0.08 × i`, rounded to float32:
+
+- All **251 latitude labels** match exactly.
+- **98 longitude labels** match exactly; **44** are one float32 ULP lower and
+  **46** are one ULP higher. One longitude ULP here is
+  `0.000030517578125°`.
+
+An ULP is one spacing between neighboring representable floating-point numbers.
+These differences exceed the wrapper's `1e-9°` adjacent-spacing tolerance, but
+remain at the observed coordinate encoding scale. This explains its rejection;
+it does not establish current accuracy or forecast skill.
+
+The actual normalized longitude support ends at **−65.03997802734375°**, starting
+at **−80°**. A nominal **−65°/295°** edge must not be invented. Any accepted future
+reader must interpolate on the actual saved coordinates and preserve domain
+exits and masks.
+
+## Proposed v2 review, before any GDP outcomes
+
+A separately identified v2 amendment is scientifically defensible as a metadata
+and coordinate-encoding correction, provided it is reviewed and frozen before
+new GDP outcome acquisition. Preserve the entire v1 protocol, raw bodies,
+failures, forecast receipt and zero-score report. Bind any v2 protocol to this
+diagnosis and disclose the original failure.
+
+The proposal has two narrowly bounded parts:
+
+1. **Metadata history:** allowlist only the two valid UTC capture-time tokens
+   attached to the exact `(local files)` line and exact DAS URL inside this
+   history field. Preserve the version line, every other byte and every acquired
+   raw hash. Reject units, schema, version, URL and other history changes. Removing
+   the whole history field would be a broader change than this evidence supports.
+2. **Coordinate representation:** explicitly review and declare native counts,
+   monotonicity, nominal lattice and float32 encoding bounds. The saved evidence
+   supports reviewing exact rounded-float32 latitude labels and a longitude
+   allowance no greater than one float32 ULP from the rounded nominal lattice.
+   Freeze the chosen rule and hostile synthetic tests before new GDP outcomes.
+   Keep exact actual coordinates for sampling; never snap or expand support.
+
+Keep the GDP/WMO identities, context and target windows, three candidate models,
+six horizons, full denominators, source product, depth, tile, variables, stride,
+current time knots and transport budgets unchanged. Do not fit a coefficient,
+replace a drifter, select an easier tile, add a model or tune against outcomes.
+Tests should reject changed units/version, a shifted or coarsened grid, unexpected
+depth/time knots, nondeclared coordinate encodings and perturbations beyond the
+reviewed encoding bound.
+
+This would be a **pre-GDP-outcome amendment**, not an entirely scientific-value-
+unseen first design: HYCOM forcing bytes were already acquired and decoded for
+compatibility diagnosis. They have not produced a scored comparison or been used
+to select model parameters. A later successful transport and score would still
+be a retrospective buoy-motion diagnostic, with assimilation, processing,
+independence and issue-time limitations. It would not validate loose plastic,
+reef protection or the physical tank.
+````
+
+#### Later record 4: grok-matched-current-failure-review-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-failure-review-response.txt
+
+Role: `SAVED_GROK_STATIC_REVIEW_RESPONSE`. Exact source bytes: **2,424**; SHA-256: `9ca0bb8c82caa1d2c06672fe34e76cf44c62f7de4f198ef502332e0fa002a919`.
+
+````text
+Grok
+Worked for 5s
+
+Static interpretation only. v1 is not rewritten and no skill is claimed.
+
+Why zero results is valid. The study planned 36 cells and scored 0 because both GDP trajectory requests were blocked by an exact-hash mismatch on two volatile history timestamps, and the HYCOM wrapper rejected coordinate labels that are exact float32 values stored as float64. No model was run on future positions, no ID was replaced, and the 36-cell matrix with null errors is the correct blocked-study outcome. It is a transport/schema failure, not a model failure.
+
+v2 amendment review.
+
+Accept normalizing only the two validated UTC capture-history tokens (the exact (local files) line and the exact DAS URL line). Retain every other byte, including version, schema, units and the acquired raw hashes. Reject any other history, units or version change.
+Accept validating that native labels are exact float32 promotions and lie within one float32 ULP of the rounded nominal lattice, while sampling uses the actual saved coordinates. Do not snap to the nominal grid or expand support past the observed end at approximately −65.04°.
+Flaw to keep explicit: the HYCOM bytes have already been decoded, so v2 is a pre-GDP-outcome encoding correction, not an entirely value-unseen first design. It must carry a new protocol/code hash, bind to this diagnosis, and disclose the v1 failure. No velocity tuning, model selection, ID replacement, depth/tile change or hidden retry is authorized.
+
+UI / Chalk during v1 failure. Display “Acquisition blocked: 0 of 2 GDP trajectories retrieved; 36 planned cells, 0 scored; primary comparison withheld.” Do not show a winner, a probability, or a claim that currents were tested. Chalk may cite only the frozen receipt IDs and the two explicit block reasons; it must refuse any prompt that treats the null result as model skill or as plastic/reef evidence.
+
+Three E2E regressions.
+
+DAS bytes that differ only in the two allow-listed timestamps pass; any other byte change (version, units, schema) blocks the trajectory requests.
+A HYCOM file whose longitude labels are exact float32 and within one ULP of the nominal lattice is accepted, but sampling at exactly −65.0° (beyond the actual −65.04° end) returns OUTSIDE_CURRENT_DOMAIN and retains the cell.
+Replay of the frozen v1 artifacts still yields 36 cells, 0 scored, primary null, and refuses to overwrite the original receipt.
+````
+
+#### Later record 5: matched-current-prefreeze-review.md
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-prefreeze-review.md
+
+Role: `LOCAL_REVIEW_DECISION_NOT_GROK_OUTPUT`. Exact source bytes: **2,247**; SHA-256: `185442474bb4c3dc47d227d4be9a1db5dc5a9dda6543b76830dedf52adc47c40`.
+
+````text
+# Matched-current study: pre-acquisition review decision
+
+The local review accepts the fixed two-group, three-candidate, six-hour retrospective design for one bounded acquisition attempt. This decision records a source review, **not a scientific result**. The preceding six-group NOAA study, current ocean presets and tank comparison remain unchanged.
+
+The exact design is in `docs/matched-current-study-plan.md`; executable query/budget/identity contracts live in `matched_current_protocol.py`. The review fixes decode acquisition-verified immutable bytes, enforce the acquisition-manifest/source/forecast/score clock chain, reject orphan hash sentinels before requests, and require serial source clocks. All-masked currents remain unsupported. Package initialization code is included in the implementation hash set.
+
+The local focused suite passed **159 tests** using invented arrays and mocked transport. Ruff and diff checks passed. The actual Grok web prompt and answer are retained in `docs/grok-evidence/grok-matched-current-final-prefreeze-{prompt,response}.txt`. Grok gave conditional static acceptance; it did not execute code, acquire values, validate physical behavior, or consume an xAI API. The review receipt records exact file hashes and local dependency versions.
+
+The next operations are distinct: commit reviewed source; generate the metadata-only protocol and trusted identity; commit that freeze; run the immutable acquisition command once; persist all fixed forecasts before numeric future-coordinate decoding; explicitly compute the first score; verify offline replay. The public reader and API may read saved artifacts but may never run any of these operations. Any failure stays in the original denominator; no alternative endpoint, retry, replacement group, expanded tile, changed depth or tuned coefficient follows a disappointing outcome.
+
+Primary comparison requires all **36 model-hour cells**, which reuse only **12 later processed position estimates**. Partial results may report explicitly named secondary supports without selecting a winner. HYCOM future-valid analysis at 15 m does not establish origin-time availability, assimilation independence, surface-plastic accuracy, tank performance or reef protection.
+````
+
+#### Later record 6: matched-current-prefreeze-review.json
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-prefreeze-review.json
+
+Role: `LOCAL_PREFREEZE_REVIEW_RECEIPT_NOT_GROK_OUTPUT`. Exact source bytes: **1,660**; SHA-256: `3a2f4fec60e137be93321a514f23980f3b237c9bd0577551a0f9b796bf9b589f`.
+
+````text
+{
+  "actual_grok_web_review": true,
+  "decisions": [
+    "Decode verified immutable forcing bytes directly.",
+    "Forecast follows manifest and per-source completion.",
+    "Reject orphan sentinels before requests.",
+    "Require sequential nonoverlapping source clocks.",
+    "All-masked forcing remains explicitly unsupported.",
+    "Include package initializers in numerical source dependency hashes."
+  ],
+  "fixed_candidates": [
+    "stationary",
+    "last_drift",
+    "current_only"
+  ],
+  "focused_tests_passed": 159,
+  "grok_api_used": false,
+  "grok_execution_claim": false,
+  "grok_files": [
+    {
+      "bytes": 45919,
+      "path": "docs/grok-evidence/grok-matched-current-final-prefreeze-prompt.txt",
+      "sha256": "560336035e2cef3ff83fcdae017b0362f59d54c482f4b41dd5d24bcc44306c38"
+    },
+    {
+      "bytes": 3003,
+      "path": "docs/grok-evidence/grok-matched-current-final-prefreeze-response.txt",
+      "sha256": "8f7ed71fa710ce9afc9db681f8894d21f368b533f70eb36f04211cf9655302e8"
+    }
+  ],
+  "planned_cells": 36,
+  "ruff": "PASS",
+  "runtime_versions_at_review": {
+    "httpx": "0.28.1",
+    "netCDF4": "1.7.5",
+    "numpy": "2.5.4",
+    "pytest": "8.4.2",
+    "python": "3.12.14"
+  },
+  "schema_version": 1,
+  "scientific_boundaries": {
+    "assimilation_independence_verified": false,
+    "no_heldout_tuning": true,
+    "no_model_promotion": true,
+    "no_replacements": true,
+    "operational_causality": false,
+    "physical_validation": false
+  },
+  "scientific_values_acquired_at_review": false,
+  "source_dependency_package_initializers_pinned": true,
+  "stage": "PRE_ACQUISITION_REVIEW",
+  "unique_later_position_estimates": 12
+}
+````
+
+#### Later record 7: matched-current-v1-compatibility-diagnosis.md
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-v1-compatibility-diagnosis.md
+
+Role: `LOCAL_SAVED_BYTES_DIAGNOSIS_NOT_GROK_OUTPUT`. Exact source bytes: **7,560**; SHA-256: `a481e075abf5768d372ecae0f9fc8498064139a3f0e85abb509808321803ecc4`.
+
+````text
+# Matched-current v1: saved-byte compatibility diagnosis
+
+Review date: **17 October 2026**. This review uses only already saved v1 files.
+It makes **no new request, model run, numerical score, protocol freeze or code
+amendment**. The machine-readable source identities and axis calculations are in
+[the diagnosis receipt](research-evidence/matched-current-v1-compatibility-diagnosis.json).
+
+## What happened
+
+The immutable v1 attempt made four requests, retained 751,334 response bytes and
+blocked both planned GDP trajectory requests. Its saved first score and replay
+retain **all 36 planned model/horizon cells**, with **zero scored cells** and null
+errors. It obtained no GDP trajectory payload and selected no model. The twelve
+planned future position estimates remain unavailable.
+
+Two compatibility guards caused the failure:
+
+1. NOAA's metadata response differed from the seed in two request-history
+   timestamps, so the exact raw-hash gate blocked both GDP trajectory requests.
+2. The downloaded HYCOM file passed the unchanged generic reader, but the study
+   wrapper rejected native coordinate spacings against an overly tight decimal
+   lattice tolerance. The actual coordinate labels show float32 rounding even
+   though the NetCDF coordinate variables are stored as float64.
+
+The guards preserved their failures. This document proposes an explicit,
+reviewable v2 compatibility amendment; it does not turn the v1 attempt into a
+successful comparison or authorize a hidden retry.
+
+## NOAA: exactly two volatile history timestamps
+
+Both seed and acquired DAS files contain **18,686 bytes**. Their full hashes are:
+
+| File | SHA256 |
+| --- | --- |
+| Metadata seed | `66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39` |
+| Acquired v1 response | `9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3` |
+
+Only lines **425–426** differ. In the `history` field, both capture timestamps
+changed from `2026-10-17T19:34:52Z` to `2026-10-17T21:11:25Z`:
+
+```diff
+-2026-10-17T19:34:52Z (local files)
++2026-10-17T21:11:25Z (local files)
+-2026-10-17T19:34:52Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das";
++2026-10-17T21:11:25Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das";
+```
+
+Replacing those exact two old capture-time tokens with the acquired tokens makes
+the seed bytes identical to the acquired bytes. Every other byte is unchanged,
+including the `Version v2.01` history line, schema, units and metadata text. This
+is evidence of a volatile request-history field; it is not evidence that an
+unexpected units, version or schema change should be accepted.
+
+The acquired origin identity/drogue CSV is byte-identical to its **640-byte**
+seed, SHA256
+`fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339`.
+The selected IDs and identity metadata did not change. Both trajectory requests
+remain recorded as `BLOCKED / DEPENDENCY_UNAVAILABLE`, with no body and no
+request attempt.
+
+## HYCOM: coordinate encoding, not a changed current model
+
+The acquired HYCOM metadata XML is byte-identical to its **159,404-byte** seed,
+SHA256
+`741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d`.
+The current file contains **572,604 bytes**, SHA256
+`7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065`.
+
+The unchanged generic reader accepts its requested UTC knots at midnight, three
+hours and six hours, and the declared fifteen-metre depth. The unchanged study
+wrapper reports `HYCOM_REQUESTED_NATIVE_TILE_OR_STRIDE_CHANGED`. This review
+exports no current-vector values and runs no advection or model comparison.
+
+| Saved coordinate property | Latitude | Native longitude |
+| --- | --- | --- |
+| NetCDF variable dtype | float64 | float64 |
+| Coordinate count | 251 | 188 |
+| Actual first and last labels | 25 to 35° | 280 to 294.96002197265625° |
+| Nominal increment | 0.04° | 0.08° |
+| Smallest actual adjacent increment | 0.039997100830078125° | 0.0799560546875° |
+| Largest actual adjacent increment | 0.04000091552734375° | 0.08001708984375° |
+| Largest increment difference from nominal | 0.0000028991699218758° | 0.0000439453125° |
+| Labels exactly representable as float32 | Every label | Every label |
+
+The arrays are strictly increasing. Every saved float64 label equals an exact
+float32 value promoted to float64. Against the predeclared decimal lattices
+`25 + 0.04 × i` and `280 + 0.08 × i`, rounded to float32:
+
+- All **251 latitude labels** match exactly.
+- **98 longitude labels** match exactly; **44** are one float32 ULP lower and
+  **46** are one ULP higher. One longitude ULP here is
+  `0.000030517578125°`.
+
+An ULP is one spacing between neighboring representable floating-point numbers.
+These differences exceed the wrapper's `1e-9°` adjacent-spacing tolerance, but
+remain at the observed coordinate encoding scale. This explains its rejection;
+it does not establish current accuracy or forecast skill.
+
+The actual normalized longitude support ends at **−65.03997802734375°**, starting
+at **−80°**. A nominal **−65°/295°** edge must not be invented. Any accepted future
+reader must interpolate on the actual saved coordinates and preserve domain
+exits and masks.
+
+## Proposed v2 review, before any GDP outcomes
+
+A separately identified v2 amendment is scientifically defensible as a metadata
+and coordinate-encoding correction, provided it is reviewed and frozen before
+new GDP outcome acquisition. Preserve the entire v1 protocol, raw bodies,
+failures, forecast receipt and zero-score report. Bind any v2 protocol to this
+diagnosis and disclose the original failure.
+
+The proposal has two narrowly bounded parts:
+
+1. **Metadata history:** allowlist only the two valid UTC capture-time tokens
+   attached to the exact `(local files)` line and exact DAS URL inside this
+   history field. Preserve the version line, every other byte and every acquired
+   raw hash. Reject units, schema, version, URL and other history changes. Removing
+   the whole history field would be a broader change than this evidence supports.
+2. **Coordinate representation:** explicitly review and declare native counts,
+   monotonicity, nominal lattice and float32 encoding bounds. The saved evidence
+   supports reviewing exact rounded-float32 latitude labels and a longitude
+   allowance no greater than one float32 ULP from the rounded nominal lattice.
+   Freeze the chosen rule and hostile synthetic tests before new GDP outcomes.
+   Keep exact actual coordinates for sampling; never snap or expand support.
+
+Keep the GDP/WMO identities, context and target windows, three candidate models,
+six horizons, full denominators, source product, depth, tile, variables, stride,
+current time knots and transport budgets unchanged. Do not fit a coefficient,
+replace a drifter, select an easier tile, add a model or tune against outcomes.
+Tests should reject changed units/version, a shifted or coarsened grid, unexpected
+depth/time knots, nondeclared coordinate encodings and perturbations beyond the
+reviewed encoding bound.
+
+This would be a **pre-GDP-outcome amendment**, not an entirely scientific-value-
+unseen first design: HYCOM forcing bytes were already acquired and decoded for
+compatibility diagnosis. They have not produced a scored comparison or been used
+to select model parameters. A later successful transport and score would still
+be a retrospective buoy-motion diagnostic, with assimilation, processing,
+independence and issue-time limitations. It would not validate loose plastic,
+reef protection or the physical tank.
+````
+
+#### Later record 8: matched-current-v1-compatibility-diagnosis.json
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-v1-compatibility-diagnosis.json
+
+Role: `LOCAL_SAVED_BYTES_DIAGNOSIS_RECEIPT_NOT_GROK_OUTPUT`. Exact source bytes: **9,544**; SHA-256: `b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d`.
+
+````text
+{
+  "gdp_metadata": {
+    "acquired": {
+      "bytes": 18686,
+      "path": "data/public/matched-current-v1/raw/gdp-metadata.das",
+      "sha256": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3"
+    },
+    "acquired_history_capture_utc": "2026-10-17T21:11:25Z",
+    "all_other_bytes_identical": true,
+    "changed_line_count": 2,
+    "changes": [
+      {
+        "acquired": "2026-10-17T21:11:25Z (local files)",
+        "line_number": 425,
+        "seed": "2026-10-17T19:34:52Z (local files)"
+      },
+      {
+        "acquired": "2026-10-17T21:11:25Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das\";",
+        "line_number": 426,
+        "seed": "2026-10-17T19:34:52Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das\";"
+      }
+    ],
+    "identity_csv": {
+      "acquired": {
+        "bytes": 640,
+        "path": "data/public/matched-current-v1/raw/gdp-origin-identity.csv",
+        "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+      },
+      "byte_identical": true,
+      "seed": {
+        "bytes": 640,
+        "path": "docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv",
+        "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+      }
+    },
+    "only_exact_two_capture_timestamp_tokens_differ": true,
+    "scientific_interpretation": "Raw-hash mismatch is caused by volatile request-history capture timestamps, with no observed schema/unit/version difference. Both GDP trajectory requests were blocked.",
+    "seed": {
+      "bytes": 18686,
+      "path": "docs/research-evidence/matched-current-metadata/gdp-hourly.das",
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    "seed_history_capture_utc": "2026-10-17T19:34:52Z"
+  },
+  "hycom": {
+    "actual_normalized_longitude_bounds_deg": [
+      -80.0,
+      -65.03997802734375
+    ],
+    "axes": {
+      "lat": {
+        "all_coordinates_exact_promoted_float32": true,
+        "coordinate_units": "degrees_north",
+        "count": 251,
+        "encoded_dtype": "float64",
+        "first": 25.0,
+        "last": 35.0,
+        "max_absolute_coordinate_difference_from_nominal_decimal_deg": 1.8310546892053026e-06,
+        "max_absolute_coordinate_difference_from_rounded_float32_lattice_deg": 0.0,
+        "max_absolute_spacing_difference_from_nominal_deg": 2.8991699218758327e-06,
+        "maximum_absolute_ulp_difference": 0.0,
+        "nominal_decimal_lattice": {
+          "increment": 0.04,
+          "start": 25.0
+        },
+        "rounded_nominal_float32_ulp_difference_counts": {
+          "0": 251
+        },
+        "spacing_max": 0.04000091552734375,
+        "spacing_min": 0.039997100830078125,
+        "strictly_increasing": true
+      },
+      "lon": {
+        "all_coordinates_exact_promoted_float32": true,
+        "coordinate_units": "degrees_east",
+        "count": 188,
+        "encoded_dtype": "float64",
+        "first": 280.0,
+        "last": 294.96002197265625,
+        "max_absolute_coordinate_difference_from_nominal_decimal_deg": 3.4179687474988896e-05,
+        "max_absolute_coordinate_difference_from_rounded_float32_lattice_deg": 3.0517578125e-05,
+        "max_absolute_spacing_difference_from_nominal_deg": 4.3945312500001665e-05,
+        "maximum_absolute_ulp_difference": 1.0,
+        "nominal_decimal_lattice": {
+          "increment": 0.08,
+          "start": 280.0
+        },
+        "rounded_nominal_float32_ulp_difference_counts": {
+          "-1": 44,
+          "0": 98,
+          "1": 46
+        },
+        "spacing_max": 0.08001708984375,
+        "spacing_min": 0.0799560546875,
+        "strictly_increasing": true
+      }
+    },
+    "current_file": {
+      "bytes": 572604,
+      "path": "data/public/matched-current-v1/raw/hycom-currents.nc",
+      "sha256": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065"
+    },
+    "metadata_acquired": {
+      "bytes": 159404,
+      "path": "data/public/matched-current-v1/raw/hycom-metadata.xml",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    },
+    "metadata_byte_identical": true,
+    "metadata_seed": {
+      "bytes": 159404,
+      "path": "docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml",
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    },
+    "scientific_interpretation": "Actual double coordinate labels are exact float32 promotions. Quantization explains the failed spacing check; it does not justify changing currents, expanding support or claiming physical accuracy.",
+    "selected_depth_m": 15,
+    "unchanged_generic_reader_accepted": true,
+    "unchanged_wrapper_rejection": "HYCOM_REQUESTED_NATIVE_TILE_OR_STRIDE_CHANGED",
+    "valid_time_knots_utc": [
+      "2022-06-01T00:00:00Z",
+      "2022-06-01T03:00:00Z",
+      "2022-06-01T06:00:00Z"
+    ],
+    "wrapper_nominal_spacing_tolerance_deg": 1e-09
+  },
+  "kind": "MATCHED_CURRENT_V1_SAVED_BYTES_COMPATIBILITY_DIAGNOSIS",
+  "recommendation": {
+    "coordinate_rule": "Before any new GDP outcome request, explicitly review and freeze native coordinate-count/lattice/float32-encoding checks. Retain exactly the actual supported axes for interpolation. Observed latitude equals the rounded float32 decimal lattice; observed longitude is within one float32 ULP of that lattice. These observations motivate a reviewed encoding contract, not a model-score-selected tolerance.",
+    "disclosure": "No GDP trajectory payload or scored model outcome was obtained in v1. HYCOM forcing bytes were already acquired and decoded; therefore any v2 design is pre-GDP-outcome, not an entirely scientific-value-unseen first attempt. Encoding inspection must not be represented as model validation or used to select models.",
+    "gdp_rule": "Review an allowlist matching only the two valid UTC capture-time tokens in the exact history field. Preserve the version/text, every other metadata byte, and raw bytes plus raw SHA256 receipts. Reject units/schema/version or other history changes. Do not remove the whole history field.",
+    "no_support_expansion": "Never snap coordinates, add a nominal longitude295 node, interpolate outside the actual tile or change depth/IDs/models after outcomes.",
+    "preserve_v1": true,
+    "retain_unchanged": [
+      "GDP and WMO identities",
+      "context/origin/target windows",
+      "three model definitions",
+      "six horizons and full planned denominators",
+      "depth, current product, variables, tile, stride and current time knots",
+      "transport requests/time/byte limits",
+      "no fitting, tuning, replacement or automatic promotion"
+    ],
+    "status": "REVIEW_PROPOSAL_ONLY",
+    "type": "EXPLICIT_V2_PRE_GDP_OUTCOME_METADATA_AND_COORDINATE_ENCODING_AMENDMENT"
+  },
+  "reviewed_at_utc": "2026-10-17T21:15:21.413262Z",
+  "schema_version": 1,
+  "scope": {
+    "amendment_implemented": false,
+    "gdp_trajectory_coordinates_exported": false,
+    "model_runs_for_diagnosis": 0,
+    "new_network_requests": 0,
+    "new_protocol_frozen": false,
+    "physical_validation": false,
+    "saved_local_bytes_only": true,
+    "velocity_values_exported": false
+  },
+  "source_checkpoint_git_head": "c62e7457d3fcc11181aacd1792bcf0803083f115",
+  "v1": {
+    "artifacts": {
+      "acquisition-start": {
+        "bytes": 402,
+        "path": "data/public/matched-current-v1/acquisition-start.json",
+        "sha256": "17780b5eb69dbcd47c800baec1c844c9e650c227e80bef7940d6cba26b1cd800"
+      },
+      "evaluation": {
+        "bytes": 63563,
+        "path": "data/public/matched-current-v1/evaluation.json",
+        "sha256": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7"
+      },
+      "forecasts": {
+        "bytes": 17133,
+        "path": "data/public/matched-current-v1/forecasts.json",
+        "sha256": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f"
+      },
+      "manifest": {
+        "bytes": 5441,
+        "path": "data/public/matched-current-v1/manifest.json",
+        "sha256": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e"
+      },
+      "protocol": {
+        "bytes": 8845,
+        "path": "data/public/matched-current-v1/protocol.json",
+        "sha256": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6"
+      }
+    },
+    "current_field_failure": "HYCOM_REQUESTED_NATIVE_TILE_OR_STRIDE_CHANGED",
+    "distinct_future_targets_planned": 12,
+    "downloaded_gdp_trajectory_roles": 0,
+    "planned_model_horizon_cells": 36,
+    "requests_attempted": 4,
+    "response_bytes_received": 751334,
+    "scored_model_horizon_cells": 0,
+    "status_by_role": {
+      "gdp_identity": {
+        "reason": null,
+        "request_attempted": true,
+        "status": "DOWNLOADED"
+      },
+      "gdp_metadata": {
+        "reason": "PINNED_METADATA_CHANGED",
+        "request_attempted": true,
+        "status": "METADATA_INVALID"
+      },
+      "hycom_currents": {
+        "reason": null,
+        "request_attempted": true,
+        "status": "DOWNLOADED"
+      },
+      "hycom_metadata": {
+        "reason": null,
+        "request_attempted": true,
+        "status": "DOWNLOADED"
+      },
+      "trajectory:300234066836710": {
+        "reason": "DEPENDENCY_UNAVAILABLE",
+        "request_attempted": false,
+        "status": "BLOCKED"
+      },
+      "trajectory:300534061292930": {
+        "reason": "DEPENDENCY_UNAVAILABLE",
+        "request_attempted": false,
+        "status": "BLOCKED"
+      }
+    }
+  }
+}
+````
+
+#### Later record 9: matched-current-v1-archive-location.json
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-v1-archive-location.json
+
+Role: `LOCAL_BYTE_IDENTICAL_RELOCATION_RECEIPT_NOT_GROK_OUTPUT`. Exact source bytes: **2,340**; SHA-256: `687c0269f5fb7408781baa1278780156a4ead50944726d26e8a37ef593c8de90`.
+
+````text
+{
+  "acquisition_repeated": false,
+  "all_original_file_bytes_preserved": true,
+  "archive_directory": "data/research/matched-current-v1",
+  "files": {
+    "acquisition-start.json": "17780b5eb69dbcd47c800baec1c844c9e650c227e80bef7940d6cba26b1cd800",
+    "acquisition-start.sha256": "021e00fb42a25b383e45cfb610045c2bff6dbe040378086678d24be7cd2b4380",
+    "evaluation.json": "354a167f13809c11d965315eb440e2cdd22bb946a85ccbed2dc0ba5561614db7",
+    "evaluation.sha256": "5815269a3e9e43fd7f50dbc98bfbad57d87d5ae03554256d2176ae25bf1cf0eb",
+    "forecasts.json": "4818e8acdb6fc51dda5967a51b7274c93ee0475edb992afa51c36ed7a246565f",
+    "forecasts.sha256": "7a5fa11162aba3dc18ac212b00b3874488b82a8523a871c49e20a7ce3cd169c5",
+    "manifest.json": "4da5bb7780334a4a4e6e64080b406f90362f179f81b40d3e2927a6bbcce3ce9e",
+    "manifest.sha256": "83d5a06d8e74da2154b78eef3b8e095d71f572c1de218bb900ef988e21ee5270",
+    "protocol.json": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6",
+    "protocol.sha256": "c416abffccfdb3850ecc9f895eedc8539b96332d59299b425a3d1cd58f1faa68",
+    "raw/gdp-metadata.das": "9931c4a300bc37096103ad6d9091e8e2aa77e318de2bdaa9da6c55508b2ef7f3",
+    "raw/gdp-metadata.sha256": "7334349451791ddecda2a4e18bd751d0bdc89f462bb3cf5bebb18a5f362d9ec5",
+    "raw/gdp-origin-identity.csv": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+    "raw/gdp-origin-identity.sha256": "10360f79f7a2f8870f9506bcaee1762e86675e32b277b7f29f881f5543e0a447",
+    "raw/hycom-currents.nc": "7005d62128f100066c6d7120fc4e32c4a6c524814d1085dcc19996dfbc910065",
+    "raw/hycom-currents.sha256": "420a563520b620f8279896f5011711363adaf2847332e2c01950734c441e4411",
+    "raw/hycom-metadata.sha256": "6b1a4fcc0cf0aa9dfc679afa68c4ae44f27186e27eed14d3a2f8a7416b5d5764",
+    "raw/hycom-metadata.xml": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+  },
+  "future_study_rule": "Include this later archive explicitly in future exposure inventories.",
+  "models_or_scores_changed": false,
+  "original_directory": "data/public/matched-current-v1",
+  "original_freeze_commit": "c62e745",
+  "reason": "Later study archive must not alter the historical all-existing-public-fixture exclusion snapshot.",
+  "schema_version": 1,
+  "visibility": "Public repository archive; directory name does not imply private access."
+}
+````
+
+### Later-source manifest
+
+The earlier manifest remains its unchanged historical capture. This separate manifest covers the additive records only. Publication flags describe this local builder, not a later verified Trov upload.
+
+```json
+{
+  "schema_version": 1,
+  "kind": "LATER_MATCHED_CURRENT_V1_REVIEW_AND_FAILURE_ARCHIVE_APPEND",
+  "previous_continuation_prefix_bytes": 78008,
+  "previous_continuation_prefix_sha256": "4524f38a304d6feadb92486d8c96c14c07d18de5377915e79d2372e4c5f76396",
+  "previous_prefix_preserved_exactly": true,
+  "additional_grok_review_rounds": 2,
+  "additional_grok_files": 4,
+  "additional_local_decision_diagnosis_receipt_files": 5,
+  "later_exact_source_file_count": 9,
+  "later_exact_source_bytes": 83794,
+  "continuation_total_grok_review_rounds": 5,
+  "v1_scientific_attempt": {
+    "protocol_frozen": true,
+    "acquisition_attempted": true,
+    "planned_cells": 36,
+    "scored_cells": 0,
+    "gdp_trajectory_payloads_acquired": 0,
+    "primary_results": null,
+    "physical_validation": false
+  },
+  "v2_status": "PROPOSAL_NOT_IMPLEMENTED_FROZEN_ACQUIRED_OR_SCORED",
+  "latest_local_checks": {
+    "frontend_passed": 222,
+    "isolated_http_passed": 153,
+    "isolated_http_failed": 0,
+    "isolated_http_expected_blocked": 6,
+    "python_full_suite": "PENDING",
+    "exact_new_head_hosted_ci": "PENDING"
+  },
+  "publication_performed_by_this_append_builder": false,
+  "files": [
+    {
+      "path": "docs/grok-evidence/grok-matched-current-final-prefreeze-prompt.txt",
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "bytes": 45919,
+      "sha256": "560336035e2cef3ff83fcdae017b0362f59d54c482f4b41dd5d24bcc44306c38"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-final-prefreeze-response.txt",
+      "kind": "SAVED_GROK_STATIC_REVIEW_RESPONSE",
+      "bytes": 3003,
+      "sha256": "8f7ed71fa710ce9afc9db681f8894d21f368b533f70eb36f04211cf9655302e8"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-failure-review-prompt.txt",
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "bytes": 9097,
+      "sha256": "d5dad9fa6a4404618c36144964e06fc99ae7c5cfbe393954d62ac0f1fb56d98b"
+    },
+    {
+      "path": "docs/grok-evidence/grok-matched-current-failure-review-response.txt",
+      "kind": "SAVED_GROK_STATIC_REVIEW_RESPONSE",
+      "bytes": 2424,
+      "sha256": "9ca0bb8c82caa1d2c06672fe34e76cf44c62f7de4f198ef502332e0fa002a919"
+    },
+    {
+      "path": "docs/matched-current-prefreeze-review.md",
+      "kind": "LOCAL_REVIEW_DECISION_NOT_GROK_OUTPUT",
+      "bytes": 2247,
+      "sha256": "185442474bb4c3dc47d227d4be9a1db5dc5a9dda6543b76830dedf52adc47c40"
+    },
+    {
+      "path": "docs/research-evidence/matched-current-prefreeze-review.json",
+      "kind": "LOCAL_PREFREEZE_REVIEW_RECEIPT_NOT_GROK_OUTPUT",
+      "bytes": 1660,
+      "sha256": "3a2f4fec60e137be93321a514f23980f3b237c9bd0577551a0f9b796bf9b589f"
+    },
+    {
+      "path": "docs/matched-current-v1-compatibility-diagnosis.md",
+      "kind": "LOCAL_SAVED_BYTES_DIAGNOSIS_NOT_GROK_OUTPUT",
+      "bytes": 7560,
+      "sha256": "a481e075abf5768d372ecae0f9fc8498064139a3f0e85abb509808321803ecc4"
+    },
+    {
+      "path": "docs/research-evidence/matched-current-v1-compatibility-diagnosis.json",
+      "kind": "LOCAL_SAVED_BYTES_DIAGNOSIS_RECEIPT_NOT_GROK_OUTPUT",
+      "bytes": 9544,
+      "sha256": "b921a114f16f146eb06c1b76db23d9f1ab991fffe50dc650759cbd7b3ef2707d"
+    },
+    {
+      "path": "docs/research-evidence/matched-current-v1-archive-location.json",
+      "kind": "LOCAL_BYTE_IDENTICAL_RELOCATION_RECEIPT_NOT_GROK_OUTPUT",
+      "bytes": 2340,
+      "sha256": "687c0269f5fb7408781baa1278780156a4ead50944726d26e8a37ef593c8de90"
+    }
+  ]
+}
+```
+
+End of additive v1 checkpoint. Existing canonical705KB source archive remains unchanged.

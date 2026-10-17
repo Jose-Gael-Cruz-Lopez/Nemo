@@ -1,0 +1,8 @@
+{
+  "git_head_at_acquisition": "c62e7457d3fcc11181aacd1792bcf0803083f115",
+  "protocol_sha256": "210367efb31319285ddaff2018e8a64f330c68652cd9feb51aaade1df86ef5f6",
+  "scientific_scores_computed": false,
+  "started_at_utc": "2026-10-17T21:11:25.580216Z",
+  "study_id": "matched-current-gdp-hycom-15m-v1",
+  "trusted_identity_sha256": "735cae2f052538bb643d9c91f35d715b7f0a90bb1e29fb1b156dbd700b6a0191"
+}

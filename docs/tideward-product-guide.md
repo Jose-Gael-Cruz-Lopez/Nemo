@@ -4,6 +4,8 @@ Current documentation checkpoint: **17 October 2026**. Repository: [Jose-Gael-Cr
 
 This is the current complete guide. It supersedes **Tideward — complete product handbook · 17 October 2026**, including that earlier version's pending USB restart investigation, and older setup notes that assume a C920s camera, disabled Photon, or a single default constant-velocity ocean graph. Earlier Trov entries remain reference history. Older study protocols and verification receipts remain historical records rather than being rewritten. The source-controlled guide and its linked technical documents are the detailed reference; the Trov Product document is the team-facing copy.
 
+**Latest verified local checkpoint — 17 October 2026:** the [complete software walkthrough and verification](complete-software-verification-20261017.md) records **1,641 Python, 223 frontend and 153 HTTP checks passed**, with zero failures and six expected external/physical scopes blocked in HTTP. The **105-test** fresh-process reader/API/replay check is a subset, not another scientific sample. Browser workflows and separate live Chalk REPORT investigations were exercised. The [matched-current v1 result](matched-current-results.md) remains **0/36 scored**; v2 is only proposed. Physical validation and exact-new-head hosted CI are separate from these local results. Earlier receipts below retain their capture-time status.
+
 ## 1. What the product does
 
 Tideward helps a team ask where floating pollution could come from, compare where to intercept it before it reaches a protected area, and preserve evidence for checking whether the intervention actually worked. It combines a local camera experiment, numerical transport models, public ocean research and a bounded AI evidence interpreter.
