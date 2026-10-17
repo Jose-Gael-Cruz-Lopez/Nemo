@@ -104,6 +104,12 @@ These assignments do not depend on a webcam, pump, calibration or new physical d
 
 Next software work is concrete: extend guided-demo acceptance/accessibility regressions, strengthen the export/method boundary tests, keep hosted CI green on each exact commit, and retain provider-failure/stale-response behavior. An [optional synthetic first-passage bookkeeping audit](docs/algorithm-contract-audit.md#11-next-synthetic-audit-first-passage-bookkeeping) tests exact destination/support partitions; it changes neither frozen algorithms nor physical evidence. Physical calibration and independent source/interception trials are a separate later measurement task; extra ocean-model training cannot replace them. Grok is used interactively for review; its recurring research schedule remains paused. GitHub checks run on code changes.
 
+## Updated physical rig guide
+
+The [11-page rig guide](docs/tideward-rig-guide.pdf) replaces the earlier clipped build guide. It distinguishes reported inventory from items still needing purchase or confirmation, specifies the selected C920s USB camera and actual pump-adapter check, and gives assembly, mapping, separate layout measurements and first-trial steps. [Connection diagram](docs/assets/tideward-rig-connections.png) · [measured tank map](docs/assets/tideward-rig-measured-map.png).
+
+Use the webcam's USB connection to the laptop and the pump's original, separately operated AC cord. The return tube carries water within the same bin; the original cord goes over the rim without cutting the tank. Decorative coral, 3D printing and the unused Arduino/ESP32 boards are not required by this selected plan. The guide is a planned build, not a claim that the rig or any physical trial has been completed. Megana and Aarush's current handoffs remain software-only.
+
 ## Reproduce software checks
 
 The safest complete software rehearsal starts its own temporary API/store on a random loopback port and guards every provider, camera and Photon path:
