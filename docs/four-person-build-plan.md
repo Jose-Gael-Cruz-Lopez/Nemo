@@ -25,6 +25,12 @@ NOAA trajectories; it is not new unseen evidence or a promoted production model.
 
 ## 1. One definite physical build
 
+![Planned USB webcam, separate manual pump power and same-bin tubing loop](assets/tideward-physical-setup.svg)
+
+This drawing is a connection plan with illustrative positions. Measure the actual
+bin, waterline, adapter fit and collector before recording; it is not evidence of
+an assembled rig or physical trial.
+
 ```text
 DRY SIDE
 Fixed overhead USB webcam ── USB cable / required host adapter ── laptop

@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1400" height="1150" viewBox="0 0 1400 1150" role="img" aria-labelledby="title desc">
+<title id="title">Tideward physical tank setup: USB webcam, manually powered pump and measured trial layout</title>
+<desc id="desc">Planned, illustrative setup. A fixed dry USB webcam connects by one data cable to a dry laptop. A submerged pump recirculates freshwater from its intake grille through outlet tubing to a submerged sidewall return in the same bin. Original AC power remains separate and manually operated. Sources, protected polygon, mesh collector and seven calibration marks must be physically measured. No Arduino, ESP32, relay, coral prop or three-dimensional print is required.</desc>
+<defs>
+<linearGradient id="canvas" x2="1" y2="1"><stop stop-color="#eff8fe"/><stop offset="1" stop-color="#deeffb"/></linearGradient>
+<linearGradient id="water" x2="1" y2="1"><stop stop-color="#e1f5fd"/><stop offset="1" stop-color="#bfe4f5"/></linearGradient>
+<pattern id="mesh" width="12" height="12" patternUnits="userSpaceOnUse"><rect width="12" height="12" fill="#e6f4f9"/><path d="M0 0H12V12H0Z" fill="none" stroke="#568eaa" stroke-width="1"/></pattern>
+<marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L8 4.5L0 9Z" fill="#3a94b7"/></marker>
+<marker id="tubeArrow" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0 0L6 3.5L0 7Z" fill="#168fa6"/></marker>
+<style>text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif} .small{font-size:15px;fill:#55788e} .label{font-size:17px;fill:#315f7a} .mono{font-family:monospace}</style>
+</defs>
+<rect width="1400" height="1150" fill="url(#canvas)"/>
+
+<svg x="42" y="40" width="51" height="42" viewBox="0 0 160 128"><path d="M12 85C37 49 77 18 117 17C137 16 150 24 147 43C143 71 132 99 115 108C101 115 81 110 80 97C79 85 88 77 99 79C106 80 111 84 113 88C116 70 105 57 89 55C64 51 35 67 12 85Z" fill="#267da8"/></svg>
+<text x="108" y="74" font-size="32" fill="#1d4863" font-weight="600" text-anchor="start" >Tideward / physical setup</text>
+<text x="44" y="115" font-size="18" fill="#274e68" font-weight="400" text-anchor="start" >One webcam connection. One water loop. One separate, manually operated pump cord.</text>
+<rect x="1102" y="48" width="254" height="37" rx="18" fill="#f8fcff" stroke="#bbdbed" />
+<text x="1229" y="72" font-size="13" fill="#376e8c" font-weight="600" text-anchor="middle" >PLANNED · NOT YET RUN</text>
+<rect x="40" y="150" width="360" height="654" rx="24" fill="#ffffffb8" stroke="#cde4f1" />
+<rect x="438" y="150" width="922" height="654" rx="24" fill="#ffffffb8" stroke="#cde4f1" />
+<text x="65" y="190" font-size="17" fill="#286b90" font-weight="600" text-anchor="start" >01 / DRY WORKSTATION</text>
+<text x="462" y="190" font-size="17" fill="#286b90" font-weight="600" text-anchor="start" >02 / BIN + FIXED OVERHEAD VIEW</text>
+<text x="65" y="221" font-size="15" fill="#274e68" font-weight="400" text-anchor="start" >Keep laptop, webcam, connectors</text>
+<text x="65" y="243" font-size="15" fill="#274e68" font-weight="400" text-anchor="start" >and mains outlet outside splashes.</text>
+<rect x="78" y="372" width="282" height="182" rx="12" fill="#f8fcff" stroke="#6f9eb8" />
+<rect x="90" y="384" width="258" height="155" rx="5" fill="#e6f4fc" stroke="#b8dbea" />
+<text x="111" y="414" font-size="21" fill="#286b90" font-weight="600" text-anchor="start" >Tideward</text>
+<text x="111" y="442" font-size="14" fill="#274e68" font-weight="400" text-anchor="start" >Capture → Trace → Compare</text>
+<path d="M112 490 C160 475 185 518 218 485 S285 464 323 484" fill="none" stroke="#7eb8d2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+<circle cx="112" cy="490" r="4" fill="#d86768" stroke="none" />
+<circle cx="160" cy="489" r="4" fill="#d86768" stroke="none" />
+<circle cx="218" cy="485" r="4" fill="#d86768" stroke="none" />
+<circle cx="271" cy="476" r="4" fill="#d86768" stroke="none" />
+<circle cx="323" cy="484" r="4" fill="#d86768" stroke="none" />
+<path d="M65 555H373L355 569H84Z" stroke="#7da8bf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#dceef8"/>
+<rect x="358" y="446" width="28" height="19" rx="4" fill="#b8d9eb" stroke="#709cb6" />
+<text x="65" y="600" font-size="16" fill="#234f6c" font-weight="500" text-anchor="start" >Laptop runs capture + analysis.</text>
+<text x="65" y="625" font-size="14" fill="#274e68" font-weight="400" text-anchor="start" >Host adapter only if its ports need one.</text>
+<path d="M386 456H416V270H896" fill="none" stroke="#2b86b1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="533" y="243" width="290" height="31" rx="15" fill="#e9f7ff" stroke="#cce5f3" />
+<text x="678" y="263" font-size="13" fill="#2d708f" font-weight="600" text-anchor="middle" >ONE USB DATA + POWER CABLE</text>
+<text x="665" y="297" font-size="14" fill="#55788e" font-weight="400" text-anchor="middle" >No separate webcam power supply</text>
+<path d="M952 249V219H1300V310" fill="none" stroke="#84a9be" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1284" y="294" width="32" height="27" rx="5" fill="#c8e0ee" stroke="#7c9fb4" />
+<rect x="896" y="249" width="114" height="45" rx="11" fill="#f8fcff" stroke="#6d9bb5" />
+<circle cx="953" cy="271" r="14" fill="#285f7e" stroke="none" />
+<circle cx="953" cy="271" r="7" fill="#99cfe9" stroke="none" />
+<circle cx="918" cy="267" r="3" fill="#60afc3" stroke="none" />
+<text x="1040" y="262" font-size="18" fill="#2b607e" font-weight="600" text-anchor="start" >Fixed USB webcam</text>
+<text x="1040" y="286" font-size="14" fill="#274e68" font-weight="400" text-anchor="start" >Dry, overhead, no movement</text>
+<path d="M930 299L607 338M976 299L1240 338" fill="none" stroke="#8bbbd2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 7"/>
+<text x="950" y="326" font-size="14" fill="#4e7b94" font-weight="400" text-anchor="middle" >Camera sees the whole water plane</text>
+<rect x="561" y="342" width="709" height="345" rx="24" fill="url(#water)" stroke="#75a9c5" />
+<rect x="574" y="354" width="683" height="319" rx="16" fill="none" stroke="#b1d5e8" />
+<text x="590" y="368" font-size="14" fill="#3d7491" font-weight="500" text-anchor="start" >TOP VIEW · positions are illustrative, not measured</text>
+<path d="M593 385H607M600 378V392" fill="none" stroke="#467e9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="610" y="390" font-size="12" fill="#467e9c" font-weight="500" text-anchor="start" >1</text>
+<path d="M888 397H902M895 390V404" fill="none" stroke="#467e9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="905" y="402" font-size="12" fill="#467e9c" font-weight="500" text-anchor="start" >2</text>
+<path d="M1223 397H1237M1230 390V404" fill="none" stroke="#467e9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1240" y="402" font-size="12" fill="#467e9c" font-weight="500" text-anchor="start" >3</text>
+<path d="M593 645H607M600 638V652" fill="none" stroke="#467e9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="610" y="650" font-size="12" fill="#467e9c" font-weight="500" text-anchor="start" >4</text>
+<path d="M888 645H902M895 638V652" fill="none" stroke="#467e9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="905" y="650" font-size="12" fill="#467e9c" font-weight="500" text-anchor="start" >5</text>
+<path d="M1223 645H1237M1230 638V652" fill="none" stroke="#467e9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1240" y="650" font-size="12" fill="#467e9c" font-weight="500" text-anchor="start" >6</text>
+<path d="M745 565H759M752 558V572" fill="none" stroke="#467e9c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<text x="762" y="570" font-size="12" fill="#467e9c" font-weight="500" text-anchor="start" >7</text>
+<circle cx="648" cy="432" r="19" fill="#f8fcff" stroke="#8bbcd4" />
+<text x="648" y="438" font-size="18" fill="#2b6889" font-weight="600" text-anchor="middle" >A</text>
+<circle cx="648" cy="514" r="19" fill="#f8fcff" stroke="#8bbcd4" />
+<text x="648" y="520" font-size="18" fill="#2b6889" font-weight="600" text-anchor="middle" >B</text>
+<circle cx="648" cy="596" r="19" fill="#f8fcff" stroke="#8bbcd4" />
+<text x="648" y="602" font-size="18" fill="#2b6889" font-weight="600" text-anchor="middle" >C</text>
+<text x="689" y="435" font-size="15" fill="#2d6888" font-weight="600" text-anchor="start" >Release sources</text>
+<text x="689" y="457" font-size="14" fill="#274e68" font-weight="400" text-anchor="start" >Measure A / B / C in cm</text>
+<circle cx="706" cy="514" r="7" fill="#d8585d" stroke="#fff" />
+<text x="689" y="548" font-size="14" fill="#274e68" font-weight="400" text-anchor="start" >Single red floating token</text>
+<path d="M1012 408L1197 416L1210 496L1107 539L1000 501Z" fill="#d5f1e9" fill-opacity=".86" stroke="#4b9b91" stroke-width="2.5" stroke-dasharray="7 5"/>
+<text x="1103" y="455" font-size="18" fill="#2d756d" font-weight="600" text-anchor="middle" >Protected zone</text>
+<text x="1103" y="480" font-size="14" fill="#2d756d" font-weight="400" text-anchor="middle" >Measured polygon</text>
+<text x="1103" y="502" font-size="13" fill="#2d756d" font-weight="400" text-anchor="middle" >No coral prop needed</text>
+<rect x="895" y="438" width="42" height="172" rx="7" fill="url(#mesh)" stroke="#4b849f" />
+<path d="M891 435H942M891 614H942" fill="none" stroke="#5486a0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+<text x="916" y="634" font-size="14" fill="#376e8c" font-weight="600" text-anchor="middle" >Mesh collector</text>
+<text x="900" y="712" font-size="14" fill="#476f86" font-weight="400" text-anchor="middle" ></text>
+<path d="M734 512C784 494 835 492 883 500" fill="none" stroke="#4d9eb9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 6" marker-end="url(#arrow)"/>
+<text x="798" y="485" font-size="12" fill="#547e95" font-weight="400" text-anchor="middle" >Illustrative drift</text>
+<rect x="1151" y="570" width="92" height="66" rx="9" fill="#2b4e62" stroke="#214659" />
+<path d="M1159 584H1177" fill="none" stroke="#9ab8c8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1159 595H1177" fill="none" stroke="#9ab8c8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1159 606H1177" fill="none" stroke="#9ab8c8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1159 617H1177" fill="none" stroke="#9ab8c8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+<rect x="1184" y="632" width="18" height="20" rx="3" fill="#79bccb" stroke="#2c7d93" />
+<text x="1129" y="565" font-size="14" fill="#2d6482" font-weight="600" text-anchor="end" >Pond Boss 80 GPH</text>
+<path d="M1105 574L1144 594" fill="none" stroke="#7397ad" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1082" y="596" font-size="13" fill="#376d89" font-weight="400" text-anchor="end" >Water enters grille</text>
+<text x="1082" y="615" font-size="13" fill="#376d89" font-weight="400" text-anchor="end" >Pump fully submerged</text>
+<path d="M1193 650V659Q1193 665 1187 665H596Q585 665 585 654V411Q585 400 598 400H651" fill="none" stroke="#ffffff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M1193 650V659Q1193 665 1187 665H596Q585 665 585 654V411Q585 400 598 400H651" fill="none" stroke="#49b1c3" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+<path d="M607 400H649" fill="none" stroke="#168fa6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#tubeArrow)"/>
+<path d="M1080 665H1045" fill="none" stroke="#168fa6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#tubeArrow)"/>
+<text x="900" y="711" font-size="14" fill="#205d76" font-weight="600" text-anchor="middle" paint-order="stroke" stroke="#dff4fc" stroke-width="5" stroke-linejoin="round">3/8 in INSIDE diameter vinyl tubing · check the actual outlet adapter</text>
+<text x="687" y="410" font-size="12" fill="#24667f" font-weight="400" text-anchor="start" >Submerged sidewall return</text>
+<text x="600" y="765" font-size="15" fill="#305f79" font-weight="500" text-anchor="start" >Measure interior: ____ × ____ cm   |   Water depth: ____ cm</text>
+<text x="600" y="789" font-size="13" fill="#274e68" font-weight="400" text-anchor="start" >Check bin space, collector fit, pump submersion and tube / adapter fit before use.</text>
+<path d="M1243 608H1326V724Q1326 754 1307 754Q1288 754 1288 735H400" fill="none" stroke="#b78b54" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<text x="1066" y="734" font-size="13" fill="#8b673d" font-weight="500" text-anchor="middle" paint-order="stroke" stroke="#f3faff" stroke-width="6">Original AC cord · separate from USB</text>
+<rect x="63" y="659" width="313" height="118" rx="15" fill="#f6fbfe" stroke="#cbe1ed" />
+<rect x="79" y="681" width="47" height="68" rx="8" fill="#ffffff" stroke="#9ebaca" />
+<path d="M94 696V704M110 696V704" fill="none" stroke="#688da3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<circle cx="102" cy="710" r="2.5" fill="#688da3" stroke="none" />
+<path d="M94 722V730M110 722V730" fill="none" stroke="#688da3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<circle cx="102" cy="736" r="2.5" fill="#688da3" stroke="none" />
+<text x="144" y="690" font-size="15" fill="#375e76" font-weight="600" text-anchor="start" >GFCI-protected outlet</text>
+<text x="144" y="715" font-size="15" fill="#8b673d" font-weight="600" text-anchor="start" >Manual power only</text>
+<text x="144" y="739" font-size="13" fill="#274e68" font-weight="400" text-anchor="start" >Keep plug + outlet dry.</text>
+<text x="144" y="759" font-size="12" fill="#274e68" font-weight="400" text-anchor="start" >Unplug before adjustments.</text>
+<path d="M400 735H378" fill="none" stroke="#b78b54" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+<text x="65" y="319" font-size="17" fill="#376e8c" font-weight="600" text-anchor="start" >No Arduino / ESP32 / relay</text>
+<text x="65" y="344" font-size="15" fill="#274e68" font-weight="400" text-anchor="start" >No laptop-to-pump wiring.</text>
+<rect x="40" y="832" width="1320" height="246" rx="24" fill="#ffffffc9" stroke="#cce3f1" />
+<text x="65" y="870" font-size="21" fill="#245b7a" font-weight="600" text-anchor="start" >Required parts / check before the first physical trial</text>
+<text x="65" y="899" font-size="15" fill="#274e68" font-weight="400" text-anchor="start" >Use these connections only. No coral ornament or 3D print is required for the experiment.</text>
+<rect x="65" y="921" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="91" y="935" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >USB webcam</text>
+<text x="91" y="953" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Verify it works in the laptop camera selector</text>
+<rect x="65" y="968" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="91" y="982" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >Rigid overhead mount</text>
+<text x="91" y="1000" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Keep camera fixed throughout calibration + trials</text>
+<rect x="65" y="1015" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="91" y="1029" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >Seven water-plane marks + ruler</text>
+<text x="91" y="1047" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Measure their positions; reserve independent checks</text>
+<rect x="505" y="921" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="531" y="935" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >USB data cable</text>
+<text x="531" y="953" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Not a charge-only cable</text>
+<rect x="505" y="968" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="531" y="982" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >3/8 in ID tubing + clamps</text>
+<text x="531" y="1000" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Verify the actual pump adapter before fitting</text>
+<rect x="505" y="1015" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="531" y="1029" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >Red floating tokens</text>
+<text x="531" y="1047" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Track one token at a time</text>
+<rect x="945" y="921" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="971" y="935" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >Host-port adapter</text>
+<text x="971" y="953" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Match the laptop port to the webcam cable</text>
+<rect x="945" y="968" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="971" y="982" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >Pond Boss pump + original cord</text>
+<text x="971" y="1000" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Check exact model label and full submersion</text>
+<rect x="945" y="1015" width="15" height="15" rx="3" fill="#fff" stroke="#82afc8" />
+<text x="971" y="1029" font-size="15" fill="#315f79" font-weight="500" text-anchor="start" >Bin, mesh collector + spill tray</text>
+<text x="971" y="1047" font-size="11" fill="#55778c" font-weight="400" text-anchor="start" >Check fit; position and secure mesh by hand</text>
+<text x="43" y="1110" font-size="15" fill="#4c7188" font-weight="400" text-anchor="start" >Connection plan only · layout and arrows are illustrative · no physical tank trial is claimed.</text>
+<a xlink:href="https://store.ggp-us.com/products/tubing-adapter-53458" target="_blank">
+<text x="1358" y="1110" font-size="13" fill="#2a7197" font-weight="500" text-anchor="end" >Manufacturer: 3/8-in ID adapter ↗</text>
+</a>
+<text x="43" y="1134" font-size="12" fill="#55788e" font-weight="400" text-anchor="start" >Adapter reference supports model 99034; confirm your purchased pump model and fitted barb. Keep return water in the same bin.</text>
+</svg>
