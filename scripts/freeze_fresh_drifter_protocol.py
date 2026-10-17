@@ -1,5 +1,6 @@
 """Freeze a metadata-only new-GDP-ID study before acquisition; never fits models."""
 from __future__ import annotations
+
 import csv
 import hashlib
 import json

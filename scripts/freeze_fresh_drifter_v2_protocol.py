@@ -1,8 +1,9 @@
 """Preserve v1 and freeze a pre-outcome schema/transport amendment, no network."""
 from __future__ import annotations
+
 import hashlib
 import json
-from datetime import UTC,datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
