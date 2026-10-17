@@ -1,0 +1,1541 @@
+{
+  "schema_version": 1,
+  "kind": "MOTION_VECTOR_DIAGNOSTIC",
+  "status": "COMPLETED",
+  "noaa": {
+    "schema_version": 1,
+    "kind": "NOAA_VECTOR_MOTION_DIAGNOSTIC",
+    "status": "COMPLETED",
+    "data_origin": "REAL_HISTORICAL_NOAA_DRIFTER",
+    "design_status": "POST_HOC_ALREADY_VIEWED_FORECASTS_NOT_INDEPENDENT_TEST",
+    "experiment_id": "noaa-gdp-8707978-19871003-chronological-v1",
+    "provenance": {
+      "provider": "NOAA AOML Global Drifter Program",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%228707978%22&time%3E=1987-10-03T00%3A00%3A00Z&time%3C=1987-10-03T23%3A00%3A00Z",
+      "metadata_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.html",
+      "product_doi": "10.25921/x46c-3620",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "attribution": "NOAA Global Drifter Program; Elipot et al. (2022), DOI 10.25921/x46c-3620",
+      "retrieved_at_utc": "2026-10-16T22:35:05.155315Z",
+      "csv_relative_path": "data/public/noaa-gdp-8707978-19871003.csv",
+      "sha256": "b503de924bbfe82fb18a705917e527faaf26e51688845adb4b57f0cb121c2fca",
+      "integrity_verified": true,
+      "bytes": 1950,
+      "row_count": 24,
+      "drifter_id": "8707978",
+      "upstream_manifest_purpose": "real historical data loading/replay smoke test only",
+      "benchmark_scope": "retrospective_tiny_heldout_forecast_extension_of_ingestion_fixture"
+    },
+    "coordinate_system": {
+      "input": "geographic_latitude_longitude_degrees",
+      "fit": "spherical_azimuthal_equidistant_east_north_metres",
+      "error": "spherical_great_circle_metres",
+      "earth_mean_radius_m": 6371008.8,
+      "origin_latitude_deg": 46.43713,
+      "origin_longitude_deg": -137.7102,
+      "maximum_local_distance_m": 50000.0,
+      "sphere_not_wgs84_ellipsoid": true,
+      "approximate_maximum_ellipsoid_discrepancy_fraction": 0.006
+    },
+    "velocity_units": "m/s",
+    "vector_basis": "fixed_spherical_local_frame_east_north_metres",
+    "minimum_heading_speed_m_s": 0.005,
+    "residual_definition": "predicted_minus_observed_velocity_not_current_forcing_residual",
+    "coverage": {
+      "physical_drifters": 1,
+      "models": 3,
+      "intervals_per_model": 6,
+      "attempted_model_intervals": 18,
+      "scored_model_intervals": 18,
+      "failed_model_intervals": 0,
+      "unique_observed_intervals": 6
+    },
+    "models": [
+      {
+        "id": "stationary",
+        "label": "Stationary position persistence",
+        "intervals": [
+          {
+            "horizon_hours": 1,
+            "start_utc": "1987-10-03T17:00:00Z",
+            "end_utc": "1987-10-03T18:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T17:00:00Z",
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "latitude_deg": 46.4097,
+              "longitude_deg": -137.66934
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T17:00:00Z",
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "horizon_hours": 1,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 1225.0189256719914,
+              "training_error_radius_m": 1277.9096939395558,
+              "training_hindcast_count": 10,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": -0.30592690082618157,
+              "northward_m_s": 0.14900092946694674,
+              "speed_m_s": 0.34028303753070965,
+              "heading_deg_clockwise_from_north": 295.9682814991389
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -5.419072598063697e-13,
+              "northward_m_s": -1.2631870857957337e-16,
+              "speed_m_s": 5.419072745288298e-13,
+              "heading_deg_clockwise_from_north": null
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": 0.30592690082563967,
+              "northward_m_s": -0.14900092946694687,
+              "speed_m_s": 0.34028303753022254,
+              "heading_deg_clockwise_from_north": 115.96828149917893
+            },
+            "angular_error_deg": null,
+            "position_error_m": 1225.0189256719914,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 2,
+            "start_utc": "1987-10-03T18:00:00Z",
+            "end_utc": "1987-10-03T19:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "latitude_deg": 46.4097,
+              "longitude_deg": -137.66934
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "latitude_deg": 46.42067,
+              "longitude_deg": -137.66748
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "horizon_hours": 1,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 1225.0189256719914,
+              "training_error_radius_m": 1277.9096939395558,
+              "training_hindcast_count": 10,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "horizon_hours": 2,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 2001.2452586372735,
+              "training_error_radius_m": 2555.553715209217,
+              "training_hindcast_count": 9,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.03942911894613935,
+              "northward_m_s": 0.33885701749763497,
+              "speed_m_s": 0.3411432744878042,
+              "heading_deg_clockwise_from_north": 6.637042360586029
+            },
+            "predicted_velocity": {
+              "eastward_m_s": 0.0,
+              "northward_m_s": 0.0,
+              "speed_m_s": 0.0,
+              "heading_deg_clockwise_from_north": null
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.03942911894613935,
+              "northward_m_s": -0.33885701749763497,
+              "speed_m_s": 0.3411432744878042,
+              "heading_deg_clockwise_from_north": 186.63704236058604
+            },
+            "angular_error_deg": null,
+            "position_error_m": 2001.2452586372735,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 3,
+            "start_utc": "1987-10-03T19:00:00Z",
+            "end_utc": "1987-10-03T20:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "latitude_deg": 46.42067,
+              "longitude_deg": -137.66748
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "latitude_deg": 46.43215,
+              "longitude_deg": -137.66277
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "horizon_hours": 2,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 2001.2452586372735,
+              "training_error_radius_m": 2555.553715209217,
+              "training_hindcast_count": 9,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "horizon_hours": 3,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 3091.6205164894554,
+              "training_error_radius_m": 3832.3891031998382,
+              "training_hindcast_count": 8,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.10007530785694295,
+              "northward_m_s": 0.3546458765460708,
+              "speed_m_s": 0.36849527133165877,
+              "heading_deg_clockwise_from_north": 15.758204645463373
+            },
+            "predicted_velocity": {
+              "eastward_m_s": 0.0,
+              "northward_m_s": 0.0,
+              "speed_m_s": 0.0,
+              "heading_deg_clockwise_from_north": null
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.10007530785694295,
+              "northward_m_s": -0.3546458765460708,
+              "speed_m_s": 0.36849527133165877,
+              "heading_deg_clockwise_from_north": 195.75820464546337
+            },
+            "angular_error_deg": null,
+            "position_error_m": 3091.6205164894554,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 4,
+            "start_utc": "1987-10-03T20:00:00Z",
+            "end_utc": "1987-10-03T21:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "latitude_deg": 46.43215,
+              "longitude_deg": -137.66277
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "latitude_deg": 46.44412,
+              "longitude_deg": -137.65826
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "horizon_hours": 3,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 3091.6205164894554,
+              "training_error_radius_m": 3832.3891031998382,
+              "training_hindcast_count": 8,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "horizon_hours": 4,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 4371.641802358656,
+              "training_error_radius_m": 5106.580695953224,
+              "training_hindcast_count": 7,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.09576637411024687,
+              "northward_m_s": 0.3697839132761769,
+              "speed_m_s": 0.3819834301747484,
+              "heading_deg_clockwise_from_north": 14.519423124763888
+            },
+            "predicted_velocity": {
+              "eastward_m_s": 0.0,
+              "northward_m_s": 0.0,
+              "speed_m_s": 0.0,
+              "heading_deg_clockwise_from_north": null
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.09576637411024687,
+              "northward_m_s": -0.3697839132761769,
+              "speed_m_s": 0.3819834301747484,
+              "heading_deg_clockwise_from_north": 194.51942312476388
+            },
+            "angular_error_deg": null,
+            "position_error_m": 4371.641802358656,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 5,
+            "start_utc": "1987-10-03T21:00:00Z",
+            "end_utc": "1987-10-03T22:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "latitude_deg": 46.44412,
+              "longitude_deg": -137.65826
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "latitude_deg": 46.45582,
+              "longitude_deg": -137.654
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "horizon_hours": 4,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 4371.641802358656,
+              "training_error_radius_m": 5106.580695953224,
+              "training_hindcast_count": 7,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "horizon_hours": 5,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 5665.887166827787,
+              "training_error_radius_m": 6383.848690437805,
+              "training_hindcast_count": 6,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.09041040562312358,
+              "northward_m_s": 0.3614459497003991,
+              "speed_m_s": 0.37258182456979994,
+              "heading_deg_clockwise_from_north": 14.043541519865272
+            },
+            "predicted_velocity": {
+              "eastward_m_s": 0.0,
+              "northward_m_s": 0.0,
+              "speed_m_s": 0.0,
+              "heading_deg_clockwise_from_north": null
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.09041040562312358,
+              "northward_m_s": -0.3614459497003991,
+              "speed_m_s": 0.37258182456979994,
+              "heading_deg_clockwise_from_north": 194.04354151986527
+            },
+            "angular_error_deg": null,
+            "position_error_m": 5665.887166827787,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 6,
+            "start_utc": "1987-10-03T22:00:00Z",
+            "end_utc": "1987-10-03T23:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "latitude_deg": 46.45582,
+              "longitude_deg": -137.654
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T23:00:00Z",
+              "latitude_deg": 46.46087,
+              "longitude_deg": -137.62016
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "horizon_hours": 5,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 5665.887166827787,
+              "training_error_radius_m": 6383.848690437805,
+              "training_hindcast_count": 6,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T23:00:00Z",
+              "horizon_hours": 6,
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498000000002,
+              "error_m": 6774.607840188004,
+              "training_error_radius_m": 7081.798481539463,
+              "training_hindcast_count": 5,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.7198978857852303,
+              "northward_m_s": 0.15664787386520995,
+              "speed_m_s": 0.736743864816352,
+              "heading_deg_clockwise_from_north": 77.72395382417139
+            },
+            "predicted_velocity": {
+              "eastward_m_s": 0.0,
+              "northward_m_s": 0.0,
+              "speed_m_s": 0.0,
+              "heading_deg_clockwise_from_north": null
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.7198978857852303,
+              "northward_m_s": -0.15664787386520995,
+              "speed_m_s": 0.736743864816352,
+              "heading_deg_clockwise_from_north": 257.72395382417136
+            },
+            "angular_error_deg": null,
+            "position_error_m": 6774.607840188004,
+            "status": "SCORED"
+          }
+        ],
+        "metrics": {
+          "vector_rmse_m_s": 0.4463705716900126,
+          "speed_bias_predicted_minus_observed_m_s": -0.42353845048508854,
+          "angular_mae_deg": null,
+          "angular_scored_count": 0,
+          "angular_withheld_count": 6,
+          "ade_m": 3855.003585028861,
+          "fde_m": 6774.607840188004
+        }
+      },
+      {
+        "id": "last_drift",
+        "label": "Last observed displacement",
+        "intervals": [
+          {
+            "horizon_hours": 1,
+            "start_utc": "1987-10-03T17:00:00Z",
+            "end_utc": "1987-10-03T18:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T17:00:00Z",
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "latitude_deg": 46.4097,
+              "longitude_deg": -137.66934
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T17:00:00Z",
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "horizon_hours": 1,
+              "latitude_deg": 46.40795839679777,
+              "longitude_deg": -137.66854153599868,
+              "error_m": 203.10334664909072,
+              "training_error_radius_m": 1382.7751051988655,
+              "training_hindcast_count": 10,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": -0.30592690082618157,
+              "northward_m_s": 0.14900092946694674,
+              "speed_m_s": 0.34028303753070965,
+              "heading_deg_clockwise_from_north": 295.9682814991389
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.28889380030517525,
+              "northward_m_s": 0.09521599877500812,
+              "speed_m_s": 0.3041803975891425,
+              "heading_deg_clockwise_from_north": 288.2416120248323
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": 0.017033100521006317,
+              "northward_m_s": -0.05378493069193861,
+              "speed_m_s": 0.056417597280417266,
+              "heading_deg_clockwise_from_north": 162.4275737863365
+            },
+            "angular_error_deg": 7.726669474306618,
+            "position_error_m": 203.10334664909072,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 2,
+            "start_utc": "1987-10-03T18:00:00Z",
+            "end_utc": "1987-10-03T19:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "latitude_deg": 46.4097,
+              "longitude_deg": -137.66934
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "latitude_deg": 46.42067,
+              "longitude_deg": -137.66748
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "horizon_hours": 1,
+              "latitude_deg": 46.40795839679777,
+              "longitude_deg": -137.66854153599868,
+              "error_m": 203.10334664909072,
+              "training_error_radius_m": 1382.7751051988655,
+              "training_hindcast_count": 10,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "horizon_hours": 2,
+              "latitude_deg": 46.41104519003868,
+              "longitude_deg": -137.68210460753838,
+              "error_m": 1549.939131317697,
+              "training_error_radius_m": 2669.3242765736763,
+              "training_hindcast_count": 9,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.03942911894613935,
+              "northward_m_s": 0.33885701749763497,
+              "speed_m_s": 0.3411432744878042,
+              "heading_deg_clockwise_from_north": 6.637042360586029
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.2888938003046316,
+              "northward_m_s": 0.09521599877493132,
+              "speed_m_s": 0.30418039758860216,
+              "heading_deg_clockwise_from_north": 288.2416120248506
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.32832291925077095,
+              "northward_m_s": -0.24364101872270366,
+              "speed_m_s": 0.4088482423951277,
+              "heading_deg_clockwise_from_north": 233.4217249795024
+            },
+            "angular_error_deg": 78.3954303357354,
+            "position_error_m": 1549.939131317697,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 3,
+            "start_utc": "1987-10-03T19:00:00Z",
+            "end_utc": "1987-10-03T20:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "latitude_deg": 46.42067,
+              "longitude_deg": -137.66748
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "latitude_deg": 46.43215,
+              "longitude_deg": -137.66277
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "horizon_hours": 2,
+              "latitude_deg": 46.41104519003868,
+              "longitude_deg": -137.68210460753838,
+              "error_m": 1549.939131317697,
+              "training_error_radius_m": 2669.3242765736763,
+              "training_hindcast_count": 9,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "horizon_hours": 3,
+              "latitude_deg": 46.41413037936826,
+              "longitude_deg": -137.6956692141608,
+              "error_m": 3220.845237308039,
+              "training_error_radius_m": 4355.176181817372,
+              "training_hindcast_count": 8,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.10007530785694295,
+              "northward_m_s": 0.3546458765460708,
+              "speed_m_s": 0.36849527133165877,
+              "heading_deg_clockwise_from_north": 15.758204645463373
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.28889380030497824,
+              "northward_m_s": 0.09521599877520114,
+              "speed_m_s": 0.3041803975890158,
+              "heading_deg_clockwise_from_north": 288.24161202487846
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.3889691081619212,
+              "northward_m_s": -0.2594298777708697,
+              "speed_m_s": 0.4675476751995338,
+              "heading_deg_clockwise_from_north": 236.2979885285888
+            },
+            "angular_error_deg": 87.5165926205849,
+            "position_error_m": 3220.845237308039,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 4,
+            "start_utc": "1987-10-03T20:00:00Z",
+            "end_utc": "1987-10-03T21:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "latitude_deg": 46.43215,
+              "longitude_deg": -137.66277
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "latitude_deg": 46.44412,
+              "longitude_deg": -137.65826
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "horizon_hours": 3,
+              "latitude_deg": 46.41413037936826,
+              "longitude_deg": -137.6956692141608,
+              "error_m": 3220.845237308039,
+              "training_error_radius_m": 4355.176181817372,
+              "training_hindcast_count": 8,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "horizon_hours": 4,
+              "latitude_deg": 46.41721396443205,
+              "longitude_deg": -137.7092353554071,
+              "error_m": 4920.707305668564,
+              "training_error_radius_m": 6535.763613423168,
+              "training_hindcast_count": 7,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.09576637411024687,
+              "northward_m_s": 0.3697839132761769,
+              "speed_m_s": 0.3819834301747484,
+              "heading_deg_clockwise_from_north": 14.519423124763888
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.2888938003051324,
+              "northward_m_s": 0.09521599877503238,
+              "speed_m_s": 0.3041803975891094,
+              "heading_deg_clockwise_from_north": 288.2416120248392
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.38466017441537925,
+              "northward_m_s": -0.2745679145011445,
+              "speed_m_s": 0.47260024275784895,
+              "heading_deg_clockwise_from_north": 234.48100246855057
+            },
+            "angular_error_deg": 86.27781109992469,
+            "position_error_m": 4920.707305668564,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 5,
+            "start_utc": "1987-10-03T21:00:00Z",
+            "end_utc": "1987-10-03T22:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "latitude_deg": 46.44412,
+              "longitude_deg": -137.65826
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "latitude_deg": 46.45582,
+              "longitude_deg": -137.654
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "horizon_hours": 4,
+              "latitude_deg": 46.41721396443205,
+              "longitude_deg": -137.7092353554071,
+              "error_m": 4920.707305668564,
+              "training_error_radius_m": 6535.763613423168,
+              "training_hindcast_count": 7,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "horizon_hours": 5,
+              "latitude_deg": 46.42029594487571,
+              "longitude_deg": -137.72280303081777,
+              "error_m": 6587.895244251856,
+              "training_error_radius_m": 8804.777975494668,
+              "training_hindcast_count": 6,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.09041040562312358,
+              "northward_m_s": 0.3614459497003991,
+              "speed_m_s": 0.37258182456979994,
+              "heading_deg_clockwise_from_north": 14.043541519865272
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.2888938003050983,
+              "northward_m_s": 0.09521599877501444,
+              "speed_m_s": 0.30418039758907145,
+              "heading_deg_clockwise_from_north": 288.241612024838
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.3793042059282219,
+              "northward_m_s": -0.2662299509253847,
+              "speed_m_s": 0.46341133715584876,
+              "heading_deg_clockwise_from_north": 234.93535478899818
+            },
+            "angular_error_deg": 85.80192949502725,
+            "position_error_m": 6587.895244251856,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 6,
+            "start_utc": "1987-10-03T22:00:00Z",
+            "end_utc": "1987-10-03T23:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "latitude_deg": 46.45582,
+              "longitude_deg": -137.654
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T23:00:00Z",
+              "latitude_deg": 46.46087,
+              "longitude_deg": -137.62016
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "horizon_hours": 5,
+              "latitude_deg": 46.42029594487571,
+              "longitude_deg": -137.72280303081777,
+              "error_m": 6587.895244251856,
+              "training_error_radius_m": 8804.777975494668,
+              "training_hindcast_count": 6,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T23:00:00Z",
+              "horizon_hours": 6,
+              "latitude_deg": 46.423376320345,
+              "longitude_deg": -137.73637223993268,
+              "error_m": 9832.207336607189,
+              "training_error_radius_m": 8744.968125912736,
+              "training_hindcast_count": 5,
+              "within_training_error_radius": false
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.7198978857852303,
+              "northward_m_s": 0.15664787386520995,
+              "speed_m_s": 0.736743864816352,
+              "heading_deg_clockwise_from_north": 77.72395382417139
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.2888938003048808,
+              "northward_m_s": 0.09521599877465639,
+              "speed_m_s": 0.3041803975887528,
+              "heading_deg_clockwise_from_north": 288.2416120247868
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -1.0087916860901112,
+              "northward_m_s": -0.06143187509055356,
+              "speed_m_s": 1.0106604480247907,
+              "heading_deg_clockwise_from_north": 266.5151914235291
+            },
+            "angular_error_deg": 149.48234179938459,
+            "position_error_m": 9832.207336607189,
+            "status": "SCORED"
+          }
+        ],
+        "metrics": {
+          "vector_rmse_m_s": 0.5550489854114964,
+          "speed_bias_predicted_minus_observed_m_s": -0.1193580528962298,
+          "angular_mae_deg": 82.53346247082725,
+          "angular_scored_count": 6,
+          "angular_withheld_count": 0,
+          "ade_m": 4385.782933633739,
+          "fde_m": 9832.207336607189
+        }
+      },
+      {
+        "id": "ridge_ar1",
+        "label": "Learned ridge velocity autoregression",
+        "intervals": [
+          {
+            "horizon_hours": 1,
+            "start_utc": "1987-10-03T17:00:00Z",
+            "end_utc": "1987-10-03T18:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T17:00:00Z",
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "latitude_deg": 46.4097,
+              "longitude_deg": -137.66934
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T17:00:00Z",
+              "latitude_deg": 46.40487,
+              "longitude_deg": -137.65498
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "horizon_hours": 1,
+              "latitude_deg": 46.407710165485845,
+              "longitude_deg": -137.66582169652614,
+              "error_m": 348.8842027840471,
+              "training_error_radius_m": 1628.7962917915925,
+              "training_hindcast_count": 10,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": -0.30592690082618157,
+              "northward_m_s": 0.14900092946694674,
+              "speed_m_s": 0.34028303753070965,
+              "heading_deg_clockwise_from_north": 295.9682814991389
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.23096363653327356,
+              "northward_m_s": 0.08758025907577462,
+              "speed_m_s": 0.24701113979020037,
+              "heading_deg_clockwise_from_north": 290.766477571538
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": 0.074963264292908,
+              "northward_m_s": -0.06142067039117212,
+              "speed_m_s": 0.09691227860673478,
+              "heading_deg_clockwise_from_north": 129.32925717418266
+            },
+            "angular_error_deg": 5.201803927600906,
+            "position_error_m": 348.8842027840471,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 2,
+            "start_utc": "1987-10-03T18:00:00Z",
+            "end_utc": "1987-10-03T19:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "latitude_deg": 46.4097,
+              "longitude_deg": -137.66934
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "latitude_deg": 46.42067,
+              "longitude_deg": -137.66748
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T18:00:00Z",
+              "horizon_hours": 1,
+              "latitude_deg": 46.407710165485845,
+              "longitude_deg": -137.66582169652614,
+              "error_m": 348.8842027840471,
+              "training_error_radius_m": 1628.7962917915925,
+              "training_hindcast_count": 10,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "horizon_hours": 2,
+              "latitude_deg": 46.41000649392192,
+              "longitude_deg": -137.67429573331455,
+              "error_m": 1295.7467419815,
+              "training_error_radius_m": 2875.1356089712904,
+              "training_hindcast_count": 9,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.03942911894613935,
+              "northward_m_s": 0.33885701749763497,
+              "speed_m_s": 0.3411432744878042,
+              "heading_deg_clockwise_from_north": 6.637042360586029
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.1805090717881136,
+              "northward_m_s": 0.07083628356491342,
+              "speed_m_s": 0.19391055687376893,
+              "heading_deg_clockwise_from_north": 291.4262867035337
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.21993819073425294,
+              "northward_m_s": -0.2680207339327215,
+              "speed_m_s": 0.34671014055157273,
+              "heading_deg_clockwise_from_north": 219.3723504423084
+            },
+            "angular_error_deg": 75.21075565705229,
+            "position_error_m": 1295.7467419815,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 3,
+            "start_utc": "1987-10-03T19:00:00Z",
+            "end_utc": "1987-10-03T20:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "latitude_deg": 46.42067,
+              "longitude_deg": -137.66748
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "latitude_deg": 46.43215,
+              "longitude_deg": -137.66277
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T19:00:00Z",
+              "horizon_hours": 2,
+              "latitude_deg": 46.41000649392192,
+              "longitude_deg": -137.67429573331455,
+              "error_m": 1295.7467419815,
+              "training_error_radius_m": 2875.1356089712904,
+              "training_hindcast_count": 9,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "horizon_hours": 3,
+              "latitude_deg": 46.41169875395631,
+              "longitude_deg": -137.68075943925248,
+              "error_m": 2659.4817148692005,
+              "training_error_radius_m": 4171.036662432501,
+              "training_hindcast_count": 8,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.10007530785694295,
+              "northward_m_s": 0.3546458765460708,
+              "speed_m_s": 0.36849527133165877,
+              "heading_deg_clockwise_from_north": 15.758204645463373
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.13767526411531245,
+              "northward_m_s": 0.05221284513447447,
+              "speed_m_s": 0.14724353821562985,
+              "heading_deg_clockwise_from_north": 290.76905052665495
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.2377505719722554,
+              "northward_m_s": -0.3024330314115964,
+              "speed_m_s": 0.38469607869322275,
+              "heading_deg_clockwise_from_north": 218.17182099826564
+            },
+            "angular_error_deg": 84.98915411880841,
+            "position_error_m": 2659.4817148692005,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 4,
+            "start_utc": "1987-10-03T20:00:00Z",
+            "end_utc": "1987-10-03T21:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "latitude_deg": 46.43215,
+              "longitude_deg": -137.66277
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "latitude_deg": 46.44412,
+              "longitude_deg": -137.65826
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T20:00:00Z",
+              "horizon_hours": 3,
+              "latitude_deg": 46.41169875395631,
+              "longitude_deg": -137.68075943925248,
+              "error_m": 2659.4817148692005,
+              "training_error_radius_m": 4171.036662432501,
+              "training_hindcast_count": 8,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "horizon_hours": 4,
+              "latitude_deg": 46.412821295942656,
+              "longitude_deg": -137.68553896354658,
+              "error_m": 4059.968045696881,
+              "training_error_radius_m": 5442.281581535221,
+              "training_hindcast_count": 7,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.09576637411024687,
+              "northward_m_s": 0.3697839132761769,
+              "speed_m_s": 0.3819834301747484,
+              "heading_deg_clockwise_from_north": 14.519423124763888
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.10179589929510958,
+              "northward_m_s": 0.03463772255165812,
+              "speed_m_s": 0.10752756361447857,
+              "heading_deg_clockwise_from_north": 288.79171324700786
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.19756227340535645,
+              "northward_m_s": -0.3351461907245188,
+              "speed_m_s": 0.38904218412692515,
+              "heading_deg_clockwise_from_north": 210.5185368977585
+            },
+            "angular_error_deg": 85.72770987775601,
+            "position_error_m": 4059.968045696881,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 5,
+            "start_utc": "1987-10-03T21:00:00Z",
+            "end_utc": "1987-10-03T22:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "latitude_deg": 46.44412,
+              "longitude_deg": -137.65826
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "latitude_deg": 46.45582,
+              "longitude_deg": -137.654
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T21:00:00Z",
+              "horizon_hours": 4,
+              "latitude_deg": 46.412821295942656,
+              "longitude_deg": -137.68553896354658,
+              "error_m": 4059.968045696881,
+              "training_error_radius_m": 5442.281581535221,
+              "training_hindcast_count": 7,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "horizon_hours": 5,
+              "latitude_deg": 46.413441167378586,
+              "longitude_deg": -137.6889177742792,
+              "error_m": 5419.063129291971,
+              "training_error_radius_m": 7115.702232308064,
+              "training_hindcast_count": 6,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.09041040562312358,
+              "northward_m_s": 0.3614459497003991,
+              "speed_m_s": 0.37258182456979994,
+              "heading_deg_clockwise_from_north": 14.043541519865272
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.0719590649272097,
+              "northward_m_s": 0.019125390940859258,
+              "speed_m_s": 0.07445728711039022,
+              "heading_deg_clockwise_from_north": 284.8840595233801
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.1623694705503333,
+              "northward_m_s": -0.3423205587595399,
+              "speed_m_s": 0.3788762461757653,
+              "heading_deg_clockwise_from_north": 205.37591864058948
+            },
+            "angular_error_deg": 89.15948199648517,
+            "position_error_m": 5419.063129291971,
+            "status": "SCORED"
+          },
+          {
+            "horizon_hours": 6,
+            "start_utc": "1987-10-03T22:00:00Z",
+            "end_utc": "1987-10-03T23:00:00Z",
+            "interval_seconds": 3600.0,
+            "observed_start": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "latitude_deg": 46.45582,
+              "longitude_deg": -137.654
+            },
+            "observed_end": {
+              "time_utc": "1987-10-03T23:00:00Z",
+              "latitude_deg": 46.46087,
+              "longitude_deg": -137.62016
+            },
+            "predicted_start": {
+              "time_utc": "1987-10-03T22:00:00Z",
+              "horizon_hours": 5,
+              "latitude_deg": 46.413441167378586,
+              "longitude_deg": -137.6889177742792,
+              "error_m": 5419.063129291971,
+              "training_error_radius_m": 7115.702232308064,
+              "training_hindcast_count": 6,
+              "within_training_error_radius": true
+            },
+            "predicted_end": {
+              "time_utc": "1987-10-03T23:00:00Z",
+              "horizon_hours": 6,
+              "latitude_deg": 46.41363148709664,
+              "longitude_deg": -137.69113629873124,
+              "error_m": 7561.248284407573,
+              "training_error_radius_m": 7792.752429010483,
+              "training_hindcast_count": 5,
+              "within_training_error_radius": true
+            },
+            "observed_velocity": {
+              "eastward_m_s": 0.7198978857852303,
+              "northward_m_s": 0.15664787386520995,
+              "speed_m_s": 0.736743864816352,
+              "heading_deg_clockwise_from_north": 77.72395382417139
+            },
+            "predicted_velocity": {
+              "eastward_m_s": -0.04724576261063103,
+              "northward_m_s": 0.005866452681167655,
+              "speed_m_s": 0.047608584853159414,
+              "heading_deg_clockwise_from_north": 277.07812361266235
+            },
+            "residual_predicted_minus_observed": {
+              "eastward_m_s": -0.7671436483958614,
+              "northward_m_s": -0.1507814211840423,
+              "speed_m_s": 0.7818212162946159,
+              "heading_deg_clockwise_from_north": 258.88030841304095
+            },
+            "angular_error_deg": 160.64583021150906,
+            "position_error_m": 7561.248284407573,
+            "status": "SCORED"
+          }
+        ],
+        "metrics": {
+          "vector_rmse_m_s": 0.4441727196828697,
+          "speed_bias_predicted_minus_observed_m_s": -0.28724533874224095,
+          "angular_mae_deg": 83.48912263153531,
+          "angular_scored_count": 6,
+          "angular_withheld_count": 0,
+          "ade_m": 3557.398686505195,
+          "fde_m": 7561.248284407573
+        }
+      }
+    ],
+    "field_forcing_available": false,
+    "debris_survey_context_available": false,
+    "independent_evaluation": false,
+    "model_selection_performed": false,
+    "automatic_model_promotion": false,
+    "physical_validation": false,
+    "calibrated_probability": false,
+    "plastic_source_attribution_supported": false,
+    "new_trajectory_acquisition": false,
+    "limitations": [
+      "Six observed intervals are reused across three models; 18 scores are not 18 independent measurements.",
+      "This scores existing forecasts on an already viewed historical buoy-day; it is not new model training or independent evaluation.",
+      "NOAA hourly locations are QC/interpolated; upstream processing may use later fixes, so this does not establish raw real-time skill.",
+      "Vectors are finite differences in the fixed local spherical metric frame, not direct current measurements or instantaneous velocity.",
+      "No matched Copernicus/IOOS current field or MDMAP debris survey is connected; this residual is forecast minus observed motion.",
+      "Buoy response/depth differs from floating plastic. No polluter, source probability, interception benefit or reef impact is inferred."
+    ]
+  },
+  "synthetic_tank": {
+    "schema_version": 1,
+    "kind": "SYNTHETIC_VISION_VECTOR_DIAGNOSTIC",
+    "status": "COMPLETED",
+    "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+    "physical_validation": false,
+    "camera_started": false,
+    "hardware_actuation": false,
+    "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+    "coordinates": {
+      "position_units": "cm",
+      "velocity_units": "cm/s",
+      "image_size_px": [
+        400,
+        240
+      ],
+      "frame_count": 8,
+      "timestamp_kind": "SYNTHETIC_MONOTONIC_OFFSETS",
+      "direction_min_speed_cm_s": 0.01
+    },
+    "model": {
+      "id": "synthetic-frozen-constant-reference-4cm-s",
+      "kind": "DECLARED_SYNTHETIC_REFERENCE_NOT_TRAINED",
+      "velocity_cm_s": [
+        4.0,
+        0.0
+      ],
+      "frozen_before_scoring": true,
+      "trained": false,
+      "model_selection_performed": false,
+      "promotion_performed": false
+    },
+    "calibration": {
+      "homography_image_to_cm": [
+        [
+          0.10000000382425793,
+          0.0,
+          -6.153480596427405e-15
+        ],
+        [
+          0.0,
+          0.09999999840389237,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "mean_error_cm": 6.659256504515438e-07,
+      "max_error_cm": 1.1908600906201096e-06,
+      "validation_count": 3,
+      "max_allowed_error_cm": 0.001,
+      "approved": true,
+      "image_size_px": [
+        400,
+        240
+      ],
+      "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+      "plane": "measured_water_surface",
+      "units": "cm",
+      "calibration_id": "cal-b411c64d9778f6b1",
+      "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+      "physical_validation": false
+    },
+    "frames": [
+      {
+        "id": "synthetic-frame-0000",
+        "t_s": 0.0,
+        "sha256_bgr_bytes": "d37704d2a8667140f8dab7cfe9657317d3ebca6d431e24a748f6350b13b6389f",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      },
+      {
+        "id": "synthetic-frame-0001",
+        "t_s": 0.2,
+        "sha256_bgr_bytes": "9f052b7cb31815a217047cfb00812466487c0f53c4e4ce3e8090702c3b585536",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      },
+      {
+        "id": "synthetic-frame-0002",
+        "t_s": 0.4,
+        "sha256_bgr_bytes": "77787956aa48970135d2672445d24837523b992688c08f9e4ab32deb0a55bb1e",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      },
+      {
+        "id": "synthetic-frame-0003",
+        "t_s": 0.6000000000000001,
+        "sha256_bgr_bytes": "5cbbaf9e345014d4036a2d1eb88f47bb8de0c4f3c1cdc4d8b8753d1bd814711a",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      },
+      {
+        "id": "synthetic-frame-0004",
+        "t_s": 0.8,
+        "sha256_bgr_bytes": "cbeeedc0ddcf6d7e34cf1871270b863bda22c3eb88d7f5a445a02cd799b74ff0",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      },
+      {
+        "id": "synthetic-frame-0005",
+        "t_s": 1.0,
+        "sha256_bgr_bytes": "b3337696f3cab45a22c1ded78f3c798f2f6e070e791479afa9e54fc3bed83aae",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      },
+      {
+        "id": "synthetic-frame-0006",
+        "t_s": 1.2000000000000002,
+        "sha256_bgr_bytes": "d2340c4fa3f7a3832d409c0cf86e296ee1d148051af9c96d03f14c542da0fad5",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      },
+      {
+        "id": "synthetic-frame-0007",
+        "t_s": 1.4000000000000001,
+        "sha256_bgr_bytes": "eb573c6780d9fd921ff9bef94d7d68c512e1b040ea05d54022dafe0b33cb0a73",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false,
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA"
+      }
+    ],
+    "observations": [
+      {
+        "pixel_x": 50.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          45,
+          95,
+          11,
+          11
+        ],
+        "t_s": 0.0,
+        "x_cm": 5.00000019121289,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": true,
+        "reason": null,
+        "frame_id": "synthetic-frame-0000",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "pixel_x": 60.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          55,
+          95,
+          11,
+          11
+        ],
+        "t_s": 0.2,
+        "x_cm": 6.00000022945547,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": false,
+        "reason": null,
+        "frame_id": "synthetic-frame-0001",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "pixel_x": 70.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          65,
+          95,
+          11,
+          11
+        ],
+        "t_s": 0.4,
+        "x_cm": 7.000000267698049,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": false,
+        "reason": null,
+        "frame_id": "synthetic-frame-0002",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "pixel_x": 80.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          75,
+          95,
+          11,
+          11
+        ],
+        "t_s": 0.6000000000000001,
+        "x_cm": 8.00000030594063,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": false,
+        "reason": null,
+        "frame_id": "synthetic-frame-0003",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "pixel_x": 90.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          85,
+          95,
+          11,
+          11
+        ],
+        "t_s": 0.8,
+        "x_cm": 9.000000344183208,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": false,
+        "reason": null,
+        "frame_id": "synthetic-frame-0004",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "pixel_x": 100.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          95,
+          95,
+          11,
+          11
+        ],
+        "t_s": 1.0,
+        "x_cm": 10.000000382425787,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": false,
+        "reason": null,
+        "frame_id": "synthetic-frame-0005",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "pixel_x": 110.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          105,
+          95,
+          11,
+          11
+        ],
+        "t_s": 1.2000000000000002,
+        "x_cm": 11.000000420668368,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": false,
+        "reason": null,
+        "frame_id": "synthetic-frame-0006",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "pixel_x": 120.0,
+        "pixel_y": 100.0,
+        "area_px": 92.0,
+        "bbox_px": [
+          115,
+          95,
+          11,
+          11
+        ],
+        "t_s": 1.4000000000000001,
+        "x_cm": 12.000000458910947,
+        "y_cm": 9.999999840389236,
+        "observed": true,
+        "quality": 1.0,
+        "track_id": "synthetic-track-0001",
+        "association_break": false,
+        "reason": null,
+        "frame_id": "synthetic-frame-0007",
+        "camera_session_id": "SYNTHETIC-SOFTWARE-REPLAY-NO-CAMERA",
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      }
+    ],
+    "vectors": [
+      {
+        "x_cm": 5.50000021033418,
+        "y_cm": 9.999999840389236,
+        "observed_vx_cm_s": 5.000000191212899,
+        "observed_vy_cm_s": 0.0,
+        "predicted_vx_cm_s": 4.0,
+        "predicted_vy_cm_s": 0.0,
+        "residual_vx_cm_s": -1.0000001912128988,
+        "residual_vy_cm_s": 0.0,
+        "vector_error_cm_s": 1.0000001912128988,
+        "speed_bias_cm_s": -1.0000001912128988,
+        "absolute_speed_error_cm_s": 1.0000001912128988,
+        "direction_error_deg": 0.0,
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "x_cm": 7.500000286819339,
+        "y_cm": 9.999999840389236,
+        "observed_vx_cm_s": 5.0000001912129015,
+        "observed_vy_cm_s": 0.0,
+        "predicted_vx_cm_s": 4.0,
+        "predicted_vy_cm_s": 0.0,
+        "residual_vx_cm_s": -1.0000001912129015,
+        "residual_vy_cm_s": 0.0,
+        "vector_error_cm_s": 1.0000001912129015,
+        "speed_bias_cm_s": -1.0000001912129015,
+        "absolute_speed_error_cm_s": 1.0000001912129015,
+        "direction_error_deg": 0.0,
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "x_cm": 9.500000363304498,
+        "y_cm": 9.999999840389236,
+        "observed_vx_cm_s": 5.000000191212895,
+        "observed_vy_cm_s": 0.0,
+        "predicted_vx_cm_s": 4.0,
+        "predicted_vy_cm_s": 0.0,
+        "residual_vx_cm_s": -1.0000001912128953,
+        "residual_vy_cm_s": 0.0,
+        "vector_error_cm_s": 1.0000001912128953,
+        "speed_bias_cm_s": -1.0000001912128953,
+        "absolute_speed_error_cm_s": 1.0000001912128953,
+        "direction_error_deg": 0.0,
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      },
+      {
+        "x_cm": 11.500000439789657,
+        "y_cm": 9.999999840389236,
+        "observed_vx_cm_s": 5.000000191212895,
+        "observed_vy_cm_s": 0.0,
+        "predicted_vx_cm_s": 4.0,
+        "predicted_vy_cm_s": 0.0,
+        "residual_vx_cm_s": -1.0000001912128953,
+        "residual_vy_cm_s": 0.0,
+        "vector_error_cm_s": 1.0000001912128953,
+        "speed_bias_cm_s": -1.0000001912128953,
+        "absolute_speed_error_cm_s": 1.0000001912128953,
+        "direction_error_deg": 0.0,
+        "data_origin": "SYNTHETIC_SOFTWARE_REPLAY",
+        "physical_validation": false
+      }
+    ],
+    "metrics": {
+      "sample_count": 4,
+      "vector_rmse_cm_s": 1.0000001912128977,
+      "mean_speed_bias_cm_s": -1.0000001912128977,
+      "mean_absolute_speed_error_cm_s": 1.0000001912128977,
+      "mean_direction_error_deg": 0.0,
+      "direction_defined_count": 4
+    },
+    "admission": {
+      "measured_profile_admitted": false,
+      "store_written": false,
+      "data_origin": "SYNTHETIC_SOFTWARE_REPLAY"
+    },
+    "limitations": [
+      "Synthetic software replay only: no physical tank, camera or ocean was observed.",
+      "Four nonoverlapping differences from one synthetic track are dependent, not four independent trials.",
+      "Accepted detector quality=1 is not calibrated probability or confidence.",
+      "The deliberately imperfect frozen reference is not an ML model, water-current measurement or source prediction.",
+      "Angles are undefined if either velocity is below the declared speed threshold.",
+      "This fixture cannot validate NOAA forecasts, plastic origins, interception performance or ecological benefit."
+    ]
+  },
+  "camera_started": false,
+  "hardware_actuation": false,
+  "physical_validation": false,
+  "provider_calls": false,
+  "store_written": false
+}

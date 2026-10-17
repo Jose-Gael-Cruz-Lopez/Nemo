@@ -172,6 +172,40 @@ def create_app(settings: Settings | None = None):
         except (FileNotFoundError, PermissionError):
             raise HTTPException(503, "The pinned transfer diagnostic is unavailable locally") from None
 
+    @app.get("/api/v1/research/vector-diagnostic")
+    def vector_diagnostic(response: Response):
+        """Read-only motion comparison; never acquires evidence or contacts a provider."""
+        from apps.ocean.reeftrace_ocean.vector_diagnostics import run_noaa_vector_diagnostic
+        from apps.vision.reeftrace_vision.vector_diagnostic import run_synthetic_vector_diagnostic
+        response.headers["Cache-Control"] = "no-store"
+        try:
+            return {
+                "schema_version": 1, "kind": "MOTION_VECTOR_DIAGNOSTIC", "status": "COMPLETED",
+                "noaa": run_noaa_vector_diagnostic(),
+                "synthetic_tank": run_synthetic_vector_diagnostic(),
+                "camera_started": False, "hardware_actuation": False,
+                "physical_validation": False, "provider_calls": False, "store_written": False,
+            }
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(503, "The pinned vector dataset is unavailable locally",
+                                headers={"Cache-Control": "no-store"}) from None
+        except ValueError as error:
+            raise HTTPException(409, str(error)[:300],
+                                headers={"Cache-Control": "no-store"}) from None
+
+    @app.get("/api/v1/research/cohort-vectors")
+    def cohort_vector_diagnostic(response: Response):
+        from apps.ocean.reeftrace_ocean.vector_diagnostics import run_noaa_cohort_vector_diagnostic
+        response.headers["Cache-Control"] = "no-store"
+        try:
+            return run_noaa_cohort_vector_diagnostic()
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(503, "The pinned cohort vector data is unavailable locally",
+                                headers={"Cache-Control": "no-store"}) from None
+        except ValueError as error:
+            raise HTTPException(409, str(error)[:300],
+                                headers={"Cache-Control": "no-store"}) from None
+
     @app.get("/api/v1/cases/{case_id}/briefing")
     def briefing(case_id: str):
         return runtime.briefing(case_id)
@@ -356,6 +390,21 @@ def create_app(settings: Settings | None = None):
     @app.get("/api/v1/recordings")
     def recordings():
         return runtime.store.list("recording", 30)
+
+    @app.get("/api/v1/flow/{flow_id}/vector-diagnostic")
+    def recorded_flow_vectors(flow_id: str, response: Response):
+        from apps.vision.reeftrace_vision.field_vector_diagnostic import (
+            inspect_recorded_flow_vectors,
+        )
+        response.headers["Cache-Control"] = "no-store"
+        try:
+            return inspect_recorded_flow_vectors(runtime.store, flow_id)
+        except KeyError:
+            raise HTTPException(404, "Recorded flow evidence not found",
+                                headers={"Cache-Control": "no-store"}) from None
+        except ValueError as error:
+            raise HTTPException(409, str(error)[:300],
+                                headers={"Cache-Control": "no-store"}) from None
 
     @app.get("/api/v1/recordings/{recording_id}/flow-samples")
     def samples(recording_id: str):

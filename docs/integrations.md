@@ -213,6 +213,8 @@ generated SDK request/response contracts, route filtering, session rescans, dedu
 durable-before-send ordering and identical retries. With the sponsors extra absent,
 the application starts offline and SDK contract tests skip.
 
-Chalk has separate live model proof as described above; Photon still needs an authorized
-phone round trip before any conversation claim. Demo evidence should name the configured model, case/evidence IDs, tool trace,
+Chalk has separate live model proof as described above; the separately authorized Photon
+phone round trip was also verified with an independent Delivered-status read. An HTTP
+202 acceptance alone is not delivery proof, and neither event guarantees future delivery.
+Demo evidence should name the configured model, case/evidence IDs, tool trace,
 inbound message ID and accepted request ID; do not label mocks as live sponsor calls.

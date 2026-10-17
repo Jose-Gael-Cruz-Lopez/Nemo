@@ -7,6 +7,8 @@ import { MotionAblation } from "./motion-ablation";
 import { MultiDrifterStudy } from "./multi-drifter-study";
 import { DatasetReadiness } from "./dataset-readiness";
 import { TransferDiagnostic } from "./transfer-diagnostic";
+import { VectorDiagnostic } from "./vector-diagnostic";
+import { CohortVectors } from "./cohort-vectors";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -76,8 +78,9 @@ export function RealDataLab({ api }: { api: string }) {
     finally { if (!pending.signal.aborted) { controller.current = null; setLoading(false); } }
   }
   return <>
-    <div className="page-heading"><div><p className="kicker">Measured ocean observations</p><h1>Real data, honest limits.</h1><p className="page-description">Replay a NOAA drifter day and compare forecasts against six held-out observations.</p></div><button className="primary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running real-data replay…" : "Run real-data replay"}</button></div>
+    <div className="page-heading"><div><p className="kicker">Measured ocean observations</p><h1>Real data, honest limits.</h1><p className="page-description">Compare observed and predicted motion across real NOAA drifters, then inspect the drift recorded in your tank.</p></div><button className="primary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running real-data replay…" : "Run reference buoy replay"}</button></div>
     <div className="notice info"><Icon name="help" /><span>This is a separate geographic motion benchmark. Buoy positions do not identify a plastic source or validate your tank.</span></div>
+    <CohortVectors api={api} />
     {loading && <div className="busy-notice" role="status">Loading the verified dataset and fitting the predeclared motion models…</div>}
     {error && <div className="notice error" role="alert">{error}<button className="card-link" onClick={() => void run()}>Retry replay <Icon name="arrow" /></button></div>}
     {!data && !loading && !error && <section className="card dataset-intro"><span className="observation-icon"><Icon name="wave" /></span><h2>A small real-data test you can inspect.</h2><p>Train on the first eighteen hourly positions. Forecast the next six hours without reading those held-out positions.</p><div className="dataset-methods"><span>Stationary baseline</span><span>Last observed drift</span><span>Regularized velocity model</span></div><p className="settings-note">The replay runs locally from the collected NOAA CSV. No account, camera, or sponsor credentials are required.</p></section>}
@@ -88,6 +91,7 @@ export function RealDataLab({ api }: { api: string }) {
       </div>
       <section className="card"><div className="card-header"><div><h2 className="card-title">Dataset provenance</h2><p className="card-subtitle">NOAA Global Drifter Program · buoy {data.provenance.drifter_id} · {data.provenance.row_count} positions</p></div><a className="card-link" href={https(data.provenance.metadata_url)} target="_blank" rel="noreferrer">NOAA metadata <Icon name="arrow" /></a></div><div className="card-body"><p>{data.provenance.attribution}</p><div className="heading-actions"><a className="secondary-button" href={https(data.provenance.source_url)} target="_blank" rel="noreferrer">View source CSV <Icon name="arrow" /></a><a className="card-link" href={https(data.provenance.license_url)} target="_blank" rel="noreferrer">{data.provenance.license} <Icon name="arrow" /></a></div><details className="details-panel"><summary>Integrity hash and experiment limits</summary><p className="settings-note">CSV SHA-256</p><code className="evidence-id">{data.provenance.sha256}</code><ul className="reason-list">{data.limitations.map(limit => <li key={limit}>{limit}</li>)}</ul></details><details className="details-panel"><summary>Full reproducible benchmark report</summary><pre className="code-block">{JSON.stringify(data, null, 2)}</pre></details></div></section>
     </div>}
+    <VectorDiagnostic api={api} />
     <TrainingDiagnostic api={api} />
     <MotionAblation api={api} />
     <MultiDrifterStudy api={api} />

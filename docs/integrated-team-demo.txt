@@ -15,7 +15,7 @@ If services need starting, run this from the reeftrace repository:
 
 The prepared Photon-enabled startup requires the explicit --allow-photon flag. Do not restart an already running service just to follow this guide. The default launcher does not silently enable messaging.
 
-Use “Connect operator” for mutations such as loading a demo, computing evidence, saving trials or asking Chalk. Enter the private local operator token in that dialog; provider keys stay on the server. Public research replays need no operator token.
+The root page is the public introduction. Choose “Enter ReefTrace” to use /login and verify the shared local operator token, or enter /workspace for public research. This is local operator access, not individual email accounts. The token stays in React memory during in-app navigation; a reload clears it. The workspace’s “Operator access” dialog can also connect access for loading demos, computing evidence, saving trials and asking Chalk. Provider keys stay on the server; public research replays need no operator token.
 
 At this handoff, camera capture and the physical pump are off. The software has no pump actuator. Pump power remains manual on its original cord; “Stop task” stops software work, not a wall-powered pump.
 
@@ -130,6 +130,41 @@ Expand the source/protocol details for official NOAA URLs, acquisition failures,
 
 Public buoy motion is NOT plastic-source validation. It supplies neither known plastic-release labels nor coral-health outcomes. The next decisive evidence remains independent, known-source tank trials, including wrong-source cases, retained endpoints, abstentions and invalid runs.
 
+5A. INSPECT MOTION VECTORS
+
+In Data lab, begin with “Run real-cohort vectors”: four acquired real NOAA drifters, four models and six forecast hours each give 96 scores using 24 unique observed intervals. The original target remains six drifters/144 scores, with two acquisition slots missing. Inspect each drifter/model, the aggregate table, exact components and provenance. This is post-hoc analysis of already-viewed historical data, not a new independent test.
+
+Then choose “Run vector diagnostic” for the original reference buoy and synthetic image pipeline. The report is computed locally and
+read-only: no camera, model-provider call, message, evidence write or model promotion.
+
+Historical NOAA shows six hourly observed displacement vectors for the original
+1987 buoy-day and three existing forecast tracks. Choose a model to inspect green
+observed arrows, purple predicted arrows and brown error arrows (predicted minus
+observed). They share display origins for comparison, not geographical positions;
+they are not a dense current field. East is right and north is up, in m/s.
+
+Vector RMSE measures the discrepancy of the whole velocity vector. Negative speed
+bias means slower predictions. Direction is undefined when either speed is below
+0.005 m/s; the stationary model correctly has no direction score. Average position
+error and final position error remain separate metre-valued metrics. Ridge has
+lower average error here but worse final error than stationary; no universal winner
+is declared. Eighteen model-interval scores reuse six unique observed intervals.
+This already-viewed sample is a post-hoc diagnostic, not independent evaluation.
+
+Switch to “Synthetic OpenCV replay”. Eight generated red-token frames run through
+the real HSV detector, gap-preserving tracker, independently checked homography and
+finite differences. Motion is 5 cm/s against a frozen 4 cm/s synthetic reference;
+vector RMSE is approximately 1 cm/s and speed bias -1 cm/s. These four pairs are
+dependent. Tank mapping uses +x right, +y down, with centimetre units; do not combine
+its metric scale with NOAA m/s. No camera was opened and no measured profile admitted.
+
+After a recorded flow is fitted in Camera commissioning, “Inspect recorded drift vectors” reads only that immutable fit and its named validation recordings. Unsupported samples remain visible; conditional field interpolation at observed midpoints is not a future trajectory forecast. Stored capture claims are unverified and explicit fake flags stay synthetic.
+
+Expand exact interval components or provenance to inspect the full report. Ocean-
+current forcing and debris survey context are explicitly not connected. Parcels,
+OpenDrift, PIV and future field/debris integration are research directions described
+in docs/motion-vector-research.txt, not newly acquired or validated ocean evidence.
+
 6. PHOTON STATUS: WHAT WAS ACTUALLY PROVED
 
 Photon is enabled in the current local configuration. Settings distinguishes configuration from whether the automatic worker is actually running; “Automatic replies on” requires the running-worker status.
@@ -153,7 +188,7 @@ Both teammate pull requests are merged:
   PR #3 — field evidence/commissioning:
   https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/3
 
-The distinct method-replay bridge and acquired-cohort study are integrated in the current working implementation. The final local verification passed 695 Python tests and 54 frontend tests. Final commit, push and CI status belong to the separate verification receipt; this guide does not assert a later unpublished result.
+The distinct method-replay bridge, acquired-cohort study and motion-vector diagnostic are integrated in the current implementation. Exact test counts, commit, push and CI status belong to the corresponding dated verification receipt; this guide does not assert an unpublished result.
 
 JUDGING LANGUAGE
 

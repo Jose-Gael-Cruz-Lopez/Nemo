@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "kind": "RECORDED_FIELD_VECTOR_DIAGNOSTIC",
+  "status": "COMPLETED",
+  "scope": "CONDITIONAL_HELDOUT_FIELD_INTERPOLATION_ALREADY_REVIEWED_NOT_INDEPENDENT_TEST",
+  "flow_id": "flow-test",
+  "flow_content_hash": "bce8bd3a563b50755a8f21a03250fea3fa0d7974acdb347881f6cacf79c68043",
+  "calibration_id": "cal-a9953b828c4eeb9e",
+  "camera_session_id": "test-camera",
+  "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+  "recorded_data_origin": "MEASURED_TANK",
+  "capture_origin": "SYNTHETIC_CAPTURE_REPLAY",
+  "capture_independently_verified": false,
+  "physical_validation": false,
+  "camera_started": false,
+  "hardware_actuation": false,
+  "provider_calls": false,
+  "store_written": false,
+  "refit_performed": false,
+  "model_selection_performed": false,
+  "position_units": "cm",
+  "velocity_units": "cm/s",
+  "timestamp_kind": "host_receipt_not_exposure",
+  "provenance": {
+    "training_recording_ids": [
+      "training"
+    ],
+    "validation_recording_ids": [
+      "validation-near",
+      "validation-far"
+    ],
+    "frame_splits_disjoint": true
+  },
+  "coverage": {
+    "training_recording_count": 1,
+    "validation_recording_count": 2,
+    "training_sample_count": 3,
+    "validation_sample_count": 6,
+    "supported_sample_count": 3,
+    "unsupported_sample_count": 3,
+    "supported_fraction": 0.5
+  },
+  "metrics": {
+    "sample_count": 3,
+    "vector_rmse_cm_s": 1.0000000000000007,
+    "mean_speed_bias_cm_s": -1.0000000000000007,
+    "mean_absolute_speed_error_cm_s": 1.0000000000000007,
+    "mean_direction_error_deg": 0.0,
+    "direction_defined_count": 3,
+    "equal_recording_mean_rmse_cm_s": 1.0000000000000007,
+    "recordings_with_supported_samples": 1
+  },
+  "recordings": [
+    {
+      "recording_id": "validation-near",
+      "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+      "physical_validation": false,
+      "recording_content_hash": "bf00fe99862d2207e7058c1ddb3ac28dde79025be3ab7fd5194201edcb3fe257",
+      "counts": {
+        "point_count": 6,
+        "frame_count": 6,
+        "observed_point_count": 6,
+        "missing_point_count": 0,
+        "ambiguous_point_count": 0,
+        "no_detection_point_count": 0,
+        "association_gap_count": 0,
+        "track_count": 1,
+        "extracted_sample_count": 3,
+        "supported_sample_count": 3,
+        "unsupported_sample_count": 0
+      },
+      "metrics": {
+        "sample_count": 3,
+        "vector_rmse_cm_s": 1.0000000000000007,
+        "mean_speed_bias_cm_s": -1.0000000000000007,
+        "mean_absolute_speed_error_cm_s": 1.0000000000000007,
+        "mean_direction_error_deg": 0.0,
+        "direction_defined_count": 3
+      },
+      "vectors": [
+        {
+          "x_cm": 4.2,
+          "y_cm": 5.0,
+          "observed_vx_cm_s": 2.0000000000000018,
+          "observed_vy_cm_s": 0.0,
+          "predicted_vx_cm_s": 1.0000000000000009,
+          "predicted_vy_cm_s": 0.0,
+          "residual_vx_cm_s": -1.0000000000000009,
+          "residual_vy_cm_s": 0.0,
+          "vector_error_cm_s": 1.0000000000000009,
+          "speed_bias_cm_s": -1.0000000000000009,
+          "absolute_speed_error_cm_s": 1.0000000000000009,
+          "direction_error_deg": 0.0,
+          "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+          "physical_validation": false,
+          "sample_index": 0,
+          "supported": true
+        },
+        {
+          "x_cm": 5.0,
+          "y_cm": 5.0,
+          "observed_vx_cm_s": 2.000000000000001,
+          "observed_vy_cm_s": 0.0,
+          "predicted_vx_cm_s": 1.0000000000000009,
+          "predicted_vy_cm_s": 0.0,
+          "residual_vx_cm_s": -1.0,
+          "residual_vy_cm_s": 0.0,
+          "vector_error_cm_s": 1.0,
+          "speed_bias_cm_s": -1.0,
+          "absolute_speed_error_cm_s": 1.0,
+          "direction_error_deg": 0.0,
+          "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+          "physical_validation": false,
+          "sample_index": 1,
+          "supported": true
+        },
+        {
+          "x_cm": 5.8,
+          "y_cm": 5.0,
+          "observed_vx_cm_s": 2.000000000000002,
+          "observed_vy_cm_s": 0.0,
+          "predicted_vx_cm_s": 1.0000000000000009,
+          "predicted_vy_cm_s": 0.0,
+          "residual_vx_cm_s": -1.0000000000000013,
+          "residual_vy_cm_s": 0.0,
+          "vector_error_cm_s": 1.0000000000000013,
+          "speed_bias_cm_s": -1.0000000000000013,
+          "absolute_speed_error_cm_s": 1.0000000000000013,
+          "direction_error_deg": 0.0,
+          "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+          "physical_validation": false,
+          "sample_index": 2,
+          "supported": true
+        }
+      ]
+    },
+    {
+      "recording_id": "validation-far",
+      "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+      "physical_validation": false,
+      "recording_content_hash": "1ef5747f0aa905ede0f00ce9a2345c2c31b8ed63373940c6184b385eda5114b5",
+      "counts": {
+        "point_count": 6,
+        "frame_count": 6,
+        "observed_point_count": 6,
+        "missing_point_count": 0,
+        "ambiguous_point_count": 0,
+        "no_detection_point_count": 0,
+        "association_gap_count": 0,
+        "track_count": 1,
+        "extracted_sample_count": 3,
+        "supported_sample_count": 0,
+        "unsupported_sample_count": 3
+      },
+      "metrics": {
+        "sample_count": 0,
+        "vector_rmse_cm_s": null,
+        "mean_speed_bias_cm_s": null,
+        "mean_absolute_speed_error_cm_s": null,
+        "mean_direction_error_deg": null,
+        "direction_defined_count": 0
+      },
+      "vectors": [
+        {
+          "x_cm": 4.2,
+          "y_cm": 15.0,
+          "observed_vx_cm_s": 2.0000000000000018,
+          "observed_vy_cm_s": 0.0,
+          "predicted_vx_cm_s": null,
+          "predicted_vy_cm_s": null,
+          "residual_vx_cm_s": null,
+          "residual_vy_cm_s": null,
+          "vector_error_cm_s": null,
+          "speed_bias_cm_s": null,
+          "absolute_speed_error_cm_s": null,
+          "direction_error_deg": null,
+          "sample_index": 0,
+          "supported": false,
+          "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+          "physical_validation": false
+        },
+        {
+          "x_cm": 5.0,
+          "y_cm": 15.0,
+          "observed_vx_cm_s": 2.000000000000001,
+          "observed_vy_cm_s": 0.0,
+          "predicted_vx_cm_s": null,
+          "predicted_vy_cm_s": null,
+          "residual_vx_cm_s": null,
+          "residual_vy_cm_s": null,
+          "vector_error_cm_s": null,
+          "speed_bias_cm_s": null,
+          "absolute_speed_error_cm_s": null,
+          "direction_error_deg": null,
+          "sample_index": 1,
+          "supported": false,
+          "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+          "physical_validation": false
+        },
+        {
+          "x_cm": 5.8,
+          "y_cm": 15.0,
+          "observed_vx_cm_s": 2.000000000000002,
+          "observed_vy_cm_s": 0.0,
+          "predicted_vx_cm_s": null,
+          "predicted_vy_cm_s": null,
+          "residual_vx_cm_s": null,
+          "residual_vy_cm_s": null,
+          "vector_error_cm_s": null,
+          "speed_bias_cm_s": null,
+          "absolute_speed_error_cm_s": null,
+          "direction_error_deg": null,
+          "sample_index": 2,
+          "supported": false,
+          "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+          "physical_validation": false
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Conditional field interpolation at observed validation midpoints, not a free-running trajectory forecast.",
+    "These validation runs already contributed to the saved fit diagnostics; this is not a new independent experiment.",
+    "Unsupported samples remain visible with predictions and scores withheld; supported error must be read with coverage.",
+    "Vectors within a run share motion and are dependent; equal-recording summaries are descriptive only.",
+    "Stored MEASURED_TANK labels are capture declarations, not independent proof of physical hardware or validation.",
+    "Host receipt timestamps differ from exposure times; this is object drift, not direct water-current measurement.",
+    "No source identity, calibrated probability, interception benefit or ecological impact is established."
+  ]
+}

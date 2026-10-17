@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+import math
 from dataclasses import replace
 
 import numpy as np
@@ -21,12 +22,61 @@ def inputs():
             for row in manifest["trajectories"]}
 
 
+def assert_frozen_report_matches(actual, expected, path="$body"):
+    """Keep provenance/structure exact while allowing cross-platform float roundoff.
+
+    Linux and macOS linear algebra differ at floating-point roundoff scale in this
+    fixture. The explicit tolerance remains well below any meaningful reported
+    positional precision; it is not applied to counts, IDs, flags or statuses.
+    """
+    assert type(actual) is type(expected), f"{path}: type changed"
+    if isinstance(expected, float):
+        assert math.isfinite(actual) and math.isfinite(expected), f"{path}: nonfinite value"
+        assert actual == pytest.approx(expected, rel=1e-10, abs=1e-8), path
+    elif isinstance(expected, dict):
+        assert actual.keys() == expected.keys(), f"{path}: keys changed"
+        for key in expected:
+            assert_frozen_report_matches(actual[key], expected[key], f"{path}.{key}")
+    elif isinstance(expected, list):
+        assert len(actual) == len(expected), f"{path}: list length changed"
+        for index, (value, frozen) in enumerate(zip(actual, expected, strict=True)):
+            assert_frozen_report_matches(value, frozen, f"{path}[{index}]")
+    else:
+        assert actual == expected, path
+
+
+def test_frozen_report_comparison_accepts_only_narrow_float_roundoff():
+    frozen = {"models": [{"error_m": 2911.2980731059383, "spectral_radius": 0.9297275578838206}]}
+    linux = {"models": [{"error_m": 2911.2980731060047, "spectral_radius": 0.9297275578838187}]}
+    assert_frozen_report_matches(linux, frozen)
+
+
+@pytest.mark.parametrize(("actual", "expected"), [
+    ({"drifter_id": "12731"}, {"drifter_id": "12730"}),
+    ({"coverage": {"scored_outcomes": 119}}, {"coverage": {"scored_outcomes": 120}}),
+    ({"status": "INCOMPLETE_OUTCOMES"}, {"status": "COMPLETE"}),
+    ({"independent_evaluation": True}, {"independent_evaluation": False}),
+    ({"independent_evaluation": 0}, {"independent_evaluation": False}),
+    ({"coverage": 120.0}, {"coverage": 120}),
+    ({"errors_m": [1.0]}, {"errors_m": [1.0, 2.0]}),
+    ({"error_m": 2911.2990731059383}, {"error_m": 2911.2980731059383}),
+    ({"error_m": float("nan")}, {"error_m": 1.0}),
+    ({"error_m": float("inf")}, {"error_m": 1.0}),
+    ({"error_m": 1.0, "extra": None}, {"error_m": 1.0}),
+])
+def test_frozen_report_comparison_rejects_identity_accounting_and_material_changes(actual, expected):
+    with pytest.raises(AssertionError):
+        assert_frozen_report_matches(actual, expected)
+
+
 def test_real_diagnostic_matches_frozen_report_and_preserves_all_120_outcomes_and_original_results():
     before = run_multidrifter_study()
     report = lopo.run_lopo_diagnostic()
     payload = (lopo.DIRECTORY / "report.json").read_bytes()
     assert hashlib.sha256(payload).hexdigest() == (lopo.DIRECTORY / "report.sha256").read_text().strip()
-    assert report == json.loads(payload) == lopo.run_lopo_diagnostic()
+    assert_frozen_report_matches(report, json.loads(payload))
+    # A second run in the same process must still reproduce every value exactly.
+    assert report == lopo.run_lopo_diagnostic()
     assert run_multidrifter_study() == before
     assert report["design_status"] == "POST_HOC_ALREADY_VIEWED_DRIFTERS_NOT_INDEPENDENT_TEST"
     assert report["independent_evaluation"] is False

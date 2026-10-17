@@ -1,0 +1,276 @@
+REEFTRACE: MOTION VECTORS, OCEAN DATA AND PREVENTION
+Research and implementation checkpoint — 17 October 2026
+
+THE USEFUL NEXT STEP
+
+ReefTrace should connect three questions: What motion did we observe? How well did
+our model reproduce it? Would the resulting interception decision protect the
+declared receiving zone? A beautiful trajectory is useful only when it supports
+an inspectable decision and an independent way to check that decision.
+
+The implemented addition is a Data Lab vector diagnostic (Data lab → Run vector diagnostic; GET /api/v1/research/vector-diagnostic). It does not pretend that
+NOAA buoys, tank tokens, shoreline debris surveys and current models are the same
+kind of evidence. Each has a different role, coordinate system and limitation.
+
+1. WHAT EXISTS NOW
+
+The tank pipeline uses OpenCV red-token detection, pixel-to-centimetre homography,
+gap-preserving tracking and finite-difference displacement samples. Repeated
+calibration releases can fit the token's spatial drift field. The source estimator
+then compares forward simulated histories from declared candidate regions against
+an observation. A retained endpoint can remain Unknown when several histories fit.
+
+The separate NOAA benchmark uses one pinned historical buoy-day: 18 hourly positions
+for the observation prefix, followed by six forecast hours. Its fixed algorithms
+are stationary position, last observed displacement and learned ridge velocity
+autoregression. The training diagnostic uses overlapping earlier prefixes; the
+four-drifter study compares fixed algorithms on four acquired groups from a six-
+group target. Its missing basin remains missing. A later acquisition attempt
+downloaded zero additional trajectories.
+
+The leave-one-drifter-out diagnostic uses four already-viewed groups. The pooled
+residual model scored 1,711.2 m mean trajectory error versus 729.4 m for the existing
+ridge model. It is a negative post-hoc result, not fresh independent evidence or a
+reason to promote the pooled model.
+
+The new NOAA vector diagnostic reuses the unchanged benchmark predictions. Its
+coverage is one buoy, six unique observed intervals, three models and 18 scored
+model-interval comparisons. Those 18 scores are not 18 independent observations.
+All forecast tracks are validated before future coordinates enter vector scoring.
+The first forecast interval starts at the last prefix observation; later intervals
+start at previous FORECAST positions, never at future observed positions.
+
+Actual replay results from the existing 1987 day:
+
+Model          Vector RMSE     Speed bias       ADE          FDE
+               metres/second  metres/second    metres       metres
+Stationary     0.4464          -0.4235          3,855.0      6,774.6
+Last drift     0.5550          -0.1194          4,385.8      9,832.2
+Ridge AR1      0.4442          -0.2872          3,557.4      7,561.2
+
+Residual means predicted velocity minus observed velocity. Negative speed bias
+means the prediction moved too slowly on average. ADE averages position errors;
+FDE measures the final position error. Ridge improves ADE here but has worse FDE
+than stationary, so there is no universal winner. Direction is scored only when
+both speeds are at least 0.005 m/s; stationary headings remain undefined. The two
+moving models' angular errors are approximately 82.5 and 83.5 degrees.
+
+Ten new vector tests plus fourteen existing ocean tests passed locally. Tests
+check units, chronological matching, previous-forecast anchoring, unchanged input,
+all-forecast-before-truth ordering and fail-closed invalid inputs. This is a local
+component verification, separate from the parent integration's browser/API checks.
+
+REAL COHORT EXPANSION (implemented after the initial one-buoy view)
+
+Data lab → Run real-cohort vectors; GET /api/v1/research/cohort-vectors.
+Four acquired real NOAA drifters each contribute 18 earlier positions, six later
+observations and four frozen model tracks. All 96 acquired model intervals score;
+24 unique observed intervals are reused across models. The acquisition target is
+six drifters/144 model intervals: two slots remain missing. This is post-hoc use of
+already-viewed historical data, not new acquisition or an independent test.
+
+Acquired-cohort results (each drifter weighted equally; not the six-group target):
+Model           Vector RMSE m/s    Mean position error m    Mean final error m
+Stationary      0.2781             2911.3                   4942.3
+Last drift      0.2271             1579.9                   3323.7
+Mean drift      0.2125             1846.7                   2883.5
+Ridge AR1       0.1177              729.4                   1203.0
+
+Inspect each drifter and model separately in the UI; aggregate performance can
+hide individual failures. Near-zero headings stay undefined. An incomplete track
+withholds its six velocity intervals and all common-cohort aggregates; it is never
+bridged with a convenient arrow. The existing position forecasts remain unchanged.
+
+REAL RECORDED-TANK BRIDGE (implemented; no physical run claimed)
+
+After commissioning, POST /api/v1/camera/record saves timestamped positions/frames.
+POST /api/v1/flow/fit-recordings freezes training-only coefficients with disjoint
+validation recording IDs. GET /api/v1/flow/{flow_id}/vector-diagnostic then re-reads
+those exact artifacts. It never accepts new coefficients or replacement validation
+IDs, refits, captures a frame or writes evidence. The Camera wizard exposes the
+read-only inspection after a recorded fit exists.
+
+It evaluates the frozen drift field at observed validation midpoints, keeping
+supported and unsupported samples, recording-level gaps and denominators visible.
+This is conditional field interpolation, not a free-running future-path forecast.
+Those validation runs already contributed to the saved diagnostics; this chart
+re-expresses that existing evidence and is not a fresh independent experiment.
+All speeds stay in cm/s. Synthetic/fake capture flags remain synthetic; other
+stored capture declarations remain explicitly unverified, never physical proof.
+
+For a genuine experiment, freeze mapping/flow/layouts before collecting new whole
+runs; compare predicted first protected-zone entry and capture-before-entry with
+independently recorded outcomes. Source-release labels remain in the evaluation
+ledger, outside the inference model. The camera/pump setup has not been run yet.
+
+2. WHAT OPENCV AND PIV CAN CONTRIBUTE
+
+HSV thresholding is appropriate for a deliberately red demo token. It identifies
+colour under calibrated lighting; it is not a general plastic classifier. Red
+straddles OpenCV's hue boundary, hence two ranges. Glare, shadows, artificial red
+coral and occlusion can invalidate the observation. Use timestamped frames and
+reject gaps rather than drawing a line across a disappearance.
+
+Homography maps an approximately planar water surface to tank centimetres. Fit
+points and independent check points must be distinct; camera movement or water
+level changes can invalidate that mapping. Mapping accuracy is not tracking or
+flow-model accuracy.
+
+Our sparse particle tracking is closer to PTV than full PIV. PIV estimates local
+displacement by correlating image patches containing many suitable tracers; it
+needs sufficient particle texture, controlled illumination and image-pair timing.
+PIVlab is therefore useful prior art and a future comparison method, not an
+instant replacement for a single-red-token pipeline. An ocean current product
+also cannot fill missing centimetre-scale tank flow coverage.
+
+A new software-only synthetic image replay exercises the production detector,
+mapping and tracker. Eight generated frames encode a 5 cm/s token against a
+deliberately imperfect 4 cm/s frozen reference. Its dependent nonoverlapping
+differences expose a 1 cm/s vector error. It starts no camera, admits no measured
+profile and proves no physical flow accuracy. It is a wiring check for software.
+
+Even in freshwater, the token's measured drift is not pure water velocity. Its
+immersion, shape, room airflow and surface response contribute. Do not add windage
+or drag to an already measured token-drift field and count those effects twice.
+
+OpenCV primary references:
+https://docs.opencv.org/4.x/da/d97/tutorial_threshold_inRange.html
+https://docs.opencv.org/4.x/d9/dab/tutorial_homography.html
+PIVlab author/project: https://pivlab.blogspot.com/
+
+3. EXISTING OCEAN SOLUTIONS WE CAN MODEL OR INTEGRATE
+
+Parcels advances particles through declared fields and supports custom kernels.
+Its spherical meshes use angular coordinates with velocity conversion; geographic
+advection must sample the vector field correctly. Newer documentation differs from
+older v3 notebooks, so pin a version. Parcels does not supply ReefTrace's evidence
+workflow, protected-zone decision validation or account permissions.
+https://docs.oceanparcels.org/en/latest/user_guide/getting_started/explanation_concepts.html
+https://docs.oceanparcels.org/en/latest/user_guide/examples/tutorial_velocityconversion.html
+
+OpenDrift distinguishes OceanDrift, Leeway and PlastDrift. Their current, direct
+wind, wave and vertical processes differ. In particular, Leeway's empirical wind
+response includes wave effects implicitly; adding explicit Stokes drift without a
+matching convention can double count. Negative timesteps work in its controlled
+back-and-forth example; they do not restore erased history after every state change.
+https://opendrift.github.io/choosing_a_model.html
+https://opendrift.github.io/gallery/example_backandforth.html
+
+BAKTRAK provides closer conceptual precedent: retain forward dynamics, sample
+possible histories, and refine those consistent with a time-space observation.
+The authors explain why nonlinear changes complicate naive reverse models.
+Retention creates a similar identification problem: distinct paths can converge
+to the same observed pocket. That last application is our engineering inference,
+not a claim that the paper proves ReefTrace's particular estimator.
+https://www.ffi.no/publikasjoner/arkiv/baktrak-backtracking-drifting-objects-using-an-iterative-algorithm-with-a-forward-trajectory-model
+
+The OSPAR study combines hydrodynamics, waves, atmosphere and litter categories to
+investigate hypothetical origins and mitigation. Its useful lesson is to combine
+transport with independent contextual evidence while retaining uncertainty.
+https://meetingorganizer.copernicus.org/EGU2020/EGU2020-5977.html
+
+Citation correction: the supplied Frontiers 2017 paper is “Modeling the Fate and
+Distribution of Floating Litter Particles in the Aegean Sea.” It supports source/
+release scenarios, beaching and pathway connectivity. It is not a dedicated proof
+that backward tracing fails for retained objects.
+https://www.frontiersin.org/journals/marine-science/articles/10.3389/fmars.2017.00191/pdf
+
+4. DATA FUSION: EXACT PRESENT BOUNDARIES AND NEXT CONTRACT
+
+NOAA GDP hourly observations are QC/interpolated retrospective buoy positions.
+Their upstream processing can use later raw fixes. Neither local train/test
+isolation nor a recent download date makes them operational real-time data.
+Standard drogued GDP buoys principally follow motion near 15 m depth, whereas
+floating plastic responds differently; drogue status and depth matching matter.
+https://www.aoml.noaa.gov/phod/gdp/hourly_data.php
+https://www.aoml.noaa.gov/phod/gdp/papers/Elipot_et_al-2016.pdf
+https://www.aoml.noaa.gov/phod/gdp/FAQ.php
+
+GLORYS12 provides historical gridded current forcing from 1993 onward. It cannot
+be paired with the 1987 benchmark. Existing 2000/2020 cohorts have compatible
+dates but have already been viewed. A new current-fusion experiment needs its
+own frozen protocol and fresh whole-drifter evaluation.
+
+Exact product: GLOBAL_MULTIYEAR_PHY_001_030; daily dataset
+cmems_mod_glo_phy_my_0.083deg_P1D-m; variables uo and vo in m/s. Select depth
+explicitly, decode packing/fill values, preserve wet masks and geographic units.
+Daily means cover midnight to midnight and are centred at noon. Hourly
+interpolation cannot reconstruct hourly/tidal dynamics; this product omits tides.
+Its roughly 8 km grid does not resolve tank flow or individual reef channels.
+https://data.marine.copernicus.eu/product/GLOBAL_MULTIYEAR_PHY_001_030/description
+https://documentation.marine.copernicus.eu/PUM/CMEMS-GLO-PUM-001-030.pdf
+https://help.marine.copernicus.eu/en/articles/8283072-copernicus-marine-toolbox-api-subset
+
+The existing local NetCDF reader validates those units, masks, depth and hashes
+when uo/vo names are explicitly selected. It does not sample, interpolate or
+integrate trajectories. Its defaults utotal/vtotal belong to a different merged
+surface-current convention. Do not treat GLORYS Eulerian currents as those totals.
+
+Future typed inputs should retain:
+  Trajectory: physical object identity/aliases, class/drogue status, UTC position,
+    actual receive/as-of time when available, quality and provenance hash.
+  Field: product/version, issue and valid times, averaging interval, selected
+    depth, east/north m/s, latitude/longitude degrees, masks and interpolation rule.
+  Debris survey: site/date, category/count, surveyed area, effort, protocol and
+    independently documented intervention timing.
+
+Missing receive/issue times stay missing. Proposed fusion is sampled current plus
+explicit object response plus learned residual, tested against current-only and
+simple motion baselines. Audit assimilation and availability before claiming skill.
+
+NOAA GTS fixes are a better route to availability-aware replay, but require WMO-
+to-GDP physical identity mapping. IOOS HF radar offers more coastal observations
+where coverage overlaps. NOAA MDMAP measures actual shoreline debris amount/type,
+not item paths or release labels; effort and survey protocol must accompany counts.
+None is acquired or connected as forcing/outcome truth in the new diagnostic.
+https://www.aoml.noaa.gov/phod/gdp/real-time_data.php
+https://ioos.noaa.gov/data/access-ioos-data/
+https://marinedebris.noaa.gov/our-work/monitoring/marine-debris-monitoring-and-assessment-project
+
+“Message in a bottle” supplies an object-relevant precedent and Movebank study
+1271155477. Article reviewed; data download, correction and reuse contract still
+need verification before claiming an integrated training dataset.
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0242459
+
+5. CONNECTING DIAGNOSTICS TO PREVENTION
+
+A lower motion error does not guarantee a better interception decision. Evaluate
+first entry into the protected zone, arrival-time error and collector-before-zone
+ordering. Compare frozen baseline/intervention predictions against independent
+recorded releases. Show unresolved and missing outcomes and retain every denominator.
+Do not weight scenarios with uncalibrated source-support percentages.
+
+For physical validation, separate calibration drift runs, development releases and
+untouched known-source releases. Hold out complete releases/sessions, not adjacent
+frames. Moving the mesh or changing pump/water conditions needs layout-specific
+drift validation. Source accuracy, wrong rankings, Unknown, Invalid and next-needed
+measurement are more useful than a large neural model without relevant labels.
+
+6. CHALK AND PHOTON: ACTUAL IMPLEMENTED API BOUNDARIES
+
+Verified from repository adapters, without reading credentials or calling providers:
+Chalk base https://api.chalk.ai/v1/router; POST /chat/completions; Authorization:
+Bearer [private key] and X-Chalk-Env-Id; body contains exact model, messages and
+max_completion_tokens=1024. Requests are capped at 25 seconds within a 60-second
+whole turn. The investigator retrieves bounded evidence; it does not train the
+transport model, alter numeric scores or switch a pump. Configured readiness is
+different from a completed live response. No new provider call was made for this
+research. https://docs.chalk.ai/docs/model-gateway
+
+Photon uses pinned photonhq-api 0.5.0, import photon_api, base
+https://api.photon.codes and a private bearer project key. SDK projects.list_messages
+uses GET /v1/projects/{project-id}/messages to poll received iMessages from a persisted session timestamp with pagination. SDK
+raw.projects.send_message uses POST /v1/projects/{project-id}/messages with the exact project, spaceId, senderId, plain text
+and a durable idempotency-key. Direct iMessage replies omit parentMessageId on the
+wire; the parent remains in the local durable record. HTTP 202 means accepted,
+not Delivered. Route authorization, deduplication and immutable outbox records
+remain mandatory. No messages or configuration changes occurred in this research.
+https://photon.codes/docs/beta/get-started/imessage
+https://github.com/photon-hq/api/tree/main/packages/python
+
+The product relationship is Photon -> ReefTrace investigator -> Chalk -> permitted
+model, then a bounded answer back through Photon. The web dashboard can invoke
+Chalk directly. Neither messaging nor an LLM turns synthetic replay into physical
+validation, or NOAA buoy observations into proven plastic provenance.
+
+ACCESS LIMIT: Several supplied YouTube pages and the full Peanuts/CSU resources were not accessible in this audit. The technical recommendations above rely on primary documentation and papers that were readable, plus the actual local implementation; they do not claim that every linked video was watched.
