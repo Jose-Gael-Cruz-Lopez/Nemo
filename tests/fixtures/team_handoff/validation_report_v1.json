@@ -1,0 +1,1288 @@
+{
+  "schema_version": "validation_report_v1",
+  "input_bundle_hash": "8949710266dafd51d9d6ce1e1b96e5c81b8191f4fb6325df815b3977413e5550",
+  "comparison_id": "prevention-comparison-synthetic-v1",
+  "plan_id": "prevention-plan-cbc7a3768188dad23f46",
+  "source_evaluation_hash": "c5df7a25d7ab0a39cdac0154251fb6b9b9a73968c361ce89bb3b8fb527433c11",
+  "export_evaluation_hash": "2a164bd393a0ae85633c75277dd2520b7b279cf50aa333dcc237abd6927dfbff",
+  "original_private_hash_verified": false,
+  "numerical_replay_verified": true,
+  "development_protocol_id": "development-prevention-v1",
+  "validation_protocol_id": "heldout-prevention-v1",
+  "data_origin": "SYNTHETIC",
+  "physical_validation": false,
+  "supports_significance_or_causal_claim": false,
+  "protocols": {
+    "development": {
+      "comparison_hash": "2ea0eea8d8c28c053517f3a4045843c4abb9e1e3e43f1756f5596795e810c08a",
+      "frozen_at": 1001.0,
+      "id": "development-prevention-v1",
+      "plan_hash": "5df0afed7ed22e07c8da0ba44d2ebf572461e20eec50a7b06a08d1929bb61d15",
+      "recording_ids": [],
+      "selected_layout": "intervention",
+      "selection_basis": "SIMULATION_ONLY",
+      "session_ids": [
+        "development-session-v1"
+      ],
+      "split": "development",
+      "trial_ids": []
+    },
+    "validation": {
+      "comparison_hash": "2ea0eea8d8c28c053517f3a4045843c4abb9e1e3e43f1756f5596795e810c08a",
+      "frozen_at": 1002.0,
+      "id": "heldout-prevention-v1",
+      "plan_hash": "5df0afed7ed22e07c8da0ba44d2ebf572461e20eec50a7b06a08d1929bb61d15",
+      "recording_ids": [],
+      "selected_layout": "intervention",
+      "selection_basis": "SIMULATION_ONLY",
+      "session_ids": [
+        "validation-session-1",
+        "validation-session-2",
+        "validation-session-3",
+        "validation-session-4",
+        "validation-session-5",
+        "validation-session-6",
+        "validation-session-7",
+        "validation-session-8"
+      ],
+      "split": "validation",
+      "trial_ids": [
+        "prevention-trial-08751369dfeb229e0436ff42",
+        "prevention-trial-30e98834595010c22dd5c6d3",
+        "prevention-trial-4f21d14f0f0d636b8c7c485c",
+        "prevention-trial-df990c9c1f01be30b9a09979",
+        "prevention-trial-eb1fefe8d6cec9c416fdab01",
+        "prevention-trial-faa6ef1335f0719fc61c6fa9",
+        "prevention-trial-fb563457f594279d94e09ed3",
+        "prevention-trial-fbf9ee24665ecfd871099131"
+      ]
+    }
+  },
+  "by_origin": {
+    "SYNTHETIC_DEMO": {
+      "data_origin": "SYNTHETIC_DEMO",
+      "layouts": {
+        "baseline": {
+          "planned": 4,
+          "released": 4,
+          "missing_planned": 0,
+          "zone_entries": 2,
+          "captured_before_entry": 0,
+          "no_entry": 0,
+          "unresolved": 2,
+          "token_accounted": 2,
+          "unaccounted": 2,
+          "recording_linked": 0,
+          "horizon_completed": 2,
+          "outcome_resolved": 2,
+          "tracking_verification": "not_automatically_verified",
+          "entry_rate_bounds": {
+            "lower": 0.5,
+            "upper": 1.0,
+            "denominator": 4,
+            "kind": "planned_slots_missing_and_unresolved_are_unknown"
+          },
+          "observed_entry_rate_bounds": {
+            "lower": 0.5,
+            "upper": 1.0,
+            "denominator": 4,
+            "kind": "actual_releases_including_unresolved"
+          }
+        },
+        "intervention": {
+          "planned": 4,
+          "released": 4,
+          "missing_planned": 0,
+          "zone_entries": 0,
+          "captured_before_entry": 2,
+          "no_entry": 0,
+          "unresolved": 2,
+          "token_accounted": 2,
+          "unaccounted": 2,
+          "recording_linked": 0,
+          "horizon_completed": 2,
+          "outcome_resolved": 2,
+          "tracking_verification": "not_automatically_verified",
+          "entry_rate_bounds": {
+            "lower": 0.0,
+            "upper": 0.5,
+            "denominator": 4,
+            "kind": "planned_slots_missing_and_unresolved_are_unknown"
+          },
+          "observed_entry_rate_bounds": {
+            "lower": 0.0,
+            "upper": 0.5,
+            "denominator": 4,
+            "kind": "actual_releases_including_unresolved"
+          }
+        }
+      },
+      "by_source": [
+        {
+          "source_id": "A",
+          "baseline": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 2,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 2,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 2,
+            "outcome_resolved": 2,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 1.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 1.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "intervention": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 2,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 2,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 2,
+            "outcome_resolved": 2,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 0.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 0.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          }
+        },
+        {
+          "source_id": "B",
+          "baseline": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 2,
+            "token_accounted": 0,
+            "unaccounted": 2,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "intervention": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 2,
+            "token_accounted": 0,
+            "unaccounted": 2,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          }
+        }
+      ],
+      "plan": {
+        "expected_total": 8,
+        "recorded_total": 8,
+        "complete": true,
+        "balanced": true,
+        "order_followed": true
+      },
+      "effect_bounds": {
+        "lower": 0.0,
+        "upper": 1.0,
+        "kind": "baseline_minus_intervention_planned_entry_fraction"
+      },
+      "observed_effect_bounds": {
+        "lower": 0.0,
+        "upper": 1.0,
+        "kind": "actual_releases_including_unresolved_not_causal_estimate"
+      },
+      "supports_causal_claim": false,
+      "physical_outcomes_automatically_verified": false
+    },
+    "OPERATOR_REPORTED_PHYSICAL": {
+      "data_origin": "OPERATOR_REPORTED_PHYSICAL",
+      "layouts": {
+        "baseline": {
+          "planned": 4,
+          "released": 0,
+          "missing_planned": 4,
+          "zone_entries": 0,
+          "captured_before_entry": 0,
+          "no_entry": 0,
+          "unresolved": 0,
+          "token_accounted": 0,
+          "unaccounted": 0,
+          "recording_linked": 0,
+          "horizon_completed": 0,
+          "outcome_resolved": 0,
+          "tracking_verification": "not_automatically_verified",
+          "entry_rate_bounds": {
+            "lower": 0.0,
+            "upper": 1.0,
+            "denominator": 4,
+            "kind": "planned_slots_missing_and_unresolved_are_unknown"
+          },
+          "observed_entry_rate_bounds": {
+            "lower": 0.0,
+            "upper": 1.0,
+            "denominator": 0,
+            "kind": "actual_releases_including_unresolved"
+          }
+        },
+        "intervention": {
+          "planned": 4,
+          "released": 0,
+          "missing_planned": 4,
+          "zone_entries": 0,
+          "captured_before_entry": 0,
+          "no_entry": 0,
+          "unresolved": 0,
+          "token_accounted": 0,
+          "unaccounted": 0,
+          "recording_linked": 0,
+          "horizon_completed": 0,
+          "outcome_resolved": 0,
+          "tracking_verification": "not_automatically_verified",
+          "entry_rate_bounds": {
+            "lower": 0.0,
+            "upper": 1.0,
+            "denominator": 4,
+            "kind": "planned_slots_missing_and_unresolved_are_unknown"
+          },
+          "observed_entry_rate_bounds": {
+            "lower": 0.0,
+            "upper": 1.0,
+            "denominator": 0,
+            "kind": "actual_releases_including_unresolved"
+          }
+        }
+      },
+      "by_source": [
+        {
+          "source_id": "A",
+          "baseline": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "intervention": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          }
+        },
+        {
+          "source_id": "B",
+          "baseline": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "intervention": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          }
+        }
+      ],
+      "plan": {
+        "expected_total": 8,
+        "recorded_total": 0,
+        "complete": false,
+        "balanced": false,
+        "order_followed": true
+      },
+      "effect_bounds": {
+        "lower": -1.0,
+        "upper": 1.0,
+        "kind": "baseline_minus_intervention_planned_entry_fraction"
+      },
+      "observed_effect_bounds": {
+        "lower": -1.0,
+        "upper": 1.0,
+        "kind": "actual_releases_including_unresolved_not_causal_estimate"
+      },
+      "supports_causal_claim": false,
+      "physical_outcomes_automatically_verified": false
+    }
+  },
+  "diagnostics": [
+    {
+      "data_origin": "SYNTHETIC_DEMO",
+      "source_id": "A",
+      "scenario_id": "nominal",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 2,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 2,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 2,
+            "outcome_resolved": 2,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 1.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 1.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 2,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 2,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 2,
+            "outcome_resolved": 2,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 0.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 0.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    },
+    {
+      "data_origin": "SYNTHETIC_DEMO",
+      "source_id": "B",
+      "scenario_id": "nominal",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 2,
+            "token_accounted": 0,
+            "unaccounted": 2,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 2,
+            "token_accounted": 0,
+            "unaccounted": 2,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": -1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    },
+    {
+      "data_origin": "SYNTHETIC_DEMO",
+      "source_id": "A",
+      "scenario_id": "no-dispersion-check",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 2,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 2,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 2,
+            "outcome_resolved": 2,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 1.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 1.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 2,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 2,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 2,
+            "outcome_resolved": 2,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 0.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 0.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    },
+    {
+      "data_origin": "SYNTHETIC_DEMO",
+      "source_id": "B",
+      "scenario_id": "no-dispersion-check",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 2,
+            "token_accounted": 0,
+            "unaccounted": 2,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 2,
+            "missing_planned": 0,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 2,
+            "token_accounted": 0,
+            "unaccounted": 2,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": -1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    },
+    {
+      "data_origin": "OPERATOR_REPORTED_PHYSICAL",
+      "source_id": "A",
+      "scenario_id": "nominal",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": -1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    },
+    {
+      "data_origin": "OPERATOR_REPORTED_PHYSICAL",
+      "source_id": "B",
+      "scenario_id": "nominal",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": -1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    },
+    {
+      "data_origin": "OPERATOR_REPORTED_PHYSICAL",
+      "source_id": "A",
+      "scenario_id": "no-dispersion-check",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": -1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    },
+    {
+      "data_origin": "OPERATOR_REPORTED_PHYSICAL",
+      "source_id": "B",
+      "scenario_id": "no-dispersion-check",
+      "layouts": {
+        "baseline": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 20,
+            "captured_before_zone_count": 0,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 0.0,
+            "zone_entry_fraction": 1.0,
+            "zone_entry_lower_fraction": 1.0,
+            "zone_entry_upper_fraction": 1.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        },
+        "intervention": {
+          "predicted": {
+            "particles": 20,
+            "zone_entry_count": 0,
+            "captured_before_zone_count": 20,
+            "unresolved_count": 0,
+            "unsupported_count": 0,
+            "captured_before_zone_fraction": 1.0,
+            "zone_entry_fraction": 0.0,
+            "zone_entry_lower_fraction": 0.0,
+            "zone_entry_upper_fraction": 0.0
+          },
+          "observed": {
+            "planned": 2,
+            "released": 0,
+            "missing_planned": 2,
+            "zone_entries": 0,
+            "captured_before_entry": 0,
+            "no_entry": 0,
+            "unresolved": 0,
+            "token_accounted": 0,
+            "unaccounted": 0,
+            "recording_linked": 0,
+            "horizon_completed": 0,
+            "outcome_resolved": 0,
+            "tracking_verification": "not_automatically_verified",
+            "entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 2,
+              "kind": "planned_slots_missing_and_unresolved_are_unknown"
+            },
+            "observed_entry_rate_bounds": {
+              "lower": 0.0,
+              "upper": 1.0,
+              "denominator": 0,
+              "kind": "actual_releases_including_unresolved"
+            }
+          },
+          "prediction_outside_recorded_bounds": false
+        }
+      },
+      "predicted_benefit_bounds": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "observed_planned_benefit_bounds": {
+        "lower": -1.0,
+        "upper": 1.0
+      },
+      "scenario_observation_label": "NONE_same_source_layout_trials_not_additional_releases"
+    }
+  ],
+  "selected_layout_usefulness": {
+    "SYNTHETIC_DEMO": {
+      "status": "UNRESOLVED_ON_REPORTED_NEW_TRIALS",
+      "selected_layout": "intervention",
+      "physical_results_claimed": false
+    },
+    "OPERATOR_REPORTED_PHYSICAL": {
+      "status": "NO_NEW_TRIALS",
+      "selected_layout": "intervention",
+      "physical_results_claimed": false
+    }
+  },
+  "source_identification": {
+    "evaluated": false,
+    "reason": "Release labels group intervention outcomes only; no source-classifier predictions are supplied."
+  },
+  "dependence_warnings": [],
+  "next_measurement": {
+    "heuristic": "transparent_priority_rule_not_optimal_active_learning",
+    "collector_movement_requires_fresh_layout_drift": true,
+    "independent_recordings_required": true,
+    "retained_endpoint_rewatch_or_crop_is_new_evidence": false,
+    "kind": "INDEPENDENT_PAIRED_TRIAL",
+    "source_id": "B",
+    "scenario_id": "no-dispersion-check",
+    "scenario_role": "frozen_model_scenario_not_an_observed_trial_label",
+    "layouts": [
+      "baseline",
+      "intervention"
+    ],
+    "releases": 2,
+    "region_identified": false,
+    "region_cm": null,
+    "reason_codes": [
+      "UNCERTAINTY_CAN_CHANGE_LAYOUT_DECISION"
+    ],
+    "explanation": "Request a new independent paired baseline/intervention release at this declared source after layout-specific drift validation. Do not change the frozen plan; register a new plan if its quota is complete."
+  },
+  "limitations": [
+    "Particle fractions are model-conditional, not calibrated probabilities or confidence intervals.",
+    "Outcome bounds describe logged releases and missing slots, not significance or a causal estimate.",
+    "Synthetic and operator-reported physical outcomes are never pooled or automatically camera-verified.",
+    "Distinct IDs and exporter session receipts do not prove experimental independence.",
+    "No source-identification accuracy, ocean accuracy, coral survival or CO2 benefit is established.",
+    "Repeated images of a retained endpoint do not recover missing history; a crop is not a new observation.",
+    "Collector movement requires fresh independent layout-specific drift validation.",
+    "Original private-ledger hashes are exporter receipts, not independently recomputed from scrubbed notes.",
+    "Content hashes detect changed payloads relative to a receipt; they are not signatures or proof of authenticity."
+  ],
+  "id": "prevention-validation-bd92669f971508341fc5",
+  "content_hash": "bd92669f971508341fc5744991f3ebb825dcaa36310d088d96174b7f4a650430"
+}
