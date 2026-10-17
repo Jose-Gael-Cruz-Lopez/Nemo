@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "./icons";
 import { TrainingDiagnostic } from "./training-diagnostic";
+import { MotionAblation } from "./motion-ablation";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -85,5 +86,6 @@ export function RealDataLab({ api }: { api: string }) {
       <section className="card"><div className="card-header"><div><h2 className="card-title">Dataset provenance</h2><p className="card-subtitle">NOAA Global Drifter Program · buoy {data.provenance.drifter_id} · {data.provenance.row_count} positions</p></div><a className="card-link" href={https(data.provenance.metadata_url)} target="_blank" rel="noreferrer">NOAA metadata <Icon name="arrow" /></a></div><div className="card-body"><p>{data.provenance.attribution}</p><div className="heading-actions"><a className="secondary-button" href={https(data.provenance.source_url)} target="_blank" rel="noreferrer">View source CSV <Icon name="arrow" /></a><a className="card-link" href={https(data.provenance.license_url)} target="_blank" rel="noreferrer">{data.provenance.license} <Icon name="arrow" /></a></div><details className="details-panel"><summary>Integrity hash and experiment limits</summary><p className="settings-note">CSV SHA-256</p><code className="evidence-id">{data.provenance.sha256}</code><ul className="reason-list">{data.limitations.map(limit => <li key={limit}>{limit}</li>)}</ul></details><details className="details-panel"><summary>Full reproducible benchmark report</summary><pre className="code-block">{JSON.stringify(data, null, 2)}</pre></details></div></section>
     </div>}
     <TrainingDiagnostic api={api} />
+    <MotionAblation api={api} />
   </>;
 }

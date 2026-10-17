@@ -124,6 +124,14 @@ def create_app(settings: Settings | None = None):
         except (FileNotFoundError, PermissionError):
             raise HTTPException(503, "The pinned training dataset is unavailable locally") from None
 
+    @app.get("/api/v1/research/motion-ablation")
+    def motion_ablation():
+        from apps.ocean.reeftrace_ocean.ablation import run_motion_ablation
+        try:
+            return run_motion_ablation()
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(503, "The pinned motion dataset is unavailable locally") from None
+
     @app.get("/api/v1/cases/{case_id}/briefing")
     def briefing(case_id: str):
         return runtime.briefing(case_id)

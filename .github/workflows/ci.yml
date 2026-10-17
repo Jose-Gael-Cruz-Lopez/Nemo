@@ -59,6 +59,8 @@ jobs:
         run: python -m pytest -q --strict-config --strict-markers -ra
       - name: Replay the pinned real NOAA fixture
         run: python scripts/evaluate_real_data.py --output "${RUNNER_TEMP}/reeftrace-real-data.json"
+      - name: Audit learned motion against simple baselines on training positions only
+        run: python scripts/evaluate_motion_ablation.py --output "${RUNNER_TEMP}/reeftrace-motion-ablation.json"
       - name: Check public and synthetic fixtures were not rewritten
         run: git diff --exit-code -- data/public data/sample_runs
 
