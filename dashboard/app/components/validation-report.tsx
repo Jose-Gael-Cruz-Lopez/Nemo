@@ -108,6 +108,7 @@ function ValidationPanel(props: ValidationWorkspaceProps) {
       const result = await mutate<unknown>("Checking validation report identity and accounting", `${path}/validation-reports`, { report: input });
       const accepted = checkedValidationReceipt(result, scope); signal.throwIfAborted(); setReceipt(accepted);
       props.onSelected?.(validationReceiptIsCurrent(accepted, scope, current) ? accepted.report.id : "");
+      setDraftSource("Server accepted this manifest’s identity and trial accounting · method not rerun · physical validation not established");
       setNotice("The server accepted the manifest’s identity and accounting. It did not rerun the external method or validate physical outcomes.");
     });
   }
