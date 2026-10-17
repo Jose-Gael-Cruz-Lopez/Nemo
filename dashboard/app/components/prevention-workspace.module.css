@@ -3,11 +3,11 @@
 .intro { max-width: 790px; }
 .columns { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
 .history { display: grid; gap: 4px; padding: 10px; }
-.history button { display: grid; gap: 4px; width: 100%; padding: 11px; text-align: left; background: transparent; border: 1px solid transparent; border-radius: 11px; color: var(--ink); overflow-wrap: anywhere; }
+.history button { display: grid; gap: 4px; width: 100%; padding: 11px; text-align: left; background: transparent; border: 1px solid transparent; border-radius: 0; color: var(--ink); overflow-wrap: anywhere; }
 .history button[aria-current="true"] { background: var(--purple-soft); border-color: #bad8e5; }
 .history small { color: var(--muted); font-size: 10px; }
 .history strong { font-size: 12px; font-weight: 550; }
-.scope { padding: 12px 14px; background: #eaf7fb; border: 1px solid #c9e1ea; border-radius: 12px; color: #426276; }
+.scope { padding: 12px 14px; background: #eaf7fb; border: 1px solid #c9e1ea; border-radius: 0; color: #426276; }
 .badges, .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
 .badges { margin-bottom: 13px; }
 .maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
@@ -17,13 +17,13 @@
 .map figcaption strong { display: block; color: var(--ink); }
 .mapLegend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 10px; }
 .mapLegend span { display: inline-flex; gap: 5px; align-items: center; }
-.key { display: inline-block; width: 11px; height: 8px; border-radius: 2px; }
+.key { display: inline-block; width: 11px; height: 8px; border-radius: 0; }
 .protectedKey { background: #f0c7a7; border: 1px solid #bd8156; }
 .trapKey { background: #dbe9e0; border: 1px solid #9aafa0; }
 .pathKey { background: #087fac; }
 .form { display: grid; gap: 15px; }
 .form label { display: grid; gap: 6px; color: #426276; font-size: 11px; }
-.form input, .form select, .form textarea { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid #c9e1ea; border-radius: 10px; color: var(--ink); background: var(--glass-strong); }
+.form input, .form select, .form textarea { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid #c9e1ea; border-radius: 0; color: var(--ink); background: var(--glass-strong); }
 .form textarea { resize: vertical; }
 .form fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 .form legend { padding: 0 0 10px; color: var(--ink); font-weight: 550; }

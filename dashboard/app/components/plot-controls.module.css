@@ -1,0 +1,13 @@
+.controls { min-width: 0; margin: 0; padding: 12px; border: 1px solid #b8d3e2; border-radius: 0; background: #f5fbff; }
+.controls legend { padding: 0 5px; color: #315b73; font-size: 12px; font-weight: 600; }
+.series { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+.seriesLabel { display: inline-flex; align-items: center; gap: 7px; color: #254f65; font-size: 12px; cursor: pointer; }
+.seriesLabel input { width: 16px; height: 16px; margin: 0; accent-color: #087fac; cursor: pointer; }
+.seriesLabel input:focus-visible, .helpButton:focus-visible { outline: 2px solid #1d6890; outline-offset: 3px; }
+.swatch { width: 22px; border-top-width: 3px; }
+.controlNote { margin: 9px 0 0; color: #526f83; font-size: 11px; line-height: 1.5; }
+.help { position: relative; display: inline-flex; max-width: 100%; }
+.helpButton { display: inline-flex; gap: 5px; align-items: center; padding: 3px 0; border: 0; border-radius: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; text-decoration: underline dotted #7096ad; text-underline-offset: 4px; cursor: help; }
+.helpMark { display: inline-flex; width: 14px; height: 14px; justify-content: center; align-items: center; border: 1px solid #6b91a7; border-radius: 0; color: #345f78; font-size: 10px; font-weight: 600; flex-shrink: 0; }
+.tooltip { position: absolute; z-index: 30; top: 100%; left: 0; width: max-content; max-width: min(240px, 75vw); padding: 8px 10px; border: 1px solid #7096ad; border-radius: 0; background: #f5fbff; color: #254f65; font-size: 12px; font-weight: 400; line-height: 1.5; text-align: left; white-space: normal; visibility: hidden; opacity: 0; pointer-events: none; }
+.tooltipVisible { visibility: visible; opacity: 1; pointer-events: auto; }

@@ -2,11 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { readVectorResponse } from "./vector-diagnostic-state";
+import { HelpLabel, PlotSeriesControls, type PathVisibility } from "./plot-controls";
 import { type RecordedTrajectoryReport, type TrajectoryRun, validateRecordedTrajectoryReport } from "./recorded-trajectory-state";
 import styles from "./vector-diagnostic.module.css";
 
 const number = (v: number, digits = 2) => v.toLocaleString(undefined, { minimumFractionDigits: digits, maximumFractionDigits: digits });
-function PathPlot({ report, run }: { report: RecordedTrajectoryReport; run: TrajectoryRun }) {
+export function RecordedPathFigure({ report, run, visible, onToggle }: { report: RecordedTrajectoryReport; run: TrajectoryRun; visible: PathVisibility; onToggle: (id: string, checked: boolean) => void }) {
   if (run.status !== "SCORED") return <p className={styles.note}>No path is drawn for this withheld run. A broken or unsupported track is never bridged into a successful forecast.</p>;
   const b = report.bounds, width = b.x_max_cm - b.x_min_cm, height = b.y_max_cm - b.y_min_cm;
   const scale = Math.min(430 / width, 280 / height), left = 35 + (430 - width * scale) / 2, top = 25 + (280 - height * scale) / 2;
@@ -15,13 +16,23 @@ function PathPlot({ report, run }: { report: RecordedTrajectoryReport; run: Traj
   const observed = [initial, ...run.comparisons.map(p => `${x(p.observed_x_cm)},${y(p.observed_y_cm)}`)].join(" ");
   const predicted = [initial, ...run.comparisons.map(p => `${x(p.predicted_x_cm)},${y(p.predicted_y_cm)}`)].join(" ");
   const last = run.comparisons[run.comparisons.length - 1];
-  return <div className={styles.plot}><svg viewBox="0 0 500 335" role="img" aria-label={`Recorded and free-running predicted paths in calibrated centimetres for ${run.recording_id}. Observed green; prediction blue dashed. Both start at the first observation.`}>
+  return <div className={styles.plot}>
+    <PlotSeriesControls legend="Show tank paths" series={[
+      { id: "recorded", label: "Recorded path", explanation: "The token positions saved in this validation run.", color: "#267864", checked: visible.recorded },
+      { id: "forecast", label: "Predicted path", explanation: "The frozen field's free-running path from the initial position.", color: "#087fac", dashed: true, checked: visible.forecast },
+    ]} onChange={onToggle}/>
+    {!visible.recorded && !visible.forecast && <p role="status" className={styles.note}>No paths selected. Check Recorded or Predicted to show a path. Scores are unchanged.</p>}
+    <svg viewBox="0 0 500 335" role="img" aria-label={`Recorded and free-running predicted paths in calibrated centimetres for ${run.recording_id}. Observed green; prediction blue dashed. Both start at the first observation.`}>
     <rect x={left} y={top} width={width * scale} height={height * scale} fill="#edf8fc" stroke="#a9c8d5" />
-    <polyline points={observed} fill="none" stroke="#267864" strokeWidth="3" /><polyline points={predicted} fill="none" stroke="#087fac" strokeWidth="3" strokeDasharray="7 4" />
-    <circle cx={x(run.initial_position.x_cm!)} cy={y(run.initial_position.y_cm!)} r="5" fill="#12364b"><title>Common initial observation; no later observation resets the prediction</title></circle>
-    <circle cx={x(last.observed_x_cm)} cy={y(last.observed_y_cm)} r="5" fill="#267864"><title>Recorded endpoint</title></circle><circle cx={x(last.predicted_x_cm)} cy={y(last.predicted_y_cm)} r="5" fill="#087fac"><title>Predicted endpoint</title></circle>
+    {visible.recorded && <g data-plot-series="recorded"><polyline points={observed} fill="none" stroke="#267864" strokeWidth="3" /><circle cx={x(last.observed_x_cm)} cy={y(last.observed_y_cm)} r="5" fill="#267864"><title>Recorded endpoint</title></circle></g>}
+    {visible.forecast && <g data-plot-series="forecast"><polyline points={predicted} fill="none" stroke="#087fac" strokeWidth="3" strokeDasharray="7 4" /><circle cx={x(last.predicted_x_cm)} cy={y(last.predicted_y_cm)} r="5" fill="#087fac"><title>Predicted endpoint</title></circle></g>}
+    {(visible.recorded || visible.forecast) && <circle cx={x(run.initial_position.x_cm!)} cy={y(run.initial_position.y_cm!)} r="5" fill="#12364b"><title>Common initial observation; no later observation resets the prediction</title></circle>}
     <text x="35" y="18" fontSize="11" fill="#345a6b">Tank bounds · {number(width, 1)} × {number(height, 1)} cm</text><text x="35" y="325" fontSize="11" fill="#345a6b">Green: recorded · Blue dashed: predicted · Dot: shared start</text>
   </svg><p className={styles.note}>Both axes share the same centimetre scale. Plot uses +x right, +y down as a display convention; physical coordinate directions follow your calibration. Lines join all {run.comparisons.length} scored timestamp positions; wall bounces and other motion between samples are not drawn. No ocean geography, traps or protection outcome is represented.</p></div>;
+}
+function PathPlot({ report, run }: { report: RecordedTrajectoryReport; run: TrajectoryRun }) {
+  const [visible, setVisible] = useState<PathVisibility>({ recorded: true, forecast: true });
+  return <RecordedPathFigure report={report} run={run} visible={visible} onToggle={(id, checked) => setVisible(previous => ({ ...previous, [id]: checked }))}/>;
 }
 function Results({ report }: { report: RecordedTrajectoryReport }) {
   const [runId, setRunId] = useState(report.recordings[0].recording_id);
@@ -32,7 +43,7 @@ function Results({ report }: { report: RecordedTrajectoryReport }) {
     <div className={styles.metrics}><div><strong>{c.complete_recordings}/{c.validation_recordings}</strong><span>Complete declared validation runs</span></div><div><strong>{c.scored_forecast_points}/{c.planned_forecast_points}</strong><span>Scored / planned forecast points · {c.withheld_forecast_points} withheld</span></div><div><strong>{report.metrics ? `${number(report.metrics.equal_recording_ade_cm)} cm` : "Withheld"}</strong><span>Equal-run mean path error · withheld if any run fails</span></div></div>
     <p className={styles.note}>Deterministic Euler steps ≤0.05 s, reflecting rectangular walls, zero diffusion and no traps. The model advances from its own predictions at actual saved time intervals. This is separate from the conditional vector check and the stochastic source/prevention simulators.</p>
     <label className={styles.select}>Inspect free-running validation run<select value={runId} onChange={event => setRunId(event.target.value)}>{report.recordings.map(r => <option key={r.recording_id} value={r.recording_id}>{r.recording_id} · {r.status === "SCORED" ? "Scored" : "Withheld"}</option>)}</select></label>
-    {run.metrics ? <div className={styles.metrics}><div><strong>{number(run.metrics.ade_cm)} cm</strong><span>This run’s mean path error</span></div><div><strong>{number(run.metrics.fde_cm)} cm</strong><span>Final position error</span></div><div><strong>{number(run.metrics.position_rmse_cm)} cm</strong><span>Position RMSE · {run.scored_forecast_points} dependent points</span></div></div> : <div className="notice error" role="status">Full run withheld: {run.reason_codes.join(", ")}. Its {run.planned_forecast_points} planned points stay in the denominator.</div>}
+    {run.metrics ? <div className={styles.metrics}><div><strong>{number(run.metrics.ade_cm)} cm</strong><span><HelpLabel label="This run’s mean path error" explanation="ADE: average distance between the predicted path and saved token positions."/></span></div><div><strong>{number(run.metrics.fde_cm)} cm</strong><span><HelpLabel label="Final position error" explanation="FDE: distance between the predicted and recorded endpoints."/></span></div><div><strong>{number(run.metrics.position_rmse_cm)} cm</strong><span><HelpLabel label="Position RMSE" explanation="Root mean squared position miss. Larger individual misses have more influence than in ADE."/> · {run.scored_forecast_points} dependent points</span></div></div> : <div className="notice error" role="status">Full run withheld: {run.reason_codes.join(", ")}. Its {run.planned_forecast_points} planned points stay in the denominator.</div>}
     <PathPlot report={report} run={run} />
     {run.status === "SCORED" && <details className="details-panel"><summary>Actual timestamps and path errors</summary><p className={styles.note}>Showing first {Math.min(12, run.comparisons.length)} points; plot and metrics use all scored points. Elapsed time subtracts the saved start offset ({number(run.time_origin_s, 3)} s), rather than assuming acquisition began at zero.</p><div className="table-scroll"><table className="metrics-table"><caption>Recorded versus predicted positions in calibrated cm</caption><thead><tr><th>Elapsed s</th><th>Recorded x, y</th><th>Predicted x, y</th><th>Error cm</th></tr></thead><tbody>{run.comparisons.slice(0, 12).map(p => <tr key={p.t_s}><th scope="row">{number(p.t_s - run.time_origin_s, 3)}</th><td>{number(p.observed_x_cm)}, {number(p.observed_y_cm)}</td><td>{number(p.predicted_x_cm)}, {number(p.predicted_y_cm)}</td><td>{number(p.position_error_cm)}</td></tr>)}</tbody></table></div></details>}
     <details className="details-panel"><summary>All trajectories, withheld runs and provenance</summary><ul className="reason-list">{report.limitations.map(text => <li key={text}>{text}</li>)}</ul><pre className="code-block">{JSON.stringify(report, null, 2)}</pre></details>

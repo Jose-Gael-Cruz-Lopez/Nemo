@@ -6,57 +6,92 @@ import { useRouter } from "next/navigation";
 import { BrandMark } from "./components/brand-mark";
 import { BRAND_NAME } from "./components/brand";
 import { Icon } from "./components/icons";
-import { CoastalTerrain } from "./components/coastal-terrain";
-import styles from "./welcome.module.css";
+import styles from "./landing.module.css";
 
-const PHASES = [
-  { title: "See the movement.", detail: "Start with a saved observation. Keep what was measured separate from what the model predicts.", label: "Observe", icon: "camera" as const },
-  { title: "Follow the evidence.", detail: "Compare candidate sources, test the assumptions, and ask Chalk what the evidence supports.", label: "Trace", icon: "wave" as const },
-  { title: "Protect what matters.", detail: "Compare interception layouts, record trials, and see whether the intervention delivers.", label: "Prevent", icon: "check" as const },
+const CHAPTERS = [
+  { label: "Observe", heading: "Every path is a piece of evidence.", detail: "Begin with a saved observation or a token recorded in your tank.", target: "investigations", icon: "camera" as const },
+  { label: "Trace", heading: "Follow the evidence, including its limits.", detail: "Compare possible entry points. Keep an unknown source unknown.", target: "investigations", icon: "wave" as const },
+  { label: "Prevent", heading: "Test what protects the area.", detail: "Compare two interception layouts, then check their predictions against recorded trials.", target: "prevention", icon: "check" as const },
 ];
 
+function ResearchGlobe({ chapter }: { chapter: number }) {
+  return <figure className={styles.globeFrame}>
+    <svg viewBox="0 0 540 540" role="img" aria-labelledby="globe-title globe-desc" className={styles.globe}>
+      <title id="globe-title">An illustrative journey from observation to protection</title>
+      <desc id="globe-desc">An ocean sphere with three candidate entry areas, a possible route and a protected area. This is a concept illustration, not experimental or geographic evidence.</desc>
+      <defs><radialGradient id="ocean-sphere" cx="32%" cy="26%"><stop offset="0" stopColor="#f1fbff" stopOpacity=".95"/><stop offset=".65" stopColor="#c4e5f5" stopOpacity=".84"/><stop offset="1" stopColor="#87b7d1" stopOpacity=".85"/></radialGradient><clipPath id="sphere-clip"><circle cx="270" cy="270" r="178"/></clipPath></defs>
+      <circle cx="270" cy="270" r="238" fill="none" stroke="#477e9c" strokeOpacity=".32" strokeDasharray="2 7"/>
+      <circle cx="270" cy="270" r="208" fill="none" stroke="#477e9c" strokeOpacity=".26"/>
+      <path d="M88 170A208 208 0 0 1 428 133" fill="none" stroke="#267da8" strokeWidth="2"/>
+      <circle cx="270" cy="270" r="178" fill="url(#ocean-sphere)" stroke="#6295b1" strokeWidth="1.2"/>
+      <g clipPath="url(#sphere-clip)" fill="none" stroke="#6c9eb9" strokeOpacity=".36">
+        {[-100,-50,0,50,100].map(y=><ellipse key={y} cx="270" cy={270+y} rx={Math.sqrt(178*178-y*y)} ry="26"/>)}
+        {[45,95,142].map(rx=><ellipse key={rx} cx="270" cy="270" rx={rx} ry="178"/>)}
+        <path d="M92 270H448M270 92V448"/>
+      </g>
+      <g fill="#a3cbbb" fillOpacity=".72" stroke="#6eaaa7" strokeWidth="1">
+        <path d="M151 191l34-24 35 6 15 26-18 24 8 26-23 21-27-13-14-37Z"/>
+        <path d="M222 278l31 13 12 30-16 41-18 26-10-35-16-34Z"/>
+        <path d="M308 170l48-8 31 23-5 29-24 5-15-22-25 17-27-17Z"/>
+        <path d="M300 241l33-13 29 22 4 35-29 37-25-13-16-35Z"/>
+        <path d="M370 339l29-7 20 18-7 18-31-2Z"/>
+      </g>
+      <g fill="#267da8" stroke="#eff9fe" strokeWidth="3">
+        <circle cx="188" cy="235" r={chapter===0?8:5}/><circle cx="234" cy="314" r="5"/><circle cx="349" cy="228" r="5"/>
+      </g>
+      <path d="M188 235C230 195 267 221 285 259S331 301 357 325" stroke="#267da8" strokeWidth="2" strokeDasharray={chapter===0?"2 9":"7 5"} fill="none" opacity={chapter===0?.35:1}/>
+      <g opacity={chapter===2?1:.5}><rect x="342" y="311" width="30" height="30" fill="#d9b48e" fillOpacity=".75" stroke="#946336"/><path d="M329 307l-13 28" stroke="#426b60" strokeWidth="5"/></g>
+      <g fontFamily="monospace" fontSize="10" fill="#315e78"><text x="168" y="220">A</text><text x="242" y="310">B</text><text x="361" y="228">C</text></g>
+      <path d="M454 331h35v35M86 209H51v-35" stroke="#477e9c" fill="none"/>
+      <text x="270" y="505" textAnchor="middle" fontFamily="monospace" fontSize="10" letterSpacing="2" fill="#315e78">OBSERVE / TRACE / PREVENT</text>
+    </svg>
+    <figcaption>Illustrative coastal system · not measured evidence</figcaption>
+  </figure>;
+}
+
 export default function Home() {
-  const [phase, setPhase] = useState(0);
+  const [chapter, setChapter] = useState(0);
   const router = useRouter();
   useEffect(() => {
-    // Existing shared links keep their case and view when the landing page moves in.
     function restoreLegacyLink() {
       const [view, search = ""] = window.location.hash.slice(1).split("?");
       if (!["overview", "investigations", "prevention", "camera", "data", "settings"].includes(view)) return;
       const caseId = new URLSearchParams(search).get("case");
       router.replace(`/workspace#${view}${caseId && caseId.length <= 200 ? `?case=${encodeURIComponent(caseId)}` : ""}`);
     }
-    restoreLegacyLink();
-    window.addEventListener("hashchange", restoreLegacyLink);
+    restoreLegacyLink(); window.addEventListener("hashchange", restoreLegacyLink);
     return () => window.removeEventListener("hashchange", restoreLegacyLink);
   }, [router]);
-  return <main className={styles.welcome}>
+  return <main className={styles.landing}>
     <a className="sr-only skip-link" href="#hero-main">Skip to content</a>
-    <div className={styles.landingFrame}>
+    <section className={styles.experience} aria-label="Tideward coastal research">
       <header className={styles.header}>
-        <Link href="/" className={styles.wordmark} aria-label={`${BRAND_NAME} home`}><span className={styles.mark}><BrandMark /></span>{BRAND_NAME}<span className={styles.brandLabel}>COASTAL INTELLIGENCE</span></Link>
-        <nav aria-label="Main navigation" className={styles.navigation}><a href="#how-it-works">How it works</a><Link href="/workspace#data">Explore the evidence</Link><Link className={styles.navLogin} href="/login">Open workspace <Icon name="arrow" /></Link></nav>
+        <Link href="/" className={styles.wordmark} aria-label={`${BRAND_NAME} home`}><BrandMark/><span>{BRAND_NAME}<small>COASTAL RESEARCH</small></span></Link>
+        <nav aria-label="Main navigation"><a href="#workflow">The workflow</a><Link href="/workspace#data">The evidence</Link><Link href="/login" className={styles.signIn}>Open workspace <Icon name="arrow"/></Link></nav>
       </header>
-      <section className={styles.hero} id="hero-main">
-        <div className={styles.heroEmblem}><BrandMark /></div>
-        <div className={styles.eyebrow}><span />FROM OBSERVATION TO PREVENTION</div>
-        <h1>Follow the current.<br /><span>Change what reaches the reef.</span></h1>
-        <p className={styles.heroDescription}>Turn floating pollution into actionable evidence.<br className={styles.desktopBreak} /> Trace possible sources. Test smarter places to intercept it.</p>
-        <div className={styles.heroActions}><Link href="/login" className={styles.primary}>Enter {BRAND_NAME} <Icon name="arrow" /></Link><Link href="/workspace" className={styles.textLink}><span className={styles.playIcon}><Icon name="play" /></span>Explore saved observations</Link></div>
-        <div className={styles.terrainStage}>
-          <CoastalTerrain phase={phase} className={styles.terrain} />
-          <div className={styles.mapCaption}><span className={styles.mapCross}>+</span>ILLUSTRATIVE COASTAL MODEL <span>01 / {BRAND_NAME.toUpperCase()}</span></div>
-          <div className={styles.floatingInsight} aria-live="polite"><span className={styles.insightIcon}><Icon name={PHASES[phase].icon} /></span><div><small>THE {BRAND_NAME.toUpperCase()} APPROACH</small><strong>{PHASES[phase].title}</strong><p>{PHASES[phase].detail}</p></div></div>
-          <div className={styles.phaseSwitch} aria-label={`Explore the ${BRAND_NAME} workflow`}>{PHASES.map((item, i) => <button key={item.label} type="button" aria-pressed={phase === i} onClick={() => setPhase(i)}><span>0{i + 1}</span>{item.label}</button>)}</div>
+      <div className={styles.hero} id="hero-main">
+        <div className={styles.heroCopy}>
+          <p className={styles.kicker}>OBSERVATION → INTERVENTION → EVIDENCE</p>
+          <h1><span>Follow the</span><br/>current.</h1>
+          <p className={styles.intro}>Understand where pollution may enter.<br/>Test what keeps it from reaching a protected area.</p>
+          <div className={styles.actions}><Link href="/login" className={styles.primary}>Start your experiment <Icon name="arrow"/></Link><Link href="/workspace#data" className={styles.secondary}>Explore NOAA evidence <Icon name="arrow"/></Link></div>
+          <p className={styles.accessNote}>No setup needed to explore. Operator access is required to run experiments.</p>
         </div>
-      </section>
-      <div className={styles.heroFoot}><span><span className={styles.smallDot} />BUILT FOR BETTER COASTAL DECISIONS</span><a href="#how-it-works">Discover the workflow <span>↓</span></a><span>OBSERVE. TRACE. PREVENT.</span></div>
-    </div>
-    <section className={styles.workflowSection} id="how-it-works" aria-labelledby="workflow-title">
-      <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>A CLEARER WAY FORWARD</p><h2 id="workflow-title">One observation.<br />A more informed next step.</h2></div><p>{BRAND_NAME} connects movement, models, and recorded outcomes so your next intervention starts with evidence.</p></div>
-      <div className={styles.workflowGrid}>{PHASES.map((item, i) => <Link href={`/workspace#${i === 0 ? "investigations" : i === 1 ? "data" : "prevention"}`} key={item.label} className={styles.workflowCard}><span className={styles.stepNumber}>0{i + 1}</span><Icon name={item.icon} /><h3>{item.label}</h3><p>{item.detail}</p><span className={styles.cardAction}>Explore {item.label.toLowerCase()} <Icon name="arrow" /></span></Link>)}</div>
-      <div className={styles.evidenceNote}><Icon name="help" /><p>Know what the evidence can say. Source rankings are conditional, synthetic trials are clearly labeled, and uncertainty stays visible.</p><Link href="/workspace#prevention">See the comparison <Icon name="arrow" /></Link></div>
+        <ResearchGlobe chapter={chapter}/>
+        <nav className={styles.chapters} aria-label="Explore the Tideward workflow">{CHAPTERS.map((item,index)=><button type="button" key={item.label} aria-pressed={chapter===index} aria-label={`0${index+1} ${item.label}`} aria-controls="chapter-detail" onClick={()=>setChapter(index)}><span>0{index+1}</span><strong>{item.label}</strong></button>)}</nav>
+      </div>
+      <div className={styles.bottomRail}>
+        <div className={styles.projectStamp}><BrandMark/><span>CONTROLLED PROTOTYPE<br/><strong>Tank experiments + NOAA research</strong></span></div>
+        <div className={styles.chapterDetail} id="chapter-detail" aria-live="polite" aria-atomic="true"><span>0{chapter+1} / {CHAPTERS[chapter].label}</span><strong>{CHAPTERS[chapter].heading}</strong><p>{CHAPTERS[chapter].detail}</p></div>
+        <a href="#workflow" className={styles.discover}>Discover the workflow <span>↓</span></a>
+      </div>
+      <span className={styles.artNote}>Higgsfield ocean illustration</span>
     </section>
-    <footer className={styles.footer}><Link href="/" className={styles.wordmark}><span className={styles.mark}><BrandMark /></span>{BRAND_NAME}</Link><span>A clearer current. A better next step.</span><Link href="/login">Operator sign in <Icon name="arrow" /></Link></footer>
+    <section className={styles.workflow} id="workflow" aria-labelledby="workflow-title">
+      <div className={styles.sectionHeading}><p className={styles.kicker}>THE EXPERIMENT, MADE CLEAR</p><h2 id="workflow-title">One question at a time.</h2><p>Start with an observation. Follow the evidence to your next test.</p></div>
+      <div className={styles.workflowGrid}>{CHAPTERS.map((item,index)=><Link href={`/workspace#${item.target}`} key={item.label} className={styles.workflowCard}><span className={styles.cardNumber}>0{index+1}</span><Icon name={item.icon}/><h3>{item.label}</h3><p>{item.detail}</p><span className={styles.cardAction}>Open {item.label.toLowerCase()} <Icon name="arrow"/></span></Link>)}</div>
+      <p className={styles.evidenceNote}><Icon name="help"/>The demo is synthetic. NOAA records describe historical buoy motion. Real tank performance still needs to be measured.</p>
+    </section>
+    <footer className={styles.footer}><span>{BRAND_NAME} · Observe. Trace. Prevent.</span><Link href="/workspace#data">Data & methods <Icon name="arrow"/></Link><Link href="/login">Operator sign in <Icon name="arrow"/></Link></footer>
   </main>;
 }

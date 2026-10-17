@@ -1,0 +1,60 @@
+.landing{--ink:#23465c;--muted:#486b80;--line:#87afc85c;--accent:#267da8;color:var(--ink);background:#e8f3fc;min-height:100vh}
+.landing :is(a,button):focus-visible{outline:3px solid #1d6890;outline-offset:5px}
+.experience{position:relative;min-height:760px;min-height:max(760px,100svh);display:flex;flex-direction:column;isolation:isolate;overflow:hidden;background:#c9e5f4}
+.experience::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,#e8f3fcf0 0%,#e8f3fcd4 35%,#d7ecf657 70%,#c7e1f138),url('/tideward-ocean-hero.png') center/cover no-repeat}
+.experience::after{content:"";position:absolute;inset:20px;z-index:-1;border:1px solid #709cb852;pointer-events:none;background:linear-gradient(#3d7ca1,#3d7ca1) top left/22px 1px no-repeat,linear-gradient(#3d7ca1,#3d7ca1) top left/1px 22px no-repeat,linear-gradient(#3d7ca1,#3d7ca1) bottom right/22px 1px no-repeat,linear-gradient(#3d7ca1,#3d7ca1) bottom right/1px 22px no-repeat}
+.header{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:42px 5%;position:relative;z-index:2}
+.wordmark{display:flex;align-items:center;gap:10px;font-size:26px;font-weight:650;letter-spacing:-1px;line-height:1}
+.wordmark>svg{width:50px;height:42px;color:var(--accent)}
+.wordmark small{display:block;font:9px/1.5 monospace;letter-spacing:2px;margin-top:8px;color:var(--muted)}
+.header nav{display:flex;align-items:center;gap:30px;font:10px/1.5 monospace;letter-spacing:1px;text-transform:uppercase}
+.signIn{display:flex;align-items:center;gap:22px;padding:13px 18px;border:1px solid #6f9ab3;background:#e8f3fc88}
+.signIn svg,.actions svg,.cardAction svg,.footer svg{width:15px;height:15px}
+.header a:hover,.secondary:hover{color:#12557c}
+.hero{position:relative;display:grid;grid-template-columns:1.08fr 1fr;align-items:center;gap:2%;width:90%;max-width:1600px;margin:auto;flex:1;min-height:470px;padding:12px 2% 40px}
+.heroCopy{z-index:1;padding-bottom:15px}
+.kicker{font:10px/1.6 monospace;letter-spacing:1.8px;color:#426d86;margin:0 0 25px}
+.hero h1{font-size:clamp(64px,7vw,110px);font-weight:600;line-height:.94;letter-spacing:-5px;text-transform:uppercase;margin:0 0 30px}
+.hero h1 span{color:transparent;-webkit-text-stroke:1.5px #315d76;font-weight:450}
+.intro{font-size:15px;line-height:1.8;color:#365f77;margin-bottom:28px}
+.actions{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.primary,.secondary{display:inline-flex;align-items:center;gap:18px;font-size:12px;min-height:44px}
+.primary{padding:13px 20px;background:#badff3;border:1px solid #5a94b5;color:#174b69;transition:background .2s}
+.primary:hover{background:#a4d1eb}
+.secondary{border-bottom:1px solid #91b4c8}
+.accessNote{font-size:10px;line-height:1.6;max-width:370px;color:#476b80;margin-top:15px}
+.globeFrame{margin:0;position:relative;align-self:center;min-width:0;transform:translateX(-2%)}
+.globe{display:block;width:100%;max-height:540px;filter:drop-shadow(0 20px 30px #31729a0d)}
+.globeFrame figcaption{text-align:center;color:#3a627b;font:9px/1.5 monospace;letter-spacing:.6px;margin-top:-13px}
+.chapters{position:absolute;right:-3%;top:31%;display:flex;flex-direction:column;gap:22px}
+.chapters::before{content:"";position:absolute;left:12px;top:12px;bottom:12px;border-left:1px solid #5d90ae80;z-index:-1}
+.chapters button{border:0;background:transparent;display:flex;align-items:center;gap:12px;color:#426d86;text-align:left;min-height:30px;padding:0;font-size:10px}
+.chapters button>span{display:grid;place-items:center;width:25px;height:25px;background:#daeefa;border:1px solid #83a8bf;font:9px monospace}
+.chapters strong{text-transform:uppercase;letter-spacing:1.1px;font-size:8px;font-weight:550;opacity:0;transition:opacity .2s}
+.chapters [aria-pressed=true]>span{background:#267da8;color:#fff;border-color:#267da8}
+.chapters [aria-pressed=true] strong,.chapters button:hover strong,.chapters button:focus-visible strong{opacity:1}
+.bottomRail{width:90%;max-width:1600px;display:grid;grid-template-columns:1fr 1.45fr auto;align-items:center;gap:35px;padding:22px 2% 36px;margin:0 auto;border-top:1px solid var(--line)}
+.projectStamp{display:flex;align-items:center;gap:13px;font:9px/1.9 monospace;letter-spacing:.8px}
+.projectStamp>svg{width:36px;height:36px;color:var(--accent)}
+.projectStamp strong{font:10px/1.5 monospace;letter-spacing:0;color:#456e84}
+.chapterDetail{min-height:74px;border-left:1px solid #7aabc6;padding-left:24px}
+.chapterDetail>span{display:block;font:9px/1.5 monospace;letter-spacing:1.5px;color:#416d86;text-transform:uppercase;margin-bottom:7px}
+.chapterDetail>strong{font-size:14px;font-weight:500}
+.chapterDetail>p{font-size:11px;line-height:1.6;max-width:420px;margin:6px 0 0;color:#456c82}
+.discover{font:10px/1.5 monospace;display:flex;align-items:center;gap:28px}.discover>span{font-size:22px}
+.artNote{position:absolute;bottom:7px;right:28px;font:8px/1.2 monospace;color:#426d86}
+.workflow{max-width:1200px;margin:auto;padding:80px 40px 55px;scroll-margin-top:25px}
+.sectionHeading{max-width:540px;margin-bottom:35px}.sectionHeading .kicker{margin-bottom:14px}
+.sectionHeading h2{font-size:38px;font-weight:500;letter-spacing:-1.4px;margin:0 0 13px}.sectionHeading>p:last-child{font-size:14px;color:var(--muted);line-height:1.7}
+.workflowGrid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line)}
+.workflowCard{position:relative;display:block;padding:30px;background:#f2f8fc}.workflowCard+.workflowCard{border-left:1px solid var(--line)}
+.workflowCard>svg{width:25px;height:25px;margin:5px 0 30px;color:#267da8}.cardNumber{position:absolute;right:26px;top:30px;font:11px monospace;color:#53798f}
+.workflowCard h3{font-size:23px;font-weight:500;margin:0 0 14px;letter-spacing:-.6px}.workflowCard p{font-size:13px;color:var(--muted);line-height:1.8;min-height:70px;margin-bottom:24px}
+.workflowCard:hover{background:#e2f0fa}.cardAction{display:flex;align-items:center;justify-content:space-between;font:10px monospace;text-transform:uppercase;letter-spacing:.6px;color:#245d80}
+.evidenceNote{display:flex;align-items:flex-start;gap:10px;font-size:11px;line-height:1.7;color:#4d7187;margin-top:22px}.evidenceNote svg{width:15px;height:15px;margin-top:2px}
+.footer{max-width:1120px;margin:auto;padding:25px 0 35px;display:flex;align-items:center;gap:28px;justify-content:space-between;border-top:1px solid var(--line);font:10px/1.5 monospace;color:#476e85}
+.footer a{display:flex;align-items:center;gap:10px}
+@media(min-width:1500px){.chapters{right:-1.4%}.heroCopy{padding-left:2%}.globeFrame{padding-right:4%}}
+@media(max-width:1050px){.header{padding:32px 5%}.header nav{gap:20px}.header nav>a:first-child{display:none}.hero h1{font-size:clamp(64px,8.5vw,95px);letter-spacing:-3px}.hero{width:92%;gap:0}.intro{font-size:13px}.actions{gap:15px}.primary,.secondary{font-size:10px}.chapters{right:-1%}.chapters strong{display:none}.bottomRail{gap:24px;grid-template-columns:1fr 1.6fr}.discover{display:none}.projectStamp strong{font-size:9px}.footer{margin:0 40px}.chapterDetail>strong{font-size:13px}}
+@media(max-width:700px){.experience{min-height:100svh}.experience::after{inset:10px}.experience::before{background:linear-gradient(180deg,#e8f3fce8,#e8f3fc99 55%,#d7ecf6bd),url('/tideward-ocean-hero.png') center/cover}.header{padding:28px 25px;gap:15px}.wordmark{font-size:22px}.wordmark>svg{width:37px;height:32px}.wordmark small{font-size:7px;letter-spacing:1px;margin-top:6px}.header nav>a:not(.signIn){display:none}.signIn{font-size:8px;padding:10px;gap:12px}.hero{grid-template-columns:1fr;width:100%;padding:26px 30px 6px;min-height:0}.heroCopy{padding:0}.hero .kicker{font-size:8px;letter-spacing:1.1px;margin-bottom:20px}.hero h1{font-size:clamp(42px,10vw,64px);line-height:.96;margin-bottom:20px;letter-spacing:-2.5px}.hero h1 span{-webkit-text-stroke:1px #315d76}.intro{font-size:12px;margin-bottom:20px}.primary,.secondary{font-size:10px;gap:12px}.actions{gap:13px}.primary{padding:11px 13px}.accessNote{font-size:9px;margin-top:12px;max-width:270px}.globeFrame{max-width:310px;width:85%;justify-self:center;transform:none;margin:4px 0 12px}.globeFrame figcaption{font-size:7px;margin-top:-15px}.chapters{top:auto;bottom:40%;right:20px;gap:14px}.chapters button>span{width:22px;height:22px;font-size:8px}.chapters::before{left:10px}.bottomRail{width:calc(100% - 60px);display:block;padding:18px 0 28px}.projectStamp{display:none}.chapterDetail{padding-left:14px;min-height:89px}.chapterDetail>strong{font-size:12px}.chapterDetail>p{font-size:10px}.chapterDetail>span{font-size:8px}.artNote{font-size:6px;right:22px;bottom:6px}.workflow{padding:48px 25px 30px}.sectionHeading h2{font-size:29px}.sectionHeading>p:last-child{font-size:12px}.workflowGrid{grid-template-columns:1fr}.workflowCard{padding:25px}.workflowCard+.workflowCard{border-left:0;border-top:1px solid var(--line)}.workflowCard>svg{margin-bottom:20px}.workflowCard p{min-height:0;font-size:12px;max-width:350px}.footer{margin:0 25px;padding:22px 0 30px;flex-wrap:wrap;gap:16px;font-size:9px}.footer>span{width:100%}}
+@media(prefers-reduced-motion:reduce){.landing *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

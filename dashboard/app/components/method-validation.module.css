@@ -1,6 +1,6 @@
 .stack { display: grid; gap: 13px; min-width: 0; }
 .header { flex-wrap: wrap; gap: 12px; }
-.scope { margin: 0; padding: 12px; color: #426276; background: #eaf7fb; border: 1px solid #c9e1ea; border-radius: 12px; font-size: 11px; line-height: 1.75; }
+.scope { margin: 0; padding: 12px; color: #426276; background: #eaf7fb; border: 1px solid #c9e1ea; border-radius: 0; font-size: 11px; line-height: 1.75; }
 .scope h3 { margin-top: 0; }
 .actions, .badges { display: flex; flex-wrap: wrap; gap: 9px; }
 .actions button[aria-pressed="true"] { border-color: #9ec6d7; background: var(--purple-soft); }

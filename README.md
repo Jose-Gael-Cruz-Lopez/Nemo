@@ -49,6 +49,16 @@ Loading the source demo already prepares example evidence; explicitly recomputin
 
 The final local software verification on 17 October 2026 passed **1,061 Python tests**, **122 frontend tests**, and **122 PASS / 0 FAIL / 6 expected BLOCKED** offline HTTP checks. Ruff, generated route types, TypeScript and the production build passed. Actual browser checks covered the revised guide, Ranked/Unknown/Invalid source states, separate prevention example, recorded-outcome disclosure and real NOAA results; the guide also had no horizontal overflow at 390 px. Live-provider failures were preserved and two discovered research-orchestration defects received regressions. The blocked offline scopes are not counted as successful physical or device tests. GitHub runs Python/scientific replay, isolated HTTP workflows, and dashboard lint/types/build on pushes and pull requests; inspect the exact commit's hosted result separately.
 
+The later merged-PR/interface checkpoint passed **1,091 Python tests**, **134 frontend tests**, and the same **122 PASS / 0 FAIL / 6 expected BLOCKED** isolated HTTP workflow. Ruff, dependency consistency, ESLint, route types, TypeScript and the production build passed. No frozen model or dataset changed. Hosted CI for the exact final commit must still be checked separately.
+
+## Interface and first visit
+
+The interface keeps the light-blue Tideward palette and uses square cards, fine rules and flat research panels. The landing page adapts the ocean scene, large typography and chapter navigation of the Blue Marine reference to Tideward’s own Observe → Trace → Prevent story; its original Higgsfield-generated ocean art and globe are explicitly illustrative. It contains no claimed live environmental measurements.
+
+**Explore NOAA evidence** opens the public Data Lab without operator access. **Start your experiment** opens operator sign-in; writing observations, computing reports, camera operations and model requests remain protected. Overview keeps three primary demo actions. Detailed methods, provenance, saved records and advanced setup remain available through labelled disclosures.
+
+In Data Lab, recorded/forecast paths and observed/predicted/error vectors have checkbox visibility controls. Hiding a series preserves its original plot scale and all numerical scores. The first view shows the best-model summary and one path plot; the full five-model score table is behind **Compare all five models**. Metric-label help works on hover, keyboard focus and touch; Escape dismisses it. See [the interface design notes](docs/interface-design.md).
+
 ## Data roles, units and algorithms
 
 The [algorithm and contract audit](docs/algorithm-contract-audit.md) gives the equations, actual code references, assumptions and failure rules. The following datasets have different jobs:
@@ -91,18 +101,20 @@ STOP never erases saved evidence and does not cut external pump power. The softw
 
 The current-case `analysis_bundle_v1` export has `payload_sha256` and `payload_canonical_json`. Importing its validation manifest checks exact identity, partition and recomputed trial accounting; it returns **`IDENTITY_AND_ACCOUNTING_CHECKED_METHOD_NOT_RERUN`**. It does not rerun the separate numerical method or prove an independent experiment.
 
-Trace 2's offline validator uses its distinct `content_hash` envelope and full immutable method inputs. Its published synthetic alternatives are alternative outcomes for the same fixture, not additive independent trials. Do not rename hashes or treat a redacted product export as a complete method-replay bundle. [The validation protocol](docs/prevention-validation-protocol.md), [Trace 3 contract](docs/trace3-research-and-contract.md), and [Aarush's merged rehearsal](docs/experiment-validation-v2.md) explain the boundary.
+Trace 2's offline validator uses its distinct `content_hash` envelope and full immutable method inputs. Its published synthetic alternatives are alternative outcomes for the same fixture, not additive independent trials. Do not rename hashes or treat a redacted product export as a complete method-replay bundle. [The export-contract audit](docs/software-export-contract.md), [validation protocol](docs/prevention-validation-protocol.md), [Trace 3 contract](docs/trace3-research-and-contract.md), and [Aarush's merged rehearsal](docs/experiment-validation-v2.md) explain the boundary.
 
-## Current software-only team work
+## Merged software team work and next steps
 
-Use the two copyable prompts in [software handoffs](docs/software-handoffs.md):
+The two software-only assignments in [software handoffs](docs/software-handoffs.md) are merged into `main`:
 
-- **Megana:** existing-demo acceptance, accessibility and browser end-to-end evidence.
-- **Aarush:** export/validator contract documentation and missing/unresolved/retry edge-case tests.
+- **Megana — [PR #6](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/6):** [browser demo acceptance matrix](docs/software-demo-acceptance.md), four frontend regressions, explicit button types, step descriptions and a stronger guide focus outline. The matrix distinguishes browser, Node, Python, HTTP, code inspection and blocked scopes.
+- **Aarush — [PR #7](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/7):** [export/validator contract audit](docs/software-export-contract.md) and 30 synthetic regressions covering missing/unresolved outcomes, retries, conflicting identities, quota/order accounting, stale receipts and the distinction between product accounting and numerical method replay. This PR does not implement the full current-case method bridge.
 
 These assignments do not depend on a webcam, pump, calibration or new physical data. Jose owns shared application state, scientific interfaces, live provider configuration and final integration. Earlier [four-person](docs/four-person-build-plan.md) and [three-person](docs/team-handoff-prompts.md) plans remain history; they do not expand these current software-only scopes.
 
-Next software work is concrete: extend guided-demo acceptance/accessibility regressions, strengthen the export/method boundary tests, keep hosted CI green on each exact commit, and retain provider-failure/stale-response behavior. An [optional synthetic first-passage bookkeeping audit](docs/algorithm-contract-audit.md#11-next-synthetic-audit-first-passage-bookkeeping) tests exact destination/support partitions; it changes neither frozen algorithms nor physical evidence. Physical calibration and independent source/interception trials are a separate later measurement task; extra ocean-model training cannot replace them. Grok is used interactively for review; its recurring research schedule remains paused. GitHub checks run on code changes.
+Jose's integration follow-up strengthens global/login keyboard focus, moves focus to the source Chalk heading from the Overview guide, announces completed Data Lab reviews and prevention freeze/save results, and removes duplicated no-live-response text. The Prevention URL's `case` parameter retains the source-case context used by the advanced creation form; the loaded comparison has its own visible identity and may be a separate synthetic example.
+
+Next work is concrete: commission the physical camera/mapping and separately measured flow layouts; freeze and run independent source/interception trials; implement and review a complete current-case-to-method-input bridge before claiming numerical method replay for a product export; and verify assistive-technology behavior on real screen readers and additional browsers. The [optional synthetic first-passage bookkeeping audit](docs/algorithm-contract-audit.md#11-next-synthetic-audit-first-passage-bookkeeping) remains a proposal, not an implemented change to frozen algorithms. Retain provider-failure/stale-response behavior and inspect CI for each exact commit. Grok is used interactively for review; its recurring research schedule remains paused. GitHub checks run on code changes. Funded xAI Voice validation and sponsor-track eligibility remain unverified; a chat subscription or unredeemed credit code is not an API result.
 
 ## Updated physical rig guide
 

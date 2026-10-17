@@ -41,7 +41,7 @@ export default function Login() {
             {error && <p className={styles.loginError} role="alert">{error}</p>}
             <button type="submit" className={styles.primary} disabled={pending || !draft.trim()}>{pending ? "Verifying access…" : "Sign in to workspace"}<Icon name={pending ? "clock" : "arrow"} /></button>
           </form>}
-          <div className={styles.loginDivider}><span />Or explore first<span /></div><Link href="/workspace" className={styles.exploreLink}>View saved observations <Icon name="arrow" /></Link>
+          <div className={styles.loginDivider}><span />Or explore first<span /></div><Link href="/workspace#data" className={styles.exploreLink}>Explore NOAA research <Icon name="arrow" /></Link>
           <p className={styles.privacyNote}><Icon name="check" />Your operator token stays in this tab’s memory. Provider keys stay on the server. Reloading clears operator access.</p>
         </section>
       </div><div className={styles.loginBottom}><span>BETTER DECISIONS BEGIN WITH EVIDENCE.</span><span>Local research workspace</span></div>

@@ -77,12 +77,15 @@ test("Data Lab exposes one primary study and keeps earlier study controls behind
   assert.doesNotMatch(visible, /Run reference buoy replay|Load fixed Kalman study|Load motion-vector diagnostic/);
 });
 
-test("actual completed study keeps the five-model result and clear plot visible while hiding provenance density", () => {
+test("completed study keeps the summary and plot visible while full model scores and provenance stay inspectable", () => {
   const html = render(React.createElement(FreshStudyResults, { api: "", report }));
   const visible = defaultVisible(html);
   assert.match(visible, /Last observed drift had the smallest average miss in this study/);
   assert.match(visible, /6\/6 historical groups.*180\/180 model-hour results/);
-  for (const model of report.models) assert.ok(visible.includes(model.label));
+  for (const model of report.models) assert.ok(html.includes(model.label));
+  assert.match(html, /<details class="details-panel"><summary>Compare all five models<\/summary>/);
+  assert.match(visible, /Average miss.*1,573.4 m/);
+  assert.doesNotMatch(visible, /<caption>Lower miss is better/);
   assert.match(visible, /Recorded · solid/); assert.match(visible, /Forecast · dashed/);
   assert.match(visible, /Grid spacing:/); assert.doesNotMatch(visible, /display units/);
   assert.match(visible, /Explain this result/); assert.match(visible, /Sign in to use Chalk/);

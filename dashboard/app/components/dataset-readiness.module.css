@@ -3,15 +3,15 @@
 .stack { display: grid; gap: 16px; min-width: 0; }
 .intro { max-width: 850px; margin: 0; color: #426276; line-height: 1.8; font-size: 12px; }
 .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-.metrics > div { display: grid; gap: 6px; padding: 17px; border: 1px solid #c9e1ea; border-radius: 14px; background: var(--glass-strong, #fff); }
+.metrics > div { display: grid; gap: 6px; padding: 17px; border: 1px solid #c9e1ea; border-radius: 0; background: var(--glass-strong, #fff); }
 .metrics strong { font-size: 26px; color: #12364b; font-weight: 550; line-height: 1.2; }
 .metrics span { color: #4e6b7b; font-size: 11px; line-height: 1.6; }
-.blocked { padding: 15px 17px; border: 1px solid #e7d5ac; border-radius: 13px; color: #755823; background: #fcf6e9; font-size: 12px; line-height: 1.8; }
+.blocked { padding: 15px 17px; border: 1px solid #e7d5ac; border-radius: 0; color: #755823; background: #fcf6e9; font-size: 12px; line-height: 1.8; }
 .blocked p { margin: 5px 0 0; }
 .receipt { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .receipt p { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
 .datasets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-.dataset { min-width: 0; padding: 20px; border: 1px solid #c9e1ea; border-radius: 17px; background: rgb(255 255 255 / 82%); }
+.dataset { min-width: 0; padding: 20px; border: 1px solid #c9e1ea; border-radius: 0; background: rgb(255 255 255 / 82%); }
 .datasetHead { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 17px; }
 .datasetType { color: #07658a; font-size: 10px; letter-spacing: .9px; text-transform: uppercase; }
 .dataset h4 { margin: 0 0 10px; color: #12364b; font-size: 15px; line-height: 1.5; font-weight: 550; }

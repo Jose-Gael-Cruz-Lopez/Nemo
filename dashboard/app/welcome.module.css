@@ -1,14 +1,14 @@
 .welcome{--welcome-ink:#23465c;--welcome-muted:#526f83;--welcome-accent:#267da8;color:var(--welcome-ink);background:#e8f3fc;min-height:100vh;padding:18px}
 .welcome a:focus-visible,.welcome button:focus-visible,.welcome input:focus-visible{outline:3px solid #60add9;outline-offset:5px}
-.landingFrame,.loginFrame{max-width:1640px;margin:0 auto;overflow:hidden;border:1px solid #ffffffe6;border-radius:24px;background:radial-gradient(ellipse at 13% 30%,#c9e9fc70,transparent 47%),radial-gradient(ellipse at 90% 12%,#b8dff660,transparent 50%),#f0f8fd;box-shadow:0 18px 65px #53768a08,inset 0 1px 0 white}
+.landingFrame,.loginFrame{max-width:1640px;margin:0 auto;overflow:hidden;border:1px solid #ffffffe6;border-radius:0;background:radial-gradient(ellipse at 13% 30%,#c9e9fc70,transparent 47%),radial-gradient(ellipse at 90% 12%,#b8dff660,transparent 50%),#f0f8fd;box-shadow:0 18px 65px #53768a08,inset 0 1px 0 white}
 .header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 34px}
 .wordmark{display:inline-flex;align-items:center;flex-shrink:0;gap:9px;color:#234f69;font-size:21px;font-weight:650;letter-spacing:-.9px;line-height:1}
-.mark{display:grid;place-items:center;height:30px;width:30px;border-radius:10px;background:#569fc9;color:white;box-shadow:0 3px 8px #4383a81a}
+.mark{display:grid;place-items:center;height:30px;width:30px;border-radius:0;background:#569fc9;color:white;box-shadow:0 3px 8px #4383a81a}
 .mark svg{width:19px;height:19px;stroke-width:1.6}
 .brandLabel{font:500 8px/1.5 monospace;letter-spacing:1.4px;color:#6a8da1;border-left:1px solid #ced9e0;padding-left:15px;margin-left:11px}
 .navigation{display:flex;align-items:center;gap:30px;font-size:11px;color:#527182}
 .navigation>a:not(.navLogin):hover{color:#367ca4}
-.navLogin{display:flex;align-items:center;gap:18px;padding:11px 18px;background:#fbfdffb3;border:1px solid #d4e4ee;border-radius:30px;color:#3b647b;box-shadow:0 2px 5px #37657f04;transition:background .2s,transform .2s}
+.navLogin{display:flex;align-items:center;gap:18px;padding:11px 18px;background:#fbfdffb3;border:1px solid #d4e4ee;border-radius:0;color:#3b647b;box-shadow:0 2px 5px #37657f04;transition:background .2s,transform .2s}
 .navLogin:hover{background:white;transform:translateY(-1px)}
 .navLogin svg{width:14px}
 .hero{position:relative;padding-top:57px;text-align:center}
@@ -18,7 +18,7 @@
 .hero h1>span{color:#4c819f}
 .heroDescription{font-size:13px;color:#60859a;line-height:1.8;margin-bottom:23px}
 .heroActions{display:flex;justify-content:center;align-items:center;gap:26px}
-.primary{display:inline-flex;justify-content:center;align-items:center;gap:28px;min-height:43px;padding:12px 22px;border:1px solid #96c8e4;border-radius:30px;background:linear-gradient(145deg,#d1edfc,#a9d8f1);box-shadow:inset 0 1px 0 #ffffff50,0 5px 14px #559bc324;color:#174b69;font-size:11px;font-weight:550;transition:transform .2s,box-shadow .2s}
+.primary{display:inline-flex;justify-content:center;align-items:center;gap:28px;min-height:43px;padding:12px 22px;border:1px solid #96c8e4;border-radius:0;background:linear-gradient(145deg,#d1edfc,#a9d8f1);box-shadow:inset 0 1px 0 #ffffff50,0 5px 14px #559bc324;color:#174b69;font-size:11px;font-weight:550;transition:transform .2s,box-shadow .2s}
 .primary svg{width:15px;height:15px}
 .primary:hover{background:linear-gradient(145deg,#c2e7fa,#97cfea);transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff50,0 8px 18px #559bc335}
 .primary:disabled{transform:none}
@@ -31,14 +31,14 @@
 .mapCaption{position:absolute;bottom:28px;left:34px;display:flex;gap:10px;align-items:center;font:8px/1.5 monospace;letter-spacing:1px;color:#7495a8}
 .mapCaption>span:last-child{margin-left:10px;color:#8ea9b8}
 .mapCross{color:#76a9c6;font-size:16px}
-.floatingInsight{position:absolute;top:42%;right:6.5%;display:flex;width:246px;gap:12px;text-align:left;padding:16px;background:#ffffffa8;border:1px solid #ffffffee;border-radius:17px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 40px #44667914,inset 0 1px 0 white}
-.insightIcon{display:grid;place-items:center;width:30px;height:30px;flex-shrink:0;border:1px solid #d9ebf5;border-radius:9px;color:#60a3ca;background:#eaf5fb}
+.floatingInsight{position:absolute;top:42%;right:6.5%;display:flex;width:246px;gap:12px;text-align:left;padding:16px;background:#ffffffa8;border:1px solid #ffffffee;border-radius:0;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 40px #44667914,inset 0 1px 0 white}
+.insightIcon{display:grid;place-items:center;width:30px;height:30px;flex-shrink:0;border:1px solid #d9ebf5;border-radius:0;color:#60a3ca;background:#eaf5fb}
 .insightIcon svg{width:16px}
 .floatingInsight small{display:block;font:7px/1.5 monospace;letter-spacing:1.1px;color:#7294a7;margin:1px 0 7px}
 .floatingInsight strong{display:block;font-size:12px;font-weight:550}
 .floatingInsight p{font-size:10px;line-height:1.65;color:#63889d;margin:5px 0 0}
-.phaseSwitch{position:absolute;bottom:29px;left:50%;transform:translateX(-50%);display:flex;padding:4px;gap:3px;border-radius:30px;border:1px solid #ffffffed;background:#ffffff91;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 5px 22px #436d8514}
-.phaseSwitch button{display:flex;align-items:center;gap:6px;min-height:32px;border:0;border-radius:20px;padding:7px 14px;font-size:10px;background:transparent;color:#526f83;transition:color .2s,background .2s;white-space:nowrap}
+.phaseSwitch{position:absolute;bottom:29px;left:50%;transform:translateX(-50%);display:flex;padding:4px;gap:3px;border-radius:0;border:1px solid #ffffffed;background:#ffffff91;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 5px 22px #436d8514}
+.phaseSwitch button{display:flex;align-items:center;gap:6px;min-height:32px;border:0;border-radius:0;padding:7px 14px;font-size:10px;background:transparent;color:#526f83;transition:color .2s,background .2s;white-space:nowrap}
 .phaseSwitch button>span{font-size:8px;font-family:monospace;opacity:.7}
 .phaseSwitch button[aria-pressed="true"]{background:#b7def4;color:#174b69;box-shadow:0 2px 4px #4378971c}
 .heroFoot{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:60px;padding:14px 34px;border-top:1px solid #dde8ef80;font:8px/1.6 monospace;letter-spacing:1px;color:#7999ab}
@@ -51,7 +51,7 @@
 .sectionHeading h2{font-size:32px;font-weight:450;line-height:1.2;letter-spacing:-1.2px}
 .sectionHeading>p{max-width:290px;margin:0;color:#7092a6;font-size:12px;line-height:1.8}
 .workflowGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.workflowCard{position:relative;padding:28px;border:1px solid #ffffffd9;border-radius:20px;background:linear-gradient(145deg,#ffffffb5,#f6fbfe9c);box-shadow:0 12px 30px #60879d06,inset 0 1px 0 white;transition:transform .2s,box-shadow .2s}
+.workflowCard{position:relative;padding:28px;border:1px solid #ffffffd9;border-radius:0;background:linear-gradient(145deg,#ffffffb5,#f6fbfe9c);box-shadow:0 12px 30px #60879d06,inset 0 1px 0 white;transition:transform .2s,box-shadow .2s}
 .workflowCard:hover{transform:translateY(-4px);box-shadow:0 12px 30px #60879d12}
 .workflowCard>svg{width:25px;height:25px;color:#719fba;margin:8px 0 24px}
 .stepNumber{position:absolute;right:25px;top:27px;color:#9eb5c3;font:10px monospace}
@@ -59,14 +59,14 @@
 .workflowCard p{font-size:11px;line-height:1.8;color:#6f91a5;margin:12px 0 22px}
 .cardAction{display:flex;justify-content:space-between;align-items:center;color:#54839e;font-size:10px}
 .cardAction svg{width:14px}
-.evidenceNote{display:flex;align-items:center;gap:13px;margin-top:23px;padding:20px 23px;border:1px solid #d4e3eb;border-radius:13px;color:#6b8ea2}
+.evidenceNote{display:flex;align-items:center;gap:13px;margin-top:23px;padding:20px 23px;border:1px solid #d4e3eb;border-radius:0;color:#6b8ea2}
 .evidenceNote>svg{width:17px}
 .evidenceNote>p{margin:0;flex:1;font-size:10px;line-height:1.7}
 .evidenceNote>a{display:flex;gap:12px;align-items:center;font-size:10px;color:#517b93;white-space:nowrap}
 .evidenceNote>a svg{width:13px}
 .footer{max-width:1480px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;align-items:center;border-top:1px solid #d5e1e8;padding:28px 20px 14px;font-size:10px;color:#83a0b1}
 .footer .wordmark{font-size:16px;color:#506e80}
-.footer .mark{width:23px;height:23px;border-radius:7px}
+.footer .mark{width:23px;height:23px;border-radius:0}
 .footer .mark svg{width:14px;height:14px}
 .footer>a:last-child{display:flex;gap:12px;align-items:center;color:#5d8094}
 .footer>a:last-child svg{width:13px}
@@ -81,27 +81,27 @@
 .loginStory>p{position:relative;z-index:1;font-size:12px;color:#6e90a4;line-height:1.9}
 .loginTerrain{position:absolute;width:145%;height:auto;bottom:20px;left:-30%}
 .loginCaption{position:absolute;bottom:9px;color:#89a5b5;font:8px monospace;letter-spacing:1.5px}
-.loginPanel{position:relative;max-width:440px;width:100%;padding:35px;background:linear-gradient(145deg,#ffffffbc,#f6fbfe9c);border:1px solid #ffffffeb;border-radius:25px;box-shadow:0 20px 70px #46728c0d,inset 0 1px 0 white;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.loginPanelIcon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,#eaf5fc,#dceef9);border:1px solid white;color:#78a5bf;margin-bottom:26px;box-shadow:0 3px 8px #547b910a}
+.loginPanel{position:relative;max-width:440px;width:100%;padding:35px;background:linear-gradient(145deg,#ffffffbc,#f6fbfe9c);border:1px solid #ffffffeb;border-radius:0;box-shadow:0 20px 70px #46728c0d,inset 0 1px 0 white;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.loginPanelIcon{display:grid;place-items:center;width:42px;height:42px;border-radius:0;background:linear-gradient(145deg,#eaf5fc,#dceef9);border:1px solid white;color:#78a5bf;margin-bottom:26px;box-shadow:0 3px 8px #547b910a}
 .loginPanelIcon svg{width:20px;height:20px}
 .loginPanel .eyebrow{justify-content:flex-start;margin-bottom:10px;font-size:7px;letter-spacing:1.4px}
 .loginPanel h2{font-size:25px;font-weight:500;letter-spacing:-.9px;line-height:1.2;margin-bottom:12px}
 .loginIntro{font-size:11px;color:#6e91a5;line-height:1.8;margin-bottom:27px}
 .loginForm{display:flex;flex-direction:column}
 .loginForm>label{font-size:10px;font-weight:550;margin-bottom:9px;color:#587a8d}
-.tokenField{display:flex;align-items:center;gap:10px;background:#fff9;border:1px solid #d0e1eb;border-radius:11px;padding:0 12px;min-height:46px}
-.tokenField:focus-within{border-color:#8cbedb;box-shadow:0 0 0 3px #83b9d80c}
+.tokenField{display:flex;align-items:center;gap:10px;background:#fff9;border:1px solid #d0e1eb;border-radius:0;padding:0 12px;min-height:46px}
+.tokenField:focus-within{border-color:#1d6890;outline:3px solid #1d6890;outline-offset:3px}
 .tokenField>svg{width:15px;height:15px;color:#9cb4c2}
 .tokenField input{border:0;outline:0!important;background:transparent;flex:1;min-width:0;color:#46606f;font-size:11px;padding:12px 0}
 .tokenField input::placeholder{color:#9cb3c1}
 .tokenField>button{background:transparent;color:#7496a9;font-size:9px;padding:5px;border:0}
 .tokenHelp{font-size:9px;color:#7c9bad;line-height:1.8;margin:10px 0 20px}
 .tokenHelp code{font-size:8px;color:#5f8398}
-.loginForm .primary{width:100%;border-radius:11px;justify-content:space-between}
-.loginError{padding:10px 12px;border-radius:8px;background:#fff1f3;color:#9a3346;font-size:10px;line-height:1.6}
+.loginForm .primary{width:100%;border-radius:0;justify-content:space-between}
+.loginError{padding:10px 12px;border-radius:0;background:#fff1f3;color:#9a3346;font-size:10px;line-height:1.6}
 .loginDivider{display:flex;align-items:center;gap:12px;margin:23px 0 18px;color:#98b0be;font-size:9px}
 .loginDivider>span{flex:1;height:1px;background:#dce7ed}
-.exploreLink{display:flex;align-items:center;justify-content:center;gap:18px;padding:11px;border:1px solid #d3e2eb;background:#ffffff50;border-radius:11px;color:#6c90a5;font-size:10px}
+.exploreLink{display:flex;align-items:center;justify-content:center;gap:18px;padding:11px;border:1px solid #d3e2eb;background:#ffffff50;border-radius:0;color:#6c90a5;font-size:10px}
 .exploreLink svg{width:13px}
 .exploreLink:hover{background:#fff}
 .privacyNote{display:flex;align-items:flex-start;gap:8px;color:#89a5b5;font-size:8px;line-height:1.8;margin:21px 0 0}
@@ -114,7 +114,7 @@
 .textButton{background:transparent;border:0;padding:5px;color:#6e91a6;font-size:10px}
 @media(min-width:1500px){.hero{padding-top:70px}.terrainStage{margin-top:-8px;height:530px}}
 @media(max-width:1050px){.brandLabel{display:none}.hero h1{font-size:49px}.floatingInsight{right:3%;top:40%;width:216px}.heroFoot>span:last-child{display:none}.terrainStage{height:390px}.terrain{width:135%;left:-17.5%;top:0}.loginGrid{gap:5%;padding:25px 5% 40px;grid-template-columns:1fr 1fr}.loginStory{min-height:470px}.loginPanel{padding:28px}}
-@media(max-width:760px){.welcome{padding:10px}.landingFrame,.loginFrame{border-radius:18px}.header{padding:19px 20px;gap:12px}.wordmark{font-size:19px}.navigation{gap:14px}.navigation>a:not(.navLogin){display:none}.navLogin{font-size:10px;padding:9px 13px;gap:10px}.hero{padding-top:41px}.hero h1{font-size:clamp(32px,6.5vw,46px);letter-spacing:-1.7px;line-height:1.13}.heroDescription{margin:0 22px 22px;font-size:11px}.heroActions{gap:20px}.primary{gap:18px;font-size:10px;padding:11px 17px}.textLink{font-size:9px}.terrainStage{height:335px;margin-top:14px}.terrain{width:180%;left:-40%;top:15px}.floatingInsight{width:180px;top:30%;right:5%;padding:12px;gap:8px}.floatingInsight p{font-size:8px}.floatingInsight small{font-size:6px}.floatingInsight strong{font-size:11px}.insightIcon{width:25px;height:25px}.mapCaption{bottom:11px;left:18px;font-size:6px;gap:6px}.mapCaption>span:last-child{display:none}.phaseSwitch{bottom:47px}.heroFoot{padding:15px 20px;gap:10px;font-size:6px}.workflowSection{padding:52px 15px 35px}.sectionHeading{align-items:flex-start;gap:20px;flex-direction:column}.sectionHeading h2{font-size:29px}.sectionHeading>p{font-size:11px;max-width:100%}.workflowGrid{grid-template-columns:1fr;gap:12px}.workflowCard{padding:23px}.workflowCard>svg{margin:3px 0 15px}.workflowCard p{max-width:400px;margin-bottom:18px}.evidenceNote{padding:16px;flex-wrap:wrap}.evidenceNote>p{font-size:9px}.evidenceNote>a{margin-left:30px}.footer{padding:24px 9px 14px;gap:15px}.footer>span{display:none}.loginFrame{min-height:calc(100vh - 20px)}.loginGrid{grid-template-columns:1fr;padding:15px 20px 40px;gap:25px}.loginStory{min-height:220px;padding:12px 5px 0}.loginStory .eyebrow{font-size:7px}.loginStory h1{font-size:36px;letter-spacing:-1.6px;margin-bottom:13px}.loginStory>p{font-size:10px}.loginTerrain{width:93%;left:40%;bottom:-10px;opacity:.6}.loginCaption{display:none}.loginPanel{margin:0 auto;padding:28px;border-radius:21px}.loginPanel h2{font-size:24px}.loginBottom{padding:16px 20px;font-size:6px;gap:15px}}
+@media(max-width:760px){.welcome{padding:10px}.landingFrame,.loginFrame{border-radius:0}.header{padding:19px 20px;gap:12px}.wordmark{font-size:19px}.navigation{gap:14px}.navigation>a:not(.navLogin){display:none}.navLogin{font-size:10px;padding:9px 13px;gap:10px}.hero{padding-top:41px}.hero h1{font-size:clamp(32px,6.5vw,46px);letter-spacing:-1.7px;line-height:1.13}.heroDescription{margin:0 22px 22px;font-size:11px}.heroActions{gap:20px}.primary{gap:18px;font-size:10px;padding:11px 17px}.textLink{font-size:9px}.terrainStage{height:335px;margin-top:14px}.terrain{width:180%;left:-40%;top:15px}.floatingInsight{width:180px;top:30%;right:5%;padding:12px;gap:8px}.floatingInsight p{font-size:8px}.floatingInsight small{font-size:6px}.floatingInsight strong{font-size:11px}.insightIcon{width:25px;height:25px}.mapCaption{bottom:11px;left:18px;font-size:6px;gap:6px}.mapCaption>span:last-child{display:none}.phaseSwitch{bottom:47px}.heroFoot{padding:15px 20px;gap:10px;font-size:6px}.workflowSection{padding:52px 15px 35px}.sectionHeading{align-items:flex-start;gap:20px;flex-direction:column}.sectionHeading h2{font-size:29px}.sectionHeading>p{font-size:11px;max-width:100%}.workflowGrid{grid-template-columns:1fr;gap:12px}.workflowCard{padding:23px}.workflowCard>svg{margin:3px 0 15px}.workflowCard p{max-width:400px;margin-bottom:18px}.evidenceNote{padding:16px;flex-wrap:wrap}.evidenceNote>p{font-size:9px}.evidenceNote>a{margin-left:30px}.footer{padding:24px 9px 14px;gap:15px}.footer>span{display:none}.loginFrame{min-height:calc(100vh - 20px)}.loginGrid{grid-template-columns:1fr;padding:15px 20px 40px;gap:25px}.loginStory{min-height:220px;padding:12px 5px 0}.loginStory .eyebrow{font-size:7px}.loginStory h1{font-size:36px;letter-spacing:-1.6px;margin-bottom:13px}.loginStory>p{font-size:10px}.loginTerrain{width:93%;left:40%;bottom:-10px;opacity:.6}.loginCaption{display:none}.loginPanel{margin:0 auto;padding:28px;border-radius:0}.loginPanel h2{font-size:24px}.loginBottom{padding:16px 20px;font-size:6px;gap:15px}}
 @media(max-width:400px){.heroActions{gap:11px}.textLink{font-size:8px;gap:6px}.hero h1{font-size:31px}.heroDescription{font-size:10px}.loginGrid{padding:10px 14px 30px}}
 @media(prefers-reduced-transparency:reduce){.floatingInsight,.phaseSwitch,.loginPanel{backdrop-filter:none;-webkit-backdrop-filter:none;background:#f7fbfe}}
 @media(prefers-reduced-motion:reduce){.welcome *{scroll-behavior:auto!important;transition:none!important}}
@@ -139,3 +139,12 @@
 .heroEmblem::before{content:"";position:absolute;inset:-35px;background:radial-gradient(ellipse,#63d5ed14,transparent 67%);pointer-events:none}
 @media(min-width:1500px){.hero{padding-top:32px}}
 @media(max-width:760px){.hero{padding-top:25px}.heroEmblem{width:78px;height:63px;margin-bottom:20px}.header .mark{width:35px;height:29px}}
+
+/* Scientific operator form: square, flat panels in the existing light-blue palette. */
+.welcome a:focus-visible,.welcome button:focus-visible,.welcome input:focus-visible{outline:3px solid #1d6890;outline-offset:4px}
+.loginFrame,.loginPanel,.loginPanelIcon,.tokenField,.primary,.exploreLink{box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+.loginFrame{border:1px solid #abc6d9;background:#edf6fc}
+.loginPanel{border:1px solid #abc6d9;background:#f4f9fd}
+.loginPanelIcon{background:#dceef9;border-color:#bed6e5}
+.primary{background:#badff3;border-color:#6b9fbe}
+.primary:hover{background:#a4d1eb;box-shadow:none;transform:none}
