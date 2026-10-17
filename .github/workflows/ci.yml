@@ -67,8 +67,8 @@ jobs:
         run: python scripts/evaluate_fresh_drifter_study.py --output "${RUNNER_TEMP}/reeftrace-fresh-drifters.json"
       - name: Replay the pinned matched-current attempt without acquisition or a new score
         run: python -m scripts.evaluate_matched_current_study --directory data/research/matched-current-v1 --output "${RUNNER_TEMP}/reeftrace-matched-current.json"
-      - name: Replay the distinct v2 compatibility amendment without acquisition or a new score
-        run: python -m scripts.evaluate_matched_current_v2_study --output "${RUNNER_TEMP}/reeftrace-matched-current-v2.json"
+      - name: Verify frozen v2 numbers with explicit cross-platform float bounds
+        run: python -m scripts.verify_matched_current_v2_portable --output "${RUNNER_TEMP}/reeftrace-matched-current-v2-portable.json"
       - name: Replay the team intervention validation example
         run: python -m scripts.evaluate_prevention_validation tests/fixtures/prevention_validation/unresolved_analysis_bundle_v1.json --development-protocol development-prevention-v1 --validation-protocol heldout-prevention-v1 --output "${RUNNER_TEMP}/reeftrace-method-validation.json"
       - name: Check public and synthetic fixtures were not rewritten

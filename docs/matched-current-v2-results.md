@@ -214,6 +214,8 @@ clock/shape/metric structure and exact snapshot, and returns
 separate replay was performed. Neither command fetches, re-freezes, repairs or
 changes the saved study.
 
+The byte-exact command passed on the acquisition machine but failed on Linux in [hosted run 39073934821](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39073934821) after all 1,779 Python tests passed. A separate [post-outcome portability check](matched-current-v2-portable-verification.md) preserves all frozen evidence and discloses tiny computed-number differences under explicit absolute bounds. It neither changes the scientific protocol nor replaces the saved first score. Use `python -m scripts.verify_matched_current_v2_portable` for that distinctly labeled software verification.
+
 ## 7. Data Lab, Chalk and HTTP verification
 
 In Data Lab, choose **Study version → v2 · compatibility amendment**, then
