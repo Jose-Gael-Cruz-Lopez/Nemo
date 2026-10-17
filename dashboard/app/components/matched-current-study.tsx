@@ -6,7 +6,7 @@ import { Icon } from "./icons";
 import { useOperator } from "./operator-provider";
 import { HelpLabel, PlotSeriesControls } from "./plot-controls";
 import { readVectorResponse } from "./vector-diagnostic-state";
-import { MATCHED_GROUPS, MATCHED_MODELS, matchedHourlyDisplacement, matchedPlot, matchedSegments, validateMatchedAnswer, validateMatchedEnvelope, type MatchedAnswer, type MatchedEnvelope, type MatchedModelId, type MatchedPlotPoint } from "./matched-current-state";
+import { MATCHED_GROUPS, MATCHED_MODELS, matchedStudyVersion, matchedHourlyDisplacement, matchedPlot, matchedSegments, validateMatchedAnswer, validateMatchedEnvelope, type MatchedAnswer, type MatchedEnvelope, type MatchedModelId, type MatchedPlotPoint, type MatchedStudyVersion } from "./matched-current-state";
 import styles from "./matched-current-study.module.css";
 
 type SeriesId = "recorded" | MatchedModelId;
@@ -51,7 +51,7 @@ function MatchedChalk({api,envelope,token}:{api:string;envelope:MatchedEnvelope;
     if(controller.current||!token||!question.trim()||question.trim().length>2000)return;
     const pending=new AbortController();controller.current=pending;const timer=window.setTimeout(()=>pending.abort(),90_000);setAnswer(null);setError("");setLoading(true);
     try{
-      const response=await fetch(`${api.replace(/\/$/,"")}/api/v1/research/matched-current/investigate`,{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify({question:question.trim(),report_sha256:envelope.artifact_identity.report_sha256,protocol_sha256:envelope.artifact_identity.protocol_sha256}),signal:pending.signal});
+      const response=await fetch(`${api.replace(/\/$/,"")}/api/v1/research/matched-current/investigate`,{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json",Authorization:`Bearer ${token}`},body:JSON.stringify({question:question.trim(),study_version:matchedStudyVersion(envelope.report.study_id),report_sha256:envelope.artifact_identity.report_sha256,protocol_sha256:envelope.artifact_identity.protocol_sha256}),signal:pending.signal});
       const result=await readVectorResponse(response,value=>validateMatchedAnswer(value,envelope),5_000_000);
       if(controller.current===pending&&!pending.signal.aborted)setAnswer(result);
     }catch(cause){if(controller.current===pending)setError(pending.signal.aborted?"The bounded Chalk review timed out. The saved report remains available.":errorText(cause));}
@@ -64,6 +64,7 @@ export function MatchedCurrentResults({api,envelope}:{api:string;envelope:Matche
   const {token}=useOperator(),[groupId,setGroupId]=useState<string>(MATCHED_GROUPS[0]),[visible,setVisible]=useState<Visibility>(initialVisibility),[hour,setHour]=useState(6),[arrows,setArrows]=useState(false);
   const s=envelope.report.scores,group=s.groups.find(item=>item.group_id===groupId)!,complete=s.primary_common_cohort_complete;
   return <div className={styles.stack}>
+    <p className={styles.note}>{matchedStudyVersion(envelope.report.study_id)==="v2"?"v2 compatibility amendment · same buoy groups and models. Frozen before new GDP outcomes, after the v1 forcing was decoded for diagnosis. The v1 failure remains available in the version selector.":"v1 original attempt · preserved without rewriting its inputs, predictions or failures."}</p>
     <div className={styles.summary}><strong>{complete?"A complete historical comparison is available.":"The comparison is incomplete; no overall model ranking is supported."}</strong><p>{s.scored_cell_count} / 36 scored model-hour cells · 2 planned buoy groups · 12 distinct later positions planned</p></div>
     <div className="table-scroll"><table className="metrics-table"><caption>All declared groups · primary comparison withheld unless every model-hour cell scores</caption><thead><tr><th>Fixed candidate</th><th>Coverage</th><th><HelpLabel label="Average miss" explanation="Equal-buoy average of each six-hour ADE, only when the complete shared cohort is available."/></th><th><HelpLabel label="Miss at 6h" explanation="Equal-buoy final position error. It is withheld here unless the full shared cohort is available."/></th></tr></thead><tbody>{s.models.map(model=>{const primary=s.primary_equal_id_macro_results?.find(row=>row.model_id===model.model_id);return <tr key={model.model_id}><th scope="row">{labels[model.model_id]}</th><td>{model.metrics.scored_count} / 12</td><td>{fmt(primary?.equal_id_macro_ade_m??null)}</td><td>{fmt(primary?.equal_id_macro_fde_m??null)}</td></tr>;})}</tbody></table></div>
     <div className={styles.controls}><label className={styles.label}>Buoy group<select value={groupId} onChange={event=>setGroupId(event.target.value)}>{MATCHED_GROUPS.map(id=><option key={id} value={id}>GDP {id}</option>)}</select></label><label className={styles.label}>Inspect saved hour<select value={hour} onChange={event=>setHour(Number(event.target.value))}>{[1,2,3,4,5,6].map(value=><option key={value} value={value}>{value}h · {String(value).padStart(2,"0")}:00 UTC</option>)}</select></label><label className={styles.checkbox}><input type="checkbox" checked={arrows} onChange={event=>setArrows(event.target.checked)}/>Hourly displacement arrows</label></div>
@@ -82,17 +83,23 @@ export function MatchedCurrentResults({api,envelope}:{api:string;envelope:Matche
   </div>;
 }
 
-function Session({api}:{api:string}) {
+function Session({api,studyVersion}:{api:string;studyVersion:MatchedStudyVersion}) {
   const [envelope,setEnvelope]=useState<MatchedEnvelope|null>(null),[loading,setLoading]=useState(false),[error,setError]=useState("");
   const controller=useRef<AbortController|null>(null);
   useEffect(()=>()=>{controller.current?.abort();controller.current=null;},[]);
   async function load(){
     if(controller.current)return;
     const pending=new AbortController();controller.current=pending;const timer=window.setTimeout(()=>pending.abort(),30_000);setEnvelope(null);setError("");setLoading(true);
-    try{const response=await fetch(`${api.replace(/\/$/,"")}/api/v1/research/matched-current`,{cache:"no-store",signal:pending.signal});const result=await readVectorResponse(response,validateMatchedEnvelope,5_000_000);if(controller.current===pending&&!pending.signal.aborted)setEnvelope(result);}
+    try{const response=await fetch(`${api.replace(/\/$/,"")}/api/v1/research/matched-current?study_version=${studyVersion}`,{cache:"no-store",signal:pending.signal});const result=await readVectorResponse(response,value=>validateMatchedEnvelope(value,studyVersion),5_000_000);if(controller.current===pending&&!pending.signal.aborted)setEnvelope(result);}
     catch(cause){if(controller.current===pending)setError(pending.signal.aborted?"The frozen study read timed out; no result was accepted.":errorText(cause));}
     finally{window.clearTimeout(timer);if(controller.current===pending){controller.current=null;setLoading(false);}}
   }
-  return <section className="card" aria-label="Matched current and real buoy study"><div className={`card-header ${styles.header}`}><div><h2 className="card-title">Do matched currents explain the buoy’s motion?</h2><p className="card-subtitle">Two fixed GDP groups · three motion candidates · six later hours</p></div><button className="secondary-button" disabled={loading} onClick={()=>void load()}><Icon name="play"/>{loading?"Reading saved evidence…":"Load matched-current study"}</button></div><div className={`card-body ${styles.stack}`}>{!envelope&&!loading&&!error&&<p className={styles.note}>Inspect a separately frozen historical comparison, including failed acquisitions and missing paths. Loading this card never acquires data or performs a first score.</p>}{loading&&<p role="status" className={styles.note}>Reading the pinned result, protocol and all planned outcome slots…</p>}{error&&<div className="notice error" role="alert">{error} No fallback dataset or automatic retry will be used.</div>}{envelope&&<MatchedCurrentResults key={envelope.artifact_identity.report_sha256} api={api} envelope={envelope}/>}</div></section>;
+  return <section className="card" aria-label="Matched current and real buoy study"><div className={`card-header ${styles.header}`}><div><h2 className="card-title">Do matched currents explain the buoy’s motion?</h2><p className="card-subtitle">{studyVersion==="v2"?"v2 compatibility amendment":"v1 original attempt"} · two GDP groups · three candidates · six later hours</p></div><button className="secondary-button" disabled={loading} onClick={()=>void load()}><Icon name="play"/>{loading?"Reading saved evidence…":"Load matched-current study"}</button></div><div className={`card-body ${styles.stack}`}>{!envelope&&!loading&&!error&&<p className={styles.note}>Inspect a separately frozen historical comparison, including failed acquisitions and missing paths. Loading this card never acquires data or performs a first score.</p>}{loading&&<p role="status" className={styles.note}>Reading the pinned result, protocol and all planned outcome slots…</p>}{error&&<div className="notice error" role="alert">{error} No fallback dataset or automatic retry will be used.</div>}{envelope&&<MatchedCurrentResults key={envelope.artifact_identity.report_sha256} api={api} envelope={envelope}/>}</div></section>;
 }
-export function MatchedCurrentStudy({api}:{api:string}){return <Session key={api} api={api}/>;}
+export function MatchedCurrentStudy({api}:{api:string}){
+  const [studyVersion,setStudyVersion]=useState<MatchedStudyVersion>("v2");
+  return <div className={styles.stack}>
+    <label className={styles.label}>Study version<select value={studyVersion} onChange={event=>setStudyVersion(event.target.value as MatchedStudyVersion)}><option value="v2">v2 · compatibility amendment</option><option value="v1">v1 · preserved original attempt</option></select></label>
+    <Session key={`${api}:${studyVersion}`} api={api} studyVersion={studyVersion}/>
+  </div>;
+}

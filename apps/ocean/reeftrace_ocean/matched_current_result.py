@@ -160,11 +160,25 @@ def _pinned(directory: Path, name: str, expected=None) -> tuple[dict, str]:
     return value, digest
 
 
-def _result_pin(root: Path, expected, allow_unpinned: bool) -> tuple[dict, str, str | None]:
+def _version_contract(study_version: str):
+    """Two explicit historical namespaces; never accept a caller module/path."""
+    if study_version == "v1":
+        return protocol_io, RESULT_IDENTITY_RELATIVE, "data/research/matched-current-v1"
+    if study_version == "v2":
+        from . import matched_current_v2_protocol
+
+        return (matched_current_v2_protocol,
+                "apps/ocean/reeftrace_ocean/matched_current_v2_result_identity.py",
+                "data/research/matched-current-v2")
+    raise ValueError("Unknown frozen matched-current study version")
+
+
+def _result_pin(root: Path, expected, allow_unpinned: bool, *, study_version="v1") -> tuple[dict, str, str | None]:
+    selected_protocol, identity_relative, _ = _version_contract(study_version)
     if expected is not None:
         _require(_hash(expected), "expected report hash must be lowercase SHA-256")
         return {"REPORT_SHA256": expected}, "EXPLICIT_CALLER_PIN", None
-    path = root / RESULT_IDENTITY_RELATIVE
+    path = root / identity_relative
     if not path.is_file():
         if allow_unpinned:
             return {}, "UNPINNED_LOCAL_ONLY", None
@@ -183,7 +197,7 @@ def _result_pin(root: Path, expected, allow_unpinned: bool) -> tuple[dict, str, 
                  "result identity permits literal string assignments only")
         values[node.targets[0].id] = node.value.value
     _keys(values, {"STUDY_ID", "REPORT_SHA256", "FORECAST_SHA256", "MANIFEST_SHA256"})
-    _require(values["STUDY_ID"] == protocol_io.STUDY_ID
+    _require(values["STUDY_ID"] == selected_protocol.STUDY_ID
              and all(_hash(values[key]) for key in values if key != "STUDY_ID"),
              "trusted result identity changed")
     return values, "TRUSTED_RESULT_IDENTITY", hashlib.sha256(raw).hexdigest()
@@ -518,6 +532,7 @@ def _score_shape(scores: dict, forecasts: dict) -> None:
 
 def _load_result(
     directory=None, *, root=None, expected_report_sha256=None, allow_unpinned_local=False,
+    study_version="v1",
 ) -> dict:
     """Read one pinned result without executing any forecast or first-score path.
 
@@ -526,11 +541,13 @@ def _load_result(
     outer forecasts.json file hash, not its inner forecast-content digest.
     """
     _require(type(allow_unpinned_local) is bool, "local-only opt-in must be boolean")
-    root = Path(root or protocol_io.ROOT)
-    directory = Path(directory or root / "data/research/matched-current-v1")
+    selected_protocol, _, default_directory = _version_contract(study_version)
+    root = Path(root or selected_protocol.ROOT)
+    directory = Path(directory or root / default_directory)
     _require(not directory.is_symlink(), "symlinked study directory is not accepted")
-    pins, pin_source, result_identity_hash = _result_pin(root, expected_report_sha256, allow_unpinned_local)
-    protocol, manifest, hashes, _sources = protocol_io.load_acquisition(directory, root=root)
+    pins, pin_source, result_identity_hash = _result_pin(
+        root, expected_report_sha256, allow_unpinned_local, study_version=study_version)
+    protocol, manifest, hashes, _sources = selected_protocol.load_acquisition(directory, root=root)
     if manifest is None:
         raise FileNotFoundError("Matched-current acquisition is not available")
     lineage = {key: value for key, value in hashes.items() if key.endswith("sha256")}
@@ -542,7 +559,7 @@ def _load_result(
     _require(forecast["schema_version"] == report["schema_version"] == 1
              and forecast["kind"] == "FROZEN_MATCHED_CURRENT_FORECASTS"
              and report["kind"] == "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC"
-             and forecast["study_id"] == report["study_id"] == protocol_io.STUDY_ID,
+             and forecast["study_id"] == report["study_id"] == selected_protocol.STUDY_ID,
              "study kind/identity changed")
     _equal(forecast["schema_version"], 1)
     _equal(report["schema_version"], 1)
@@ -605,15 +622,15 @@ def _load_result(
                          "advection forcing differs from the acquired field")
     # Re-read frozen identity/files after validation so a concurrent replacement
     # is rejected, rather than returning mixed artifact generations.
-    _, latest_manifest, latest_hashes, _ = protocol_io.load_acquisition(directory, root=root)
+    _, latest_manifest, latest_hashes, _ = selected_protocol.load_acquisition(directory, root=root)
     _require(latest_hashes == hashes and latest_manifest == manifest
              and _pinned(directory, "forecasts", forecast_file_hash)[0] == forecast
              and _pinned(directory, "evaluation", report_hash)[0] == report,
              "frozen artifacts changed while being read")
-    _require(_result_pin(root, expected_report_sha256, allow_unpinned_local)
+    _require(_result_pin(root, expected_report_sha256, allow_unpinned_local, study_version=study_version)
              == (pins, pin_source, result_identity_hash), "trusted result pin changed while being read")
     return {"report": copy.deepcopy({key: report[key] for key in REPORT_KEYS}),
-        "artifact_identity": {"schema_version": 1, "study_id": protocol_io.STUDY_ID,
+        "artifact_identity": {"schema_version": 1, "study_id": selected_protocol.STUDY_ID,
             "report_sha256": report_hash, "forecast_file_sha256": forecast_file_hash,
             "forecast_sha256": forecast["forecasts"]["forecast_sha256"],
             "protocol_sha256": hashes["protocol_sha256"],
@@ -628,6 +645,7 @@ def _load_result(
 
 def load_frozen_matched_current_result(
     directory=None, *, root=None, expected_report_sha256=None, allow_unpinned_local=False,
+    study_version="v1",
 ) -> dict:
     """Read pinned, already scored evidence; never execute acquisition or scoring.
 
@@ -638,6 +656,6 @@ def load_frozen_matched_current_result(
     """
     try:
         return _load_result(directory, root=root, expected_report_sha256=expected_report_sha256,
-                            allow_unpinned_local=allow_unpinned_local)
+                            allow_unpinned_local=allow_unpinned_local, study_version=study_version)
     except (KeyError, TypeError, IndexError, OverflowError, RecursionError) as error:
         raise ValueError("Frozen matched-current result: malformed artifact structure") from error

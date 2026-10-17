@@ -1,5 +1,7 @@
 """Artifact-only matched-current research and explicit read-only Chalk review."""
 
+from typing import Literal
+
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import Response
 from pydantic import Field, field_validator
@@ -9,6 +11,7 @@ from ....services import matched_current_investigation
 
 
 class MatchedCurrentQuestion(StrictModel):
+    study_version: Literal["v1", "v2"] = "v1"
     question: str = Field(min_length=1, max_length=2000, strict=True)
     report_sha256: str = Field(pattern=r"^[0-9a-f]{64}$", strict=True)
     protocol_sha256: str = Field(pattern=r"^[0-9a-f]{64}$", strict=True)
@@ -37,11 +40,14 @@ def create_matched_current_router(runtime, operator) -> APIRouter:
                              headers={"Cache-Control": "no-store"})
 
     @router.get("/research/matched-current")
-    def matched_current(response: Response):
+    def matched_current(response: Response, study_version: Literal["v1", "v2"] = "v1"):
         response.headers["Cache-Control"] = "no-store"
         try:
-            snapshot = matched_current_investigation.load_matched_current_result()
-            matched_current_investigation.snapshot_identity(snapshot)
+            snapshot = (matched_current_investigation.load_matched_current_result()
+                        if study_version == "v1" else
+                        matched_current_investigation.load_matched_current_result(study_version="v2"))
+            matched_current_investigation.snapshot_identity(
+                snapshot, expected_study_id=matched_current_investigation.STUDY_IDS[study_version])
             return snapshot
         except FileNotFoundError:
             raise unavailable() from None
@@ -56,7 +62,7 @@ def create_matched_current_router(runtime, operator) -> APIRouter:
         try:
             return await matched_current_investigation.investigate_matched_current(
                 runtime, body.question, report_sha256=body.report_sha256,
-                protocol_sha256=body.protocol_sha256)
+                protocol_sha256=body.protocol_sha256, study_version=body.study_version)
         except FileNotFoundError:
             raise unavailable() from None
         except (PermissionError, ImportError):

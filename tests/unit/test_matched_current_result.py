@@ -354,3 +354,53 @@ def test_current_field_and_advection_unknown_fields_are_not_exposed(artifacts):
     rewrite(artifacts)
     with pytest.raises(ValueError, match="schema"):
         read(artifacts)
+
+
+def test_versioned_reader_preserves_original_and_requires_distinct_v2_trust(artifacts, monkeypatch):
+    from apps.ocean.reeftrace_ocean import matched_current_v2_protocol as v2
+
+    original_files = {str(p): p.read_bytes() for p in artifacts['root'].rglob('*') if p.is_file()}
+    v2case = copy.deepcopy({key: value for key, value in artifacts.items() if key != 'loads'})
+    v2case['directory'] = artifacts['root'] / 'data/research/matched-current-v2'
+    v2case['directory'].mkdir(parents=True)
+    v2case['protocol']['study_id'] = v2.STUDY_ID
+    v2case['forecast']['study_id'] = v2.STUDY_ID
+    v2case['report']['study_id'] = v2.STUDY_ID
+    forecast_hash = save(v2case['directory'] / 'forecasts.json', v2case['forecast'])
+    v2case['report']['forecast_file_sha256'] = forecast_hash
+    report_hash = save(v2case['directory'] / 'evaluation.json', v2case['report'])
+    identity = artifacts['root'] / 'apps/ocean/reeftrace_ocean/matched_current_v2_result_identity.py'
+    identity.write_text(f'STUDY_ID = {v2.STUDY_ID!r}\nREPORT_SHA256 = {report_hash!r}\n'
+        f'FORECAST_SHA256 = {forecast_hash!r}\nMANIFEST_SHA256 = {v2case["hashes"]["manifest_sha256"]!r}\n')
+
+    def load(selected_directory, *, root):
+        assert Path(selected_directory) == v2case['directory']
+        assert Path(root) == artifacts['root']
+        return copy.deepcopy((v2case['protocol'], v2case['manifest'], v2case['hashes'], {}))
+
+    monkeypatch.setattr(v2, 'load_acquisition', load)
+    snapshot = reader.load_frozen_matched_current_result(root=artifacts['root'], study_version='v2')
+    assert snapshot['report'] == v2case['report']
+    assert snapshot['artifact_identity']['study_id'] == v2.STUDY_ID
+    assert snapshot['artifact_identity']['report_sha256'] == report_hash
+    assert snapshot['artifact_identity']['numeric_replay_verified'] is False
+    assert read(artifacts)['report'] == artifacts['report']
+    for name, before in original_files.items():
+        assert Path(name).read_bytes() == before
+    # A v1 report cannot impersonate v2 even with a deliberately refreshed local
+    # test hash. The public service additionally requires its literal trust pin.
+    v2case['report']['study_id'] = reader.protocol_io.STUDY_ID
+    save(v2case['directory'] / 'evaluation.json', v2case['report'])
+    with pytest.raises(ValueError, match='study kind/identity'):
+        reader.load_frozen_matched_current_result(v2case['directory'], root=artifacts['root'],
+            study_version='v2', expected_report_sha256=hashlib.sha256(
+                (v2case['directory'] / 'evaluation.json').read_bytes()).hexdigest())
+
+
+@pytest.mark.parametrize('version', ['v3', '', '../v1', None, True])
+def test_unknown_reader_version_fails_before_any_artifact_load(monkeypatch, version):
+    def forbidden(*_args, **_kwargs):
+        pytest.fail('Unknown version reached the artifact loader')
+    monkeypatch.setattr(reader.protocol_io, 'load_acquisition', forbidden)
+    with pytest.raises(ValueError, match='Unknown frozen'):
+        reader.load_frozen_matched_current_result(study_version=version)

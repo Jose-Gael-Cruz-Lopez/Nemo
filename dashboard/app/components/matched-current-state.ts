@@ -3,6 +3,13 @@ export const MATCHED_GROUPS = ["300234066836710", "300534061292930"] as const;
 export const MATCHED_MODELS = ["stationary", "last_drift", "current_only"] as const;
 export const MATCHED_ORIGIN = "2022-06-01T00:00:00Z";
 export const MATCHED_STUDY = "matched-current-gdp-hycom-15m-v1";
+export const MATCHED_STUDIES = { v1: MATCHED_STUDY, v2: "matched-current-gdp-hycom-15m-v2" } as const;
+export type MatchedStudyVersion = keyof typeof MATCHED_STUDIES;
+export function matchedStudyVersion(studyId: string): MatchedStudyVersion {
+  if (studyId === MATCHED_STUDIES.v1) return "v1";
+  if (studyId === MATCHED_STUDIES.v2) return "v2";
+  throw new Error("Unknown matched-current study. No result was accepted.");
+}
 export type MatchedModelId = typeof MATCHED_MODELS[number];
 export type GeoPoint = { time_utc: string; latitude_deg: number; longitude_deg: number };
 export type MatchedForecastCell = { horizon_hours: number; elapsed_s: number; time_utc: string; forecast_status: "AVAILABLE" | "UNAVAILABLE"; forecast_reason_code: string | null; latitude_deg: number | null; longitude_deg: number | null };
@@ -65,10 +72,11 @@ function validateCell(cell: MatchedForecastCell, hour: number) {
   else if (cell.forecast_status !== "UNAVAILABLE" || cell.latitude_deg !== null || cell.longitude_deg !== null || typeof cell.forecast_reason_code !== "string") return fail();
 }
 
-export function validateMatchedEnvelope(value: unknown): MatchedEnvelope {
+export function validateMatchedEnvelope(value: unknown, studyVersion: MatchedStudyVersion = "v1"): MatchedEnvelope {
   if (!object(value) || !bounded(value) || !object(value.report) || !object(value.artifact_identity)) return fail();
   const envelope = value as MatchedEnvelope, r = envelope.report, identity = envelope.artifact_identity, s = r.scores;
-  if (r.schema_version !== 1 || r.kind !== "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC" || r.study_id !== MATCHED_STUDY || identity.schema_version !== 1 || identity.study_id !== MATCHED_STUDY || identity.integrity_verified !== true || identity.result_pin_verified !== true || identity.pin_source !== "TRUSTED_RESULT_IDENTITY" || identity.numeric_replay_verified !== false || identity.verification_scope !== "FROZEN_ARTIFACT_LINEAGE_AND_STRUCTURE_NOT_NUMERIC_REPLAY" || ![identity.report_sha256, identity.forecast_file_sha256, identity.forecast_sha256, identity.protocol_sha256, identity.trusted_protocol_identity_sha256, identity.manifest_sha256, identity.acquisition_start_sha256, identity.result_identity_file_sha256].every(hash)
+  const expectedStudy = MATCHED_STUDIES[studyVersion];
+  if (!expectedStudy || r.schema_version !== 1 || r.kind !== "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC" || r.study_id !== expectedStudy || identity.schema_version !== 1 || identity.study_id !== expectedStudy || identity.integrity_verified !== true || identity.result_pin_verified !== true || identity.pin_source !== "TRUSTED_RESULT_IDENTITY" || identity.numeric_replay_verified !== false || identity.verification_scope !== "FROZEN_ARTIFACT_LINEAGE_AND_STRUCTURE_NOT_NUMERIC_REPLAY" || ![identity.report_sha256, identity.forecast_file_sha256, identity.forecast_sha256, identity.protocol_sha256, identity.trusted_protocol_identity_sha256, identity.manifest_sha256, identity.acquisition_start_sha256, identity.result_identity_file_sha256].every(hash)
     || !object(r.lineage) || r.lineage.protocol_sha256 !== identity.protocol_sha256 || r.lineage.trusted_identity_sha256 !== identity.trusted_protocol_identity_sha256 || r.lineage.manifest_sha256 !== identity.manifest_sha256 || r.lineage.acquisition_start_sha256 !== identity.acquisition_start_sha256 || r.forecast_file_sha256 !== identity.forecast_file_sha256 || r.forecasts_saved_before_target_coordinate_decode !== true || utc(r.forecast_frozen_at_utc) === null || utc(r.scored_at_utc) === null || utc(r.scored_at_utc)! < utc(r.forecast_frozen_at_utc)! || !Array.isArray(r.source_receipts) || !object(r.context_qc) || !(r.current_field === null || object(r.current_field)) || !reason(r.current_field_failure)
     || [r.physical_validation, r.operational_causality, r.assimilation_independence_verified, r.physical_alias_resolution_verified, r.statistical_independence, r.global_training, r.heldout_tuning, r.automatic_model_promotion, r.provider_calls, r.camera_started, r.store_written].some(v => v !== false)
     || !object(s) || s.schema_version !== 1 || s.kind !== "MATCHED_CURRENT_SCORES" || s.origin_time_utc !== MATCHED_ORIGIN || s.planned_group_count !== 2 || s.planned_cell_count !== 36 || s.planned_distinct_target_count !== 12 || !count(s.scored_cell_count) || [s.statistical_independence, s.automatic_winner_selected, s.operational_forecast_skill_verified, s.physical_validation].some(v => v !== false) || !Array.isArray(s.limitations) || !s.limitations.length || !s.limitations.every(v => typeof v === "string")) return fail();
@@ -167,7 +175,7 @@ export function matchedHourlyDisplacement(points: (MatchedPlotPoint | null)[], h
 
 export function validateMatchedAnswer(value: unknown, selected: MatchedEnvelope): MatchedAnswer {
   if (!object(value) || !bounded(value) || value.schema_version !== 1 || value.kind !== "MATCHED_CURRENT_RESEARCH_INVESTIGATION" || value.scope !== "READ_ONLY_MATCHED_CURRENT_STUDY" || !["REPORT","STOP"].includes(value.action as string) || typeof value.explanation !== "string" || !value.explanation.trim() || value.explanation.length > 1200 || typeof value.live_model_response !== "boolean" || value.provider !== "chalk" || !Array.isArray(value.evidence_ids) || !Array.isArray(value.trace) || value.trace.length > 1 || [value.numeric_replay_verified,value.store_written,value.physical_validation,value.hardware_actuation].some(v=>v!==false)) return fail();
-  const current = validateMatchedEnvelope({report:value.research_report,artifact_identity:value.artifact_identity}), identity=selected.artifact_identity;
+  const current = validateMatchedEnvelope({report:value.research_report,artifact_identity:value.artifact_identity}, matchedStudyVersion(selected.report.study_id)), identity=selected.artifact_identity;
   if (current.artifact_identity.report_sha256!==identity.report_sha256 || current.artifact_identity.protocol_sha256!==identity.protocol_sha256 || value.report_sha256!==identity.report_sha256 || value.protocol_sha256!==identity.protocol_sha256 || canonical(current)!==canonical(selected)) return fail();
   const allowed=[`matched-current-report:${identity.report_sha256}`,`matched-current-protocol:${identity.protocol_sha256}`];
   if (value.evidence_ids.some(id=>typeof id!=="string"||!allowed.includes(id)) || new Set(value.evidence_ids).size!==value.evidence_ids.length || value.action==="REPORT"&&(value.live_model_response!==true||value.evidence_ids.length!==2||value.trace.length!==1)) return fail();

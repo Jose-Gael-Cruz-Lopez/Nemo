@@ -1,0 +1,11 @@
+**GO for the shown v2 implementation, conditional on the local tests you already ran and on a committed freeze before any I/O.** No execution is claimed here, and no scientific result is asserted. The earlier incorrect stage claim is corrected: depth/time/velocity encoding is checked only when the scientific wrapper decodes HYCOM after serial acquisition; it blocks current-only forecasting, not the GDP trajectory requests. GDP dependency blocking remains limited to the metadata/identity transport gates. All candidates are still persisted before any future numeric coordinate is decoded.
+
+**Actionable findings (none material enough to withhold GO)**  
+1. No defect in the narrow UTC canonicalization: exactly one history block, the two tokens must be equal valid UTC seconds, and every other byte is retained.  
+2. No defect in the axis contract as now written: first longitude label exact 280, latitude exact rounded float32, interior/east longitude ≤ one float32 ULP, strict increase, no snap or support expansion.  
+3. No defect in chronology or isolation: acquisition-start sentinel, sequential non-overlapping receipts, forecast frozen and re-read before target decode, exact replay excluding capture clocks.  
+4. No defect in failure retention: blocked, metadata-invalid and schema-invalid rows stay in the 36-cell plan; primary macro remains null unless all 36 score.  
+5. No defect in the pre-GDP-outcome disclosure: v2 binds the v1 artifact hashes and the prior zero-score state; it does not rewrite v1 or claim value-unseen status.
+
+**Next safe ordered steps**  
+Commit the reviewed sources, the generated protocol, and the identity file. Confirm the freeze commit contains every pinned hash and that v1 artifacts are unchanged. Only then run the six-role acquisition once. After the manifest is written, run the first-score path so forecasts are saved and re-read before any future coordinate is decoded. Replay the frozen artifacts and confirm byte identity excluding the capture clocks. Display any partial result with the 36-cell denominator and withhold the primary macro unless all 36 cells score. Do not tune, replace groups, or alter depth/tile after outcomes.

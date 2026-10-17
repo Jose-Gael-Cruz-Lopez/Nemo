@@ -258,3 +258,30 @@ test("two connected credentials remount the Chalk request boundary without enter
     assert.match(html, /Ask Chalk about matched currents/);
   }
 });
+
+test("v2 selection requires its own study identity and refuses cross-version or unknown responses", () => {
+  const amended = fixture();
+  amended.report.study_id = amended.artifact_identity.study_id = "matched-current-gdp-hycom-15m-v2";
+  assert.equal(validateMatchedEnvelope(amended, "v2"), amended);
+  assert.throws(() => validateMatchedEnvelope(amended, "v1"), /No result was accepted/);
+  assert.throws(() => validateMatchedEnvelope(fixture(), "v2"), /No result was accepted/);
+  assert.throws(() => validateMatchedEnvelope(fixture(), "v3"), /No result was accepted/);
+  const a = answer(amended);
+  assert.equal(validateMatchedAnswer(a, amended), a);
+  assert.throws(() => validateMatchedAnswer(answer(), amended), /No result was accepted/);
+});
+
+test("v2 rendering discloses prior forcing exposure and retains the original attempt choice", () => {
+  const { MatchedCurrentStudy, MatchedCurrentResults } = component("app/components/matched-current-study.tsx");
+  const { OperatorProvider } = component("app/components/operator-provider.tsx");
+  const amended = fixture();
+  amended.report.study_id = amended.artifact_identity.study_id = "matched-current-gdp-hycom-15m-v2";
+  const card = renderToStaticMarkup(React.createElement(MatchedCurrentStudy, { api: "" }));
+  assert.match(card, /Study version/);
+  assert.match(card, /value="v2" selected/);
+  assert.match(card, /v1 · preserved original attempt/);
+  const result = renderToStaticMarkup(React.createElement(OperatorProvider, null, React.createElement(MatchedCurrentResults, { api: "", envelope: amended })));
+  assert.match(result, /after the v1 forcing was decoded for diagnosis/);
+  assert.match(result, /same buoy groups and models/);
+  assert.match(result, /does not establish operational forecast skill/);
+});

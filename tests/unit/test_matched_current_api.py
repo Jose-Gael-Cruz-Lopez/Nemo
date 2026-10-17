@@ -25,14 +25,15 @@ AUTH = {"Authorization": "Bearer TEST-MATCHED-ONLY"}
 DEFAULT_READER = service.load_matched_current_result
 
 
-def make_snapshot():
+def make_snapshot(study_version="v1"):
     """Invented missing-input results; these are not acquired or validated data."""
     forecasts = models.build_matched_current_forecasts({})
     scores = models.score_matched_current_forecasts(forecasts, {})
     lineage = {"protocol_sha256": PROTOCOL, "manifest_sha256": "c" * 64,
                "acquisition_start_sha256": "d" * 64, "trusted_identity_sha256": "e" * 64}
     report = {"schema_version": 1, "kind": "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC",
-        "study_id": service.STUDY_ID, "lineage": lineage, "forecast_file_sha256": "f" * 64,
+        "study_id": service.STUDY_IDS[study_version], "lineage": lineage,
+        "forecast_file_sha256": "f" * 64,
         "forecast_frozen_at_utc": "2026-10-17T17:00:00Z",
         "forecasts_saved_before_target_coordinate_decode": True,
         "scored_at_utc": "2026-10-17T17:01:00Z", "scores": scores,
@@ -44,7 +45,8 @@ def make_snapshot():
                  "store_written"):
         report[flag] = False
     return {"report": report, "artifact_identity": {"schema_version": 1,
-        "study_id": service.STUDY_ID, "report_sha256": REPORT, "protocol_sha256": PROTOCOL,
+        "study_id": service.STUDY_IDS[study_version],
+        "report_sha256": REPORT, "protocol_sha256": PROTOCOL,
         "forecast_file_sha256": "f" * 64, "forecast_sha256": forecasts["forecast_sha256"],
         "trusted_protocol_identity_sha256": "e" * 64, "manifest_sha256": "c" * 64,
         "acquisition_start_sha256": "d" * 64, "integrity_verified": True,
@@ -371,3 +373,149 @@ def test_oversized_compact_evidence_falls_back_without_a_second_model_call():
     assert result["action"] == "STOP" and result["failure_code"] == "MODEL_OR_TOOL_CONTRACT_ERROR"
     assert len(requests) == 1 and result["trace"] == []
     assert result["research_report"] == snapshot["report"]
+
+
+@pytest.mark.parametrize("version", ["v3", "V2", "", "../../v1", "matched-current-gdp-hycom-15m-v2"])
+def test_unknown_api_version_is_rejected_by_schema_before_loading_or_provider(app, monkeypatch, version):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("An invalid study version reached an artifact or provider")
+
+    monkeypatch.setattr(service, "load_matched_current_result", forbidden)
+    monkeypatch.setattr(app.state.runtime, "chalk_settings", forbidden)
+    with TestClient(app) as client:
+        assert client.get(ENDPOINT, params={"study_version": version}).status_code == 422
+        assert client.post(ENDPOINT + "/investigate", json=question(study_version=version),
+                           headers=AUTH).status_code == 422
+
+
+def test_v2_selected_loader_preserves_envelope_and_disabled_review_without_side_effects(app, monkeypatch):
+    snapshot = make_snapshot("v2")
+    calls = []
+
+    def selected_loader(**kwargs):
+        calls.append(kwargs)
+        return copy.deepcopy(snapshot)
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Selected artifact review acquired, scored, wrote or operated a device")
+
+    monkeypatch.setattr(service, "load_matched_current_result", selected_loader)
+    runtime = app.state.runtime
+    monkeypatch.setattr(runtime, "chalk_settings", lambda: chalk_settings(False))
+    with TestClient(app) as client:
+        with runtime.store.connection() as db:
+            before = tuple(db.iterdump())
+        for method in ("put", "put_case_result", "add_case", "update_case", "propose", "transition_action"):
+            monkeypatch.setattr(runtime.store, method, forbidden)
+        monkeypatch.setattr(models, "build_matched_current_forecasts", forbidden)
+        monkeypatch.setattr(models, "score_matched_current_forecasts", forbidden)
+        monkeypatch.setattr(cv2, "VideoCapture", forbidden)
+        monkeypatch.setattr(httpx.HTTPTransport, "handle_request", forbidden)
+        monkeypatch.setattr(httpx.AsyncHTTPTransport, "handle_async_request", forbidden)
+        response = client.get(ENDPOINT, params={"study_version": "v2"})
+        assert response.status_code == 200 and response.json() == snapshot
+        assert response.headers["cache-control"] == "no-store"
+        response = client.post(ENDPOINT + "/investigate", json=question(study_version="v2"),
+                               headers=AUTH)
+        assert response.status_code == 200 and response.headers["cache-control"] == "no-store"
+        result = response.json()
+        assert result["action"] == "STOP" and result["failure_code"] == "NOT_CONFIGURED"
+        assert result["research_report"] == snapshot["report"]
+        assert result["artifact_identity"] == snapshot["artifact_identity"]
+        assert result["numeric_replay_verified"] is result["store_written"] is False
+        with runtime.store.connection() as db:
+            assert tuple(db.iterdump()) == before
+    assert calls == [{"study_version": "v2"}] * 3
+
+
+@pytest.mark.parametrize("selected,returned", [("v1", "v2"), ("v2", "v1")])
+def test_api_refuses_cross_version_envelopes_before_provider(app, monkeypatch, selected, returned):
+    monkeypatch.setattr(service, "load_matched_current_result",
+                        lambda **kwargs: make_snapshot(returned))
+
+    def forbidden():
+        raise AssertionError("A cross-version artifact reached provider configuration")
+
+    monkeypatch.setattr(app.state.runtime, "chalk_settings", forbidden)
+    with TestClient(app) as client:
+        assert client.get(ENDPOINT, params={"study_version": selected}).status_code == 409
+        assert client.post(ENDPOINT + "/investigate", json=question(study_version=selected),
+                           headers=AUTH).status_code == 409
+
+
+@pytest.mark.parametrize("field", ["report_sha256", "protocol_sha256"])
+def test_v2_stale_selected_hash_is_rejected_before_provider(app, monkeypatch, field):
+    calls = []
+
+    def selected_loader(**kwargs):
+        calls.append(kwargs)
+        return make_snapshot("v2")
+
+    def forbidden():
+        raise AssertionError("A stale v2 selection reached provider configuration")
+
+    monkeypatch.setattr(service, "load_matched_current_result", selected_loader)
+    monkeypatch.setattr(app.state.runtime, "chalk_settings", forbidden)
+    with TestClient(app) as client:
+        response = client.post(ENDPOINT + "/investigate",
+            json=question(study_version="v2", **{field: "9" * 64}), headers=AUTH)
+    assert response.status_code == 409 and response.headers["cache-control"] == "no-store"
+    assert calls == [{"study_version": "v2"}]
+
+
+def test_v2_compact_evidence_discloses_amendment_and_preserves_v1_failure_scope():
+    backend = service.MatchedCurrentBackend(make_snapshot("v2"), study_version="v2")
+    result = asyncio.run(backend.call("get_study_evidence", {}))
+    study = result["matched_current_study"]
+    assert study["study_id"] == service.STUDY_IDS["v2"] and study["study_version"] == "v2"
+    amendment = study["compatibility_amendment"]
+    assert amendment["scope"] == "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN"
+    assert amendment["preserved_prior_study_id"] == service.STUDY_ID
+    assert amendment["prior_forcing_acquired_and_decoded"] is True
+    assert amendment["prior_gdp_trajectory_payloads"] == amendment["prior_scored_cells"] == 0
+    assert amendment["models_and_denominators_unchanged"] is amendment["v1_preserved"] is True
+    assert amendment["silent_retry"] is amendment["model_or_parameter_tuning"] is False
+    assert study["coverage"]["planned_cell_count"] == 36
+    assert study["coverage"]["planned_distinct_target_count"] == 12
+    assert study["primary_equal_id_macro_results"] is None
+    assert all(flag is False for flag in study["scientific_flags"].values())
+    original = asyncio.run(service.MatchedCurrentBackend(make_snapshot()).call("get_study_evidence", {}))
+    assert original["matched_current_study"]["compatibility_amendment"] is None
+
+
+def test_v2_review_rechecks_selected_identity_after_provider():
+    snapshots = [make_snapshot("v2"), make_snapshot("v1")]
+    reads = []
+
+    def loader():
+        reads.append(True)
+        return snapshots[len(reads) - 1]
+
+    async def execute():
+        mock, requests = scripted_client()
+        async with mock:
+            with pytest.raises(ValueError, match="identity changed"):
+                await service.investigate_matched_current(
+                    SimpleNamespace(chalk_settings=chalk_settings), "Explain", report_sha256=REPORT,
+                    protocol_sha256=PROTOCOL, study_version="v2", client=mock, loader=loader)
+        return requests
+
+    assert len(asyncio.run(execute())) == 2 and len(reads) == 2
+
+
+def test_default_loader_v2_passes_only_fixed_version_to_artifact_reader(monkeypatch):
+    expected = make_snapshot("v2")
+    calls = []
+    reader = ModuleType("apps.ocean.reeftrace_ocean.matched_current_result")
+
+    def load(*args, **kwargs):
+        calls.append((args, kwargs))
+        return expected
+
+    reader.load_frozen_matched_current_result = load
+    monkeypatch.setitem(sys.modules, reader.__name__, reader)
+    assert DEFAULT_READER(study_version="v2") == expected
+    assert calls == [((), {"study_version": "v2"})]
+    with pytest.raises(ValueError, match="version"):
+        DEFAULT_READER(study_version="../untrusted")
+    assert len(calls) == 1

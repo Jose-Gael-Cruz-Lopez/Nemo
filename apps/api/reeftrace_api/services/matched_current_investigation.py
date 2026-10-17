@@ -16,6 +16,7 @@ import re
 from adapters.chalk.research import investigate_study
 
 STUDY_ID = "matched-current-gdp-hycom-15m-v1"
+STUDY_IDS = {"v1": STUDY_ID, "v2": "matched-current-gdp-hycom-15m-v2"}
 GROUP_IDS = ("300234066836710", "300534061292930")
 MODEL_IDS = ("stationary", "last_drift", "current_only")
 VERIFICATION_SCOPE = "FROZEN_ARTIFACT_LINEAGE_AND_STRUCTURE_NOT_NUMERIC_REPLAY"
@@ -51,6 +52,11 @@ Explain the model comparison or its blockers, its scope and the next independent
 measurement needed. Metadata or grid-contract rejection means a guard rejected
 the input; it does not establish that the physical grid, product or model changed.
 Describe a rejected coordinate contract as such, not as observed current failure.
+When the selected evidence identifies the compatibility amendment, disclose that
+it was pre-GDP-outcome, not entirely scientific-value-unseen: earlier HYCOM
+forcing was already acquired and decoded, while the preserved first attempt had
+no GDP trajectory payload or scored result. The amendment is not a new model,
+learned fit, silent retry, or replacement of the earlier failure record.
 Do not claim operational forecast skill, plastic sources,
 polluter identity, reef protection, interception benefit, calibrated probability,
 or physical tank validation. Neither numerical agreement nor this discussion
@@ -62,11 +68,20 @@ when evidence is unavailable, invalid or outside this matched-study scope.
 """
 
 
-def load_matched_current_result() -> dict:
+def _study_id(study_version: str) -> str:
+    if not isinstance(study_version, str) or study_version not in STUDY_IDS:
+        raise ValueError("Unknown matched-current study version")
+    return STUDY_IDS[study_version]
+
+
+def load_matched_current_result(*, study_version: str = "v1") -> dict:
     """Read externally pinned local artifacts only; never acquire or re-score."""
     from apps.ocean.reeftrace_ocean.matched_current_result import load_frozen_matched_current_result
 
-    return load_frozen_matched_current_result()
+    _study_id(study_version)
+    # Retain the historical no-argument reader seam for v1 callers and mocks.
+    return (load_frozen_matched_current_result() if study_version == "v1" else
+            load_frozen_matched_current_result(study_version="v2"))
 
 
 def _canonical(snapshot: dict) -> bytes:
@@ -77,8 +92,10 @@ def _canonical(snapshot: dict) -> bytes:
     return payload
 
 
-def snapshot_identity(snapshot: dict) -> tuple[str, str]:
+def snapshot_identity(snapshot: dict, *, expected_study_id: str = STUDY_ID) -> tuple[str, str]:
     """Check the distinct study boundary after the trusted artifact-only reader."""
+    if expected_study_id not in STUDY_IDS.values():
+        raise ValueError("Unknown matched-current study identity")
     if (not isinstance(snapshot, dict) or set(snapshot) != {"report", "artifact_identity"}
             or not isinstance(snapshot["report"], dict)
             or not isinstance(snapshot["artifact_identity"], dict)):
@@ -86,8 +103,8 @@ def snapshot_identity(snapshot: dict) -> tuple[str, str]:
     report, identity = snapshot["report"], snapshot["artifact_identity"]
     if (type(report.get("schema_version")) is not int or report["schema_version"] != 1
             or report.get("kind") != "MATCHED_CURRENT_RETROSPECTIVE_DIAGNOSTIC"
-            or report.get("study_id") != STUDY_ID
-            or identity.get("study_id") != STUDY_ID
+            or report.get("study_id") != expected_study_id
+            or identity.get("study_id") != expected_study_id
             or type(identity.get("schema_version")) is not int or identity["schema_version"] != 1
             or identity.get("integrity_verified") is not True
             or identity.get("result_pin_verified") is not True
@@ -142,9 +159,12 @@ def snapshot_identity(snapshot: dict) -> tuple[str, str]:
 class MatchedCurrentBackend:
     """One immutable study snapshot; no runtime, store or action capability."""
 
-    def __init__(self, snapshot: dict):
+    def __init__(self, snapshot: dict, *, study_version: str = "v1"):
+        self.study_id = _study_id(study_version)
+        self.study_version = study_version
         self.snapshot = copy.deepcopy(snapshot)
-        self.report_hash, self.protocol_hash = snapshot_identity(self.snapshot)
+        self.report_hash, self.protocol_hash = snapshot_identity(
+            self.snapshot, expected_study_id=self.study_id)
         self.snapshot_hash = hashlib.sha256(_canonical(self.snapshot)).hexdigest()
         self.evidence_ids = ["matched-current-report:" + self.report_hash,
                              "matched-current-protocol:" + self.protocol_hash]
@@ -172,7 +192,8 @@ class MatchedCurrentBackend:
         receipt_keys = ("role", "status", "reason", "sha256", "retained_bytes", "http_status",
                         "response_complete")
         result = {"ok": True, "evidence_ids": self.evidence_ids, "matched_current_study": {
-            "kind": report["kind"], "study_id": STUDY_ID, "report_sha256": self.report_hash,
+            "kind": report["kind"], "study_id": self.study_id,
+            "study_version": self.study_version, "report_sha256": self.report_hash,
             "protocol_sha256": self.protocol_hash, "artifact_verification": identity,
             "origin_time_utc": scores["origin_time_utc"],
             "coverage": {"planned_group_count": 2, "planned_model_track_count": 6,
@@ -197,6 +218,17 @@ class MatchedCurrentBackend:
                 "physical_validation", "operational_causality", "assimilation_independence_verified",
                 "physical_alias_resolution_verified", "statistical_independence", "global_training",
                 "heldout_tuning", "automatic_model_promotion")},
+            "compatibility_amendment": ({
+                "scope": "PRE_GDP_OUTCOME_NOT_ENTIRELY_SCIENTIFIC_VALUE_UNSEEN",
+                "preserved_prior_study_id": STUDY_ID,
+                "prior_gdp_trajectory_payloads": 0, "prior_scored_cells": 0,
+                "prior_forcing_acquired_and_decoded": True,
+                "changes": ["two allowlisted NOAA history capture-time tokens",
+                            "bounded native float32 coordinate-label encoding"],
+                "models_and_denominators_unchanged": True,
+                "v1_preserved": True, "silent_retry": False,
+                "model_or_parameter_tuning": False,
+            } if self.study_version == "v2" else None),
             "interpretation": "Retrospective buoy-motion feasibility only. Thirty-six model/horizon cells reuse twelve later processed position estimates. Coverage and partial outcomes remain explicit; artifact verification is not numerical replay, independent validation, plastic attribution or demonstrated reef protection.",
         }}
         if len(json.dumps(result, allow_nan=False).encode()) > 40_000:
@@ -205,11 +237,14 @@ class MatchedCurrentBackend:
 
 
 async def investigate_matched_current(runtime, question: str, *, report_sha256: str,
-                                      protocol_sha256: str, client=None, loader=None) -> dict:
+                                      protocol_sha256: str, study_version: str = "v1",
+                                      client=None, loader=None) -> dict:
     """Pin the clicked study before a bounded model turn, then re-read its bytes."""
-    read = loader or load_matched_current_result
+    expected_study_id = _study_id(study_version)
+    read = loader or (load_matched_current_result if study_version == "v1" else
+                     lambda: load_matched_current_result(study_version="v2"))
     snapshot = await asyncio.to_thread(read)
-    backend = MatchedCurrentBackend(snapshot)
+    backend = MatchedCurrentBackend(snapshot, study_version=study_version)
     if (report_sha256, protocol_sha256) != (backend.report_hash, backend.protocol_hash):
         raise ValueError("Matched-current snapshot changed since the selected report")
     result = await investigate_study(question, backend,
@@ -217,7 +252,8 @@ async def investigate_matched_current(runtime, question: str, *, report_sha256: 
          "protocol_evidence_id": backend.evidence_ids[1]}, runtime.chalk_settings(),
         client=client, system_prompt=SYSTEM)
     latest = await asyncio.to_thread(read)
-    if (snapshot_identity(latest) != (backend.report_hash, backend.protocol_hash)
+    if (snapshot_identity(latest, expected_study_id=expected_study_id)
+            != (backend.report_hash, backend.protocol_hash)
             or hashlib.sha256(_canonical(latest)).hexdigest() != backend.snapshot_hash):
         raise ValueError("Matched-current snapshot changed during the research review")
     return {"schema_version": 1, "kind": "MATCHED_CURRENT_RESEARCH_INVESTIGATION",
