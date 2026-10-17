@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "kind": "RECORDED_FIELD_TRAJECTORY_DIAGNOSTIC",
+  "status": "WITHHELD_INCOMPLETE_RUNS",
+  "scope": "ALREADY_REVIEWED_RECORDINGS_DETERMINISTIC_MEAN_FIELD_NOT_INDEPENDENT_TEST",
+  "flow_id": "flow-test",
+  "flow_content_hash": "bce8bd3a563b50755a8f21a03250fea3fa0d7974acdb347881f6cacf79c68043",
+  "calibration_id": "cal-a9953b828c4eeb9e",
+  "camera_session_id": "test-camera",
+  "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+  "physical_validation": false,
+  "capture_independently_verified": false,
+  "bounds": {
+    "x_min_cm": 0.0,
+    "x_max_cm": 20.0,
+    "y_min_cm": 0.0,
+    "y_max_cm": 20.0
+  },
+  "position_units": "cm",
+  "time_units": "s",
+  "timestamp_kind": "host_receipt_not_exposure",
+  "model": {
+    "kind": "DETERMINISTIC_FROZEN_MEAN_FIELD",
+    "maximum_step_s": 0.05,
+    "boundary": "reflecting_rectangle",
+    "traps": "NONE",
+    "diffusivity_cm2_s": 0,
+    "initial_observation_only": true,
+    "observed_position_updates": false
+  },
+  "integration": {
+    "total_steps": 21,
+    "maximum_total_steps": 20000,
+    "maximum_steps_per_run": 2000,
+    "maximum_horizon_s": 20.0,
+    "maximum_observation_gap_s": 0.5
+  },
+  "coverage": {
+    "validation_recordings": 2,
+    "complete_recordings": 1,
+    "planned_forecast_points": 10,
+    "scored_forecast_points": 5,
+    "withheld_forecast_points": 5
+  },
+  "provenance": {
+    "training_recording_ids": [
+      "training"
+    ],
+    "validation_recording_ids": [
+      "validation-near",
+      "validation-far"
+    ],
+    "frame_splits_disjoint": true
+  },
+  "recordings": [
+    {
+      "recording_id": "validation-near",
+      "recording_content_hash": "bf00fe99862d2207e7058c1ddb3ac28dde79025be3ab7fd5194201edcb3fe257",
+      "status": "SCORED",
+      "reason_codes": [],
+      "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+      "physical_validation": false,
+      "planned_forecast_points": 5,
+      "scored_forecast_points": 5,
+      "integration_steps": 21,
+      "horizon_s": 1.0,
+      "time_origin_s": 0.0,
+      "initial_position": {
+        "t_s": 0.0,
+        "x_cm": 4.0,
+        "y_cm": 5
+      },
+      "comparisons": [
+        {
+          "t_s": 0.2,
+          "predicted_x_cm": 4.199999999999999,
+          "predicted_y_cm": 5.0,
+          "observed_x_cm": 4.4,
+          "observed_y_cm": 5.0,
+          "position_error_cm": 0.20000000000000107
+        },
+        {
+          "t_s": 0.4,
+          "predicted_x_cm": 4.399999999999999,
+          "predicted_y_cm": 5.0,
+          "observed_x_cm": 4.8,
+          "observed_y_cm": 5.0,
+          "position_error_cm": 0.40000000000000124
+        },
+        {
+          "t_s": 0.6000000000000001,
+          "predicted_x_cm": 4.599999999999999,
+          "predicted_y_cm": 5.0,
+          "observed_x_cm": 5.2,
+          "observed_y_cm": 5.0,
+          "position_error_cm": 0.6000000000000014
+        },
+        {
+          "t_s": 0.8,
+          "predicted_x_cm": 4.799999999999998,
+          "predicted_y_cm": 5.0,
+          "observed_x_cm": 5.6,
+          "observed_y_cm": 5.0,
+          "position_error_cm": 0.8000000000000016
+        },
+        {
+          "t_s": 1.0,
+          "predicted_x_cm": 4.999999999999997,
+          "predicted_y_cm": 5.0,
+          "observed_x_cm": 6.0,
+          "observed_y_cm": 5.0,
+          "position_error_cm": 1.0000000000000027
+        }
+      ],
+      "metrics": {
+        "ade_cm": 0.6000000000000016,
+        "fde_cm": 1.0000000000000027,
+        "position_rmse_cm": 0.6633249580710816
+      }
+    },
+    {
+      "recording_id": "validation-far",
+      "recording_content_hash": "1ef5747f0aa905ede0f00ce9a2345c2c31b8ed63373940c6184b385eda5114b5",
+      "status": "WITHHELD",
+      "reason_codes": [
+        "UNSUPPORTED_FORECAST_PATH"
+      ],
+      "data_origin": "SYNTHETIC_CAPTURE_REPLAY",
+      "physical_validation": false,
+      "planned_forecast_points": 5,
+      "scored_forecast_points": 0,
+      "integration_steps": 0,
+      "horizon_s": 1.0,
+      "time_origin_s": 0.0,
+      "initial_position": {
+        "t_s": 0.0,
+        "x_cm": 4.0,
+        "y_cm": 15
+      },
+      "comparisons": [],
+      "metrics": null
+    }
+  ],
+  "metrics": null,
+  "camera_started": false,
+  "hardware_actuation": false,
+  "store_written": false,
+  "refit_performed": false,
+  "model_selection_performed": false,
+  "independent_evaluation": false,
+  "provider_calls": false,
+  "calibrated_probability": false,
+  "limitations": [
+    "Already reviewed validation recordings; this is not a fresh independent test or proof of physical capture.",
+    "Frozen mean drift only, with reflecting walls and no traps or dispersion; not the stochastic source or prevention simulator.",
+    "Only the initial observed position initializes forecasts; later positions are used for scoring after every forecast exists.",
+    "Any missing/broken track, long gap or unsupported predicted path withholds the full run and common aggregate metrics.",
+    "Positions within a recording are dependent; pooled position counts are not independent trial counts.",
+    "Actual saved host-receipt offsets are used, not exposure times; no protected-zone entry, retention or intervention benefit is evaluated."
+  ]
+}

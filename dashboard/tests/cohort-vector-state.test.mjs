@@ -71,6 +71,38 @@ test("missing or duplicate drifters, models and intervals cannot disappear from 
   ]) { const report = fixture(); mutate(report); rejected(report); }
 });
 
+test("missing or malformed group dates fail before the selected-drifter dropdown renders", () => {
+  for (const key of ["start_utc", "end_utc"]) {
+    const missing = fixture(); delete missing.groups[0][key]; rejected(missing);
+    for (const value of [null, 0, "", "not a date", "2000-02-30T00:00:00Z", "2000-06-01T00:00:00+00:00"]) {
+      const report = fixture(); report.groups[0][key] = value; rejected(report);
+    }
+  }
+  for (const block of ["", " ", "/private/source.csv", "a".repeat(201)]) {
+    const report = fixture(); report.groups[0].block_id = block; rejected(report);
+  }
+});
+
+test("another drifter block's dates or shifted forecast intervals cannot relabel these scores", () => {
+  const differentBlock = fixture();
+  differentBlock.groups[0].start_utc = differentBlock.groups[2].start_utc;
+  differentBlock.groups[0].end_utc = differentBlock.groups[2].end_utc;
+  // The date range itself is valid; only its binding to each scored interval fails.
+  rejected(differentBlock);
+  const shortened = fixture(); shortened.groups[0].end_utc = "2000-06-01T22:00:00Z"; rejected(shortened);
+  const shifted = fixture(), row = shifted.groups[0].models[3].intervals[1];
+  row.start_utc = "2000-06-01T17:00:00Z"; row.end_utc = "2000-06-01T18:00:00Z";
+  // One-hour duration and every numerical metric are unchanged, but this would
+  // duplicate hour one's clock under the hour-two label.
+  rejected(shifted);
+});
+
+test("withheld tracks retain the exact six planned observation times", () => {
+  const missing = incompleteFixture(); delete missing.groups[0].models[3].intervals[0].end_utc; rejected(missing);
+  const shifted = incompleteFixture(); shifted.groups[0].models[3].intervals[0].end_utc = "2000-06-01T19:00:00Z"; rejected(shifted);
+  validateCohortVectorReport(incompleteFixture());
+});
+
 test("common-cohort aggregates are reconstructed from track metrics", () => {
   for (const key of ["vector_rmse_m_s", "speed_bias_predicted_minus_observed_m_s", "angular_mae_deg", "ade_m", "fde_m"]) {
     const report = fixture();

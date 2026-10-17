@@ -144,27 +144,48 @@ class Runtime:
         return self.store.put("profile", profile, profile.get("id"))
 
     def fit_recorded_flow(self, body):
+        import re
+
         from apps.transport.reeftrace_transport import fit_flow
         from apps.vision.reeftrace_vision.tracking import flow_samples
         allowed = {"training_recording_ids", "validation_recording_ids", "bounds",
                    "cell_size_cm", "coverage_radius_cm"}
-        if set(body) - allowed:
+        if not isinstance(body, dict) or set(body) - allowed:
             raise ValueError("Unsupported recorded-flow fields")
         training_ids, validation_ids = body.get("training_recording_ids", []), body.get("validation_recording_ids", [])
         if not all(isinstance(ids, list) and 1 <= len(ids) <= 100 for ids in (training_ids, validation_ids)):
             raise ValueError("Supply 1-100 complete recordings per split")
+        for ids in (training_ids, validation_ids):
+            if any(not isinstance(rid, str)
+                   or re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,99}", rid) is None
+                   for rid in ids):
+                raise ValueError("Recording IDs must be bounded artifact identifiers")
+            if len(set(ids)) != len(ids):
+                raise ValueError("Recording IDs must be distinct within each split; repeated evidence cannot be reweighted")
         if set(training_ids) & set(validation_ids):
             raise ValueError("Training and validation recording IDs must be disjoint")
         training = [self.store.get("recording", rid) for rid in training_ids]
         validation = [self.store.get("recording", rid) for rid in validation_ids]
+        for rid, recording in zip(training_ids + validation_ids, training + validation, strict=True):
+            if not isinstance(recording, dict) or recording.get("id") != rid:
+                raise ValueError("Saved recording identity does not match its reference")
         calibration_ids = {r["calibration_id"] for r in training + validation}
         sessions = {r["camera_session_id"] for r in training + validation}
         if len(calibration_ids) != 1 or len(sessions) != 1:
             raise ValueError("Flow recordings must share one frozen calibration and camera session")
-        frames_a = {f for r in training for f in r["evidence_frame_ids"]}
-        frames_b = {f for r in validation for f in r["evidence_frame_ids"]}
-        if not frames_a or not frames_b or frames_a & frames_b:
-            raise ValueError("Flow train/validation frames must be present and disjoint")
+        # A new recording ID must not disguise reused frames, including reuse
+        # within the same split. Set unions alone silently discard duplicates.
+        seen_frames = set()
+        for recording in training + validation:
+            frames = recording.get("evidence_frame_ids")
+            if (not isinstance(frames, list) or not 1 <= len(frames) <= 20000
+                    or any(not isinstance(fid, str)
+                           or re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,99}", fid) is None
+                           for fid in frames)):
+                raise ValueError("Recording evidence frames must be present and bounded artifact identifiers")
+            if len(set(frames)) != len(frames) or seen_frames & set(frames):
+                raise ValueError("Flow recording frames must be distinct and disjoint across both splits")
+            seen_frames.update(frames)
         samples = [s for r in training for s in flow_samples(r["points"])]
         holdout = [s for r in validation for s in flow_samples(r["points"])]
         if not samples or not holdout or len(samples) + len(holdout) > 10000:

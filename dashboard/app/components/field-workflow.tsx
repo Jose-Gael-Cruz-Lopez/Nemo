@@ -15,6 +15,7 @@ import {
 } from "./field-workflow-state";
 import styles from "./field-workflow.module.css";
 import { RecordedFlowVectors } from "./recorded-flow-vectors";
+import { RecordedFlowTrajectories } from "./recorded-flow-trajectories";
 
 type Request = <T>(path: string, body?: unknown, options?: { signal?: AbortSignal; independent?: boolean }) => Promise<T>;
 export type FieldWorkflowProps = {
@@ -225,6 +226,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
           })}>Fit recorded flow</button></div>
           {draft.flow && <p className={styles.explain}>Flow <code>{draft.flow.id}</code>: {draft.flow.diagnostics.sample_count} training samples, {draft.flow.diagnostics.node_count} nodes, held-out error {draft.flow.diagnostics.validation_rmse_cm_s?.toFixed(3) ?? "unavailable"} cm/s, {Math.round((draft.flow.diagnostics.validation_coverage_fraction ?? 0) * 100)}% supported.</p>}
           {draft.flow && <RecordedFlowVectors api={apiBase} flowId={draft.flow.id} />}
+          {draft.flow && <RecordedFlowTrajectories api={apiBase} flowId={draft.flow.id} />}
         </div>
       </Step>
 

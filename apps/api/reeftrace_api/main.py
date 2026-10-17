@@ -406,6 +406,21 @@ def create_app(settings: Settings | None = None):
             raise HTTPException(409, str(error)[:300],
                                 headers={"Cache-Control": "no-store"}) from None
 
+    @app.get("/api/v1/flow/{flow_id}/trajectory-diagnostic")
+    def recorded_flow_trajectories(flow_id: str, response: Response):
+        from apps.vision.reeftrace_vision.field_trajectory_diagnostic import (
+            inspect_recorded_flow_trajectories,
+        )
+        response.headers["Cache-Control"] = "no-store"
+        try:
+            return inspect_recorded_flow_trajectories(runtime.store, flow_id)
+        except KeyError:
+            raise HTTPException(404, "Recorded flow evidence not found",
+                                headers={"Cache-Control": "no-store"}) from None
+        except ValueError as error:
+            raise HTTPException(409, str(error)[:300],
+                                headers={"Cache-Control": "no-store"}) from None
+
     @app.get("/api/v1/recordings/{recording_id}/flow-samples")
     def samples(recording_id: str):
         return {"samples": flow_samples(runtime.store.get("recording", recording_id)["points"])}

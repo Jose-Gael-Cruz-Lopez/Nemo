@@ -105,6 +105,13 @@ export function readMotionVectorReport(response: Response): Promise<MotionVector
 
 const COHORT_MODELS = ["stationary", "last_drift", "mean_drift", "ridge_ar1"];
 const COHORT_DRIFTERS = ["12730", "12731", "300234063243480", "300234063472530"];
+function cohortUtc(value: unknown): number | null {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/.test(value)) return null;
+  const milliseconds = Date.parse(value);
+  // Date.parse normalizes impossible dates such as February 30; don't display
+  // those as a different observation date or accept a timezone reinterpretation.
+  return Number.isFinite(milliseconds) && new Date(milliseconds).toISOString().replace(".000Z", "Z") === value ? milliseconds : null;
+}
 type FailedTrack = { id: string; label: string; status: "WITHHELD"; metrics: null; reason_codes: string[]; intervals: { horizon_hours: number; end_utc: string; status: "FAILED"; reason_codes: string[] }[] };
 type CohortTrack = Model & { status: "SCORED"; reason_codes: string[] } | FailedTrack;
 export type CohortVectorReport = {
@@ -126,12 +133,20 @@ export function validateCohortVectorReport(value: unknown): CohortVectorReport {
   let scored = 0;
   const ids = new Set<string>();
   for (const group of value.groups) {
-    if (!record(group) || typeof group.drifter_id !== "string" || !COHORT_DRIFTERS.includes(group.drifter_id) || ids.has(group.drifter_id) || typeof group.block_id !== "string" || !Array.isArray(group.models) || group.models.length !== 4) return fail();
+    if (!record(group) || typeof group.drifter_id !== "string" || !COHORT_DRIFTERS.includes(group.drifter_id) || ids.has(group.drifter_id) || typeof group.block_id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$/.test(group.block_id) || !Array.isArray(group.models) || group.models.length !== 4) return fail();
+    const start = cohortUtc(group.start_utc), end = cohortUtc(group.end_utc);
+    if (start === null || end === null || end - start !== 23 * 3_600_000) return fail();
     ids.add(group.drifter_id);
     for (const [i, track] of group.models.entries()) {
       if (!record(track) || track.id !== COHORT_MODELS[i] || typeof track.label !== "string" || !Array.isArray(track.reason_codes)) return fail();
       if (track.status === "SCORED") { validateNoaaVectorModels([track], [COHORT_MODELS[i]]); scored += 6; }
       else if (track.status !== "WITHHELD" || track.metrics !== null || !track.reason_codes.length || !Array.isArray(track.intervals) || track.intervals.length !== 6 || !track.intervals.every((row, j) => record(row) && row.status === "FAILED" && row.horizon_hours === j + 1 && Array.isArray(row.reason_codes) && row.reason_codes.length > 0)) return fail();
+      // Every score (including a withheld outcome) belongs to this group's
+      // declared six held-out hours after its 18-position training prefix.
+      for (const [j, row] of (track.intervals as Record<string, unknown>[]).entries()) {
+        if (cohortUtc(row.end_utc) !== start + (18 + j) * 3_600_000
+          || track.status === "SCORED" && cohortUtc(row.start_utc) !== start + (17 + j) * 3_600_000) return fail();
+      }
     }
   }
   if (c.scored_model_intervals !== scored || c.failed_model_intervals !== 96 - scored || c.common_acquired_cohort_complete !== (scored === 96)) return fail();

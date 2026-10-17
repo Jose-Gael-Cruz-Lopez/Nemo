@@ -1,0 +1,146 @@
+REEFTRACE ML AND EXPERIMENT RESEARCH ADDENDUM
+17 October 2026 — scientific chain reviewed from main f8f1d1b, followed by local fixes
+
+WHAT THE SOFTWARE ACTUALLY LEARNS
+
+ReefTrace has two distinct numerical tasks. The NOAA research task learns short-
+term motion. Its ridge autoregression estimates how a two-component velocity
+changes from one hour to the next, using only an allowed position prefix. It
+estimates a mean drift and a small regularized transition matrix. It is not an
+LLM, a general ocean simulator or a model trained to identify plastic polluters.
+
+The tank task fits a spatial object-drift field: recorded marker displacements
+become centimetres-per-second samples, spatial cells summarize them, and inverse-
+distance interpolation predicts drift between supported locations. This is an
+empirical token-response model. It includes that token's immersion and surface
+response under those conditions, rather than independently measuring pure water
+velocity. Source comparison then runs forward ensembles from declared inlet
+regions and checks which histories fit the evidence. Chalk explains those frozen
+results; it does not learn the transport physics or modify the numerical answer.
+
+REAL DATA RESULTS AND THEIR LIMITS
+
+The acquired NOAA cohort contains four historical buoy-days, not the complete
+six-group acquisition target. Four models times six forecast intervals times four
+buoys produce 96 model scores from 24 unique observed intervals. These observations
+are reused across models and are not 96 independent experiments.
+
+Model             Vector RMSE (m/s)   Mean position error (m)   Mean final error (m)
+Stationary        0.2781              2,911.3                   4,942.3
+Last drift        0.2271              1,579.9                   3,323.7
+Mean drift        0.2125              1,846.7                   2,883.5
+Ridge AR1         0.1177                729.4                   1,203.0
+
+These are descriptive results on already inspected data. The additional pooled
+residual model performed worse than the existing ridge model in the post-hoc
+leave-one-drifter-out diagnostic. Increasing model complexity has not established
+an improvement. No model promotion or new training dataset resulted from this audit.
+
+NOAA's hourly product is quality-controlled and mathematically interpolated.
+Its upstream processing may use later fixes, so a chronological split in our code
+cannot establish raw real-time forecasting skill. Standard drogued GDP buoys
+principally sample motion near 15 m depth; floating plastic responds differently.
+https://www.aoml.noaa.gov/phod/gdp/hourly_data.php
+https://www.aoml.noaa.gov/phod/gdp/papers/Elipot_et_al-2016.pdf
+https://www.aoml.noaa.gov/phod/gdp/FAQ.php
+
+THE GAP BETWEEN A VECTOR SCORE AND AN INTERCEPTION DECISION
+
+The existing recorded-field vector inspection queries the frozen field at observed
+validation midpoints. That is useful conditional interpolation evidence, but future
+observed locations already determine where the field is sampled. A small vector
+error there does not prove that a free-running predicted trajectory stays nearby.
+
+A new bounded read-only diagnostic now closes part of this software gap. It starts
+each saved validation run from its first observed point, advances the frozen field
+at predicted positions only, and scores later positions after every required
+forecast has been constructed. It uses actual saved host-receipt offsets, without
+regularizing them or resetting to future observations. It reports centimetre ADE,
+final error and pooled position RMSE, with exact point and recording denominators.
+
+Its assumptions are explicit: deterministic mean field, step at most 0.05 seconds,
+reflecting rectangular walls, no traps, zero diffusion. It therefore does not
+duplicate the stochastic source/prevention model or evaluate protected-zone
+benefit. Missing observations, identity breaks, long gaps, unsupported predicted
+paths or exhausted budgets withhold the whole run and common aggregates. Required
+failed runs remain visible. It performs no camera capture, refitting or promotion.
+Coverage is checked along each actual reflected integration subsegment using the
+union of measured-node support disks. Covered endpoints cannot hide an unmeasured
+interior, including a trip out to a wall and back to the same endpoint. This is a
+new diagnostic safeguard; the existing source/prevention engine's declared finite-
+time-node support semantics and frozen physics have not been changed.
+
+The 24 new tests cover irregular timestamps, no future-position reset, all-forecast-
+before-truth ordering, wrong direction, gaps, missing evidence, support failures,
+unsupported segment interiors and reflected wall paths, connected support-disk
+unions, global integration budgets and no-action behavior. Synthetic contracts exercise
+the implementation; they remain labelled synthetic and prove no physical accuracy.
+
+A REPRODUCIBLE SCIENTIFIC BUG FIXED LOCALLY
+
+The recorded-flow fitting endpoint previously accepted the same recording ID
+multiple times within one split. Repeating a good validation run could artificially
+reweight the error. In an in-memory synthetic example, two unique validation runs
+produced RMSE 2.8284 cm/s. Repeating the good run nine times while keeping the same
+bad run reduced it to 1.2649 cm/s, with no new measurement. This could pass a
+2 cm/s admission threshold incorrectly.
+
+The fix rejects repeated recording IDs, malformed identifiers, recording-reference
+aliases and repeated/shared evidence frame IDs before fitting or writing. A new
+recording name cannot disguise reused frame identities. Twenty-three regression
+cases passed; the broader vision/field-session regression completed 60 passed.
+This protects evidence accounting, not statistical independence: distinct IDs alone
+cannot prove that operators made genuinely independent physical releases.
+
+SOURCE AND PREVENTION AUDIT
+
+No additional critical source/prevention numerical bug was identified in this
+limited audit. Existing safeguards matter: retained endpoints can remain Unknown;
+relative support is not calibrated probability; all candidate sources and declared
+scenarios are considered without weighting by source scores; first entry is resolved
+with competing absorbing geometries, including reflected segments; and unsupported
+particles remain in denominators and withhold a recommendation.
+
+Perfect retention, fixed layout-specific flow and finite-step support are declared
+assumptions, not verified reef behavior. More particles reduce simulation noise
+under that model; they do not repair wrong physics. Parcels' diffusion documentation
+also shows why spatially varying diffusivity would require additional drift terms;
+silently replacing the existing constant is not a valid improvement.
+https://docs.oceanparcels.org/en/latest/user_guide/examples/tutorial_diffusion.html
+
+WHAT ADDITIONAL API IS ACTUALLY NEEDED?
+
+The present tank experiment needs no external ocean-current API. Its most important
+missing data are new independent drift and known-release recordings under the actual
+pump, water level, token and collector conditions. Calibrate and tune on development
+runs, freeze choices, then evaluate untouched complete releases/sessions. Never split
+adjacent frames from one run across training and final evaluation.
+https://scikit-learn.org/stable/common_pitfalls.html#data-leakage
+https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data
+
+For a future coastal study, IOOS HF-radar current totals are a promising observed
+forcing input where location/date coverage overlaps. Current official access is
+NDBC THREDDS, not the retired Scripps server. Preserve QC, masks, temporal averaging,
+depth/response and issue/availability metadata; a coastal grid still cannot resolve
+this tank or every reef channel. No such field was acquired during this audit.
+https://ioos.noaa.gov/project/hf-radar/
+https://dods.ndbc.noaa.gov/thredds/catalog/hfradar.html
+
+NOAA GTS fixes could support availability-aware motion replay, after verifying receive
+times and WMO/GDP identity mapping. MDMAP could provide shoreline debris outcomes,
+but survey effort, area, protocol and intervention timing must accompany counts.
+Neither supplies missing known-source tank labels. GLORYS reanalysis begins in 1993,
+so it cannot be joined to the existing 1987 day; its daily means are not hourly tides.
+https://www.aoml.noaa.gov/phod/gdp/real-time_data.php
+https://marinedebris.noaa.gov/our-work/monitoring/marine-debris-monitoring-and-assessment-project
+https://documentation.marine.copernicus.eu/PUM/CMEMS-GLO-PUM-001-030.pdf
+
+THE HIGHEST-VALUE NEXT EXPERIMENT
+
+Use free-running drift error to identify an unsupported or systematically wrong
+region. Collect new development drift there, freeze a new model/layout comparison,
+then conduct new matched baseline/intervention releases. Evaluate protected-zone
+entry before collection, unresolved outcomes and token accounting. Keep final
+source labels outside inference inputs. The meaningful outcome is whether an
+interception decision survives independent recorded evidence, not whether an
+already inspected benchmark can be made to display a smaller error.
