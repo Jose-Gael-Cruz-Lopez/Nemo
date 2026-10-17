@@ -364,6 +364,33 @@ def extra(result, api, token):
             and fresh_review["snapshot_report_sha256"] == snapshot_hash
             and fresh_review["store_written"] is False
             and fresh_review["hardware_actuation"] is False)
+        currents = req("/research/current-forecast", auth=False)
+        check("public current forcing uses a pinned real forecast without inventing measurements",
+            currents["kind"] == "CURRENT_FORCED_PREVIEW"
+            and currents["dynamic"]["status"] == currents["persistence"]["status"] == "COMPLETED"
+            and len(currents["dynamic"]["track"]) == len(currents["persistence"]["track"]) == 25
+            and currents["forcing"]["future_valid_times_at_acquisition"] is True
+            and currents["validation"]["measured_track_available"] is False
+            and currents["validation"]["physical_validation"] is False
+            and currents["validation"]["ade_m"] is None
+            and currents["validation"]["fde_m"] is None
+            and currents["endpoint_separation_m"] > 0)
+        current_question = {"question": "Explain this changing-current prediction and its limitations.",
+            "snapshot_sha256": currents["snapshot_sha256"],
+            "method_sha256": currents["method_sha256"]}
+        req("/research/current-forecast/investigate", current_question, expected=401, auth=False)
+        req("/research/current-forecast/investigate", {
+            **current_question, "snapshot_sha256": "0" * 64}, expected=409)
+        current_review = req("/research/current-forecast/investigate", current_question)
+        check("disabled Chalk preserves the exact geographic current snapshot",
+            current_review["action"] == "STOP"
+            and current_review["failure_code"] == "NOT_CONFIGURED"
+            and current_review["live_model_response"] is False
+            and current_review["research_report"] == currents
+            and current_review["snapshot_sha256"] == currents["snapshot_sha256"]
+            and current_review["method_sha256"] == currents["method_sha256"]
+            and current_review["store_written"] is False
+            and current_review["hardware_actuation"] is False)
         check("real-vector units and synthetic vision evidence stay separated", noaa["noaa"]["velocity_units"] == "m/s"
             and noaa["synthetic_tank"]["coordinates"]["velocity_units"] == "cm/s"
             and noaa["synthetic_tank"]["data_origin"] == "SYNTHETIC_SOFTWARE_REPLAY"
@@ -392,6 +419,8 @@ def extra(result, api, token):
             fixed_kalman_coverage=kalman["coverage"],
             fresh_study_coverage=fresh_coverage,
             fresh_study_snapshot_sha256=snapshot_hash,
+            current_forecast_snapshot_sha256=currents["snapshot_sha256"],
+            current_forecast_method_sha256=currents["method_sha256"],
             no_live_provider_calls=True, no_physical_trials=True)
 
 

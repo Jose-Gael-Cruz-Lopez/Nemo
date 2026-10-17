@@ -1,0 +1,264 @@
+"""Bounded, deterministic passive-tracer advection through geographic currents.
+
+OceanField velocities are east/north metres per second. This module never uses
+buoy holdout positions, estimates tank flow, extrapolates a current field or
+manufactures curvature. WGS84 metric derivatives and RK4 integrate the supplied
+field; the result remains model output rather than observed waste motion.
+"""
+
+from __future__ import annotations
+
+import math
+from datetime import UTC, datetime, timedelta
+from numbers import Real
+
+import numpy as np
+
+from .field import OceanField, _wgs84_metres_per_degree
+
+MAX_HORIZON_S = 6 * 3600.0
+MAX_STEPS = 2048
+MAX_SAMPLES = 250_000
+MAX_SPEED_M_S = 10.0
+MAX_ABS_LATITUDE_DEG = 85.0
+
+
+class _Unsupported(ValueError):
+    def __init__(self, reason: str):
+        self.reason = reason
+        super().__init__(reason)
+
+
+def _positive(value, name: str, maximum: float) -> float:
+    if (isinstance(value, (bool, np.bool_)) or not isinstance(value, Real)
+            or not math.isfinite(value) or not 0 < value <= maximum):
+        raise ValueError(f"{name} must be positive and within {maximum}")
+    return float(value)
+
+
+def _start(value) -> datetime:
+    if isinstance(value, str):
+        try:
+            value = datetime.fromisoformat(value)
+        except ValueError as error:
+            raise ValueError("start_time_utc requires a timezone-aware timestamp") from error
+    if not isinstance(value, datetime) or value.utcoffset() is None:
+        raise ValueError("start_time_utc requires a timezone-aware timestamp")
+    result = value.astimezone(UTC)
+    if not 1900 <= result.year <= 2100:
+        raise ValueError("start_time_utc is outside the bounded calendar")
+    return result
+
+
+def _bracket(axis: np.ndarray, value: float, reason: str) -> list[tuple[int, float]]:
+    """Contributing knots only; never clamp or bridge missing coordinates."""
+    if value < axis[0] or value > axis[-1]:
+        raise _Unsupported(reason)
+    index = int(np.searchsorted(axis, value, side="left"))
+    if index < len(axis) and axis[index] == value:
+        return [(index, 1.0)]
+    if not 0 < index < len(axis):
+        raise _Unsupported(reason)
+    fraction = float((value - axis[index - 1]) / (axis[index] - axis[index - 1]))
+    return [(index - 1, 1 - fraction), (index, fraction)]
+
+
+class CurrentSampler:
+    """Bilinear space/linear time interpolation with explicit missing-data stops.
+
+    Rectilinear ascending or descending spatial axes are supported. A local
+    0..360 longitude field is converted to -180..180. Fields crossing the
+    antimeridian, spanning more than 180 degrees or entering polar latitudes
+    are rejected rather than stitched or extrapolated.
+    """
+
+    def __init__(self, field: OceanField):
+        if not isinstance(field, OceanField):
+            raise TypeError("An OceanField with geographic coordinates and m/s velocities is required")
+        self.field = field
+        self.latitude = np.asarray(field.latitude_deg, dtype=float)
+        longitude = np.asarray(field.longitude_deg, dtype=float)
+        when = np.asarray(field.time_utc)
+        if (self.latitude.ndim != 1 or longitude.ndim != 1 or when.ndim != 1
+                or min(len(self.latitude), len(longitude), len(when)) < 1
+                or not np.isfinite(self.latitude).all() or not np.isfinite(longitude).all()
+                or np.abs(self.latitude).max() > MAX_ABS_LATITUDE_DEG
+                or longitude.min() < -180 or longitude.max() > 360):
+            raise ValueError("Current axes require finite nonpolar geographic coordinates")
+        if not np.issubdtype(when.dtype, np.datetime64) or np.isnat(when).any():
+            raise ValueError("Current times require decoded UTC-compatible datetime64 values")
+        if np.any(when < np.datetime64("1900-01-01")) or np.any(when >= np.datetime64("2101-01-01")):
+            raise ValueError("Current times are outside the bounded calendar")
+        if len(when) < 2 or np.any(np.diff(when) <= np.timedelta64(0, "s")):
+            raise ValueError("Current forcing needs at least two strictly increasing times")
+        self.epoch = when[0]
+        self.times = np.asarray((when - self.epoch) / np.timedelta64(1, "s"), dtype=float)
+        if not np.isfinite(self.times).all():
+            raise ValueError("Current time coordinates exceed the finite representation")
+        self.longitude = (longitude + 180.0) % 360.0 - 180.0
+        for axis, name in ((self.latitude, "latitude"), (self.longitude, "longitude")):
+            if len(axis) > 1 and not (np.all(np.diff(axis) > 0) or np.all(np.diff(axis) < 0)):
+                raise ValueError(f"Current {name} must be monotonic without a dateline crossing")
+        if np.ptp(self.longitude) >= 180 or np.ptp(longitude) >= 180:
+            raise ValueError("Current longitude span must remain local and avoid the dateline")
+        shape = (len(when), len(self.latitude), len(self.longitude))
+        if math.prod(shape) > MAX_SAMPLES:
+            raise ValueError("Current field exceeds the sample budget")
+        self.u = np.asarray(field.eastward_m_s, dtype=float)
+        self.v = np.asarray(field.northward_m_s, dtype=float)
+        self.mask = np.asarray(field.valid_mask)
+        if (self.u.shape != shape or self.v.shape != shape or self.mask.shape != shape
+                or self.mask.dtype != np.dtype(bool)):
+            raise ValueError("Current values and boolean mask require (time, latitude, longitude)")
+        if (not np.isfinite(self.u[self.mask]).all() or not np.isfinite(self.v[self.mask]).all()
+                or not self.mask.any()):
+            raise ValueError("Valid current samples must be finite and nonempty")
+        speed = np.hypot(self.u[self.mask], self.v[self.mask])
+        if float(speed.max()) > MAX_SPEED_M_S:
+            raise ValueError("Current speed exceeds the declared m/s safety budget")
+        if not isinstance(field.metadata, dict):
+            raise TypeError("Current provenance must be a metadata object")
+        declared_units = field.metadata.get("velocity_units", "m/s")
+        if declared_units != "m/s":
+            raise ValueError("OceanField velocities must be in m/s")
+        if field.selected_depth_m is not None and (
+            not isinstance(field.selected_depth_m, Real)
+            or isinstance(field.selected_depth_m, (bool, np.bool_))
+            or not math.isfinite(field.selected_depth_m) or field.selected_depth_m < 0
+        ):
+            raise ValueError("Selected current depth must be finite nonnegative metres")
+        if len(self.latitude) > 1 and self.latitude[0] > self.latitude[-1]:
+            self.latitude = self.latitude[::-1]
+            self.u, self.v, self.mask = (item[:, ::-1, :] for item in (self.u, self.v, self.mask))
+        if len(self.longitude) > 1 and self.longitude[0] > self.longitude[-1]:
+            self.longitude = self.longitude[::-1]
+            self.u, self.v, self.mask = (item[:, :, ::-1] for item in (self.u, self.v, self.mask))
+        # At most a quarter of the smallest cell per accepted step and half the
+        # shortest forcing interval. This is a numerical limit, not uncertainty.
+        cells = []
+        if len(self.latitude) > 1:
+            cells.append(float(np.diff(self.latitude).min()) * min(
+                _wgs84_metres_per_degree(float(lat))[1] for lat in self.latitude))
+        if len(self.longitude) > 1:
+            cells.append(float(np.diff(self.longitude).min()) * min(
+                _wgs84_metres_per_degree(float(lat))[0] for lat in self.latitude))
+        self.step_limit_s = float(np.diff(self.times).min()) / 2
+        if cells and speed.max() > 0:
+            self.step_limit_s = min(self.step_limit_s, min(cells) / (4 * float(speed.max())))
+
+    def sample(self, latitude_deg: float, longitude_deg: float, seconds: float) -> tuple[float, float]:
+        if (not np.isfinite([latitude_deg, longitude_deg, seconds]).all()
+                or abs(latitude_deg) > MAX_ABS_LATITUDE_DEG
+                or not -180 <= longitude_deg < 180):
+            raise _Unsupported("UNSUPPORTED_GEOGRAPHY")
+        ti = _bracket(self.times, seconds, "OUTSIDE_FORCING_TIME")
+        yi = _bracket(self.latitude, latitude_deg, "OUTSIDE_CURRENT_DOMAIN")
+        xi = _bracket(self.longitude, longitude_deg, "OUTSIDE_CURRENT_DOMAIN")
+        east = north = 0.0
+        for t, tw in ti:
+            for y, yw in yi:
+                for x, xw in xi:
+                    if not self.mask[t, y, x]:
+                        raise _Unsupported("MASKED_CURRENT_CELL")
+                    weight = tw * yw * xw
+                    east += weight * self.u[t, y, x]
+                    north += weight * self.v[t, y, x]
+        return float(east), float(north)
+
+
+def advect_current(field: OceanField, *, latitude_deg: float, longitude_deg: float,
+                   start_time_utc: str | datetime, horizon_s: float = MAX_HORIZON_S,
+                   step_s: float = 300, output_step_s: float = 900) -> dict:
+    """Integrate a passive surface tracer; retain only fully supported RK4 steps.
+
+    This bounded ocean diagnostic never changes source/prevention tank evidence.
+    Invalid configuration raises ValueError. Missing forcing stops with an
+    explicit UNSUPPORTED/PARTIAL report and the last valid accepted position.
+    No extrapolation, zero-filled masks, clipping or stochastic wiggles occur.
+    """
+    horizon = _positive(horizon_s, "horizon_s", MAX_HORIZON_S)
+    step = _positive(step_s, "step_s", 3600)
+    output_step = _positive(output_step_s, "output_step_s", MAX_HORIZON_S)
+    for value in (latitude_deg, longitude_deg):
+        if isinstance(value, (bool, np.bool_)) or not isinstance(value, Real) or not math.isfinite(value):
+            raise ValueError("Starting coordinates require finite real geographic degrees")
+    if abs(latitude_deg) > MAX_ABS_LATITUDE_DEG or not -180 <= longitude_deg <= 360:
+        raise ValueError("Starting coordinates must be nonpolar geographic degrees")
+    longitude = (float(longitude_deg) + 180) % 360 - 180
+    start = _start(start_time_utc)
+    sampler = CurrentSampler(field)
+    start64 = np.datetime64(start.replace(tzinfo=None), "us")
+    offset = float((start64 - sampler.epoch) / np.timedelta64(1, "s"))
+    step = min(step, sampler.step_limit_s, output_step)
+    if not math.isfinite(step) or step <= 0 or math.ceil(horizon / step) + math.ceil(horizon / output_step) > MAX_STEPS:
+        raise ValueError("Advection would exceed its bounded step budget")
+    state = np.array([float(latitude_deg), longitude])
+    elapsed = 0.0
+    track = []
+    reason = None
+    accepted_steps = 0
+
+    def point(t: float, position: np.ndarray) -> dict:
+        u, v = sampler.sample(float(position[0]), float(position[1]), offset + t)
+        return {"time_utc": (start + timedelta(seconds=t)).isoformat().replace("+00:00", "Z"),
+                "elapsed_s": t, "latitude_deg": float(position[0]),
+                "longitude_deg": float(position[1]), "eastward_m_s": u,
+                "northward_m_s": v, "speed_m_s": math.hypot(u, v)}
+
+    def derivative(t: float, position: np.ndarray) -> np.ndarray:
+        u, v = sampler.sample(float(position[0]), float(position[1]), offset + t)
+        metres_lon, metres_lat = _wgs84_metres_per_degree(float(position[0]))
+        return np.array([v / metres_lat, u / metres_lon])
+
+    try:
+        track.append(point(0.0, state))
+        next_output = min(output_step, horizon)
+        while elapsed < horizon:
+            if accepted_steps >= MAX_STEPS:
+                raise _Unsupported("STEP_BUDGET_EXCEEDED")
+            dt = min(step, horizon - elapsed, next_output - elapsed)
+            k1 = derivative(elapsed, state)
+            k2 = derivative(elapsed + dt / 2, state + dt * k1 / 2)
+            k3 = derivative(elapsed + dt / 2, state + dt * k2 / 2)
+            k4 = derivative(elapsed + dt, state + dt * k3)
+            candidate = state + dt * (k1 + 2 * k2 + 2 * k3 + k4) / 6
+            accepted_point = point(elapsed + dt, candidate)
+            state = candidate
+            elapsed += dt
+            accepted_steps += 1
+            if elapsed >= next_output:
+                track.append(accepted_point)
+                next_output = min(horizon, next_output + output_step)
+        status = "COMPLETED"
+    except _Unsupported as error:
+        reason = error.reason
+        status = "PARTIAL" if elapsed > 0 else "UNSUPPORTED"
+        if elapsed > 0 and track[-1]["elapsed_s"] != elapsed:
+            track.append(point(elapsed, state))
+    return {
+        "schema_version": 1, "kind": "CURRENT_FORCED_PASSIVE_TRACER",
+        "status": status, "reason_code": reason,
+        "requested_horizon_s": horizon, "completed_horizon_s": elapsed,
+        "track": track, "accepted_steps": accepted_steps,
+        "solver": {"method": "RK4_WGS84_METRIC_DERIVATIVES", "maximum_step_s": step,
+                   "output_step_s": output_step, "spatial_interpolation": "bilinear",
+                   "temporal_interpolation": "linear", "velocity_units": "m/s",
+                   "position_units": "geographic_degrees", "maximum_steps": MAX_STEPS},
+        "forcing": {"time_start_utc": str(field.time_utc[0]) + "Z",
+                    "time_end_utc": str(field.time_utc[-1]) + "Z",
+                    "selected_depth_m": field.selected_depth_m,
+                    "shape": list(sampler.u.shape),
+                    "provenance": {key: field.metadata[key] for key in (
+                        "product", "dataset", "title", "u_variable", "v_variable", "sha256",
+                        "source_url", "issued_at_utc", "retrieved_at_utc", "license", "data_kind"
+                    ) if key in field.metadata}},
+        "physical_validation": False, "plastic_motion_validated": False,
+        "tank_flow_used": False, "heldout_buoy_positions_used": False,
+        "limitations": [
+            "The supplied current field is model output, not measured waste motion.",
+            "No windage, object response, beaching, retention or diffusion is inferred.",
+            "Missing cells and unavailable times stop the track; no extrapolation is used.",
+            "Forecast causality requires a separately verified issue-time/as-of receipt.",
+            "Ocean currents do not calibrate the centimetre-scale tank experiment.",
+        ],
+    }

@@ -92,7 +92,7 @@ def _finish(arguments: dict, expected: set[str], successful: bool) -> dict:
 
 async def investigate_study(
     question: str, backend: ToolBackend, context: Mapping[str, Any], settings: ChalkSettings,
-    *, client: httpx.AsyncClient | None = None,
+    *, client: httpx.AsyncClient | None = None, system_prompt: str = SYSTEM,
 ) -> dict:
     """At most one evidence read and two model calls; caller rechecks the snapshot."""
     trace: list[dict] = []
@@ -106,7 +106,7 @@ async def investigate_study(
     if not settings.readiness()["ready"]:
         return _stop("Chalk is not configured; the verified research report remains available.",
                      trace, "NOT_CONFIGURED")
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content":
+    messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content":
         json.dumps({"trusted_context": dict(context), "untrusted_request": question}, allow_nan=False)}]
     owned = client is None
     http = client or httpx.AsyncClient()

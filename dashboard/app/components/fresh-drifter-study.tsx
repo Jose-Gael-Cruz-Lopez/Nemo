@@ -40,7 +40,7 @@ export function StudyPathFigure({group,model,visible,onToggle}:{group:FreshGroup
    <text x="45" y="354" fontSize="11" fill="#526f83">Grid spacing: {spacing>=1000?`${fmt(spacing/1000,2)} km`:`${fmt(spacing,0)} m`}</text><text x="615" y="354" textAnchor="end" fontSize="11" fill="#526f83">East → · North ↑</text>
   </svg>
   <figcaption className={styles.legend}><span><HelpLabel label="Plot scale" explanation="East and north use the same metre scale. Hiding a path does not zoom or change the scores."/></span><span>◇ Model start · ○ last context point</span></figcaption>
-  <p className={styles.plotCaption}>The gap between the paths shows the forecast miss over six hours. Kalman uses a filtered start; other models use the last recorded context point.</p>
+  <p className={styles.plotCaption}>These models use past buoy positions, without ocean-current forcing. The gap shows the six-hour forecast miss. Kalman uses a filtered start; the other models use the last recorded context point.</p>
  </figure>;
 }
 export function StudyPath({group,model}:{group:FreshGroup;model:FreshModel}) {

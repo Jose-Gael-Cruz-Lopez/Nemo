@@ -68,7 +68,7 @@ jobs:
       - name: Replay the team intervention validation example
         run: python -m scripts.evaluate_prevention_validation tests/fixtures/prevention_validation/unresolved_analysis_bundle_v1.json --development-protocol development-prevention-v1 --validation-protocol heldout-prevention-v1 --output "${RUNNER_TEMP}/reeftrace-method-validation.json"
       - name: Check public and synthetic fixtures were not rewritten
-        run: git diff --exit-code -- data/public data/sample_runs
+        run: git diff --exit-code -- data/public data/current_fields data/sample_runs
 
   offline-http:
     name: Isolated offline HTTP workflow
@@ -93,7 +93,7 @@ jobs:
       - name: Exercise source, prevention, exports and NOAA vectors over actual HTTP
         run: python scripts/e2e_offline.py --timeout-seconds 240 --output "${RUNNER_TEMP}/reeftrace-offline-http.json"
       - name: Check public and synthetic fixtures were not rewritten
-        run: git diff --exit-code -- data/public data/sample_runs
+        run: git diff --exit-code -- data/public data/current_fields data/sample_runs
 
   dashboard:
     name: Dashboard tests, lint, types and production build

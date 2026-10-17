@@ -16,6 +16,7 @@ from fastapi.responses import JSONResponse, Response
 from apps.vision.reeftrace_vision.calibration import fit_homography
 from apps.vision.reeftrace_vision.tracking import flow_samples
 
+from .api.v1.endpoints.current_forecast import create_current_forecast_router
 from .api.v1.endpoints.field_sessions import create_field_sessions_router
 from .api.v1.endpoints.fresh_physics import create_fresh_physics_router
 from .api.v1.endpoints.health import router as health_router
@@ -114,6 +115,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(create_method_validation_router(), prefix="/api/v1")
     app.include_router(create_field_sessions_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_fresh_physics_router(runtime, operator), prefix="/api/v1")
+    app.include_router(create_current_forecast_router(runtime, operator), prefix="/api/v1")
 
     @app.get("/")
     def root():
