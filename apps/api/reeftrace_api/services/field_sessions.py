@@ -80,6 +80,12 @@ DEFAULT_HELP = {
 }
 
 
+def _detection_key(recording):
+    """Recordings made before detector selection existed used the red HSV detector."""
+    detection = recording.get("detection") or {"detector": "red_hsv"}
+    return (detection.get("detector"), detection.get("reference_id"))
+
+
 def _step(step, status, code, message, help_text=""):
     if status != "PASSED" and not help_text:
         help_text = DEFAULT_HELP[step]
@@ -220,6 +226,11 @@ class FieldSessionService:
             return _step(name, "BLOCKED", "SPLIT_FRAMES_OVERLAP",
                          "Training and validation recordings share frames.",
                          "Record validation drift as a separate run."), None
+        detections = {_detection_key(r) for rs in splits.values() for r in rs}
+        if len(detections) != 1:
+            return _step(name, "BLOCKED", "DETECTOR_MIXED",
+                         "Drift recordings used different token detectors or empty-tank references.",
+                         "Record every drift run with the same detector and reference."), None
         # Samples come from the existing helper: gaps and track changes are never joined.
         counts = {s: sum(len(flow_samples(r["points"])) for r in rs) for s, rs in splits.items()}
         if not all(counts.values()):
@@ -344,6 +355,12 @@ class FieldSessionService:
         except (ValueError, KeyError) as error:
             return _step(name, "BLOCKED", "OBSERVATION_NOT_CURRENT", str(error) or "Observation is not current.",
                          "Make a new source observation with the current setup."), None
+        drift = self._get("recording", request.training_recording_ids[0]) if request.training_recording_ids else None
+        observed = self._get("recording", case["recording_id"])
+        if drift and observed and _detection_key(observed) != _detection_key(drift):
+            return _step(name, "BLOCKED", "DETECTOR_MIXED",
+                         "The source observation used a different token detector or reference than the drift runs.",
+                         "Record the source case with the same detector and empty-tank reference."), None
         facts = {"case_id": case["id"], "recording_id": case["recording_id"], "mode": "LIVE",
                  "evidence_frame_count": len(case.get("evidence_frame_ids") or [])}
         return _passed(name, "OBSERVATION_CURRENT", "A new LIVE source observation passed the existing gate."), facts

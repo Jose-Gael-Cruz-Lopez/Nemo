@@ -154,3 +154,24 @@ test("preview clicks map to source-image pixels", () => {
   assert.deepEqual(previewPixel(400, -5, 320, 240, 640, 480), [639, 0]);
   assert.throws(() => previewPixel(1, 1, 0, 0, 640, 480), /no size/);
 });
+
+test("green-token recording needs a measured empty-tank reference from the same session", async () => {
+  const { detectionFields, parseTokenReference, setTokenReference, withTokenSize, newDraft: fresh, deriveSteps: steps, decodeDraft: decode, encodeDraft: encode } = await import("../app/components/field-workflow-state.ts");
+  const saved = { detector: "foreground_reference_v1", reference_id: "ref-0123456789abcdef-a1b2c3d4", content_id: "ref-0123456789abcdef", camera_session_id: "usb-fake-session", image_size_px: [1280, 720], frame_count: 10, roi_fraction: 1, captured_at: 1, rig_change_at_capture: null, id: "ref-0123456789abcdef-a1b2c3d4" };
+  let draft = { ...fresh(), cameraSessionId: "usb-fake-session", trainingRecordingIds: ["recording-a"], validationRecordingIds: ["recording-b"] };
+  assert.equal(draft.detector, "foreground_reference_v1");
+  assert.throws(() => detectionFields(draft), /empty tank/);
+  const reference = parseTokenReference(saved);
+  draft = setTokenReference(draft, reference);
+  assert.deepEqual(draft.trainingRecordingIds, [], "a new reference clears recordings made another way");
+  assert.throws(() => detectionFields(draft), /measure one token/);
+  assert.equal(steps(draft, null, null, "").find(step => step.id === "drift_recordings").message, "Measure one token before recording.");
+  assert.throws(() => withTokenSize(reference, { reference_id: "ref-other", token_area_px: 400, token_area_px_range: [140, 1200] }), /another reference/);
+  draft = setTokenReference(draft, withTokenSize(reference, { reference_id: reference.reference_id, token_area_px: 400, token_area_px_range: [140, 1200] }));
+  assert.deepEqual(detectionFields(draft), { detector: "foreground_reference_v1", reference_id: reference.reference_id });
+  assert.throws(() => detectionFields({ ...draft, cameraSessionId: "usb-new-session" }), /another camera session/);
+  assert.deepEqual(detectionFields({ ...draft, detector: "red_hsv" }), {}, "red keeps the original request body");
+  assert.deepEqual(decode(encode(draft)).tokenReference, draft.tokenReference);
+  assert.equal(decode(JSON.stringify({ ...draft, detector: "blue" })), null);
+  assert.throws(() => parseTokenReference({ ...saved, detector: "red_hsv" }), /incomplete/);
+});

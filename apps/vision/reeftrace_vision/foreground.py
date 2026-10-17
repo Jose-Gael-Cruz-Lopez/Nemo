@@ -105,6 +105,31 @@ class EmptyTankReference:
             np.round(self.median).astype(np.uint8).tobytes() + roi_bytes
             + repr(self.shape).encode()).hexdigest()[:16]
 
+    _ARRAYS = ("median", "median_bgr", "noise", "roi", "gray")
+
+    def to_arrays(self):
+        """Private arrays for local storage (``numpy.savez``); never sent to clients."""
+        return {**{name: getattr(self, name) for name in self._ARRAYS},
+                "meta": np.array([self.frame_count, self.median_gray], dtype=np.float64)}
+
+    @classmethod
+    def from_arrays(cls, arrays, *, expected_id):
+        """Rebuild a saved reference and refuse it if its content no longer matches its ID."""
+        reference = cls.__new__(cls)
+        for name in cls._ARRAYS:
+            setattr(reference, name, np.asarray(arrays[name]))
+        reference.roi = reference.roi.astype(bool)
+        reference.shape = reference.gray.shape
+        reference.frame_count = int(arrays["meta"][0])
+        reference.median_gray = float(arrays["meta"][1])
+        reference._window = cv2.createHanningWindow(reference.shape[::-1], cv2.CV_32F)
+        reference.fingerprint = "ref-" + hashlib.sha256(
+            np.round(reference.median).astype(np.uint8).tobytes() + np.packbits(reference.roi).tobytes()
+            + repr(tuple(reference.shape)).encode()).hexdigest()[:16]
+        if reference.fingerprint != expected_id:
+            raise ValueError("Saved empty-tank reference does not match its ID; capture a new one")
+        return reference
+
     def describe(self):
         """Small provenance record; never the images themselves."""
         return {"detector": DETECTOR_ID, "reference_id": self.fingerprint,

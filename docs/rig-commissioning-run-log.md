@@ -59,7 +59,7 @@ short wall. Measure on the **water surface**.
 | Quantity | Value | Method / note |
 | --- | --- | --- |
 | Origin corner and axis directions | | |
-| Bin interior length × width × depth | | |
+| Bin interior length × width × depth | 41.3 × 28.6 × 17.1 cm (operator-reported) | Not stated whether measured at the rim, inside or at the waterline; the bin tapers. Measure inside length and width **at the waterline** before using them for mapping. |
 | Waterline height above the floor, and its tape mark | | |
 | Pump minimum operating depth (from the manual) | | |
 | Overflow margin above the waterline | | |
@@ -161,14 +161,11 @@ capture origin is `SYNTHETIC_FAKE_CAPTURE` is never physical evidence.
 
 ## 6. Current blockers
 
-1. **Token detection (blocking recording).** Green caps are invisible to the red-only
-   tracker. A colour-independent detector now exists
-   (`apps/vision/reeftrace_vision/foreground.py`, see `docs/foreground-token-detection.md`).
-   It passes on synthetic frames and on frames built from the team's empty-tank photo.
-   Recording still calls `detect_red`. The reference/token-size endpoints and the
-   `runtime.py` detector switch are a pending integration request to Jose.
-   **Rig action:** put a plain, opaque, light sheet under the clear bin; the patterned
-   carpet shows through and makes the reference refuse under ripple.
+1. **Token detection: wired in, not yet tried on the real camera.** Green caps are found by
+   the colour-independent detector (`docs/foreground-token-detection.md`), now selectable
+   in recording and in the field wizard (Jose approved the shared-file change, relayed by
+   Megana). Still to do on the rig: put a plain light sheet under the clear bin, start the
+   app, capture the empty tank with the pump running, and measure one cap.
 2. **Inventory rows 12–14 not yet checked.**
 3. **No measurements yet** (section 2). Mapping, drift, profiles and receipts depend on them.
 4. **Second layout:** the intervention collector position must be declared and marked

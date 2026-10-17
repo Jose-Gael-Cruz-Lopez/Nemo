@@ -1,8 +1,9 @@
 # Colour-independent token detection (empty-tank reference)
 
-**Status:** detector, tests and evaluation are done (`apps/vision/reeftrace_vision/foreground.py`).
-It is **not yet used by recording**. That needs the small API/runtime change in
-section 5, which belongs to Jose. Nothing in the existing red pipeline changed.
+**Status:** the detector is built, evaluated and **wired into recording**. Jose
+approved the shared-file change, relayed by Megana. Red HSV remains the default
+detector, so existing recordings and clients behave exactly as before. It has not yet
+run on real C270 frames.
 
 ## 1. Why
 
@@ -115,34 +116,27 @@ same for both detectors and wasn't modified here.
 - Heavy ripple over a textured floor will be refused rather than tracked.
 - It has not yet been run on real C270 frames.
 
-## 5. Integration request for Jose (shared files; not changed here)
+## 5. How it is wired in
 
-Only Jose edits `runtime.py`, `main.py`, the camera endpoints and `RecordInput`.
-Proposed minimal wiring:
+The shared files changed minimally. Jose approved this, relayed by Megana.
 
-1. **`POST /api/v1/camera/reference`** (operator). Body: `{frame_count: 5–60,
-   roi_polygon_px?}`. It captures fresh frames from the **current** session, builds
-   `EmptyTankReference`, and stores a record `{reference_id, camera_session_id,
-   image_size_px, describe()}`. The arrays (median, noise) go privately under
-   `data/local`, never in API responses or Git. It is refused if the camera isn't
-   fresh.
-2. **`POST /api/v1/camera/token-size`** (operator). With one cap in view, it runs
-   `measure_token_area` against a stored reference and saves
-   `token_area_range(...)` with that reference.
-3. **`RecordInput`**: add an optional `detector: "red_hsv" | "foreground_reference_v1"`
-   (default `red_hsv`, so existing behaviour is unchanged) and `reference_id`.
-   `CaseInput` is untouched.
-4. **`Runtime.record`**: replace `detect_red(image)` with the chosen detector. For
-   the foreground detector:
-   - require a reference from the same camera session and image size, plus a
-     measured token size;
-   - treat `SceneChanged` as ending the recording, like the existing "camera
-     restarted" error;
-   - store `{detector, reference_id, token_area_px_range}` on the recording.
-5. **Disturbance**: `POST /rig/disturbed` (or any revalidation) should also require
-   a new reference.
+| Where | Change |
+| --- | --- |
+| `services/token_detection.py` (new) | Captures the empty-tank reference from the **current** session; measures one token; saves arrays privately under `data/local/token_references/` (re-verified against their content ID on reload); returns only IDs and small metadata; hands recording a detector after checking session, image size, measured token size and that no rig disturbance happened since capture. |
+| `schemas/contracts.py` | `RecordInput.detector` (`red_hsv` default, or `foreground_reference_v1`) and `reference_id`; new `TokenReferenceInput`. `CaseInput` unchanged. |
+| `main.py` | `GET /api/v1/camera/reference` (status, public); `POST /api/v1/camera/reference` (operator: `{frame_count 5–60, roi_polygon_px?}`); `POST /api/v1/camera/reference/{id}/token-size` (operator). `POST /camera/record` passes the detector fields. |
+| `services/runtime.py` | `record()` takes `detector`/`reference_id`, uses the chosen detector instead of `detect_red`, discards the recording on `SceneChanged` ("Recording discarded: …"), and stores `detection: {detector, reference_id?, token_area_px_range?}` on the recording. |
+| `services/field_sessions.py` | Blocks a receipt (`DETECTOR_MIXED`) if drift runs, or the first observation, used different detectors or references. Older recordings without `detection` count as `red_hsv`. |
+| Field wizard | A "How the camera finds the token" choice (default: any colour). "Capture empty tank" and "Measure one token" buttons. All recordings send the detector fields. A new reference clears earlier recordings in the draft. |
 
-After that lands, Megana adds two follow-ups in Lane 1 files:
-- a "Capture empty-tank reference" and "Measure one token" step in the field wizard;
-- a field-session check that every recording in a receipt shares one detector and
-  one reference.
+**Tests:** `tests/integration/test_token_detection_api.py`, 8 tests through the real API with a synthetic green-cap fake capture:
+- the reference and token size are saved with no image, array or path data in responses;
+- a moving green cap is tracked with the new detector, while the red detector sees nothing;
+- recording is refused without a current, measured reference;
+- the token-size check needs exactly one token;
+- a disturbance or new session makes the reference stale;
+- a camera bump discards the recording;
+- operator authentication is required;
+- mixed detectors block a field receipt.
+
+The wizard state is covered in `dashboard/tests/field-workflow-state.test.mjs`.
