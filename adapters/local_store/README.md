@@ -1,3 +1,3 @@
-# Local persistence adapters
+# Local store
 
-Implement SQLite as the durable local fallback and JSON only for lightweight append-only/replay use. Keep the persistence interface shared with the optional Butterbase adapter so local operation does not depend on a network service.
+The implemented SQLite WAL store is `apps/api/reeftrace_api/services/store.py`. It stores immutable evidence and frozen profiles, transactionally versioned cases/manual tasks, and a durable Photon inbox/outbox. The API chooses the database directory through REEFTRACE_DATA_DIR; local camera evidence and private settings are ignored by Git.

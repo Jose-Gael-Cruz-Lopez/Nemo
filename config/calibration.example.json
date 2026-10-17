@@ -1,12 +1,9 @@
 {
-  "calibration_id": "replace-with-unique-id",
-  "created_at": null,
-  "camera_id": null,
-  "image_size_px": [1280, 720],
-  "tank_size_cm": [60.0, 40.0],
-  "homography_image_to_tank": null,
-  "tank_to_gantry": null,
-  "gantry_safe_polygon_mm": [],
-  "validation_residual_cm": null,
-  "approved": false
+  "pixel_points": [[null,null],[null,null],[null,null],[null,null]],
+  "world_cm_points": [[null,null],[null,null],[null,null],[null,null]],
+  "check_pixels": [[null,null],[null,null],[null,null]],
+  "check_world_cm": [[null,null],[null,null],[null,null]],
+  "max_error_cm": 0.5,
+  "image_size_px": [null,null],
+  "camera_session_id": "replace-with-current-usb-session"
 }

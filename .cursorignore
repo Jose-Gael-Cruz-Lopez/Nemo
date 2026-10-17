@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+work/
+.git/
+.copernicusmarine/
+data/local/
+data/runs/
+.venv/
+**/node_modules/
+**/.next/
+**/__pycache__/
+*.sqlite*
+*.db
+*.log

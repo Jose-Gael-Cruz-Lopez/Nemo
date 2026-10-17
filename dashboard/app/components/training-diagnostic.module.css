@@ -1,0 +1,51 @@
+.card {
+  margin-top: 20px;
+}
+
+.header {
+  flex-wrap: wrap;
+}
+
+.scope {
+  margin: 0 0 14px;
+  color: #655c77;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 18px 12px;
+}
+
+.table {
+  min-width: 630px;
+  margin-block: 14px 10px;
+}
+
+.table thead tr:first-child th:not(:first-child) {
+  text-align: center;
+}
+
+.table td,
+.table thead tr:last-child th {
+  text-align: right;
+}
+
+.retry {
+  margin-left: 10px;
+}
+
+@media (max-width: 520px) {
+  .header > button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .retry {
+    display: flex;
+    margin: 8px 0 0;
+  }
+}

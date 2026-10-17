@@ -1,0 +1,69 @@
+{
+  "id": "replace-with-frozen-measured-profile-id",
+  "calibration_id": "replace-with-approved-water-plane-calibration-id",
+  "data_origin": "MEASURED_TANK",
+  "valid": false,
+  "token_class": "red-foam-10mm",
+  "bounds": {
+    "x_min_cm": null,
+    "x_max_cm": null,
+    "y_min_cm": null,
+    "y_max_cm": null
+  },
+  "flow": null,
+  "sources": [
+    {
+      "id": "A",
+      "polygon_cm": [],
+      "prior": 0.3333333333333333
+    },
+    {
+      "id": "B",
+      "polygon_cm": [],
+      "prior": 0.3333333333333333
+    },
+    {
+      "id": "C",
+      "polygon_cm": [],
+      "prior": 0.3333333333333333
+    }
+  ],
+  "traps": [],
+  "observation_polygon_cm": [],
+  "revalidation_max_rmse_cm_s": null,
+  "transport": {
+    "particles_per_source": 500,
+    "dt_s": 0.1,
+    "max_age_s": 60,
+    "diffusivity_cm2_s": 0.05,
+    "drift_bias_cm_s": [
+      0,
+      0
+    ],
+    "age_prior": {
+      "min_s": 0,
+      "max_s": 30,
+      "count": 16
+    }
+  },
+  "gates": {
+    "position_sigma_cm": 0.7,
+    "model_error_cm": 0.3,
+    "correlation_time_s": 0.8
+  },
+  "sensitivity_variants": [
+    {
+      "id": "dispersion_x0.5",
+      "transport": {
+        "diffusivity_cm2_s": 0.025
+      }
+    },
+    {
+      "id": "dispersion_x2.0",
+      "transport": {
+        "diffusivity_cm2_s": 0.1
+      }
+    }
+  ],
+  "max_validation_rmse_cm_s": null
+}

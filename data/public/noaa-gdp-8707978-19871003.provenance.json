@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%228707978%22&time%3E=1987-10-03T00%3A00%3A00Z&time%3C=1987-10-03T23%3A00%3A00Z",
+  "metadata_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.html",
+  "provider": "NOAA AOML Global Drifter Program",
+  "dataset_id": "drifter_hourly_qc",
+  "product_doi": "10.25921/x46c-3620",
+  "dataset_release_from_metadata": "v2.01",
+  "license_from_endpoint_metadata": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "attribution": "NOAA Global Drifter Program; Elipot et al. (2022), DOI 10.25921/x46c-3620",
+  "retrieved_at_utc": "2026-10-16T22:35:05.155315Z",
+  "sha256": "b503de924bbfe82fb18a705917e527faaf26e51688845adb4b57f0cb121c2fca",
+  "bytes": 1950,
+  "row_count": 24,
+  "drifter_id": "8707978",
+  "time_start_utc": "1987-10-03T00:00:00Z",
+  "time_end_utc": "1987-10-03T23:00:00Z",
+  "schema": {
+    "ID": "trajectory identifier, string",
+    "time": "UTC ISO-8601",
+    "latitude": "degrees_north",
+    "longitude": "degrees_east",
+    "ve": "eastward velocity, m/s",
+    "vn": "northward velocity, m/s",
+    "err_ve": "95% confidence interval in eastward velocity, m/s",
+    "err_vn": "95% confidence interval in northward velocity, m/s"
+  },
+  "purpose": "real historical data loading/replay smoke test only",
+  "not_validated": [
+    "tank source attribution",
+    "plastic source attribution",
+    "ocean forecast skill"
+  ]
+}

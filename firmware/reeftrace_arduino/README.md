@@ -1,5 +1,3 @@
-# Reeftrace Arduino firmware
+# Retired scaffold
 
-Implement the device-side safety boundary here: outputs off at startup, explicit homing before absolute moves, bounded travel and speed, debounced limit switches, pump timeout, watchdog, and fault telemetry.
-
-Do not enable motor or pump outputs until the emergency stop, limit switches, travel limits, and pump cutoff have been physically tested. The backend remains the authority for run and approval state; firmware must independently reject unsafe commands.
+The selected USB Webcam Edition uses no Arduino firmware or serial connection. The webcam connects directly to the laptop; the pump retains its original AC cord and fixed manual circulation setting. This directory is retained only to explain the original repository scaffold; it is not part of the build or installation.

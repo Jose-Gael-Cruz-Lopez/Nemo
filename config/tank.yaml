@@ -1,32 +1,31 @@
-site:
-  id: demo-tank
-  name: Reeftrace demo tank
-  units: cm
-  origin: inside-lower-left-usable-corner
-
-geometry:
-  width_cm: 60
-  height_cm: 40
-  safe_polygon_cm: [] # Add measured vertices before enabling any motion.
-  obstacles: []
-  deposition_zones: []
-
-sources:
-  - id: inlet-a
-    polygon_cm: []
-  - id: inlet-b
-    polygon_cm: []
-  - id: inlet-c
-    polygon_cm: []
-
-transport:
-  field_file: data/flow_field.npz
-  pump_setting: null
-  water_depth_cm: null
-  interpolation_min_coverage: 0.7
-  random_seed: 7
-
-safety:
-  hardware_enabled: false
-  require_homed_before_move: true
-  max_pump_duration_ms: 1500
+# Measurement worksheet, not a valid ready-to-use profile. Do not copy demo geometry.
+site_id: actual-small-tank
+camera_model: Logitech_C920s
+capture_mode: usb_device
+coordinate_space: measured_water_surface_xy_centimetres
+bounds:
+  x_min_cm: null
+  x_max_cm: null
+  y_min_cm: null
+  y_max_cm: null
+water_depth_cm: null
+camera_session_id: null
+calibration_id: null
+pump:
+  model_verified: null
+  power: original_unmodified_AC_cord
+  role: fixed_circulation_only
+  manual_setting: null
+  return_direction: null
+pocket:
+  polygon_cm: null
+  retention_trial_duration_s: null
+  validated_on_same_token_class: false
+observation_polygon_cm: null
+source_polygons_cm:
+  A: null
+  B: null
+  C: null
+token_class: red-foam-10mm
+collection_mode: manual_net
+hardware_actuation: false

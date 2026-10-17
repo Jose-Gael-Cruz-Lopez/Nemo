@@ -11,6 +11,7 @@ htmlcov/
 # Node / Next.js
 node_modules/
 .next/
+*.tsbuildinfo
 out/
 coverage/
 
@@ -26,3 +27,8 @@ data/runs/**
 # Editor / OS
 .DS_Store
 .vscode/
+
+# Local camera evidence and credentials
+data/local/
+work/
+.copernicusmarine/

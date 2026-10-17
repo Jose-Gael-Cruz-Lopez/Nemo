@@ -1,0 +1,102 @@
+.stack {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+}
+
+.header {
+  flex-wrap: wrap;
+}
+
+.scope {
+  margin: 0 0 17px;
+  padding: 11px 13px;
+  border: 1px solid #e8e2ef;
+  border-radius: 5px;
+  color: #746781;
+  background: #faf8fc;
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+.metrics,
+.badges,
+.voiceActions,
+.links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+.metrics {
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.metrics strong {
+  color: #62518a;
+  font-size: 19px;
+  font-weight: 550;
+}
+
+.chart {
+  margin: 14px 0 20px;
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  max-height: 225px;
+}
+
+.chart figcaption {
+  max-width: 640px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+.transcript {
+  margin: 15px 0 18px;
+  color: #605c69;
+  font-size: 12px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+
+.voiceActions {
+  margin-block: 14px;
+}
+
+.voiceActions > span {
+  margin: 0;
+}
+
+.player {
+  margin-top: 16px;
+}
+
+.player audio {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+}
+
+@media (max-width: 520px) {
+  .header > button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .metrics {
+    align-items: flex-start;
+  }
+
+  .voiceActions > button {
+    width: 100%;
+    justify-content: center;
+  }
+}
