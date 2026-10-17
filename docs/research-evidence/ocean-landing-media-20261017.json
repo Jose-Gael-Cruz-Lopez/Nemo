@@ -1,0 +1,29 @@
+{
+  "kind": "illustrative_landing_media_provenance",
+  "date": "2026-10-17",
+  "provider": "Higgsfield MCP",
+  "model": "seedance_2_5",
+  "job_id": "ea755a8f-9867-4e00-af07-e3ffbd06cccf",
+  "terminal_status": "completed",
+  "parameters": {
+    "mode": "t2v",
+    "duration_seconds": 10,
+    "resolution": "1080p",
+    "aspect_ratio": "16:9",
+    "generate_audio": false
+  },
+  "prompt": "An original cinematic underwater ocean environment for a scientific coastal protection website. A single continuous 10-second shot, no cuts, no text, no logo, no interface or charts. Wide view from just below a rippling ocean surface, soft sunbeams entering from the upper left, crystalline light cyan and azure water gradually deepening to blue near the lower edge. Open uncluttered water fills the centre and left two thirds for a large white website title. A beautiful but restrained coral reef slopes gently into the lower right corner, small distant reef fish drift slowly across the background. Subtle suspended particles, soft believable light caustics. Camera glides forward almost imperceptibly, a calm documentary ocean journey rather than fast action. Motion stays steady and coherent from first frame to last, suitable as a muted looping website background with a gentle crossfade. Sophisticated naturalistic underwater photography, restrained palette of pale ocean blue, cyan and marine blue; luminous rather than dark black. This is an illustrative ocean scene, not a measured experiment. No people, no debris cleanup robot, no technological objects, no maps, no artificial glowing effects, no dramatic wildlife closeups.",
+  "output": {
+    "path": "dashboard/public/tideward-ocean-journey.mp4",
+    "sha256": "174b5f73cbc734d52b17b3d2ce103a60ee7f4bdc1f807cf870f95849ee3c28b5",
+    "browser_width": 1920,
+    "browser_height": 1080,
+    "browser_duration_seconds": 10.041667,
+    "browser_muted": true,
+    "browser_ready_state": 4,
+    "browser_media_error": null
+  },
+  "scientific_evidence": false,
+  "xai_api_used": false,
+  "voice": "Explicit opt-in browser speech synthesis; not part of the generated video"
+}
