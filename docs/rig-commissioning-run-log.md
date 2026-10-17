@@ -11,7 +11,8 @@ fixtures or the 23 demo cases.
 | Field | Value |
 | --- | --- |
 | Branch | `team/rig-commissioning-v2` |
-| Base `main` (CI green) | `e39b64ca4443820a8f2b9302f60ca7dc1b4da587` |
+| Base `main` (CI green) | `33280da` (rebased 2026-10-17 18:55 EDT; first opened on `e39b64c`) |
+| Assignment | Trov handoff #6, claimed after Jose confirmed the rig work is active |
 | Log opened | 2026-10-17 14:47 UTC |
 | Operator | Megana (@megana111) |
 
@@ -32,16 +33,16 @@ Do not buy or cut tubing until the barb fit row says PRESENT.
 | # | Item | Acceptance check | Status | Checked by / time | Notes |
 | - | ---- | ---------------- | ------ | ----------------- | ----- |
 | 1 | Laptop and charger | Runs the repo; a USB data port works; sits outside the splash area | **PRESENT** | Megana (reported), 14:49 UTC
-| 2 | External USB webcam (C920s or equivalent) | macOS lists it; OpenCV opens it at an explicit device index; the full bin is sharp in frame | **NOT DETECTED** | Claude, 14:47 UTC | `system_profiler` listed only the built-in FaceTime camera and an iPhone Continuity Camera. Neither is the rig camera. Plug in the webcam and recheck. |
-| 3 | Webcam data cable and host adapter | Carries data, not charge only; matches the laptop's ports | UNCHECKED | | |
-| 4 | Rigid overhead mount | Clamp, tripod or support holding the whole bin in view; no hand-held camera; cable secured | UNCHECKED | | |
-| 5 | Pond Boss 80 GPH corded pump | Model label and manual read privately; cord intact; operating water depth noted; low-flow setting located | UNCHECKED | | Record the model and minimum depth only. No photos in Git. |
-| 6 | Pump's supplied outlet barb (3/8-inch) | The supplied adapter is in hand and matches 3/8-inch ID tube | UNCHECKED | | Resolve any mismatch before buying tube. |
-| 7 | About 3 ft of clear vinyl tube, 3/8-inch **inside** diameter | Push-fits the supplied barb with no forcing | UNCHECKED | | Buy or cut only after row 6 is PRESENT. |
-| 8 | Two small hose clamps, plus ties for the outlet | Seal the barb; fix the return outlet outside the tracked region | UNCHECKED | | Tape alone is not a seal. |
-| 9 | Watertight bin (Sterilite 6 qt or larger) | Interior measured; pump submerged at a stable waterline with overflow margin; collector fits | UNCHECKED | | 6 qt capacity does not guarantee depth or clearance. |
-| 10 | Mesh pocket (Top Fin breeder or a smaller secured pocket cut from its mesh) | Fits with clearance; holds a token for the full declared horizon | UNCHECKED | | Validate retention before treating it as absorbing. |
-| 11 | Three identical red floating tokens | Float; one clean red detection each; only one used per run; all recovered | UNCHECKED | | No red coral or other red objects in the scene. |
+| 2 | External USB webcam: Logitech C270 (team's verified camera, native 1280 × 720) | macOS lists it; OpenCV opens it at an explicit device index; the full bin is sharp in frame | **PRESENT** | Megana + Claude, 22:53 UTC | Enumerated by macOS as "C270 HD WEBCAM" via a USB 3.1/2.1 hub (listed without opening it). Still to confirm in the app: its OpenCV device index (likely not 0 here, because the built-in FaceTime camera is also present) and a sharp full-bin image from the mount. |
+| 3 | Webcam data cable and host adapter | Carries data, not charge only; matches the laptop's ports | **PRESENT** | Megana + Claude, 22:54 UTC | Cable and hub carry data: the C270 enumerates through them. |
+| 4 | Rigid overhead mount | Clamp, tripod or support holding the whole bin in view; no hand-held camera; cable secured | **PRESENT** | Megana (reported), 22:54 UTC | Rigid mount in hand. Still to confirm once mounted: the whole bin is in frame, looking straight down. |
+| 5 | Pond Boss 80 GPH corded pump | Model label and manual read privately; cord intact; operating water depth noted; low-flow setting located | **PRESENT** | Megana (reported), 22:55 UTC | Pump in hand, cord intact, label read privately. Still to record: model and manual's minimum operating depth (section 2). No photos in Git. |
+| 6 | Pump's supplied outlet barb (3/8-inch) | The supplied adapter is in hand and matches 3/8-inch ID tube | **PRESENT** | Megana (reported), 22:55 UTC | Supplied 3/8-inch barb in hand and fits the pump outlet. Tubing may now be bought or cut. |
+| 7 | About 3 ft of clear vinyl tube, 3/8-inch **inside** diameter | Push-fits the supplied barb with no forcing | **PRESENT** | Megana (reported), 22:56 UTC | 3/8-inch ID tube in hand; push-fits the supplied barb snugly. |
+| 8 | Two small hose clamps, plus ties for the outlet | Seal the barb; fix the return outlet outside the tracked region | **NOT USED (operator decision)** | Megana, 22:56 UTC | Operator judged the snug push-fit sufficient without hose clamps. Risk accepted: check for leaks at the barb during the first wet run. The return outlet still needs a fixed, marked position (clip, tie or weight outside the tracked region); method recorded in section 2. |
+| 9 | Watertight bin (Sterilite 6 qt or larger) | Interior measured; pump submerged at a stable waterline with overflow margin; collector fits | **PRESENT** | Megana (reported), 22:57 UTC | Watertight; pump fits submerged with overflow margin. Interior dimensions to be recorded in section 2. |
+| 10 | Mesh pocket (Top Fin breeder or a smaller secured pocket cut from its mesh) | Fits with clearance; holds a token for the full declared horizon | **PRESENT** | Megana (reported), 22:57 UTC | Fits with the pump, leaves open water, and can be fixed in place. Token retention over the full horizon is not yet tested. |
+| 11 | Three identical red floating tokens | Float; one clean red detection each; only one used per run; all recovered | **FIT-FAILED** | Megana + Claude, 22:58 UTC | Team has green bottle caps. The tracker detects red only: tracking.py detect_red uses fixed red HSV ranges, and recording calls it from runtime.py. Green caps would never be detected. Resolve by making the caps red (tape, paint or sticker on top) or by a coordinated colour change with Jose. |
 | 12 | Ruler or tape measure | Centimetre scale | UNCHECKED | | |
 | 13 | Seven water-plane reference marks | At least 4 mapping marks and 3 **different** check marks at the water-surface height (not the bin floor) | UNCHECKED | | |
 | 14 | Stable lighting, tray and towels, dry protected mains outlet | Tracking stable under room or desk light; electronics dry; GFCI outlet; pump unplugged before touching wet parts | UNCHECKED | | |
@@ -160,10 +161,16 @@ capture origin is `SYNTHETIC_FAKE_CAPTURE` is never physical evidence.
 
 ## 6. Current blockers
 
-1. **External USB webcam not detected** (14:47 UTC): no camera session can start.
-2. **Inventory rows 1 and 3–14 are unchecked.** The barb and tube fit (rows 6–7)
-   and the bin, pump and mesh clearance (rows 9–10) gate any wet work.
-3. **No measurements yet** (section 2). Mapping, drift, profiles and receipts
-   depend on them.
-4. **Second layout:** the intervention collector position must be declared and
-   marked before its drift is recorded.
+1. **Token colour (blocking all tracking).** The team only has green bottle caps, but
+   the tracker detects red only. `detect_red` in `apps/vision/reeftrace_vision/tracking.py`
+   uses fixed red HSV ranges, and recording calls it from `runtime.py`. Offline check
+   (synthetic image, no camera): a red disc gives 1 detection; green discs at HSV
+   (60,204,200) and (63,213,120) give 0. Needed: a coordinated, configurable token colour
+   (vision change plus a Jose-owned `runtime.py` change), tuned from the real cap under
+   rig lighting. Integration request pending with Jose.
+2. **Inventory rows 12–14 not yet checked.**
+3. **No measurements yet** (section 2). Mapping, drift, profiles and receipts depend on them.
+4. **Second layout:** the intervention collector position must be declared and marked
+   before its drift is recorded.
+5. **Clamps not used** (operator decision): leak check at the barb and a fixed outlet
+   position are still required.
