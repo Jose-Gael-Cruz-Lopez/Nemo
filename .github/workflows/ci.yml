@@ -30,7 +30,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      REEFTRACE_DATA_DIR: ${{ runner.temp }}/reeftrace-ci-data
       REEFTRACE_LOCAL_TOKEN: ci-local-test-only
       PYTHONNOUSERSITE: "1"
       PYTHONUNBUFFERED: "1"
@@ -55,6 +54,8 @@ jobs:
       - name: Lint Python
         run: python -m ruff check apps adapters scripts tests
       - name: Run the full offline Python suite
+        env:
+          REEFTRACE_DATA_DIR: ${{ runner.temp }}/reeftrace-ci-data
         run: python -m pytest -q --strict-config --strict-markers -ra
       - name: Replay the pinned real NOAA fixture
         run: python scripts/evaluate_real_data.py --output "${RUNNER_TEMP}/reeftrace-real-data.json"
