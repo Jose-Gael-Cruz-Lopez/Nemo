@@ -247,13 +247,37 @@ def _profiles(payload):
     return drift_ids, drift_sessions
 
 
+def _numerical_difference(actual, frozen, path="numerical_report"):
+    """Locate the first replay mismatch without hiding changed identities or counts."""
+    if type(actual) is not type(frozen):
+        return f"{path}: {type(actual).__name__} != {type(frozen).__name__}"
+    if isinstance(actual, dict):
+        if actual.keys() != frozen.keys():
+            return f"{path}: keys differ"
+        for key in actual:
+            difference = _numerical_difference(actual[key], frozen[key], f"{path}.{key}")
+            if difference:
+                return difference
+    elif isinstance(actual, list):
+        if len(actual) != len(frozen):
+            return f"{path}: lengths differ"
+        for index, (a, b) in enumerate(zip(actual, frozen, strict=True)):
+            difference = _numerical_difference(a, b, f"{path}[{index}]")
+            if difference:
+                return difference
+    elif canonical_json(actual) != canonical_json(frozen):
+        return f"{path}: replay={actual!r}, frozen={frozen!r}"
+    return None
+
+
 def _replay_numerical(comparison, profiles):
     # Reuse the frozen numerical engine; do not derive metrics from illustration paths.
     report = comparison["numerical_report"]
     replay = compare_layouts(profiles["baseline"], profiles["intervention"],
                              comparison["protected_zone_cm"], horizon_s=comparison["horizon_s"],
                              particles=comparison["particles"], seed=report["seed"])
-    _require(canonical_json(replay) == canonical_json(report), "Stale/tampered numerical report or incompatible profiles")
+    difference = _numerical_difference(replay, report)
+    _require(difference is None, f"Stale/tampered numerical report or incompatible profiles: {difference}")
 
 
 def _protocols(payload, development_id, validation_id, drift_ids, drift_sessions):
