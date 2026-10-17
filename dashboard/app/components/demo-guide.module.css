@@ -5,6 +5,8 @@
 .step > svg { color: #2381aa; }
 .index { position: absolute; right: 24px; top: 23px; color: #9ab9ce; font-size: 13px; }
 .step button { width: 100%; justify-content: space-between; }
+/* The shared #b4d5e8 ring is 1.37:1 on this card; this one is 5.43:1 (WCAG 2.2 needs 3:1). */
+.step button:focus-visible { outline: 3px solid #1d6890; outline-offset: 3px; }
 @media(max-width:1000px) { .guide { grid-template-columns: 1fr; } .step { gap: 10px; padding: 21px; } }
 
 .investigations { display: grid; grid-template-columns: minmax(0,1fr); gap: 20px; }
