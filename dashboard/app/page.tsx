@@ -7,15 +7,17 @@ import { Icon, type IconName } from "./components/icons";
 import { SourceMap, type SourceProfile } from "./components/source-map";
 import { RealDataLab } from "./components/real-data-lab";
 import { ReefBriefing } from "./components/reef-briefing";
+import { canReloadSourceEvidence, currentSourceEvidence } from "./components/evidence-state";
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
 type View = "overview" | "investigations" | "camera" | "data" | "settings";
 type Case = { id: string; profile_id: string; mode: string; state: string; evidence_id: string | null; points: { x_cm: number; y_cm: number }[]; endpoint?: { x_cm: number; y_cm: number; retained: boolean } | null };
-type Evidence = { id: string; status: string; relative_support: Record<string, number>; reason_codes?: string[]; inference_mode?: string; [key: string]: unknown };
-type Readiness = { ready: boolean; connection_verified: boolean; reasons: string[] };
+type Evidence = { id: string; case_id: string; status: string; relative_support: Record<string, number>; reason_codes?: string[]; inference_mode?: string; [key: string]: unknown };
+type Readiness = { enabled?: boolean; ready: boolean; connection_verified: boolean; reasons: string[] };
 type Status = { camera: { fresh: boolean; running: boolean; session_id: string | null; width: number | null; height: number | null }; chalk: Readiness; photon: Readiness; operator_configured: boolean };
 type Investigation = { action: string; explanation: string; live_model_response?: boolean; evidence_ids: string[]; source_report?: Evidence; trace?: unknown[] };
 type ManualAction = { id: string; case_id: string; evidence_id: string; state: string; expires_at: number; created_at: number; outcome?: { outcome: string; recovered_count: number; note: string } };
+type Sensitivity = { parent_estimate_id: string; [key: string]: unknown };
 const VIEWS: { id: View; label: string; icon: IconName }[] = [
   { id: "overview", label: "Overview", icon: "overview" },
   { id: "investigations", label: "Investigations", icon: "cases" },
@@ -29,14 +31,23 @@ function Pill({ children, tone = "neutral" }: { children: ReactNode; tone?: stri
 }
 function caseKind(item: Case) { return item.endpoint ? "Retained endpoint" : "Observed trajectory"; }
 function readableReason(reason: string) { return reason.toLowerCase().replaceAll("_", " "); }
+function configurationLabel(provider: "chalk" | "photon", readiness?: Readiness) {
+  if (!readiness) return "Checking configuration";
+  if (readiness.enabled === false || readiness.reasons.includes("disabled")) {
+    return provider === "photon" ? "Automatic replies off" : "Investigator disabled";
+  }
+  return readiness.ready ? "Configured" : "Configuration incomplete";
+}
 function errorMessage(cause: unknown) { return cause instanceof Error ? cause.message : String(cause); }
 function isAbort(cause: unknown) { return cause instanceof DOMException && cause.name === "AbortError"; }
 type RequestOptions = { signal?: AbortSignal; independent?: boolean };
-type CompletionNotice = { message: string; tone: "success" | "info" };
+type EvidenceScope = { id: string; case_id: string };
+type CompletionNotice = { message: string; tone: "success" | "info"; scope?: EvidenceScope };
 function investigationNotice(result: Investigation): CompletionNotice {
-  return result.live_model_response
+  const completion: CompletionNotice = result.live_model_response
     ? { message: "Chalk returned a live model investigation. Review its explanation and tool trace below.", tone: "success" }
     : { message: "Chalk did not run a live model. Review its connection status below; saved source evidence remains available.", tone: "info" };
+  return { ...completion, ...(result.source_report ? { scope: { id: result.source_report.id, case_id: result.source_report.case_id } } : {}) };
 }
 class ApiError extends Error {
   constructor(message: string, readonly status: number) { super(message); this.name = "ApiError"; }
@@ -60,7 +71,13 @@ function parseRequestJson(text: string, label: string): Record<string, unknown> 
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`${label} must be a JSON object enclosed in braces, with the fields shown in the API reference.`);
   return value as Record<string, unknown>;
 }
-function SourceReport({ evidence }: { evidence: Evidence | null }) {
+function SourceReport({ evidence, expectedEvidenceId, readError, reloadDisabled, onReload }: {
+  evidence: Evidence | null;
+  expectedEvidenceId?: string | null;
+  readError: string;
+  reloadDisabled: boolean;
+  onReload: () => void;
+}) {
   return <aside className="evidence-panel" aria-live="polite">
     <div className="evidence-heading"><h3>Source support</h3>{evidence && <Pill tone={evidence.status === "ranked" ? "purple" : evidence.status === "unknown" ? "amber" : "red"}>{evidence.status === "unknown" ? "Unknown" : evidence.status === "ranked" ? "Ranked" : "Invalid"}</Pill>}</div>
     {evidence ? <>
@@ -71,7 +88,7 @@ function SourceReport({ evidence }: { evidence: Evidence | null }) {
       {evidence.reason_codes?.length ? <ul className="reason-list">{evidence.reason_codes.map(reason => <li key={reason}>{readableReason(reason)}</li>)}</ul> : <p className="card-subtitle">Based on the saved observation and frozen transport model.</p>}
       <p className="settings-note">These values are not geographic probabilities.</p>
       <code className="evidence-id">{evidence.id}</code>
-    </> : <div className="empty-state"><Icon name="file" /><p>No report yet</p><span>Compute source support to compare this observation with the candidate sources.</span></div>}
+    </> : readError ? <div className="empty-state"><Icon name="help" /><p>Saved report could not be loaded</p><span role="alert">{readError}</span><button className="secondary-button" disabled={reloadDisabled} onClick={onReload}>Reload source report</button></div> : expectedEvidenceId ? <div className="empty-state" role="status"><Icon name="clock" /><p>Loading saved source report…</p><span>Reading the current evidence for this observation.</span></div> : <div className="empty-state"><Icon name="file" /><p>No report yet</p><span>Compute source support to compare this observation with the candidate sources.</span></div>}
   </aside>;
 }
 
@@ -83,12 +100,13 @@ export default function Home() {
   const [profiles, setProfiles] = useState<SourceProfile[]>([]);
   const [cases, setCases] = useState<Case[]>([]);
   const [selected, setSelected] = useState("");
-  const [evidence, setEvidence] = useState<Evidence | null>(null);
-  const [answer, setAnswer] = useState<Investigation | null>(null);
+  const [loadedEvidence, setLoadedEvidence] = useState<Evidence | null>(null);
+  const [answerResult, setAnswer] = useState<Investigation | null>(null);
   const [question, setQuestion] = useState("Which candidate sources fit this evidence, and what remains uncertain?");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [noticeTone, setNoticeTone] = useState<"success" | "info">("success");
+  const [noticeScope, setNoticeScope] = useState<EvidenceScope | null>(null);
   const [connectionError, setConnectionError] = useState("");
   const [observationType, setObservationType] = useState("trajectory");
   const [busy, setBusy] = useState("");
@@ -100,7 +118,7 @@ export default function Home() {
   const [calibrationId, setCalibrationId] = useState("");
   const [flowJson, setFlowJson] = useState("");
   const [setupResult, setSetupResult] = useState<unknown>(null);
-  const [analysis, setAnalysis] = useState<unknown>(null);
+  const [analysisResult, setAnalysis] = useState<Sensitivity | null>(null);
   const [actionId, setActionId] = useState("");
   const [actionState, setActionState] = useState("");
   const [caseActions, setCaseActions] = useState<ManualAction[]>([]);
@@ -119,6 +137,30 @@ export default function Home() {
   const stoppingRef = useRef(false);
   const refreshRun = useRef(0);
   const selectedRef = useRef("");
+  const evidenceReadRun = useRef(0);
+  const evidenceRetryPending = useRef(false);
+  const [evidenceReadAttempt, setEvidenceReadAttempt] = useState(0);
+  const [evidenceReadFailure, setEvidenceReadFailure] = useState<(EvidenceScope & { message: string }) | null>(null);
+  const activeCase = cases.find(item => item.id === selected);
+  const selectedEvidenceId = activeCase?.evidence_id;
+  const evidence = currentSourceEvidence(loadedEvidence, selected, selectedEvidenceId);
+  const answer = evidence && currentSourceEvidence(answerResult?.source_report, selected, selectedEvidenceId) ? answerResult : null;
+  const analysis = evidence && analysisResult?.parent_estimate_id === evidence.id ? analysisResult : null;
+  const sourceReadError = currentSourceEvidence(evidenceReadFailure, selected, selectedEvidenceId)?.message ?? "";
+  const visibleNotice = !noticeScope || currentSourceEvidence(noticeScope, selected, selectedEvidenceId) ? notice : "";
+
+  function setEvidence(value: Evidence | null) {
+    ++evidenceReadRun.current;
+    evidenceRetryPending.current = false;
+    setLoadedEvidence(value); setAnswer(null); setAnalysis(null); setEvidenceReadFailure(null);
+  }
+  function reloadSourceReport() {
+    if (actionController.current || stoppingRef.current
+      || !canReloadSourceEvidence(evidenceReadFailure, selected, selectedEvidenceId, evidenceRetryPending.current)) return;
+    evidenceRetryPending.current = true;
+    setEvidenceReadFailure(null);
+    setEvidenceReadAttempt(attempt => attempt + 1);
+  }
 
   function navigate(nextView: View) {
     setView(nextView);
@@ -157,8 +199,10 @@ export default function Home() {
   const refresh = useCallback(async (signal?: AbortSignal) => {
     const run = ++refreshRun.current;
     const [nextStatus, nextProfiles, nextCases] = await Promise.all([request<Status>("/status", undefined, { signal }), request<SourceProfile[]>("/profiles", undefined, { signal }), request<Case[]>("/cases", undefined, { signal })]);
-    if (signal?.aborted || run !== refreshRun.current) return;
+    if (signal?.aborted) return;
+    if (run !== refreshRun.current) return nextCases;
     setStatus(nextStatus); setProfiles(nextProfiles); setCases(nextCases); setConnectionError("");
+    return nextCases;
   }, [request]);
   useEffect(() => {
     const controller = new AbortController();
@@ -173,11 +217,24 @@ export default function Home() {
   }, [refresh]);
   useEffect(() => {
     const controller = new AbortController();
-    if (selected) request<Evidence>(`/cases/${encodeURIComponent(selected)}/evidence`, undefined, { signal: controller.signal }).then(result => { if (!controller.signal.aborted && selectedRef.current === selected) setEvidence(result); }).catch(cause => {
-      if (!controller.signal.aborted && !(cause instanceof ApiError && cause.status === 404)) setError(errorMessage(cause));
+    const run = ++evidenceReadRun.current;
+    if (selected && selectedEvidenceId) evidenceRetryPending.current = true;
+    if (selected && selectedEvidenceId) request<Evidence>(`/cases/${encodeURIComponent(selected)}/evidence`, undefined, { signal: controller.signal }).then(result => {
+      const accepted = currentSourceEvidence(result, selected, selectedEvidenceId);
+      if (!controller.signal.aborted && selectedRef.current === selected && run === evidenceReadRun.current) {
+        if (accepted) {
+          setLoadedEvidence(accepted); setEvidenceReadFailure(null);
+          setAnswer(previous => currentSourceEvidence(previous?.source_report, selected, selectedEvidenceId) ? previous : null);
+          setAnalysis(previous => previous?.parent_estimate_id === selectedEvidenceId ? previous : null);
+        } else setEvidenceReadFailure({ case_id: selected, id: selectedEvidenceId, message: "The saved report changed while loading. Reload the current source report." });
+      }
+    }).catch(cause => {
+      if (!controller.signal.aborted && selectedRef.current === selected && run === evidenceReadRun.current) setEvidenceReadFailure({ case_id: selected, id: selectedEvidenceId, message: errorMessage(cause) });
+    }).finally(() => {
+      if (run === evidenceReadRun.current) evidenceRetryPending.current = false;
     });
     return () => controller.abort();
-  }, [selected, request]);
+  }, [selected, selectedEvidenceId, request, evidenceReadAttempt]);
   useEffect(() => {
     if (!selected || busy || stopping) return;
     const controller = new AbortController();
@@ -230,12 +287,16 @@ export default function Home() {
     const run = ++actionRun.current;
     const controller = new AbortController();
     actionController.current = controller;
-    setBusy(name); setTaskCaseId(caseId); setError(""); setNotice("");
+    setBusy(name); setTaskCaseId(caseId); setError(""); setNotice(""); setNoticeScope(null);
     try {
       const completion = await job();
       if (run !== actionRun.current || controller.signal.aborted) return;
-      await refresh(controller.signal).catch(cause => { if (!controller.signal.aborted) setConnectionError(errorMessage(cause)); });
-      if (run === actionRun.current) { setNoticeTone(completion?.tone ?? "success"); setNotice(completion?.message ?? `${name} complete.`); }
+      const refreshedCases = await refresh(controller.signal).catch(cause => { if (!controller.signal.aborted) setConnectionError(errorMessage(cause)); });
+      if (run === actionRun.current) {
+        const completedCase = (refreshedCases ?? cases).find(item => item.id === caseId);
+        setNoticeScope(completion?.scope ?? (completedCase?.evidence_id ? { case_id: caseId, id: completedCase.evidence_id } : null));
+        setNoticeTone(completion?.tone ?? "success"); setNotice(completion?.message ?? `${name} complete.`);
+      }
     }
     catch (cause) {
       if (run === actionRun.current && !isAbort(cause)) {
@@ -257,7 +318,6 @@ export default function Home() {
       }
     });
   }
-  const activeCase = cases.find(item => item.id === selected);
   const profile = profiles.find(item => item.id === activeCase?.profile_id);
   const filteredCases = cases.filter(item => `${item.id} ${item.mode} ${item.state} ${caseKind(item)}`.toLowerCase().includes(query.toLowerCase().trim()));
   const measuredProfiles = profiles.filter(item => item.data_origin === "MEASURED_TANK");
@@ -279,7 +339,7 @@ export default function Home() {
     try {
       await request(`/cases/${encodeURIComponent(caseId)}/stop`, {}, { independent: true, signal: AbortSignal.timeout(8000) });
       await refresh();
-      setNoticeTone("success"); setNotice("Software tasks stopped for this observation. The pump remains powered through its original cord.");
+      setNoticeScope(null); setNoticeTone("success"); setNotice("Software tasks stopped for this observation. The pump remains powered through its original cord.");
     } catch (cause) { setError(`Stop was not confirmed. ${errorMessage(cause)}`); }
     finally { stoppingRef.current = false; setStopping(false); setBusy(""); setTaskCaseId(""); }
   }
@@ -300,7 +360,7 @@ export default function Home() {
       <header className="topbar"><div className="breadcrumb"><span>Workspace</span><Icon name="chevron" /><strong>{currentView.label}</strong></div><div className="topbar-actions"><label className="search-field"><Icon name="search" /><span className="sr-only">Search observations</span><input ref={searchInput} type="search" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Enter") navigate("investigations"); }} placeholder="Find an observation…" /><kbd className="search-shortcut" aria-hidden="true">/</kbd></label><button className="icon-button" title="Operator access" aria-label="Open operator access" onClick={openOperator}><Icon name="key" /></button></div></header>
       <main id="workspace-main" className="page-content" tabIndex={-1} aria-busy={!!busy}>
         {connectionError && <div className="notice error" role="alert">Could not reach the local API. {connectionError}</div>}
-        {notice && <div className={`notice operation-notice ${noticeTone}`} role="status"><Icon name={noticeTone === "success" ? "check" : "help"} /><span>{notice}</span><button className="icon-button" aria-label="Dismiss notice" onClick={() => setNotice("")}><Icon name="close" /></button></div>}
+        {visibleNotice && <div className={`notice operation-notice ${noticeTone}`} role="status"><Icon name={noticeTone === "success" ? "check" : "help"} /><span>{visibleNotice}</span><button className="icon-button" aria-label="Dismiss notice" onClick={() => setNotice("")}><Icon name="close" /></button></div>}
         {error && <div className="notice error" role="alert">{error}<button className="icon-button" aria-label="Dismiss error" onClick={() => setError("")}><Icon name="close" /></button></div>}
         {busy && <div className="busy-notice" role="status"><span className="status-dot is-live" />{busy}…{taskCaseId && <button className="ghost-button" disabled={!token || stopping} onClick={() => void stopCase(taskCaseId)}>Stop task</button>}</div>}
 
@@ -311,7 +371,7 @@ export default function Home() {
             <section className="card"><div className="card-header"><div><h2 className="card-title">Recent observations</h2><p className="card-subtitle">Pick up an investigation.</p></div><button className="card-link" onClick={() => navigate("investigations")}>View all <Icon name="arrow" /></button></div><div className="observation-list">{filteredCases.length ? filteredCases.slice(0, 4).map(item => <button className="observation-row" key={item.id} disabled={!!busy} onClick={() => openCase(item.id)}><span className="observation-icon"><Icon name={item.endpoint ? "wave" : "cases"} /></span><span className="observation-copy"><span className="observation-title">{caseKind(item)}</span><span className="observation-meta">{item.id.slice(-8)} · {item.evidence_id ? "Report saved" : "Ready to compare"}</span></span><Pill tone={item.mode === "LIVE" ? "green" : "neutral"}>{item.mode === "SYNTHETIC" ? "Demo" : item.mode}</Pill><Icon name="chevron" /></button>) : <div className="empty-state"><Icon name="cases" /><p>{query ? "No matching observations" : "Your first observation starts here"}</p><span>{query ? "Try a case ID, mode, or observation type." : "Load the demo or record a calibrated camera observation."}</span></div>}</div></section>
             <section className="card"><div className="card-header"><div><h2 className="card-title">Ready to trace</h2><p className="card-subtitle">What your next experiment needs.</p></div><Icon name="check" /></div><div className="checklist"><div className="check-row"><span className={`check-icon ${token ? "complete" : ""}`}><Icon name="key" /></span><div className="check-copy"><span className="check-title">Operator access</span><span>{token ? "Token entered for this tab" : "Connect to run workspace actions"}</span></div><button className="card-link" onClick={openOperator}>{token ? "Manage" : "Connect"} <Icon name="arrow" /></button></div><div className="check-row"><span className={`check-icon ${status?.camera.fresh ? "complete" : ""}`}><Icon name="camera" /></span><div className="check-copy"><span className="check-title">USB camera</span><span>{status?.camera.fresh ? "Fresh frames are arriving" : "Connect your overhead webcam"}</span></div><button className="card-link" onClick={() => navigate("camera")}>Set up <Icon name="arrow" /></button></div><div className="check-row"><span className={`check-icon ${measuredProfiles.length ? "complete" : ""}`}><Icon name="wave" /></span><div className="check-copy"><span className="check-title">Measured tank profile</span><span>{measuredProfiles.length ? `${measuredProfiles.length} frozen profile${measuredProfiles.length === 1 ? "" : "s"}` : "Calibrate before a physical source trial"}</span></div><Pill tone={measuredProfiles.length ? "green" : "neutral"}>{measuredProfiles.length ? "Saved" : "Pending"}</Pill></div></div></section>
             <section className="card"><div className="card-header"><div><h2 className="card-title">Your workflow</h2><p className="card-subtitle">From an observation to an honest answer.</p></div></div><div className="card-body">{[{ title: "Observe", detail: "Record a path or retained endpoint.", target: "camera" }, { title: "Compare", detail: "Test candidate sources with measured flow.", target: "investigations" }, { title: "Investigate", detail: "Ask Chalk to explain the saved evidence.", target: "investigations" }].map((step, index) => <button className="workflow-step" key={step.title} onClick={() => navigate(step.target as View)}><span className="step-index">0{index + 1}</span><span><strong>{step.title}</strong><span>{step.detail}</span></span><Icon name="arrow" /></button>)}</div></section>
-            <section className="card"><div className="card-header"><div><h2 className="card-title">Connected tools</h2><p className="card-subtitle">One investigator. Two ways to reach it.</p></div><button className="card-link" onClick={() => navigate("settings")}>Manage <Icon name="arrow" /></button></div><div className="card-body">{(["chalk", "photon"] as const).map(provider => <div className="tool-row" key={provider}><span className={`tool-logo ${provider}`}>{provider === "chalk" ? "c" : <Icon name="agent" />}</span><div className="tool-description"><strong>{provider === "chalk" ? "Chalk" : "Photon"}</strong><span>{provider === "chalk" ? "Evidence investigator" : "Messaging channel"}</span></div><Pill tone={status?.[provider].ready ? "purple" : "neutral"}>{status?.[provider].ready ? "Configured" : "Not configured"}</Pill></div>)}<p className="settings-note">Configuration status is separate from a verified live connection.</p></div></section>
+            <section className="card"><div className="card-header"><div><h2 className="card-title">Connected tools</h2><p className="card-subtitle">One investigator. Two ways to reach it.</p></div><button className="card-link" onClick={() => navigate("settings")}>Manage <Icon name="arrow" /></button></div><div className="card-body">{(["chalk", "photon"] as const).map(provider => <div className="tool-row" key={provider}><span className={`tool-logo ${provider}`}>{provider === "chalk" ? "c" : <Icon name="agent" />}</span><div className="tool-description"><strong>{provider === "chalk" ? "Chalk" : "Photon"}</strong><span>{provider === "chalk" ? "Evidence investigator" : "Messaging channel"}</span></div><Pill tone={status?.[provider].ready ? "purple" : "neutral"}>{configurationLabel(provider, status?.[provider])}</Pill></div>)}<p className="settings-note">Configuration status is separate from a verified live connection.</p></div></section>
           </div>
           <div className="notice info"><Icon name="help" /><span>New here? The demo includes a ranked path, an ambiguous endpoint, and an invalid calibration.</span><button className="card-link" disabled={!!busy} onClick={loadDemo}>Try the demo <Icon name="arrow" /></button></div>
         </>}
@@ -321,7 +381,7 @@ export default function Home() {
           {!token && <div className="notice info"><Icon name="key" /><span>Connect operator access to compute source evidence or ask the investigator.</span><button className="card-link" onClick={openOperator}>Connect operator <Icon name="arrow" /></button></div>}
           <div className="case-layout"><section className="card case-list" aria-label="Saved cases"><div className="card-header"><h2 className="card-title">Observations</h2><Pill>{filteredCases.length}</Pill></div>{filteredCases.length ? filteredCases.map(item => <button className="case-item" key={item.id} aria-current={item.id === selected ? "true" : undefined} disabled={!!busy} onClick={() => selectCase(item.id)}><span><strong>{caseKind(item)}</strong><span>{item.id.slice(-8)}</span></span><Pill tone={item.mode === "LIVE" ? "green" : "neutral"}>{item.mode === "SYNTHETIC" ? "Demo" : item.mode}</Pill></button>) : <div className="empty-state"><p>{query ? "No matches" : "No observations yet"}</p><span>{query ? "Try another search." : "Load a demo to get started."}</span></div>}</section>
             <div className="case-detail">{activeCase ? <>
-              <section className="card"><div className="card-header case-detail-heading"><div><div className="case-meta"><Pill tone={activeCase.mode === "LIVE" ? "green" : "purple"}>{activeCase.mode}</Pill><span>{activeCase.id}</span></div><h2>{caseKind(activeCase)}</h2></div><Pill>{activeCase.state.replaceAll("_", " ").toLowerCase()}</Pill></div><div className="report-grid"><div><SourceMap profile={profile} points={activeCase.points} endpoint={activeCase.endpoint} /><div className="map-legend"><span><i className="legend-dot purple" />Observed debris</span><span><i className="legend-dot green" />Retention pocket</span><span>Regions {profile?.sources.map(source => source.id).join(" · ") || "not loaded"}</span></div></div><SourceReport evidence={evidence} /></div><div className="action-bar"><button className="primary-button" title={caseStopped ? "This case is stopped. Load a new observation to compute." : !token ? "Connect operator access first" : busy ? "Wait for the current task or stop it" : "Compare the saved observation with its frozen source model"} disabled={locked || caseStopped} onClick={() => void performCase("Comparing candidate sources", async () => setEvidence(await request(`/cases/${encodeURIComponent(selected)}/estimate`, {})))}><Icon name="play" />Compute source support</button><button className="secondary-button" title={!evidence ? "Compute source support first" : caseStopped ? "This case is stopped" : "Compare the predeclared transport assumptions"} disabled={locked || !evidence || caseStopped} onClick={() => void performCase("Testing transport sensitivity", async () => setAnalysis(await request(`/cases/${encodeURIComponent(selected)}/sensitivity`, { preset_id: "predeclared-transport-envelope-v1" })))}>Test sensitivity</button><button className="danger-button" disabled={!token || stopping || caseStopped} onClick={() => void stopCase()}><Icon name="stop" />Stop task</button></div><p className="settings-note card-body">{caseStopped ? "This observation is stopped. Load a new demo or camera observation to start another investigation. " : ""}Stop ends software tasks for this case. The circulation pump stays on its original wall cord.</p>{analysis != null && <details className="details-panel" open><summary>Sensitivity evidence</summary><pre className="code-block">{JSON.stringify(analysis, null, 2)}</pre></details>}{evidence && <details className="details-panel"><summary>Full immutable source report</summary><pre className="code-block">{JSON.stringify(evidence, null, 2)}</pre></details>}</section>
+              <section className="card"><div className="card-header case-detail-heading"><div><div className="case-meta"><Pill tone={activeCase.mode === "LIVE" ? "green" : "purple"}>{activeCase.mode}</Pill><span>{activeCase.id}</span></div><h2>{caseKind(activeCase)}</h2></div><Pill>{activeCase.state.replaceAll("_", " ").toLowerCase()}</Pill></div><div className="report-grid"><div><SourceMap profile={profile} points={activeCase.points} endpoint={activeCase.endpoint} /><div className="map-legend"><span><i className="legend-dot purple" />Observed debris</span><span><i className="legend-dot green" />Retention pocket</span><span>Regions {profile?.sources.map(source => source.id).join(" · ") || "not loaded"}</span></div></div><SourceReport evidence={evidence} expectedEvidenceId={selectedEvidenceId} readError={sourceReadError} reloadDisabled={!!busy || stopping} onReload={reloadSourceReport} /></div><div className="action-bar"><button className="primary-button" title={caseStopped ? "This case is stopped. Load a new observation to compute." : !token ? "Connect operator access first" : busy ? "Wait for the current task or stop it" : "Compare the saved observation with its frozen source model"} disabled={locked || caseStopped} onClick={() => void performCase("Comparing candidate sources", async () => setEvidence(await request(`/cases/${encodeURIComponent(selected)}/estimate`, {})))}><Icon name="play" />Compute source support</button><button className="secondary-button" title={!evidence ? "Compute source support first" : caseStopped ? "This case is stopped" : "Compare the predeclared transport assumptions"} disabled={locked || !evidence || caseStopped} onClick={() => void performCase("Testing transport sensitivity", async () => setAnalysis(await request(`/cases/${encodeURIComponent(selected)}/sensitivity`, { preset_id: "predeclared-transport-envelope-v1" })))}>Test sensitivity</button><button className="danger-button" disabled={!token || stopping || caseStopped} onClick={() => void stopCase()}><Icon name="stop" />Stop task</button></div><p className="settings-note card-body">{caseStopped ? "This observation is stopped. Load a new demo or camera observation to start another investigation. " : ""}Stop ends software tasks for this case. The circulation pump stays on its original wall cord.</p>{analysis != null && <details className="details-panel" open><summary>Sensitivity evidence</summary><pre className="code-block">{JSON.stringify(analysis, null, 2)}</pre></details>}{evidence && <details className="details-panel"><summary>Full immutable source report</summary><pre className="code-block">{JSON.stringify(evidence, null, 2)}</pre></details>}</section>
               <section className="card agent-card"><div className="card-header"><div><h2 className="card-title">Ask the investigator</h2><p className="card-subtitle">Chalk explains the same saved evidence used by Photon.</p></div><span className="tool-logo chalk">c</span></div><div className="card-body"><label className="question-field"><span className="sr-only">Investigation question</span><textarea value={question} onChange={event => setQuestion(event.target.value)} maxLength={4000} rows={2} /></label><div className="action-bar"><button className="primary-button" title={!evidence ? "Compute source support first" : !question.trim() ? "Enter a question" : caseStopped ? "This case is stopped" : "Ask the case-bound Chalk investigator"} disabled={locked || !evidence || !question.trim() || caseStopped} onClick={() => void performCase("Investigating through Chalk", async () => { const result = await request<Investigation>(`/cases/${encodeURIComponent(selected)}/investigate`, { text: question.trim() }); setAnswer(result); return investigationNotice(result); })}><Icon name="agent" />Ask Chalk</button><button className="card-link" onClick={() => navigate("settings")}>Channel settings <Icon name="arrow" /></button></div>{!status?.chalk.ready && <p className="settings-note">Chalk is not configured yet. Asking will show its connection status; source evidence stays available. Set the server credentials in Settings to enable a live model.</p>}{answer && <div className="answer" aria-live="polite"><Pill tone={answer.action === "STOP" ? "amber" : "purple"}>{answer.action === "STOP" && !answer.live_model_response ? "No live model response" : answer.action}</Pill><p>{answer.explanation}</p><p className="settings-note">Live model response: {answer.live_model_response ? "yes" : "no"} · Evidence: {answer.evidence_ids.join(", ") || "none"}</p><details className="details-panel"><summary>Tool trace</summary><pre className="code-block">{JSON.stringify(answer.trace, null, 2)}</pre></details></div>}</div></section>
               <ReefBriefing api={API} caseId={activeCase.id} evidenceId={evidence?.id} operatorToken={token} stopped={caseStopped} />
               {activeCase.mode === "LIVE" && evidence && <section className="card"><div className="card-header"><h2 className="card-title">Manual recovery</h2><Pill>Human task</Pill></div><div className="card-body">
@@ -351,12 +411,12 @@ export default function Home() {
         {view === "settings" && <>
           <div className="page-heading"><div><h1>Workspace settings</h1><p className="page-description">Operator access and the tools behind your investigations.</p></div></div>
           <section className="card"><div className="card-header"><div><h2 className="card-title">Operator access</h2><p className="card-subtitle">Required to load demos, record, or compute a new report.</p></div><Pill tone={token ? "purple" : "neutral"}>{token ? "Token entered" : "Not connected"}</Pill></div><div className="card-body setting-row"><p className="settings-note">The local token stays in memory in this browser tab.</p><button className="secondary-button" onClick={openOperator}><Icon name="key" />{token ? "Manage access" : "Connect operator"}</button></div></section>
-          <div className="settings-grid">{(["chalk", "photon"] as const).map(provider => <section className="card integration-card" key={provider}><div className="card-header"><div className="integration-heading"><span className={`tool-logo ${provider}`}>{provider === "chalk" ? "c" : <Icon name="agent" />}</span><h2 className="card-title">{provider === "chalk" ? "Chalk" : "Photon"}</h2></div><Pill tone={status?.[provider].ready ? "purple" : "neutral"}>{status?.[provider].ready ? "Configured" : "Not configured"}</Pill></div><div className="card-body"><p>{provider === "chalk" ? "A bounded investigator that reads source reports, tests sensitivity, and explains the evidence." : "The same case-bound investigator, available in your prepared direct messaging conversation."}</p><div className="integration-state"><span>Live connection verified</span><strong>{status?.[provider].connection_verified ? "Yes" : "Not verified"}</strong></div><div className="integration-reasons">{status?.[provider].reasons?.map(reason => <Pill key={reason}>{readableReason(reason)}</Pill>)}</div><p className="settings-note">{provider === "chalk" ? "Set the gateway key, environment, and model in the server’s .env." : "Set your key, project, and allowlisted route in the server’s .env."} Restart the API after changes. See docs/integrations.md for setup.</p></div></section>)}</div>
+          <div className="settings-grid">{(["chalk", "photon"] as const).map(provider => <section className="card integration-card" key={provider}><div className="card-header"><div className="integration-heading"><span className={`tool-logo ${provider}`}>{provider === "chalk" ? "c" : <Icon name="agent" />}</span><h2 className="card-title">{provider === "chalk" ? "Chalk" : "Photon"}</h2></div><Pill tone={status?.[provider].ready ? "purple" : "neutral"}>{configurationLabel(provider, status?.[provider])}</Pill></div><div className="card-body"><p>{provider === "chalk" ? "A bounded investigator that reads source reports, tests sensitivity, and explains the evidence." : "A prepared messaging channel for the same case-bound investigator. Reply state is shown below."}</p><div className="integration-state"><span>Configuration check</span><strong>{configurationLabel(provider, status?.[provider])}</strong></div><div className="integration-reasons">{status?.[provider].reasons?.map(reason => <Pill key={reason}>{readableReason(reason)}</Pill>)}</div><p className="settings-note">{provider === "chalk" ? "This checks configuration only. A completed investigation's live model response and tool trace are the evidence for that request. Credentials stay in the server's .env." : "This checks configuration only; it does not test phone pairing or message delivery. Disabled means automatic replies are off. Keys and routes stay on the server."}</p></div></section>)}</div>
           <section className="card"><div className="card-header"><h2 className="card-title">About this workspace</h2><Pill>Local prototype</Pill></div><div className="card-body"><div className="setting-row"><span>Collection method</span><strong>Manual recovery</strong></div><div className="setting-row"><span>Hardware actuation</span><strong>None</strong></div><p className="settings-note">Synthetic cases test the software. Real source attribution requires calibrated tank measurements and held-out physical trials.</p></div></section>
         </>}
         <footer className="workspace-footer"><span>ReefTrace · Source tracing first</span><span>Demo data is not physical validation.</span></footer>
       </main>
     </div>
-    <dialog ref={operatorDialog} className="operator-dialog" aria-labelledby="operator-title" onClick={event => { if (event.target === event.currentTarget) operatorDialog.current?.close(); }}><div className="dialog-header"><h2 id="operator-title">Connect operator</h2><button className="icon-button" aria-label="Close operator access" onClick={() => operatorDialog.current?.close()}><Icon name="close" /></button></div><p className="dialog-help">Find <code>REEFTRACE_LOCAL_TOKEN</code> in your local <code>reeftrace/.env</code>. Enter it here to run workspace actions.</p><form method="dialog" onSubmit={() => { setToken(tokenDraft.trim()); setNoticeTone("info"); setNotice(tokenDraft.trim() ? "Operator token entered for this browser tab. Actions will verify it with the API." : "Operator access cleared for this tab."); }}><label>Local operator token<input type="password" autoComplete="off" value={tokenDraft} onChange={event => setTokenDraft(event.target.value)} disabled={!!busy} placeholder="Enter your local token" /></label><p className="settings-note">Stored only in this tab’s memory. Sponsor keys stay on the server.</p><div className="dialog-actions">{tokenDraft && <button type="button" className="ghost-button" disabled={!!busy} onClick={() => setTokenDraft("")}>Clear token</button>}<button className="primary-button" type="submit" disabled={!!busy}>Done</button></div></form></dialog>
+    <dialog ref={operatorDialog} className="operator-dialog" aria-labelledby="operator-title" onClick={event => { if (event.target === event.currentTarget) operatorDialog.current?.close(); }}><div className="dialog-header"><h2 id="operator-title">Connect operator</h2><button className="icon-button" aria-label="Close operator access" onClick={() => operatorDialog.current?.close()}><Icon name="close" /></button></div><p className="dialog-help">Find <code>REEFTRACE_LOCAL_TOKEN</code> in your local <code>reeftrace/.env</code>. Enter it here to run workspace actions.</p><form method="dialog" onSubmit={() => { setToken(tokenDraft.trim()); setNoticeScope(null); setNoticeTone("info"); setNotice(tokenDraft.trim() ? "Operator token entered for this browser tab. Actions will verify it with the API." : "Operator access cleared for this tab."); }}><label>Local operator token<input type="password" autoComplete="off" value={tokenDraft} onChange={event => setTokenDraft(event.target.value)} disabled={!!busy} placeholder="Enter your local token" /></label><p className="settings-note">Stored only in this tab’s memory. Sponsor keys stay on the server.</p><div className="dialog-actions">{tokenDraft && <button type="button" className="ghost-button" disabled={!!busy} onClick={() => setTokenDraft("")}>Clear token</button>}<button className="primary-button" type="submit" disabled={!!busy}>Done</button></div></form></dialog>
   </div>;
 }

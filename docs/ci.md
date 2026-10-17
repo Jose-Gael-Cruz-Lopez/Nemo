@@ -1,6 +1,6 @@
 # GitHub checks
 
-The workflow at [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs on every `push` and `pull_request`. It has two independent jobs on GitHub-hosted Ubuntu: **Python tests and scientific replay**, and **Dashboard lint, types and production build**. A newer run cancels an older run for the same workflow/event/ref. There is no deployment, message sending, hardware access or live provider evaluation.
+The workflow at [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs on every `push` and `pull_request`. It has two independent jobs on GitHub-hosted Ubuntu: **Python tests and scientific replay**, and **Dashboard tests, lint, types and production build**. A newer run cancels an older run for the same workflow/event/ref. There is no deployment, message sending, hardware access or live provider evaluation.
 
 The workflow needs only GitHub's built-in `contents: read` permission. Checkout does not retain Git credentials, and no repository/account secrets are referenced. Official checkout/setup actions are pinned to inspected immutable commit SHAs, with their release versions in comments. Update a pin only after checking its official release and commit. [GitHub's concurrency documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency) describes the cancellation rule; [setup-node](https://github.com/actions/setup-node) and [setup-python](https://github.com/actions/setup-python) document dependency caching.
 
@@ -31,13 +31,14 @@ Use a source copy without private `.env` settings when reproducing clean CI. Ful
 
 ## Dashboard job
 
-Node.js 24 installs the committed `dashboard/package-lock.json` with `npm ci`, then runs ESLint, generates Next.js route types, checks TypeScript and builds production output. The npm download cache is keyed from the lockfile; `node_modules` and `.next` are not shared between runs. No frontend step requires a running API or a provider key.
+Node.js 24 installs the committed `dashboard/package-lock.json` with `npm ci`, then runs the evidence-freshness regressions, ESLint, Next.js route type generation, TypeScript and the production build. The six regressions use Node's built-in test runner and cover case/evidence identity changes and delayed responses. The npm download cache is keyed from the lockfile; `node_modules` and `.next` are not shared between runs. No frontend step requires a running API or a provider key.
 
 The `next typegen` step precedes `tsc --noEmit` so a clean checkout has generated route declarations. This follows the installed Next.js 16 CLI documentation, which treats those declarations and `next-env.d.ts` as generated files. The production build also performs its normal Next.js type validation.
 
 ```sh
 cd dashboard
 npm ci --no-audit --no-fund
+node --test tests/*.test.mjs
 npm run lint
 npx next typegen
 npx tsc --noEmit
@@ -52,6 +53,6 @@ No workflow credential, channel assignment or automatic Photon reply is needed f
 
 ## Validation before publication
 
-The strict Python command passed **231 tests** locally, with one existing Starlette/httpx deprecation warning and no skips. Ruff and `pip check` passed. A fresh isolated dashboard copy passed the exact `npm ci`, ESLint, `next typegen`, TypeScript and production-build commands without changing the running workspace's dependencies or build output. The real NOAA CLI verified its pinned hash and reproduced the declared 18/6 split and model metrics without changing input fixtures.
+The strict Python command passed **320 tests** locally, with one existing Starlette/httpx deprecation warning and no skips. Ruff and `pip check` passed. Six dashboard evidence-freshness and read-recovery regressions passed. A fresh isolated dashboard copy passed ESLint, `next typegen`, TypeScript and the production build without changing the running workspace's dependencies or build output. The real NOAA CLI verified its pinned hash and reproduced the declared 18/6 split and model metrics without changing input fixtures.
 
-Workflow YAML structure, both event triggers, read-only permissions, disabled sponsor settings and immutable action pins were checked locally against the current official action releases. These checks ran on the local macOS environment; the first GitHub-hosted Ubuntu execution can be claimed only after the workflow is committed/pushed and its two jobs complete.
+Workflow YAML structure, both event triggers, read-only permissions, disabled sponsor settings and immutable action pins were checked locally. The earlier hosted run at commit `3e068c1` passed both jobs. Each later commit needs its own completed hosted run before its CI can be called green; inspect the current commit's Actions results rather than carrying forward an earlier success.

@@ -84,6 +84,7 @@ def test_gateway_contract_reads_evidence_before_grounded_finish():
     assert requests[0].headers["Authorization"] == "Bearer secret"
     assert requests[0].headers["X-Chalk-Env-Id"] == "env-1"
     assert json.loads(requests[0].content)["model"] == "model-1"
+    assert set(json.loads(requests[0].content)) == {"model", "messages"}
 
 
 @pytest.mark.parametrize(
@@ -100,6 +101,8 @@ def test_gateway_contract_reads_evidence_before_grounded_finish():
         command("pump_on"),
         {"tool": "get_case", "arguments": {}, "ignore_rules": True},
         "not json",
+        '{"tool":"finish","arguments":{"action":"REPORT"',
+        '```json\n{"tool":"finish","arguments":{}}\n```',
     ],
 )
 def test_unreturned_ids_and_unregistered_tools_fail_closed(bad_command):
@@ -267,7 +270,72 @@ def test_overall_turn_timeout_returns_safe_stop():
             settings = ChalkSettings(True, SETTINGS.base_url, "secret", "env", "model", 0.01, 0.01)
             return await investigate("test", SlowBackend(), {}, settings, client=client)
 
-    assert asyncio.run(run())["action"] == "STOP"
+    answer = asyncio.run(run())
+    assert answer["action"] == "STOP"
+    assert answer["failure_code"] == "TIMEOUT"
+    assert answer["timeout_stage"] == "tool:get_case"
+    assert answer["timeout_scope"] == "turn"
+    assert answer["tools_completed"] == 0
+
+
+@pytest.mark.parametrize("turn_limit,request_limit,scope", [
+    (0.5, 0.01, "request"), (0.02, 0.5, "turn"),
+])
+def test_model_request_wall_time_is_bounded_by_request_and_remaining_turn(turn_limit, request_limit, scope):
+    """A transport ignoring HTTPX phase timeout still cannot outlive either budget."""
+    backend = Backend()
+    budgets = []
+
+    async def serve(request):
+        budgets.append(request.extensions["timeout"]["read"])
+        await asyncio.sleep(2)
+        raise AssertionError("Request should have been cancelled by its wall-time budget")
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(serve)) as client:
+            settings = ChalkSettings(True, SETTINGS.base_url, "secret", "env", "model",
+                                     turn_limit, request_limit)
+            started = asyncio.get_running_loop().time()
+            answer = await investigate("test", backend, {}, settings, client=client)
+            return answer, asyncio.get_running_loop().time() - started
+
+    answer, elapsed = asyncio.run(run())
+    assert answer["action"] == "STOP" and answer["live_model_response"] is False
+    assert answer["failure_code"] == "TIMEOUT"
+    assert answer["timeout_stage"] == "model_call_1"
+    assert answer["timeout_scope"] == scope
+    assert answer["model_calls_attempted"] == 1
+    assert answer["tools_completed"] == 0 and backend.calls == []
+    assert len(budgets) == 1 and 0 < budgets[0] <= min(turn_limit, request_limit)
+    assert elapsed < 0.3
+    assert "secret" not in json.dumps(answer)
+
+
+def test_later_model_call_receives_only_remaining_whole_turn_budget():
+    budgets = []
+    backend = Backend()
+
+    async def serve(request):
+        budgets.append(request.extensions["timeout"]["read"])
+        if len(budgets) == 1:
+            await asyncio.sleep(0.04)
+            return httpx.Response(200, json={"choices": [{"message": {
+                "content": json.dumps(command("get_case"))}}]})
+        await asyncio.sleep(2)
+        raise AssertionError("The second request must end at the original turn deadline")
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(serve)) as client:
+            settings = ChalkSettings(True, SETTINGS.base_url, "secret", "env", "model", 0.10, 0.08)
+            return await investigate("test", backend, {}, settings, client=client)
+
+    answer = asyncio.run(run())
+    assert len(budgets) == 2 and 0 < budgets[1] < budgets[0] <= 0.08
+    assert answer["failure_code"] == "TIMEOUT" and answer["timeout_scope"] == "turn"
+    assert answer["timeout_stage"] == "model_call_2"
+    assert answer["model_calls_attempted"] == 2 and answer["tools_completed"] == 1
+    assert [row["tool"] for row in answer["trace"]] == ["get_case"]
+    assert backend.calls == [("get_case", {})]
 
 
 def test_offline_evaluation_uses_same_agent_but_never_claims_real_model_results(tmp_path):

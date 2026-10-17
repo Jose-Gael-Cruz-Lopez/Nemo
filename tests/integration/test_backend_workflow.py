@@ -27,6 +27,7 @@ def app(tmp_path, monkeypatch):
     monkeypatch.setenv("CHALK_ENABLED", "false")
     monkeypatch.setenv("PHOTON_ENABLED", "false")
     monkeypatch.setenv("PHOTON_ROUTES_JSON", "[]")
+    monkeypatch.setenv("GROK_VOICE_ENABLED", "false")
     return create_app(Settings(data_dir=tmp_path, local_token="workflow-test"))
 
 
@@ -34,6 +35,50 @@ def load(client):
     response = client.post("/api/v1/demo/load", headers=AUTH, json={})
     assert response.status_code == 200, response.text
     return response.json()["cases"]
+
+
+@pytest.mark.parametrize("origin", ["http://127.0.0.1:3000", "http://localhost:3000"])
+def test_dashboard_private_network_preflight_allows_exact_local_origin_and_keeps_auth(app, origin):
+    with TestClient(app) as client:
+        preflight = client.options("/api/v1/demo/load", headers={
+            "Origin": origin, "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "authorization,content-type",
+            "Access-Control-Request-Private-Network": "true"})
+        assert preflight.status_code == 200
+        assert preflight.headers["access-control-allow-origin"] == origin
+        assert preflight.headers["access-control-allow-private-network"] == "true"
+        denied = client.post("/api/v1/demo/load", headers={"Origin": origin}, json={})
+        assert denied.status_code == 401
+        assert denied.headers["access-control-allow-origin"] == origin
+        assert app.state.runtime.store.cases() == []
+
+
+@pytest.mark.parametrize("origin", ["https://untrusted.example", "http://127.0.0.1:3001",
+                                     "http://localhost:3000.untrusted.example", "null"])
+def test_private_network_preflight_rejects_external_or_inexact_origins(app, origin):
+    with TestClient(app) as client:
+        response = client.options("/api/v1/demo/load", headers={
+            "Origin": origin, "Access-Control-Request-Method": "POST",
+            "Access-Control-Request-Headers": "authorization,content-type",
+            "Access-Control-Request-Private-Network": "true"})
+        assert response.status_code == 400
+        assert "access-control-allow-origin" not in response.headers
+        assert app.state.runtime.store.cases() == []
+
+
+def test_private_network_permission_cannot_be_widened_by_wildcard_or_external_settings(tmp_path, monkeypatch):
+    monkeypatch.setenv("PHOTON_ENABLED", "false")
+    app = create_app(Settings(data_dir=tmp_path, local_token="cors-test-only",
+                              allowed_origins=["*", "https://external.example"]))
+    with TestClient(app) as client:
+        for origin in ("https://external.example", "https://another.example"):
+            response = client.options("/api/v1/demo/load", headers={
+                "Origin": origin, "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Private-Network": "true"})
+            assert response.status_code == 400
+            assert "access-control-allow-origin" not in response.headers
+        assert client.post("/api/v1/demo/load", json={}).status_code == 401
+        assert app.state.runtime.store.cases() == []
 
 
 def test_buttons_load_compute_sensitivity_investigate_and_stop_with_real_pipeline(app):
@@ -240,11 +285,41 @@ def test_e2e_audit_script_exercises_api_and_truthfully_keeps_external_blockers(a
         result = audit("http://127.0.0.1:8000", "workflow-test", client=client)
     assert result["summary"]["software_workflow_passed"], result
     assert result["summary"]["FAIL"] == 0
-    assert result["summary"]["BLOCKED"] == 3
+    assert result["summary"]["BLOCKED"] == 4
     assert result["summary"]["complete_live_product_verified"] is False
     assert result["evidence"]["live_chalk_response"] is False
     assert result["evidence"]["real_data_split"]["heldout_count"] == 6
+    assert result["evidence"]["training_diagnostic_split"]["test_data_used"] is False
+    assert [row["source_status"] for row in result["evidence"]["frozen_briefings"]] == [
+        "ranked", "unknown", "invalid"]
+    assert len(result["evidence"]["satellite_sample_sha256"]) == 64
+    assert result["xai_audio_requested"] is False
     assert "workflow-test" not in json.dumps(result)
+
+
+@pytest.mark.parametrize("unsafe_state", ["photon", "camera", "actuator"])
+def test_e2e_audit_refuses_active_messaging_or_hardware_before_any_mutation(unsafe_state):
+    from scripts.e2e_demo import audit
+
+    requests = []
+    readiness = {"photon": {"enabled": unsafe_state == "photon"},
+                 "camera": {"running": unsafe_state == "camera"},
+                 "hardware_actuation": unsafe_state == "actuator"}
+
+    def respond(request):
+        requests.append(request)
+        assert request.method == "GET", "Unsafe preflight must never reach an API mutation"
+        assert request.url.path in {"/api/v1/health", "/api/v1/status"}
+        return httpx.Response(200, json={"status": "ok"} if request.url.path.endswith("health")
+                              else readiness)
+
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        result = audit("http://127.0.0.1:8000", "private-audit-test-token", client=client)
+    assert result["summary"]["software_workflow_passed"] is False
+    assert result["summary"]["FAIL"] > 0
+    assert len(requests) == 2
+    assert result["evidence"] == {}
+    assert "private-audit-test-token" not in json.dumps(result)
 
 
 @pytest.mark.parametrize("origin", ["https://127.0.0.1:8000", "http://example.com",

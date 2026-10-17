@@ -23,7 +23,7 @@ class ChalkSettings:
     environment_id: str = ""
     model: str = ""
     turn_timeout_s: float = 60.0
-    request_timeout_s: float = 15.0
+    request_timeout_s: float = 25.0
 
     def readiness(self) -> dict[str, Any]:
         reasons = []
@@ -176,18 +176,28 @@ async def investigate(
     ]
     owned = client is None
     http = client or httpx.AsyncClient()
+    loop = asyncio.get_running_loop()
+    deadline = loop.time() + settings.turn_timeout_s
+    stage = "model_call_1"
+    model_calls = 0
     try:
-        async with asyncio.timeout(settings.turn_timeout_s):
+        async with asyncio.timeout_at(deadline):
             for _ in range(9):
-                response = await http.post(
-                    settings.base_url.rstrip("/") + "/chat/completions",
-                    headers={
-                        "Authorization": "Bearer " + settings.api_key,
-                        "X-Chalk-Env-Id": settings.environment_id,
-                    },
-                    json={"model": settings.model, "messages": messages},
-                    timeout=settings.request_timeout_s,
-                )
+                model_calls += 1
+                stage = f"model_call_{model_calls}"
+                request_budget = min(settings.request_timeout_s, max(0.0, deadline - loop.time()))
+                # HTTPX timeouts bound individual transport phases. This scope also
+                # bounds total request wall time, including a supplied transport.
+                async with asyncio.timeout(request_budget):
+                    response = await http.post(
+                        settings.base_url.rstrip("/") + "/chat/completions",
+                        headers={
+                            "Authorization": "Bearer " + settings.api_key,
+                            "X-Chalk-Env-Id": settings.environment_id,
+                        },
+                        json={"model": settings.model, "messages": messages},
+                        timeout=request_budget,
+                    )
                 response.raise_for_status()
                 content = response.json()["choices"][0]["message"]["content"]
                 if not isinstance(content, str) or len(content) > 12000:
@@ -209,6 +219,7 @@ async def investigate(
                     or not {"get_case", "get_source_evidence"} <= successful
                 ):
                     raise ValueError("Proposal lacks returned case/source evidence")
+                stage = "tool:" + name
                 result = await backend.call(name, args)
                 if not isinstance(result, dict):
                     raise TypeError("Invalid backend result")
@@ -242,6 +253,11 @@ async def investigate(
         failure = ("TIMEOUT" if isinstance(error, (TimeoutError, httpx.TimeoutException)) else
                    "PROVIDER_CONNECTION_ERROR" if isinstance(error, httpx.HTTPError) else
                    "MODEL_OR_TOOL_CONTRACT_ERROR")
+        if failure == "TIMEOUT":
+            return {**_stop("Chalk exceeded its request or whole-turn time budget; no action authorized. The saved source report remains available.", trace),
+                    "failure_code": failure, "timeout_stage": stage,
+                    "timeout_scope": "turn" if loop.time() >= deadline else "request",
+                    "model_calls_attempted": model_calls, "tools_completed": len(trace)}
         return {**_stop("Investigation unavailable or invalid; no action authorized.", trace),
                 "failure_code": failure}
     finally:

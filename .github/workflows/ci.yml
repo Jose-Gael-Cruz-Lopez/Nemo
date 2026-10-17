@@ -63,7 +63,7 @@ jobs:
         run: git diff --exit-code -- data/public data/sample_runs
 
   dashboard:
-    name: Dashboard lint, types and production build
+    name: Dashboard tests, lint, types and production build
     runs-on: ubuntu-latest
     timeout-minutes: 15
     defaults:
@@ -82,6 +82,8 @@ jobs:
           cache-dependency-path: dashboard/package-lock.json
       - name: Install locked dashboard dependencies
         run: npm ci --no-audit --no-fund
+      - name: Check case and evidence freshness
+        run: node --test tests/*.test.mjs
       - name: Lint dashboard
         run: npm run lint
       - name: Generate Next.js route types

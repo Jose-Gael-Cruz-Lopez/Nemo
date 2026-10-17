@@ -9,6 +9,7 @@ remain explicit blockers; scripted transport never pretends to be a live answer.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import sys
@@ -36,9 +37,10 @@ def audit(api_url: str, token: str, *, client: httpx.Client | None = None) -> di
     if not token:
         raise ValueError("Set REEFTRACE_LOCAL_TOKEN in the private local .env before the audit")
     result = {"created_at_utc": datetime.now(UTC).isoformat(), "api_url": api_url,
-              "scope": "actual local HTTP API; synthetic source replay plus separate real NOAA forecast",
+              "scope": "actual local HTTP API; synthetic tracing, separate pinned NOAA research and frozen briefing",
               "camera_opened": False, "hardware_actuation": False,
-              "photon_messages_sent": False, "checks": [], "evidence": {}}
+              "photon_messages_sent": False, "xai_audio_requested": False,
+              "checks": [], "evidence": {}}
     owned = client is None
     http = client or httpx.Client(timeout=90, follow_redirects=False)
 
@@ -59,6 +61,10 @@ def audit(api_url: str, token: str, *, client: httpx.Client | None = None) -> di
         check("API health", request("/health") == {"status": "ok"})
         readiness = request("/status")
         check("no hardware actuation", readiness["hardware_actuation"] is False)
+        # Refuse before any mutation or model call: a background Photon worker
+        # or active camera would make this software-only audit misleading.
+        check("Photon replies are disabled", readiness["photon"]["enabled"] is False)
+        check("camera is stopped", readiness["camera"]["running"] is False)
         check("unauthorized mutation rejected", bool(request("/demo/load", {},
               authenticated=False, expected=401).get("detail")))
         first = request("/demo/load", {})
@@ -83,6 +89,40 @@ def audit(api_url: str, token: str, *, client: httpx.Client | None = None) -> di
             "preset_id": "predeclared-transport-envelope-v1"})
         check("sensitivity is bound to latest evidence", sensitivity["parent_estimate_id"] == recomputed[0]["id"]
               and len(sensitivity["variants"]) == 2)
+        research_case_before = request(f"/cases/{case_id}")
+        real_data = request("/research/real-data")
+        check("real NOAA chronological holdout", real_data["data_origin"] == "REAL_HISTORICAL_NOAA_DRIFTER"
+              and real_data["split"]["training_count"] == 18 and real_data["split"]["heldout_count"] == 6
+              and real_data["split"]["test_values_used_for_model_selection"] is False)
+        diagnostic = request("/research/training-diagnostic")
+        check("training diagnostic excludes the heldout set", diagnostic["test_data_used"] is False
+              and diagnostic["model_selection_performed"] is False
+              and diagnostic["split"]["training_count"] == 18
+              and diagnostic["split"]["origin_count"] == 5 and diagnostic["split"]["horizons"] == 6
+              and len(diagnostic["aggregates"]) == 3
+              and diagnostic["provenance"]["integrity_verified"] is True
+              and diagnostic["provenance"]["sha256"] == real_data["provenance"]["sha256"])
+        satellite = request("/research/satellite-context")
+        check("historical satellite context has pinned provenance", satellite["data_origin"] == "REAL_HISTORICAL_NOAA_SATELLITE_DERIVED"
+              and satellite["provenance"]["integrity_verified"] is True
+              and satellite["provenance"]["row_count"] == 7
+              and satellite["source_attribution"] == {
+                  "status": "NOT_SUPPORTED_BY_THIS_DATASET", "used_in_source_ranking": False})
+        briefings = []
+        for row, report in zip(loaded, recomputed, strict=True):
+            briefing = request(f"/cases/{row['case']['id']}/briefing")
+            report_hash = hashlib.sha256(json.dumps(report, sort_keys=True,
+                separators=(",", ":"), allow_nan=False).encode()).hexdigest()
+            check("frozen briefing preserves " + report["status"], briefing["case_id"] == row["case"]["id"]
+                  and briefing["source_evidence_id"] == report["id"]
+                  and briefing["source_status"] == report["status"]
+                  and briefing["source_report_hash"] == report_hash
+                  and briefing["script_hash"] == hashlib.sha256(briefing["text"].encode()).hexdigest()
+                  and briefing["satellite_sample_sha256"] == satellite["provenance"]["sha256"]
+                  and briefing["satellite_used_in_source_ranking"] is False)
+            briefings.append(briefing)
+        check("research and briefing do not change tank evidence", request(f"/cases/{case_id}") == research_case_before
+              and request(f"/cases/{case_id}/evidence") == recomputed[0])
         answer = request(f"/cases/{case_id}/investigate", {
             "text": "Explain which candidate source the saved path supports and what remains uncertain. Preserve the numerical report."})
         check("investigation keeps numerical source authority", answer["source_report"] == recomputed[0])
@@ -97,12 +137,12 @@ def audit(api_url: str, token: str, *, client: httpx.Client | None = None) -> di
                 "reason": "Live Chalk response unavailable; configure gateway credentials/model or inspect provider failure.",
                 "failure_code": answer.get("failure_code"),
                 "provider_status_code": answer.get("provider_status_code"),
+                "timeout_stage": answer.get("timeout_stage"),
+                "timeout_scope": answer.get("timeout_scope"),
+                "model_calls_attempted": answer.get("model_calls_attempted"),
+                "tools_completed": answer.get("tools_completed"),
                 "configuration_reasons": readiness["chalk"]["reasons"]})
         check("manual task history is recoverable", isinstance(request(f"/cases/{case_id}/actions"), list))
-        real_data = request("/research/real-data")
-        check("real NOAA chronological holdout", real_data["data_origin"] == "REAL_HISTORICAL_NOAA_DRIFTER"
-              and real_data["split"]["training_count"] == 18 and real_data["split"]["heldout_count"] == 6
-              and real_data["split"]["test_values_used_for_model_selection"] is False)
         request_body = {key: value for key, value in loaded[0]["case"].items() if key in {
             "profile_id", "calibration_id", "token_class", "points", "endpoint",
             "evidence_frame_ids", "mode", "camera_session_id", "association_valid"}}
@@ -112,6 +152,8 @@ def audit(api_url: str, token: str, *, client: httpx.Client | None = None) -> di
         request(f"/cases/{stopped_id}/estimate", {}, expected=409)
         request(f"/cases/{stopped_id}/sensitivity", {
             "preset_id": "predeclared-transport-envelope-v1"}, expected=409)
+        check("stopped case cannot prepare a briefing", bool(request(
+            f"/cases/{stopped_id}/briefing", expected=409).get("detail")))
         stopped_answer = request(f"/cases/{stopped_id}/investigate", {"text": "Continue"})
         check("stopped case cannot continue", stopped_answer["action"] == "STOP"
               and stopped_answer["live_model_response"] is False and stopped_answer["source_report"] is None)
@@ -123,13 +165,20 @@ def audit(api_url: str, token: str, *, client: httpx.Client | None = None) -> di
             "sensitivity_id": sensitivity["id"], "investigation_action": answer["action"],
             "live_chalk_response": answer["live_model_response"],
             "real_data_experiment_id": real_data["experiment_id"],
-            "real_data_split": real_data["split"], "disposable_stopped_case": stopped_id}
+            "real_data_split": real_data["split"], "training_diagnostic_split": diagnostic["split"],
+            "satellite_sample_sha256": satellite["provenance"]["sha256"],
+            "frozen_briefings": [{key: briefing[key] for key in (
+                "case_id", "source_evidence_id", "source_status", "source_report_hash", "script_hash")}
+                for briefing in briefings], "disposable_stopped_case": stopped_id}
         result["checks"].extend([
             {"check": "physical webcam/tank calibration", "status": "BLOCKED",
              "reason": "Requires connected external camera, measured drift and blind physical trials; audit does not open hardware."},
             {"check": "Photon device round trip", "status": "BLOCKED",
-             "reason": "Requires configured assigned channel and authorized human-initiated message; audit sends no messages.",
-             "configuration_reasons": readiness["photon"]["reasons"]}])
+             "reason": "Replies are disabled by user instruction; audit sends no messages and cannot verify a device round trip.",
+             "configuration_reasons": readiness["photon"]["reasons"]},
+            {"check": "xAI speech provider round trip", "status": "BLOCKED",
+             "reason": "Frozen briefing text and hashes were verified; this audit never requests provider audio.",
+             "configuration_reasons": readiness["grok"]["reasons"]}])
     except (ValueError, KeyError, TypeError, httpx.HTTPError) as error:
         # Errors contain endpoint/status and assertions, never request headers or env.
         result["checks"].append({"check": "workflow completion", "status": "FAIL",

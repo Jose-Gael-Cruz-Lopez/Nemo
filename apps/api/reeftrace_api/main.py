@@ -63,8 +63,13 @@ def create_app(settings: Settings | None = None):
     app = FastAPI(title="ReefTrace", version="0.2.0", lifespan=lifespan,
                   description="USB observations → measured forward transport → conditional source evidence")
     app.state.runtime = runtime
-    app.add_middleware(CORSMiddleware, allow_origins=settings.allowed_origins,
+    # Browser private-network preflights are necessary for the local dashboard.
+    # A configured wildcard or external origin must never gain this permission.
+    dashboard_origins = [origin for origin in settings.allowed_origins if origin in {
+        "http://localhost:3000", "http://127.0.0.1:3000"}]
+    app.add_middleware(CORSMiddleware, allow_origins=dashboard_origins,
                        allow_methods=["GET", "POST"], allow_headers=["Authorization", "Content-Type"],
+                       allow_private_network=True,
                        expose_headers=["X-Evidence-Id", "X-Script-Hash"])
     app.include_router(health_router, prefix="/api/v1")
 

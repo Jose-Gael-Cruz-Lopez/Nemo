@@ -8,17 +8,23 @@ dataclasses and inject credentials once. Never send credentials to the browser.
 
 ## Current live verification status — 16 October 2026
 
-The local product's full HTTP audit completed with **18 PASS, 0 FAIL and 3 BLOCKED** checks. Physical webcam/tank commissioning and a complete Photon device conversation remain separate from that software pass. Chalk was subsequently verified through the live investigation described below.
+The final expanded local HTTP audit completed with **27 PASS, 0 FAIL and
+3 BLOCKED** checks, including a real Chalk REPORT, the training-only diagnostic,
+satellite provenance and frozen briefings. Its blockers are physical webcam/tank
+commissioning, the intentionally disabled Photon device conversation and uninvoked
+xAI audio. No camera, actuation, message send or audio request occurred. A live
+model success is separate from configuration readiness and does not guarantee
+future provider availability.
 
 Photon Beta authentication has been tested against the real service. After the user's approval, a 30-day custom project key with `project:read` and `project:write` permissions was stored only in private `.env`. The official Python SDK's read-only `raw.projects.list_messages` call returned **HTTP 200**, and the response passed SDK schema validation. `work/photon-live-auth.json` records the verification without account IDs or secrets. The Photon dashboard now shows the user's shared-line assignment as **Active**, and the exact observed sender/agent pair is saved privately in a route restricted to one synthetic case. This does not establish a delivered agent conversation. **The user's latest instruction prohibits test messages and automatic replies: `PHOTON_ENABLED=false` must remain in force.** No Photon message has been sent by the agent. After the local API restart, readiness has only the expected `disabled` reason; readiness remains separate from live connectivity verification.
 
 The existing Google Gemini free-tier key was connected to the teammate-authorized Chalk environment using the native Gemini provider. Chalk's connection test succeeded and discovered 63 models. A new gateway key was issued privately, restricted to that Gemini connection. The user approved connection-wide model scope because Chalk's key picker did not expose the discovered model list. The user separately approved omitting a gateway daily token budget because Chalk's server rejected budgeted keys with `quota enforcement is disabled (set ROUTER_QUOTA_BACKEND)`. **There is no gateway-enforced daily token cap.** ReefTrace requests only `gemini/gemini-3.8-flash`, retains its bounded tool/request deadlines, and Google billing remains on the existing free tier.
 
-A real gateway request returned HTTP 200. An initial investigation hit a transient provider HTTP 503 after reading the case; a later bounded investigation completed with `provider: chalk`, `live_model_response: true`, `action: REPORT`, successful case/source tool reads and the actual frozen evidence ID. The exact source report remained unchanged and retained `SYNTHETIC` and `physical_validation: false`. Private local receipts record the result without publishing credentials. Readiness remains a configuration check (`connection_verified: false`); this separate successful investigation is the live evidence. No remote Chalk evaluation run has been deployed.
+A real gateway request returned HTTP 200. An initial investigation hit a transient provider HTTP 503 after reading the case; a later bounded investigation completed with `provider: chalk`, `live_model_response: true`, `action: REPORT`, successful case/source tool reads and the actual frozen evidence ID. The exact source report remained unchanged and retained `SYNTHETIC` and `physical_validation: false`. Later rehearsals also timed out before the first model response or after a case read. The application now gives each request up to 25 seconds within its original 60-second whole-turn cap and returns safe stage diagnostics on timeout. After that fix and API restart, the final expanded HTTP audit again completed a genuine REPORT, preserving the exact source evidence. This is evidence of that successful turn, not a guarantee of future provider availability. Private local receipts record results without publishing credentials. Readiness remains a configuration check (`connection_verified: false`); a separate successful investigation is the live evidence. No remote Chalk evaluation run has been deployed.
 
 ## Grok and satellite context
 
-The Grok project has detailed instructions and an actual source-based ML review conversation. Cursor, using its Grok model, is implementing the reviewed training-only diagnostic. These coding activities are distinct from use of the Grok Voice API.
+The Grok project has detailed instructions and an actual source-based ML review conversation. Cursor, using its Grok model, implemented the reviewed training-only diagnostic; its wrapper verifies the pinned CSV directly without running the held-out forecast. These coding activities are distinct from use of the Grok Voice API.
 
 The application now has a deterministic frozen-evidence briefing, a pinned real NOAA satellite-derived DHW time series, and a server-side xAI text-to-speech adapter. Audio generation requires an explicit operator click and `GROK_VOICE_ENABLED=true` plus private `XAI_API_KEY`. The user selected finishing without a live key because their API dashboard requires a payment method and prepaid credits. Voice remains disabled; passing mocked adapter tests does not prove a live Grok call or completed sponsor eligibility. See [satellite and speech contract](grok-space-context.md).
 
@@ -26,7 +32,7 @@ Satellite heat stress is historical ecological context for a Florida Keys-area g
 ## Chalk
 
 `ChalkSettings` takes `enabled`, `base_url`, `api_key`, `environment_id`, `model`,
-`turn_timeout_s=60` and `request_timeout_s=15`. Obtain a scoped gateway key and a model
+`turn_timeout_s=60` and `request_timeout_s=25`. Obtain a scoped gateway key and a model
 permitted by the selected environment; the official [gateway setup](https://docs.chalk.ai/docs/model-gateway)
 explains provisioning. Event credits are not assumed.
 
@@ -57,6 +63,15 @@ source scores from the frozen deterministic report.** Digits in generated explan
 are rejected; put IDs only in their separate fields. Valid ID citations do not
 guarantee that every generated sentence is correct. Recheck case revision before
 committing an investigation, especially after a concurrent STOP.
+
+Each model request has a wall-clock cap of the smaller of 25 seconds and the
+remaining 60-second whole-turn budget. The whole-turn deadline includes tool work
+and never resets between calls. A slow response therefore cannot consume nine
+fresh request budgets. There are no automatic model retries, model switches or
+provider-specific reasoning options. `TIMEOUT` includes only the safe stage,
+request/turn scope, attempted model-call count and completed tool count; it never
+includes provider bodies, headers or credentials. Partial/non-JSON output remains
+invalid and cannot authorize an action.
 
 The adapter never authorizes a recovery task or switches a pump. A
 REQUEST_APPROVAL finish only cites a proposal already created by the local backend.

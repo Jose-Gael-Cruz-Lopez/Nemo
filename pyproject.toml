@@ -9,7 +9,8 @@ description = "Controlled source-intelligence proof of concept for floating debr
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-  "fastapi>=0.115,<1.0",
+  "fastapi>=0.143.3,<1.0",
+  "starlette>=1.8,<2.0",
   "uvicorn[standard]>=0.30,<1.0",
   "pydantic-settings>=2.4,<3.0",
   "numpy>=2.0,<3.0",

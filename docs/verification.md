@@ -15,6 +15,13 @@ Open [the local dashboard](http://127.0.0.1:3000). In **Operator access**, enter
 
 The API uses a single worker at `http://127.0.0.1:8000`; its [interactive API reference](http://127.0.0.1:8000/docs) describes every request. The camera stays closed until an operator starts it. The pump remains on its original power cord, with no software actuation.
 
+Browser private-network preflights are allowed only for the explicitly configured
+dashboard origins `http://127.0.0.1:3000` and `http://localhost:3000`. Wildcard,
+external, lookalike and different-port origins cannot gain that permission.
+An allowed preflight does not authorize a write: each mutation still requires
+the private operator token. After updating the API code, restart the API once to
+load the corrected middleware; a dashboard reload alone does not update it.
+
 ## Run the source-tracing demonstration
 
 | Step | Click / action | What a correct result looks like |
@@ -49,6 +56,20 @@ Reproduce the same result locally or read it through the API:
 curl --fail http://127.0.0.1:8000/api/v1/research/real-data
 ```
 
+The separate training diagnostic uses five expanding origins inside those first
+18 points, with six forecast horizons and all three models. It verifies the pinned
+CSV directly and never runs the held-out benchmark or selects a model. Read it at
+`GET /api/v1/research/training-diagnostic`; its `test_data_used` and
+`model_selection_performed` fields must both remain false.
+
+In an investigation, **Load satellite context** reads the pinned historical NOAA
+Coral Reef Watch sample; **Read briefing text** produces a deterministic script
+bound to the saved source evidence and its hash. The seven-day satellite series
+is ecological context and never changes the tank source ranking. The text and
+script hashes can be verified without xAI credentials. **Generate Grok narration**
+is a separate authenticated provider request and remains disabled under the
+current setup; reading text is not proof of a live Voice API call.
+
 ## Run the full HTTP audit
 
 With the local API running:
@@ -57,7 +78,7 @@ With the local API running:
 .venv/bin/python scripts/e2e_demo.py --output work/e2e-demo.json
 ```
 
-The script accepts only an HTTP loopback origin and reads the private operator token from the repository `.env` without printing it. It checks health, rejected unauthorized writes, idempotent demo loading, case selection, re-estimation of ranked/Unknown/invalid observations, sensitivity lineage, Chalk's preserved numerical evidence, saved manual-task history, the real NOAA experiment and STOP on a disposable copy. It opens no camera and sends no Photon messages. If Chalk is configured, its investigation is a real, metered model request.
+The script accepts only an HTTP loopback origin and reads the private operator token from the repository `.env` without printing it. Before any mutation or model request, it refuses a running camera, hardware actuation or an enabled Photon worker. It checks rejected unauthorized writes, idempotent demo loading, case selection, re-estimation of ranked/Unknown/invalid observations, sensitivity lineage, the NOAA holdout and training-only diagnostic, pinned satellite provenance, frozen briefing hashes, Chalk's preserved numerical evidence, saved manual-task history and STOP on a disposable copy. It opens no camera, sends no Photon messages and never requests xAI audio. If Chalk is configured, its one investigation is a real, metered model turn.
 
 The JSON report distinguishes:
 
@@ -71,11 +92,20 @@ The JSON report distinguishes:
 
 ### Current commissioning evidence
 
-The actual local HTTP audit recorded **18 PASS, 0 FAIL, 3 BLOCKED**. The browser exercised the source-tracing workflow and the real NOAA Data lab. The remaining blockers are physical webcam/tank commissioning, a live Chalk model response, and a complete Photon device conversation.
+The final expanded actual local HTTP audit recorded **27 PASS, 0 FAIL,
+3 BLOCKED** in `work/e2e-final.json`. Chalk returned a genuine **REPORT** with
+`live_model_response: true`, a nonempty tool trace and the current source evidence
+ID. The saved deterministic report stayed exactly equal to the re-computed
+report. The audit verified the training-only diagnostic, historical satellite
+provenance, all three frozen briefing statuses and STOP. Its remaining blockers
+are physical webcam/tank commissioning, the intentionally disabled Photon device
+conversation and uninvoked xAI speech. No camera, actuator, Photon send or audio
+request was used. The report passed a scan against the private credentials/route
+values and strong token patterns without exposing them.
 
-Photon Beta **authentication was checked against the real service** after the user's approval. A 30-day custom project key with `project:read` and `project:write` is stored only in private `.env`. The official SDK's read-only `raw.projects.list_messages` request returned **HTTP 200** and its response passed schema validation. The local evidence record is `work/photon-live-auth.json`; it records no secret or account identifier. No messages were sent. The shared line and exact sender/agent route remain unassigned, and `PHOTON_ENABLED=false`. A user must supply their intended send-from identity and authorize the test reply before the channel round trip can be demonstrated.
+Photon Beta **authentication was checked against the real service** after the user's approval. A 30-day custom project key with `project:read` and `project:write` is stored only in private `.env`. The official SDK's read-only `raw.projects.list_messages` request returned **HTTP 200** and its response passed schema validation. The local evidence record is `work/photon-live-auth.json`; it records no secret or account identifier. The shared-line assignment is Active, and the exact sender/agent route is configured privately. **The user prohibits test messages and automatic replies, so `PHOTON_ENABLED=false` remains required.** No messages were sent. Authentication and assignment do not establish a device conversation.
 
-Chalk still has no provider connection, gateway key or selected model. Its current `NOT_CONFIGURED` fallback is an honest blocked live-model check, not a successful model answer. Configuration-readiness fields remain separate from the explicit Photon authentication evidence and from device delivery.
+Chalk has a configured native Gemini connection, a scoped gateway key and a permitted Flash model. Earlier real investigations completed with `live_model_response: true`, successful case/source tool reads and the frozen evidence ID. Subsequent rehearsals also encountered intermittent provider HTTP 503 and TIMEOUT responses. After the bounded latency fix and API restart, the final expanded audit again completed a genuine REPORT. A future failure still returns STOP with the unchanged numerical report, even after an earlier success. The request budget is now 25 seconds, bounded by the remaining 60-second whole-turn deadline; no retries or provider reasoning fields are added. Timeout diagnostics identify the stage and completed tools without exposing provider content. Readiness alone is not a live success. See [the current integration evidence and limits](integrations.md).
 
 ### Chalk Model Gateway
 
@@ -89,7 +119,7 @@ CHALK_ENV_ID=YOUR_ENVIRONMENT_ID
 CHALK_MODEL=YOUR_PERMITTED_MODEL_OR_PUBLISHED_ROUTE
 ```
 
-ReefTrace calls `/chat/completions` using a Bearer key and `X-Chalk-Env-Id`. Select an available connection-prefixed model or published route. Dedicated deployments may use their own API host. Restart the API after editing `.env`. Require a returned trace, evidence ID and `live_model_response: true`; readiness alone proves only configuration. A missing credential, provider HTTP failure, timeout or invalid tool output produces STOP. Safe HTTP diagnostics expose only the status code. The [official gateway documentation](https://docs.chalk.ai/docs/model-gateway) defines these endpoint/authentication/model contracts.
+ReefTrace calls `/chat/completions` using a Bearer key and `X-Chalk-Env-Id`. Select an available connection-prefixed model or published route. Dedicated deployments may use their own API host. Restart the API after editing `.env`; rotating only the provider credential inside the existing Chalk connection does not require a local restart if the gateway key, environment and model remain unchanged. Require a returned trace, evidence ID and `live_model_response: true`; readiness alone proves only configuration. A missing credential, provider HTTP failure, timeout or invalid tool output produces STOP. Safe HTTP diagnostics expose only the status code; timeout fields contain the call stage and counts. The [official gateway documentation](https://docs.chalk.ai/docs/model-gateway) defines these endpoint/authentication/model contracts.
 
 ### Photon 2.0 / Beta
 
@@ -98,13 +128,14 @@ Follow the **Beta** [project setup](https://photon.codes/docs/beta/get-started/p
 In [the Beta dashboard](https://app.beta.photon.codes), select the project, create a key with `project:read` and `project:write`, and assign a shared line to the exact human send-from phone/email identity. The human must initiate the conversation. Put the actual assigned identities and allowed case ID in private `.env`:
 
 ```dotenv
-PHOTON_ENABLED=true
+PHOTON_ENABLED=false
 PHOTON_API_KEY=YOUR_PROJECT_KEY
 PHOTON_PROJECT_ID=YOUR_PROJECT_ID
 PHOTON_ROUTES_JSON=[{"human_handle":"YOUR_SEND_FROM_IDENTITY","agent_handle":"PHOTON_ASSIGNED_NUMBER","role":"operator","allowed_cases":["ACTUAL_CASE_ID"]}]
 ```
 
-Start this deliberately messaging-enabled configuration with:
+Keep the current worker disabled. Only after a new explicit authorization for
+replies, set `PHOTON_ENABLED=true` and start that messaging-enabled configuration with:
 
 ```sh
 .venv/bin/python scripts/dev.py --allow-photon
@@ -119,20 +150,41 @@ Use a separate data directory for a different Photon project. The worker polls p
 .venv/bin/python -m ruff check apps adapters scripts tests
 .venv/bin/python -m pip check
 cd dashboard
+node --test tests/*.test.mjs
 npm run lint
 npm run build
 npm audit --omit=dev
 ```
 
-The final full Python suite passed **231 tests**, with zero failures, errors or skips and one existing Starlette/httpx TestClient deprecation warning. Ruff reported zero issues across the repository. Dashboard ESLint, TypeScript and the optimized production build passed. The actual loopback HTTP demo recorded **18 PASS, 0 FAIL and 3 BLOCKED** checks; its camera, live Chalk and Photon round-trip checks remain blocked. The browser also exercised demo loading, ranked/Unknown/invalid source evidence, sensitivity, the explicit unavailable-Chalk response, NOAA replay, search, reload persistence, STOP on a disposable case, and readable setup validation. At a 390px viewport the Data lab page had no horizontal page overflow. These software checks do not substitute for physical or live-service commissioning.
+The current strict full Python suite passed **320 tests**, with zero failures,
+errors or skips in **63.02 seconds** and one existing Starlette/httpx TestClient
+deprecation warning. All sponsor services were explicitly disabled for that test
+process. Full repository Ruff and `pip check` passed. This includes regressions
+for private-network CORS/authentication, model request/turn deadlines,
+truncated-output rejection, source/STOP races and the expanded audit's no-message
+and no-hardware guards. Six frontend state and read-recovery regressions also passed, covering
+atomic evidence refresh so recomputing source support clears an old
+investigation, sensitivity result and approval display together.
+
+The earlier actual loopback HTTP rehearsal returned an explicit Chalk TIMEOUT
+while preserving its source report. This motivated the bounded request-budget
+change and safe stage diagnostics. The final expanded script recorded **27 PASS,
+0 FAIL and 3 BLOCKED**, with a real Chalk REPORT; its added public-data/briefing
+checks and separate untested-audio blocker are included in those new counts.
+Earlier browser checks covered demo loading, ranked/Unknown/invalid evidence,
+sensitivity, NOAA replay, search, reload persistence, STOP and setup validation.
+These software checks do not substitute for physical or live-service
+commissioning.
 
 | Area | Automated evidence | What still needs a real-world check |
 |---|---|---|
 | USB vision and geometry | Actual OpenCV images, projective mapping, association/freshness and simulated capture-worker tests | Connected C920s, intended OS permissions, real image quality and timing |
 | Tank transport and tracing | Measured-record admission, heldout split rules, bounded particle physics, sensitivity, ambiguity and source gates | Real independent drift/retention runs and blind source-release trials |
 | Case/action state | SQLite transactions, STOP races, task restoration, role/approval/outcome guards | A supervised physical recovery and honest recorded outcome |
-| Chalk | Real adapter with explicit HTTP MockTransport, bounded tools, returned IDs, Unknown preservation and safe diagnostics | Successful account-backed model response and quality review |
-| Photon | Official 0.5.0 SDK contract tests plus a real read-only HTTP 200 authentication/schema check | Shared-line assignment, authorized route and actual device round trip; no send performed |
-| Public-data ML | Pinned real NOAA CSV, training-only fits, chronological holdout, geographic geometry and leakage regressions | Many independent trajectories and matched forcing before operational claims |
+| Browser/API | Exact local-origin private-network preflights, untrusted-origin rejection and unchanged operator authentication | The intended browser/OS against the restarted local services |
+| Chalk | Real adapter with explicit HTTP MockTransport, strict tools/IDs/Unknown preservation, request and whole-turn deadlines; earlier account-backed REPORT | Current provider availability and review of each generated answer; a timeout remains a failed live response |
+| Photon | Official 0.5.0 SDK contract tests, real read-only HTTP 200 auth/schema check and Active assignment | Actual device round trip remains untested; replies stay disabled by user instruction |
+| Public-data ML | Pinned real NOAA CSV, training-only fits, five-origin diagnostic, separate chronological holdout, geographic geometry and leakage regressions | Many independent trajectories and matched forcing before operational claims |
+| Satellite and briefing | Pinned NOAA heat-stress provenance, no source-ranking influence, immutable evidence/script hashes and mocked audio/STOP races | Explicitly authorized live xAI speech requires a configured key; no live speech claim |
 
 The runtime has no motor, pump, relay or serial actuator command. Local source tracing does not use geographic coordinates, and the Data lab does not manufacture tank cases. A five-second manual-collection target-age gate can expire during an LLM or human round trip; obtain fresh case evidence rather than treating a fresh preview as a renewed target. Copernicus remains a separate, explicit authenticated-download experiment, with the resolution/access limits in [datasets.md](datasets.md).
