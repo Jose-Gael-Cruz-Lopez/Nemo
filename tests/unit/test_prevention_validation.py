@@ -411,3 +411,59 @@ def test_strict_numeric_origin_truth_and_path_boundaries(edit):
     value["id"] = "analysis-bundle-" + value["content_hash"][:20]
     with pytest.raises(ValueError):
         run(value)
+
+
+@pytest.mark.parametrize("fixture", ["analysis_bundle_v1.json", "unresolved_analysis_bundle_v1.json"])
+def test_replay_allows_only_display_coordinate_roundoff_without_changing_report(monkeypatch, fixture):
+    from apps.estimation.reeftrace_estimation import prevention_validation as validation
+
+    value = json.loads((FIXTURES / "prevention_validation" / fixture).read_text())
+    expected = run(value)
+    original = validation.compare_layouts
+
+    def rounded_replay(*args, **kwargs):
+        replay = original(*args, **kwargs)
+        for group in replay["nominal_paths"]:
+            for path in group["paths"]:
+                for point in path["points"]:
+                    for key in ("x_cm", "y_cm"):
+                        point[key] = math.nextafter(point[key], math.inf)
+        return replay
+
+    monkeypatch.setattr(validation, "compare_layouts", rounded_replay)
+    assert run(value) == expected
+
+
+@pytest.mark.parametrize("field", ["coordinate", "time", "fraction", "count", "decision"])
+def test_replay_still_rejects_changed_geometry_events_metrics_and_decisions(monkeypatch, field):
+    from apps.estimation.reeftrace_estimation import prevention_validation as validation
+
+    original = validation.compare_layouts
+
+    def changed_replay(*args, **kwargs):
+        replay = original(*args, **kwargs)
+        point = replay["nominal_paths"][0]["paths"][0]["points"][1]
+        metrics = replay["results"][0]["baseline"]
+        if field == "coordinate":
+            point["x_cm"] += 1e-8
+        elif field == "time":
+            point["t_s"] = math.nextafter(point["t_s"], math.inf)
+        elif field == "fraction":
+            metrics["zone_entry_fraction"] = math.nextafter(metrics["zone_entry_fraction"], math.inf)
+        elif field == "count":
+            metrics["zone_entry_count"] -= 1
+        else:
+            replay["recommendation"] = "BASELINE"
+        return replay
+
+    monkeypatch.setattr(validation, "compare_layouts", changed_replay)
+    with pytest.raises(ValueError, match="Stale/tampered numerical report.*numerical_report\\."):
+        run(bundle())
+
+
+def test_even_display_roundoff_requires_unchanged_export_hash():
+    value = bundle()
+    point = value["payload"]["comparison"]["numerical_report"]["nominal_paths"][0]["paths"][0]["points"][0]
+    point["x_cm"] = math.nextafter(point["x_cm"], math.inf)
+    with pytest.raises(ValueError, match="hash"):
+        run(value)

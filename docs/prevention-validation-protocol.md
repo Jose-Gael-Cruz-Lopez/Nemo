@@ -106,7 +106,15 @@ retaining their old profile hash; this validator refuses such a mismatch.
   training/validation drift recording sets across both layouts. They retain their
   frozen calibration, frame-split and camera-session receipts. The existing
   `compare_layouts` engine replays the exact seed/settings; its entire numerical
-  report must match, including first-event counts. Illustration paths are never
+  report must match, including first-event counts, fractions, event times and
+  decisions. Only illustration point `x_cm`/`y_cm` coordinates may differ on
+  replay by at most `1e-12` cm (absolute tolerance, no relative tolerance), to
+  accommodate ARM/x86 floating-point rounding. Coordinate types, path structure,
+  particle IDs and time nodes remain exact. Payload/profile/comparison hashes
+  remain byte-exact; no input is rounded or rewritten, and the report is derived
+  from the frozen snapshot so its hash remains reproducible across these runtimes.
+  Larger coordinate differences or any metric difference are rejected with the
+  first mismatched field. Illustration paths are never
   used to recompute event order or unsupported-region locations.
 - `trials` contains only `id`, `comparison_id`, `trial_key`, `layout`, `data_origin`,
   `outcome`, `entry_time_s`, `interception_time_s`, `token_accounted`,

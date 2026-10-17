@@ -265,6 +265,14 @@ def _numerical_difference(actual, frozen, path="numerical_report"):
             difference = _numerical_difference(a, b, f"{path}[{index}]")
             if difference:
                 return difference
+    elif (isinstance(actual, float)
+          and re.fullmatch(r"numerical_report\.nominal_paths\[\d+\]\.paths\[\d+\]"
+                           r"\.points\[\d+\]\.(?:x_cm|y_cm)", path)
+          and math.isfinite(actual) and math.isfinite(frozen)
+          and math.isclose(actual, frozen, rel_tol=0.0, abs_tol=1e-12)):
+        # ARM/x86 arithmetic may round illustration coordinates differently.
+        # No tolerance applies to time nodes, event order, metrics or decisions.
+        return None
     elif canonical_json(actual) != canonical_json(frozen):
         return f"{path}: replay={actual!r}, frozen={frozen!r}"
     return None
