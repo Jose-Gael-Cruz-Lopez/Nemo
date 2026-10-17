@@ -352,7 +352,8 @@ def recommend_layout(layouts: list[dict]) -> dict:
 
 def _method_sha256() -> str:
     digest = hashlib.sha256()
-    for name in ("advection.py", "field.py", "current_forecast.py", "ocean_prevention.py"):
+    for name in ("advection.py", "field.py", "current_forecast.py", "ocean_prevention.py",
+                 "ocean_numerics.py"):
         digest.update(name.encode() + b"\0")
         digest.update(Path(__file__).with_name(name).read_bytes())
     return digest.hexdigest()
@@ -360,6 +361,8 @@ def _method_sha256() -> str:
 
 def run_ocean_prevention(scenario_id: str = DEFAULT_SCENARIO_ID) -> dict:
     """Compare two predeclared layouts using one identical dynamic path per release."""
+    from .ocean_numerics import run_numerical_sensitivity
+
     scenario = frozen_scenario(scenario_id)
     scenario_sha256 = _sha256(scenario)
     field, manifest = load_current_snapshot()
@@ -461,6 +464,7 @@ def run_ocean_prevention(scenario_id: str = DEFAULT_SCENARIO_ID) -> dict:
             "geometry_frame": frame, "event_model": scenario["event_model"],
             "identical_unmodified_forcing_for_every_layout": True,
             "paths_integrated_once_per_release": True,
+            "paths_integrated_once_scope": "main_decision_paths_only_separate_numerical_diagnostic_reruns",
             "barriers_modify_flow": False,
             "capture_efficiency_assumption": "ideal_absorbing_first_contact_not_measured",
             "winner_rule": "strict_nonoverlap_of_entry_bounds_else_tie_or_indeterminate",
@@ -489,6 +493,7 @@ def run_ocean_prevention(scenario_id: str = DEFAULT_SCENARIO_ID) -> dict:
         ] + (["The valid-time window has ended; this is an archived forecast snapshot, not live conditions."]
              if archived else []),
     }
+    report["numerical_sensitivity"] = run_numerical_sensitivity(field, scenario)
     # Clock-dependent archival labeling is an honest display state; the complete
     # serialized report identity includes that state rather than hiding changes.
     report["report_sha256"] = _sha256(report)

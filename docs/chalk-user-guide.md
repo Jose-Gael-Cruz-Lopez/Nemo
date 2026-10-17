@@ -46,7 +46,7 @@ The server binds the answer to the selected current snapshot, method, scenario a
 
 In the downstream illustrative scenario, the deterministic table shows central-layout entries of two out of six and flanking-layout entries of four out of six. Chalk explains why the central geometry performs better in that model, while retaining the ideal-capture assumption, coarse current support and hypothetical reef-area proxy. The original no-entry control remains a tie; a different number of captures does not prove protection when neither layout has a threatened entry.
 
-The new local numerical-quality work also passes a compact integration-step/contact-chord summary to this review. Smaller-step agreement concerns numerical sensitivity to a fixed field; it is not observed waste accuracy, a probability of reef protection or a measured effect. At this documentation checkpoint that extension has passed local suites and is awaiting final live-flow verification and push.
+The numerical-quality feature also passes a compact integration-step/contact-chord summary to this review. Smaller-step agreement concerns numerical sensitivity to a fixed field; it is not observed waste accuracy, a probability of reef protection or a measured effect. A separate final local live review cited the exact report/method and explained both checks without changing the scientific numbers.
 
 ### 3. Prevention: interpret tank predictions and recorded trials
 
@@ -136,7 +136,7 @@ An authorized Photon conversation can invoke the same source-case investigator. 
 
 ## What is verified, and what remains
 
-The local numerical-quality checkpoint passed **1,331 Python tests, 190 frontend tests and 137 guarded HTTP checks**, with zero HTTP failures and six deliberately blocked external/physical scopes; lint, TypeScript and the isolated production build passed. These checks cover contracts, failures, stale identities and workflows without proving a new live model turn or physical accuracy. No remote Chalk-hosted evaluation run is claimed. The new numerical-quality extension still needs its final live-flow check and push at this documentation snapshot.
+The final local numerical-quality checkpoint passed **1,365 Python tests, 191 frontend tests and 137 guarded HTTP checks**, with zero HTTP failures and six deliberately blocked external/physical scopes; lint, TypeScript and the isolated production build passed. These checks cover contracts, failures, stale identities and workflows; the guarded HTTP run does not invoke a provider. A separate browser-driven live Chalk `REPORT` was verified against the final report and method identities and explained the new numerical-quality summary. Neither that turn nor the tests establish physical accuracy. No remote Chalk-hosted evaluation run is claimed; inspect hosted CI for the exact pushed code commit separately.
 
 The real tank is not commissioned. Required work includes measured calibration, separate held-out drift runs, independently measured layout flows and frozen trials with all missing/failed outcomes retained. Chalk helps explain those requirements; it cannot complete them in prose.
 

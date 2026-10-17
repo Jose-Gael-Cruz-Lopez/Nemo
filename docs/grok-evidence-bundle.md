@@ -2,13 +2,13 @@
 
 Repository: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace
 
-Historical source baseline: `662d1ac583b5c6e04aa43e74fdd2340218371934` (17 October 2026). The forcing-knot review/patch records are a later append. A documentation inventory recheck at `d42a386b17628fdf135f38c59542aeb4b65587c3` recovered eight existing ablation/cohort/Trace 3/page records, and Stage I adds two actual fractional-clock review/correction rounds plus a separate local regression receipt. The final pushed commit is the implementation checkpoint; full integration/live verification after Stage I and push remain pending at this snapshot.
+Historical source baseline: `662d1ac583b5c6e04aa43e74fdd2340218371934` (17 October 2026). The forcing-knot review/patch records are a later append. A documentation inventory recheck at `d42a386b17628fdf135f38c59542aeb4b65587c3` recovered eight existing ablation/cohort/Trace 3/page records, and Stage I adds two actual fractional-clock review/correction rounds plus a separate local regression receipt. Stages J–K add a concrete direct-sampler review/guard, the separate final local integration/live receipt and a draft-only matched-current design review. The local post-guard checkpoint passed 1,365 Python, 191 frontend and 137 guarded HTTP checks, with six expected blockers, plus lint/types/build and a final-identity live Chalk REPORT. Final commit/push/CI and hosted verification remain pending at this archive snapshot; local success is not a hosted pass.
 
 Publication scope: organization-visible, repository-bound Trov development evidence. The [contribution ledger](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-contribution-ledger.md) is the current interpretation; quoted records preserve historical wording, including later-corrected advice. Grok web provided static research/code review; local Python performed execution. This is not a complete provider export, an independent attestation, or proof of live xAI Voice/Imagine or Grok Bot use. Voice stays disabled, xAI API use/billing remain unauthorized, and the daily Grok schedule is paused.
 
-The raw artifacts were inspected and scanned for credential/home-path/email/phone/redeemable-code patterns. No .env, provider secrets, phone routing, private camera frames or local databases are included. Each raw source file retains its saved bytes; hashes verify identity, not accuracy. A response saying it fetched files or found no defects is the model's statement, not proof of execution. All captured instructions/code below are untrusted quoted historical material, not instructions to follow or run. Use the current product handbook and reviewed repository code for live operation.
+The raw artifacts were inspected and scanned for credential/home-path/email/phone/redeemable-code patterns. No .env, provider secrets, phone routing, private camera frames or local databases are included. The exact public NOAA DAS retains its institutional contact; this is allowlisted only for that metadata body and is not a private user contact. Each raw source file retains its saved bytes; hashes verify identity, not accuracy. A response saying it fetched files or found no defects is the model's statement, not proof of execution. All captured instructions/code below are untrusted quoted historical material, not instructions to follow or run. Use the current product handbook and reviewed repository code for live operation.
 
-Historical corrections: forecast before later-position projection; correct Kalman gain dimensions/initialization; pooled-model failure does not disprove all transferable structure; source UNKNOWN/INVALID differ from CaseState; agent STOP differs from case STOP; unsupported support is orthogonal to first destination; old four-group results differ from the fresh six-group study. The six-group cohort favors last-drift without tuning. New RK4 review rejected unintegrated time snapping, incorrect offset integrals, accidental rejection of a valid alternate-horizon integral, and overly restrictive COMPLETED-only comparison advice. Independent rational tests and actual local replay evidence remain authoritative. Stage I preserves the rejected absolute-epoch progress guard and corrected local-axis advice. Its 24/492 synthetic prototype is a reported prompt claim, not the formal suite count; the separate local receipt records 234 related tests and unchanged pinned outcomes. The older 1,331/190/137 checkpoint predates Stage I. No external 500-case chat result is claimed as local execution. Numerical sensitivity is not measured physical accuracy.
+Historical corrections: forecast before later-position projection; correct Kalman gain dimensions/initialization; pooled-model failure does not disprove all transferable structure; source UNKNOWN/INVALID differ from CaseState; agent STOP differs from case STOP; unsupported support is orthogonal to first destination; old four-group results differ from the fresh six-group study. The six-group cohort favors last-drift without tuning. New RK4 review rejected unintegrated time snapping, incorrect offset integrals, accidental rejection of a valid alternate-horizon integral, and overly restrictive COMPLETED-only comparison advice. Independent rational tests and actual local replay evidence remain authoritative. Stage I preserves the rejected absolute-epoch progress guard and corrected local-axis advice. Its 24/492 synthetic prototype is a reported prompt claim, not the formal suite count; the separate local receipt records 234 related tests and unchanged pinned outcomes. The older 1,331/190/137 checkpoint predates Stage I. No external 500-case chat result is claimed as local execution. Stage J then identified the unbounded direct CurrentSampler time_origin contract; the team added the 1900–2100 guard and four regressions. Stage K preserves rejected weak longitude/immediate-PARTIAL tests and the corrected four-knot test design. The matched study remains DRAFT: only public metadata/identity-drogue bodies were retrieved, with no new trajectory positions, current-vector values, scores or physical trials. Numerical sensitivity is not measured physical accuracy.
 
 ## A. Source contribution records, exact ML prompt sequence and numerical primer
 
@@ -678,7 +678,7 @@ The tests are offline. They cover provenance tampering, dimensional/date/locatio
 
 Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/rk4-numerical-quality.md
 
-Bytes: 6177; SHA-256: `8b320c22cfb0cae42f6e8db3165bf67337897ff6217d9e9afa8e0bccf5929675`. Role: research/build record or exact prompt sequence; no blanket authorship or execution claim. Quoted record; read the ledger for current status.
+Bytes: 8109; SHA-256: `9d4f6fe0ac3a0c4e6b2aef371bab6828de4b02c6f3097d2a45032515451008f0`. Role: research/build record or exact prompt sequence; no blanket authorship or execution claim. Quoted record; read the ledger for current status.
 
 ````text
 # RK4 and numerical quality in Tideward
@@ -740,6 +740,17 @@ default steps. Its six track arrays and every release outcome in both scenarios
 were checked against a saved pre-patch reference and remained exactly unchanged.
 Method hashes change with source bytes; historical receipts are not relabelled.
 
+A second regression addressed fractional timestamps: constructing sampler time as
+an epoch offset plus elapsed seconds could round an exact supported endpoint one
+ULP beyond the field. Forcing timestamps are now subtracted from the requested
+start before conversion to floating seconds; RK4 sampling, scheduling and progress
+all use that same local axis. The rejected absolute-epoch progress guard is not
+retained. Direct sampler origins share the 1900–2100 calendar bound, preventing
+unsupported calendar arithmetic. A synthetic constant 0.5 m/s case now integrates
+the full 566.734631 s and approximately 283.3673155 m, including the final supported
+timestamp. Exact rational signed-flow tests and strict masked-future tests retain
+the supported prefix without an epsilon, extrapolation or time-only snap.
+
 ## Two different sensitivity checks
 
 **Integration sensitivity** reruns the fixed releases with maximum solver steps of
@@ -759,6 +770,22 @@ event-time differences are retained for all releases.
 The main decision still evaluates all layouts against one common default path
 per release. Additional diagnostic reruns are separate and never promote a model,
 retune a completed study or replace the default decision.
+
+In the pinned downstream comparison, 300- and 150-second integrations differ
+from the 75-second reference by at most approximately 0.000840 m and 0.000326 m
+at accepted common output times. Contact spacing of 300 and 150 seconds differs
+from 75 seconds by at most approximately 0.152 s and 0.0435 s for matching events
+on the same fine path. Every level retains all six releases, central 2/6 versus
+flanking 4/6, and the original no-entry control remains tied. These particular
+differences are numerical sensitivity results, not physical error bounds.
+
+Final local verification passed 1,365 Python tests, 191 frontend tests and 137
+guarded HTTP checks, plus Ruff, ESLint, TypeScript and a production build. Browser
+checks verified both product surfaces and a separate live Chalk explanation
+bound to the exact report/method identities. The
+[safe local receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-local-verification.json)
+pins tested source bytes, comparison scope and explicitly untested physical
+claims; hosted CI must be checked for the actual pushed code commit.
 
 ## What this proves and what it does not
 
@@ -854,7 +881,7 @@ checks are described in [RK4 numerical quality](https://github.com/Jose-Gael-Cru
 
 ## B. Exact saved historical and new RK4 prompt, response and local-receipt sources
 
-The first fourteen numbered files are the original inspected archive. Nine forcing-knot files preserve four actual prompt/response rounds and a separate local execution receipt. Eight later-discovered numbered files preserve existing ablation/cohort/Trace 3/larger-page records, including overlapping/partial UI history. Five Stage I files preserve two actual fractional-clock review/correction rounds and a separate local regression receipt. These 36 source files are not 36 unique turns or independent experiments. Source file hashes below match the raw archive manifest.
+The first fourteen numbered files are the original inspected archive. Nine forcing-knot files preserve four actual prompt/response rounds and a separate local execution receipt. Eight later-discovered numbered files preserve existing ablation/cohort/Trace 3/larger-page records, including overlapping/partial UI history. Five Stage I files preserve two actual fractional-clock review/correction rounds and a separate local regression receipt. Stage J adds an implementation-review pair and final local verification receipt, and Stage K adds two draft-study design-review pairs. These 43 raw source files are not 43 unique turns or independent experiments. Source file hashes below match the raw archive manifest.
 
 ### docs/grok-evidence/01-initial-build-prompt.txt
 
@@ -6646,7 +6673,2198 @@ Bytes: 2158; SHA-256: `8682ee4651110f5d5be220f304ca1a95e82584138044f78b99d4a96da
 }
 ````
 
-## C. Bundle inventory
+### docs/grok-evidence/rk4-final-relative-implementation-review-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-relative-implementation-review-prompt.txt
+
+Bytes: 32153; SHA-256: `f0f598fe9613a7819de1f7262256b063eee345376ee08b8a919d2e8e7af5600e`. Role: Stage J actual outbound implementation-review prompt with current source/regressions; static review input, not model execution. Quoted record; read the ledger for current status.
+
+````text
+Review the ACTUAL final Tideward start-relative RK4 implementation and regressions below, after our previous corrections. Static adversarial review only: do not claim execution. Independent local checks report234 related tests passed and all6pinneddecisionpaths plus both scenarios' complete outcomes exactly unchanged. Root full integration tests are currently running; no physical accuracy claim follows. Preserve frozen NOAA outcomes and old rejected advice.
+
+The implementation samples and progresses entirely on one local elapsed axis, aligns forcing knots, strictly stops on unsupported masks/times/domain, and never snaps time without position integration. Field and requested start calendars are both bounded to1900–2100, so supported integer date spans are shorter than201years. CurrentSampler optional time_origin defaults to original first-field origin for existing callers. Verify whether this bound makes its NumPy datetime subtraction safe; do not simply repeat the unbounded-int warning without checking actual validation. Source questions: any remaining concrete offset/endpoint/mask/step-budget defect? Any new caller contract that needs rejection rather than silent wrap? Give an exact regression if one exists. Keep suggestions separate from observed execution and avoid proposing cosmetic curvature.
+
+FILE: apps/ocean/reeftrace_ocean/advection.py
+"""Bounded, deterministic passive-tracer advection through geographic currents.
+
+OceanField velocities are east/north metres per second. This module never uses
+buoy holdout positions, estimates tank flow, extrapolates a current field or
+manufactures curvature. WGS84 metric derivatives and RK4 integrate the supplied
+field; the result remains model output rather than observed waste motion.
+"""
+
+from __future__ import annotations
+
+import math
+from datetime import UTC, datetime, timedelta
+from numbers import Real
+
+import numpy as np
+
+from .field import OceanField, _wgs84_metres_per_degree
+
+MAX_HORIZON_S = 6 * 3600.0
+MAX_STEPS = 2048
+MAX_SAMPLES = 250_000
+MAX_SPEED_M_S = 10.0
+MAX_ABS_LATITUDE_DEG = 85.0
+
+
+class _Unsupported(ValueError):
+    def __init__(self, reason: str):
+        self.reason = reason
+        super().__init__(reason)
+
+
+def _positive(value, name: str, maximum: float) -> float:
+    if (isinstance(value, (bool, np.bool_)) or not isinstance(value, Real)
+            or not math.isfinite(value) or not 0 < value <= maximum):
+        raise ValueError(f"{name} must be positive and within {maximum}")
+    return float(value)
+
+
+def _start(value) -> datetime:
+    if isinstance(value, str):
+        try:
+            value = datetime.fromisoformat(value)
+        except ValueError as error:
+            raise ValueError("start_time_utc requires a timezone-aware timestamp") from error
+    if not isinstance(value, datetime) or value.utcoffset() is None:
+        raise ValueError("start_time_utc requires a timezone-aware timestamp")
+    result = value.astimezone(UTC)
+    if not 1900 <= result.year <= 2100:
+        raise ValueError("start_time_utc is outside the bounded calendar")
+    return result
+
+
+def _bracket(axis: np.ndarray, value: float, reason: str) -> list[tuple[int, float]]:
+    """Contributing knots only; never clamp or bridge missing coordinates."""
+    if value < axis[0] or value > axis[-1]:
+        raise _Unsupported(reason)
+    index = int(np.searchsorted(axis, value, side="left"))
+    if index < len(axis) and axis[index] == value:
+        return [(index, 1.0)]
+    if not 0 < index < len(axis):
+        raise _Unsupported(reason)
+    fraction = float((value - axis[index - 1]) / (axis[index] - axis[index - 1]))
+    return [(index - 1, 1 - fraction), (index, fraction)]
+
+
+class CurrentSampler:
+    """Bilinear space/linear time interpolation with explicit missing-data stops.
+
+    Rectilinear ascending or descending spatial axes are supported. A local
+    0..360 longitude field is converted to -180..180. Fields crossing the
+    antimeridian, spanning more than 180 degrees or entering polar latitudes
+    are rejected rather than stitched or extrapolated.
+    """
+
+    def __init__(self, field: OceanField, *, time_origin: np.datetime64 | None = None):
+        if not isinstance(field, OceanField):
+            raise TypeError("An OceanField with geographic coordinates and m/s velocities is required")
+        self.field = field
+        self.latitude = np.asarray(field.latitude_deg, dtype=float)
+        longitude = np.asarray(field.longitude_deg, dtype=float)
+        when = np.asarray(field.time_utc)
+        if (self.latitude.ndim != 1 or longitude.ndim != 1 or when.ndim != 1
+                or min(len(self.latitude), len(longitude), len(when)) < 1
+                or not np.isfinite(self.latitude).all() or not np.isfinite(longitude).all()
+                or np.abs(self.latitude).max() > MAX_ABS_LATITUDE_DEG
+                or longitude.min() < -180 or longitude.max() > 360):
+            raise ValueError("Current axes require finite nonpolar geographic coordinates")
+        if not np.issubdtype(when.dtype, np.datetime64) or np.isnat(when).any():
+            raise ValueError("Current times require decoded UTC-compatible datetime64 values")
+        if np.any(when < np.datetime64("1900-01-01")) or np.any(when >= np.datetime64("2101-01-01")):
+            raise ValueError("Current times are outside the bounded calendar")
+        if len(when) < 2 or np.any(np.diff(when) <= np.timedelta64(0, "s")):
+            raise ValueError("Current forcing needs at least two strictly increasing times")
+        if time_origin is not None and (not isinstance(time_origin, np.datetime64)
+                                        or np.isnat(time_origin)):
+            raise ValueError("Current time origin must be a decoded finite datetime64")
+        self.epoch = when[0] if time_origin is None else time_origin
+        # Subtract the integer datetime coordinates before converting to float.
+        # Integration uses its requested start as origin, avoiding offset+t
+        # cancellation that can put an exact supported knot one ULP out of range.
+        # The default public sampler remains relative to the first forcing time.
+        self.times = np.asarray((when - self.epoch) / np.timedelta64(1, "s"), dtype=float)
+        if not np.isfinite(self.times).all():
+            raise ValueError("Current time coordinates exceed the finite representation")
+        self.longitude = (longitude + 180.0) % 360.0 - 180.0
+        for axis, name in ((self.latitude, "latitude"), (self.longitude, "longitude")):
+            if len(axis) > 1 and not (np.all(np.diff(axis) > 0) or np.all(np.diff(axis) < 0)):
+                raise ValueError(f"Current {name} must be monotonic without a dateline crossing")
+        if np.ptp(self.longitude) >= 180 or np.ptp(longitude) >= 180:
+            raise ValueError("Current longitude span must remain local and avoid the dateline")
+        shape = (len(when), len(self.latitude), len(self.longitude))
+        if math.prod(shape) > MAX_SAMPLES:
+            raise ValueError("Current field exceeds the sample budget")
+        self.u = np.asarray(field.eastward_m_s, dtype=float)
+        self.v = np.asarray(field.northward_m_s, dtype=float)
+        self.mask = np.asarray(field.valid_mask)
+        if (self.u.shape != shape or self.v.shape != shape or self.mask.shape != shape
+                or self.mask.dtype != np.dtype(bool)):
+            raise ValueError("Current values and boolean mask require (time, latitude, longitude)")
+        if (not np.isfinite(self.u[self.mask]).all() or not np.isfinite(self.v[self.mask]).all()
+                or not self.mask.any()):
+            raise ValueError("Valid current samples must be finite and nonempty")
+        speed = np.hypot(self.u[self.mask], self.v[self.mask])
+        if float(speed.max()) > MAX_SPEED_M_S:
+            raise ValueError("Current speed exceeds the declared m/s safety budget")
+        if not isinstance(field.metadata, dict):
+            raise TypeError("Current provenance must be a metadata object")
+        declared_units = field.metadata.get("velocity_units", "m/s")
+        if declared_units != "m/s":
+            raise ValueError("OceanField velocities must be in m/s")
+        if field.selected_depth_m is not None and (
+            not isinstance(field.selected_depth_m, Real)
+            or isinstance(field.selected_depth_m, (bool, np.bool_))
+            or not math.isfinite(field.selected_depth_m) or field.selected_depth_m < 0
+        ):
+            raise ValueError("Selected current depth must be finite nonnegative metres")
+        if len(self.latitude) > 1 and self.latitude[0] > self.latitude[-1]:
+            self.latitude = self.latitude[::-1]
+            self.u, self.v, self.mask = (item[:, ::-1, :] for item in (self.u, self.v, self.mask))
+        if len(self.longitude) > 1 and self.longitude[0] > self.longitude[-1]:
+            self.longitude = self.longitude[::-1]
+            self.u, self.v, self.mask = (item[:, :, ::-1] for item in (self.u, self.v, self.mask))
+        # At most a quarter of the smallest cell per accepted step and half the
+        # shortest forcing interval. This is a numerical limit, not uncertainty.
+        cells = []
+        if len(self.latitude) > 1:
+            cells.append(float(np.diff(self.latitude).min()) * min(
+                _wgs84_metres_per_degree(float(lat))[1] for lat in self.latitude))
+        if len(self.longitude) > 1:
+            cells.append(float(np.diff(self.longitude).min()) * min(
+                _wgs84_metres_per_degree(float(lat))[0] for lat in self.latitude))
+        self.step_limit_s = float(np.diff(self.times).min()) / 2
+        if cells and speed.max() > 0:
+            self.step_limit_s = min(self.step_limit_s, min(cells) / (4 * float(speed.max())))
+
+    def sample(self, latitude_deg: float, longitude_deg: float, seconds: float) -> tuple[float, float]:
+        if (not np.isfinite([latitude_deg, longitude_deg, seconds]).all()
+                or abs(latitude_deg) > MAX_ABS_LATITUDE_DEG
+                or not -180 <= longitude_deg < 180):
+            raise _Unsupported("UNSUPPORTED_GEOGRAPHY")
+        ti = _bracket(self.times, seconds, "OUTSIDE_FORCING_TIME")
+        yi = _bracket(self.latitude, latitude_deg, "OUTSIDE_CURRENT_DOMAIN")
+        xi = _bracket(self.longitude, longitude_deg, "OUTSIDE_CURRENT_DOMAIN")
+        east = north = 0.0
+        for t, tw in ti:
+            for y, yw in yi:
+                for x, xw in xi:
+                    if not self.mask[t, y, x]:
+                        raise _Unsupported("MASKED_CURRENT_CELL")
+                    weight = tw * yw * xw
+                    east += weight * self.u[t, y, x]
+                    north += weight * self.v[t, y, x]
+        return float(east), float(north)
+
+
+def advect_current(field: OceanField, *, latitude_deg: float, longitude_deg: float,
+                   start_time_utc: str | datetime, horizon_s: float = MAX_HORIZON_S,
+                   step_s: float = 300, output_step_s: float = 900) -> dict:
+    """Integrate a passive surface tracer; retain only fully supported RK4 steps.
+
+    This bounded ocean diagnostic never changes source/prevention tank evidence.
+    Invalid configuration raises ValueError. Missing forcing stops with an
+    explicit UNSUPPORTED/PARTIAL report and the last valid accepted position.
+    Steps end at forcing-time knots so no RK4 stage spans a time-interpolation
+    derivative break. No extrapolation, zero-filled masks or stochastic wiggles
+    occur, and positive intervals are never skipped by advancing time alone.
+    """
+    horizon = _positive(horizon_s, "horizon_s", MAX_HORIZON_S)
+    step = _positive(step_s, "step_s", 3600)
+    output_step = _positive(output_step_s, "output_step_s", MAX_HORIZON_S)
+    for value in (latitude_deg, longitude_deg):
+        if isinstance(value, (bool, np.bool_)) or not isinstance(value, Real) or not math.isfinite(value):
+            raise ValueError("Starting coordinates require finite real geographic degrees")
+    if abs(latitude_deg) > MAX_ABS_LATITUDE_DEG or not -180 <= longitude_deg <= 360:
+        raise ValueError("Starting coordinates must be nonpolar geographic degrees")
+    longitude = (float(longitude_deg) + 180) % 360 - 180
+    start = _start(start_time_utc)
+    start64 = np.datetime64(start.replace(tzinfo=None), "us")
+    sampler = CurrentSampler(field, time_origin=start64)
+    step = min(step, sampler.step_limit_s, output_step)
+    forcing_elapsed = sampler.times
+    knot_splits = int(np.count_nonzero((forcing_elapsed > 0) & (forcing_elapsed < horizon)))
+    if (not math.isfinite(step) or step <= 0
+            or math.ceil(horizon / step) + math.ceil(horizon / output_step)
+            + knot_splits > MAX_STEPS):
+        raise ValueError("Advection would exceed its bounded step budget")
+    state = np.array([float(latitude_deg), longitude])
+    elapsed = 0.0
+    track = []
+    reason = None
+    accepted_steps = 0
+
+    def point(t: float, position: np.ndarray) -> dict:
+        u, v = sampler.sample(float(position[0]), float(position[1]), t)
+        return {"time_utc": (start + timedelta(seconds=t)).isoformat().replace("+00:00", "Z"),
+                "elapsed_s": t, "latitude_deg": float(position[0]),
+                "longitude_deg": float(position[1]), "eastward_m_s": u,
+                "northward_m_s": v, "speed_m_s": math.hypot(u, v)}
+
+    def derivative(t: float, position: np.ndarray) -> np.ndarray:
+        u, v = sampler.sample(float(position[0]), float(position[1]), t)
+        metres_lon, metres_lat = _wgs84_metres_per_degree(float(position[0]))
+        return np.array([v / metres_lat, u / metres_lon])
+
+    try:
+        track.append(point(0.0, state))
+        next_output = min(output_step, horizon)
+        while elapsed < horizon:
+            if accepted_steps >= MAX_STEPS:
+                raise _Unsupported("STEP_BUDGET_EXCEEDED")
+            knot_index = int(np.searchsorted(forcing_elapsed, elapsed, side="right"))
+            if knot_index >= len(forcing_elapsed):
+                raise _Unsupported("OUTSIDE_FORCING_TIME")
+            target = min(elapsed + step, horizon, next_output,
+                         float(forcing_elapsed[knot_index]))
+            dt = target - elapsed
+            if not math.isfinite(dt) or dt <= 0 or target <= elapsed:
+                raise _Unsupported("TIME_STEP_NOT_REPRESENTABLE")
+            k1 = derivative(elapsed, state)
+            k2 = derivative(elapsed + dt / 2, state + dt * k1 / 2)
+            k3 = derivative(elapsed + dt / 2, state + dt * k2 / 2)
+            k4 = derivative(target, state + dt * k3)
+            candidate = state + dt * (k1 + 2 * k2 + 2 * k3 + k4) / 6
+            accepted_point = point(target, candidate)
+            state = candidate
+            elapsed = target
+            accepted_steps += 1
+            if elapsed >= next_output:
+                track.append(accepted_point)
+                next_output = min(horizon, next_output + output_step)
+        status = "COMPLETED"
+    except _Unsupported as error:
+        reason = error.reason
+        status = "PARTIAL" if elapsed > 0 else "UNSUPPORTED"
+        if elapsed > 0 and track[-1]["elapsed_s"] != elapsed:
+            track.append(point(elapsed, state))
+    return {
+        "schema_version": 1, "kind": "CURRENT_FORCED_PASSIVE_TRACER",
+        "status": status, "reason_code": reason,
+        "requested_horizon_s": horizon, "completed_horizon_s": elapsed,
+        "track": track, "accepted_steps": accepted_steps,
+        "solver": {"method": "RK4_WGS84_METRIC_DERIVATIVES", "maximum_step_s": step,
+                   "output_step_s": output_step, "spatial_interpolation": "bilinear",
+                   "temporal_interpolation": "linear", "velocity_units": "m/s",
+                   "forcing_time_knots_aligned": True,
+                   "position_units": "geographic_degrees", "maximum_steps": MAX_STEPS},
+        "forcing": {"time_start_utc": str(field.time_utc[0]) + "Z",
+                    "time_end_utc": str(field.time_utc[-1]) + "Z",
+                    "selected_depth_m": field.selected_depth_m,
+                    "shape": list(sampler.u.shape),
+                    "provenance": {key: field.metadata[key] for key in (
+                        "product", "dataset", "title", "u_variable", "v_variable", "sha256",
+                        "source_url", "issued_at_utc", "retrieved_at_utc", "license", "data_kind"
+                    ) if key in field.metadata}},
+        "physical_validation": False, "plastic_motion_validated": False,
+        "tank_flow_used": False, "heldout_buoy_positions_used": False,
+        "limitations": [
+            "The supplied current field is model output, not measured waste motion.",
+            "No windage, object response, beaching, retention or diffusion is inferred.",
+            "Missing cells and unavailable times stop the track; no extrapolation is used.",
+            "Forecast causality requires a separately verified issue-time/as-of receipt.",
+            "Ocean currents do not calibrate the centimetre-scale tank experiment.",
+        ],
+    }
+
+
+FILE: tests/unit/test_advection_time_knots.py
+"""Numerical regressions for irregular forcing times, never new field evidence."""
+
+from datetime import UTC, datetime, timedelta
+from fractions import Fraction
+
+import numpy as np
+import pytest
+
+from apps.ocean.reeftrace_ocean import advection
+from apps.ocean.reeftrace_ocean.field import OceanField, _wgs84_metres_per_degree
+
+EPOCH = datetime(2026, 10, 17, tzinfo=UTC)
+METRES_LON, _ = _wgs84_metres_per_degree(0)
+
+
+def forcing(times=(0, 650, 1400), speeds=(0, 1, 0)):
+    seconds = np.asarray(times, dtype=float)
+    shape = (len(times), 2, 2)
+    return OceanField(
+        np.datetime64("2026-10-17T00:00:00", "ns")
+        + np.rint(seconds * 1_000_000_000).astype("timedelta64[ns]"),
+        np.array([-1.0, 1.0]), np.array([-1.0, 1.0]),
+        np.broadcast_to(np.asarray(speeds, dtype=float)[:, None, None], shape).copy(),
+        np.zeros(shape), np.ones(shape, dtype=bool), 0.25,
+        {"velocity_units": "m/s", "product": "SYNTHETIC_TIME_KNOT_REGRESSION"},
+    )
+
+
+def exact_integral(times, speeds, start, end):
+    """Exact trapezoid areas of the declared piecewise-linear time function."""
+    start, end = Fraction(str(start)), Fraction(str(end))
+    area = Fraction(0)
+    for a, b, u0, u1 in zip(times[:-1], times[1:], speeds[:-1], speeds[1:], strict=True):
+        a, b, u0, u1 = (Fraction(str(value)) for value in (a, b, u0, u1))
+        left, right = max(a, start), min(b, end)
+        if right > left:
+            slope = (u1 - u0) / (b - a)
+            left_u, right_u = u0 + slope * (left - a), u0 + slope * (right - a)
+            area += (right - left) * (left_u + right_u) / 2
+    return area
+
+
+def integrate(source=None, *, start=0, horizon=1000, step=300, output=1000):
+    return advection.advect_current(
+        source or forcing(), latitude_deg=0, longitude_deg=0,
+        start_time_utc=EPOCH + timedelta(seconds=start),
+        horizon_s=horizon, step_s=step, output_step_s=output,
+    )
+
+
+@pytest.mark.parametrize("start,horizon,area", [
+    (0, 1000, Fraction(1780, 3)),
+    (100, 900, Fraction(22840, 39)),
+    (100, 1000, Fraction(8220, 13)),
+    (650, 450, Fraction(315)),
+])
+def test_rk4_integrates_each_linear_time_piece_with_arbitrary_start(start, horizon, area):
+    # These exact areas independently verify both the equation and horizon meaning:
+    # a 900-second horizon from t=100 ends at t=1000, not t=900 or t=1100.
+    assert exact_integral((0, 650, 1400), (0, 1, 0), start, start + horizon) == area
+    result = integrate(start=start, horizon=horizon)
+    assert result["status"] == "COMPLETED"
+    assert result["completed_horizon_s"] == horizon
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(
+        float(area), abs=1e-9,
+    )
+    assert result["solver"]["forcing_time_knots_aligned"] is True
+    assert result["solver"]["method"] == "RK4_WGS84_METRIC_DERIVATIVES"
+
+
+def test_several_irregular_knots_and_output_boundaries_preserve_exact_time_integral():
+    times, speeds = (0, 650, 1400, 1800), (0.2, 1, 0.1, 0.8)
+    result = integrate(forcing(times, speeds), start=123, horizon=1500, output=479)
+    assert result["status"] == "COMPLETED"
+    assert [point["elapsed_s"] for point in result["track"]] == [0, 479, 958, 1437, 1500]
+    for point in result["track"]:
+        area = exact_integral(times, speeds, 123, 123 + point["elapsed_s"])
+        assert point["longitude_deg"] * METRES_LON == pytest.approx(float(area), abs=1e-9)
+
+
+@pytest.mark.parametrize("start,horizon,completed", [(0, 1800, 1400), (100, 1800, 1300)])
+def test_unaligned_forcing_end_retains_the_entire_supported_prefix(start, horizon, completed):
+    result = integrate(start=start, horizon=horizon, output=900)
+    assert result["status"] == "PARTIAL"
+    assert result["reason_code"] == "OUTSIDE_FORCING_TIME"
+    assert result["completed_horizon_s"] == completed
+    assert result["track"][-1]["elapsed_s"] == completed
+    assert result["track"][-1]["time_utc"] == "2026-10-17T00:23:20Z"
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(
+        float(exact_integral((0, 650, 1400), (0, 1, 0), start, 1400)), abs=1e-9,
+    )
+
+
+def test_request_ending_exactly_at_last_forcing_time_is_completed():
+    result = integrate(horizon=1400, output=900)
+    assert result["status"] == "COMPLETED"
+    assert result["reason_code"] is None
+    assert result["completed_horizon_s"] == 1400
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(700)
+
+
+def test_request_starting_at_forcing_end_has_no_invented_future():
+    result = integrate(start=1400, horizon=100)
+    assert result["status"] == "UNSUPPORTED"
+    assert result["reason_code"] == "OUTSIDE_FORCING_TIME"
+    assert result["completed_horizon_s"] == result["accepted_steps"] == 0
+    assert len(result["track"]) == 1
+    assert result["track"][0]["elapsed_s"] == result["track"][0]["longitude_deg"] == 0
+
+
+def test_exact_valid_knot_is_allowed_but_does_not_bridge_a_masked_future_interval():
+    source = forcing()
+    source.valid_mask[-1] = False
+    source.eastward_m_s[-1] = np.nan
+    at_knot = integrate(source, horizon=650)
+    after_knot = integrate(source, horizon=1000)
+    assert at_knot["status"] == "COMPLETED"
+    assert at_knot["completed_horizon_s"] == 650
+    assert after_knot["status"] == "PARTIAL"
+    assert after_knot["reason_code"] == "MASKED_CURRENT_CELL"
+    assert after_knot["completed_horizon_s"] == 650
+    assert after_knot["track"][-1] == at_knot["track"][-1]
+
+
+def test_masked_arrival_knot_never_accepts_the_future_position():
+    source = forcing()
+    source.valid_mask[1] = False
+    source.eastward_m_s[1] = np.nan
+    result = integrate(source, horizon=650)
+    # Every t>0 interpolation needs the masked t=650 sample, even before arrival.
+    assert result["status"] == "UNSUPPORTED"
+    assert result["reason_code"] == "MASKED_CURRENT_CELL"
+    assert result["completed_horizon_s"] == result["accepted_steps"] == 0
+    assert len(result["track"]) == 1
+
+
+def test_positive_submicrosecond_steps_integrate_position_instead_of_skipping_time():
+    result = integrate(forcing((0, 0.000001, 0.000002), (1, 1, 1)),
+                       horizon=0.000002, output=0.000002)
+    assert result["status"] == "COMPLETED"
+    assert result["completed_horizon_s"] == 0.000002
+    assert result["accepted_steps"] == 4
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(
+        0.000002, abs=1e-18,
+    )
+
+
+def test_local_time_progress_integrates_even_when_distant_epoch_cannot_resolve_the_increment():
+    source = forcing((0, 1), (1, 1))
+    # Float seconds from a distant epoch cannot distinguish a nanosecond increment
+    # at this start. Sampling and integration instead share a local elapsed axis;
+    # the positive duration must still advance position, not be skipped or censored.
+    source = OceanField(
+        np.array(["1900-01-01", "2090-01-01"], dtype="datetime64[ns]"),
+        source.longitude_deg, source.latitude_deg, source.eastward_m_s,
+        source.northward_m_s, source.valid_mask, source.selected_depth_m, source.metadata,
+    )
+    result = integrate(source, horizon=1e-9, output=1e-9)
+    assert result["status"] == "COMPLETED"
+    assert result["reason_code"] is None
+    assert result["completed_horizon_s"] == 1e-9
+    assert result["accepted_steps"] == 1
+    assert len(result["track"]) == 2
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(1e-9, abs=1e-22)
+
+
+def test_forcing_knot_splits_are_included_in_conservative_preflight_budget(monkeypatch):
+    # Four max-size intervals plus one output bound alone would fit this limit;
+    # the additional forcing-knot split must be accounted for before integration.
+    monkeypatch.setattr(advection, "MAX_STEPS", 5)
+    with pytest.raises(ValueError, match="bounded step budget"):
+        integrate()
+
+
+MICROSECOND_KNOTS = (0, 347304243, 374526192, 412218073, 895964114)
+
+
+def microsecond_forcing(speeds=(0.5, 0.5, 0.5, 0.5, 0.5)):
+    """Integer UTC coordinates, independent of the solver's floating time axis."""
+    when = (np.datetime64("2026-10-17T00:00:00", "us")
+            + np.asarray(MICROSECOND_KNOTS).astype("timedelta64[us]"))
+    shape = (len(when), 2, 2)
+    return OceanField(
+        when, np.array([-1.0, 1.0]), np.array([-1.0, 1.0]),
+        np.broadcast_to(np.asarray(speeds)[:, None, None], shape).copy(),
+        np.zeros(shape), np.ones(shape, dtype=bool), 0.25,
+        {"velocity_units": "m/s", "product": "SYNTHETIC_FRACTIONAL_START_REGRESSION"},
+    )
+
+
+def test_fractional_start_reaches_supported_last_microsecond_knot_without_false_censoring():
+    # Previously offset + elapsed rounded one ULP past the last forcing knot.
+    # The supported final interval was then discarded at elapsed=559.3726975.
+    result = integrate(microsecond_forcing(), start=329.229483,
+                       horizon=566.734631, step=200, output=566.734631)
+    assert result["status"] == "COMPLETED"
+    assert result["reason_code"] is None
+    assert result["completed_horizon_s"] == 566.734631
+    assert result["track"][-1]["elapsed_s"] == 566.734631
+    assert result["track"][-1]["time_utc"] == "2026-10-17T00:14:55.964114Z"
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(
+        283.3673155, abs=1e-9,
+    )
+
+
+def test_every_output_point_matches_constant_speed_integral_with_fractional_time_origin():
+    result = integrate(microsecond_forcing(), start=329.229483,
+                       horizon=566.734631, step=200, output=100)
+    assert result["status"] == "COMPLETED"
+    assert [p["elapsed_s"] for p in result["track"]] == [0, 100, 200, 300, 400, 500, 566.734631]
+    for point in result["track"]:
+        assert point["longitude_deg"] * METRES_LON == pytest.approx(
+            point["elapsed_s"] * 0.5, abs=1e-9,
+        )
+
+
+@pytest.mark.parametrize("start_us,end_us,expected", [
+    (329229483, 895964114, Fraction(1024621662902407, 19135220000000)),
+    (329229483, 412218073, Fraction(280896158484603, 9567610000000)),
+    (374526192, 895964114, Fraction(149205421, 5000000)),
+])
+def test_fractional_signed_velocity_knots_have_independently_verified_exact_integrals(
+    start_us, end_us, expected,
+):
+    speeds = (Fraction(1, 5), Fraction(4, 5), Fraction(-1, 10), Fraction(2, 5), Fraction(-3, 10))
+    exact = exact_integral([Fraction(knot, 1_000_000) for knot in MICROSECOND_KNOTS], speeds,
+                          Fraction(start_us, 1_000_000), Fraction(end_us, 1_000_000))
+    assert exact == expected  # Verify proposed values independently before using them.
+    duration = (end_us - start_us) / 1_000_000
+    result = integrate(microsecond_forcing(tuple(map(float, speeds))),
+                       start=start_us / 1_000_000, horizon=duration, step=200, output=100)
+    assert result["status"] == "COMPLETED"
+    assert result["completed_horizon_s"] == duration
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(float(exact), abs=1e-9)
+
+
+def test_signed_velocity_partial_run_retains_the_exact_supported_integral():
+    speeds = (0.2, 0.8, -0.1, 0.4, -0.3)
+    result = integrate(microsecond_forcing(speeds), start=329.229483,
+                       horizon=600, step=200, output=100)
+    exact = exact_integral([Fraction(knot, 1_000_000) for knot in MICROSECOND_KNOTS], speeds,
+                          Fraction(329229483, 1_000_000), Fraction(895964114, 1_000_000))
+    assert result["status"] == "PARTIAL"
+    assert result["reason_code"] == "OUTSIDE_FORCING_TIME"
+    assert result["completed_horizon_s"] == 566.734631
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(float(exact), abs=1e-9)
+
+
+@pytest.mark.parametrize("start_us", [329229483, 347304243, 374526193, 412218072, 895964113])
+def test_fractional_starts_match_independent_piecewise_linear_time_integral(start_us):
+    speeds = (0.2, 1.0, 0.1, 0.8, 0.5)
+    duration_us = MICROSECOND_KNOTS[-1] - start_us
+    start, end = Fraction(start_us, 1_000_000), Fraction(MICROSECOND_KNOTS[-1], 1_000_000)
+    area = exact_integral([Fraction(knot, 1_000_000) for knot in MICROSECOND_KNOTS],
+                          speeds, start, end)
+    result = integrate(microsecond_forcing(speeds), start=float(start),
+                       horizon=duration_us / 1_000_000, step=200,
+                       output=duration_us / 1_000_000)
+    assert result["status"] == "COMPLETED"
+    assert result["completed_horizon_s"] == duration_us / 1_000_000
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(
+        float(area), abs=1e-9,
+    )
+
+
+def test_rebased_sampler_keeps_default_epoch_and_strict_last_time_boundary():
+    source = microsecond_forcing()
+    default = advection.CurrentSampler(source)
+    start64 = np.datetime64("2026-10-17T00:05:29.229483", "us")
+    rebased = advection.CurrentSampler(source, time_origin=start64)
+    assert default.epoch == source.time_utc[0]
+    assert default.times[0] == 0
+    assert rebased.epoch == start64
+    assert rebased.times[-1] == 566.734631
+    for sampler in (default, rebased):
+        assert sampler.sample(0, 0, sampler.times[-1]) == (0.5, 0)
+        with pytest.raises(advection._Unsupported, match="OUTSIDE_FORCING_TIME"):
+            sampler.sample(0, 0, float(np.nextafter(sampler.times[-1], np.inf)))
+
+
+def test_fractional_request_beyond_last_knot_retains_the_full_supported_prefix_only():
+    result = integrate(microsecond_forcing(), start=329.229483,
+                       horizon=566.734632, step=200, output=566.734632)
+    assert result["status"] == "PARTIAL"
+    assert result["reason_code"] == "OUTSIDE_FORCING_TIME"
+    assert result["completed_horizon_s"] == 566.734631
+    assert result["track"][-1]["longitude_deg"] * METRES_LON == pytest.approx(
+        283.3673155, abs=1e-9,
+    )
+
+
+def test_fractional_rebased_exact_knot_still_requires_only_its_valid_time_slice():
+    source = microsecond_forcing()
+    source.valid_mask[-1] = False
+    source.eastward_m_s[-1] = np.nan
+    start_us = 329229483
+    duration = (MICROSECOND_KNOTS[-2] - start_us) / 1_000_000
+    at_knot = integrate(source, start=start_us / 1_000_000,
+                        horizon=duration, step=200, output=duration)
+    past_knot = integrate(source, start=start_us / 1_000_000,
+                          horizon=duration + 0.000001, step=200, output=duration + 0.000001)
+    assert at_knot["status"] == "COMPLETED"
+    assert past_knot["status"] == "PARTIAL"
+    assert past_knot["reason_code"] == "MASKED_CURRENT_CELL"
+    assert past_knot["completed_horizon_s"] == duration
+    assert past_knot["track"][-1] == at_knot["track"][-1]
+    unsupported = integrate(source, start=MICROSECOND_KNOTS[-2] / 1_000_000,
+                            horizon=10, step=200, output=10)
+    assert unsupported["status"] == "UNSUPPORTED"
+    assert unsupported["reason_code"] == "MASKED_CURRENT_CELL"
+    assert unsupported["completed_horizon_s"] == unsupported["accepted_steps"] == 0
+    assert len(unsupported["track"]) == 1
+    assert unsupported["track"][0]["longitude_deg"] == 0
+````
+
+### docs/grok-evidence/rk4-final-relative-implementation-review-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-relative-implementation-review-response.txt
+
+Bytes: 2404; SHA-256: `9c78aa7220cd18dd8af239d1c295c09e5bfc827d8e12f785021b5eb9b5d120da`. Role: Stage J static review finding direct CurrentSampler time_origin lacked the explicit supported-calendar guard; no execution claimed. Quoted record; read the ledger for current status.
+
+````text
+GrokWorked for 17sStatic adversarial review. No execution is claimed. Frozen NOAA outcomes and previously rejected arithmetic or absolute-epoch guards remain rejected in the record. The local report of 234 related tests passed and unchanged pinned decision paths is treated as an observation supplied by the team, not as a result obtained here.
+Datetime subtraction under the calendar bound. Both field times and the requested start are rejected outside 1900–2100. The maximum supported span is therefore shorter than 201 years. At microsecond or nanosecond resolution that span is well below 2632^{63}263 (approximately 6.3×10156.3\times10^{15}6.3×1015 µs). The subtraction when - epoch performed inside CurrentSampler for a start that has already passed _start cannot overflow a NumPy timedelta64 integer. The earlier unbounded-integer warning does not apply to the advect_current path.
+No remaining offset, endpoint, mask or step-budget defect in the supplied advect_current implementation. Sampling, knot search (side="right"), acceptance and the progress test all use the single local elapsed axis. The guard is only dt finite, dt > 0 and target > elapsed. Strict contributing-corner checks are unchanged. Preflight still counts knots strictly inside (0, horizon) plus the ceiling terms; the runtime MAX_STEPS check remains. Exact final-knot completion and one-microsecond-past rejection are covered by the regressions shown.
+New caller contract that should be rejected rather than left to cast behavior. CurrentSampler(..., time_origin=...) validates only that the argument is a finite datetime64. It does not apply the 1900–2100 bound that _start and the field-time check enforce. A direct caller can therefore supply an origin outside that window; the subsequent subtraction relies on NumPy’s cast rather than an explicit rejection.
+Exact regression.
+PythonCopyCopieddef test_time_origin_outside_calendar_is_rejected():
+    source = forcing()
+    with pytest.raises(ValueError, match="calendar"):
+        advection.CurrentSampler(source, time_origin=np.datetime64("1800-01-01"))
+advect_current itself never exercises this path because it always passes a start already accepted by _start. No other concrete defect is identified in the reviewed scheduling, mask or budget logic. Numerical agreement on the synthetic fixtures remains a solver check, not physical or plastic-motion accuracy.
+````
+
+### docs/grok-evidence/grok-matched-current-design-review-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-review-prompt.txt
+
+Bytes: 16788; SHA-256: `43485bea66664e53e4f152590bfccfec67a6d836d26916f143bc25a6c9fe077a`. Role: Stage K actual outbound pre-acquisition design-review prompt; draft metadata-only feasibility study, no scientific-value acquisition. Quoted record; read the ledger for current status.
+
+````text
+Review this DRAFT next Tideward matched-current experiment BEFORE scientific trajectory/current values are acquired or any new outcomes scored. The earlier six-GDP-ID model study remains frozen and cannot be retuned/relabelled. We want an empirical comparison beyond solver precision: historical drogued GDP buoy motion versus contemporaneous HYCOM15m field-driven RK4, with last-drift and stationary baselines. Existing public metadata access and identities are disclosed; no independent operational forecast or plastic-validation claim is allowed.
+
+Find only concrete pre-acquisition design/reader/scoring gaps that would invalidate the study. Check the25 hourly context points/6 future target contract, exact UTC alignment, depth/drogue/version/alias semantics, fixed region and strict masks, longitude0–360 conversion, packed-short CF scaling once, supported forcing times/partial horizons, all-planned denominators, calibration/future leakage and analysis assimilation. It must remain a retrospective feasibility diagnostic unless issue-time and assimilation independence can actually be verified. Do not fetch values, train, score or invent results. Suggest a minimal freeze checklist and one independent synthetic reader/integration test. Preserve any metadata-only selection limitations. Core solver horizon remains6hours; do not silently expand it to24hours or suggest tuning windage/residuals after seeing targets.
+
+DRAFT FILE: docs/matched-current-study-plan.md
+# DRAFT: matched-current drifter feasibility study
+
+Design checkpoint: **17 October 2026**. Status: **DRAFT — awaiting Grok design
+review and a formal, hashed protocol before scientific acquisition**.
+
+This is a proposed six-hour, two-group feasibility comparison. It is not a frozen
+experiment, an acquired trajectory/current dataset, a completed score, or a claim
+of operational forecast skill. Only bounded public metadata were read. No new
+trajectory positions, current-vector values, model fits, scores or physical trials
+were acquired or run for this design.
+
+## 1. Question and the improvement being tested
+
+Does a time-varying, spatially varying current field at an approximately matched
+object depth describe six hours of later GDP buoy motion better than stationary
+and last-observed-drift baselines, for two predeclared historical groups?
+
+This tests the **physical forcing against reserved later position estimates**,
+subject to the independence/processing caveats below. It is a stronger empirical
+question than whether a smaller RK4 step produces a numerically stable line.
+Numerical precision remains a separate diagnostic. A better integrator can still
+integrate the wrong current field or the wrong object-response model.
+
+The candidate forcing is **HYCOM GOFS 3.1, GLBy0.08, experiment 93.0, UV3Z, 2022,
+15 m**. Its explicit 15 m level is a closer match to the standard drogue-centered
+GDP object than OSCAR's daily upper-30-m mean. This is a rationale for testing,
+not a claim that HYCOM will outperform either baseline. A drogued buoy remains a
+different object from loose surface plastic or a tank token.
+
+## 2. What availability was actually verified
+
+| Source | Verified metadata/access | Remaining boundary |
+| --- | --- | --- |
+| [NOAA hourly GDP dataset](https://www.aoml.noaa.gov/phod/gdp/hourly_data.php) | Public ERDDAP schema/attributes and a fixed-origin identity/drogue query succeeded without credentials. The inspected endpoint identifies itself as **v2.01**, with actual time coverage ending **2022-10-31T00:00:00Z**. | The general webpage also describes release **v2.01.1**, with a different final-hour description. Do not silently call this endpoint v2.01.1. Pin the actual payload, metadata, DOI and retrieval date. No 31-position study track has been retrieved. |
+| [HYCOM 2022 UV3Z catalogue](https://tds.hycom.org/thredds/catalogs/GLBy0.08/expt_93.0_uv3z.html?dataset=GLBy0.08-expt_93.0-uv3z-2022) | The catalogue lists freely available OPeNDAP and NCSS access. **NCSS dataset metadata returned successfully without credentials**. | OPeNDAP DDS/DAS attempts timed out; the first proposed data path is the verified NCSS service. A successful metadata response is not proof that a chosen current subset has valid wet cells or successful value transport. |
+| [NOAA drifter construction/behavior](https://www.aoml.noaa.gov/phod/gdp/faq.php) | The standard drogue is centered around 15 m; losing it changes wind/wave response. | Retrospective drogue metadata are not a direct observation of the instantaneous drag depth or an operationally available status feed. |
+| [HYCOM missing/substituted-days notice](https://www.hycom.org/faqs/477-did-you-know-there-are-missing-days-in-the-gofs-31-global-analysis) | Some dates are missing or substituted, and the provider disclaims guaranteed availability. The proposed May 31–June 1 window is not among the listed 2022 substitution dates. | The list is not proof of complete support. Verify the actual requested times, cell masks and run lineage; never fill missing currents with zero. |
+
+Official supporting product specifications:
+[HYCOM GOFS 3.1 analysis](https://www.hycom.org/dataserver/gofs-3pt1/analysis).
+OSCAR is retained as a potential later comparator, not the selected first source:
+[NASA OSCAR final v2](https://podaac.jpl.nasa.gov/dataset/OSCAR_L4_OC_FINAL_V2.0).
+
+## 3. Proposed two identities and selection provenance
+
+The metadata-only candidate query used a fixed origin **2022-06-01T00:00:00Z** and
+the closed region **25–35°N, 80–65°W**. It requested identifiers, buoy class,
+drogue-loss metadata and nominal drogue depth, **not position columns or later
+motion**. Eleven identity rows were returned. Nine had loss dates preceding the
+origin. Two had metadata compatible with an attached 15 m drogue at that origin:
+
+| Proposed complete GDP group | WMO | Reported class/depth | Queried drogue-loss field | Interpretation for this draft |
+| --- | --- | --- | --- | --- |
+| `300234066836710` | `6202613` | SVPB / `15 m` | `2023-03-02T00:00:00Z` | Loss is after the proposed six-hour outcome window. |
+| `300534061292930` | `4102636` | SVPB / `15 m` | Empty/fill | This endpoint documents fill as still attached; zero instead means uncertain from the beginning. Do not conflate those states. |
+
+The two mappings occur once each in the project's saved identity registry; each
+WMO maps back to one GDP ID there. Neither GDP ID nor its mapped WMO is in the
+original 223-ID/known-alias exclusion set. Neither is among the six completed
+fresh-study GDP groups. Identity-registry appearances and an earlier metadata-only
+2021 candidate appearance for the first ID are disclosed; these are **not** claims
+that the IDs have never been seen in metadata.
+
+These checks use the existing saved registry/exclusions, not a newly complete
+physical-identity audit. Preserve the previously disclosed unresolved historical
+aliases. Set `physical_alias_resolution_verified=false` and
+`statistical_independence=false` unless a later documented review establishes
+otherwise. Future trajectories have not been inspected to establish row count,
+finite observations, six-hour survival, spatial coverage or path difficulty.
+
+The proposed two identities stay in the full planned denominator. Do not replace
+one because a download, mask, prefix or future observation fails. The eleven-row
+origin metadata frame is a selection-availability record, not eleven evaluated
+trajectories. Formal review must accept or amend this rule before acquisition.
+
+## 4. Proposed observation and forecast contract
+
+| Item | Proposed fixed value |
+| --- | --- |
+| Context | **25 hourly positions**, 2022-05-31T00:00:00Z through 2022-06-01T00:00:00Z, inclusive. |
+| Forecast origin | 2022-06-01T00:00:00Z. |
+| Reserved outcomes | **Next six hourly positions**, 2022-06-01T01:00:00Z through 2022-06-01T06:00:00Z. |
+| Forecast horizon | **21,600 seconds**, matching the existing `MAX_HORIZON_S`; no 24-hour forecast extension. |
+| Context adaptation | Last drift uses only its own final two context observations. No common learned model or cross-group fitting. |
+| Forcing support | The declared tile and three-hour valid times must support integration from origin through 06:00Z. Context-era forcing can be inspected for transport/QC, but no parameters are fitted from it. |
+| Comparison outputs | Same six UTC horizons and same observed targets for every candidate; great-circle position error in metres, six-hour endpoint error, status and coverage. |
+| Planned accounting | Two complete GDP groups × three candidates × six horizons = **36 planned model/horizon attempts**, using only **12 distinct later position estimates**. These are not 36 independent observations. |
+
+Fixed candidates, subject to exact implementation/version review before freezing:
+
+1. **Stationary:** remain at the final context position.
+2. **Last observed drift:** extrapolate the final context displacement with its
+   actual elapsed time; freeze the coordinate conversion and propagation method.
+3. **Current-only:** start at the same final context position and integrate the
+   matched HYCOM 15 m field with the existing knot-aligned bounded advection
+   implementation. Proposed solver maximum step 300 s, hourly output, and forced
+   alignment with current-time knots; freeze the exact code revision and options.
+
+Do not train or introduce a learned residual, windage, Stokes coefficient, diffusion
+coefficient, kernel or new noise tuning before formal design review. Do not tune
+against these groups or the already completed NOAA studies. Any later candidate
+needs a separately declared development design and untouched comparison groups.
+
+## 5. Exact source paths and data-reader requirements
+
+GDP base:
+`https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc`
+
+Availability query, shown unescaped for readability:
+
+```text
+drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00:00:00Z&latitude>=25&latitude<=35&longitude>=-80&longitude<=-65&distinct()
+```
+
+This is the identity/drogue query already made, not a future acquisition command.
+Any later 31-position query must constrain one exact selected ID and the declared
+UTC window. Use the recorded positions as the target; GDP `ve`/`vn` are derived
+from the same processed track and are not independent forcing truth.
+
+HYCOM NCSS base:
+`https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022`
+
+Verified metadata path: the base plus `/dataset.xml`.
+
+The metadata report:
+
+- Grid axes: 4,251 latitude values, −80 to 90°, nominal increment 0.04°; 4,500
+  longitude values, 0 to 359.92°, nominal increment 0.08°.
+- Time: **2,920** valid times, three-hour increment; units `hours since 2000-01-01
+  00:00:00`, Gregorian calendar. The named 2022 aggregate spans **2022-01-01T12Z
+  through 2023-01-01T09Z**. Do not infer bounds from the year in the URL alone.
+- Forty fixed depths, positive downward in metres, including **15.0**.
+- `water_u` and `water_v` use dimensions `time depth lat lon`, stored as short
+  integers, units m/s, scale factor **0.001**, offset **0**, missing/fill **−30000**.
+
+Proposed first scientific subset: only those two variables, the 15 m level, the
+predeclared **25–35°N / 80–65°W** tile, native spatial resolution, and the required
+three-hour times. This tile is approximately 0.6 MB of packed two-component data
+for three times before format overhead; actual service dimensions/size must be
+recorded rather than assumed. Freeze a bounded request and byte/time budget before
+making it. Use one connection; checksum the exact returned bytes.
+
+The reader must decode fill before scaling/interpolation, convert longitude
+conventions explicitly, preserve native valid times and units, reject dry or
+unsupported interpolation stencils, and retain domain/time exits. Do not expand
+the tile or change the depth after observing an unfavorable outcome. A preliminary
+transport probe, if approved, must have its own predeclared tiny metadata/data
+scope and must not become an unreported cohort/model-selection exercise.
+
+## 6. Issue-time, processing and independence limits
+
+The inspected HYCOM metadata expose **Valid Time**; no verified run/issue timestamp
+or historical publication-as-of record has been established. The catalogue calls
+this an analysis/hindcast aggregate. Its future-valid current fields may contain
+information unavailable at the drifter forecast origin. Consequently this first
+comparison is a **retrospective forcing-supported motion diagnostic**, not a claim
+of prospective six-hour forecasting skill. An operational study requires archived
+run-specific forecasts, an issue cutoff and realistic delivery latency.
+
+HYCOM includes data assimilation. Before calling the evaluated observations
+independent, audit the product's actual assimilation inputs and whether the tested
+GDP observations, derived products or closely related data entered the forcing.
+Whole-ID holdout alone does not settle this. No assimilation-independence proof was
+obtained by the catalogue inspection.
+
+GDP hourly positions are quality-controlled processed/interpolated estimates,
+not raw instantaneous ground truth. Endpoint metadata include retrospective drogue
+information and processing/version inconsistencies; that also prevents an as-of
+operational claim. The two nearby groups and six dependent future hours support
+descriptive feasibility results only. Do not infer calibrated confidence,
+statistical significance, source attribution, plastic skill or reef protection.
+
+## 7. Preserve failures and report only supported comparisons
+
+Retain all two groups and every planned candidate/horizon, including transport
+failure, malformed/duplicate/missing rows, unresolved identity, missing current
+cells, time limits and domain exits. Distinguish these reasons explicitly.
+Never substitute zero currents, interpolate across unsupported masks or discard
+a failed group to improve an average.
+
+Any common-supported-prefix descriptive comparison must name its exact available
+horizons and flag incompleteness; it must not silently stand in for the full
+six-hour result. Report the planned two-group denominator, achieved per-candidate
+coverage and all failures next to any errors. Do not label synthetic paths or a
+fine numerical reference as observed outcomes.
+
+## 8. Metadata receipts and the review gate
+
+The following exact metadata responses were retained locally in ignored
+`work/matched-current-study-metadata/`, with `receipt.json`. They are public-source
+metadata only. The raw files are **not committed acquisition fixtures**; this
+document records their receipt hashes so a later formal protocol can decide which
+metadata to preserve in its own immutable package.
+
+| Local receipt body | Retrieval start (UTC, 2026-10-17) | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| `gdp-hourly.dds` | 19:34:51.733619 | 1,312 | `758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad` |
+| `gdp-hourly.das` | 19:34:51.897741 | 18,686 | `66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39` |
+| `gdp-origin-identity-drogue.csv` | 19:34:52.198899 | 640 | `fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339` |
+| `hycom-2022-ncss-dataset.xml` | 19:34:54.925023 | 159,404 | `741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d` |
+
+The `.dds`/`.das` URLs append those extensions to the GDP base; the candidate URL
+is the availability query above with encoded comparison characters. All four
+bounded curl requests completed with exit 0 using ordinary certificate
+verification and no supplied authentication. These hashes refer to the specific
+responses, not to every future response of those changing services.
+
+Existing identity-check sources:
+
+- `data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv`: 318,597 bytes,
+  SHA-256 `a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82`.
+- `data/public/noaa-fresh-drifter-v2/exclusions.json`: 10,625 bytes,
+  SHA-256 `40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e`.
+
+**Next step:** obtain Grok design review, review its advice locally, resolve or
+retain every limitation above, then freeze a separate protocol and exact code/data
+contracts before requesting scientific values. This draft authorizes no automated
+acquisition, scoring, model promotion, tank operation or deployment. Keep the
+existing completed NOAA results unchanged.
+
+Related references: [next current-data study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/next-current-data-study.md),
+[fresh NOAA study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/fresh-noaa-study.md),
+and [RK4 numerical quality](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/rk4-numerical-quality.md).
+````
+
+### docs/grok-evidence/grok-matched-current-design-review-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-review-response.txt
+
+Bytes: 4368; SHA-256: `1ce25012167a9ec3c3709e0fbc5f4d881613270db3b9b918466ca4c4a869d04f`. Role: Stage K initial static design advice; preserves rejected longitude fixture and incorrect immediate-unsupported/PARTIAL expectation. Quoted record; read the ledger for current status.
+
+````text
+GrokWorked for 4sPre-acquisition design review (static). No values were fetched, no scores were computed, and the frozen six-GDP-ID study is untouched. The draft correctly labels itself a retrospective feasibility diagnostic and discloses the missing issue-time and assimilation-independence proofs.
+Concrete gaps that would invalidate the study if left unresolved
+
+25-point context versus 6-hour free-run contract. The draft requests 25 hourly positions (2022-05-31T00Z through 2022-06-01T00Z) plus 6 reserved hours, but never states whether the 25-point window is used only for last-drift’s final two observations or is also read by the current-only integrator. If any context-era HYCOM field or GDP position after the origin is allowed to influence the RK4 start state or step, the six-hour comparison is no longer a pure free-run from the origin. Freeze an explicit rule: last-drift may use only the final two context positions; the current-only run starts at the origin position and may sample only HYCOM times ≥ origin.
+Longitude convention and single CF scaling. HYCOM longitudes are 0–359.92°. The existing sampler expects −180…180. The draft says “convert longitude conventions explicitly” but does not pin the exact shift (including the 359.92 edge and the tile’s −80…−65 request). Packed-short values use scale 0.001 and fill −30000; the reader must apply the scale exactly once after fill rejection. A double-scale or a scale-before-fill path would silently corrupt every velocity and invalidate the comparison.
+Supported forcing times and partial horizons. HYCOM is three-hourly. The draft requires support “from origin through 06:00Z” but does not state the failure policy when a required three-hour knot is missing or masked inside the 25–35°N / 80–65°W tile. Because no replacement is allowed, a missing knot must produce an explicit PARTIAL/OUTSIDE_FORCING_TIME or MASKED_CURRENT_CELL for that group and must keep the group in the 36-cell denominator. Silence here would permit post-hoc tile expansion.
+Drogue and version semantics. One candidate has an empty/fill drogue-loss field (interpreted as attached) and the other a loss date after the window. The draft notes the endpoint’s fill-versus-zero distinction but does not freeze the exact metadata columns and fill sentinel that will be re-checked at acquisition time. A later change in the v2.01 versus v2.01.1 endpoint description could reclassify the drogue state. Pin the payload hash, the precise fill rule, and physical_alias_resolution_verified=false.
+Assimilation and issue-time. The draft correctly withholds an operational claim. It must also freeze that no calibration, residual, or windage coefficient will be estimated from either the 25-point context or the 6 reserved hours, and that the study remains retrospective unless a later, separately hashed protocol supplies verified issue timestamps and an assimilation-input audit.
+
+Minimal freeze checklist.
+
+Protocol hash covering the two GDP IDs, WMO mappings, exact 25+6 UTC windows, HYCOM experiment/depth/tile, longitude-shift rule, CF scale-once rule, solver revision (knot-aligned RK4, max step 300 s, horizon 21 600 s), and the 36-cell failure policy.
+Detached receipts for the four existing metadata responses and the identity-registry/exclusions hashes.
+Explicit statement that context-era fields are transport/QC only and that no parameter is fit from them or from the reserved hours.
+statistical_independence=false and physical_alias_resolution_verified=false unless a later audit changes them.
+
+One independent synthetic reader/integration test.
+Construct a tiny in-memory HYCOM-like field: longitudes [0.0, 0.08] (to be shifted), one depth 15 m, three-hour times, packed-short u/v with scale 0.001 and a single fill value. Assert (a) fill is rejected before scaling, (b) scale is applied once, (c) longitude 0 maps to the sampler’s expected convention, (d) a start at the middle time with a 6-hour horizon that crosses a masked future knot returns PARTIAL with the group retained in a 2×3×6 denominator, and (e) last-drift uses only the final two synthetic context positions. No real GDP or HYCOM values are required.
+No windage, residual or horizon extension is proposed. The 36 planned cells and the two disclosed identities stay in the denominator even if later transport fails.
+````
+
+### docs/grok-evidence/grok-matched-current-design-correction-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-correction-prompt.txt
+
+Bytes: 1600; SHA-256: `1684af70667c39470cd898f856d5fd979f5bdfb8ec85be71123dbdeee291c52b`. Role: Stage K correction rejecting weak longitude and partial-prefix tests and clarifying context/assimilation boundaries; no scientific values or scores. Quoted record; read the ledger for current status.
+
+````text
+Two corrections before accepting the synthetic test design. Longitudes[0,0.08] do not exercise HYCOM's actual280..295→-80..-65 normalization; use[280,281] and assert normalization to[-80,-79], with a start inside that cell. Also with only three times0,3,6 hours, starting at3h and masking6h makes the first positive interpolation unsupported: it should be UNSUPPORTED, not PARTIAL. For a real partial-prefix test use four times0,3,6,9h, start3h, request6h, mask only9h. The3→6h interval must complete; then6→9h is masked and stops at elapsed3h, retaining the full denominator and displacement for that supported prefix. Use constant raw shortu=500 with scale.001(m/s),v=0,lat0,lon-79.9 on lat[-1,1]/lon[280,281] to avoid an earlier spatial exit. Expected supported east displacement5400m. Keep a separate immediate-unsupported test as well. No acquired values or scores.
+
+We accept explicit final-two-context-only last drift, origin-only current initialization, HYCOM forcing valid0,3,6h for the actual six-hour run, no fitted coefficients, hash-pinned fill/version/drogue rules, and all36plannedmodel-horizon outcomes. The local field reader must decode CF exactly once and preserve masks. Context-era field values are not necessary for these fixed models, so omit them from the final model forcing rather than call any use of past-known fields inherently future leakage. Distinguish assimilation/look-ahead from valid-time hindcast explicitly. Confirm the corrected tests and identify any remaining true pre-acquisition gap; do not invent additional data or an operational availability claim.
+````
+
+### docs/grok-evidence/grok-matched-current-design-correction-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-correction-response.txt
+
+Bytes: 1834; SHA-256: `ec239ac84085adf1bd76b3ebd1c696bd02ae689bc03d020d321c5ee5b7a24810`. Role: Stage K corrected static test proposal with four time knots; accepted as a reader-test design, not an implemented/executed study. Quoted record; read the ledger for current status.
+
+````text
+GrokCorrected synthetic tests confirmed (static). No values acquired and no scores computed.
+
+Longitude normalization. Use longitudes [280, 281]. Assert the reader maps them to [-80, -79]. Start inside that cell (lon -79.9).
+Immediate unsupported. Three times [0, 3, 6] h, start at 3 h, mask the 6 h slice. The first positive interpolation is unsupported, so status is UNSUPPORTED (not PARTIAL), completed horizon 0, and the group remains in the denominator.
+True partial prefix. Four times [0, 3, 6, 9] h, start at 3 h, request 6 h, mask only the 9 h slice. The 3→6 h interval completes; the 6→9 h step then fails with MASKED_CURRENT_CELL. Status PARTIAL, completed elapsed 3 h, east displacement exactly 5400 m (constant raw short u=500, scale 0.001, v=0), and the full 2×3×6 denominator is retained.
+Separate immediate-unsupported case remains as specified above.
+CF scale is applied once after fill rejection; masks are preserved. Context-era field values are omitted from the final model forcing for these fixed candidates. Last-drift uses only the final two context positions; the current-only run initializes at the origin only. HYCOM times 0, 3, 6 h cover the six-hour horizon. No coefficients are fit. Fill, version and drogue rules stay hash-pinned. All 36 planned cells are retained.
+
+Remaining true pre-acquisition gap.
+The draft still lacks a pinned, hash-covered rule for the exact longitude-shift implementation (including the 359.92° edge) and for the fill-sentinel re-check against the acquired payload. Without those two frozen reader contracts, a later change in axis ordering or fill encoding could silently alter every velocity before any score exists. Assimilation/look-ahead versus valid-time hindcast is already distinguished; no operational availability is claimed, and no additional data are proposed.
+````
+
+### docs/grok-evidence/rk4-final-local-verification.json
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-local-verification.json
+
+Bytes: 11751; SHA-256: `1612a9f06f9ee76eddcced606ff0db5c06ff2fd164bd46268513ca0da8865df6`. Role: Stage J safe local post-guard verification receipt:1365 Python/191 frontend/137 guarded HTTP tests, exact recorded prepatch comparison scope, local browser and final-identity live Chalk; not Grok execution, hosted CI or physical validation. Quoted record; read the ledger for current status.
+
+````json
+{
+  "schema_version": 1,
+  "kind": "LOCAL_RK4_QUALITY_VERIFICATION_NOT_PHYSICAL_VALIDATION",
+  "created_at_utc": "2026-10-17T19:47:31.341286+00:00",
+  "git_head_at_capture": "a65536c08cecf86cddf1a7b38191e4a2cfec34bf",
+  "scientific_code_not_yet_committed_at_capture": true,
+  "source_sha256": {
+    "apps/api/reeftrace_api/services/ocean_prevention_investigation.py": "094c217d0c3414465152494ce6bf9974e90e2159006aa4bac3406a6f527c69ae",
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/ocean_prevention.py": "939a30e0ac376ab62cd14835931dc1d661db24946962668d93a85222c30b822f",
+    "dashboard/app/components/ocean-prevention-state.ts": "1ce98c357af9c89c59aee4d2f10a5439dee604bdb2b3b6e92da5ab0c4628f275",
+    "dashboard/app/components/ocean-prevention.tsx": "031bcbb5b357041715abef0485092deafb73d93d45c5f7bd270b026e62caf065",
+    "dashboard/showcase/ocean-reports.json": "62eb8d3b5780957f91f5d897e4112fdccab73c5cea4dab25e5f6d79036ef5196",
+    "dashboard/tsconfig.json": "80dcd7e53437160e52c6200c0c5f766bb4a8940161006485a9d235ba7bb26069",
+    "apps/ocean/reeftrace_ocean/ocean_numerics.py": "50492f8e5e3a66915df680f83d9ffcc0bee710ba53a843c34225f7577e48ca8f",
+    "dashboard/app/components/ocean-numerics-state.ts": "b3bf62f241de4d9f0220a83054f172dd60042affd43393ef8945c29fc774c860",
+    "dashboard/app/components/ocean-numerics.tsx": "8e6368a8654fcf61b0d44627a4e2d1eda43f5aeec5ad89e03c0ad70163e63dc2",
+    "dashboard/tests/fixtures/ocean-numerics-report.json": "d1a9749f5d6f7a1d8ac124c91d9e7abbedccffe3323f2482ef0b72ab832fe893",
+    "dashboard/tests/ocean-numerics.test.mjs": "dfad0d5a9813f39669e7cdb8981f31cb1e41ef7c8e2528cb9c37cfd230ab875f",
+    "tests/integration/test_ocean_numerics_evidence.py": "6ebfcc2d7c31915908640c110692c87b40415c7208ef607eac61a8d04a2893af",
+    "tests/unit/test_advection_time_knots.py": "b56c1df014603be9dd72bd38b86ee816c591456121e25e7b0de8befcc6349a56",
+    "tests/unit/test_ocean_numerics.py": "1b9e84b4e97b4cd5ee78ce53e58476153de2153f3e58d6e03b919c2d57501a7b"
+  },
+  "isolated_source_copy_matches_all_changed_code": true,
+  "tests": {
+    "python_passed": 1365,
+    "python_warnings": 1,
+    "frontend_passed": 191,
+    "guarded_http": {
+      "PASS": 137,
+      "FAIL": 0,
+      "BLOCKED": 6,
+      "software_workflow_passed": true,
+      "expected_external_scopes_blocked": true,
+      "complete_live_product_verified": false,
+      "physical_validation": false,
+      "live_provider_round_trip_verified": false
+    },
+    "ruff": "passed",
+    "eslint": "passed",
+    "typescript": "passed",
+    "production_build": "passed",
+    "hosted_ci": "pending_exact_scientific_commit"
+  },
+  "prepatch_reference_sha256": "953ea1db0f70d920729f3136b75258cafede2dc0fbd361a39699dc64e85ad6b2",
+  "paths": [
+    {
+      "release_id": "release-1",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-2",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-3",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-4",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-5",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    },
+    {
+      "release_id": "release-6",
+      "exact_track_match": true,
+      "status_match": true,
+      "completed_horizon_match": true,
+      "accepted_step_count_match": true
+    }
+  ],
+  "comparisons": {
+    "downstream-corridor-v2": {
+      "all_prepatch_recorded_layout_fields_exact_match": true,
+      "baseline_summary_exact_match": true,
+      "baseline_outcomes_match_unchanged_event_evaluator_on_prepatch_paths": true,
+      "recommendation_exact_match": true,
+      "entry_counts": [
+        2,
+        4
+      ],
+      "recommendation": "BEST_LAYOUT",
+      "reference_scope": "Saved layout summary is compared recursively on recorded fields; derived entry-reduction field was not in that capture."
+    },
+    "initial-proxy-v1": {
+      "all_prepatch_recorded_layout_fields_exact_match": true,
+      "baseline_summary_exact_match": true,
+      "baseline_outcomes_match_unchanged_event_evaluator_on_prepatch_paths": true,
+      "recommendation_exact_match": true,
+      "entry_counts": [
+        0,
+        0
+      ],
+      "recommendation": "TIE",
+      "reference_scope": "Saved layout summary is compared recursively on recorded fields; derived entry-reduction field was not in that capture."
+    }
+  },
+  "fractional_clock_reproducer": {
+    "status": "COMPLETED",
+    "completed_horizon_s": 566.734631,
+    "east_displacement_m": 283.36731550000025,
+    "expected_east_displacement_m": 283.3673155,
+    "independent_exact_constant_speed_integral": true
+  },
+  "browser": {
+    "checked_at": "2026-10-17T19:42:12.837Z",
+    "fixed_viewbox_under_filters": true,
+    "viewbox": "132 0 456 484",
+    "observed_layout_entries": {
+      "central": "2 of 6",
+      "flanking": "4 of 6"
+    },
+    "current_time_slider_test": "keyboard End showed 2026-10-18 00:00 UTC, Home restored origin",
+    "chalk_region_text": "Explain this comparison with Chalk\n\nChalk reads this exact current snapshot, method and scenario. It cannot change the numerical result or manufacture a winning layout.\n\nAsk Chalk about these layouts\n\nREPORT. In this forecast snapshot, central coverage has fewer modeled reef-proxy entries than flanking coverage for the same hypothetical releases; no comparison tracks are unresolved. Chosen after viewing a preview, this illustrative what-if is not an independent test: coarse current support, ideal geometric interception, and omitted windage, waves, buoyancy, diffusion, shoreline and retention effects preclude a measured-benefit claim. Solver-step changes at fixed output times and event-chord downsampling from one fine path check numerical precision, not physical accuracy; missing tracks would retain full-denominator bounds. Independently measure debris paths, collector interception and retention, and outcomes at a mapped reef before claiming real protection; modeled entry is not coral damage.\n\nREPORT \u00b7 Live Chalk response\n\nIn this forecast snapshot, central coverage has fewer modeled reef-proxy entries than flanking coverage for the same hypothetical releases; no comparison tracks are unresolved. Chosen after viewing a preview, this illustrative what-if is not an independent test: coarse current support, ideal geometric interception, and omitted windage, waves, buoyancy, diffusion, shoreline and retention effects preclude a measured-benefit claim. Solver-step changes at fixed output times and event-chord downsampling from one fine path check numerical precision, not physical accuracy; missing tracks would retain full-denominator bounds. Independently measure debris paths, collector interception and retention, and outcomes at a mapped reef before claiming real protection; modeled entry is not coral damage.\n\nComparison evidence citations\n[\n  \"ocean-comparison:572e69e4cbcffa2d77f14e994dc2a59a7df9c35e6a16e2265c3a88b8daba238e\",\n  \"ocean-method:d6764ba36c7fd323c122b0969c6a0b176c35e75ed056db93c13e74af042528ca\"\n]",
+    "numerical_disclosure_text": "Does a smaller time step change the result?\n\nRK4 samples the current at the start, two estimated midpoints and an estimated endpoint, then combines those slopes. Smaller steps refine this calculation; they do not supply new current measurements.\n\nThe layout recommendation is unchanged across the tested contact intervals. All six releases complete the forcing horizon in every numerical run.\n\n1 \u00b7 Change the integration step\n\nRequested RK4 steps of 300, 150 and 75 seconds are compared only at common accepted output times, 300 seconds apart. The 75-second run is a numerical reference, not observed truth. Actual substeps may be shortened at forcing knots, spatial limits or the horizon.\n\nPosition sensitivity \u00b7 the same six hypothetical releases\nRequested step\tLargest separation from 75 s\tComparable releases\tForcing coverage\n300 s\t0.00084 m\t6 / 6\t6 complete \u00b7 0 partial \u00b7 0 unavailable\n150 s\t0.000326 m\t6 / 6\t6 complete \u00b7 0 partial \u00b7 0 unavailable\n75 s \u00b7 reference\t0 m \u00b7 self-comparison\t6 / 6\t6 complete \u00b7 0 partial \u00b7 0 unavailable\n\nLargest position difference across these numerical runs: 0.00084 m. A comparable prefix can still end before the requested six-hour horizon; it is not a complete forecast.\n\n2 \u00b7 Change only the contact-check spacing\n\nAll three rows reuse the same fine trajectory, integrated and saved every 75 seconds. Selecting points 300, 150 or 75 seconds apart changes only the straight chords used to find first reef or interceptor contact. The terminal accepted point is retained even for partial paths.\n\nPredicted reef-entry bounds \u00b7 denominator stays six per layout\nContact spacing\tNo interceptor\tLayout A\tLayout B\tRecommendation\n300 s\t6 / 6\t2 / 6 \u00b7 0 unresolved\t4 / 6 \u00b7 0 unresolved\tLayout A\n150 s\t6 / 6\t2 / 6 \u00b7 0 unresolved\t4 / 6 \u00b7 0 unresolved\tLayout A\n75 s\t6 / 6\t2 / 6 \u00b7 0 unresolved\t4 / 6 \u00b7 0 unresolved\tLayout A\n\nLayout A: Central coverage. Layout B: Flanking coverage. Missing or unsupported outcomes stay in the upper entry bound; they never become zero entries.\n\nContact matching and incomplete comparisons\n\nNumerical precision is not physical accuracy. The forcing is still roughly 4 km / three-hour model data. Agreement does not establish fourth-order convergence, improved ML skill, real collection efficiency or reef protection. No tank observations or independent truth enter this check, and it does not replace the main layout decision paths.",
+    "control_scenario": {
+      "old_report_and_review_cleared": true,
+      "central_entries": "0 of 6",
+      "flanking_entries": "0 of 6",
+      "recommendation_heading": "The two layouts tie in this scenario."
+    },
+    "data_lab": {
+      "combined_plot_count": 1,
+      "disclosure_initially_closed": true,
+      "shares_same_numerical_text": true
+    }
+  },
+  "live_chalk": {
+    "action": "REPORT",
+    "live_model_response_verified": true,
+    "expected_exact_evidence_ids": [
+      "ocean-comparison:572e69e4cbcffa2d77f14e994dc2a59a7df9c35e6a16e2265c3a88b8daba238e",
+      "ocean-method:d6764ba36c7fd323c122b0969c6a0b176c35e75ed056db93c13e74af042528ca"
+    ],
+    "report_sha256": "572e69e4cbcffa2d77f14e994dc2a59a7df9c35e6a16e2265c3a88b8daba238e",
+    "method_sha256": "d6764ba36c7fd323c122b0969c6a0b176c35e75ed056db93c13e74af042528ca",
+    "numeric_summary": {
+      "integration_max_separation_m": 0.0008397775205383981,
+      "event_recommendation_agrees_at_all_levels": true,
+      "all_integrations_completed": true,
+      "meaning": "numerical sensitivity only; no physical accuracy or ML skill established"
+    }
+  },
+  "provider_network_calls_in_offline_checks": 0,
+  "new_photon_test_messages_sent": 0,
+  "photon_settings_changed": false,
+  "xai_api_calls": 0,
+  "paid_billing_enabled": false,
+  "camera_started_by_this_verification": false,
+  "physical_trials_run": 0,
+  "physical_validation": false,
+  "new_matched_current_study": "draft_metadata_only_no_trajectory_or_current_values_acquired_no_scores"
+}
+````
+
+## C. DRAFT matched-current study and exact public metadata evidence
+
+This plan is not a frozen protocol. Four public metadata/identity-drogue bodies and a safe derived receipt establish specific metadata/access observations only. No new study trajectory positions, current-vector values, model fits, scores or physical trials were acquired/run. Synthetic reader tests are proposed, not executed. Exact source bytes are retained; the NOAA DAS public institutional contact is preserved.
+
+### docs/matched-current-study-plan.md
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-study-plan.md
+
+Bytes: 22788; SHA-256: `5d29d877faeb010582189b5e97a0438f6021e3d42ebc2576306b1fd75f31a7c6`. Role: DRAFT matched-current feasibility design; no scientific-value acquisition, frozen protocol or completed study. Quoted record; read the ledger for current status.
+
+````text
+# DRAFT: matched-current drifter feasibility study
+
+Design checkpoint: **17 October 2026**. Status: **DRAFT — Grok design review and
+correction received; a reader implementation, local review and a formal, hashed
+protocol are still required before scientific acquisition**.
+
+This is a proposed six-hour, two-group feasibility comparison. It is not a frozen
+experiment, an acquired trajectory/current dataset, a completed score, or a claim
+of operational forecast skill. Only bounded public metadata were read. No new
+trajectory positions, current-vector values, model fits, scores or physical trials
+were acquired or run for this design.
+
+## 1. Question and the improvement being tested
+
+Does a time-varying, spatially varying current field at an approximately matched
+object depth describe six hours of later GDP buoy motion better than stationary
+and last-observed-drift baselines, for two predeclared historical groups?
+
+This tests the **physical forcing against reserved later position estimates**,
+subject to the independence/processing caveats below. It is a stronger empirical
+question than whether a smaller RK4 step produces a numerically stable line.
+Numerical precision remains a separate diagnostic. A better integrator can still
+integrate the wrong current field or the wrong object-response model.
+
+The candidate forcing is **HYCOM GOFS 3.1, GLBy0.08, experiment 93.0, UV3Z, 2022,
+15 m**. Its explicit 15 m level is a closer match to the standard drogue-centered
+GDP object than OSCAR's daily upper-30-m mean. This is a rationale for testing,
+not a claim that HYCOM will outperform either baseline. A drogued buoy remains a
+different object from loose surface plastic or a tank token.
+
+## 2. What availability was actually verified
+
+| Source | Verified metadata/access | Remaining boundary |
+| --- | --- | --- |
+| [NOAA hourly GDP dataset](https://www.aoml.noaa.gov/phod/gdp/hourly_data.php) | Public ERDDAP schema/attributes and a fixed-origin identity/drogue query succeeded without credentials. The inspected endpoint identifies itself as **v2.01**, with actual time coverage ending **2022-10-31T00:00:00Z**. | The general webpage also describes release **v2.01.1**, with a different final-hour description. Do not silently call this endpoint v2.01.1. Pin the actual payload, metadata, DOI and retrieval date. No 31-position study track has been retrieved. |
+| [HYCOM 2022 UV3Z catalogue](https://tds.hycom.org/thredds/catalogs/GLBy0.08/expt_93.0_uv3z.html?dataset=GLBy0.08-expt_93.0-uv3z-2022) | The catalogue lists freely available OPeNDAP and NCSS access. **NCSS dataset metadata returned successfully without credentials**. | OPeNDAP DDS/DAS attempts timed out; the first proposed data path is the verified NCSS service. A successful metadata response is not proof that a chosen current subset has valid wet cells or successful value transport. |
+| [NOAA drifter construction/behavior](https://www.aoml.noaa.gov/phod/gdp/faq.php) | The standard drogue is centered around 15 m; losing it changes wind/wave response. | Retrospective drogue metadata are not a direct observation of the instantaneous drag depth or an operationally available status feed. |
+| [HYCOM missing/substituted-days notice](https://www.hycom.org/faqs/477-did-you-know-there-are-missing-days-in-the-gofs-31-global-analysis) | Some dates are missing or substituted, and the provider disclaims guaranteed availability. The proposed May 31–June 1 window is not among the listed 2022 substitution dates. | The list is not proof of complete support. Verify the actual requested times, cell masks and run lineage; never fill missing currents with zero. |
+
+Official supporting product specifications:
+[HYCOM GOFS 3.1 analysis](https://www.hycom.org/dataserver/gofs-3pt1/analysis).
+OSCAR is retained as a potential later comparator, not the selected first source:
+[NASA OSCAR final v2](https://podaac.jpl.nasa.gov/dataset/OSCAR_L4_OC_FINAL_V2.0).
+
+## 3. Proposed two identities and selection provenance
+
+The metadata-only candidate query used a fixed origin **2022-06-01T00:00:00Z** and
+the closed region **25–35°N, 80–65°W**. It requested identifiers, buoy class,
+drogue-loss metadata and nominal drogue depth, **not position columns or later
+motion**. Eleven identity rows were returned. Nine had loss dates preceding the
+origin. Two had metadata compatible with an attached 15 m drogue at that origin:
+
+| Proposed complete GDP group | WMO | Reported class/depth | Queried drogue-loss field | Interpretation for this draft |
+| --- | --- | --- | --- | --- |
+| `300234066836710` | `6202613` | SVPB / `15 m` | `2023-03-02T00:00:00Z` | Loss is after the proposed six-hour outcome window. |
+| `300534061292930` | `4102636` | SVPB / `15 m` | Empty/fill | This endpoint documents fill as still attached; zero instead means uncertain from the beginning. Do not conflate those states. |
+
+The two mappings occur once each in the project's saved identity registry; each
+WMO maps back to one GDP ID there. Neither GDP ID nor its mapped WMO is in the
+original 223-ID/known-alias exclusion set. Neither is among the six completed
+fresh-study GDP groups. Identity-registry appearances and an earlier metadata-only
+2021 candidate appearance for the first ID are disclosed; these are **not** claims
+that the IDs have never been seen in metadata.
+
+These checks use the existing saved registry/exclusions, not a newly complete
+physical-identity audit. Preserve the previously disclosed unresolved historical
+aliases. Set `physical_alias_resolution_verified=false` and
+`statistical_independence=false` unless a later documented review establishes
+otherwise. Future trajectories have not been inspected to establish row count,
+finite observations, six-hour survival, spatial coverage or path difficulty.
+
+The proposed two identities stay in the full planned denominator. Do not replace
+one because a download, mask, prefix or future observation fails. The eleven-row
+origin metadata frame is a selection-availability record, not eleven evaluated
+trajectories. Formal review must accept or amend this rule before acquisition.
+
+## 4. Proposed observation and forecast contract
+
+| Item | Proposed fixed value |
+| --- | --- |
+| Context | **25 hourly positions**, 2022-05-31T00:00:00Z through 2022-06-01T00:00:00Z, inclusive. |
+| Forecast origin | 2022-06-01T00:00:00Z. |
+| Reserved outcomes | **Next six hourly positions**, 2022-06-01T01:00:00Z through 2022-06-01T06:00:00Z. |
+| Forecast horizon | **21,600 seconds**, matching the existing `MAX_HORIZON_S`; no 24-hour forecast extension. |
+| Context use | The 25 positions are context/QC, not a fitting dataset. Stationary and current-only initialize from the origin position alone. Last drift uses only its own final two context positions, at May 31T23Z and June 1T00Z, with their actual elapsed time. No common learned model or cross-group fitting. |
+| Forcing support | Current-only receives exactly the declared tile at **June 1T00Z, 03Z and 06Z**, at 15 m. It receives no earlier current fields or later GDP positions. The model does not ingest the other 24 context positions. |
+| Comparison outputs | Same six UTC horizons and same observed targets for every candidate; great-circle position error in metres, six-hour endpoint error, status and coverage. |
+| Planned accounting | Two complete GDP groups × three candidates × six horizons = **36 planned model/horizon attempts**, using only **12 distinct later position estimates**. These are not 36 independent observations. |
+
+Fixed candidates, subject to exact implementation/version review before freezing:
+
+1. **Stationary:** remain at the origin position, without reading earlier context.
+2. **Last observed drift:** extrapolate the final context displacement with its
+   actual elapsed time; freeze the coordinate conversion and propagation method.
+3. **Current-only:** start at that origin position alone and integrate the
+   matched HYCOM 15 m field with the existing knot-aligned bounded advection
+   implementation. Proposed solver maximum step 300 s, hourly output, and forced
+   alignment with current-time knots; freeze the exact code revision and options.
+   Only the origin, 03Z and 06Z forcing slices enter this run. Earlier current
+   fields are unnecessary for these fixed candidates and are omitted from the
+   proposed scientific-value request.
+
+Do not train or introduce a learned residual, windage, Stokes coefficient, diffusion
+coefficient, kernel or new noise tuning before formal design review. Do not tune
+against these groups or the already completed NOAA studies. Any later candidate
+needs a separately declared development design and untouched comparison groups.
+
+## 5. Exact source paths and data-reader requirements
+
+GDP base:
+`https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc`
+
+Availability query, shown unescaped for readability:
+
+```text
+drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00:00:00Z&latitude>=25&latitude<=35&longitude>=-80&longitude<=-65&distinct()
+```
+
+This is the identity/drogue query already made, not a future acquisition command.
+Any later 31-position query must constrain one exact selected ID and the declared
+UTC window. Use the recorded positions as the target; GDP `ve`/`vn` are derived
+from the same processed track and are not independent forcing truth.
+
+HYCOM NCSS base:
+`https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022`
+
+Verified metadata path: the base plus `/dataset.xml`.
+
+The metadata report:
+
+- Grid axes: 4,251 latitude values, −80 to 90°, nominal increment 0.04°; 4,500
+  longitude values, 0 to 359.92°, nominal increment 0.08°.
+- Time: **2,920** valid times, three-hour increment; units `hours since 2000-01-01
+  00:00:00`, Gregorian calendar. The named 2022 aggregate spans **2022-01-01T12Z
+  through 2023-01-01T09Z**. Do not infer bounds from the year in the URL alone.
+- Forty fixed depths, positive downward in metres, including **15.0**.
+- `water_u` and `water_v` use dimensions `time depth lat lon`, stored as short
+  integers, units m/s, scale factor **0.001**, offset **0**, missing/fill **−30000**.
+
+Proposed first scientific subset: only those two variables, the 15 m level, the
+predeclared **25–35°N / 80–65°W** tile, native spatial resolution, and exactly
+**2022-06-01T00Z, 03Z and 06Z**. This tile is approximately 0.6 MB of packed two-component data
+for three times before format overhead; actual service dimensions/size must be
+recorded rather than assumed. Freeze a bounded request and byte/time budget before
+making it. Use one connection; checksum the exact returned bytes.
+
+### Longitude, support and CF decoding contract
+
+The reader's exact normalization is:
+
+```python
+normalized_lon = ((native_lon + 180.0) % 360.0) - 180.0
+```
+
+Pinned synthetic expectations: **280 → −80**, **281 → −79**, and
+**359.92 → approximately −0.08** (absolute floating-point tolerance `1e-10`
+degrees). This tolerance checks a synthetic representation conversion; it is not
+a measured geographic error bound or a time-snapping rule.
+
+For this western Atlantic tile the native source-longitude interval is 280–295°;
+the normalized interval is −80 to −65°. Keep the velocity arrays aligned with
+their coordinate indices. Reject non-finite, duplicate or non-monotonic axes,
+an unexpected discontinuity/dateline-crossing tile, and any sample outside the
+supported interval. Do not silently wrap an outside point, sort/reorder a changed
+axis, shift the whole field, expand support, interpolate across a seam, or silently
+substitute another product. A future dateline-capable reader would need its own
+explicitly reviewed contract; it is outside this draft.
+
+For both velocity components, compare the acquired variable's units, raw dtype,
+fill/missing sentinels, scale, offset, dimensions and selected depth against the
+pinned metadata. Expected values are raw short, m/s, `_FillValue` and
+`missing_value` **−30000**, scale **0.001**, offset **0**, dimensions
+`time depth lat lon`, and depth **15.0 m** positive downward. Reject an unexpected
+encoding, unit or depth change as a recorded failure for the planned groups.
+Do not adopt a new scale, unit conversion, fill value or nearest depth implicitly.
+
+Use one explicit raw-decoding path: reject/mask the **raw integer −30000 before
+scaling**, then multiply finite supported raw integers by **0.001 exactly once**.
+If a library performs automatic CF mask/scale, disable it for this path or prove
+the equivalent single-decoding behavior before freeze; never multiply an already
+decoded value again. The raw sentinel must remain missing, not become −30 m/s or
+zero. A raw `500` must become **0.5 m/s**, not 0.0005 m/s.
+
+Preserve native UTC valid times and masks, reject unsupported wet-cell stencils
+and retain domain/time exits. A missing or masked required knot must produce the
+actual integrator status and completed prefix; no invented finite continuation
+is allowed. Do not expand the tile or change the depth after observing an
+unfavorable outcome. A preliminary transport probe, if approved, must have its own
+predeclared tiny scope and must not become unreported cohort/model selection.
+
+### Required synthetic reader/integration fixtures before freeze
+
+These are **proposed tests using invented arrays**, not acquired HYCOM values,
+executed test receipts or observations of either GDP group:
+
+| Fixture | Exact input | Required assertion |
+| --- | --- | --- |
+| Conversion and scale-once | Native longitude `[280, 281]`, latitude `[-1, 1]`, one depth `15`, raw short `u=500`, `v=0`, scale `0.001`, fill `−30000`. | Longitude becomes `[-80, -79]`; the 359.92 edge also passes the separate conversion assertion; supported velocity is 0.5 m/s east. Raw sentinels are masked before scaling. Unexpected metadata/support changes fail explicitly. |
+| Immediate unsupported | Times `[0, 3, 6]` h; start at **3 h**, longitude **−79.9°**, latitude **0°**; request 6 h; mask the whole 6 h velocity slice. | First positive-time interpolation lacks support: **UNSUPPORTED**, completed elapsed **0**. It is not a PARTIAL result merely because the initial point exists. |
+| True partial prefix | Times `[0, 3, 6, 9]` h; same start at **3 h** and same location/constant velocity; request 6 h; mask only the whole 9 h velocity slice. | The 3→6 h interval completes, then the next interval fails with masked-current support: **PARTIAL**, completed elapsed **3 h**, east displacement **5,400 m** in the numerical frame within a declared floating-point test tolerance. Do not claim a completed six-hour path. |
+| Accounting | Exercise the two synthetic group slots × three candidates × six future horizons, with the missing-current cases above. | Retain **all 36 planned cells** and all group/status records. Mark unsupported later horizons explicitly; do not turn an available prefix into a full score or drop missing cells from the denominator. |
+| Context isolation | Change the first 23 synthetic context positions while preserving the final two, then separately change the penultimate position while preserving origin. | Last drift reads only the final two; stationary/current-only initialize only at origin. No fitted model, future GDP positions or context-era current slices enter current-only. |
+
+The original review's longitudes `[0, 0.08]` did not exercise the intended western
+Atlantic shift, and its masked-knot example incorrectly expected PARTIAL before
+any positive interval completed. Those suggestions were rejected and corrected.
+The corrected four-time fixture is required for a genuine partial-prefix case.
+These reader tests must be implemented and verified before formal protocol freeze;
+static review alone does not establish them as passing.
+
+## 6. Issue-time, processing and independence limits
+
+The inspected HYCOM metadata expose **Valid Time**; no verified run/issue timestamp
+or historical publication-as-of record has been established. The catalogue calls
+this an analysis/hindcast aggregate. Its future-valid current fields may contain
+information unavailable at the drifter forecast origin. Consequently this first
+comparison is a **retrospective forcing-supported motion diagnostic**, not a claim
+of prospective six-hour forecasting skill. An operational study requires archived
+run-specific forecasts, an issue cutoff and realistic delivery latency.
+
+HYCOM includes data assimilation. Before calling the evaluated observations
+independent, audit the product's actual assimilation inputs and whether the tested
+GDP observations, derived products or closely related data entered the forcing.
+Whole-ID holdout alone does not settle this. No assimilation-independence proof was
+obtained by the catalogue inspection.
+
+GDP hourly positions are quality-controlled processed/interpolated estimates,
+not raw instantaneous ground truth. Endpoint metadata include retrospective drogue
+information and processing/version inconsistencies; that also prevents an as-of
+operational claim. The two nearby groups and six dependent future hours support
+descriptive feasibility results only. Do not infer calibrated confidence,
+statistical significance, source attribution, plastic skill or reef protection.
+
+## 7. Preserve failures and report only supported comparisons
+
+Retain all two groups and every planned candidate/horizon, including transport
+failure, malformed/duplicate/missing rows, unresolved identity, missing current
+cells, time limits and domain exits. Distinguish these reasons explicitly.
+Never substitute zero currents, interpolate across unsupported masks or discard
+a failed group to improve an average.
+
+Any common-supported-prefix descriptive comparison must name its exact available
+horizons and flag incompleteness; it must not silently stand in for the full
+six-hour result. Report the planned two-group denominator, achieved per-candidate
+coverage and all failures next to any errors. Do not label synthetic paths or a
+fine numerical reference as observed outcomes.
+
+## 8. Metadata receipts and the review gate
+
+The following exact public metadata bodies are preserved under
+`docs/research-evidence/matched-current-metadata/`, with a safe, derived
+`receipt.json`. They were copied byte-for-byte from the original ignored local
+receipts, without another external request. The derived receipt includes only
+relative filenames, public URLs, retrieval times, curl outcomes, sizes and hashes;
+it excludes machine home paths, credentials and private user data. They are
+**metadata/design evidence, not acquired scientific-value fixtures or a frozen
+study protocol**.
+
+| Local receipt body | Retrieval start (UTC, 2026-10-17) | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| [gdp-hourly.dds](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-hourly.dds) | 19:34:51.733619 | 1,312 | `758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad` |
+| [gdp-hourly.das](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-hourly.das) | 19:34:51.897741 | 18,686 | `66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39` |
+| [gdp-origin-identity-drogue.csv](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv) | 19:34:52.198899 | 640 | `fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339` |
+| [hycom-2022-ncss-dataset.xml](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml) | 19:34:54.925023 | 159,404 | `741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d` |
+
+The [derived receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/receipt.json)
+is 2,640 bytes, SHA-256
+`56328dff9fe82945fe0756967e1334a55471a5735f9e846bae721a186e88c993`.
+Repository links identify the intended durable source paths; no claim of a push
+or Trov publication is created by this draft.
+
+The `.dds`/`.das` URLs append those extensions to the GDP base; the candidate URL
+is the availability query above with encoded comparison characters. All four
+bounded curl requests completed with exit 0 using ordinary certificate
+verification and no supplied authentication. These hashes refer to the specific
+responses, not to every future response of those changing services.
+
+Existing identity-check sources:
+
+- `data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv`: 318,597 bytes,
+  SHA-256 `a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82`.
+- `data/public/noaa-fresh-drifter-v2/exclusions.json`: 10,625 bytes,
+  SHA-256 `40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e`.
+
+## 9. Design review decisions and the remaining gate
+
+Grok supplied an initial static design review and a correction after the local
+review challenged its longitude fixture, immediate-unsupported/PARTIAL distinction
+and leakage wording. Both initial advice and correction are retained as historical
+review evidence in the project's Grok archive; this draft records the accepted
+contracts rather than treating every model suggestion as correct or executed.
+
+Accepted: origin-only current initialization, final-two-position last drift,
+25-position QC context without fitting, exactly three current knots, explicit
+longitude/CF/depth/metadata validation, and full planned accounting on failures.
+Rejected: the blanket claim that using any past/context-era field would itself
+necessarily constitute future leakage. Properly declared development or past-only
+calibration can be scientifically legitimate. This feasibility draft deliberately
+uses no such fitting or earlier forcing because the fixed candidate is simpler;
+the actual unresolved operational issue is future-valid analysis/assimilation
+information without verified origin-time availability.
+
+**Next step:** implement and verify the synthetic reader contracts, review the
+exact implementation and protocol locally, resolve or retain every limitation
+above, then freeze a separate protocol and exact code/data hashes before requesting
+scientific values. The review has not frozen the study. This draft authorizes no
+automated acquisition, scoring, model promotion, tank operation or deployment.
+Keep the existing completed NOAA results unchanged.
+
+Related references: [next current-data study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/next-current-data-study.md),
+[fresh NOAA study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/fresh-noaa-study.md),
+and [RK4 numerical quality](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/rk4-numerical-quality.md).
+````
+
+### docs/research-evidence/matched-current-metadata/gdp-hourly.das
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-hourly.das
+
+Bytes: 18686; SHA-256: `66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39`. Role: Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values. Quoted record; read the ledger for current status.
+
+````text
+Attributes {
+ s {
+  ID {
+    String cf_role "trajectory_id";
+    String ioos_category "Identifier";
+    String long_name "Global Drifter Program Buoy ID";
+  }
+  WMO {
+    Int32 _FillValue -999999;
+    Int32 actual_range 0, 8800888;
+    Float64 colorBarMaximum 100.0;
+    Float64 colorBarMinimum 0.0;
+    String history "From dirall.dat";
+    String long_name "World Meteorological Organization buoy identification number";
+    Int32 missing_value -999;
+  }
+  expno {
+    Int32 _FillValue -999999;
+    Int32 actual_range 46, 32212;
+    Float64 colorBarMaximum 100.0;
+    Float64 colorBarMinimum 0.0;
+    String history "From dirall.dat";
+    String long_name "Experiment number";
+    Int32 missing_value -999;
+    String units "count";
+  }
+  time {
+    String _CoordinateAxisType "Time";
+    Float64 actual_range 5.60178e+8, 1.6671744e+9;
+    String axis "T";
+    Float64 colorBarMaximum 100.0;
+    Float64 colorBarMinimum -100.0;
+    String ioos_category "Time";
+    String long_name "Time";
+    String standard_name "time";
+    String time_origin "01-JAN-1970 00:00:00";
+    String units "seconds since 1970-01-01T00:00:00Z";
+    Float64 valid_max 3.0e+10;
+    Float64 valid_min 2.0e+8;
+  }
+  latitude {
+    String _CoordinateAxisType "Lat";
+    Float32 _FillValue -999999.0;
+    Float32 actual_range -78.30718, 89.98403;
+    String axis "Y";
+    Float64 colorBarMaximum 90.0;
+    Float64 colorBarMinimum -90.0;
+    String ioos_category "Location";
+    String long_name "Latitude";
+    Float32 missing_value -1.0e+34;
+    String standard_name "latitude";
+    String units "degrees_north";
+    Float32 valid_max 90.0;
+    Float32 valid_min -90.0;
+  }
+  longitude {
+    String _CoordinateAxisType "Lon";
+    Float32 _FillValue -999999.0;
+    Float32 actual_range -180.0, 180.0;
+    String axis "X";
+    Float64 colorBarMaximum 180.0;
+    Float64 colorBarMinimum -180.0;
+    String ioos_category "Location";
+    String long_name "Longitude";
+    Float32 missing_value -1.0e+34;
+    String standard_name "longitude";
+    String units "degrees_east";
+    Float32 valid_max 180.0;
+    Float32 valid_min -180.0;
+  }
+  lon360 {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range 0.0, 360.0;
+    String axis "X";
+    Float64 colorBarMaximum 180.0;
+    Float64 colorBarMinimum -180.0;
+    String long_name "Longitude";
+    Float32 missing_value -1.0e+34;
+    String standard_name "longitude";
+    String units "degrees_east";
+    Float32 valid_max 360.0;
+    Float32 valid_min 0.0;
+  }
+  sst {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range -998.8399625853385, 6935.946145480505;
+    Float64 colorBarMaximum 305.0;
+    Float64 colorBarMinimum 273.0;
+    String ioos_category "Temperature";
+    String long_name "fitted sea water temperature";
+    Float64 missing_value -1.0e+34;
+    String standard_name "sea_water_temperature";
+    String units "Kelvin";
+  }
+  sst1 {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range -993.218203606482, 5078.501466679307;
+    Float64 colorBarMaximum 305.0;
+    Float64 colorBarMinimum 273.0;
+    String ioos_category "Temperature";
+    String long_name "fitted non-diurnal sea water temperature";
+    Float64 missing_value -1.0e+34;
+    String standard_name "sea_water_temperature";
+    String units "Kelvin";
+  }
+  sst2 {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range -998.5294141049665, 5212.662006261129;
+    Float64 colorBarMaximum 3.0;
+    Float64 colorBarMinimum -3.0;
+    String ioos_category "Temperature";
+    String long_name "fitted diurnal sea water temperature";
+    Float64 missing_value -1.0e+34;
+    String standard_name "surface_temperature_anomaly";
+    String units "Kelvin";
+  }
+  err_sst {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range 1.316919246718948e-4, 12403.336234337685;
+    Float64 colorBarMaximum 305.0;
+    Float64 colorBarMinimum 273.0;
+    String ioos_category "Quality";
+    String long_name "standard uncertainty of fitted sea water temperature";
+    Float64 missing_value -1.0e+34;
+    String standard_name "sea_water_temperature";
+    String units "Kelvin";
+  }
+  err_sst1 {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range 5.060282444099445e-5, 5630.134683892944;
+    Float64 colorBarMaximum 305.0;
+    Float64 colorBarMinimum 273.0;
+    String ioos_category "Quality";
+    String long_name "standard uncertainty of fitted non-diurnal sea water temperature";
+    Float64 missing_value -1.0e+34;
+    String standard_name "sea_water_temperature";
+    String units "Kelvin";
+  }
+  err_sst2 {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range 1.2937428182201066e-4, 7336.699895774796;
+    Float64 colorBarMaximum 3.0;
+    Float64 colorBarMinimum -3.0;
+    String ioos_category "Quality";
+    String long_name "standard uncertainty of fitted diurnal sea water temperature";
+    Float64 missing_value -1.0e+34;
+    String standard_name "surface_temperature_anomaly";
+    String units "Kelvin";
+  }
+  flg_sst {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range 0.0, 5.0;
+    Float64 colorBarMaximum 6.0;
+    Float64 colorBarMinimum 0.0;
+    String flag_meanings "no-estimate, no-uncertainty-estimate, estimate-not-in-range-uncertainty-not-in-range, estimate-not-in-range-uncertainty-in-range, estimate-in-range-uncertainty-not-in-range, estimate-in-range-uncertainty-in-range";
+    String flag_values "0, 1, 2, 3, 4, 5";
+    String ioos_category "Quality";
+    String long_name "fitted sea water temperature quality flag";
+    Float64 missing_value -999999.0;
+    String standard_name "quality flag";
+    String units "dimensionless";
+  }
+  flg_sst1 {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range 0.0, 5.0;
+    Float64 colorBarMaximum 6.0;
+    Float64 colorBarMinimum 0.0;
+    String flag_meanings "no-estimate, no-uncertainty-estimate, estimate-not-in-range-uncertainty-not-in-range, estimate-not-in-range-uncertainty-in-range, estimate-in-range-uncertainty-not-in-range, estimate-in-range-uncertainty-in-range";
+    String flag_values "0, 1, 2, 3, 4, 5";
+    String ioos_category "Quality";
+    String long_name "fitted non-diurnal sea water temperature quality flag";
+    Float64 missing_value -999999.0;
+    String standard_name "quality flag";
+    String units "dimensionless";
+  }
+  flg_sst2 {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range 0.0, 5.0;
+    Float64 colorBarMaximum 6.0;
+    Float64 colorBarMinimum 0.0;
+    String flag_meanings "no-estimate, no-uncertainty-estimate, estimate-not-in-range-uncertainty-not-in-range, estimate-not-in-range-uncertainty-in-range, estimate-in-range-uncertainty-not-in-range, estimate-in-range-uncertainty-in-range";
+    String flag_values "0, 1, 2, 3, 4, 5";
+    String ioos_category "Quality";
+    String long_name "fitted diurnal sea water temperature quality flag";
+    Float64 missing_value -999999.0;
+    String standard_name "quality flag";
+    String units "dimensionless";
+  }
+  ve {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range -8.3641, 50.15901;
+    Float64 colorBarMaximum 0.5;
+    Float64 colorBarMinimum -0.5;
+    String long_name "Eastward velocity";
+    Float32 missing_value -1.0e+34;
+    String standard_name "surface_eastward_sea_water_velocity";
+    String units "m/s";
+  }
+  vn {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range -8.864425, 12.57357;
+    Float64 colorBarMaximum 0.5;
+    Float64 colorBarMinimum -0.5;
+    String long_name "Northward velocity";
+    Float32 missing_value -1.0e+34;
+    String standard_name "surface_northward_sea_water_velocity";
+    String units "m/s";
+  }
+  err_lat {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range -9.99999, 0.13652;
+    Float64 colorBarMaximum 50.0;
+    Float64 colorBarMinimum 0.0;
+    String long_name "95% confidence interval in latitude";
+    Float32 missing_value -1.0e+34;
+    String units "degrees_north";
+  }
+  err_lon {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range 9.9999994e-11, 0.003599995;
+    Float64 colorBarMaximum 50.0;
+    Float64 colorBarMinimum 0.0;
+    String long_name "95% confidence interval in longitude";
+    Float32 missing_value -1.0e+34;
+    String units "degrees_east";
+  }
+  err_ve {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range 1.8201085e-7, 47.3575;
+    Float64 colorBarMaximum 50.0;
+    Float64 colorBarMinimum 0.0;
+    String long_name "95% confidence interval in eastward velocity";
+    Float32 missing_value -1.0e+34;
+    String units "m/s";
+  }
+  err_vn {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range 1.8201085e-7, 6.6311;
+    Float64 colorBarMaximum 50.0;
+    Float64 colorBarMinimum 0.0;
+    String long_name "95% confidence interval in northward velocity";
+    Float32 missing_value -1.0e+34;
+    String units "m/s";
+  }
+  typebuoy {
+    String history "From directory file dirall.dat";
+    String long_name "Buoy type (see https://www.aoml.noaa.gov/phod/dac/dirall.html)";
+  }
+  gap {
+    Float32 _FillValue -999999.0;
+    Float32 actual_range 0.0, 43200.0;
+    String long_name "time interval between previous and next location fix";
+    Float32 missing_value -1.0e+34;
+    String units "seconds";
+  }
+  deploy_date {
+    Float64 actual_range 5.601312e+8, 1.6670016e+9;
+    String history "From deployment log deplog.dat";
+    String ioos_category "Time";
+    String long_name "Deployment date and time";
+    String standard_name "time";
+    String time_origin "01-JAN-1970 00:00:00";
+    String units "seconds since 1970-01-01T00:00:00Z";
+  }
+  deploy_lat {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range -77.81, 89.9;
+    Float64 colorBarMaximum 90.0;
+    Float64 colorBarMinimum -90.0;
+    String history "From deployment log deplog.dat";
+    String long_name "Deployment latitude";
+    Float64 missing_value -1.0e+34;
+    String units "degrees_north";
+  }
+  deploy_lon {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range -180.0, 180.0;
+    Float64 colorBarMaximum 180.0;
+    Float64 colorBarMinimum -180.0;
+    String history "From deployment log deplog.dat";
+    String long_name "Deployment longitude";
+    Float64 missing_value -1.0e+34;
+    String units "degrees_east";
+  }
+  end_date {
+    Float64 actual_range 5.626368e+8, 1.6862688e+9;
+    String history "From directory file dirall.dat";
+    String ioos_category "Time";
+    String long_name "Last good date and time derived by DAC quality control";
+    String standard_name "time";
+    String time_origin "01-JAN-1970 00:00:00";
+    String units "seconds since 1970-01-01T00:00:00Z";
+  }
+  end_lat {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range -77.49, 99.54;
+    Float64 colorBarMaximum 90.0;
+    Float64 colorBarMinimum -90.0;
+    String history "From directory file dirall.dat";
+    String long_name "Last good latitude derived by DAC quality control";
+    Float64 missing_value -1.0e+34;
+    String units "degrees_north";
+  }
+  end_lon {
+    Float64 _FillValue -999999.0;
+    Float64 actual_range -179.99, 179.98;
+    Float64 colorBarMaximum 180.0;
+    Float64 colorBarMinimum -180.0;
+    String history "From directory file dirall.dat";
+    String long_name "Last good longitude derived by DAC quality control";
+    Float64 missing_value -1.0e+34;
+    String units "degrees_east";
+  }
+  drogue_lost_date {
+    Float64 actual_range 0.0, 1.6854048e+9;
+    String history "From directory file dirall.dat";
+    String ioos_category "Time";
+    String long_name "Date of drogue loss (FillValue=drogue still attached; 0=drogue status uncertain from beginning)";
+    String standard_name "time";
+    String time_origin "01-JAN-1970 00:00:00";
+    String units "seconds since 1970-01-01T00:00:00Z";
+  }
+  typedeath {
+    Int32 _FillValue -999999;
+    Int32 actual_range 0, 6;
+    String history "From directory file dirall.dat";
+    String long_name "Type of death (0=buoy still alive, 1=buoy ran aground, 2=picked up by vessel, 3=stop transmitting, 4=sporadic transmissions, 5=bad batteries, 6=inactive status)";
+    Int32 missing_value -999;
+  }
+  location_type {
+    String long_name "Location Type - GPS or Argos";
+  }
+  DeployingShip {
+    String long_name "Deploying Ship";
+  }
+  DeploymentStatus {
+    String long_name "Status of Deployment";
+  }
+  BuoyTypeManufacturer {
+    String long_name "Buoy Type Manufacturer";
+  }
+  BuoyTypeSensorArray {
+    String long_name "Buoy Type Sensor Array";
+  }
+  PurchaserFunding {
+    String long_name "Purchaser Funding";
+  }
+  SensorUpgrade {
+    String long_name "Sensor Upgrade";
+  }
+  Transmissions {
+    String long_name "Transmissions";
+  }
+  DeployingCountry {
+    String long_name "Deploying Country";
+  }
+  DeploymentComments {
+    String long_name "Deployment Comments";
+  }
+  ManufactureYear {
+    String long_name "Manufacture Year";
+  }
+  ManufactureMonth {
+    String long_name "Manufacture Month";
+  }
+  FloatDiameter {
+    String long_name "Float Diameter";
+  }
+  SubsfcFloatPresence {
+    String long_name "Subsfc Float Presence";
+  }
+  DrogueType {
+    String long_name "Drogue Type";
+  }
+  DrogueLength {
+    String long_name "Drogue Length";
+  }
+  DrogueBallast {
+    String long_name "Drogue Ballast";
+  }
+  DragAreaAboveDrogue {
+    String long_name "Drag Area Above Drogue";
+  }
+  DragAreaOfDrogue {
+    String long_name "Drag Area Of Drogue";
+  }
+  DragAreaRatio {
+    String long_name "Drag Area Ratio";
+  }
+  DrogueCenterDepth {
+    String long_name "Drogue Center Depth";
+  }
+  DrogueDetectSensor {
+    String long_name "Drogue Detect Sensor";
+  }
+ }
+  NC_GLOBAL {
+    String acknowledgement "Elipot, Shane; Sykulski, Adam; Lumpkin, Rick; Centurioni, Luca; Pazos, Mayra (2022). Hourly location, current velocity, and temperature collected from Global Drifter Program drifters world-wide. Version v2.01. NOAA National Centers for Environmental Information. Dataset. https://doi.org/10.25921/x46c-3620. Accessed [date].";
+    String cdm_data_type "Trajectory";
+    String cdm_trajectory_variables "ID";
+    String comment "Global Drifter Program hourly data";
+    String contributor_name "NOAA Global Drifter Program";
+    String contributor_role "Data Acquisition Center";
+    String Conventions "CF-1.6, ACDD-1.3, COARDS";
+    String creator_email "aoml.dftr@noaa.gov";
+    String creator_name "GDP drifter DAC";
+    String creator_type "institution";
+    String creator_url "https://www.aoml.noaa.gov/phod/gdp";
+    String CurrentProgram "1844";
+    String date_created "2023-08-31T11:08:41Z";
+    String date_issued "2021-01-22T01:01:03Z";
+    String date_modified "2021-01-22T01:01:03Z";
+    String doi "10.25921/x46c-3620";
+    Float64 Easternmost_Easting 180.0;
+    String featureType "Trajectory";
+    Float64 geospatial_lat_max 89.98403;
+    Float64 geospatial_lat_min -78.30718;
+    String geospatial_lat_resolution "tbd";
+    String geospatial_lat_units "degrees_north";
+    Float64 geospatial_lon_max 180.0;
+    Float64 geospatial_lon_min -180.0;
+    String geospatial_lon_resolution "tbd";
+    String geospatial_lon_units "degrees_east";
+    String history "Version v2.01.  Metadata from dirall.dat and deplog.dat
+2026-10-17T19:34:52Z (local files)
+2026-10-17T19:34:52Z https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das";
+    String infoUrl "https://www.aoml.noaa.gov/phod/dac/dirall.html";
+    String institution "NOAA Atlantic Oceanographic and Meteorological Laboratory";
+    String interpolation_method "Weighted Maximum Likelihood Estimator";
+    String keywords "aground, alive, atlantic, attached, bad, batteries, beginning, between, buoy, circulation, collection, confidence, currents, data, date, death, deploy_date, deploy_lat, deploy_lon, deployment, drifter, drifting, drogue, drogue_lost_date, earth, Earth Science > Oceans > Ocean Circulation > Ocean Currents, eastward, end, end_date, end_lat, end_lon, err_lat, err_lon, err_sst, err_sst1, err_sst2, err_ve, err_vn, experiment, expno, fix, flg_sst, flg_sst1, flg_sst2, gap, global, hour, hourly, identification, inactive, interpolated, interval, laboratory, latitude, lon360, longitude, loss, meteorological, missing, next, noaa, northward, number, obs, observations, ocean, oceanographic, oceans, organisation, organization, percent, picked, previous, program, ran, science, sea, seawater, see, sporadic, status, still, stop, surface, surface current, surface_eastward_sea_water_velocity, surface_northward_sea_water_velocity, time, trajectory, transmissions, transmitting, type, typebuoy, typedeath, uncertain, value, velocity, vessel, water, WMO, world";
+    String keywords_vocabulary "GCMD Science Keywords";
+    String licence "freely available";
+    String license "Creative Commons Attribution 4.0 (https://creativecommons.org/licenses/by/4.0/) This study used data collected and made freely available by the NOAA Global Drifter Program (https://www.aoml.noaa.gov/phod/gdp/) accessed from https://erddap.aoml.noaa.gov/gdp/erddap/index.html";
+    String ManufactureSensorType "SVPBD";
+    String ManufactureVoltage "84 volts";
+    String metadata_link "https://www.aoml.noaa.gov/phod/dac/dirall.html";
+    Float64 Northernmost_Northing 89.98403;
+    String processing_level "Level 2 QC by GDP drifter DAC";
+    String publisher_email "aoml.dftr@noaa.gov";
+    String publisher_name "GDP Drifter DAC";
+    String publisher_type "institution";
+    String publisher_url "https://www.aoml.noaa.gov/phod/gdp";
+    String source "source description";
+    String sourceUrl "(local files)";
+    Float64 Southernmost_Northing -78.30718;
+    String standard_name_vocabulary "CF Standard Name Table v30";
+    String subsetVariables "ID, location_type, WMO, expno, typedeath, typebuoy,SensorUpgrade,BuoyTypeManufacturer,BuoyTypeSensorArray,FloatDiameter,PurchaserFunding,Transmissions,DeployingCountry,ManufactureYear,ManufactureMonth,DrogueLength,DrogueBallast,DrogueDetectSensor, DeploymentStatus, DeployingShip";
+    String summary "Global Drifter Program hourly drifting buoy collection. Quality control interpolated (interpolation via mathematical model fitting) data. Hourly Drifter data product exists from early 2000's to present, well suited for observing smaller-scale oceanic processes. NOAA-Atlantic Oceanographic & Meteorological Laboratory (AOML) data from a local source. The hourly QC dataset is updated on a quarterly basis, i.e. every 3 months, in delayed mode, but the data processing team has experienced unforeseen setbacks. The GDP is working as quickly as possible to update the dataset. Please reference the acknowledgment attribute to cite the dataset's DOI.";
+    String time_coverage_end "2022-10-31T00:00:00Z";
+    String time_coverage_start "1987-10-02T13:00:00Z";
+    String title "Global Drifter Program - 1 Hour Interpolated QC Drifter Data";
+    Float64 Westernmost_Easting -180.0;
+  }
+}
+````
+
+### docs/research-evidence/matched-current-metadata/gdp-hourly.dds
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-hourly.dds
+
+Bytes: 1312; SHA-256: `758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad`. Role: Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values. Quoted record; read the ledger for current status.
+
+````text
+Dataset {
+  Sequence {
+    String ID;
+    Int32 WMO;
+    Int32 expno;
+    Float64 time;
+    Float32 latitude;
+    Float32 longitude;
+    Float32 lon360;
+    Float64 sst;
+    Float64 sst1;
+    Float64 sst2;
+    Float64 err_sst;
+    Float64 err_sst1;
+    Float64 err_sst2;
+    Float64 flg_sst;
+    Float64 flg_sst1;
+    Float64 flg_sst2;
+    Float32 ve;
+    Float32 vn;
+    Float32 err_lat;
+    Float32 err_lon;
+    Float32 err_ve;
+    Float32 err_vn;
+    String typebuoy;
+    Float32 gap;
+    Float64 deploy_date;
+    Float64 deploy_lat;
+    Float64 deploy_lon;
+    Float64 end_date;
+    Float64 end_lat;
+    Float64 end_lon;
+    Float64 drogue_lost_date;
+    Int32 typedeath;
+    String location_type;
+    String DeployingShip;
+    String DeploymentStatus;
+    String BuoyTypeManufacturer;
+    String BuoyTypeSensorArray;
+    String PurchaserFunding;
+    String SensorUpgrade;
+    String Transmissions;
+    String DeployingCountry;
+    String DeploymentComments;
+    String ManufactureYear;
+    String ManufactureMonth;
+    String FloatDiameter;
+    String SubsfcFloatPresence;
+    String DrogueType;
+    String DrogueLength;
+    String DrogueBallast;
+    String DragAreaAboveDrogue;
+    String DragAreaOfDrogue;
+    String DragAreaRatio;
+    String DrogueCenterDepth;
+    String DrogueDetectSensor;
+  } s;
+} s;
+````
+
+### docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv
+
+Bytes: 640; SHA-256: `fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339`. Role: Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values. Quoted record; read the ledger for current status.
+
+````text
+ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth
+,,,UTC,
+300234064015000,4101546,SVP,2017-11-30T00:00:00Z,15 m
+300234064503580,4101707,SVPB,2019-09-04T00:00:00Z,15 m
+300234066536050,4401854,SVPB,2020-11-14T00:00:00Z,15 m
+300234066791730,6203613,SVPB,2020-05-23T00:00:00Z,15 m
+300234066836710,6202613,SVPB,2023-03-02T00:00:00Z,15 m
+300234067113280,1301573,SVP,2020-04-30T00:00:00Z,15 m
+300234067118280,1301578,SVP,2020-02-16T00:00:00Z,15 m
+300234067873390,3201770,SVP,2021-05-13T00:00:00Z,15 m
+300234067973140,6203777,SVPB,2021-05-01T00:00:00Z,15 m
+300534061292930,4102636,SVPB,,15 m
+300534061651530,4102632,SVPB,2021-10-27T00:00:00Z,15 m
+````
+
+### docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml
+
+Bytes: 159404; SHA-256: `741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d`. Role: Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values. Quoted record; read the ledger for current status.
+
+````text
+<?xml version="1.0" encoding="UTF-8"?>
+<gridDataset location="/thredds/ncss/GLBy0.08/expt_93.0/uv3z/2022" path="path">
+  <axis name="depth" shape="40" type="double" axisType="Height">
+    <attribute name="long_name" value="Depth" />
+    <attribute name="standard_name" value="depth" />
+    <attribute name="units" value="m" />
+    <attribute name="positive" value="down" />
+    <attribute name="axis" value="Z" />
+    <attribute name="NAVO_code" type="int" value="5" />
+    <attribute name="_CoordinateAxisType" value="Height" />
+    <attribute name="_CoordinateZisPositive" value="down" />
+    <values>0.0 2.0 4.0 6.0 8.0 10.0 12.0 15.0 20.0 25.0 30.0 35.0 40.0 45.0 50.0 60.0 70.0 80.0 90.0 100.0 125.0 150.0 200.0 250.0 300.0 350.0 400.0 500.0 600.0 700.0 800.0 900.0 1000.0 1250.0 1500.0 2000.0 2500.0 3000.0 4000.0 5000.0</values>
+  </axis>
+  <axis name="lat" shape="4251" type="double" axisType="Lat">
+    <attribute name="long_name" value="Latitude" />
+    <attribute name="standard_name" value="latitude" />
+    <attribute name="units" value="degrees_north" />
+    <attribute name="point_spacing" value="even" />
+    <attribute name="axis" value="Y" />
+    <attribute name="NAVO_code" type="int" value="1" />
+    <attribute name="_CoordinateAxisType" value="Lat" />
+    <values>-80.0 -79.95999908447266 -79.91999816894531 -79.87999725341797 -79.83999633789062 -79.80000305175781 -79.76000213623047 -79.72000122070312 -79.68000030517578 -79.63999938964844 -79.5999984741211 -79.55999755859375 -79.5199966430664 -79.4800033569336 -79.44000244140625 -79.4000015258789 -79.36000061035156 -79.31999969482422 -79.27999877929688 -79.23999786376953 -79.19999694824219 -79.16000366210938 -79.12000274658203 -79.08000183105469 -79.04000091552734 -79.0 -78.95999908447266 -78.91999816894531 -78.87999725341797 -78.83999633789062 -78.80000305175781 -78.76000213623047 -78.72000122070312 -78.68000030517578 -78.63999938964844 -78.5999984741211 -78.55999755859375 -78.5199966430664 -78.4800033569336 -78.44000244140625 -78.4000015258789 -78.36000061035156 -78.31999969482422 -78.27999877929688 -78.23999786376953 -78.19999694824219 -78.16000366210938 -78.12000274658203 -78.08000183105469 -78.04000091552734 -78.0 -77.95999908447266 -77.91999816894531 -77.87999725341797 -77.83999633789062 -77.80000305175781 -77.76000213623047 -77.72000122070312 -77.68000030517578 -77.63999938964844 -77.5999984741211 -77.55999755859375 -77.5199966430664 -77.4800033569336 -77.44000244140625 -77.4000015258789 -77.36000061035156 -77.31999969482422 -77.27999877929688 -77.23999786376953 -77.19999694824219 -77.16000366210938 -77.12000274658203 -77.08000183105469 -77.04000091552734 -77.0 -76.95999908447266 -76.91999816894531 -76.87999725341797 -76.83999633789062 -76.80000305175781 -76.76000213623047 -76.72000122070312 -76.68000030517578 -76.63999938964844 -76.5999984741211 -76.55999755859375 -76.5199966430664 -76.4800033569336 -76.44000244140625 -76.4000015258789 -76.36000061035156 -76.31999969482422 -76.27999877929688 -76.23999786376953 -76.19999694824219 -76.16000366210938 -76.12000274658203 -76.08000183105469 -76.04000091552734 -76.0 -75.95999908447266 -75.91999816894531 -75.87999725341797 -75.83999633789062 -75.80000305175781 -75.76000213623047 -75.72000122070312 -75.68000030517578 -75.63999938964844 -75.5999984741211 -75.55999755859375 -75.5199966430664 -75.4800033569336 -75.44000244140625 -75.4000015258789 -75.36000061035156 -75.31999969482422 -75.27999877929688 -75.23999786376953 -75.19999694824219 -75.16000366210938 -75.12000274658203 -75.08000183105469 -75.04000091552734 -75.0 -74.95999908447266 -74.91999816894531 -74.87999725341797 -74.83999633789062 -74.80000305175781 -74.76000213623047 -74.72000122070312 -74.68000030517578 -74.63999938964844 -74.5999984741211 -74.55999755859375 -74.5199966430664 -74.4800033569336 -74.44000244140625 -74.4000015258789 -74.36000061035156 -74.31999969482422 -74.27999877929688 -74.23999786376953 -74.19999694824219 -74.16000366210938 -74.12000274658203 -74.08000183105469 -74.04000091552734 -74.0 -73.95999908447266 -73.91999816894531 -73.87999725341797 -73.83999633789062 -73.80000305175781 -73.76000213623047 -73.72000122070312 -73.68000030517578 -73.63999938964844 -73.5999984741211 -73.55999755859375 -73.5199966430664 -73.4800033569336 -73.44000244140625 -73.4000015258789 -73.36000061035156 -73.31999969482422 -73.27999877929688 -73.23999786376953 -73.19999694824219 -73.16000366210938 -73.12000274658203 -73.08000183105469 -73.04000091552734 -73.0 -72.95999908447266 -72.91999816894531 -72.87999725341797 -72.83999633789062 -72.80000305175781 -72.76000213623047 -72.72000122070312 -72.68000030517578 -72.63999938964844 -72.5999984741211 -72.55999755859375 -72.5199966430664 -72.4800033569336 -72.44000244140625 -72.4000015258789 -72.36000061035156 -72.31999969482422 -72.27999877929688 -72.23999786376953 -72.19999694824219 -72.16000366210938 -72.12000274658203 -72.08000183105469 -72.04000091552734 -72.0 -71.95999908447266 -71.91999816894531 -71.87999725341797 -71.83999633789062 -71.80000305175781 -71.76000213623047 -71.72000122070312 -71.68000030517578 -71.63999938964844 -71.5999984741211 -71.55999755859375 -71.5199966430664 -71.4800033569336 -71.44000244140625 -71.4000015258789 -71.36000061035156 -71.31999969482422 -71.27999877929688 -71.23999786376953 -71.19999694824219 -71.16000366210938 -71.12000274658203 -71.08000183105469 -71.04000091552734 -71.0 -70.95999908447266 -70.91999816894531 -70.87999725341797 -70.83999633789062 -70.80000305175781 -70.76000213623047 -70.72000122070312 -70.68000030517578 -70.63999938964844 -70.5999984741211 -70.55999755859375 -70.5199966430664 -70.4800033569336 -70.44000244140625 -70.4000015258789 -70.36000061035156 -70.31999969482422 -70.27999877929688 -70.23999786376953 -70.19999694824219 -70.16000366210938 -70.12000274658203 -70.08000183105469 -70.04000091552734 -70.0 -69.95999908447266 -69.91999816894531 -69.87999725341797 -69.83999633789062 -69.80000305175781 -69.76000213623047 -69.72000122070312 -69.68000030517578 -69.63999938964844 -69.5999984741211 -69.55999755859375 -69.5199966430664 -69.4800033569336 -69.44000244140625 -69.4000015258789 -69.36000061035156 -69.31999969482422 -69.27999877929688 -69.23999786376953 -69.19999694824219 -69.16000366210938 -69.12000274658203 -69.08000183105469 -69.04000091552734 -69.0 -68.95999908447266 -68.91999816894531 -68.87999725341797 -68.83999633789062 -68.80000305175781 -68.76000213623047 -68.72000122070312 -68.68000030517578 -68.63999938964844 -68.5999984741211 -68.55999755859375 -68.5199966430664 -68.4800033569336 -68.44000244140625 -68.4000015258789 -68.36000061035156 -68.31999969482422 -68.27999877929688 -68.23999786376953 -68.19999694824219 -68.16000366210938 -68.12000274658203 -68.08000183105469 -68.04000091552734 -68.0 -67.95999908447266 -67.91999816894531 -67.87999725341797 -67.83999633789062 -67.80000305175781 -67.76000213623047 -67.72000122070312 -67.68000030517578 -67.63999938964844 -67.5999984741211 -67.55999755859375 -67.5199966430664 -67.4800033569336 -67.44000244140625 -67.4000015258789 -67.36000061035156 -67.31999969482422 -67.27999877929688 -67.23999786376953 -67.19999694824219 -67.16000366210938 -67.12000274658203 -67.08000183105469 -67.04000091552734 -67.0 -66.95999908447266 -66.91999816894531 -66.87999725341797 -66.83999633789062 -66.80000305175781 -66.76000213623047 -66.72000122070312 -66.68000030517578 -66.63999938964844 -66.5999984741211 -66.55999755859375 -66.5199966430664 -66.4800033569336 -66.44000244140625 -66.4000015258789 -66.36000061035156 -66.31999969482422 -66.27999877929688 -66.23999786376953 -66.19999694824219 -66.16000366210938 -66.12000274658203 -66.08000183105469 -66.04000091552734 -66.0 -65.95999908447266 -65.91999816894531 -65.87999725341797 -65.83999633789062 -65.80000305175781 -65.76000213623047 -65.72000122070312 -65.68000030517578 -65.63999938964844 -65.5999984741211 -65.55999755859375 -65.5199966430664 -65.4800033569336 -65.44000244140625 -65.4000015258789 -65.36000061035156 -65.31999969482422 -65.27999877929688 -65.23999786376953 -65.19999694824219 -65.16000366210938 -65.12000274658203 -65.08000183105469 -65.04000091552734 -65.0 -64.95999908447266 -64.91999816894531 -64.87999725341797 -64.83999633789062 -64.80000305175781 -64.76000213623047 -64.72000122070312 -64.68000030517578 -64.63999938964844 -64.5999984741211 -64.55999755859375 -64.5199966430664 -64.4800033569336 -64.44000244140625 -64.4000015258789 -64.36000061035156 -64.31999969482422 -64.27999877929688 -64.23999786376953 -64.19999694824219 -64.16000366210938 -64.12000274658203 -64.08000183105469 -64.04000091552734 -64.0 -63.959999084472656 -63.91999816894531 -63.880001068115234 -63.84000015258789 -63.79999923706055 -63.7599983215332 -63.720001220703125 -63.68000030517578 -63.63999938964844 -63.599998474121094 -63.560001373291016 -63.52000045776367 -63.47999954223633 -63.439998626708984 -63.400001525878906 -63.36000061035156 -63.31999969482422 -63.279998779296875 -63.2400016784668 -63.20000076293945 -63.15999984741211 -63.119998931884766 -63.08000183105469 -63.040000915527344 -63.0 -62.959999084472656 -62.91999816894531 -62.880001068115234 -62.84000015258789 -62.79999923706055 -62.7599983215332 -62.720001220703125 -62.68000030517578 -62.63999938964844 -62.599998474121094 -62.560001373291016 -62.52000045776367 -62.47999954223633 -62.439998626708984 -62.400001525878906 -62.36000061035156 -62.31999969482422 -62.279998779296875 -62.2400016784668 -62.20000076293945 -62.15999984741211 -62.119998931884766 -62.08000183105469 -62.040000915527344 -62.0 -61.959999084472656 -61.91999816894531 -61.880001068115234 -61.84000015258789 -61.79999923706055 -61.7599983215332 -61.720001220703125 -61.68000030517578 -61.63999938964844 -61.599998474121094 -61.560001373291016 -61.52000045776367 -61.47999954223633 -61.439998626708984 -61.400001525878906 -61.36000061035156 -61.31999969482422 -61.279998779296875 -61.2400016784668 -61.20000076293945 -61.15999984741211 -61.119998931884766 -61.08000183105469 -61.040000915527344 -61.0 -60.959999084472656 -60.91999816894531 -60.880001068115234 -60.84000015258789 -60.79999923706055 -60.7599983215332 -60.720001220703125 -60.68000030517578 -60.63999938964844 -60.599998474121094 -60.560001373291016 -60.52000045776367 -60.47999954223633 -60.439998626708984 -60.400001525878906 -60.36000061035156 -60.31999969482422 -60.279998779296875 -60.2400016784668 -60.20000076293945 -60.15999984741211 -60.119998931884766 -60.08000183105469 -60.040000915527344 -60.0 -59.959999084472656 -59.91999816894531 -59.880001068115234 -59.84000015258789 -59.79999923706055 -59.7599983215332 -59.720001220703125 -59.68000030517578 -59.63999938964844 -59.599998474121094 -59.560001373291016 -59.52000045776367 -59.47999954223633 -59.439998626708984 -59.400001525878906 -59.36000061035156 -59.31999969482422 -59.279998779296875 -59.2400016784668 -59.20000076293945 -59.15999984741211 -59.119998931884766 -59.08000183105469 -59.040000915527344 -59.0 -58.959999084472656 -58.91999816894531 -58.880001068115234 -58.84000015258789 -58.79999923706055 -58.7599983215332 -58.720001220703125 -58.68000030517578 -58.63999938964844 -58.599998474121094 -58.560001373291016 -58.52000045776367 -58.47999954223633 -58.439998626708984 -58.400001525878906 -58.36000061035156 -58.31999969482422 -58.279998779296875 -58.2400016784668 -58.20000076293945 -58.15999984741211 -58.119998931884766 -58.08000183105469 -58.040000915527344 -58.0 -57.959999084472656 -57.91999816894531 -57.880001068115234 -57.84000015258789 -57.79999923706055 -57.7599983215332 -57.720001220703125 -57.68000030517578 -57.63999938964844 -57.599998474121094 -57.560001373291016 -57.52000045776367 -57.47999954223633 -57.439998626708984 -57.400001525878906 -57.36000061035156 -57.31999969482422 -57.279998779296875 -57.2400016784668 -57.20000076293945 -57.15999984741211 -57.119998931884766 -57.08000183105469 -57.040000915527344 -57.0 -56.959999084472656 -56.91999816894531 -56.880001068115234 -56.84000015258789 -56.79999923706055 -56.7599983215332 -56.720001220703125 -56.68000030517578 -56.63999938964844 -56.599998474121094 -56.560001373291016 -56.52000045776367 -56.47999954223633 -56.439998626708984 -56.400001525878906 -56.36000061035156 -56.31999969482422 -56.279998779296875 -56.2400016784668 -56.20000076293945 -56.15999984741211 -56.119998931884766 -56.08000183105469 -56.040000915527344 -56.0 -55.959999084472656 -55.91999816894531 -55.880001068115234 -55.84000015258789 -55.79999923706055 -55.7599983215332 -55.720001220703125 -55.68000030517578 -55.63999938964844 -55.599998474121094 -55.560001373291016 -55.52000045776367 -55.47999954223633 -55.439998626708984 -55.400001525878906 -55.36000061035156 -55.31999969482422 -55.279998779296875 -55.2400016784668 -55.20000076293945 -55.15999984741211 -55.119998931884766 -55.08000183105469 -55.040000915527344 -55.0 -54.959999084472656 -54.91999816894531 -54.880001068115234 -54.84000015258789 -54.79999923706055 -54.7599983215332 -54.720001220703125 -54.68000030517578 -54.63999938964844 -54.599998474121094 -54.560001373291016 -54.52000045776367 -54.47999954223633 -54.439998626708984 -54.400001525878906 -54.36000061035156 -54.31999969482422 -54.279998779296875 -54.2400016784668 -54.20000076293945 -54.15999984741211 -54.119998931884766 -54.08000183105469 -54.040000915527344 -54.0 -53.959999084472656 -53.91999816894531 -53.880001068115234 -53.84000015258789 -53.79999923706055 -53.7599983215332 -53.720001220703125 -53.68000030517578 -53.63999938964844 -53.599998474121094 -53.560001373291016 -53.52000045776367 -53.47999954223633 -53.439998626708984 -53.400001525878906 -53.36000061035156 -53.31999969482422 -53.279998779296875 -53.2400016784668 -53.20000076293945 -53.15999984741211 -53.119998931884766 -53.08000183105469 -53.040000915527344 -53.0 -52.959999084472656 -52.91999816894531 -52.880001068115234 -52.84000015258789 -52.79999923706055 -52.7599983215332 -52.720001220703125 -52.68000030517578 -52.63999938964844 -52.599998474121094 -52.560001373291016 -52.52000045776367 -52.47999954223633 -52.439998626708984 -52.400001525878906 -52.36000061035156 -52.31999969482422 -52.279998779296875 -52.2400016784668 -52.20000076293945 -52.15999984741211 -52.119998931884766 -52.08000183105469 -52.040000915527344 -52.0 -51.959999084472656 -51.91999816894531 -51.880001068115234 -51.84000015258789 -51.79999923706055 -51.7599983215332 -51.720001220703125 -51.68000030517578 -51.63999938964844 -51.599998474121094 -51.560001373291016 -51.52000045776367 -51.47999954223633 -51.439998626708984 -51.400001525878906 -51.36000061035156 -51.31999969482422 -51.279998779296875 -51.2400016784668 -51.20000076293945 -51.15999984741211 -51.119998931884766 -51.08000183105469 -51.040000915527344 -51.0 -50.959999084472656 -50.91999816894531 -50.880001068115234 -50.84000015258789 -50.79999923706055 -50.7599983215332 -50.720001220703125 -50.68000030517578 -50.63999938964844 -50.599998474121094 -50.560001373291016 -50.52000045776367 -50.47999954223633 -50.439998626708984 -50.400001525878906 -50.36000061035156 -50.31999969482422 -50.279998779296875 -50.2400016784668 -50.20000076293945 -50.15999984741211 -50.119998931884766 -50.08000183105469 -50.040000915527344 -50.0 -49.959999084472656 -49.91999816894531 -49.880001068115234 -49.84000015258789 -49.79999923706055 -49.7599983215332 -49.720001220703125 -49.68000030517578 -49.63999938964844 -49.599998474121094 -49.560001373291016 -49.52000045776367 -49.47999954223633 -49.439998626708984 -49.400001525878906 -49.36000061035156 -49.31999969482422 -49.279998779296875 -49.2400016784668 -49.20000076293945 -49.15999984741211 -49.119998931884766 -49.08000183105469 -49.040000915527344 -49.0 -48.959999084472656 -48.91999816894531 -48.880001068115234 -48.84000015258789 -48.79999923706055 -48.7599983215332 -48.720001220703125 -48.68000030517578 -48.63999938964844 -48.599998474121094 -48.560001373291016 -48.52000045776367 -48.47999954223633 -48.439998626708984 -48.400001525878906 -48.36000061035156 -48.31999969482422 -48.279998779296875 -48.2400016784668 -48.20000076293945 -48.15999984741211 -48.119998931884766 -48.08000183105469 -48.040000915527344 -48.0 -47.959999084472656 -47.91999816894531 -47.880001068115234 -47.84000015258789 -47.79999923706055 -47.7599983215332 -47.720001220703125 -47.68000030517578 -47.63999938964844 -47.599998474121094 -47.560001373291016 -47.52000045776367 -47.47999954223633 -47.439998626708984 -47.400001525878906 -47.36000061035156 -47.31999969482422 -47.279998779296875 -47.2400016784668 -47.20000076293945 -47.15999984741211 -47.119998931884766 -47.08000183105469 -47.040000915527344 -47.0 -46.959999084472656 -46.91999816894531 -46.880001068115234 -46.84000015258789 -46.79999923706055 -46.7599983215332 -46.720001220703125 -46.68000030517578 -46.63999938964844 -46.599998474121094 -46.560001373291016 -46.52000045776367 -46.47999954223633 -46.439998626708984 -46.400001525878906 -46.36000061035156 -46.31999969482422 -46.279998779296875 -46.2400016784668 -46.20000076293945 -46.15999984741211 -46.119998931884766 -46.08000183105469 -46.040000915527344 -46.0 -45.959999084472656 -45.91999816894531 -45.880001068115234 -45.84000015258789 -45.79999923706055 -45.7599983215332 -45.720001220703125 -45.68000030517578 -45.63999938964844 -45.599998474121094 -45.560001373291016 -45.52000045776367 -45.47999954223633 -45.439998626708984 -45.400001525878906 -45.36000061035156 -45.31999969482422 -45.279998779296875 -45.2400016784668 -45.20000076293945 -45.15999984741211 -45.119998931884766 -45.08000183105469 -45.040000915527344 -45.0 -44.959999084472656 -44.91999816894531 -44.880001068115234 -44.84000015258789 -44.79999923706055 -44.7599983215332 -44.720001220703125 -44.68000030517578 -44.63999938964844 -44.599998474121094 -44.560001373291016 -44.52000045776367 -44.47999954223633 -44.439998626708984 -44.400001525878906 -44.36000061035156 -44.31999969482422 -44.279998779296875 -44.2400016784668 -44.20000076293945 -44.15999984741211 -44.119998931884766 -44.08000183105469 -44.040000915527344 -44.0 -43.959999084472656 -43.91999816894531 -43.880001068115234 -43.84000015258789 -43.79999923706055 -43.7599983215332 -43.720001220703125 -43.68000030517578 -43.63999938964844 -43.599998474121094 -43.560001373291016 -43.52000045776367 -43.47999954223633 -43.439998626708984 -43.400001525878906 -43.36000061035156 -43.31999969482422 -43.279998779296875 -43.2400016784668 -43.20000076293945 -43.15999984741211 -43.119998931884766 -43.08000183105469 -43.040000915527344 -43.0 -42.959999084472656 -42.91999816894531 -42.880001068115234 -42.84000015258789 -42.79999923706055 -42.7599983215332 -42.720001220703125 -42.68000030517578 -42.63999938964844 -42.599998474121094 -42.560001373291016 -42.52000045776367 -42.47999954223633 -42.439998626708984 -42.400001525878906 -42.36000061035156 -42.31999969482422 -42.279998779296875 -42.2400016784668 -42.20000076293945 -42.15999984741211 -42.119998931884766 -42.08000183105469 -42.040000915527344 -42.0 -41.959999084472656 -41.91999816894531 -41.880001068115234 -41.84000015258789 -41.79999923706055 -41.7599983215332 -41.720001220703125 -41.68000030517578 -41.63999938964844 -41.599998474121094 -41.560001373291016 -41.52000045776367 -41.47999954223633 -41.439998626708984 -41.400001525878906 -41.36000061035156 -41.31999969482422 -41.279998779296875 -41.2400016784668 -41.20000076293945 -41.15999984741211 -41.119998931884766 -41.08000183105469 -41.040000915527344 -41.0 -40.959999084472656 -40.91999816894531 -40.880001068115234 -40.84000015258789 -40.79999923706055 -40.7599983215332 -40.720001220703125 -40.68000030517578 -40.63999938964844 -40.599998474121094 -40.560001373291016 -40.52000045776367 -40.47999954223633 -40.439998626708984 -40.400001525878906 -40.36000061035156 -40.31999969482422 -40.279998779296875 -40.2400016784668 -40.20000076293945 -40.15999984741211 -40.119998931884766 -40.08000183105469 -40.040000915527344 -40.0 -39.959999084472656 -39.91999816894531 -39.880001068115234 -39.84000015258789 -39.79999923706055 -39.7599983215332 -39.720001220703125 -39.68000030517578 -39.63999938964844 -39.599998474121094 -39.560001373291016 -39.52000045776367 -39.47999954223633 -39.439998626708984 -39.400001525878906 -39.36000061035156 -39.31999969482422 -39.279998779296875 -39.2400016784668 -39.20000076293945 -39.15999984741211 -39.119998931884766 -39.08000183105469 -39.040000915527344 -39.0 -38.959999084472656 -38.91999816894531 -38.880001068115234 -38.84000015258789 -38.79999923706055 -38.7599983215332 -38.720001220703125 -38.68000030517578 -38.63999938964844 -38.599998474121094 -38.560001373291016 -38.52000045776367 -38.47999954223633 -38.439998626708984 -38.400001525878906 -38.36000061035156 -38.31999969482422 -38.279998779296875 -38.2400016784668 -38.20000076293945 -38.15999984741211 -38.119998931884766 -38.08000183105469 -38.040000915527344 -38.0 -37.959999084472656 -37.91999816894531 -37.880001068115234 -37.84000015258789 -37.79999923706055 -37.7599983215332 -37.720001220703125 -37.68000030517578 -37.63999938964844 -37.599998474121094 -37.560001373291016 -37.52000045776367 -37.47999954223633 -37.439998626708984 -37.400001525878906 -37.36000061035156 -37.31999969482422 -37.279998779296875 -37.2400016784668 -37.20000076293945 -37.15999984741211 -37.119998931884766 -37.08000183105469 -37.040000915527344 -37.0 -36.959999084472656 -36.91999816894531 -36.880001068115234 -36.84000015258789 -36.79999923706055 -36.7599983215332 -36.720001220703125 -36.68000030517578 -36.63999938964844 -36.599998474121094 -36.560001373291016 -36.52000045776367 -36.47999954223633 -36.439998626708984 -36.400001525878906 -36.36000061035156 -36.31999969482422 -36.279998779296875 -36.2400016784668 -36.20000076293945 -36.15999984741211 -36.119998931884766 -36.08000183105469 -36.040000915527344 -36.0 -35.959999084472656 -35.91999816894531 -35.880001068115234 -35.84000015258789 -35.79999923706055 -35.7599983215332 -35.720001220703125 -35.68000030517578 -35.63999938964844 -35.599998474121094 -35.560001373291016 -35.52000045776367 -35.47999954223633 -35.439998626708984 -35.400001525878906 -35.36000061035156 -35.31999969482422 -35.279998779296875 -35.2400016784668 -35.20000076293945 -35.15999984741211 -35.119998931884766 -35.08000183105469 -35.040000915527344 -35.0 -34.959999084472656 -34.91999816894531 -34.880001068115234 -34.84000015258789 -34.79999923706055 -34.7599983215332 -34.720001220703125 -34.68000030517578 -34.63999938964844 -34.599998474121094 -34.560001373291016 -34.52000045776367 -34.47999954223633 -34.439998626708984 -34.400001525878906 -34.36000061035156 -34.31999969482422 -34.279998779296875 -34.2400016784668 -34.20000076293945 -34.15999984741211 -34.119998931884766 -34.08000183105469 -34.040000915527344 -34.0 -33.959999084472656 -33.91999816894531 -33.880001068115234 -33.84000015258789 -33.79999923706055 -33.7599983215332 -33.720001220703125 -33.68000030517578 -33.63999938964844 -33.599998474121094 -33.560001373291016 -33.52000045776367 -33.47999954223633 -33.439998626708984 -33.400001525878906 -33.36000061035156 -33.31999969482422 -33.279998779296875 -33.2400016784668 -33.20000076293945 -33.15999984741211 -33.119998931884766 -33.08000183105469 -33.040000915527344 -33.0 -32.959999084472656 -32.91999816894531 -32.880001068115234 -32.84000015258789 -32.79999923706055 -32.7599983215332 -32.720001220703125 -32.68000030517578 -32.63999938964844 -32.599998474121094 -32.560001373291016 -32.52000045776367 -32.47999954223633 -32.439998626708984 -32.400001525878906 -32.36000061035156 -32.31999969482422 -32.279998779296875 -32.2400016784668 -32.20000076293945 -32.15999984741211 -32.119998931884766 -32.08000183105469 -32.040000915527344 -32.0 -31.959999084472656 -31.920000076293945 -31.8799991607666 -31.84000015258789 -31.799999237060547 -31.760000228881836 -31.719999313354492 -31.68000030517578 -31.639999389648438 -31.600000381469727 -31.559999465942383 -31.520000457763672 -31.479999542236328 -31.440000534057617 -31.399999618530273 -31.360000610351562 -31.31999969482422 -31.280000686645508 -31.239999771118164 -31.200000762939453 -31.15999984741211 -31.1200008392334 -31.079999923706055 -31.040000915527344 -31.0 -30.959999084472656 -30.920000076293945 -30.8799991607666 -30.84000015258789 -30.799999237060547 -30.760000228881836 -30.719999313354492 -30.68000030517578 -30.639999389648438 -30.600000381469727 -30.559999465942383 -30.520000457763672 -30.479999542236328 -30.440000534057617 -30.399999618530273 -30.360000610351562 -30.31999969482422 -30.280000686645508 -30.239999771118164 -30.200000762939453 -30.15999984741211 -30.1200008392334 -30.079999923706055 -30.040000915527344 -30.0 -29.959999084472656 -29.920000076293945 -29.8799991607666 -29.84000015258789 -29.799999237060547 -29.760000228881836 -29.719999313354492 -29.68000030517578 -29.639999389648438 -29.600000381469727 -29.559999465942383 -29.520000457763672 -29.479999542236328 -29.440000534057617 -29.399999618530273 -29.360000610351562 -29.31999969482422 -29.280000686645508 -29.239999771118164 -29.200000762939453 -29.15999984741211 -29.1200008392334 -29.079999923706055 -29.040000915527344 -29.0 -28.959999084472656 -28.920000076293945 -28.8799991607666 -28.84000015258789 -28.799999237060547 -28.760000228881836 -28.719999313354492 -28.68000030517578 -28.639999389648438 -28.600000381469727 -28.559999465942383 -28.520000457763672 -28.479999542236328 -28.440000534057617 -28.399999618530273 -28.360000610351562 -28.31999969482422 -28.280000686645508 -28.239999771118164 -28.200000762939453 -28.15999984741211 -28.1200008392334 -28.079999923706055 -28.040000915527344 -28.0 -27.959999084472656 -27.920000076293945 -27.8799991607666 -27.84000015258789 -27.799999237060547 -27.760000228881836 -27.719999313354492 -27.68000030517578 -27.639999389648438 -27.600000381469727 -27.559999465942383 -27.520000457763672 -27.479999542236328 -27.440000534057617 -27.399999618530273 -27.360000610351562 -27.31999969482422 -27.280000686645508 -27.239999771118164 -27.200000762939453 -27.15999984741211 -27.1200008392334 -27.079999923706055 -27.040000915527344 -27.0 -26.959999084472656 -26.920000076293945 -26.8799991607666 -26.84000015258789 -26.799999237060547 -26.760000228881836 -26.719999313354492 -26.68000030517578 -26.639999389648438 -26.600000381469727 -26.559999465942383 -26.520000457763672 -26.479999542236328 -26.440000534057617 -26.399999618530273 -26.360000610351562 -26.31999969482422 -26.280000686645508 -26.239999771118164 -26.200000762939453 -26.15999984741211 -26.1200008392334 -26.079999923706055 -26.040000915527344 -26.0 -25.959999084472656 -25.920000076293945 -25.8799991607666 -25.84000015258789 -25.799999237060547 -25.760000228881836 -25.719999313354492 -25.68000030517578 -25.639999389648438 -25.600000381469727 -25.559999465942383 -25.520000457763672 -25.479999542236328 -25.440000534057617 -25.399999618530273 -25.360000610351562 -25.31999969482422 -25.280000686645508 -25.239999771118164 -25.200000762939453 -25.15999984741211 -25.1200008392334 -25.079999923706055 -25.040000915527344 -25.0 -24.959999084472656 -24.920000076293945 -24.8799991607666 -24.84000015258789 -24.799999237060547 -24.760000228881836 -24.719999313354492 -24.68000030517578 -24.639999389648438 -24.600000381469727 -24.559999465942383 -24.520000457763672 -24.479999542236328 -24.440000534057617 -24.399999618530273 -24.360000610351562 -24.31999969482422 -24.280000686645508 -24.239999771118164 -24.200000762939453 -24.15999984741211 -24.1200008392334 -24.079999923706055 -24.040000915527344 -24.0 -23.959999084472656 -23.920000076293945 -23.8799991607666 -23.84000015258789 -23.799999237060547 -23.760000228881836 -23.719999313354492 -23.68000030517578 -23.639999389648438 -23.600000381469727 -23.559999465942383 -23.520000457763672 -23.479999542236328 -23.440000534057617 -23.399999618530273 -23.360000610351562 -23.31999969482422 -23.280000686645508 -23.239999771118164 -23.200000762939453 -23.15999984741211 -23.1200008392334 -23.079999923706055 -23.040000915527344 -23.0 -22.959999084472656 -22.920000076293945 -22.8799991607666 -22.84000015258789 -22.799999237060547 -22.760000228881836 -22.719999313354492 -22.68000030517578 -22.639999389648438 -22.600000381469727 -22.559999465942383 -22.520000457763672 -22.479999542236328 -22.440000534057617 -22.399999618530273 -22.360000610351562 -22.31999969482422 -22.280000686645508 -22.239999771118164 -22.200000762939453 -22.15999984741211 -22.1200008392334 -22.079999923706055 -22.040000915527344 -22.0 -21.959999084472656 -21.920000076293945 -21.8799991607666 -21.84000015258789 -21.799999237060547 -21.760000228881836 -21.719999313354492 -21.68000030517578 -21.639999389648438 -21.600000381469727 -21.559999465942383 -21.520000457763672 -21.479999542236328 -21.440000534057617 -21.399999618530273 -21.360000610351562 -21.31999969482422 -21.280000686645508 -21.239999771118164 -21.200000762939453 -21.15999984741211 -21.1200008392334 -21.079999923706055 -21.040000915527344 -21.0 -20.959999084472656 -20.920000076293945 -20.8799991607666 -20.84000015258789 -20.799999237060547 -20.760000228881836 -20.719999313354492 -20.68000030517578 -20.639999389648438 -20.600000381469727 -20.559999465942383 -20.520000457763672 -20.479999542236328 -20.440000534057617 -20.399999618530273 -20.360000610351562 -20.31999969482422 -20.280000686645508 -20.239999771118164 -20.200000762939453 -20.15999984741211 -20.1200008392334 -20.079999923706055 -20.040000915527344 -20.0 -19.959999084472656 -19.920000076293945 -19.8799991607666 -19.84000015258789 -19.799999237060547 -19.760000228881836 -19.719999313354492 -19.68000030517578 -19.639999389648438 -19.600000381469727 -19.559999465942383 -19.520000457763672 -19.479999542236328 -19.440000534057617 -19.399999618530273 -19.360000610351562 -19.31999969482422 -19.280000686645508 -19.239999771118164 -19.200000762939453 -19.15999984741211 -19.1200008392334 -19.079999923706055 -19.040000915527344 -19.0 -18.959999084472656 -18.920000076293945 -18.8799991607666 -18.84000015258789 -18.799999237060547 -18.760000228881836 -18.719999313354492 -18.68000030517578 -18.639999389648438 -18.600000381469727 -18.559999465942383 -18.520000457763672 -18.479999542236328 -18.440000534057617 -18.399999618530273 -18.360000610351562 -18.31999969482422 -18.280000686645508 -18.239999771118164 -18.200000762939453 -18.15999984741211 -18.1200008392334 -18.079999923706055 -18.040000915527344 -18.0 -17.959999084472656 -17.920000076293945 -17.8799991607666 -17.84000015258789 -17.799999237060547 -17.760000228881836 -17.719999313354492 -17.68000030517578 -17.639999389648438 -17.600000381469727 -17.559999465942383 -17.520000457763672 -17.479999542236328 -17.440000534057617 -17.399999618530273 -17.360000610351562 -17.31999969482422 -17.280000686645508 -17.239999771118164 -17.200000762939453 -17.15999984741211 -17.1200008392334 -17.079999923706055 -17.040000915527344 -17.0 -16.959999084472656 -16.920000076293945 -16.8799991607666 -16.84000015258789 -16.799999237060547 -16.760000228881836 -16.719999313354492 -16.68000030517578 -16.639999389648438 -16.600000381469727 -16.559999465942383 -16.520000457763672 -16.479999542236328 -16.440000534057617 -16.399999618530273 -16.360000610351562 -16.31999969482422 -16.280000686645508 -16.239999771118164 -16.200000762939453 -16.15999984741211 -16.1200008392334 -16.079999923706055 -16.040000915527344 -16.0 -15.960000038146973 -15.920000076293945 -15.880000114440918 -15.84000015258789 -15.800000190734863 -15.760000228881836 -15.720000267028809 -15.680000305175781 -15.640000343322754 -15.600000381469727 -15.5600004196167 -15.520000457763672 -15.479999542236328 -15.4399995803833 -15.399999618530273 -15.359999656677246 -15.319999694824219 -15.279999732971191 -15.239999771118164 -15.199999809265137 -15.15999984741211 -15.119999885559082 -15.079999923706055 -15.039999961853027 -15.0 -14.960000038146973 -14.920000076293945 -14.880000114440918 -14.84000015258789 -14.800000190734863 -14.760000228881836 -14.720000267028809 -14.680000305175781 -14.640000343322754 -14.600000381469727 -14.5600004196167 -14.520000457763672 -14.479999542236328 -14.4399995803833 -14.399999618530273 -14.359999656677246 -14.319999694824219 -14.279999732971191 -14.239999771118164 -14.199999809265137 -14.15999984741211 -14.119999885559082 -14.079999923706055 -14.039999961853027 -14.0 -13.960000038146973 -13.920000076293945 -13.880000114440918 -13.84000015258789 -13.800000190734863 -13.760000228881836 -13.720000267028809 -13.680000305175781 -13.640000343322754 -13.600000381469727 -13.5600004196167 -13.520000457763672 -13.479999542236328 -13.4399995803833 -13.399999618530273 -13.359999656677246 -13.319999694824219 -13.279999732971191 -13.239999771118164 -13.199999809265137 -13.15999984741211 -13.119999885559082 -13.079999923706055 -13.039999961853027 -13.0 -12.960000038146973 -12.920000076293945 -12.880000114440918 -12.84000015258789 -12.800000190734863 -12.760000228881836 -12.720000267028809 -12.680000305175781 -12.640000343322754 -12.600000381469727 -12.5600004196167 -12.520000457763672 -12.479999542236328 -12.4399995803833 -12.399999618530273 -12.359999656677246 -12.319999694824219 -12.279999732971191 -12.239999771118164 -12.199999809265137 -12.15999984741211 -12.119999885559082 -12.079999923706055 -12.039999961853027 -12.0 -11.960000038146973 -11.920000076293945 -11.880000114440918 -11.84000015258789 -11.800000190734863 -11.760000228881836 -11.720000267028809 -11.680000305175781 -11.640000343322754 -11.600000381469727 -11.5600004196167 -11.520000457763672 -11.479999542236328 -11.4399995803833 -11.399999618530273 -11.359999656677246 -11.319999694824219 -11.279999732971191 -11.239999771118164 -11.199999809265137 -11.15999984741211 -11.119999885559082 -11.079999923706055 -11.039999961853027 -11.0 -10.960000038146973 -10.920000076293945 -10.880000114440918 -10.84000015258789 -10.800000190734863 -10.760000228881836 -10.720000267028809 -10.680000305175781 -10.640000343322754 -10.600000381469727 -10.5600004196167 -10.520000457763672 -10.479999542236328 -10.4399995803833 -10.399999618530273 -10.359999656677246 -10.319999694824219 -10.279999732971191 -10.239999771118164 -10.199999809265137 -10.15999984741211 -10.119999885559082 -10.079999923706055 -10.039999961853027 -10.0 -9.960000038146973 -9.920000076293945 -9.880000114440918 -9.84000015258789 -9.800000190734863 -9.760000228881836 -9.720000267028809 -9.680000305175781 -9.640000343322754 -9.600000381469727 -9.5600004196167 -9.520000457763672 -9.479999542236328 -9.4399995803833 -9.399999618530273 -9.359999656677246 -9.319999694824219 -9.279999732971191 -9.239999771118164 -9.199999809265137 -9.15999984741211 -9.119999885559082 -9.079999923706055 -9.039999961853027 -9.0 -8.960000038146973 -8.920000076293945 -8.880000114440918 -8.84000015258789 -8.800000190734863 -8.760000228881836 -8.720000267028809 -8.680000305175781 -8.640000343322754 -8.600000381469727 -8.5600004196167 -8.520000457763672 -8.479999542236328 -8.4399995803833 -8.399999618530273 -8.359999656677246 -8.319999694824219 -8.279999732971191 -8.239999771118164 -8.199999809265137 -8.15999984741211 -8.119999885559082 -8.079999923706055 -8.039999961853027 -8.0 -7.960000038146973 -7.920000076293945 -7.880000114440918 -7.840000152587891 -7.800000190734863 -7.760000228881836 -7.71999979019165 -7.679999828338623 -7.639999866485596 -7.599999904632568 -7.559999942779541 -7.519999980926514 -7.480000019073486 -7.440000057220459 -7.400000095367432 -7.360000133514404 -7.320000171661377 -7.28000020980835 -7.239999771118164 -7.199999809265137 -7.159999847412109 -7.119999885559082 -7.079999923706055 -7.039999961853027 -7.0 -6.960000038146973 -6.920000076293945 -6.880000114440918 -6.840000152587891 -6.800000190734863 -6.760000228881836 -6.71999979019165 -6.679999828338623 -6.639999866485596 -6.599999904632568 -6.559999942779541 -6.519999980926514 -6.480000019073486 -6.440000057220459 -6.400000095367432 -6.360000133514404 -6.320000171661377 -6.28000020980835 -6.239999771118164 -6.199999809265137 -6.159999847412109 -6.119999885559082 -6.079999923706055 -6.039999961853027 -6.0 -5.960000038146973 -5.920000076293945 -5.880000114440918 -5.840000152587891 -5.800000190734863 -5.760000228881836 -5.71999979019165 -5.679999828338623 -5.639999866485596 -5.599999904632568 -5.559999942779541 -5.519999980926514 -5.480000019073486 -5.440000057220459 -5.400000095367432 -5.360000133514404 -5.320000171661377 -5.28000020980835 -5.239999771118164 -5.199999809265137 -5.159999847412109 -5.119999885559082 -5.079999923706055 -5.039999961853027 -5.0 -4.960000038146973 -4.920000076293945 -4.880000114440918 -4.840000152587891 -4.800000190734863 -4.760000228881836 -4.71999979019165 -4.679999828338623 -4.639999866485596 -4.599999904632568 -4.559999942779541 -4.519999980926514 -4.480000019073486 -4.440000057220459 -4.400000095367432 -4.360000133514404 -4.320000171661377 -4.28000020980835 -4.239999771118164 -4.199999809265137 -4.159999847412109 -4.119999885559082 -4.079999923706055 -4.039999961853027 -4.0 -3.9600000381469727 -3.9200000762939453 -3.880000114440918 -3.8399999141693115 -3.799999952316284 -3.759999990463257 -3.7200000286102295 -3.680000066757202 -3.640000104904175 -3.5999999046325684 -3.559999942779541 -3.5199999809265137 -3.4800000190734863 -3.440000057220459 -3.4000000953674316 -3.359999895095825 -3.319999933242798 -3.2799999713897705 -3.240000009536743 -3.200000047683716 -3.1600000858306885 -3.119999885559082 -3.0799999237060547 -3.0399999618530273 -3.0 -2.9600000381469727 -2.9200000762939453 -2.880000114440918 -2.8399999141693115 -2.799999952316284 -2.759999990463257 -2.7200000286102295 -2.680000066757202 -2.640000104904175 -2.5999999046325684 -2.559999942779541 -2.5199999809265137 -2.4800000190734863 -2.440000057220459 -2.4000000953674316 -2.359999895095825 -2.319999933242798 -2.2799999713897705 -2.240000009536743 -2.200000047683716 -2.1600000858306885 -2.119999885559082 -2.0799999237060547 -2.0399999618530273 -2.0 -1.9600000381469727 -1.9199999570846558 -1.8799999952316284 -1.840000033378601 -1.7999999523162842 -1.7599999904632568 -1.7200000286102295 -1.6799999475479126 -1.6399999856948853 -1.600000023841858 -1.559999942779541 -1.5199999809265137 -1.4800000190734863 -1.440000057220459 -1.399999976158142 -1.3600000143051147 -1.3200000524520874 -1.2799999713897705 -1.2400000095367432 -1.2000000476837158 -1.159999966621399 -1.1200000047683716 -1.0800000429153442 -1.0399999618530273 -1.0 -0.9599999785423279 -0.9200000166893005 -0.8799999952316284 -0.8399999737739563 -0.800000011920929 -0.7599999904632568 -0.7200000286102295 -0.6800000071525574 -0.6399999856948853 -0.6000000238418579 -0.5600000023841858 -0.5199999809265137 -0.47999998927116394 -0.4399999976158142 -0.4000000059604645 -0.36000001430511475 -0.3199999928474426 -0.2800000011920929 -0.23999999463558197 -0.20000000298023224 -0.1599999964237213 -0.11999999731779099 -0.07999999821186066 -0.03999999910593033 0.0 0.03999999910593033 0.07999999821186066 0.11999999731779099 0.1599999964237213 0.20000000298023224 0.23999999463558197 0.2800000011920929 0.3199999928474426 0.36000001430511475 0.4000000059604645 0.4399999976158142 0.47999998927116394 0.5199999809265137 0.5600000023841858 0.6000000238418579 0.6399999856948853 0.6800000071525574 0.7200000286102295 0.7599999904632568 0.800000011920929 0.8399999737739563 0.8799999952316284 0.9200000166893005 0.9599999785423279 1.0 1.0399999618530273 1.0800000429153442 1.1200000047683716 1.159999966621399 1.2000000476837158 1.2400000095367432 1.2799999713897705 1.3200000524520874 1.3600000143051147 1.399999976158142 1.440000057220459 1.4800000190734863 1.5199999809265137 1.559999942779541 1.600000023841858 1.6399999856948853 1.6799999475479126 1.7200000286102295 1.7599999904632568 1.7999999523162842 1.840000033378601 1.8799999952316284 1.9199999570846558 1.9600000381469727 2.0 2.0399999618530273 2.0799999237060547 2.119999885559082 2.1600000858306885 2.200000047683716 2.240000009536743 2.2799999713897705 2.319999933242798 2.359999895095825 2.4000000953674316 2.440000057220459 2.4800000190734863 2.5199999809265137 2.559999942779541 2.5999999046325684 2.640000104904175 2.680000066757202 2.7200000286102295 2.759999990463257 2.799999952316284 2.8399999141693115 2.880000114440918 2.9200000762939453 2.9600000381469727 3.0 3.0399999618530273 3.0799999237060547 3.119999885559082 3.1600000858306885 3.200000047683716 3.240000009536743 3.2799999713897705 3.319999933242798 3.359999895095825 3.4000000953674316 3.440000057220459 3.4800000190734863 3.5199999809265137 3.559999942779541 3.5999999046325684 3.640000104904175 3.680000066757202 3.7200000286102295 3.759999990463257 3.799999952316284 3.8399999141693115 3.880000114440918 3.9200000762939453 3.9600000381469727 4.0 4.039999961853027 4.079999923706055 4.119999885559082 4.159999847412109 4.199999809265137 4.239999771118164 4.28000020980835 4.320000171661377 4.360000133514404 4.400000095367432 4.440000057220459 4.480000019073486 4.519999980926514 4.559999942779541 4.599999904632568 4.639999866485596 4.679999828338623 4.71999979019165 4.760000228881836 4.800000190734863 4.840000152587891 4.880000114440918 4.920000076293945 4.960000038146973 5.0 5.039999961853027 5.079999923706055 5.119999885559082 5.159999847412109 5.199999809265137 5.239999771118164 5.28000020980835 5.320000171661377 5.360000133514404 5.400000095367432 5.440000057220459 5.480000019073486 5.519999980926514 5.559999942779541 5.599999904632568 5.639999866485596 5.679999828338623 5.71999979019165 5.760000228881836 5.800000190734863 5.840000152587891 5.880000114440918 5.920000076293945 5.960000038146973 6.0 6.039999961853027 6.079999923706055 6.119999885559082 6.159999847412109 6.199999809265137 6.239999771118164 6.28000020980835 6.320000171661377 6.360000133514404 6.400000095367432 6.440000057220459 6.480000019073486 6.519999980926514 6.559999942779541 6.599999904632568 6.639999866485596 6.679999828338623 6.71999979019165 6.760000228881836 6.800000190734863 6.840000152587891 6.880000114440918 6.920000076293945 6.960000038146973 7.0 7.039999961853027 7.079999923706055 7.119999885559082 7.159999847412109 7.199999809265137 7.239999771118164 7.28000020980835 7.320000171661377 7.360000133514404 7.400000095367432 7.440000057220459 7.480000019073486 7.519999980926514 7.559999942779541 7.599999904632568 7.639999866485596 7.679999828338623 7.71999979019165 7.760000228881836 7.800000190734863 7.840000152587891 7.880000114440918 7.920000076293945 7.960000038146973 8.0 8.039999961853027 8.079999923706055 8.119999885559082 8.15999984741211 8.199999809265137 8.239999771118164 8.279999732971191 8.319999694824219 8.359999656677246 8.399999618530273 8.4399995803833 8.479999542236328 8.520000457763672 8.5600004196167 8.600000381469727 8.640000343322754 8.680000305175781 8.720000267028809 8.760000228881836 8.800000190734863 8.84000015258789 8.880000114440918 8.920000076293945 8.960000038146973 9.0 9.039999961853027 9.079999923706055 9.119999885559082 9.15999984741211 9.199999809265137 9.239999771118164 9.279999732971191 9.319999694824219 9.359999656677246 9.399999618530273 9.4399995803833 9.479999542236328 9.520000457763672 9.5600004196167 9.600000381469727 9.640000343322754 9.680000305175781 9.720000267028809 9.760000228881836 9.800000190734863 9.84000015258789 9.880000114440918 9.920000076293945 9.960000038146973 10.0 10.039999961853027 10.079999923706055 10.119999885559082 10.15999984741211 10.199999809265137 10.239999771118164 10.279999732971191 10.319999694824219 10.359999656677246 10.399999618530273 10.4399995803833 10.479999542236328 10.520000457763672 10.5600004196167 10.600000381469727 10.640000343322754 10.680000305175781 10.720000267028809 10.760000228881836 10.800000190734863 10.84000015258789 10.880000114440918 10.920000076293945 10.960000038146973 11.0 11.039999961853027 11.079999923706055 11.119999885559082 11.15999984741211 11.199999809265137 11.239999771118164 11.279999732971191 11.319999694824219 11.359999656677246 11.399999618530273 11.4399995803833 11.479999542236328 11.520000457763672 11.5600004196167 11.600000381469727 11.640000343322754 11.680000305175781 11.720000267028809 11.760000228881836 11.800000190734863 11.84000015258789 11.880000114440918 11.920000076293945 11.960000038146973 12.0 12.039999961853027 12.079999923706055 12.119999885559082 12.15999984741211 12.199999809265137 12.239999771118164 12.279999732971191 12.319999694824219 12.359999656677246 12.399999618530273 12.4399995803833 12.479999542236328 12.520000457763672 12.5600004196167 12.600000381469727 12.640000343322754 12.680000305175781 12.720000267028809 12.760000228881836 12.800000190734863 12.84000015258789 12.880000114440918 12.920000076293945 12.960000038146973 13.0 13.039999961853027 13.079999923706055 13.119999885559082 13.15999984741211 13.199999809265137 13.239999771118164 13.279999732971191 13.319999694824219 13.359999656677246 13.399999618530273 13.4399995803833 13.479999542236328 13.520000457763672 13.5600004196167 13.600000381469727 13.640000343322754 13.680000305175781 13.720000267028809 13.760000228881836 13.800000190734863 13.84000015258789 13.880000114440918 13.920000076293945 13.960000038146973 14.0 14.039999961853027 14.079999923706055 14.119999885559082 14.15999984741211 14.199999809265137 14.239999771118164 14.279999732971191 14.319999694824219 14.359999656677246 14.399999618530273 14.4399995803833 14.479999542236328 14.520000457763672 14.5600004196167 14.600000381469727 14.640000343322754 14.680000305175781 14.720000267028809 14.760000228881836 14.800000190734863 14.84000015258789 14.880000114440918 14.920000076293945 14.960000038146973 15.0 15.039999961853027 15.079999923706055 15.119999885559082 15.15999984741211 15.199999809265137 15.239999771118164 15.279999732971191 15.319999694824219 15.359999656677246 15.399999618530273 15.4399995803833 15.479999542236328 15.520000457763672 15.5600004196167 15.600000381469727 15.640000343322754 15.680000305175781 15.720000267028809 15.760000228881836 15.800000190734863 15.84000015258789 15.880000114440918 15.920000076293945 15.960000038146973 16.0 16.040000915527344 16.079999923706055 16.1200008392334 16.15999984741211 16.200000762939453 16.239999771118164 16.280000686645508 16.31999969482422 16.360000610351562 16.399999618530273 16.440000534057617 16.479999542236328 16.520000457763672 16.559999465942383 16.600000381469727 16.639999389648438 16.68000030517578 16.719999313354492 16.760000228881836 16.799999237060547 16.84000015258789 16.8799991607666 16.920000076293945 16.959999084472656 17.0 17.040000915527344 17.079999923706055 17.1200008392334 17.15999984741211 17.200000762939453 17.239999771118164 17.280000686645508 17.31999969482422 17.360000610351562 17.399999618530273 17.440000534057617 17.479999542236328 17.520000457763672 17.559999465942383 17.600000381469727 17.639999389648438 17.68000030517578 17.719999313354492 17.760000228881836 17.799999237060547 17.84000015258789 17.8799991607666 17.920000076293945 17.959999084472656 18.0 18.040000915527344 18.079999923706055 18.1200008392334 18.15999984741211 18.200000762939453 18.239999771118164 18.280000686645508 18.31999969482422 18.360000610351562 18.399999618530273 18.440000534057617 18.479999542236328 18.520000457763672 18.559999465942383 18.600000381469727 18.639999389648438 18.68000030517578 18.719999313354492 18.760000228881836 18.799999237060547 18.84000015258789 18.8799991607666 18.920000076293945 18.959999084472656 19.0 19.040000915527344 19.079999923706055 19.1200008392334 19.15999984741211 19.200000762939453 19.239999771118164 19.280000686645508 19.31999969482422 19.360000610351562 19.399999618530273 19.440000534057617 19.479999542236328 19.520000457763672 19.559999465942383 19.600000381469727 19.639999389648438 19.68000030517578 19.719999313354492 19.760000228881836 19.799999237060547 19.84000015258789 19.8799991607666 19.920000076293945 19.959999084472656 20.0 20.040000915527344 20.079999923706055 20.1200008392334 20.15999984741211 20.200000762939453 20.239999771118164 20.280000686645508 20.31999969482422 20.360000610351562 20.399999618530273 20.440000534057617 20.479999542236328 20.520000457763672 20.559999465942383 20.600000381469727 20.639999389648438 20.68000030517578 20.719999313354492 20.760000228881836 20.799999237060547 20.84000015258789 20.8799991607666 20.920000076293945 20.959999084472656 21.0 21.040000915527344 21.079999923706055 21.1200008392334 21.15999984741211 21.200000762939453 21.239999771118164 21.280000686645508 21.31999969482422 21.360000610351562 21.399999618530273 21.440000534057617 21.479999542236328 21.520000457763672 21.559999465942383 21.600000381469727 21.639999389648438 21.68000030517578 21.719999313354492 21.760000228881836 21.799999237060547 21.84000015258789 21.8799991607666 21.920000076293945 21.959999084472656 22.0 22.040000915527344 22.079999923706055 22.1200008392334 22.15999984741211 22.200000762939453 22.239999771118164 22.280000686645508 22.31999969482422 22.360000610351562 22.399999618530273 22.440000534057617 22.479999542236328 22.520000457763672 22.559999465942383 22.600000381469727 22.639999389648438 22.68000030517578 22.719999313354492 22.760000228881836 22.799999237060547 22.84000015258789 22.8799991607666 22.920000076293945 22.959999084472656 23.0 23.040000915527344 23.079999923706055 23.1200008392334 23.15999984741211 23.200000762939453 23.239999771118164 23.280000686645508 23.31999969482422 23.360000610351562 23.399999618530273 23.440000534057617 23.479999542236328 23.520000457763672 23.559999465942383 23.600000381469727 23.639999389648438 23.68000030517578 23.719999313354492 23.760000228881836 23.799999237060547 23.84000015258789 23.8799991607666 23.920000076293945 23.959999084472656 24.0 24.040000915527344 24.079999923706055 24.1200008392334 24.15999984741211 24.200000762939453 24.239999771118164 24.280000686645508 24.31999969482422 24.360000610351562 24.399999618530273 24.440000534057617 24.479999542236328 24.520000457763672 24.559999465942383 24.600000381469727 24.639999389648438 24.68000030517578 24.719999313354492 24.760000228881836 24.799999237060547 24.84000015258789 24.8799991607666 24.920000076293945 24.959999084472656 25.0 25.040000915527344 25.079999923706055 25.1200008392334 25.15999984741211 25.200000762939453 25.239999771118164 25.280000686645508 25.31999969482422 25.360000610351562 25.399999618530273 25.440000534057617 25.479999542236328 25.520000457763672 25.559999465942383 25.600000381469727 25.639999389648438 25.68000030517578 25.719999313354492 25.760000228881836 25.799999237060547 25.84000015258789 25.8799991607666 25.920000076293945 25.959999084472656 26.0 26.040000915527344 26.079999923706055 26.1200008392334 26.15999984741211 26.200000762939453 26.239999771118164 26.280000686645508 26.31999969482422 26.360000610351562 26.399999618530273 26.440000534057617 26.479999542236328 26.520000457763672 26.559999465942383 26.600000381469727 26.639999389648438 26.68000030517578 26.719999313354492 26.760000228881836 26.799999237060547 26.84000015258789 26.8799991607666 26.920000076293945 26.959999084472656 27.0 27.040000915527344 27.079999923706055 27.1200008392334 27.15999984741211 27.200000762939453 27.239999771118164 27.280000686645508 27.31999969482422 27.360000610351562 27.399999618530273 27.440000534057617 27.479999542236328 27.520000457763672 27.559999465942383 27.600000381469727 27.639999389648438 27.68000030517578 27.719999313354492 27.760000228881836 27.799999237060547 27.84000015258789 27.8799991607666 27.920000076293945 27.959999084472656 28.0 28.040000915527344 28.079999923706055 28.1200008392334 28.15999984741211 28.200000762939453 28.239999771118164 28.280000686645508 28.31999969482422 28.360000610351562 28.399999618530273 28.440000534057617 28.479999542236328 28.520000457763672 28.559999465942383 28.600000381469727 28.639999389648438 28.68000030517578 28.719999313354492 28.760000228881836 28.799999237060547 28.84000015258789 28.8799991607666 28.920000076293945 28.959999084472656 29.0 29.040000915527344 29.079999923706055 29.1200008392334 29.15999984741211 29.200000762939453 29.239999771118164 29.280000686645508 29.31999969482422 29.360000610351562 29.399999618530273 29.440000534057617 29.479999542236328 29.520000457763672 29.559999465942383 29.600000381469727 29.639999389648438 29.68000030517578 29.719999313354492 29.760000228881836 29.799999237060547 29.84000015258789 29.8799991607666 29.920000076293945 29.959999084472656 30.0 30.040000915527344 30.079999923706055 30.1200008392334 30.15999984741211 30.200000762939453 30.239999771118164 30.280000686645508 30.31999969482422 30.360000610351562 30.399999618530273 30.440000534057617 30.479999542236328 30.520000457763672 30.559999465942383 30.600000381469727 30.639999389648438 30.68000030517578 30.719999313354492 30.760000228881836 30.799999237060547 30.84000015258789 30.8799991607666 30.920000076293945 30.959999084472656 31.0 31.040000915527344 31.079999923706055 31.1200008392334 31.15999984741211 31.200000762939453 31.239999771118164 31.280000686645508 31.31999969482422 31.360000610351562 31.399999618530273 31.440000534057617 31.479999542236328 31.520000457763672 31.559999465942383 31.600000381469727 31.639999389648438 31.68000030517578 31.719999313354492 31.760000228881836 31.799999237060547 31.84000015258789 31.8799991607666 31.920000076293945 31.959999084472656 32.0 32.040000915527344 32.08000183105469 32.119998931884766 32.15999984741211 32.20000076293945 32.2400016784668 32.279998779296875 32.31999969482422 32.36000061035156 32.400001525878906 32.439998626708984 32.47999954223633 32.52000045776367 32.560001373291016 32.599998474121094 32.63999938964844 32.68000030517578 32.720001220703125 32.7599983215332 32.79999923706055 32.84000015258789 32.880001068115234 32.91999816894531 32.959999084472656 33.0 33.040000915527344 33.08000183105469 33.119998931884766 33.15999984741211 33.20000076293945 33.2400016784668 33.279998779296875 33.31999969482422 33.36000061035156 33.400001525878906 33.439998626708984 33.47999954223633 33.52000045776367 33.560001373291016 33.599998474121094 33.63999938964844 33.68000030517578 33.720001220703125 33.7599983215332 33.79999923706055 33.84000015258789 33.880001068115234 33.91999816894531 33.959999084472656 34.0 34.040000915527344 34.08000183105469 34.119998931884766 34.15999984741211 34.20000076293945 34.2400016784668 34.279998779296875 34.31999969482422 34.36000061035156 34.400001525878906 34.439998626708984 34.47999954223633 34.52000045776367 34.560001373291016 34.599998474121094 34.63999938964844 34.68000030517578 34.720001220703125 34.7599983215332 34.79999923706055 34.84000015258789 34.880001068115234 34.91999816894531 34.959999084472656 35.0 35.040000915527344 35.08000183105469 35.119998931884766 35.15999984741211 35.20000076293945 35.2400016784668 35.279998779296875 35.31999969482422 35.36000061035156 35.400001525878906 35.439998626708984 35.47999954223633 35.52000045776367 35.560001373291016 35.599998474121094 35.63999938964844 35.68000030517578 35.720001220703125 35.7599983215332 35.79999923706055 35.84000015258789 35.880001068115234 35.91999816894531 35.959999084472656 36.0 36.040000915527344 36.08000183105469 36.119998931884766 36.15999984741211 36.20000076293945 36.2400016784668 36.279998779296875 36.31999969482422 36.36000061035156 36.400001525878906 36.439998626708984 36.47999954223633 36.52000045776367 36.560001373291016 36.599998474121094 36.63999938964844 36.68000030517578 36.720001220703125 36.7599983215332 36.79999923706055 36.84000015258789 36.880001068115234 36.91999816894531 36.959999084472656 37.0 37.040000915527344 37.08000183105469 37.119998931884766 37.15999984741211 37.20000076293945 37.2400016784668 37.279998779296875 37.31999969482422 37.36000061035156 37.400001525878906 37.439998626708984 37.47999954223633 37.52000045776367 37.560001373291016 37.599998474121094 37.63999938964844 37.68000030517578 37.720001220703125 37.7599983215332 37.79999923706055 37.84000015258789 37.880001068115234 37.91999816894531 37.959999084472656 38.0 38.040000915527344 38.08000183105469 38.119998931884766 38.15999984741211 38.20000076293945 38.2400016784668 38.279998779296875 38.31999969482422 38.36000061035156 38.400001525878906 38.439998626708984 38.47999954223633 38.52000045776367 38.560001373291016 38.599998474121094 38.63999938964844 38.68000030517578 38.720001220703125 38.7599983215332 38.79999923706055 38.84000015258789 38.880001068115234 38.91999816894531 38.959999084472656 39.0 39.040000915527344 39.08000183105469 39.119998931884766 39.15999984741211 39.20000076293945 39.2400016784668 39.279998779296875 39.31999969482422 39.36000061035156 39.400001525878906 39.439998626708984 39.47999954223633 39.52000045776367 39.560001373291016 39.599998474121094 39.63999938964844 39.68000030517578 39.720001220703125 39.7599983215332 39.79999923706055 39.84000015258789 39.880001068115234 39.91999816894531 39.959999084472656 40.0 40.040000915527344 40.08000183105469 40.119998931884766 40.15999984741211 40.20000076293945 40.2400016784668 40.279998779296875 40.31999969482422 40.36000061035156 40.400001525878906 40.439998626708984 40.47999954223633 40.52000045776367 40.560001373291016 40.599998474121094 40.63999938964844 40.68000030517578 40.720001220703125 40.7599983215332 40.79999923706055 40.84000015258789 40.880001068115234 40.91999816894531 40.959999084472656 41.0 41.040000915527344 41.08000183105469 41.119998931884766 41.15999984741211 41.20000076293945 41.2400016784668 41.279998779296875 41.31999969482422 41.36000061035156 41.400001525878906 41.439998626708984 41.47999954223633 41.52000045776367 41.560001373291016 41.599998474121094 41.63999938964844 41.68000030517578 41.720001220703125 41.7599983215332 41.79999923706055 41.84000015258789 41.880001068115234 41.91999816894531 41.959999084472656 42.0 42.040000915527344 42.08000183105469 42.119998931884766 42.15999984741211 42.20000076293945 42.2400016784668 42.279998779296875 42.31999969482422 42.36000061035156 42.400001525878906 42.439998626708984 42.47999954223633 42.52000045776367 42.560001373291016 42.599998474121094 42.63999938964844 42.68000030517578 42.720001220703125 42.7599983215332 42.79999923706055 42.84000015258789 42.880001068115234 42.91999816894531 42.959999084472656 43.0 43.040000915527344 43.08000183105469 43.119998931884766 43.15999984741211 43.20000076293945 43.2400016784668 43.279998779296875 43.31999969482422 43.36000061035156 43.400001525878906 43.439998626708984 43.47999954223633 43.52000045776367 43.560001373291016 43.599998474121094 43.63999938964844 43.68000030517578 43.720001220703125 43.7599983215332 43.79999923706055 43.84000015258789 43.880001068115234 43.91999816894531 43.959999084472656 44.0 44.040000915527344 44.08000183105469 44.119998931884766 44.15999984741211 44.20000076293945 44.2400016784668 44.279998779296875 44.31999969482422 44.36000061035156 44.400001525878906 44.439998626708984 44.47999954223633 44.52000045776367 44.560001373291016 44.599998474121094 44.63999938964844 44.68000030517578 44.720001220703125 44.7599983215332 44.79999923706055 44.84000015258789 44.880001068115234 44.91999816894531 44.959999084472656 45.0 45.040000915527344 45.08000183105469 45.119998931884766 45.15999984741211 45.20000076293945 45.2400016784668 45.279998779296875 45.31999969482422 45.36000061035156 45.400001525878906 45.439998626708984 45.47999954223633 45.52000045776367 45.560001373291016 45.599998474121094 45.63999938964844 45.68000030517578 45.720001220703125 45.7599983215332 45.79999923706055 45.84000015258789 45.880001068115234 45.91999816894531 45.959999084472656 46.0 46.040000915527344 46.08000183105469 46.119998931884766 46.15999984741211 46.20000076293945 46.2400016784668 46.279998779296875 46.31999969482422 46.36000061035156 46.400001525878906 46.439998626708984 46.47999954223633 46.52000045776367 46.560001373291016 46.599998474121094 46.63999938964844 46.68000030517578 46.720001220703125 46.7599983215332 46.79999923706055 46.84000015258789 46.880001068115234 46.91999816894531 46.959999084472656 47.0 47.040000915527344 47.08000183105469 47.119998931884766 47.15999984741211 47.20000076293945 47.2400016784668 47.279998779296875 47.31999969482422 47.36000061035156 47.400001525878906 47.439998626708984 47.47999954223633 47.52000045776367 47.560001373291016 47.599998474121094 47.63999938964844 47.68000030517578 47.720001220703125 47.7599983215332 47.79999923706055 47.84000015258789 47.880001068115234 47.91999816894531 47.959999084472656 48.0 48.040000915527344 48.08000183105469 48.119998931884766 48.15999984741211 48.20000076293945 48.2400016784668 48.279998779296875 48.31999969482422 48.36000061035156 48.400001525878906 48.439998626708984 48.47999954223633 48.52000045776367 48.560001373291016 48.599998474121094 48.63999938964844 48.68000030517578 48.720001220703125 48.7599983215332 48.79999923706055 48.84000015258789 48.880001068115234 48.91999816894531 48.959999084472656 49.0 49.040000915527344 49.08000183105469 49.119998931884766 49.15999984741211 49.20000076293945 49.2400016784668 49.279998779296875 49.31999969482422 49.36000061035156 49.400001525878906 49.439998626708984 49.47999954223633 49.52000045776367 49.560001373291016 49.599998474121094 49.63999938964844 49.68000030517578 49.720001220703125 49.7599983215332 49.79999923706055 49.84000015258789 49.880001068115234 49.91999816894531 49.959999084472656 50.0 50.040000915527344 50.08000183105469 50.119998931884766 50.15999984741211 50.20000076293945 50.2400016784668 50.279998779296875 50.31999969482422 50.36000061035156 50.400001525878906 50.439998626708984 50.47999954223633 50.52000045776367 50.560001373291016 50.599998474121094 50.63999938964844 50.68000030517578 50.720001220703125 50.7599983215332 50.79999923706055 50.84000015258789 50.880001068115234 50.91999816894531 50.959999084472656 51.0 51.040000915527344 51.08000183105469 51.119998931884766 51.15999984741211 51.20000076293945 51.2400016784668 51.279998779296875 51.31999969482422 51.36000061035156 51.400001525878906 51.439998626708984 51.47999954223633 51.52000045776367 51.560001373291016 51.599998474121094 51.63999938964844 51.68000030517578 51.720001220703125 51.7599983215332 51.79999923706055 51.84000015258789 51.880001068115234 51.91999816894531 51.959999084472656 52.0 52.040000915527344 52.08000183105469 52.119998931884766 52.15999984741211 52.20000076293945 52.2400016784668 52.279998779296875 52.31999969482422 52.36000061035156 52.400001525878906 52.439998626708984 52.47999954223633 52.52000045776367 52.560001373291016 52.599998474121094 52.63999938964844 52.68000030517578 52.720001220703125 52.7599983215332 52.79999923706055 52.84000015258789 52.880001068115234 52.91999816894531 52.959999084472656 53.0 53.040000915527344 53.08000183105469 53.119998931884766 53.15999984741211 53.20000076293945 53.2400016784668 53.279998779296875 53.31999969482422 53.36000061035156 53.400001525878906 53.439998626708984 53.47999954223633 53.52000045776367 53.560001373291016 53.599998474121094 53.63999938964844 53.68000030517578 53.720001220703125 53.7599983215332 53.79999923706055 53.84000015258789 53.880001068115234 53.91999816894531 53.959999084472656 54.0 54.040000915527344 54.08000183105469 54.119998931884766 54.15999984741211 54.20000076293945 54.2400016784668 54.279998779296875 54.31999969482422 54.36000061035156 54.400001525878906 54.439998626708984 54.47999954223633 54.52000045776367 54.560001373291016 54.599998474121094 54.63999938964844 54.68000030517578 54.720001220703125 54.7599983215332 54.79999923706055 54.84000015258789 54.880001068115234 54.91999816894531 54.959999084472656 55.0 55.040000915527344 55.08000183105469 55.119998931884766 55.15999984741211 55.20000076293945 55.2400016784668 55.279998779296875 55.31999969482422 55.36000061035156 55.400001525878906 55.439998626708984 55.47999954223633 55.52000045776367 55.560001373291016 55.599998474121094 55.63999938964844 55.68000030517578 55.720001220703125 55.7599983215332 55.79999923706055 55.84000015258789 55.880001068115234 55.91999816894531 55.959999084472656 56.0 56.040000915527344 56.08000183105469 56.119998931884766 56.15999984741211 56.20000076293945 56.2400016784668 56.279998779296875 56.31999969482422 56.36000061035156 56.400001525878906 56.439998626708984 56.47999954223633 56.52000045776367 56.560001373291016 56.599998474121094 56.63999938964844 56.68000030517578 56.720001220703125 56.7599983215332 56.79999923706055 56.84000015258789 56.880001068115234 56.91999816894531 56.959999084472656 57.0 57.040000915527344 57.08000183105469 57.119998931884766 57.15999984741211 57.20000076293945 57.2400016784668 57.279998779296875 57.31999969482422 57.36000061035156 57.400001525878906 57.439998626708984 57.47999954223633 57.52000045776367 57.560001373291016 57.599998474121094 57.63999938964844 57.68000030517578 57.720001220703125 57.7599983215332 57.79999923706055 57.84000015258789 57.880001068115234 57.91999816894531 57.959999084472656 58.0 58.040000915527344 58.08000183105469 58.119998931884766 58.15999984741211 58.20000076293945 58.2400016784668 58.279998779296875 58.31999969482422 58.36000061035156 58.400001525878906 58.439998626708984 58.47999954223633 58.52000045776367 58.560001373291016 58.599998474121094 58.63999938964844 58.68000030517578 58.720001220703125 58.7599983215332 58.79999923706055 58.84000015258789 58.880001068115234 58.91999816894531 58.959999084472656 59.0 59.040000915527344 59.08000183105469 59.119998931884766 59.15999984741211 59.20000076293945 59.2400016784668 59.279998779296875 59.31999969482422 59.36000061035156 59.400001525878906 59.439998626708984 59.47999954223633 59.52000045776367 59.560001373291016 59.599998474121094 59.63999938964844 59.68000030517578 59.720001220703125 59.7599983215332 59.79999923706055 59.84000015258789 59.880001068115234 59.91999816894531 59.959999084472656 60.0 60.040000915527344 60.08000183105469 60.119998931884766 60.15999984741211 60.20000076293945 60.2400016784668 60.279998779296875 60.31999969482422 60.36000061035156 60.400001525878906 60.439998626708984 60.47999954223633 60.52000045776367 60.560001373291016 60.599998474121094 60.63999938964844 60.68000030517578 60.720001220703125 60.7599983215332 60.79999923706055 60.84000015258789 60.880001068115234 60.91999816894531 60.959999084472656 61.0 61.040000915527344 61.08000183105469 61.119998931884766 61.15999984741211 61.20000076293945 61.2400016784668 61.279998779296875 61.31999969482422 61.36000061035156 61.400001525878906 61.439998626708984 61.47999954223633 61.52000045776367 61.560001373291016 61.599998474121094 61.63999938964844 61.68000030517578 61.720001220703125 61.7599983215332 61.79999923706055 61.84000015258789 61.880001068115234 61.91999816894531 61.959999084472656 62.0 62.040000915527344 62.08000183105469 62.119998931884766 62.15999984741211 62.20000076293945 62.2400016784668 62.279998779296875 62.31999969482422 62.36000061035156 62.400001525878906 62.439998626708984 62.47999954223633 62.52000045776367 62.560001373291016 62.599998474121094 62.63999938964844 62.68000030517578 62.720001220703125 62.7599983215332 62.79999923706055 62.84000015258789 62.880001068115234 62.91999816894531 62.959999084472656 63.0 63.040000915527344 63.08000183105469 63.119998931884766 63.15999984741211 63.20000076293945 63.2400016784668 63.279998779296875 63.31999969482422 63.36000061035156 63.400001525878906 63.439998626708984 63.47999954223633 63.52000045776367 63.560001373291016 63.599998474121094 63.63999938964844 63.68000030517578 63.720001220703125 63.7599983215332 63.79999923706055 63.84000015258789 63.880001068115234 63.91999816894531 63.959999084472656 64.0 64.04000091552734 64.08000183105469 64.12000274658203 64.16000366210938 64.19999694824219 64.23999786376953 64.27999877929688 64.31999969482422 64.36000061035156 64.4000015258789 64.44000244140625 64.4800033569336 64.5199966430664 64.55999755859375 64.5999984741211 64.63999938964844 64.68000030517578 64.72000122070312 64.76000213623047 64.80000305175781 64.83999633789062 64.87999725341797 64.91999816894531 64.95999908447266 65.0 65.04000091552734 65.08000183105469 65.12000274658203 65.16000366210938 65.19999694824219 65.23999786376953 65.27999877929688 65.31999969482422 65.36000061035156 65.4000015258789 65.44000244140625 65.4800033569336 65.5199966430664 65.55999755859375 65.5999984741211 65.63999938964844 65.68000030517578 65.72000122070312 65.76000213623047 65.80000305175781 65.83999633789062 65.87999725341797 65.91999816894531 65.95999908447266 66.0 66.04000091552734 66.08000183105469 66.12000274658203 66.16000366210938 66.19999694824219 66.23999786376953 66.27999877929688 66.31999969482422 66.36000061035156 66.4000015258789 66.44000244140625 66.4800033569336 66.5199966430664 66.55999755859375 66.5999984741211 66.63999938964844 66.68000030517578 66.72000122070312 66.76000213623047 66.80000305175781 66.83999633789062 66.87999725341797 66.91999816894531 66.95999908447266 67.0 67.04000091552734 67.08000183105469 67.12000274658203 67.16000366210938 67.19999694824219 67.23999786376953 67.27999877929688 67.31999969482422 67.36000061035156 67.4000015258789 67.44000244140625 67.4800033569336 67.5199966430664 67.55999755859375 67.5999984741211 67.63999938964844 67.68000030517578 67.72000122070312 67.76000213623047 67.80000305175781 67.83999633789062 67.87999725341797 67.91999816894531 67.95999908447266 68.0 68.04000091552734 68.08000183105469 68.12000274658203 68.16000366210938 68.19999694824219 68.23999786376953 68.27999877929688 68.31999969482422 68.36000061035156 68.4000015258789 68.44000244140625 68.4800033569336 68.5199966430664 68.55999755859375 68.5999984741211 68.63999938964844 68.68000030517578 68.72000122070312 68.76000213623047 68.80000305175781 68.83999633789062 68.87999725341797 68.91999816894531 68.95999908447266 69.0 69.04000091552734 69.08000183105469 69.12000274658203 69.16000366210938 69.19999694824219 69.23999786376953 69.27999877929688 69.31999969482422 69.36000061035156 69.4000015258789 69.44000244140625 69.4800033569336 69.5199966430664 69.55999755859375 69.5999984741211 69.63999938964844 69.68000030517578 69.72000122070312 69.76000213623047 69.80000305175781 69.83999633789062 69.87999725341797 69.91999816894531 69.95999908447266 70.0 70.04000091552734 70.08000183105469 70.12000274658203 70.16000366210938 70.19999694824219 70.23999786376953 70.27999877929688 70.31999969482422 70.36000061035156 70.4000015258789 70.44000244140625 70.4800033569336 70.5199966430664 70.55999755859375 70.5999984741211 70.63999938964844 70.68000030517578 70.72000122070312 70.76000213623047 70.80000305175781 70.83999633789062 70.87999725341797 70.91999816894531 70.95999908447266 71.0 71.04000091552734 71.08000183105469 71.12000274658203 71.16000366210938 71.19999694824219 71.23999786376953 71.27999877929688 71.31999969482422 71.36000061035156 71.4000015258789 71.44000244140625 71.4800033569336 71.5199966430664 71.55999755859375 71.5999984741211 71.63999938964844 71.68000030517578 71.72000122070312 71.76000213623047 71.80000305175781 71.83999633789062 71.87999725341797 71.91999816894531 71.95999908447266 72.0 72.04000091552734 72.08000183105469 72.12000274658203 72.16000366210938 72.19999694824219 72.23999786376953 72.27999877929688 72.31999969482422 72.36000061035156 72.4000015258789 72.44000244140625 72.4800033569336 72.5199966430664 72.55999755859375 72.5999984741211 72.63999938964844 72.68000030517578 72.72000122070312 72.76000213623047 72.80000305175781 72.83999633789062 72.87999725341797 72.91999816894531 72.95999908447266 73.0 73.04000091552734 73.08000183105469 73.12000274658203 73.16000366210938 73.19999694824219 73.23999786376953 73.27999877929688 73.31999969482422 73.36000061035156 73.4000015258789 73.44000244140625 73.4800033569336 73.5199966430664 73.55999755859375 73.5999984741211 73.63999938964844 73.68000030517578 73.72000122070312 73.76000213623047 73.80000305175781 73.83999633789062 73.87999725341797 73.91999816894531 73.95999908447266 74.0 74.04000091552734 74.08000183105469 74.12000274658203 74.16000366210938 74.19999694824219 74.23999786376953 74.27999877929688 74.31999969482422 74.36000061035156 74.4000015258789 74.44000244140625 74.4800033569336 74.5199966430664 74.55999755859375 74.5999984741211 74.63999938964844 74.68000030517578 74.72000122070312 74.76000213623047 74.80000305175781 74.83999633789062 74.87999725341797 74.91999816894531 74.95999908447266 75.0 75.04000091552734 75.08000183105469 75.12000274658203 75.16000366210938 75.19999694824219 75.23999786376953 75.27999877929688 75.31999969482422 75.36000061035156 75.4000015258789 75.44000244140625 75.4800033569336 75.5199966430664 75.55999755859375 75.5999984741211 75.63999938964844 75.68000030517578 75.72000122070312 75.76000213623047 75.80000305175781 75.83999633789062 75.87999725341797 75.91999816894531 75.95999908447266 76.0 76.04000091552734 76.08000183105469 76.12000274658203 76.16000366210938 76.19999694824219 76.23999786376953 76.27999877929688 76.31999969482422 76.36000061035156 76.4000015258789 76.44000244140625 76.4800033569336 76.5199966430664 76.55999755859375 76.5999984741211 76.63999938964844 76.68000030517578 76.72000122070312 76.76000213623047 76.80000305175781 76.83999633789062 76.87999725341797 76.91999816894531 76.95999908447266 77.0 77.04000091552734 77.08000183105469 77.12000274658203 77.16000366210938 77.19999694824219 77.23999786376953 77.27999877929688 77.31999969482422 77.36000061035156 77.4000015258789 77.44000244140625 77.4800033569336 77.5199966430664 77.55999755859375 77.5999984741211 77.63999938964844 77.68000030517578 77.72000122070312 77.76000213623047 77.80000305175781 77.83999633789062 77.87999725341797 77.91999816894531 77.95999908447266 78.0 78.04000091552734 78.08000183105469 78.12000274658203 78.16000366210938 78.19999694824219 78.23999786376953 78.27999877929688 78.31999969482422 78.36000061035156 78.4000015258789 78.44000244140625 78.4800033569336 78.5199966430664 78.55999755859375 78.5999984741211 78.63999938964844 78.68000030517578 78.72000122070312 78.76000213623047 78.80000305175781 78.83999633789062 78.87999725341797 78.91999816894531 78.95999908447266 79.0 79.04000091552734 79.08000183105469 79.12000274658203 79.16000366210938 79.19999694824219 79.23999786376953 79.27999877929688 79.31999969482422 79.36000061035156 79.4000015258789 79.44000244140625 79.4800033569336 79.5199966430664 79.55999755859375 79.5999984741211 79.63999938964844 79.68000030517578 79.72000122070312 79.76000213623047 79.80000305175781 79.83999633789062 79.87999725341797 79.91999816894531 79.95999908447266 80.0 80.04000091552734 80.08000183105469 80.12000274658203 80.16000366210938 80.19999694824219 80.23999786376953 80.27999877929688 80.31999969482422 80.36000061035156 80.4000015258789 80.44000244140625 80.4800033569336 80.5199966430664 80.55999755859375 80.5999984741211 80.63999938964844 80.68000030517578 80.72000122070312 80.76000213623047 80.80000305175781 80.83999633789062 80.87999725341797 80.91999816894531 80.95999908447266 81.0 81.04000091552734 81.08000183105469 81.12000274658203 81.16000366210938 81.19999694824219 81.23999786376953 81.27999877929688 81.31999969482422 81.36000061035156 81.4000015258789 81.44000244140625 81.4800033569336 81.5199966430664 81.55999755859375 81.5999984741211 81.63999938964844 81.68000030517578 81.72000122070312 81.76000213623047 81.80000305175781 81.83999633789062 81.87999725341797 81.91999816894531 81.95999908447266 82.0 82.04000091552734 82.08000183105469 82.12000274658203 82.16000366210938 82.19999694824219 82.23999786376953 82.27999877929688 82.31999969482422 82.36000061035156 82.4000015258789 82.44000244140625 82.4800033569336 82.5199966430664 82.55999755859375 82.5999984741211 82.63999938964844 82.68000030517578 82.72000122070312 82.76000213623047 82.80000305175781 82.83999633789062 82.87999725341797 82.91999816894531 82.95999908447266 83.0 83.04000091552734 83.08000183105469 83.12000274658203 83.16000366210938 83.19999694824219 83.23999786376953 83.27999877929688 83.31999969482422 83.36000061035156 83.4000015258789 83.44000244140625 83.4800033569336 83.5199966430664 83.55999755859375 83.5999984741211 83.63999938964844 83.68000030517578 83.72000122070312 83.76000213623047 83.80000305175781 83.83999633789062 83.87999725341797 83.91999816894531 83.95999908447266 84.0 84.04000091552734 84.08000183105469 84.12000274658203 84.16000366210938 84.19999694824219 84.23999786376953 84.27999877929688 84.31999969482422 84.36000061035156 84.4000015258789 84.44000244140625 84.4800033569336 84.5199966430664 84.55999755859375 84.5999984741211 84.63999938964844 84.68000030517578 84.72000122070312 84.76000213623047 84.80000305175781 84.83999633789062 84.87999725341797 84.91999816894531 84.95999908447266 85.0 85.04000091552734 85.08000183105469 85.12000274658203 85.16000366210938 85.19999694824219 85.23999786376953 85.27999877929688 85.31999969482422 85.36000061035156 85.4000015258789 85.44000244140625 85.4800033569336 85.5199966430664 85.55999755859375 85.5999984741211 85.63999938964844 85.68000030517578 85.72000122070312 85.76000213623047 85.80000305175781 85.83999633789062 85.87999725341797 85.91999816894531 85.95999908447266 86.0 86.04000091552734 86.08000183105469 86.12000274658203 86.16000366210938 86.19999694824219 86.23999786376953 86.27999877929688 86.31999969482422 86.36000061035156 86.4000015258789 86.44000244140625 86.4800033569336 86.5199966430664 86.55999755859375 86.5999984741211 86.63999938964844 86.68000030517578 86.72000122070312 86.76000213623047 86.80000305175781 86.83999633789062 86.87999725341797 86.91999816894531 86.95999908447266 87.0 87.04000091552734 87.08000183105469 87.12000274658203 87.16000366210938 87.19999694824219 87.23999786376953 87.27999877929688 87.31999969482422 87.36000061035156 87.4000015258789 87.44000244140625 87.4800033569336 87.5199966430664 87.55999755859375 87.5999984741211 87.63999938964844 87.68000030517578 87.72000122070312 87.76000213623047 87.80000305175781 87.83999633789062 87.87999725341797 87.91999816894531 87.95999908447266 88.0 88.04000091552734 88.08000183105469 88.12000274658203 88.16000366210938 88.19999694824219 88.23999786376953 88.27999877929688 88.31999969482422 88.36000061035156 88.4000015258789 88.44000244140625 88.4800033569336 88.5199966430664 88.55999755859375 88.5999984741211 88.63999938964844 88.68000030517578 88.72000122070312 88.76000213623047 88.80000305175781 88.83999633789062 88.87999725341797 88.91999816894531 88.95999908447266 89.0 89.04000091552734 89.08000183105469 89.12000274658203 89.16000366210938 89.19999694824219 89.23999786376953 89.27999877929688 89.31999969482422 89.36000061035156 89.4000015258789 89.44000244140625 89.4800033569336 89.5199966430664 89.55999755859375 89.5999984741211 89.63999938964844 89.68000030517578 89.72000122070312 89.76000213623047 89.80000305175781 89.83999633789062 89.87999725341797 89.91999816894531 89.95999908447266 90.0</values>
+  </axis>
+  <axis name="lon" shape="4500" type="double" axisType="Lon">
+    <attribute name="long_name" value="Longitude" />
+    <attribute name="standard_name" value="longitude" />
+    <attribute name="units" value="degrees_east" />
+    <attribute name="modulo" value="360 degrees" />
+    <attribute name="axis" value="X" />
+    <attribute name="NAVO_code" type="int" value="2" />
+    <attribute name="_CoordinateAxisType" value="Lon" />
+    <values>0.0 0.0799560546875 0.1600341796875 0.239990234375 0.3199462890625 0.4000244140625 0.47998046875 0.56005859375 0.6400146484375 0.719970703125 0.800048828125 0.8800048828125 0.9599609375 1.0400390625 1.1199951171875 1.199951171875 1.280029296875 1.3599853515625 1.43994140625 1.52001953125 1.5999755859375 1.6800537109375 1.760009765625 1.8399658203125 1.9200439453125 2.0 2.0799560546875 2.1600341796875 2.239990234375 2.3199462890625 2.4000244140625 2.47998046875 2.56005859375 2.6400146484375 2.719970703125 2.800048828125 2.8800048828125 2.9599609375 3.0400390625 3.1199951171875 3.199951171875 3.280029296875 3.3599853515625 3.43994140625 3.52001953125 3.5999755859375 3.6800537109375 3.760009765625 3.8399658203125 3.9200439453125 4.0 4.0799560546875 4.1600341796875 4.239990234375 4.3199462890625 4.4000244140625 4.47998046875 4.56005859375 4.6400146484375 4.719970703125 4.800048828125 4.8800048828125 4.9599609375 5.0400390625 5.1199951171875 5.199951171875 5.280029296875 5.3599853515625 5.43994140625 5.52001953125 5.5999755859375 5.6800537109375 5.760009765625 5.8399658203125 5.9200439453125 6.0 6.0799560546875 6.1600341796875 6.239990234375 6.3199462890625 6.4000244140625 6.47998046875 6.56005859375 6.6400146484375 6.719970703125 6.800048828125 6.8800048828125 6.9599609375 7.0400390625 7.1199951171875 7.199951171875 7.280029296875 7.3599853515625 7.43994140625 7.52001953125 7.5999755859375 7.6800537109375 7.760009765625 7.8399658203125 7.9200439453125 8.0 8.0799560546875 8.1600341796875 8.239990234375 8.3199462890625 8.4000244140625 8.47998046875 8.56005859375 8.6400146484375 8.719970703125 8.800048828125 8.8800048828125 8.9599609375 9.0400390625 9.1199951171875 9.199951171875 9.280029296875 9.3599853515625 9.43994140625 9.52001953125 9.5999755859375 9.6800537109375 9.760009765625 9.8399658203125 9.9200439453125 10.0 10.0799560546875 10.1600341796875 10.239990234375 10.3199462890625 10.4000244140625 10.47998046875 10.56005859375 10.6400146484375 10.719970703125 10.800048828125 10.8800048828125 10.9599609375 11.0400390625 11.1199951171875 11.199951171875 11.280029296875 11.3599853515625 11.43994140625 11.52001953125 11.5999755859375 11.6800537109375 11.760009765625 11.8399658203125 11.9200439453125 12.0 12.0799560546875 12.1600341796875 12.239990234375 12.3199462890625 12.4000244140625 12.47998046875 12.56005859375 12.6400146484375 12.719970703125 12.800048828125 12.8800048828125 12.9599609375 13.0400390625 13.1199951171875 13.199951171875 13.280029296875 13.3599853515625 13.43994140625 13.52001953125 13.5999755859375 13.6800537109375 13.760009765625 13.8399658203125 13.9200439453125 14.0 14.0799560546875 14.1600341796875 14.239990234375 14.3199462890625 14.4000244140625 14.47998046875 14.56005859375 14.6400146484375 14.719970703125 14.800048828125 14.8800048828125 14.9599609375 15.0400390625 15.1199951171875 15.199951171875 15.280029296875 15.3599853515625 15.43994140625 15.52001953125 15.5999755859375 15.6800537109375 15.760009765625 15.8399658203125 15.9200439453125 16.0 16.0799560546875 16.1600341796875 16.239990234375 16.3199462890625 16.4000244140625 16.47998046875 16.56005859375 16.6400146484375 16.719970703125 16.800048828125 16.8800048828125 16.9599609375 17.0400390625 17.1199951171875 17.199951171875 17.280029296875 17.3599853515625 17.43994140625 17.52001953125 17.5999755859375 17.6800537109375 17.760009765625 17.8399658203125 17.9200439453125 18.0 18.0799560546875 18.1600341796875 18.239990234375 18.3199462890625 18.4000244140625 18.47998046875 18.56005859375 18.6400146484375 18.719970703125 18.800048828125 18.8800048828125 18.9599609375 19.0400390625 19.1199951171875 19.199951171875 19.280029296875 19.3599853515625 19.43994140625 19.52001953125 19.5999755859375 19.6800537109375 19.760009765625 19.8399658203125 19.9200439453125 20.0 20.0799560546875 20.1600341796875 20.239990234375 20.3199462890625 20.4000244140625 20.47998046875 20.56005859375 20.6400146484375 20.719970703125 20.800048828125 20.8800048828125 20.9599609375 21.0400390625 21.1199951171875 21.199951171875 21.280029296875 21.3599853515625 21.43994140625 21.52001953125 21.5999755859375 21.6800537109375 21.760009765625 21.8399658203125 21.9200439453125 22.0 22.0799560546875 22.1600341796875 22.239990234375 22.3199462890625 22.4000244140625 22.47998046875 22.56005859375 22.6400146484375 22.719970703125 22.800048828125 22.8800048828125 22.9599609375 23.0400390625 23.1199951171875 23.199951171875 23.280029296875 23.3599853515625 23.43994140625 23.52001953125 23.5999755859375 23.6800537109375 23.760009765625 23.8399658203125 23.9200439453125 24.0 24.0799560546875 24.1600341796875 24.239990234375 24.3199462890625 24.4000244140625 24.47998046875 24.56005859375 24.6400146484375 24.719970703125 24.800048828125 24.8800048828125 24.9599609375 25.0400390625 25.1199951171875 25.199951171875 25.280029296875 25.3599853515625 25.43994140625 25.52001953125 25.5999755859375 25.6800537109375 25.760009765625 25.8399658203125 25.9200439453125 26.0 26.0799560546875 26.1600341796875 26.239990234375 26.3199462890625 26.4000244140625 26.47998046875 26.56005859375 26.6400146484375 26.719970703125 26.800048828125 26.8800048828125 26.9599609375 27.0400390625 27.1199951171875 27.199951171875 27.280029296875 27.3599853515625 27.43994140625 27.52001953125 27.5999755859375 27.6800537109375 27.760009765625 27.8399658203125 27.9200439453125 28.0 28.0799560546875 28.1600341796875 28.239990234375 28.3199462890625 28.4000244140625 28.47998046875 28.56005859375 28.6400146484375 28.719970703125 28.800048828125 28.8800048828125 28.9599609375 29.0400390625 29.1199951171875 29.199951171875 29.280029296875 29.3599853515625 29.43994140625 29.52001953125 29.5999755859375 29.6800537109375 29.760009765625 29.8399658203125 29.9200439453125 30.0 30.0799560546875 30.1600341796875 30.239990234375 30.3199462890625 30.4000244140625 30.47998046875 30.56005859375 30.6400146484375 30.719970703125 30.800048828125 30.8800048828125 30.9599609375 31.0400390625 31.1199951171875 31.199951171875 31.280029296875 31.3599853515625 31.43994140625 31.52001953125 31.5999755859375 31.6800537109375 31.760009765625 31.8399658203125 31.9200439453125 32.0 32.0799560546875 32.1600341796875 32.239990234375 32.3199462890625 32.4000244140625 32.47998046875 32.56005859375 32.6400146484375 32.719970703125 32.800048828125 32.8800048828125 32.9599609375 33.0400390625 33.1199951171875 33.199951171875 33.280029296875 33.3599853515625 33.43994140625 33.52001953125 33.5999755859375 33.6800537109375 33.760009765625 33.8399658203125 33.9200439453125 34.0 34.0799560546875 34.1600341796875 34.239990234375 34.3199462890625 34.4000244140625 34.47998046875 34.56005859375 34.6400146484375 34.719970703125 34.800048828125 34.8800048828125 34.9599609375 35.0400390625 35.1199951171875 35.199951171875 35.280029296875 35.3599853515625 35.43994140625 35.52001953125 35.5999755859375 35.6800537109375 35.760009765625 35.8399658203125 35.9200439453125 36.0 36.0799560546875 36.1600341796875 36.239990234375 36.3199462890625 36.4000244140625 36.47998046875 36.56005859375 36.6400146484375 36.719970703125 36.800048828125 36.8800048828125 36.9599609375 37.0400390625 37.1199951171875 37.199951171875 37.280029296875 37.3599853515625 37.43994140625 37.52001953125 37.5999755859375 37.6800537109375 37.760009765625 37.8399658203125 37.9200439453125 38.0 38.0799560546875 38.1600341796875 38.239990234375 38.3199462890625 38.4000244140625 38.47998046875 38.56005859375 38.6400146484375 38.719970703125 38.800048828125 38.8800048828125 38.9599609375 39.0400390625 39.1199951171875 39.199951171875 39.280029296875 39.3599853515625 39.43994140625 39.52001953125 39.5999755859375 39.6800537109375 39.760009765625 39.8399658203125 39.9200439453125 40.0 40.0799560546875 40.1600341796875 40.239990234375 40.3199462890625 40.4000244140625 40.47998046875 40.56005859375 40.6400146484375 40.719970703125 40.800048828125 40.8800048828125 40.9599609375 41.0400390625 41.1199951171875 41.199951171875 41.280029296875 41.3599853515625 41.43994140625 41.52001953125 41.5999755859375 41.6800537109375 41.760009765625 41.8399658203125 41.9200439453125 42.0 42.0799560546875 42.1600341796875 42.239990234375 42.3199462890625 42.4000244140625 42.47998046875 42.56005859375 42.6400146484375 42.719970703125 42.800048828125 42.8800048828125 42.9599609375 43.0400390625 43.1199951171875 43.199951171875 43.280029296875 43.3599853515625 43.43994140625 43.52001953125 43.5999755859375 43.6800537109375 43.760009765625 43.8399658203125 43.9200439453125 44.0 44.0799560546875 44.1600341796875 44.239990234375 44.3199462890625 44.4000244140625 44.47998046875 44.56005859375 44.6400146484375 44.719970703125 44.800048828125 44.8800048828125 44.9599609375 45.0400390625 45.1199951171875 45.199951171875 45.280029296875 45.3599853515625 45.43994140625 45.52001953125 45.5999755859375 45.6800537109375 45.760009765625 45.8399658203125 45.9200439453125 46.0 46.0799560546875 46.1600341796875 46.239990234375 46.3199462890625 46.4000244140625 46.47998046875 46.56005859375 46.6400146484375 46.719970703125 46.800048828125 46.8800048828125 46.9599609375 47.0400390625 47.1199951171875 47.199951171875 47.280029296875 47.3599853515625 47.43994140625 47.52001953125 47.5999755859375 47.6800537109375 47.760009765625 47.8399658203125 47.9200439453125 48.0 48.0799560546875 48.1600341796875 48.239990234375 48.3199462890625 48.4000244140625 48.47998046875 48.56005859375 48.6400146484375 48.719970703125 48.800048828125 48.8800048828125 48.9599609375 49.0400390625 49.1199951171875 49.199951171875 49.280029296875 49.3599853515625 49.43994140625 49.52001953125 49.5999755859375 49.6800537109375 49.760009765625 49.8399658203125 49.9200439453125 50.0 50.0799560546875 50.1600341796875 50.239990234375 50.3199462890625 50.4000244140625 50.47998046875 50.56005859375 50.6400146484375 50.719970703125 50.800048828125 50.8800048828125 50.9599609375 51.0400390625 51.1199951171875 51.199951171875 51.280029296875 51.3599853515625 51.43994140625 51.52001953125 51.5999755859375 51.6800537109375 51.760009765625 51.8399658203125 51.9200439453125 52.0 52.0799560546875 52.1600341796875 52.239990234375 52.3199462890625 52.4000244140625 52.47998046875 52.56005859375 52.6400146484375 52.719970703125 52.800048828125 52.8800048828125 52.9599609375 53.0400390625 53.1199951171875 53.199951171875 53.280029296875 53.3599853515625 53.43994140625 53.52001953125 53.5999755859375 53.6800537109375 53.760009765625 53.8399658203125 53.9200439453125 54.0 54.0799560546875 54.1600341796875 54.239990234375 54.3199462890625 54.4000244140625 54.47998046875 54.56005859375 54.6400146484375 54.719970703125 54.800048828125 54.8800048828125 54.9599609375 55.0400390625 55.1199951171875 55.199951171875 55.280029296875 55.3599853515625 55.43994140625 55.52001953125 55.5999755859375 55.6800537109375 55.760009765625 55.8399658203125 55.9200439453125 56.0 56.0799560546875 56.1600341796875 56.239990234375 56.3199462890625 56.4000244140625 56.47998046875 56.56005859375 56.6400146484375 56.719970703125 56.800048828125 56.8800048828125 56.9599609375 57.0400390625 57.1199951171875 57.199951171875 57.280029296875 57.3599853515625 57.43994140625 57.52001953125 57.5999755859375 57.6800537109375 57.760009765625 57.8399658203125 57.9200439453125 58.0 58.0799560546875 58.1600341796875 58.239990234375 58.3199462890625 58.4000244140625 58.47998046875 58.56005859375 58.6400146484375 58.719970703125 58.800048828125 58.8800048828125 58.9599609375 59.0400390625 59.1199951171875 59.199951171875 59.280029296875 59.3599853515625 59.43994140625 59.52001953125 59.5999755859375 59.6800537109375 59.760009765625 59.8399658203125 59.9200439453125 60.0 60.0799560546875 60.1600341796875 60.239990234375 60.3199462890625 60.4000244140625 60.47998046875 60.56005859375 60.6400146484375 60.719970703125 60.800048828125 60.8800048828125 60.9599609375 61.0400390625 61.1199951171875 61.199951171875 61.280029296875 61.3599853515625 61.43994140625 61.52001953125 61.5999755859375 61.6800537109375 61.760009765625 61.8399658203125 61.9200439453125 62.0 62.0799560546875 62.1600341796875 62.239990234375 62.3199462890625 62.4000244140625 62.47998046875 62.56005859375 62.6400146484375 62.719970703125 62.800048828125 62.8800048828125 62.9599609375 63.0400390625 63.1199951171875 63.199951171875 63.280029296875 63.3599853515625 63.43994140625 63.52001953125 63.5999755859375 63.6800537109375 63.760009765625 63.8399658203125 63.9200439453125 64.0 64.0799560546875 64.1600341796875 64.239990234375 64.3199462890625 64.4000244140625 64.47998046875 64.56005859375 64.6400146484375 64.719970703125 64.800048828125 64.8800048828125 64.9599609375 65.0400390625 65.1199951171875 65.199951171875 65.280029296875 65.3599853515625 65.43994140625 65.52001953125 65.5999755859375 65.6800537109375 65.760009765625 65.8399658203125 65.9200439453125 66.0 66.0799560546875 66.1600341796875 66.239990234375 66.3199462890625 66.4000244140625 66.47998046875 66.56005859375 66.6400146484375 66.719970703125 66.800048828125 66.8800048828125 66.9599609375 67.0400390625 67.1199951171875 67.199951171875 67.280029296875 67.3599853515625 67.43994140625 67.52001953125 67.5999755859375 67.6800537109375 67.760009765625 67.8399658203125 67.9200439453125 68.0 68.0799560546875 68.1600341796875 68.239990234375 68.3199462890625 68.4000244140625 68.47998046875 68.56005859375 68.6400146484375 68.719970703125 68.800048828125 68.8800048828125 68.9599609375 69.0400390625 69.1199951171875 69.199951171875 69.280029296875 69.3599853515625 69.43994140625 69.52001953125 69.5999755859375 69.6800537109375 69.760009765625 69.8399658203125 69.9200439453125 70.0 70.0799560546875 70.1600341796875 70.239990234375 70.3199462890625 70.4000244140625 70.47998046875 70.56005859375 70.6400146484375 70.719970703125 70.800048828125 70.8800048828125 70.9599609375 71.0400390625 71.1199951171875 71.199951171875 71.280029296875 71.3599853515625 71.43994140625 71.52001953125 71.5999755859375 71.6800537109375 71.760009765625 71.8399658203125 71.9200439453125 72.0 72.0799560546875 72.1600341796875 72.239990234375 72.3199462890625 72.4000244140625 72.47998046875 72.56005859375 72.6400146484375 72.719970703125 72.800048828125 72.8800048828125 72.9599609375 73.0400390625 73.1199951171875 73.199951171875 73.280029296875 73.3599853515625 73.43994140625 73.52001953125 73.5999755859375 73.6800537109375 73.760009765625 73.8399658203125 73.9200439453125 74.0 74.0799560546875 74.1600341796875 74.239990234375 74.3199462890625 74.4000244140625 74.47998046875 74.56005859375 74.6400146484375 74.719970703125 74.800048828125 74.8800048828125 74.9599609375 75.0400390625 75.1199951171875 75.199951171875 75.280029296875 75.3599853515625 75.43994140625 75.52001953125 75.5999755859375 75.6800537109375 75.760009765625 75.8399658203125 75.9200439453125 76.0 76.0799560546875 76.1600341796875 76.239990234375 76.3199462890625 76.4000244140625 76.47998046875 76.56005859375 76.6400146484375 76.719970703125 76.800048828125 76.8800048828125 76.9599609375 77.0400390625 77.1199951171875 77.199951171875 77.280029296875 77.3599853515625 77.43994140625 77.52001953125 77.5999755859375 77.6800537109375 77.760009765625 77.8399658203125 77.9200439453125 78.0 78.0799560546875 78.1600341796875 78.239990234375 78.3199462890625 78.4000244140625 78.47998046875 78.56005859375 78.6400146484375 78.719970703125 78.800048828125 78.8800048828125 78.9599609375 79.0400390625 79.1199951171875 79.199951171875 79.280029296875 79.3599853515625 79.43994140625 79.52001953125 79.5999755859375 79.6800537109375 79.760009765625 79.8399658203125 79.9200439453125 80.0 80.0799560546875 80.1600341796875 80.239990234375 80.3199462890625 80.4000244140625 80.47998046875 80.56005859375 80.6400146484375 80.719970703125 80.800048828125 80.8800048828125 80.9599609375 81.0400390625 81.1199951171875 81.199951171875 81.280029296875 81.3599853515625 81.43994140625 81.52001953125 81.5999755859375 81.6800537109375 81.760009765625 81.8399658203125 81.9200439453125 82.0 82.0799560546875 82.1600341796875 82.239990234375 82.3199462890625 82.4000244140625 82.47998046875 82.56005859375 82.6400146484375 82.719970703125 82.800048828125 82.8800048828125 82.9599609375 83.0400390625 83.1199951171875 83.199951171875 83.280029296875 83.3599853515625 83.43994140625 83.52001953125 83.5999755859375 83.6800537109375 83.760009765625 83.8399658203125 83.9200439453125 84.0 84.0799560546875 84.1600341796875 84.239990234375 84.3199462890625 84.4000244140625 84.47998046875 84.56005859375 84.6400146484375 84.719970703125 84.800048828125 84.8800048828125 84.9599609375 85.0400390625 85.1199951171875 85.199951171875 85.280029296875 85.3599853515625 85.43994140625 85.52001953125 85.5999755859375 85.6800537109375 85.760009765625 85.8399658203125 85.9200439453125 86.0 86.0799560546875 86.1600341796875 86.239990234375 86.3199462890625 86.4000244140625 86.47998046875 86.56005859375 86.6400146484375 86.719970703125 86.800048828125 86.8800048828125 86.9599609375 87.0400390625 87.1199951171875 87.199951171875 87.280029296875 87.3599853515625 87.43994140625 87.52001953125 87.5999755859375 87.6800537109375 87.760009765625 87.8399658203125 87.9200439453125 88.0 88.0799560546875 88.1600341796875 88.239990234375 88.3199462890625 88.4000244140625 88.47998046875 88.56005859375 88.6400146484375 88.719970703125 88.800048828125 88.8800048828125 88.9599609375 89.0400390625 89.1199951171875 89.199951171875 89.280029296875 89.3599853515625 89.43994140625 89.52001953125 89.5999755859375 89.6800537109375 89.760009765625 89.8399658203125 89.9200439453125 90.0 90.0799560546875 90.1600341796875 90.239990234375 90.3199462890625 90.4000244140625 90.47998046875 90.56005859375 90.6400146484375 90.719970703125 90.800048828125 90.8800048828125 90.9599609375 91.0400390625 91.1199951171875 91.199951171875 91.280029296875 91.3599853515625 91.43994140625 91.52001953125 91.5999755859375 91.6800537109375 91.760009765625 91.8399658203125 91.9200439453125 92.0 92.0799560546875 92.1600341796875 92.239990234375 92.3199462890625 92.4000244140625 92.47998046875 92.56005859375 92.6400146484375 92.719970703125 92.800048828125 92.8800048828125 92.9599609375 93.0400390625 93.1199951171875 93.199951171875 93.280029296875 93.3599853515625 93.43994140625 93.52001953125 93.5999755859375 93.6800537109375 93.760009765625 93.8399658203125 93.9200439453125 94.0 94.0799560546875 94.1600341796875 94.239990234375 94.3199462890625 94.4000244140625 94.47998046875 94.56005859375 94.6400146484375 94.719970703125 94.800048828125 94.8800048828125 94.9599609375 95.0400390625 95.1199951171875 95.199951171875 95.280029296875 95.3599853515625 95.43994140625 95.52001953125 95.5999755859375 95.6800537109375 95.760009765625 95.8399658203125 95.9200439453125 96.0 96.0799560546875 96.1600341796875 96.239990234375 96.3199462890625 96.4000244140625 96.47998046875 96.56005859375 96.6400146484375 96.719970703125 96.800048828125 96.8800048828125 96.9599609375 97.0400390625 97.1199951171875 97.199951171875 97.280029296875 97.3599853515625 97.43994140625 97.52001953125 97.5999755859375 97.6800537109375 97.760009765625 97.8399658203125 97.9200439453125 98.0 98.0799560546875 98.1600341796875 98.239990234375 98.3199462890625 98.4000244140625 98.47998046875 98.56005859375 98.6400146484375 98.719970703125 98.800048828125 98.8800048828125 98.9599609375 99.0400390625 99.1199951171875 99.199951171875 99.280029296875 99.3599853515625 99.43994140625 99.52001953125 99.5999755859375 99.6800537109375 99.760009765625 99.8399658203125 99.9200439453125 100.0 100.0799560546875 100.1600341796875 100.239990234375 100.3199462890625 100.4000244140625 100.47998046875 100.56005859375 100.6400146484375 100.719970703125 100.800048828125 100.8800048828125 100.9599609375 101.0400390625 101.1199951171875 101.199951171875 101.280029296875 101.3599853515625 101.43994140625 101.52001953125 101.5999755859375 101.6800537109375 101.760009765625 101.8399658203125 101.9200439453125 102.0 102.0799560546875 102.1600341796875 102.239990234375 102.3199462890625 102.4000244140625 102.47998046875 102.56005859375 102.6400146484375 102.719970703125 102.800048828125 102.8800048828125 102.9599609375 103.0400390625 103.1199951171875 103.199951171875 103.280029296875 103.3599853515625 103.43994140625 103.52001953125 103.5999755859375 103.6800537109375 103.760009765625 103.8399658203125 103.9200439453125 104.0 104.0799560546875 104.1600341796875 104.239990234375 104.3199462890625 104.4000244140625 104.47998046875 104.56005859375 104.6400146484375 104.719970703125 104.800048828125 104.8800048828125 104.9599609375 105.0400390625 105.1199951171875 105.199951171875 105.280029296875 105.3599853515625 105.43994140625 105.52001953125 105.5999755859375 105.6800537109375 105.760009765625 105.8399658203125 105.9200439453125 106.0 106.0799560546875 106.1600341796875 106.239990234375 106.3199462890625 106.4000244140625 106.47998046875 106.56005859375 106.6400146484375 106.719970703125 106.800048828125 106.8800048828125 106.9599609375 107.0400390625 107.1199951171875 107.199951171875 107.280029296875 107.3599853515625 107.43994140625 107.52001953125 107.5999755859375 107.6800537109375 107.760009765625 107.8399658203125 107.9200439453125 108.0 108.0799560546875 108.1600341796875 108.239990234375 108.3199462890625 108.4000244140625 108.47998046875 108.56005859375 108.6400146484375 108.719970703125 108.800048828125 108.8800048828125 108.9599609375 109.0400390625 109.1199951171875 109.199951171875 109.280029296875 109.3599853515625 109.43994140625 109.52001953125 109.5999755859375 109.6800537109375 109.760009765625 109.8399658203125 109.9200439453125 110.0 110.0799560546875 110.1600341796875 110.239990234375 110.3199462890625 110.4000244140625 110.47998046875 110.56005859375 110.6400146484375 110.719970703125 110.800048828125 110.8800048828125 110.9599609375 111.0400390625 111.1199951171875 111.199951171875 111.280029296875 111.3599853515625 111.43994140625 111.52001953125 111.5999755859375 111.6800537109375 111.760009765625 111.8399658203125 111.9200439453125 112.0 112.0799560546875 112.1600341796875 112.239990234375 112.3199462890625 112.4000244140625 112.47998046875 112.56005859375 112.6400146484375 112.719970703125 112.800048828125 112.8800048828125 112.9599609375 113.0400390625 113.1199951171875 113.199951171875 113.280029296875 113.3599853515625 113.43994140625 113.52001953125 113.5999755859375 113.6800537109375 113.760009765625 113.8399658203125 113.9200439453125 114.0 114.0799560546875 114.1600341796875 114.239990234375 114.3199462890625 114.4000244140625 114.47998046875 114.56005859375 114.6400146484375 114.719970703125 114.800048828125 114.8800048828125 114.9599609375 115.0400390625 115.1199951171875 115.199951171875 115.280029296875 115.3599853515625 115.43994140625 115.52001953125 115.5999755859375 115.6800537109375 115.760009765625 115.8399658203125 115.9200439453125 116.0 116.0799560546875 116.1600341796875 116.239990234375 116.3199462890625 116.4000244140625 116.47998046875 116.56005859375 116.6400146484375 116.719970703125 116.800048828125 116.8800048828125 116.9599609375 117.0400390625 117.1199951171875 117.199951171875 117.280029296875 117.3599853515625 117.43994140625 117.52001953125 117.5999755859375 117.6800537109375 117.760009765625 117.8399658203125 117.9200439453125 118.0 118.0799560546875 118.1600341796875 118.239990234375 118.3199462890625 118.4000244140625 118.47998046875 118.56005859375 118.6400146484375 118.719970703125 118.800048828125 118.8800048828125 118.9599609375 119.0400390625 119.1199951171875 119.199951171875 119.280029296875 119.3599853515625 119.43994140625 119.52001953125 119.5999755859375 119.6800537109375 119.760009765625 119.8399658203125 119.9200439453125 120.0 120.0799560546875 120.1600341796875 120.239990234375 120.3199462890625 120.4000244140625 120.47998046875 120.56005859375 120.6400146484375 120.719970703125 120.800048828125 120.8800048828125 120.9599609375 121.0400390625 121.1199951171875 121.199951171875 121.280029296875 121.3599853515625 121.43994140625 121.52001953125 121.5999755859375 121.6800537109375 121.760009765625 121.8399658203125 121.9200439453125 122.0 122.0799560546875 122.1600341796875 122.239990234375 122.3199462890625 122.4000244140625 122.47998046875 122.56005859375 122.6400146484375 122.719970703125 122.800048828125 122.8800048828125 122.9599609375 123.0400390625 123.1199951171875 123.199951171875 123.280029296875 123.3599853515625 123.43994140625 123.52001953125 123.5999755859375 123.6800537109375 123.760009765625 123.8399658203125 123.9200439453125 124.0 124.0799560546875 124.1600341796875 124.239990234375 124.3199462890625 124.4000244140625 124.47998046875 124.56005859375 124.6400146484375 124.719970703125 124.800048828125 124.8800048828125 124.9599609375 125.0400390625 125.1199951171875 125.199951171875 125.280029296875 125.3599853515625 125.43994140625 125.52001953125 125.5999755859375 125.6800537109375 125.760009765625 125.8399658203125 125.9200439453125 126.0 126.0799560546875 126.1600341796875 126.239990234375 126.3199462890625 126.4000244140625 126.47998046875 126.56005859375 126.6400146484375 126.719970703125 126.800048828125 126.8800048828125 126.9599609375 127.0400390625 127.1199951171875 127.199951171875 127.280029296875 127.3599853515625 127.43994140625 127.52001953125 127.5999755859375 127.6800537109375 127.760009765625 127.8399658203125 127.9200439453125 128.0 128.0799560546875 128.1600341796875 128.239990234375 128.320068359375 128.4000244140625 128.47998046875 128.56005859375 128.6400146484375 128.719970703125 128.800048828125 128.8800048828125 128.9599609375 129.0400390625 129.1199951171875 129.199951171875 129.280029296875 129.3599853515625 129.43994140625 129.52001953125 129.5999755859375 129.679931640625 129.760009765625 129.8399658203125 129.9200439453125 130.0 130.0799560546875 130.1600341796875 130.239990234375 130.320068359375 130.4000244140625 130.47998046875 130.56005859375 130.6400146484375 130.719970703125 130.800048828125 130.8800048828125 130.9599609375 131.0400390625 131.1199951171875 131.199951171875 131.280029296875 131.3599853515625 131.43994140625 131.52001953125 131.5999755859375 131.679931640625 131.760009765625 131.8399658203125 131.9200439453125 132.0 132.0799560546875 132.1600341796875 132.239990234375 132.320068359375 132.4000244140625 132.47998046875 132.56005859375 132.6400146484375 132.719970703125 132.800048828125 132.8800048828125 132.9599609375 133.0400390625 133.1199951171875 133.199951171875 133.280029296875 133.3599853515625 133.43994140625 133.52001953125 133.5999755859375 133.679931640625 133.760009765625 133.8399658203125 133.9200439453125 134.0 134.0799560546875 134.1600341796875 134.239990234375 134.320068359375 134.4000244140625 134.47998046875 134.56005859375 134.6400146484375 134.719970703125 134.800048828125 134.8800048828125 134.9599609375 135.0400390625 135.1199951171875 135.199951171875 135.280029296875 135.3599853515625 135.43994140625 135.52001953125 135.5999755859375 135.679931640625 135.760009765625 135.8399658203125 135.9200439453125 136.0 136.0799560546875 136.1600341796875 136.239990234375 136.320068359375 136.4000244140625 136.47998046875 136.56005859375 136.6400146484375 136.719970703125 136.800048828125 136.8800048828125 136.9599609375 137.0400390625 137.1199951171875 137.199951171875 137.280029296875 137.3599853515625 137.43994140625 137.52001953125 137.5999755859375 137.679931640625 137.760009765625 137.8399658203125 137.9200439453125 138.0 138.0799560546875 138.1600341796875 138.239990234375 138.320068359375 138.4000244140625 138.47998046875 138.56005859375 138.6400146484375 138.719970703125 138.800048828125 138.8800048828125 138.9599609375 139.0400390625 139.1199951171875 139.199951171875 139.280029296875 139.3599853515625 139.43994140625 139.52001953125 139.5999755859375 139.679931640625 139.760009765625 139.8399658203125 139.9200439453125 140.0 140.0799560546875 140.1600341796875 140.239990234375 140.320068359375 140.4000244140625 140.47998046875 140.56005859375 140.6400146484375 140.719970703125 140.800048828125 140.8800048828125 140.9599609375 141.0400390625 141.1199951171875 141.199951171875 141.280029296875 141.3599853515625 141.43994140625 141.52001953125 141.5999755859375 141.679931640625 141.760009765625 141.8399658203125 141.9200439453125 142.0 142.0799560546875 142.1600341796875 142.239990234375 142.320068359375 142.4000244140625 142.47998046875 142.56005859375 142.6400146484375 142.719970703125 142.800048828125 142.8800048828125 142.9599609375 143.0400390625 143.1199951171875 143.199951171875 143.280029296875 143.3599853515625 143.43994140625 143.52001953125 143.5999755859375 143.679931640625 143.760009765625 143.8399658203125 143.9200439453125 144.0 144.0799560546875 144.1600341796875 144.239990234375 144.320068359375 144.4000244140625 144.47998046875 144.56005859375 144.6400146484375 144.719970703125 144.800048828125 144.8800048828125 144.9599609375 145.0400390625 145.1199951171875 145.199951171875 145.280029296875 145.3599853515625 145.43994140625 145.52001953125 145.5999755859375 145.679931640625 145.760009765625 145.8399658203125 145.9200439453125 146.0 146.0799560546875 146.1600341796875 146.239990234375 146.320068359375 146.4000244140625 146.47998046875 146.56005859375 146.6400146484375 146.719970703125 146.800048828125 146.8800048828125 146.9599609375 147.0400390625 147.1199951171875 147.199951171875 147.280029296875 147.3599853515625 147.43994140625 147.52001953125 147.5999755859375 147.679931640625 147.760009765625 147.8399658203125 147.9200439453125 148.0 148.0799560546875 148.1600341796875 148.239990234375 148.320068359375 148.4000244140625 148.47998046875 148.56005859375 148.6400146484375 148.719970703125 148.800048828125 148.8800048828125 148.9599609375 149.0400390625 149.1199951171875 149.199951171875 149.280029296875 149.3599853515625 149.43994140625 149.52001953125 149.5999755859375 149.679931640625 149.760009765625 149.8399658203125 149.9200439453125 150.0 150.0799560546875 150.1600341796875 150.239990234375 150.320068359375 150.4000244140625 150.47998046875 150.56005859375 150.6400146484375 150.719970703125 150.800048828125 150.8800048828125 150.9599609375 151.0400390625 151.1199951171875 151.199951171875 151.280029296875 151.3599853515625 151.43994140625 151.52001953125 151.5999755859375 151.679931640625 151.760009765625 151.8399658203125 151.9200439453125 152.0 152.0799560546875 152.1600341796875 152.239990234375 152.320068359375 152.4000244140625 152.47998046875 152.56005859375 152.6400146484375 152.719970703125 152.800048828125 152.8800048828125 152.9599609375 153.0400390625 153.1199951171875 153.199951171875 153.280029296875 153.3599853515625 153.43994140625 153.52001953125 153.5999755859375 153.679931640625 153.760009765625 153.8399658203125 153.9200439453125 154.0 154.0799560546875 154.1600341796875 154.239990234375 154.320068359375 154.4000244140625 154.47998046875 154.56005859375 154.6400146484375 154.719970703125 154.800048828125 154.8800048828125 154.9599609375 155.0400390625 155.1199951171875 155.199951171875 155.280029296875 155.3599853515625 155.43994140625 155.52001953125 155.5999755859375 155.679931640625 155.760009765625 155.8399658203125 155.9200439453125 156.0 156.0799560546875 156.1600341796875 156.239990234375 156.320068359375 156.4000244140625 156.47998046875 156.56005859375 156.6400146484375 156.719970703125 156.800048828125 156.8800048828125 156.9599609375 157.0400390625 157.1199951171875 157.199951171875 157.280029296875 157.3599853515625 157.43994140625 157.52001953125 157.5999755859375 157.679931640625 157.760009765625 157.8399658203125 157.9200439453125 158.0 158.0799560546875 158.1600341796875 158.239990234375 158.320068359375 158.4000244140625 158.47998046875 158.56005859375 158.6400146484375 158.719970703125 158.800048828125 158.8800048828125 158.9599609375 159.0400390625 159.1199951171875 159.199951171875 159.280029296875 159.3599853515625 159.43994140625 159.52001953125 159.5999755859375 159.679931640625 159.760009765625 159.8399658203125 159.9200439453125 160.0 160.0799560546875 160.1600341796875 160.239990234375 160.320068359375 160.4000244140625 160.47998046875 160.56005859375 160.6400146484375 160.719970703125 160.800048828125 160.8800048828125 160.9599609375 161.0400390625 161.1199951171875 161.199951171875 161.280029296875 161.3599853515625 161.43994140625 161.52001953125 161.5999755859375 161.679931640625 161.760009765625 161.8399658203125 161.9200439453125 162.0 162.0799560546875 162.1600341796875 162.239990234375 162.320068359375 162.4000244140625 162.47998046875 162.56005859375 162.6400146484375 162.719970703125 162.800048828125 162.8800048828125 162.9599609375 163.0400390625 163.1199951171875 163.199951171875 163.280029296875 163.3599853515625 163.43994140625 163.52001953125 163.5999755859375 163.679931640625 163.760009765625 163.8399658203125 163.9200439453125 164.0 164.0799560546875 164.1600341796875 164.239990234375 164.320068359375 164.4000244140625 164.47998046875 164.56005859375 164.6400146484375 164.719970703125 164.800048828125 164.8800048828125 164.9599609375 165.0400390625 165.1199951171875 165.199951171875 165.280029296875 165.3599853515625 165.43994140625 165.52001953125 165.5999755859375 165.679931640625 165.760009765625 165.8399658203125 165.9200439453125 166.0 166.0799560546875 166.1600341796875 166.239990234375 166.320068359375 166.4000244140625 166.47998046875 166.56005859375 166.6400146484375 166.719970703125 166.800048828125 166.8800048828125 166.9599609375 167.0400390625 167.1199951171875 167.199951171875 167.280029296875 167.3599853515625 167.43994140625 167.52001953125 167.5999755859375 167.679931640625 167.760009765625 167.8399658203125 167.9200439453125 168.0 168.0799560546875 168.1600341796875 168.239990234375 168.320068359375 168.4000244140625 168.47998046875 168.56005859375 168.6400146484375 168.719970703125 168.800048828125 168.8800048828125 168.9599609375 169.0400390625 169.1199951171875 169.199951171875 169.280029296875 169.3599853515625 169.43994140625 169.52001953125 169.5999755859375 169.679931640625 169.760009765625 169.8399658203125 169.9200439453125 170.0 170.0799560546875 170.1600341796875 170.239990234375 170.320068359375 170.4000244140625 170.47998046875 170.56005859375 170.6400146484375 170.719970703125 170.800048828125 170.8800048828125 170.9599609375 171.0400390625 171.1199951171875 171.199951171875 171.280029296875 171.3599853515625 171.43994140625 171.52001953125 171.5999755859375 171.679931640625 171.760009765625 171.8399658203125 171.9200439453125 172.0 172.0799560546875 172.1600341796875 172.239990234375 172.320068359375 172.4000244140625 172.47998046875 172.56005859375 172.6400146484375 172.719970703125 172.800048828125 172.8800048828125 172.9599609375 173.0400390625 173.1199951171875 173.199951171875 173.280029296875 173.3599853515625 173.43994140625 173.52001953125 173.5999755859375 173.679931640625 173.760009765625 173.8399658203125 173.9200439453125 174.0 174.0799560546875 174.1600341796875 174.239990234375 174.320068359375 174.4000244140625 174.47998046875 174.56005859375 174.6400146484375 174.719970703125 174.800048828125 174.8800048828125 174.9599609375 175.0400390625 175.1199951171875 175.199951171875 175.280029296875 175.3599853515625 175.43994140625 175.52001953125 175.5999755859375 175.679931640625 175.760009765625 175.8399658203125 175.9200439453125 176.0 176.0799560546875 176.1600341796875 176.239990234375 176.320068359375 176.4000244140625 176.47998046875 176.56005859375 176.6400146484375 176.719970703125 176.800048828125 176.8800048828125 176.9599609375 177.0400390625 177.1199951171875 177.199951171875 177.280029296875 177.3599853515625 177.43994140625 177.52001953125 177.5999755859375 177.679931640625 177.760009765625 177.8399658203125 177.9200439453125 178.0 178.0799560546875 178.1600341796875 178.239990234375 178.320068359375 178.4000244140625 178.47998046875 178.56005859375 178.6400146484375 178.719970703125 178.800048828125 178.8800048828125 178.9599609375 179.0400390625 179.1199951171875 179.199951171875 179.280029296875 179.3599853515625 179.43994140625 179.52001953125 179.5999755859375 179.679931640625 179.760009765625 179.8399658203125 179.9200439453125 180.0 180.08001708984375 180.1600341796875 180.239990234375 180.32000732421875 180.4000244140625 180.47998046875 180.55999755859375 180.6400146484375 180.719970703125 180.79998779296875 180.8800048828125 180.96002197265625 181.03997802734375 181.1199951171875 181.20001220703125 181.280029296875 181.3599853515625 181.44000244140625 181.52001953125 181.5999755859375 181.67999267578125 181.760009765625 181.8399658203125 181.91998291015625 182.0 182.08001708984375 182.1600341796875 182.239990234375 182.32000732421875 182.4000244140625 182.47998046875 182.55999755859375 182.6400146484375 182.719970703125 182.79998779296875 182.8800048828125 182.96002197265625 183.03997802734375 183.1199951171875 183.20001220703125 183.280029296875 183.3599853515625 183.44000244140625 183.52001953125 183.5999755859375 183.67999267578125 183.760009765625 183.8399658203125 183.91998291015625 184.0 184.08001708984375 184.1600341796875 184.239990234375 184.32000732421875 184.4000244140625 184.47998046875 184.55999755859375 184.6400146484375 184.719970703125 184.79998779296875 184.8800048828125 184.96002197265625 185.03997802734375 185.1199951171875 185.20001220703125 185.280029296875 185.3599853515625 185.44000244140625 185.52001953125 185.5999755859375 185.67999267578125 185.760009765625 185.8399658203125 185.91998291015625 186.0 186.08001708984375 186.1600341796875 186.239990234375 186.32000732421875 186.4000244140625 186.47998046875 186.55999755859375 186.6400146484375 186.719970703125 186.79998779296875 186.8800048828125 186.96002197265625 187.03997802734375 187.1199951171875 187.20001220703125 187.280029296875 187.3599853515625 187.44000244140625 187.52001953125 187.5999755859375 187.67999267578125 187.760009765625 187.8399658203125 187.91998291015625 188.0 188.08001708984375 188.1600341796875 188.239990234375 188.32000732421875 188.4000244140625 188.47998046875 188.55999755859375 188.6400146484375 188.719970703125 188.79998779296875 188.8800048828125 188.96002197265625 189.03997802734375 189.1199951171875 189.20001220703125 189.280029296875 189.3599853515625 189.44000244140625 189.52001953125 189.5999755859375 189.67999267578125 189.760009765625 189.8399658203125 189.91998291015625 190.0 190.08001708984375 190.1600341796875 190.239990234375 190.32000732421875 190.4000244140625 190.47998046875 190.55999755859375 190.6400146484375 190.719970703125 190.79998779296875 190.8800048828125 190.96002197265625 191.03997802734375 191.1199951171875 191.20001220703125 191.280029296875 191.3599853515625 191.44000244140625 191.52001953125 191.5999755859375 191.67999267578125 191.760009765625 191.8399658203125 191.91998291015625 192.0 192.08001708984375 192.1600341796875 192.239990234375 192.32000732421875 192.4000244140625 192.47998046875 192.55999755859375 192.6400146484375 192.719970703125 192.79998779296875 192.8800048828125 192.96002197265625 193.03997802734375 193.1199951171875 193.20001220703125 193.280029296875 193.3599853515625 193.44000244140625 193.52001953125 193.5999755859375 193.67999267578125 193.760009765625 193.8399658203125 193.91998291015625 194.0 194.08001708984375 194.1600341796875 194.239990234375 194.32000732421875 194.4000244140625 194.47998046875 194.55999755859375 194.6400146484375 194.719970703125 194.79998779296875 194.8800048828125 194.96002197265625 195.03997802734375 195.1199951171875 195.20001220703125 195.280029296875 195.3599853515625 195.44000244140625 195.52001953125 195.5999755859375 195.67999267578125 195.760009765625 195.8399658203125 195.91998291015625 196.0 196.08001708984375 196.1600341796875 196.239990234375 196.32000732421875 196.4000244140625 196.47998046875 196.55999755859375 196.6400146484375 196.719970703125 196.79998779296875 196.8800048828125 196.96002197265625 197.03997802734375 197.1199951171875 197.20001220703125 197.280029296875 197.3599853515625 197.44000244140625 197.52001953125 197.5999755859375 197.67999267578125 197.760009765625 197.8399658203125 197.91998291015625 198.0 198.08001708984375 198.1600341796875 198.239990234375 198.32000732421875 198.4000244140625 198.47998046875 198.55999755859375 198.6400146484375 198.719970703125 198.79998779296875 198.8800048828125 198.96002197265625 199.03997802734375 199.1199951171875 199.20001220703125 199.280029296875 199.3599853515625 199.44000244140625 199.52001953125 199.5999755859375 199.67999267578125 199.760009765625 199.8399658203125 199.91998291015625 200.0 200.08001708984375 200.1600341796875 200.239990234375 200.32000732421875 200.4000244140625 200.47998046875 200.55999755859375 200.6400146484375 200.719970703125 200.79998779296875 200.8800048828125 200.96002197265625 201.03997802734375 201.1199951171875 201.20001220703125 201.280029296875 201.3599853515625 201.44000244140625 201.52001953125 201.5999755859375 201.67999267578125 201.760009765625 201.8399658203125 201.91998291015625 202.0 202.08001708984375 202.1600341796875 202.239990234375 202.32000732421875 202.4000244140625 202.47998046875 202.55999755859375 202.6400146484375 202.719970703125 202.79998779296875 202.8800048828125 202.96002197265625 203.03997802734375 203.1199951171875 203.20001220703125 203.280029296875 203.3599853515625 203.44000244140625 203.52001953125 203.5999755859375 203.67999267578125 203.760009765625 203.8399658203125 203.91998291015625 204.0 204.08001708984375 204.1600341796875 204.239990234375 204.32000732421875 204.4000244140625 204.47998046875 204.55999755859375 204.6400146484375 204.719970703125 204.79998779296875 204.8800048828125 204.96002197265625 205.03997802734375 205.1199951171875 205.20001220703125 205.280029296875 205.3599853515625 205.44000244140625 205.52001953125 205.5999755859375 205.67999267578125 205.760009765625 205.8399658203125 205.91998291015625 206.0 206.08001708984375 206.1600341796875 206.239990234375 206.32000732421875 206.4000244140625 206.47998046875 206.55999755859375 206.6400146484375 206.719970703125 206.79998779296875 206.8800048828125 206.96002197265625 207.03997802734375 207.1199951171875 207.20001220703125 207.280029296875 207.3599853515625 207.44000244140625 207.52001953125 207.5999755859375 207.67999267578125 207.760009765625 207.8399658203125 207.91998291015625 208.0 208.08001708984375 208.1600341796875 208.239990234375 208.32000732421875 208.4000244140625 208.47998046875 208.55999755859375 208.6400146484375 208.719970703125 208.79998779296875 208.8800048828125 208.96002197265625 209.03997802734375 209.1199951171875 209.20001220703125 209.280029296875 209.3599853515625 209.44000244140625 209.52001953125 209.5999755859375 209.67999267578125 209.760009765625 209.8399658203125 209.91998291015625 210.0 210.08001708984375 210.1600341796875 210.239990234375 210.32000732421875 210.4000244140625 210.47998046875 210.55999755859375 210.6400146484375 210.719970703125 210.79998779296875 210.8800048828125 210.96002197265625 211.03997802734375 211.1199951171875 211.20001220703125 211.280029296875 211.3599853515625 211.44000244140625 211.52001953125 211.5999755859375 211.67999267578125 211.760009765625 211.8399658203125 211.91998291015625 212.0 212.08001708984375 212.1600341796875 212.239990234375 212.32000732421875 212.4000244140625 212.47998046875 212.55999755859375 212.6400146484375 212.719970703125 212.79998779296875 212.8800048828125 212.96002197265625 213.03997802734375 213.1199951171875 213.20001220703125 213.280029296875 213.3599853515625 213.44000244140625 213.52001953125 213.5999755859375 213.67999267578125 213.760009765625 213.8399658203125 213.91998291015625 214.0 214.08001708984375 214.1600341796875 214.239990234375 214.32000732421875 214.4000244140625 214.47998046875 214.55999755859375 214.6400146484375 214.719970703125 214.79998779296875 214.8800048828125 214.96002197265625 215.03997802734375 215.1199951171875 215.20001220703125 215.280029296875 215.3599853515625 215.44000244140625 215.52001953125 215.5999755859375 215.67999267578125 215.760009765625 215.8399658203125 215.91998291015625 216.0 216.08001708984375 216.1600341796875 216.239990234375 216.32000732421875 216.4000244140625 216.47998046875 216.55999755859375 216.6400146484375 216.719970703125 216.79998779296875 216.8800048828125 216.96002197265625 217.03997802734375 217.1199951171875 217.20001220703125 217.280029296875 217.3599853515625 217.44000244140625 217.52001953125 217.5999755859375 217.67999267578125 217.760009765625 217.8399658203125 217.91998291015625 218.0 218.08001708984375 218.1600341796875 218.239990234375 218.32000732421875 218.4000244140625 218.47998046875 218.55999755859375 218.6400146484375 218.719970703125 218.79998779296875 218.8800048828125 218.96002197265625 219.03997802734375 219.1199951171875 219.20001220703125 219.280029296875 219.3599853515625 219.44000244140625 219.52001953125 219.5999755859375 219.67999267578125 219.760009765625 219.8399658203125 219.91998291015625 220.0 220.08001708984375 220.1600341796875 220.239990234375 220.32000732421875 220.4000244140625 220.47998046875 220.55999755859375 220.6400146484375 220.719970703125 220.79998779296875 220.8800048828125 220.96002197265625 221.03997802734375 221.1199951171875 221.20001220703125 221.280029296875 221.3599853515625 221.44000244140625 221.52001953125 221.5999755859375 221.67999267578125 221.760009765625 221.8399658203125 221.91998291015625 222.0 222.08001708984375 222.1600341796875 222.239990234375 222.32000732421875 222.4000244140625 222.47998046875 222.55999755859375 222.6400146484375 222.719970703125 222.79998779296875 222.8800048828125 222.96002197265625 223.03997802734375 223.1199951171875 223.20001220703125 223.280029296875 223.3599853515625 223.44000244140625 223.52001953125 223.5999755859375 223.67999267578125 223.760009765625 223.8399658203125 223.91998291015625 224.0 224.08001708984375 224.1600341796875 224.239990234375 224.32000732421875 224.4000244140625 224.47998046875 224.55999755859375 224.6400146484375 224.719970703125 224.79998779296875 224.8800048828125 224.96002197265625 225.03997802734375 225.1199951171875 225.20001220703125 225.280029296875 225.3599853515625 225.44000244140625 225.52001953125 225.5999755859375 225.67999267578125 225.760009765625 225.8399658203125 225.91998291015625 226.0 226.08001708984375 226.1600341796875 226.239990234375 226.32000732421875 226.4000244140625 226.47998046875 226.55999755859375 226.6400146484375 226.719970703125 226.79998779296875 226.8800048828125 226.96002197265625 227.03997802734375 227.1199951171875 227.20001220703125 227.280029296875 227.3599853515625 227.44000244140625 227.52001953125 227.5999755859375 227.67999267578125 227.760009765625 227.8399658203125 227.91998291015625 228.0 228.08001708984375 228.1600341796875 228.239990234375 228.32000732421875 228.4000244140625 228.47998046875 228.55999755859375 228.6400146484375 228.719970703125 228.79998779296875 228.8800048828125 228.96002197265625 229.03997802734375 229.1199951171875 229.20001220703125 229.280029296875 229.3599853515625 229.44000244140625 229.52001953125 229.5999755859375 229.67999267578125 229.760009765625 229.8399658203125 229.91998291015625 230.0 230.08001708984375 230.1600341796875 230.239990234375 230.32000732421875 230.4000244140625 230.47998046875 230.55999755859375 230.6400146484375 230.719970703125 230.79998779296875 230.8800048828125 230.96002197265625 231.03997802734375 231.1199951171875 231.20001220703125 231.280029296875 231.3599853515625 231.44000244140625 231.52001953125 231.5999755859375 231.67999267578125 231.760009765625 231.8399658203125 231.91998291015625 232.0 232.08001708984375 232.1600341796875 232.239990234375 232.32000732421875 232.4000244140625 232.47998046875 232.55999755859375 232.6400146484375 232.719970703125 232.79998779296875 232.8800048828125 232.96002197265625 233.03997802734375 233.1199951171875 233.20001220703125 233.280029296875 233.3599853515625 233.44000244140625 233.52001953125 233.5999755859375 233.67999267578125 233.760009765625 233.8399658203125 233.91998291015625 234.0 234.08001708984375 234.1600341796875 234.239990234375 234.32000732421875 234.4000244140625 234.47998046875 234.55999755859375 234.6400146484375 234.719970703125 234.79998779296875 234.8800048828125 234.96002197265625 235.03997802734375 235.1199951171875 235.20001220703125 235.280029296875 235.3599853515625 235.44000244140625 235.52001953125 235.5999755859375 235.67999267578125 235.760009765625 235.8399658203125 235.91998291015625 236.0 236.08001708984375 236.1600341796875 236.239990234375 236.32000732421875 236.4000244140625 236.47998046875 236.55999755859375 236.6400146484375 236.719970703125 236.79998779296875 236.8800048828125 236.96002197265625 237.03997802734375 237.1199951171875 237.20001220703125 237.280029296875 237.3599853515625 237.44000244140625 237.52001953125 237.5999755859375 237.67999267578125 237.760009765625 237.8399658203125 237.91998291015625 238.0 238.08001708984375 238.1600341796875 238.239990234375 238.32000732421875 238.4000244140625 238.47998046875 238.55999755859375 238.6400146484375 238.719970703125 238.79998779296875 238.8800048828125 238.96002197265625 239.03997802734375 239.1199951171875 239.20001220703125 239.280029296875 239.3599853515625 239.44000244140625 239.52001953125 239.5999755859375 239.67999267578125 239.760009765625 239.8399658203125 239.91998291015625 240.0 240.08001708984375 240.1600341796875 240.239990234375 240.32000732421875 240.4000244140625 240.47998046875 240.55999755859375 240.6400146484375 240.719970703125 240.79998779296875 240.8800048828125 240.96002197265625 241.03997802734375 241.1199951171875 241.20001220703125 241.280029296875 241.3599853515625 241.44000244140625 241.52001953125 241.5999755859375 241.67999267578125 241.760009765625 241.8399658203125 241.91998291015625 242.0 242.08001708984375 242.1600341796875 242.239990234375 242.32000732421875 242.4000244140625 242.47998046875 242.55999755859375 242.6400146484375 242.719970703125 242.79998779296875 242.8800048828125 242.96002197265625 243.03997802734375 243.1199951171875 243.20001220703125 243.280029296875 243.3599853515625 243.44000244140625 243.52001953125 243.5999755859375 243.67999267578125 243.760009765625 243.8399658203125 243.91998291015625 244.0 244.08001708984375 244.1600341796875 244.239990234375 244.32000732421875 244.4000244140625 244.47998046875 244.55999755859375 244.6400146484375 244.719970703125 244.79998779296875 244.8800048828125 244.96002197265625 245.03997802734375 245.1199951171875 245.20001220703125 245.280029296875 245.3599853515625 245.44000244140625 245.52001953125 245.5999755859375 245.67999267578125 245.760009765625 245.8399658203125 245.91998291015625 246.0 246.08001708984375 246.1600341796875 246.239990234375 246.32000732421875 246.4000244140625 246.47998046875 246.55999755859375 246.6400146484375 246.719970703125 246.79998779296875 246.8800048828125 246.96002197265625 247.03997802734375 247.1199951171875 247.20001220703125 247.280029296875 247.3599853515625 247.44000244140625 247.52001953125 247.5999755859375 247.67999267578125 247.760009765625 247.8399658203125 247.91998291015625 248.0 248.08001708984375 248.1600341796875 248.239990234375 248.32000732421875 248.4000244140625 248.47998046875 248.55999755859375 248.6400146484375 248.719970703125 248.79998779296875 248.8800048828125 248.96002197265625 249.03997802734375 249.1199951171875 249.20001220703125 249.280029296875 249.3599853515625 249.44000244140625 249.52001953125 249.5999755859375 249.67999267578125 249.760009765625 249.8399658203125 249.91998291015625 250.0 250.08001708984375 250.1600341796875 250.239990234375 250.32000732421875 250.4000244140625 250.47998046875 250.55999755859375 250.6400146484375 250.719970703125 250.79998779296875 250.8800048828125 250.96002197265625 251.03997802734375 251.1199951171875 251.20001220703125 251.280029296875 251.3599853515625 251.44000244140625 251.52001953125 251.5999755859375 251.67999267578125 251.760009765625 251.8399658203125 251.91998291015625 252.0 252.08001708984375 252.1600341796875 252.239990234375 252.32000732421875 252.4000244140625 252.47998046875 252.55999755859375 252.6400146484375 252.719970703125 252.79998779296875 252.8800048828125 252.96002197265625 253.03997802734375 253.1199951171875 253.20001220703125 253.280029296875 253.3599853515625 253.44000244140625 253.52001953125 253.5999755859375 253.67999267578125 253.760009765625 253.8399658203125 253.91998291015625 254.0 254.08001708984375 254.1600341796875 254.239990234375 254.32000732421875 254.4000244140625 254.47998046875 254.55999755859375 254.6400146484375 254.719970703125 254.79998779296875 254.8800048828125 254.96002197265625 255.03997802734375 255.1199951171875 255.20001220703125 255.280029296875 255.3599853515625 255.44000244140625 255.52001953125 255.5999755859375 255.67999267578125 255.760009765625 255.8399658203125 255.91998291015625 256.0 256.08001708984375 256.1600341796875 256.239990234375 256.32000732421875 256.4000244140625 256.47998046875 256.55999755859375 256.6400146484375 256.719970703125 256.79998779296875 256.8800048828125 256.96002197265625 257.03997802734375 257.1199951171875 257.20001220703125 257.280029296875 257.3599853515625 257.44000244140625 257.52001953125 257.5999755859375 257.67999267578125 257.760009765625 257.8399658203125 257.91998291015625 258.0 258.08001708984375 258.1600341796875 258.239990234375 258.32000732421875 258.4000244140625 258.47998046875 258.55999755859375 258.6400146484375 258.719970703125 258.79998779296875 258.8800048828125 258.96002197265625 259.03997802734375 259.1199951171875 259.20001220703125 259.280029296875 259.3599853515625 259.44000244140625 259.52001953125 259.5999755859375 259.67999267578125 259.760009765625 259.8399658203125 259.91998291015625 260.0 260.08001708984375 260.1600341796875 260.239990234375 260.32000732421875 260.4000244140625 260.47998046875 260.55999755859375 260.6400146484375 260.719970703125 260.79998779296875 260.8800048828125 260.96002197265625 261.03997802734375 261.1199951171875 261.20001220703125 261.280029296875 261.3599853515625 261.44000244140625 261.52001953125 261.5999755859375 261.67999267578125 261.760009765625 261.8399658203125 261.91998291015625 262.0 262.08001708984375 262.1600341796875 262.239990234375 262.32000732421875 262.4000244140625 262.47998046875 262.55999755859375 262.6400146484375 262.719970703125 262.79998779296875 262.8800048828125 262.96002197265625 263.03997802734375 263.1199951171875 263.20001220703125 263.280029296875 263.3599853515625 263.44000244140625 263.52001953125 263.5999755859375 263.67999267578125 263.760009765625 263.8399658203125 263.91998291015625 264.0 264.08001708984375 264.1600341796875 264.239990234375 264.32000732421875 264.4000244140625 264.47998046875 264.55999755859375 264.6400146484375 264.719970703125 264.79998779296875 264.8800048828125 264.96002197265625 265.03997802734375 265.1199951171875 265.20001220703125 265.280029296875 265.3599853515625 265.44000244140625 265.52001953125 265.5999755859375 265.67999267578125 265.760009765625 265.8399658203125 265.91998291015625 266.0 266.08001708984375 266.1600341796875 266.239990234375 266.32000732421875 266.4000244140625 266.47998046875 266.55999755859375 266.6400146484375 266.719970703125 266.79998779296875 266.8800048828125 266.96002197265625 267.03997802734375 267.1199951171875 267.20001220703125 267.280029296875 267.3599853515625 267.44000244140625 267.52001953125 267.5999755859375 267.67999267578125 267.760009765625 267.8399658203125 267.91998291015625 268.0 268.08001708984375 268.1600341796875 268.239990234375 268.32000732421875 268.4000244140625 268.47998046875 268.55999755859375 268.6400146484375 268.719970703125 268.79998779296875 268.8800048828125 268.96002197265625 269.03997802734375 269.1199951171875 269.20001220703125 269.280029296875 269.3599853515625 269.44000244140625 269.52001953125 269.5999755859375 269.67999267578125 269.760009765625 269.8399658203125 269.91998291015625 270.0 270.08001708984375 270.1600341796875 270.239990234375 270.32000732421875 270.4000244140625 270.47998046875 270.55999755859375 270.6400146484375 270.719970703125 270.79998779296875 270.8800048828125 270.96002197265625 271.03997802734375 271.1199951171875 271.20001220703125 271.280029296875 271.3599853515625 271.44000244140625 271.52001953125 271.5999755859375 271.67999267578125 271.760009765625 271.8399658203125 271.91998291015625 272.0 272.08001708984375 272.1600341796875 272.239990234375 272.32000732421875 272.4000244140625 272.47998046875 272.55999755859375 272.6400146484375 272.719970703125 272.79998779296875 272.8800048828125 272.96002197265625 273.03997802734375 273.1199951171875 273.20001220703125 273.280029296875 273.3599853515625 273.44000244140625 273.52001953125 273.5999755859375 273.67999267578125 273.760009765625 273.8399658203125 273.91998291015625 274.0 274.08001708984375 274.1600341796875 274.239990234375 274.32000732421875 274.4000244140625 274.47998046875 274.55999755859375 274.6400146484375 274.719970703125 274.79998779296875 274.8800048828125 274.96002197265625 275.03997802734375 275.1199951171875 275.20001220703125 275.280029296875 275.3599853515625 275.44000244140625 275.52001953125 275.5999755859375 275.67999267578125 275.760009765625 275.8399658203125 275.91998291015625 276.0 276.08001708984375 276.1600341796875 276.239990234375 276.32000732421875 276.4000244140625 276.47998046875 276.55999755859375 276.6400146484375 276.719970703125 276.79998779296875 276.8800048828125 276.96002197265625 277.03997802734375 277.1199951171875 277.20001220703125 277.280029296875 277.3599853515625 277.44000244140625 277.52001953125 277.5999755859375 277.67999267578125 277.760009765625 277.8399658203125 277.91998291015625 278.0 278.08001708984375 278.1600341796875 278.239990234375 278.32000732421875 278.4000244140625 278.47998046875 278.55999755859375 278.6400146484375 278.719970703125 278.79998779296875 278.8800048828125 278.96002197265625 279.03997802734375 279.1199951171875 279.20001220703125 279.280029296875 279.3599853515625 279.44000244140625 279.52001953125 279.5999755859375 279.67999267578125 279.760009765625 279.8399658203125 279.91998291015625 280.0 280.08001708984375 280.1600341796875 280.239990234375 280.32000732421875 280.4000244140625 280.47998046875 280.55999755859375 280.6400146484375 280.719970703125 280.79998779296875 280.8800048828125 280.96002197265625 281.03997802734375 281.1199951171875 281.20001220703125 281.280029296875 281.3599853515625 281.44000244140625 281.52001953125 281.5999755859375 281.67999267578125 281.760009765625 281.8399658203125 281.91998291015625 282.0 282.08001708984375 282.1600341796875 282.239990234375 282.32000732421875 282.4000244140625 282.47998046875 282.55999755859375 282.6400146484375 282.719970703125 282.79998779296875 282.8800048828125 282.96002197265625 283.03997802734375 283.1199951171875 283.20001220703125 283.280029296875 283.3599853515625 283.44000244140625 283.52001953125 283.5999755859375 283.67999267578125 283.760009765625 283.8399658203125 283.91998291015625 284.0 284.08001708984375 284.1600341796875 284.239990234375 284.32000732421875 284.4000244140625 284.47998046875 284.55999755859375 284.6400146484375 284.719970703125 284.79998779296875 284.8800048828125 284.96002197265625 285.03997802734375 285.1199951171875 285.20001220703125 285.280029296875 285.3599853515625 285.44000244140625 285.52001953125 285.5999755859375 285.67999267578125 285.760009765625 285.8399658203125 285.91998291015625 286.0 286.08001708984375 286.1600341796875 286.239990234375 286.32000732421875 286.4000244140625 286.47998046875 286.55999755859375 286.6400146484375 286.719970703125 286.79998779296875 286.8800048828125 286.96002197265625 287.03997802734375 287.1199951171875 287.20001220703125 287.280029296875 287.3599853515625 287.44000244140625 287.52001953125 287.5999755859375 287.67999267578125 287.760009765625 287.8399658203125 287.91998291015625 288.0 288.08001708984375 288.1600341796875 288.239990234375 288.32000732421875 288.4000244140625 288.47998046875 288.55999755859375 288.6400146484375 288.719970703125 288.79998779296875 288.8800048828125 288.96002197265625 289.03997802734375 289.1199951171875 289.20001220703125 289.280029296875 289.3599853515625 289.44000244140625 289.52001953125 289.5999755859375 289.67999267578125 289.760009765625 289.8399658203125 289.91998291015625 290.0 290.08001708984375 290.1600341796875 290.239990234375 290.32000732421875 290.4000244140625 290.47998046875 290.55999755859375 290.6400146484375 290.719970703125 290.79998779296875 290.8800048828125 290.96002197265625 291.03997802734375 291.1199951171875 291.20001220703125 291.280029296875 291.3599853515625 291.44000244140625 291.52001953125 291.5999755859375 291.67999267578125 291.760009765625 291.8399658203125 291.91998291015625 292.0 292.08001708984375 292.1600341796875 292.239990234375 292.32000732421875 292.4000244140625 292.47998046875 292.55999755859375 292.6400146484375 292.719970703125 292.79998779296875 292.8800048828125 292.96002197265625 293.03997802734375 293.1199951171875 293.20001220703125 293.280029296875 293.3599853515625 293.44000244140625 293.52001953125 293.5999755859375 293.67999267578125 293.760009765625 293.8399658203125 293.91998291015625 294.0 294.08001708984375 294.1600341796875 294.239990234375 294.32000732421875 294.4000244140625 294.47998046875 294.55999755859375 294.6400146484375 294.719970703125 294.79998779296875 294.8800048828125 294.96002197265625 295.03997802734375 295.1199951171875 295.20001220703125 295.280029296875 295.3599853515625 295.44000244140625 295.52001953125 295.5999755859375 295.67999267578125 295.760009765625 295.8399658203125 295.91998291015625 296.0 296.08001708984375 296.15997314453125 296.239990234375 296.32000732421875 296.4000244140625 296.47998046875 296.55999755859375 296.6400146484375 296.719970703125 296.79998779296875 296.8800048828125 296.96002197265625 297.03997802734375 297.1199951171875 297.20001220703125 297.280029296875 297.3599853515625 297.44000244140625 297.52001953125 297.5999755859375 297.67999267578125 297.760009765625 297.84002685546875 297.91998291015625 298.0 298.08001708984375 298.15997314453125 298.239990234375 298.32000732421875 298.4000244140625 298.47998046875 298.55999755859375 298.6400146484375 298.719970703125 298.79998779296875 298.8800048828125 298.96002197265625 299.03997802734375 299.1199951171875 299.20001220703125 299.280029296875 299.3599853515625 299.44000244140625 299.52001953125 299.5999755859375 299.67999267578125 299.760009765625 299.84002685546875 299.91998291015625 300.0 300.08001708984375 300.15997314453125 300.239990234375 300.32000732421875 300.4000244140625 300.47998046875 300.55999755859375 300.6400146484375 300.719970703125 300.79998779296875 300.8800048828125 300.96002197265625 301.03997802734375 301.1199951171875 301.20001220703125 301.280029296875 301.3599853515625 301.44000244140625 301.52001953125 301.5999755859375 301.67999267578125 301.760009765625 301.84002685546875 301.91998291015625 302.0 302.08001708984375 302.15997314453125 302.239990234375 302.32000732421875 302.4000244140625 302.47998046875 302.55999755859375 302.6400146484375 302.719970703125 302.79998779296875 302.8800048828125 302.96002197265625 303.03997802734375 303.1199951171875 303.20001220703125 303.280029296875 303.3599853515625 303.44000244140625 303.52001953125 303.5999755859375 303.67999267578125 303.760009765625 303.84002685546875 303.91998291015625 304.0 304.0799560546875 304.1600341796875 304.239990234375 304.3199462890625 304.4000244140625 304.47998046875 304.56005859375 304.6400146484375 304.719970703125 304.800048828125 304.8800048828125 304.9599609375 305.0400390625 305.1199951171875 305.199951171875 305.280029296875 305.3599853515625 305.43994140625 305.52001953125 305.5999755859375 305.6800537109375 305.760009765625 305.8399658203125 305.9200439453125 306.0 306.0799560546875 306.1600341796875 306.239990234375 306.3199462890625 306.4000244140625 306.47998046875 306.56005859375 306.6400146484375 306.719970703125 306.800048828125 306.8800048828125 306.9599609375 307.0400390625 307.1199951171875 307.199951171875 307.280029296875 307.3599853515625 307.43994140625 307.52001953125 307.5999755859375 307.6800537109375 307.760009765625 307.8399658203125 307.9200439453125 308.0 308.0799560546875 308.1600341796875 308.239990234375 308.3199462890625 308.4000244140625 308.47998046875 308.56005859375 308.6400146484375 308.719970703125 308.800048828125 308.8800048828125 308.9599609375 309.0400390625 309.1199951171875 309.199951171875 309.280029296875 309.3599853515625 309.43994140625 309.52001953125 309.5999755859375 309.6800537109375 309.760009765625 309.8399658203125 309.9200439453125 310.0 310.0799560546875 310.1600341796875 310.239990234375 310.3199462890625 310.4000244140625 310.47998046875 310.56005859375 310.6400146484375 310.719970703125 310.800048828125 310.8800048828125 310.9599609375 311.0400390625 311.1199951171875 311.199951171875 311.280029296875 311.3599853515625 311.43994140625 311.52001953125 311.5999755859375 311.6800537109375 311.760009765625 311.8399658203125 311.9200439453125 312.0 312.0799560546875 312.1600341796875 312.239990234375 312.3199462890625 312.4000244140625 312.47998046875 312.56005859375 312.6400146484375 312.719970703125 312.800048828125 312.8800048828125 312.9599609375 313.0400390625 313.1199951171875 313.199951171875 313.280029296875 313.3599853515625 313.43994140625 313.52001953125 313.5999755859375 313.6800537109375 313.760009765625 313.8399658203125 313.9200439453125 314.0 314.0799560546875 314.1600341796875 314.239990234375 314.3199462890625 314.4000244140625 314.47998046875 314.56005859375 314.6400146484375 314.719970703125 314.800048828125 314.8800048828125 314.9599609375 315.0400390625 315.1199951171875 315.199951171875 315.280029296875 315.3599853515625 315.43994140625 315.52001953125 315.5999755859375 315.6800537109375 315.760009765625 315.8399658203125 315.9200439453125 316.0 316.0799560546875 316.1600341796875 316.239990234375 316.3199462890625 316.4000244140625 316.47998046875 316.56005859375 316.6400146484375 316.719970703125 316.800048828125 316.8800048828125 316.9599609375 317.0400390625 317.1199951171875 317.199951171875 317.280029296875 317.3599853515625 317.43994140625 317.52001953125 317.5999755859375 317.6800537109375 317.760009765625 317.8399658203125 317.9200439453125 318.0 318.0799560546875 318.1600341796875 318.239990234375 318.3199462890625 318.4000244140625 318.47998046875 318.56005859375 318.6400146484375 318.719970703125 318.800048828125 318.8800048828125 318.9599609375 319.0400390625 319.1199951171875 319.199951171875 319.280029296875 319.3599853515625 319.43994140625 319.52001953125 319.5999755859375 319.6800537109375 319.760009765625 319.8399658203125 319.9200439453125 320.0 320.0799560546875 320.1600341796875 320.239990234375 320.3199462890625 320.4000244140625 320.47998046875 320.56005859375 320.6400146484375 320.719970703125 320.800048828125 320.8800048828125 320.9599609375 321.0400390625 321.1199951171875 321.199951171875 321.280029296875 321.3599853515625 321.43994140625 321.52001953125 321.5999755859375 321.6800537109375 321.760009765625 321.8399658203125 321.9200439453125 322.0 322.0799560546875 322.1600341796875 322.239990234375 322.3199462890625 322.4000244140625 322.47998046875 322.56005859375 322.6400146484375 322.719970703125 322.800048828125 322.8800048828125 322.9599609375 323.0400390625 323.1199951171875 323.199951171875 323.280029296875 323.3599853515625 323.43994140625 323.52001953125 323.5999755859375 323.6800537109375 323.760009765625 323.8399658203125 323.9200439453125 324.0 324.0799560546875 324.1600341796875 324.239990234375 324.3199462890625 324.4000244140625 324.47998046875 324.56005859375 324.6400146484375 324.719970703125 324.800048828125 324.8800048828125 324.9599609375 325.0400390625 325.1199951171875 325.199951171875 325.280029296875 325.3599853515625 325.43994140625 325.52001953125 325.5999755859375 325.6800537109375 325.760009765625 325.8399658203125 325.9200439453125 326.0 326.0799560546875 326.1600341796875 326.239990234375 326.3199462890625 326.4000244140625 326.47998046875 326.56005859375 326.6400146484375 326.719970703125 326.800048828125 326.8800048828125 326.9599609375 327.0400390625 327.1199951171875 327.199951171875 327.280029296875 327.3599853515625 327.43994140625 327.52001953125 327.5999755859375 327.6800537109375 327.760009765625 327.8399658203125 327.9200439453125 328.0 328.0799560546875 328.1600341796875 328.239990234375 328.3199462890625 328.4000244140625 328.47998046875 328.56005859375 328.6400146484375 328.719970703125 328.800048828125 328.8800048828125 328.9599609375 329.0400390625 329.1199951171875 329.199951171875 329.280029296875 329.3599853515625 329.43994140625 329.52001953125 329.5999755859375 329.6800537109375 329.760009765625 329.8399658203125 329.9200439453125 330.0 330.0799560546875 330.1600341796875 330.239990234375 330.3199462890625 330.4000244140625 330.47998046875 330.56005859375 330.6400146484375 330.719970703125 330.800048828125 330.8800048828125 330.9599609375 331.0400390625 331.1199951171875 331.199951171875 331.280029296875 331.3599853515625 331.43994140625 331.52001953125 331.5999755859375 331.6800537109375 331.760009765625 331.8399658203125 331.9200439453125 332.0 332.0799560546875 332.1600341796875 332.239990234375 332.3199462890625 332.4000244140625 332.47998046875 332.56005859375 332.6400146484375 332.719970703125 332.800048828125 332.8800048828125 332.9599609375 333.0400390625 333.1199951171875 333.199951171875 333.280029296875 333.3599853515625 333.43994140625 333.52001953125 333.5999755859375 333.6800537109375 333.760009765625 333.8399658203125 333.9200439453125 334.0 334.0799560546875 334.1600341796875 334.239990234375 334.3199462890625 334.4000244140625 334.47998046875 334.56005859375 334.6400146484375 334.719970703125 334.800048828125 334.8800048828125 334.9599609375 335.0400390625 335.1199951171875 335.199951171875 335.280029296875 335.3599853515625 335.43994140625 335.52001953125 335.5999755859375 335.6800537109375 335.760009765625 335.8399658203125 335.9200439453125 336.0 336.0799560546875 336.1600341796875 336.239990234375 336.3199462890625 336.4000244140625 336.47998046875 336.56005859375 336.6400146484375 336.719970703125 336.800048828125 336.8800048828125 336.9599609375 337.0400390625 337.1199951171875 337.199951171875 337.280029296875 337.3599853515625 337.43994140625 337.52001953125 337.5999755859375 337.6800537109375 337.760009765625 337.8399658203125 337.9200439453125 338.0 338.0799560546875 338.1600341796875 338.239990234375 338.3199462890625 338.4000244140625 338.47998046875 338.56005859375 338.6400146484375 338.719970703125 338.800048828125 338.8800048828125 338.9599609375 339.0400390625 339.1199951171875 339.199951171875 339.280029296875 339.3599853515625 339.43994140625 339.52001953125 339.5999755859375 339.6800537109375 339.760009765625 339.8399658203125 339.9200439453125 340.0 340.0799560546875 340.1600341796875 340.239990234375 340.3199462890625 340.4000244140625 340.47998046875 340.56005859375 340.6400146484375 340.719970703125 340.800048828125 340.8800048828125 340.9599609375 341.0400390625 341.1199951171875 341.199951171875 341.280029296875 341.3599853515625 341.43994140625 341.52001953125 341.5999755859375 341.6800537109375 341.760009765625 341.8399658203125 341.9200439453125 342.0 342.0799560546875 342.1600341796875 342.239990234375 342.3199462890625 342.4000244140625 342.47998046875 342.56005859375 342.6400146484375 342.719970703125 342.800048828125 342.8800048828125 342.9599609375 343.0400390625 343.1199951171875 343.199951171875 343.280029296875 343.3599853515625 343.43994140625 343.52001953125 343.5999755859375 343.6800537109375 343.760009765625 343.8399658203125 343.9200439453125 344.0 344.0799560546875 344.1600341796875 344.239990234375 344.3199462890625 344.4000244140625 344.47998046875 344.56005859375 344.6400146484375 344.719970703125 344.800048828125 344.8800048828125 344.9599609375 345.0400390625 345.1199951171875 345.199951171875 345.280029296875 345.3599853515625 345.43994140625 345.52001953125 345.5999755859375 345.6800537109375 345.760009765625 345.8399658203125 345.9200439453125 346.0 346.0799560546875 346.1600341796875 346.239990234375 346.3199462890625 346.4000244140625 346.47998046875 346.56005859375 346.6400146484375 346.719970703125 346.800048828125 346.8800048828125 346.9599609375 347.0400390625 347.1199951171875 347.199951171875 347.280029296875 347.3599853515625 347.43994140625 347.52001953125 347.5999755859375 347.6800537109375 347.760009765625 347.8399658203125 347.9200439453125 348.0 348.0799560546875 348.1600341796875 348.239990234375 348.3199462890625 348.4000244140625 348.47998046875 348.56005859375 348.6400146484375 348.719970703125 348.800048828125 348.8800048828125 348.9599609375 349.0400390625 349.1199951171875 349.199951171875 349.280029296875 349.3599853515625 349.43994140625 349.52001953125 349.5999755859375 349.6800537109375 349.760009765625 349.8399658203125 349.9200439453125 350.0 350.0799560546875 350.1600341796875 350.239990234375 350.3199462890625 350.4000244140625 350.47998046875 350.56005859375 350.6400146484375 350.719970703125 350.800048828125 350.8800048828125 350.9599609375 351.0400390625 351.1199951171875 351.199951171875 351.280029296875 351.3599853515625 351.43994140625 351.52001953125 351.5999755859375 351.6800537109375 351.760009765625 351.8399658203125 351.9200439453125 352.0 352.0799560546875 352.1600341796875 352.239990234375 352.3199462890625 352.4000244140625 352.47998046875 352.56005859375 352.6400146484375 352.719970703125 352.800048828125 352.8800048828125 352.9599609375 353.0400390625 353.1199951171875 353.199951171875 353.280029296875 353.3599853515625 353.43994140625 353.52001953125 353.5999755859375 353.6800537109375 353.760009765625 353.8399658203125 353.9200439453125 354.0 354.0799560546875 354.1600341796875 354.239990234375 354.3199462890625 354.4000244140625 354.47998046875 354.56005859375 354.6400146484375 354.719970703125 354.800048828125 354.8800048828125 354.9599609375 355.0400390625 355.1199951171875 355.199951171875 355.280029296875 355.3599853515625 355.43994140625 355.52001953125 355.5999755859375 355.6800537109375 355.760009765625 355.8399658203125 355.9200439453125 356.0 356.0799560546875 356.1600341796875 356.239990234375 356.3199462890625 356.4000244140625 356.47998046875 356.56005859375 356.6400146484375 356.719970703125 356.800048828125 356.8800048828125 356.9599609375 357.0400390625 357.1199951171875 357.199951171875 357.280029296875 357.3599853515625 357.43994140625 357.52001953125 357.5999755859375 357.6800537109375 357.760009765625 357.8399658203125 357.9200439453125 358.0 358.0799560546875 358.1600341796875 358.239990234375 358.3199462890625 358.4000244140625 358.47998046875 358.56005859375 358.6400146484375 358.719970703125 358.800048828125 358.8800048828125 358.9599609375 359.0400390625 359.1199951171875 359.199951171875 359.280029296875 359.3599853515625 359.43994140625 359.52001953125 359.5999755859375 359.6800537109375 359.760009765625 359.8399658203125 359.9200439453125</values>
+  </axis>
+  <axis name="time" shape="2920" type="double" axisType="Time">
+    <attribute name="long_name" value="Valid Time" />
+    <attribute name="units" value="hours since 2000-01-01 00:00:00" />
+    <attribute name="time_origin" value="2000-01-01 00:00:00" />
+    <attribute name="calendar" value="gregorian" />
+    <attribute name="axis" value="T" />
+    <attribute name="NAVO_code" type="int" value="13" />
+    <attribute name="_CoordinateAxisType" value="Time" />
+    <values start="192876.0" increment="3.0" npts="2920" />
+  </axis>
+  <gridSet name="time lat lon">
+    <projectionBox>
+      <minx>-0.03997802734375</minx>
+      <maxx>359.9600830078125</maxx>
+      <miny>-80.02000045776367</miny>
+      <maxy>90.02000045776367</maxy>
+    </projectionBox>
+    <axisRef name="time" />
+    <axisRef name="lat" />
+    <axisRef name="lon" />
+    <grid name="water_u_bottom" desc="Eastward Water Velocity" shape="time lat lon" type="short">
+      <attribute name="_CoordinateAxes" value="time lat lon " />
+      <attribute name="long_name" value="Eastward Water Velocity" />
+      <attribute name="standard_name" value="eastward_sea_water_velocity_at_bottom" />
+      <attribute name="units" value="m/s" />
+      <attribute name="_FillValue" type="short" value="-30000" />
+      <attribute name="missing_value" type="short" value="-30000" />
+      <attribute name="scale_factor" type="float" value="0.001" />
+      <attribute name="add_offset" type="float" value="0.0" />
+      <attribute name="NAVO_code" type="int" value="17" />
+    </grid>
+    <grid name="water_v_bottom" desc="Northward Water Velocity" shape="time lat lon" type="short">
+      <attribute name="_CoordinateAxes" value="time lat lon " />
+      <attribute name="long_name" value="Northward Water Velocity" />
+      <attribute name="standard_name" value="northward_sea_water_velocity_at_bottom" />
+      <attribute name="units" value="m/s" />
+      <attribute name="_FillValue" type="short" value="-30000" />
+      <attribute name="missing_value" type="short" value="-30000" />
+      <attribute name="scale_factor" type="float" value="0.001" />
+      <attribute name="add_offset" type="float" value="0.0" />
+      <attribute name="NAVO_code" type="int" value="18" />
+    </grid>
+  </gridSet>
+  <gridSet name="time depth lat lon">
+    <projectionBox>
+      <minx>-0.03997802734375</minx>
+      <maxx>359.9600830078125</maxx>
+      <miny>-80.02000045776367</miny>
+      <maxy>90.02000045776367</maxy>
+    </projectionBox>
+    <axisRef name="time" />
+    <axisRef name="depth" />
+    <axisRef name="lat" />
+    <axisRef name="lon" />
+    <grid name="water_u" desc="Eastward Water Velocity" shape="time depth lat lon" type="short">
+      <attribute name="_CoordinateAxes" value="time depth lat lon " />
+      <attribute name="long_name" value="Eastward Water Velocity" />
+      <attribute name="standard_name" value="eastward_sea_water_velocity" />
+      <attribute name="units" value="m/s" />
+      <attribute name="_FillValue" type="short" value="-30000" />
+      <attribute name="missing_value" type="short" value="-30000" />
+      <attribute name="scale_factor" type="float" value="0.001" />
+      <attribute name="add_offset" type="float" value="0.0" />
+      <attribute name="NAVO_code" type="int" value="17" />
+    </grid>
+    <grid name="water_v" desc="Northward Water Velocity" shape="time depth lat lon" type="short">
+      <attribute name="_CoordinateAxes" value="time depth lat lon " />
+      <attribute name="long_name" value="Northward Water Velocity" />
+      <attribute name="standard_name" value="northward_sea_water_velocity" />
+      <attribute name="units" value="m/s" />
+      <attribute name="_FillValue" type="short" value="-30000" />
+      <attribute name="missing_value" type="short" value="-30000" />
+      <attribute name="scale_factor" type="float" value="0.001" />
+      <attribute name="add_offset" type="float" value="0.0" />
+      <attribute name="NAVO_code" type="int" value="18" />
+    </grid>
+  </gridSet>
+  <LatLonBox>
+    <west>0.0000</west>
+    <east>359.9200</east>
+    <south>-80.0000</south>
+    <north>90.0000</north>
+  </LatLonBox>
+  <TimeSpan>
+    <begin>2022-01-01T12:00:00Z</begin>
+    <end>2023-01-01T09:00:00Z</end>
+  </TimeSpan>
+  <AcceptList>
+    <GridAsPoint>
+      <accept displayName="xml">xml</accept>
+      <accept displayName="xml (file)">xml_file</accept>
+      <accept displayName="csv">csv</accept>
+      <accept displayName="csv (file)">csv_file</accept>
+      <accept displayName="geocsv">geocsv</accept>
+      <accept displayName="geocsv (file)">geocsv_file</accept>
+      <accept displayName="netcdf">netcdf</accept>
+      <accept displayName="netcdf4">netcdf4</accept>
+    </GridAsPoint>
+    <Grid>
+      <accept displayName="netcdf">netcdf</accept>
+      <accept displayName="netcdf4">netcdf4</accept>
+    </Grid>
+  </AcceptList>
+</gridDataset>
+````
+
+### docs/research-evidence/matched-current-metadata/receipt.json
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/receipt.json
+
+Bytes: 2640; SHA-256: `56328dff9fe82945fe0756967e1334a55471a5735f9e846bae721a186e88c993`. Role: Safe derived metadata-only transport receipt; no scientific values, positions, scores or frozen protocol. Quoted record; read the ledger for current status.
+
+````json
+{
+  "schema_version": 1,
+  "kind": "PUBLIC_METADATA_DESIGN_EVIDENCE",
+  "status": "DRAFT_NOT_A_FROZEN_PROTOCOL_OR_SCIENTIFIC_VALUE_ACQUISITION",
+  "derivation": "Byte-for-byte copies of previously retrieved public metadata bodies; safe receipt derived from an earlier local receipt. No new external request was made for this publication copy.",
+  "privacy": "No machine home paths, credentials or private user records; metadata bodies contain public source-institution metadata.",
+  "transport_verification": "All recorded curl operations exited 0 with ordinary certificate verification and no supplied authentication. HTTP response status headers were not retained in these receipts; do not infer them from this derived file.",
+  "scientific_values_acquired": false,
+  "trajectory_positions_acquired": false,
+  "current_vector_values_acquired": false,
+  "scores_computed": false,
+  "requests": [
+    {
+      "file": "gdp-hourly.dds",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.dds",
+      "retrieved_utc": "2026-10-17T19:34:51.733619+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 1312,
+      "sha256": "758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad"
+    },
+    {
+      "file": "gdp-hourly.das",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das",
+      "retrieved_utc": "2026-10-17T19:34:51.897741+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 18686,
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    {
+      "file": "gdp-origin-identity-drogue.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00:00:00Z&latitude%3E=25&latitude%3C=35&longitude%3E=-80&longitude%3C=-65&distinct()",
+      "retrieved_utc": "2026-10-17T19:34:52.198899+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 640,
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    {
+      "file": "hycom-2022-ncss-dataset.xml",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml",
+      "retrieved_utc": "2026-10-17T19:34:54.925023+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 159404,
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    }
+  ]
+}
+````
+
+## D. Bundle inventory
 
 The inventory lists embedded source files, not independent experiments. Hashes identify bytes; they are not signed attestations or claims of execution.
 
@@ -6696,8 +8914,8 @@ The inventory lists embedded source files, not independent experiments. Hashes i
   },
   {
     "file": "docs/rk4-numerical-quality.md",
-    "bytes": 6177,
-    "sha256": "8b320c22cfb0cae42f6e8db3165bf67337897ff6217d9e9afa8e0bccf5929675",
+    "bytes": 8109,
+    "sha256": "9d4f6fe0ac3a0c4e6b2aef371bab6828de4b02c6f3097d2a45032515451008f0",
     "type": "research/build record or exact prompt sequence; no blanket authorship or execution claim"
   },
   {
@@ -6921,6 +9139,84 @@ The inventory lists embedded source files, not independent experiments. Hashes i
     "bytes": 2158,
     "sha256": "8682ee4651110f5d5be220f304ca1a95e82584138044f78b99d4a96dac7957f9",
     "type": "separate local execution receipt: 234 related tests/Ruff and six exact snapshot tracks plus both scenarios unchanged; not Grok execution or new field/physical validation"
+  },
+  {
+    "file": "docs/grok-evidence/rk4-final-relative-implementation-review-prompt.txt",
+    "bytes": 32153,
+    "sha256": "f0f598fe9613a7819de1f7262256b063eee345376ee08b8a919d2e8e7af5600e",
+    "type": "Stage J actual outbound implementation-review prompt with current source/regressions; static review input, not model execution"
+  },
+  {
+    "file": "docs/grok-evidence/rk4-final-relative-implementation-review-response.txt",
+    "bytes": 2404,
+    "sha256": "9c78aa7220cd18dd8af239d1c295c09e5bfc827d8e12f785021b5eb9b5d120da",
+    "type": "Stage J static review finding direct CurrentSampler time_origin lacked the explicit supported-calendar guard; no execution claimed"
+  },
+  {
+    "file": "docs/grok-evidence/grok-matched-current-design-review-prompt.txt",
+    "bytes": 16788,
+    "sha256": "43485bea66664e53e4f152590bfccfec67a6d836d26916f143bc25a6c9fe077a",
+    "type": "Stage K actual outbound pre-acquisition design-review prompt; draft metadata-only feasibility study, no scientific-value acquisition"
+  },
+  {
+    "file": "docs/grok-evidence/grok-matched-current-design-review-response.txt",
+    "bytes": 4368,
+    "sha256": "1ce25012167a9ec3c3709e0fbc5f4d881613270db3b9b918466ca4c4a869d04f",
+    "type": "Stage K initial static design advice; preserves rejected longitude fixture and incorrect immediate-unsupported/PARTIAL expectation"
+  },
+  {
+    "file": "docs/grok-evidence/grok-matched-current-design-correction-prompt.txt",
+    "bytes": 1600,
+    "sha256": "1684af70667c39470cd898f856d5fd979f5bdfb8ec85be71123dbdeee291c52b",
+    "type": "Stage K correction rejecting weak longitude and partial-prefix tests and clarifying context/assimilation boundaries; no scientific values or scores"
+  },
+  {
+    "file": "docs/grok-evidence/grok-matched-current-design-correction-response.txt",
+    "bytes": 1834,
+    "sha256": "ec239ac84085adf1bd76b3ebd1c696bd02ae689bc03d020d321c5ee5b7a24810",
+    "type": "Stage K corrected static test proposal with four time knots; accepted as a reader-test design, not an implemented/executed study"
+  },
+  {
+    "file": "docs/grok-evidence/rk4-final-local-verification.json",
+    "bytes": 11751,
+    "sha256": "1612a9f06f9ee76eddcced606ff0db5c06ff2fd164bd46268513ca0da8865df6",
+    "type": "Stage J safe local post-guard verification receipt:1365 Python/191 frontend/137 guarded HTTP tests, exact recorded prepatch comparison scope, local browser and final-identity live Chalk; not Grok execution, hosted CI or physical validation"
+  },
+  {
+    "file": "docs/matched-current-study-plan.md",
+    "bytes": 22788,
+    "sha256": "5d29d877faeb010582189b5e97a0438f6021e3d42ebc2576306b1fd75f31a7c6",
+    "type": "DRAFT matched-current feasibility design; no scientific-value acquisition, frozen protocol or completed study"
+  },
+  {
+    "file": "docs/research-evidence/matched-current-metadata/gdp-hourly.das",
+    "bytes": 18686,
+    "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39",
+    "type": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+  },
+  {
+    "file": "docs/research-evidence/matched-current-metadata/gdp-hourly.dds",
+    "bytes": 1312,
+    "sha256": "758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad",
+    "type": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+  },
+  {
+    "file": "docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv",
+    "bytes": 640,
+    "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339",
+    "type": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+  },
+  {
+    "file": "docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml",
+    "bytes": 159404,
+    "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d",
+    "type": "Exact public provider metadata/identity-drogue body; no trajectory positions or current-vector values"
+  },
+  {
+    "file": "docs/research-evidence/matched-current-metadata/receipt.json",
+    "bytes": 2640,
+    "sha256": "56328dff9fe82945fe0756967e1334a55471a5735f9e846bae721a186e88c993",
+    "type": "Safe derived metadata-only transport receipt; no scientific values, positions, scores or frozen protocol"
   }
 ]
 ````

@@ -43,6 +43,8 @@ Start in **Overview**, choose **Start software demo**, and follow **Follow the e
 
 The default ocean comparison uses only changing-current advection. The earlier single-release/frozen-current diagnostic remains a separate API and numerical baseline; its straight path is not the product's default forecast. The saved valid window is 17 October 2026 18:00 UTC–18 October 00:00 UTC and automatically becomes an archived model scenario afterward. See [ocean prevention](docs/ocean-prevention.md) for the current workflow and [current-driven prediction](docs/current-driven-prediction.md) for the underlying solver and earlier diagnostic.
 
+**Does a smaller time step change the result?** Open this disclosure beneath the ocean comparison in Prevention or Data Lab. It separates three RK4 integration-step runs from contact checks on one fine path, retaining all six releases and incomplete coverage. The solver lands on forcing timestamps and samples on a start-relative clock, avoiding fractional-timestamp false stops. The current numerical check retains central **2/6** versus flanking **4/6** and the control tie; agreement under these settings is numerical sensitivity, not physical accuracy or improved ML skill. See [the RK4 quality guide](docs/rk4-numerical-quality.md).
+
 Loading the source demo already prepares example evidence; explicitly recomputing a case creates a new evidence identity/revision. Repeated loads reuse active demo cases. Loading after STOP creates an active replacement while preserving the stopped history. The full workspace retains the other diagnostics, Camera commissioning and Settings for deliberate advanced use.
 
 ## What is working, and what the evidence proves
@@ -167,6 +169,10 @@ The older live-server commands `scripts/e2e_demo.py` and `scripts/e2e_prevention
 Ocean integration verification on 17 October 2026: **1,263 Python tests, 163 frontend tests and 137 guarded HTTP checks passed**, with zero HTTP failures and six explicitly blocked external/physical scopes. ESLint, TypeScript and the production build passed. Browser checks covered the single graph, layer and release filters, fixed scales, changing arrow times, scenario reset, the preserved tie, tank access and a 390 px viewport without horizontal overflow. A separate live Chalk `REPORT` cited the displayed comparison and method; these software checks do not establish physical protection or model accuracy.
 
 ## Reference map
+
+Latest numerical-quality verification: **1,365 Python tests, 191 frontend tests and 137 guarded HTTP checks passed**, with zero HTTP failures and six expected blocked external/physical scopes. Ruff, ESLint, route types, TypeScript and an isolated production build passed. Browser checks covered Data Lab/Prevention, layer/release controls, fixed axes, current times, scenario reset and the control tie. A separate live Chalk `REPORT` cited the exact final comparison/method and explained numerical precision separately from physical accuracy. The [safe local receipt](docs/grok-evidence/rk4-final-local-verification.json) records source hashes and scope; inspect hosted CI for the exact pushed commit separately. No physical trial or xAI API call was performed.
+
+The [next matched-current study](docs/matched-current-study-plan.md) is a **draft design**, not a completed new dataset/model result. It proposes a public NOAA/HYCOM pairing with a fixed six-hour horizon and remains separate from the completed frozen NOAA study.
 
 - [Complete product and team guide](docs/tideward-product-guide.md): every workspace feature, graph, integration, API family, evidence contract and remaining validation task; the team-facing copy is published in Trov.
 - [Architecture](docs/architecture.md), [algorithm/contract audit](docs/algorithm-contract-audit.md), [physics](docs/physics.md), [prevention physics](docs/prevention-physics.md).

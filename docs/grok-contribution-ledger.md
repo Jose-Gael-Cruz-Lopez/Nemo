@@ -12,7 +12,10 @@ A later local inventory recheck at documentation baseline
 existing ablation/cohort/Trace 3/page captures that the original package omitted.
 They are now preserved without text edits, correcting the earlier claim that the
 standalone ablation response was absent. This is an archive-completeness update,
-not eight new model calls or eight independent reviews.
+not eight new model calls or eight independent reviews. Stages J–K below append
+a later implementation review, final local verification and a draft-only
+matched-current design review. Final commit/push/CI/hosted verification are not
+claimed by those local receipts.
 
 ## 1. What Grok actually contributed
 
@@ -46,10 +49,10 @@ only requested recurring automation.
 | Data/protocol/forecast hashes | Identity, replay consistency and recorded local ordering | Signatures, independent notarization or freedom from upstream data processing |
 | Cursor build capture and original handoff | Recorded use of Cursor/Grok for the initial diagnostic | That all development occurred in Cursor or the use of Grok Voice/Imagine API |
 
-The [exact text archive](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/README.md) contains **36 inspected artifacts**: 14 original historical local
-records, nine forcing-knot prompts/responses/local-receipt records, eight
-later-discovered historical ablation/cohort/Trace 3/larger page captures, and five
-fractional-clock prompts/responses/local-receipt records, with a
+The [exact text archive](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/README.md) contains **43 inspected raw artifacts**: 14 original historical local
+records, nine forcing-knot records, eight later-discovered historical captures,
+five fractional-clock records, three final implementation-review/local-receipt
+records and four matched-study design-review records, with a
 [byte/hash manifest](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/manifest.json). The
 [single-file Trov evidence bundle](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-bundle.md) combines that archive
 with the committed research records and exact five-prompt ML sequence. Historical
@@ -58,6 +61,9 @@ private message routing, provider keys, personal camera images or database is
 included. A missing transcript is identified as missing rather than reconstructed.
 Larger browser captures overlap numbered excerpts and have partial/UI boundaries;
 the artifact count is not a count of unique turns or independent experiments.
+The bundle also embeds the draft matched-current plan and five separately
+manifested public metadata/derived-receipt sources. Those are not acquired
+trajectory/current values, a frozen study or extra raw Grok responses.
 
 ## 3. Work-by-work contribution ledger
 
@@ -377,8 +383,9 @@ evidence. The complete local checkpoint passed **1,331 Python tests, 190 fronten
 tests and 137 guarded HTTP checks**, with zero HTTP failures and six intentionally
 blocked external/physical scopes, plus lint/types/isolated production build.
 These local checks do not prove a new live model response or a deployed build.
-Final live-flow verification and push remain pending at this documentation
-snapshot; the new work must not be described as already on `main` or deployed.
+At that Stage H checkpoint, final live-flow verification and push were pending.
+Stage J below records the later local integration/live result; it does not imply
+that the final implementation is already pushed, CI-verified or deployed.
 No model is trained, no completed NOAA study is retuned and no tank measurement
 is created by this work.
 
@@ -412,11 +419,76 @@ regression evidence, not execution by Grok or improved physical waste forecasts.
 The independent 500-case chat report is not claimed as a locally executed test
 without a corresponding saved execution proof.
 
-**Current limit.** Full integration-suite, browser/live-Chalk verification and push
-remain pending after this later repair at this documentation snapshot. Stage H's
+**Stage I checkpoint limit.** Full integration-suite, browser/live-Chalk verification
+and push were pending at that earlier snapshot; Stage J records subsequent local
+integration/live verification separately. Stage H's
 1,331 Python / 190 frontend / 137 HTTP checkpoint predates Stage I and is not a
 full rerun of the later change. No new field data, tank release, API authorization
 or physical accuracy result follows from this numerical repair.
+
+### J. Final relative-time implementation review and integrated local proof
+
+**Actual assistance.** The [final implementation prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-relative-implementation-review-prompt.txt)
+supplied the actual relative-clock code and regressions. The [static response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-relative-implementation-review-response.txt)
+found a direct-caller contract gap: `CurrentSampler(..., time_origin=...)` accepted
+a finite origin outside 1900–2100 although the normal advection entry point
+already checked that bound. The team added the same calendar rejection to the
+direct sampler and four regressions. This is a concrete review contribution;
+the model did not execute the code, and its saved response predates the guard.
+
+**Final local verification.** The separate [safe final receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-local-verification.json)
+records the post-guard **1,365 Python / 191 frontend / 137 HTTP** checkpoint,
+zero HTTP failures and six expected external/physical blockers, plus lint, types
+and isolated production build. The six pinned tracks match exactly. For both
+scenarios, comparison is recursive on the prepatch recorded layout fields; that
+capture omitted a derived entry-reduction field, so it is not a whole-report
+equality claim. Baseline outcomes also match the unchanged event evaluator on
+prepatch paths. A local-browser/live-Chalk `REPORT` cites the final
+new report and method identities; the exact identities are retained in the
+receipt. This supersedes older pending-local-integration prose without turning
+old suite counts into results for later code.
+
+**Boundary.** This is local execution and a bounded live Chalk explanation of
+frozen model evidence, not Grok execution, a new field/physical validation or a
+hosted pass. Final commit/push/CI and hosted verification remain pending at this
+archive checkpoint. Voice/Imagine use, billing, camera and Photon settings are
+not changed by this documentation append.
+
+### K. Matched-current feasibility design and corrected reader-test proposal
+
+**Actual assistance.** An [initial design prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-review-prompt.txt)
+and [static response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-review-response.txt)
+reviewed the proposed matched-forcing study. The [correction prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-correction-prompt.txt)
+and [corrected response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-correction-response.txt)
+retain wrong suggestions and their rejection: `[0, 0.08]` does not exercise the
+western Atlantic longitude shift, and masking the next knot before any positive
+interval completes produces UNSUPPORTED rather than PARTIAL. The accepted
+synthetic design normalizes `[280, 281] → [-80, -79]`, keeps the immediate-failure
+case separate, and uses four `[0, 3, 6, 9] h` knots to produce a genuine supported
+prefix before the later mask. These are proposed reader tests, not executed
+reader-test results. The final draft also pins the 359.92-degree edge and raw
+fill/scale-once checks requested by the static correction.
+
+**Research state.** The [matched-current draft](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-study-plan.md)
+proposes two existing metadata-selected GDP identities, six-hour stationary,
+last-drift and HYCOM 15 m current-only comparisons, and all 36 planned model/hour
+cells retained. Only four bounded public metadata/identity-drogue responses and
+a safe derived receipt are preserved under
+[`docs/research-evidence/matched-current-metadata/`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/tree/main/docs/research-evidence/matched-current-metadata).
+Their exact bytes/hashes are embedded in the bundle. They establish specific
+metadata/transport observations, not successful current-value retrieval, wet-cell
+support, a completed physical identity audit or model accuracy.
+
+**Remaining gate.** No new study trajectory positions, current-vector values,
+fit, score or physical trial has been acquired/run. The reader must be implemented,
+reviewed and tested, then a formal protocol and exact code/data requests frozen
+before scientific acquisition. Current-only initializes at origin, last drift
+uses its final two context positions, and no fitting is proposed. The draft
+rejects the blanket assertion that any past/context-era field use inherently
+causes future leakage; it instead preserves the actual unresolved analysis/
+assimilation and publication-as-of limitations. It remains retrospective and
+non-independent unless a separate documented audit establishes more. No tuning
+or overwrite of the completed NOAA studies follows from this design.
 
 ## 4. RK4: the existing numerical engine and its evidence boundary
 
@@ -462,7 +534,7 @@ reef benefit, forcing-aware learned residual or curved-path accuracy gain is
 claimed. Commit [`7fb4851`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/7fb4851).
 
 The older archived Grok records do **not** establish that Grok authored the original
-RK4 implementation. Stages H–I above record the actual knot/fractional-clock reviews, local
+RK4 implementation. Stages H–J above record the actual knot/fractional-clock implementation reviews, local
 corrections and separately identified executed regressions without retrofitting that earlier authorship.
 
 ## 5. What is visible in the application
@@ -471,7 +543,7 @@ corrections and separately identified executed regressions without retrofitting 
 | --- | --- | --- |
 | Data Lab research details | Original 18/6 fixture; training diagnostic; paired ablation; four-group study; post-hoc transfer; Kalman; fresh six-group study; motion vectors and denominators | Grok reviewed named research stages; Python computes and verifies reports |
 | Ocean Prevention and combined graph | Changing-current RK4 paths; A/B/common trajectories; layer checkboxes; equal axes; supported/unresolved outcomes; tie and conditional recommendation | Existing local implementation; no blanket Grok authorship claim |
-| New numerical-quality disclosure | Local solver-step and same-path contact-chord sensitivity, missing/partial coverage retained, compact evidence available to Chalk | Local suites passed; final live flow and push pending at this documentation snapshot; not physical accuracy |
+| New numerical-quality disclosure | Local solver-step and same-path contact-chord sensitivity, missing/partial coverage retained, compact evidence available to Chalk | Post-guard local suites and live Chalk passed as Stage J records; final commit/CI/hosted verification pending; not physical accuracy |
 | Chalk research explanations | Reads immutable numerical evidence and explains limits with exact hashes/citations | Chalk is a separate gateway/provider integration; Grok assistance does not make it the physics engine |
 | Evidence briefing | Frozen source text plus separately labelled satellite heat context; explicit disabled xAI speech path | Real space-data artifact and implemented adapter; no live Voice claim |
 | Camera/tank | Native USB preview, pixel grid; separately gated measured homography, empirical drift and real trial ledger | Not validated by historical buoy or ocean API results; zero physical tank commissioning claimed at this checkpoint |
@@ -539,8 +611,10 @@ their contents or a successful provider call.
    candidates unless a new acquisition record proves otherwise. The
    [next current-data study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/next-current-data-study.md)
    reviews NASA OSCAR, the limited historical `jplOscar` mirror, OpenDrift leeway
-   and current-plus-wind structures as candidates. It is a source-availability
-   review/proposal, not a newly acquired or completed matched-forcing experiment.
+   and current-plus-wind structures as candidates. The separate
+   [matched-current draft](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-study-plan.md) narrows a first HYCOM/GDP feasibility
+   design with metadata-only receipts and corrected reader-test proposals.
+   Neither document is a newly acquired or completed matched-forcing experiment.
 3. **Physical prevention validation:** fix the webcam above the measured water
    surface, independently validate mapping and drift, measure each layout's flow,
    freeze layouts/protocol, then log new known-source releases with measured

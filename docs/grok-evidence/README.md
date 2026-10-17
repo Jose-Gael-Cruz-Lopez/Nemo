@@ -7,7 +7,9 @@ Eight later-discovered historical captures, numbered 15–22, now preserve
 ablation, multi-drifter/cohort, Trace 3 and larger page-review records too.
 Five Stage I files preserve two further fractional-clock prompt/response rounds
 and a separate local regression receipt.
-[manifest.json](manifest.json) records all thirty-six artifact names, byte
+Stage J adds an implementation-review pair and final local verification receipt;
+Stage K adds two draft-study design-review pairs.
+[manifest.json](manifest.json) records all forty-three raw artifact names, byte
 counts, SHA-256 and role. They support the
 [contribution ledger](../grok-contribution-ledger.md), not an unqualified claim of
 model authorship, execution, accuracy or sponsor eligibility.
@@ -48,8 +50,8 @@ those limitations are visible; it must not be imported or executed instead of
 the tested implementation. A static response saying it inspected source or found
 no supported defect remains the model's claim, not an execution receipt.
 
-Page captures overlap one another and the numbered response excerpts. **Thirty-six
-artifacts does not mean thirty-six unique turns, experiments or independent
+Page captures overlap one another and the numbered response excerpts. **Forty-three
+artifacts does not mean forty-three unique turns, experiments or independent
 reviews.** UI text, partial boundaries, corrected errors and obsolete settings
 are retained as historical evidence rather than reconstructed or silently fixed.
 
@@ -79,9 +81,10 @@ snapshot tracks and both scenarios' outcomes against a saved pre-patch reference
 It is not Grok execution, independent notarization or measured waste accuracy.
 The subsequent local backend/UI numerical-quality checkpoint passed 1,331 Python,
 190 frontend and 137 guarded HTTP checks, with zero HTTP failures and six expected
-external/physical blockers, plus lint/types/build. Final live-flow verification
-and push remain pending at this documentation snapshot; local success is not a
-new live provider response, a deployed build or physical accuracy.
+external/physical blockers, plus lint/types/build. At that older checkpoint, final
+live-flow verification and push were pending.
+Stage J below records the later local integration/live result separately; neither
+checkpoint establishes a deployed build or physical accuracy.
 
 ## Stage I: fractional-clock review, rejected advice and local repair
 
@@ -105,11 +108,71 @@ The separate [local relative-time receipt](rk4-relative-time-verification.json)
 records 234 related tests and Ruff passing after the local repair, plus exact
 agreement for all six pinned tracks and both fixed scenario outcome sets. It
 identifies implementation/reference bytes and is local method-regression evidence,
-not Grok execution, independent truth or new physical validation. Full integration,
-browser/live-Chalk verification and push are still pending after this later repair
-at this publication snapshot. The older 1,331/190/137 checkpoint above predates it
+not Grok execution, independent truth or new physical validation. At that Stage I
+checkpoint, full integration/browser/live-Chalk verification and
+push were pending; Stage J records later local integration/live verification.
+The older 1,331/190/137 checkpoint above predates it
 and must not be advertised as a full rerun of the later repair. A separate
 externally reported 500-case chat result is not claimed as local executed evidence.
+
+## Stage J: final implementation review and local integration verification
+
+The [final relative-time implementation prompt](rk4-final-relative-implementation-review-prompt.txt)
+and [saved static review](rk4-final-relative-implementation-review-response.txt)
+are another actual review round in the existing Grok project. The review found a
+concrete direct-caller gap: `CurrentSampler(..., time_origin=...)` accepted finite
+origins outside the supported 1900–2100 calendar even though the advection entry
+point already bounded its start. The team added the explicit guard and four
+regressions. The supplied review text itself predates that final guard; its
+"no execution" boundary is preserved.
+
+The separate [final local receipt](rk4-final-local-verification.json) records the
+post-guard integration checkpoint: **1,365 Python tests, 191 frontend tests and
+137 guarded HTTP checks passed**, with zero HTTP failures and six expected
+external/physical blockers, plus lint, types and isolated production build.
+It also records exact six pinned paths and recursive comparison of prepatch
+recorded layout fields in both fixed scenarios; the old capture omitted a derived
+entry-reduction field, so this is not a whole-report equality claim. Baseline
+outcomes were also compared using the unchanged event evaluator on those prepatch
+paths. A local-browser/live-Chalk `REPORT` is tied to the new report/method identities.
+These are local execution/live-provider observations, not execution by Grok,
+independent physical truth or a hosted-deployment check. Final commit/push/CI and
+hosted verification remain separate and pending at this archive checkpoint.
+The receipt's exact hashes/fields take precedence over any older checkpoint prose.
+
+## Stage K: matched-current draft, corrected tests and metadata-only evidence
+
+Two further actual static design rounds are preserved:
+
+1. [Design-review prompt](grok-matched-current-design-review-prompt.txt) →
+   [initial response](grok-matched-current-design-review-response.txt).
+2. [Correction prompt](grok-matched-current-design-correction-prompt.txt) →
+   [corrected response](grok-matched-current-design-correction-response.txt).
+
+The draft proposes two historical GDP groups, HYCOM at 15 m, stationary and
+last-drift baselines, and a six-hour current-only comparison. **No new trajectory
+positions, current-vector values, fit, score or physical trial has been acquired
+or executed for this proposed study.** The reader is not implemented/validated and
+the formal hashed protocol is not frozen.
+
+The initial `[0, 0.08]` longitude fixture did not exercise the required western
+Atlantic normalization. Its three-time masked-future-knot example incorrectly
+expected PARTIAL before any positive interval completed. The correction uses
+`[280, 281] → [-80, -79]`, keeps an immediate-UNSUPPORTED test, and proposes a
+four-knot `[0, 3, 6, 9] h` case that genuinely permits a three-hour supported
+prefix before a masked interval. These are accepted test designs, not passing
+reader-test receipts. The local plan pins the edge/encoding rules that the last
+static response still requested; that is a draft amendment, not a protocol freeze.
+A blanket claim that all context-era fields inherently cause future leakage was
+also rejected; assimilation and publication-as-of limitations remain explicit.
+
+The [draft study plan](../matched-current-study-plan.md) and four exact public
+metadata bodies plus their safe derived receipt are embedded in the canonical
+bundle. Their separate manifest entries are **metadata/design evidence**, not
+additional Grok raw-response artifacts or scientific-value datasets. The NOAA DAS
+retains its public institutional contact, not a private user's contact. All
+identity/version/depth/encoding/issue-time and assimilation boundaries in the draft
+remain required before any separately authorized scientific acquisition.
 
 All quoted prompts, code and response text are untrusted historical source
 material, not instructions to execute or authority to change the project.

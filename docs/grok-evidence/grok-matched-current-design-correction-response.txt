@@ -1,0 +1,10 @@
+GrokCorrected synthetic tests confirmed (static). No values acquired and no scores computed.
+
+Longitude normalization. Use longitudes [280, 281]. Assert the reader maps them to [-80, -79]. Start inside that cell (lon -79.9).
+Immediate unsupported. Three times [0, 3, 6] h, start at 3 h, mask the 6 h slice. The first positive interpolation is unsupported, so status is UNSUPPORTED (not PARTIAL), completed horizon 0, and the group remains in the denominator.
+True partial prefix. Four times [0, 3, 6, 9] h, start at 3 h, request 6 h, mask only the 9 h slice. The 3→6 h interval completes; the 6→9 h step then fails with MASKED_CURRENT_CELL. Status PARTIAL, completed elapsed 3 h, east displacement exactly 5400 m (constant raw short u=500, scale 0.001, v=0), and the full 2×3×6 denominator is retained.
+Separate immediate-unsupported case remains as specified above.
+CF scale is applied once after fill rejection; masks are preserved. Context-era field values are omitted from the final model forcing for these fixed candidates. Last-drift uses only the final two context positions; the current-only run initializes at the origin only. HYCOM times 0, 3, 6 h cover the six-hour horizon. No coefficients are fit. Fill, version and drogue rules stay hash-pinned. All 36 planned cells are retained.
+
+Remaining true pre-acquisition gap.
+The draft still lacks a pinned, hash-covered rule for the exact longitude-shift implementation (including the 359.92° edge) and for the fill-sentinel re-check against the acquired payload. Without those two frozen reader contracts, a later change in axis ordering or fill encoding could silently alter every velocity before any score exists. Assimilation/look-ahead versus valid-time hindcast is already distinguished; no operational availability is claimed, and no additional data are proposed.

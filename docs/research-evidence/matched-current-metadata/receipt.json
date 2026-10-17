@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "PUBLIC_METADATA_DESIGN_EVIDENCE",
+  "status": "DRAFT_NOT_A_FROZEN_PROTOCOL_OR_SCIENTIFIC_VALUE_ACQUISITION",
+  "derivation": "Byte-for-byte copies of previously retrieved public metadata bodies; safe receipt derived from an earlier local receipt. No new external request was made for this publication copy.",
+  "privacy": "No machine home paths, credentials or private user records; metadata bodies contain public source-institution metadata.",
+  "transport_verification": "All recorded curl operations exited 0 with ordinary certificate verification and no supplied authentication. HTTP response status headers were not retained in these receipts; do not infer them from this derived file.",
+  "scientific_values_acquired": false,
+  "trajectory_positions_acquired": false,
+  "current_vector_values_acquired": false,
+  "scores_computed": false,
+  "requests": [
+    {
+      "file": "gdp-hourly.dds",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.dds",
+      "retrieved_utc": "2026-10-17T19:34:51.733619+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 1312,
+      "sha256": "758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad"
+    },
+    {
+      "file": "gdp-hourly.das",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.das",
+      "retrieved_utc": "2026-10-17T19:34:51.897741+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 18686,
+      "sha256": "66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39"
+    },
+    {
+      "file": "gdp-origin-identity-drogue.csv",
+      "url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00:00:00Z&latitude%3E=25&latitude%3C=35&longitude%3E=-80&longitude%3C=-65&distinct()",
+      "retrieved_utc": "2026-10-17T19:34:52.198899+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 640,
+      "sha256": "fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339"
+    },
+    {
+      "file": "hycom-2022-ncss-dataset.xml",
+      "url": "https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022/dataset.xml",
+      "retrieved_utc": "2026-10-17T19:34:54.925023+00:00",
+      "curl_exit_code": 0,
+      "scope": "METADATA_ONLY_NO_TRAJECTORY_OR_CURRENT_VALUES",
+      "bytes": 159404,
+      "sha256": "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"
+    }
+  ]
+}

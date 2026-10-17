@@ -1,0 +1,228 @@
+Review this DRAFT next Tideward matched-current experiment BEFORE scientific trajectory/current values are acquired or any new outcomes scored. The earlier six-GDP-ID model study remains frozen and cannot be retuned/relabelled. We want an empirical comparison beyond solver precision: historical drogued GDP buoy motion versus contemporaneous HYCOM15m field-driven RK4, with last-drift and stationary baselines. Existing public metadata access and identities are disclosed; no independent operational forecast or plastic-validation claim is allowed.
+
+Find only concrete pre-acquisition design/reader/scoring gaps that would invalidate the study. Check the25 hourly context points/6 future target contract, exact UTC alignment, depth/drogue/version/alias semantics, fixed region and strict masks, longitude0–360 conversion, packed-short CF scaling once, supported forcing times/partial horizons, all-planned denominators, calibration/future leakage and analysis assimilation. It must remain a retrospective feasibility diagnostic unless issue-time and assimilation independence can actually be verified. Do not fetch values, train, score or invent results. Suggest a minimal freeze checklist and one independent synthetic reader/integration test. Preserve any metadata-only selection limitations. Core solver horizon remains6hours; do not silently expand it to24hours or suggest tuning windage/residuals after seeing targets.
+
+DRAFT FILE: docs/matched-current-study-plan.md
+# DRAFT: matched-current drifter feasibility study
+
+Design checkpoint: **17 October 2026**. Status: **DRAFT — awaiting Grok design
+review and a formal, hashed protocol before scientific acquisition**.
+
+This is a proposed six-hour, two-group feasibility comparison. It is not a frozen
+experiment, an acquired trajectory/current dataset, a completed score, or a claim
+of operational forecast skill. Only bounded public metadata were read. No new
+trajectory positions, current-vector values, model fits, scores or physical trials
+were acquired or run for this design.
+
+## 1. Question and the improvement being tested
+
+Does a time-varying, spatially varying current field at an approximately matched
+object depth describe six hours of later GDP buoy motion better than stationary
+and last-observed-drift baselines, for two predeclared historical groups?
+
+This tests the **physical forcing against reserved later position estimates**,
+subject to the independence/processing caveats below. It is a stronger empirical
+question than whether a smaller RK4 step produces a numerically stable line.
+Numerical precision remains a separate diagnostic. A better integrator can still
+integrate the wrong current field or the wrong object-response model.
+
+The candidate forcing is **HYCOM GOFS 3.1, GLBy0.08, experiment 93.0, UV3Z, 2022,
+15 m**. Its explicit 15 m level is a closer match to the standard drogue-centered
+GDP object than OSCAR's daily upper-30-m mean. This is a rationale for testing,
+not a claim that HYCOM will outperform either baseline. A drogued buoy remains a
+different object from loose surface plastic or a tank token.
+
+## 2. What availability was actually verified
+
+| Source | Verified metadata/access | Remaining boundary |
+| --- | --- | --- |
+| [NOAA hourly GDP dataset](https://www.aoml.noaa.gov/phod/gdp/hourly_data.php) | Public ERDDAP schema/attributes and a fixed-origin identity/drogue query succeeded without credentials. The inspected endpoint identifies itself as **v2.01**, with actual time coverage ending **2022-10-31T00:00:00Z**. | The general webpage also describes release **v2.01.1**, with a different final-hour description. Do not silently call this endpoint v2.01.1. Pin the actual payload, metadata, DOI and retrieval date. No 31-position study track has been retrieved. |
+| [HYCOM 2022 UV3Z catalogue](https://tds.hycom.org/thredds/catalogs/GLBy0.08/expt_93.0_uv3z.html?dataset=GLBy0.08-expt_93.0-uv3z-2022) | The catalogue lists freely available OPeNDAP and NCSS access. **NCSS dataset metadata returned successfully without credentials**. | OPeNDAP DDS/DAS attempts timed out; the first proposed data path is the verified NCSS service. A successful metadata response is not proof that a chosen current subset has valid wet cells or successful value transport. |
+| [NOAA drifter construction/behavior](https://www.aoml.noaa.gov/phod/gdp/faq.php) | The standard drogue is centered around 15 m; losing it changes wind/wave response. | Retrospective drogue metadata are not a direct observation of the instantaneous drag depth or an operationally available status feed. |
+| [HYCOM missing/substituted-days notice](https://www.hycom.org/faqs/477-did-you-know-there-are-missing-days-in-the-gofs-31-global-analysis) | Some dates are missing or substituted, and the provider disclaims guaranteed availability. The proposed May 31–June 1 window is not among the listed 2022 substitution dates. | The list is not proof of complete support. Verify the actual requested times, cell masks and run lineage; never fill missing currents with zero. |
+
+Official supporting product specifications:
+[HYCOM GOFS 3.1 analysis](https://www.hycom.org/dataserver/gofs-3pt1/analysis).
+OSCAR is retained as a potential later comparator, not the selected first source:
+[NASA OSCAR final v2](https://podaac.jpl.nasa.gov/dataset/OSCAR_L4_OC_FINAL_V2.0).
+
+## 3. Proposed two identities and selection provenance
+
+The metadata-only candidate query used a fixed origin **2022-06-01T00:00:00Z** and
+the closed region **25–35°N, 80–65°W**. It requested identifiers, buoy class,
+drogue-loss metadata and nominal drogue depth, **not position columns or later
+motion**. Eleven identity rows were returned. Nine had loss dates preceding the
+origin. Two had metadata compatible with an attached 15 m drogue at that origin:
+
+| Proposed complete GDP group | WMO | Reported class/depth | Queried drogue-loss field | Interpretation for this draft |
+| --- | --- | --- | --- | --- |
+| `300234066836710` | `6202613` | SVPB / `15 m` | `2023-03-02T00:00:00Z` | Loss is after the proposed six-hour outcome window. |
+| `300534061292930` | `4102636` | SVPB / `15 m` | Empty/fill | This endpoint documents fill as still attached; zero instead means uncertain from the beginning. Do not conflate those states. |
+
+The two mappings occur once each in the project's saved identity registry; each
+WMO maps back to one GDP ID there. Neither GDP ID nor its mapped WMO is in the
+original 223-ID/known-alias exclusion set. Neither is among the six completed
+fresh-study GDP groups. Identity-registry appearances and an earlier metadata-only
+2021 candidate appearance for the first ID are disclosed; these are **not** claims
+that the IDs have never been seen in metadata.
+
+These checks use the existing saved registry/exclusions, not a newly complete
+physical-identity audit. Preserve the previously disclosed unresolved historical
+aliases. Set `physical_alias_resolution_verified=false` and
+`statistical_independence=false` unless a later documented review establishes
+otherwise. Future trajectories have not been inspected to establish row count,
+finite observations, six-hour survival, spatial coverage or path difficulty.
+
+The proposed two identities stay in the full planned denominator. Do not replace
+one because a download, mask, prefix or future observation fails. The eleven-row
+origin metadata frame is a selection-availability record, not eleven evaluated
+trajectories. Formal review must accept or amend this rule before acquisition.
+
+## 4. Proposed observation and forecast contract
+
+| Item | Proposed fixed value |
+| --- | --- |
+| Context | **25 hourly positions**, 2022-05-31T00:00:00Z through 2022-06-01T00:00:00Z, inclusive. |
+| Forecast origin | 2022-06-01T00:00:00Z. |
+| Reserved outcomes | **Next six hourly positions**, 2022-06-01T01:00:00Z through 2022-06-01T06:00:00Z. |
+| Forecast horizon | **21,600 seconds**, matching the existing `MAX_HORIZON_S`; no 24-hour forecast extension. |
+| Context adaptation | Last drift uses only its own final two context observations. No common learned model or cross-group fitting. |
+| Forcing support | The declared tile and three-hour valid times must support integration from origin through 06:00Z. Context-era forcing can be inspected for transport/QC, but no parameters are fitted from it. |
+| Comparison outputs | Same six UTC horizons and same observed targets for every candidate; great-circle position error in metres, six-hour endpoint error, status and coverage. |
+| Planned accounting | Two complete GDP groups × three candidates × six horizons = **36 planned model/horizon attempts**, using only **12 distinct later position estimates**. These are not 36 independent observations. |
+
+Fixed candidates, subject to exact implementation/version review before freezing:
+
+1. **Stationary:** remain at the final context position.
+2. **Last observed drift:** extrapolate the final context displacement with its
+   actual elapsed time; freeze the coordinate conversion and propagation method.
+3. **Current-only:** start at the same final context position and integrate the
+   matched HYCOM 15 m field with the existing knot-aligned bounded advection
+   implementation. Proposed solver maximum step 300 s, hourly output, and forced
+   alignment with current-time knots; freeze the exact code revision and options.
+
+Do not train or introduce a learned residual, windage, Stokes coefficient, diffusion
+coefficient, kernel or new noise tuning before formal design review. Do not tune
+against these groups or the already completed NOAA studies. Any later candidate
+needs a separately declared development design and untouched comparison groups.
+
+## 5. Exact source paths and data-reader requirements
+
+GDP base:
+`https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc`
+
+Availability query, shown unescaped for readability:
+
+```text
+drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00:00:00Z&latitude>=25&latitude<=35&longitude>=-80&longitude<=-65&distinct()
+```
+
+This is the identity/drogue query already made, not a future acquisition command.
+Any later 31-position query must constrain one exact selected ID and the declared
+UTC window. Use the recorded positions as the target; GDP `ve`/`vn` are derived
+from the same processed track and are not independent forcing truth.
+
+HYCOM NCSS base:
+`https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022`
+
+Verified metadata path: the base plus `/dataset.xml`.
+
+The metadata report:
+
+- Grid axes: 4,251 latitude values, −80 to 90°, nominal increment 0.04°; 4,500
+  longitude values, 0 to 359.92°, nominal increment 0.08°.
+- Time: **2,920** valid times, three-hour increment; units `hours since 2000-01-01
+  00:00:00`, Gregorian calendar. The named 2022 aggregate spans **2022-01-01T12Z
+  through 2023-01-01T09Z**. Do not infer bounds from the year in the URL alone.
+- Forty fixed depths, positive downward in metres, including **15.0**.
+- `water_u` and `water_v` use dimensions `time depth lat lon`, stored as short
+  integers, units m/s, scale factor **0.001**, offset **0**, missing/fill **−30000**.
+
+Proposed first scientific subset: only those two variables, the 15 m level, the
+predeclared **25–35°N / 80–65°W** tile, native spatial resolution, and the required
+three-hour times. This tile is approximately 0.6 MB of packed two-component data
+for three times before format overhead; actual service dimensions/size must be
+recorded rather than assumed. Freeze a bounded request and byte/time budget before
+making it. Use one connection; checksum the exact returned bytes.
+
+The reader must decode fill before scaling/interpolation, convert longitude
+conventions explicitly, preserve native valid times and units, reject dry or
+unsupported interpolation stencils, and retain domain/time exits. Do not expand
+the tile or change the depth after observing an unfavorable outcome. A preliminary
+transport probe, if approved, must have its own predeclared tiny metadata/data
+scope and must not become an unreported cohort/model-selection exercise.
+
+## 6. Issue-time, processing and independence limits
+
+The inspected HYCOM metadata expose **Valid Time**; no verified run/issue timestamp
+or historical publication-as-of record has been established. The catalogue calls
+this an analysis/hindcast aggregate. Its future-valid current fields may contain
+information unavailable at the drifter forecast origin. Consequently this first
+comparison is a **retrospective forcing-supported motion diagnostic**, not a claim
+of prospective six-hour forecasting skill. An operational study requires archived
+run-specific forecasts, an issue cutoff and realistic delivery latency.
+
+HYCOM includes data assimilation. Before calling the evaluated observations
+independent, audit the product's actual assimilation inputs and whether the tested
+GDP observations, derived products or closely related data entered the forcing.
+Whole-ID holdout alone does not settle this. No assimilation-independence proof was
+obtained by the catalogue inspection.
+
+GDP hourly positions are quality-controlled processed/interpolated estimates,
+not raw instantaneous ground truth. Endpoint metadata include retrospective drogue
+information and processing/version inconsistencies; that also prevents an as-of
+operational claim. The two nearby groups and six dependent future hours support
+descriptive feasibility results only. Do not infer calibrated confidence,
+statistical significance, source attribution, plastic skill or reef protection.
+
+## 7. Preserve failures and report only supported comparisons
+
+Retain all two groups and every planned candidate/horizon, including transport
+failure, malformed/duplicate/missing rows, unresolved identity, missing current
+cells, time limits and domain exits. Distinguish these reasons explicitly.
+Never substitute zero currents, interpolate across unsupported masks or discard
+a failed group to improve an average.
+
+Any common-supported-prefix descriptive comparison must name its exact available
+horizons and flag incompleteness; it must not silently stand in for the full
+six-hour result. Report the planned two-group denominator, achieved per-candidate
+coverage and all failures next to any errors. Do not label synthetic paths or a
+fine numerical reference as observed outcomes.
+
+## 8. Metadata receipts and the review gate
+
+The following exact metadata responses were retained locally in ignored
+`work/matched-current-study-metadata/`, with `receipt.json`. They are public-source
+metadata only. The raw files are **not committed acquisition fixtures**; this
+document records their receipt hashes so a later formal protocol can decide which
+metadata to preserve in its own immutable package.
+
+| Local receipt body | Retrieval start (UTC, 2026-10-17) | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| `gdp-hourly.dds` | 19:34:51.733619 | 1,312 | `758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad` |
+| `gdp-hourly.das` | 19:34:51.897741 | 18,686 | `66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39` |
+| `gdp-origin-identity-drogue.csv` | 19:34:52.198899 | 640 | `fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339` |
+| `hycom-2022-ncss-dataset.xml` | 19:34:54.925023 | 159,404 | `741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d` |
+
+The `.dds`/`.das` URLs append those extensions to the GDP base; the candidate URL
+is the availability query above with encoded comparison characters. All four
+bounded curl requests completed with exit 0 using ordinary certificate
+verification and no supplied authentication. These hashes refer to the specific
+responses, not to every future response of those changing services.
+
+Existing identity-check sources:
+
+- `data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv`: 318,597 bytes,
+  SHA-256 `a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82`.
+- `data/public/noaa-fresh-drifter-v2/exclusions.json`: 10,625 bytes,
+  SHA-256 `40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e`.
+
+**Next step:** obtain Grok design review, review its advice locally, resolve or
+retain every limitation above, then freeze a separate protocol and exact code/data
+contracts before requesting scientific values. This draft authorizes no automated
+acquisition, scoring, model promotion, tank operation or deployment. Keep the
+existing completed NOAA results unchanged.
+
+Related references: [next current-data study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/next-current-data-study.md),
+[fresh NOAA study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/fresh-noaa-study.md),
+and [RK4 numerical quality](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/rk4-numerical-quality.md).

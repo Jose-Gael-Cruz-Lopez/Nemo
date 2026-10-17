@@ -57,6 +57,17 @@ default steps. Its six track arrays and every release outcome in both scenarios
 were checked against a saved pre-patch reference and remained exactly unchanged.
 Method hashes change with source bytes; historical receipts are not relabelled.
 
+A second regression addressed fractional timestamps: constructing sampler time as
+an epoch offset plus elapsed seconds could round an exact supported endpoint one
+ULP beyond the field. Forcing timestamps are now subtracted from the requested
+start before conversion to floating seconds; RK4 sampling, scheduling and progress
+all use that same local axis. The rejected absolute-epoch progress guard is not
+retained. Direct sampler origins share the 1900–2100 calendar bound, preventing
+unsupported calendar arithmetic. A synthetic constant 0.5 m/s case now integrates
+the full 566.734631 s and approximately 283.3673155 m, including the final supported
+timestamp. Exact rational signed-flow tests and strict masked-future tests retain
+the supported prefix without an epsilon, extrapolation or time-only snap.
+
 ## Two different sensitivity checks
 
 **Integration sensitivity** reruns the fixed releases with maximum solver steps of
@@ -76,6 +87,22 @@ event-time differences are retained for all releases.
 The main decision still evaluates all layouts against one common default path
 per release. Additional diagnostic reruns are separate and never promote a model,
 retune a completed study or replace the default decision.
+
+In the pinned downstream comparison, 300- and 150-second integrations differ
+from the 75-second reference by at most approximately 0.000840 m and 0.000326 m
+at accepted common output times. Contact spacing of 300 and 150 seconds differs
+from 75 seconds by at most approximately 0.152 s and 0.0435 s for matching events
+on the same fine path. Every level retains all six releases, central 2/6 versus
+flanking 4/6, and the original no-entry control remains tied. These particular
+differences are numerical sensitivity results, not physical error bounds.
+
+Final local verification passed 1,365 Python tests, 191 frontend tests and 137
+guarded HTTP checks, plus Ruff, ESLint, TypeScript and a production build. Browser
+checks verified both product surfaces and a separate live Chalk explanation
+bound to the exact report/method identities. The
+[safe local receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-local-verification.json)
+pins tested source bytes, comparison scope and explicitly untested physical
+claims; hosted CI must be checked for the actual pushed code commit.
 
 ## What this proves and what it does not
 
