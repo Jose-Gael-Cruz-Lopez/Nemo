@@ -1,0 +1,17 @@
+GrokStatic review of the repair plan. No execution is claimed and frozen NOAA outcomes are untouched.
+The failure mode is real: reconstructing sample time as offset + elapsed can place a representable final knot one ULP past the sampler’s strict end, so a supported endpoint is rejected as OUTSIDE_FORCING_TIME. Forming forcing coordinates and all RK4/knot times directly from integer datetime differences to an optional time_origin=requested_start, while keeping the original-epoch offset solely for the unrepresentable-progress guard, removes that cancellation path without relaxing masks, budgets or the no-extrapolation rule. The plan is acceptable provided integer differences are computed in a wide enough type and the existing absolute-progress check is not reused for interpolation.
+Adversarial regression that exposes a wrong implementation.
+Use the stated fixture (times [0, 347304243, 374526192, 412218073, 895964114] µs, uniform 0.5 m/s east). Start at 2026-10-17T00:05:29.229483Z, horizon and output both 566.734631 s.
+
+A correct implementation returns COMPLETED, completed_horizon_s == 566.734631, and east displacement 283.3673155 m.
+An implementation that still samples with offset + elapsed (or adds any epsilon/clamp) returns PARTIAL/OUTSIDE_FORCING_TIME near 559.37 s.
+The same fixture with horizon 566.734632 s (one microsecond past the last knot) must stay PARTIAL/OUTSIDE_FORCING_TIME at exactly 566.734631 s and must not accept a point beyond the final knot.
+
+Independent checks.
+(a) Exact integer-microsecond endpoint lands COMPLETED with displacement equal to the rational integral.
+(b) Last endpoint one microsecond beyond support is PARTIAL at the final supported knot.
+(c) Origins both before and after the first forcing time produce correct relative knots and fail closed when the start itself is unsupported.
+(d) An interior knot whose next interval has a masked contributing corner stops at that knot with MASKED_CURRENT_CELL and does not accept a later position.
+(e) Piecewise-linear velocity whose integral is an exact Fraction matches the numeric displacement within 1e-9 m on every accepted output.
+Overflow and conversion boundaries. Integer microsecond differences between dates near year 1900 and 2100 fit in 64-bit signed integers; a conversion that narrows to 32-bit or that rounds through binary float before the difference will mis-place knots. Datetime64 resolution must be at least microseconds; coarser units can collapse distinct knots.
+Unverified without execution. Actual ULP behavior of the integer-difference path on this fixture, interaction of the retained epoch-offset guard with a start many decades from the field epoch, and bit-identity of the six pinned-snapshot tracks after the origin change. Numerical agreement on the synthetic fixture remains a solver check, not physical or plastic-motion accuracy.

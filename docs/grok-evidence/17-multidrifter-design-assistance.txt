@@ -1,0 +1,93 @@
+Grok
+Worked for 3s
+
+Design / static assistance only. No cohort has been scored and no tests have been executed here. Existing 8707978, the 18/6 benchmark and the training ablation stay unchanged. No numeric independence gate is supplied; any such gate remains a documented blocker until domain-justified and frozen.
+
+Immutable protocol and fail-closed gates
+Python
+Copy
+Copied
+import hashlib, json
+
+def protocol_identity(spec: dict) -> dict:
+    """Freeze model, preprocessing, origin, metric and group assignment together."""
+    required = ("models", "alpha", "spectral_radius", "prefix_count", "horizons",
+                "preprocessing_id", "origin_rule", "metric_ids", "development_ids",
+                "evaluation_ids", "excluded_ids")
+    if set(spec) != set(required):
+        raise ValueError("protocol identity fields incomplete or extra")
+    if spec["models"] != ("stationary", "last_drift", "mean_drift", "ridge_ar1"):
+        raise ValueError("model set is frozen")
+    if spec["alpha"] != 1.0 or spec["spectral_radius"] != 0.98:
+        raise ValueError("hyperparameters are frozen")
+    if "8707978" in spec["evaluation_ids"]:
+        raise ValueError("8707978 is development-only")
+    if set(spec["development_ids"]) & set(spec["evaluation_ids"]):
+        raise ValueError("group overlap")
+    canonical = json.dumps(spec, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return {"protocol_sha256": hashlib.sha256(canonical.encode()).hexdigest(),
+            "canonical": canonical}
+
+def assert_unseen(trajectory_id: str, protocol: dict, payload_sha256: str,
+                  manifest_sha256: str, receipt_sha256: str):
+    if trajectory_id in protocol["development_ids"] or trajectory_id == "8707978":
+        raise ValueError("already-seen or development-only id")
+    if trajectory_id not in protocol["evaluation_ids"]:
+        raise ValueError("id not in frozen evaluation assignment")
+    # receipt_sha256 is detached; it is never inside the manifest bytes
+    if hashlib.sha256(manifest_bytes).hexdigest() != receipt_sha256:
+        raise ValueError("manifest receipt mismatch")
+    if hashlib.sha256(payload_bytes).hexdigest() != payload_sha256:
+        raise ValueError("payload hash mismatch")
+Macro-aggregation (each drifter = one group)
+Python
+Copy
+Copied
+def macro_paired(results):
+    """One summary per drifter; windows inside a drifter are not replicates.
+    Every declared model × trajectory × horizon appears exactly once.
+    Out-of-domain or failed forecasts stay in the denominator as explicit failures.
+    """
+    groups = {}
+    for row in results:  # each row is one (drifter, model, horizon) outcome
+        key = (row["drifter_id"], row["model_id"], row["horizon"])
+        if key in groups:
+            raise ValueError("duplicate outcome")
+        groups[key] = row
+    expected = {(d, m, h)
+                for d in protocol["evaluation_ids"]
+                for m in protocol["models"]
+                for h in range(1, 7)}
+    if set(groups) != expected:
+        raise ValueError("coverage incomplete or extra")
+    # per-drifter mean of its horizons, then macro-mean across drifters
+    per_drifter = {}
+    for (d, m, h), row in groups.items():
+        per_drifter.setdefault((d, m), []).append(row["error_m"] if row["status"] == "ok" else None)
+    # report count of failures separately; never drop them or change the denominator
+    return {"per_drifter_means": per_drifter,
+            "failure_count": sum(1 for r in groups.values() if r["status"] != "ok"),
+            "denominator": len(expected)}
+Three fail-closed tests
+Python
+Copy
+Copied
+def test_already_seen_id_rejected():
+    with pytest.raises(ValueError, match="already-seen"):
+        assert_unseen("8707978", protocol, sha, man_sha, receipt_sha)
+
+def test_group_overlap_rejected():
+    bad = {**protocol_spec, "evaluation_ids": protocol_spec["development_ids"]}
+    with pytest.raises(ValueError, match="group overlap"):
+        protocol_identity(bad)
+
+def test_50km_failure_stays_in_denominator():
+    results = [ok_row, ok_row, {"drifter_id": "E1", "model_id": "ridge_ar1",
+                                "horizon": 6, "status": "out_of_domain_50km",
+                                "error_m": None}]
+    summary = macro_paired(results)
+    assert summary["failure_count"] >= 1
+    assert summary["denominator"] == len(expected)
+    # the out-of-domain row is present; it was not silently omitted
+
+Blocker. No geographic or temporal exclusion radius is justified by evidence in this project. The implementation must fail closed until a domain-justified rule is written, hashed into the protocol identity, and frozen before any evaluation score is computed. Upstream hourly interpolation still limits real-time claims even across distinct IDs.

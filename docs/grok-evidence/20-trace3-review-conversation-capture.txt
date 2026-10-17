@@ -1,0 +1,72 @@
+arly labeled synthetic. Chalk can only read the returned comparison and evaluation IDs, preserves the Unknown source status, and distinguishes the predicted fractions from the operator-reported outcome. No physical tank trial has been run, no hardware was actuated, Photon stayed off, and no coral benefit is claimed.”
+
+You
+
+ReefTrace prevention slice is now published on main at exact commit 4ef5b50cef86da3df697b25229193a3214cff24e: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/4ef5b50cef86da3df697b25229193a3214cff24e . Continue within this ReefTrace project. Perform a READ-ONLY static review of the NEW prevention code; do not repeat the old diagnostics module implementation. Raw files at this commit: https://raw.githubusercontent.com/Jose-Gael-Cruz-Lopez/reeftrace/4ef5b50cef86da3df697b25229193a3214cff24e/apps/estimation/reeftrace_estimation/prevention.py ; https://raw.githubusercontent.com/Jose-Gael-Cruz-Lopez/reeftrace/4ef5b50cef86da3df697b25229193a3214cff24e/apps/api/reeftrace_api/services/prevention.py ; https://raw.githubusercontent.com/Jose-Gael-Cruz-Lopez/reeftrace/4ef5b50cef86da3df697b25229193a3214cff24e/apps/api/reeftrace_api/services/prevention_investigation.py ; https://raw.githubusercontent.com/Jose-Gael-Cruz-Lopez/reeftrace/4ef5b50cef86da3df697b25229193a3214cff24e/adapters/chalk/agent.py ; https://raw.githubusercontent.com/Jose-Gael-Cruz-Lopez/reeftrace/4ef5b50cef86da3df697b25229193a3214cff24e/docs/prevention-workflow.md . Inspect corresponding schemas/tests if needed. Implemented invariants: exact first-passage order via competing absorbing protected-zone/collector polygons and shared seeded time discretization; all declared sources/scenarios, no source-support weighting; any unsupported particle withholds a robust recommendation; perfect retention explicitly conditional. Frozen plan binds source revision; separate one-token trial ledger has full-horizon/accounting attestations, exact-payload idempotency, immutable provenance, globally unique recording use and prospective frame chronology. Chalk has read-only scoped tools, exact source/comparison/evaluation citations and atomic case+ledger CAS after the network turn. Synthetic trials never become physical outcomes. Local results:419 offline Python tests passed,16 Node tests,lint/types/build passed,actual HTTP prevention audit12PASS0FAIL with one real Chalk UNKNOWN response reading all evidence. A later browser Chalk request got HTTP429 and stopped without automatic retry. No physical trials, hardware actuation or Photon replies; no funded xAI voice call. Return at most THREE demonstrable material defects with exact function and regression; distinguish source inspection from execution, and explicitly state if you cannot access a file. Do not invent test execution, change accounts/billing, message anyone or recommend scope expansion. We are preparing three nonoverlapping teammate prompts for field evidence, validation, and product/Chalk/E2E integration.
+
+Grok
+Worked for 1m
+
+READ-ONLY static review of prevention code at commit 4ef5b50cef86da3df697b25229193a3214cff24e
+
+Inspected the raw source of apps/estimation/reeftrace_estimation/prevention.py, apps/api/reeftrace_api/services/prevention.py (full add_trial/evaluate/load_demo), apps/api/reeftrace_api/services/prevention_investigation.py, adapters/chalk/agent.py, and docs/prevention-workflow.md. This is source inspection only; no tests were executed here and local/CI results were not re-run.
+
+No demonstrable material defect found.
+
+The inspected implementation matches the stated invariants:
+
+First-passage order is determined by a competing absorbing zone+traps simulation on shared seeded time nodes (_first_passage, compare_layouts); event times are documented as time-node upper bounds; any unsupported particle sets coverage_ok = False and withholds a robust recommendation; source-support weights are unused.
+Measured layouts require distinct flow IDs and non-overlapping recording sets (_profiles); synthetic layouts reject OPERATOR_REPORTED_PHYSICAL trials (add_trial).
+Trial ledger is separate, uses exact-payload idempotency on trial_key+request_hash, enforces global unique recording use, prospective frame chronology, full-horizon/accounting fields, and per-cell quota; evaluation bounds treat missing and unresolved as unknown (evaluate).
+Comparison binds case revision and source evidence ID; STOP/revision archives and rejects writes (_assert_case).
+Chalk prevention mode restricts tools to get_case/get_source_evidence/get_prevention_evidence, requires citing the three IDs, blocks collection proposals, preserves UNKNOWN, and performs atomic case+ledger CAS after the network turn (PreventionCaseBackend.call, investigate_prevention, commit_for_comparison).
+
+No further code issue is supported by the inspected files.
+
+You
+
+Continue in THIS ReefTrace project and conversation. We are building the user's Trace 3 lane; public repository https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/tree/main currently starts at 4ef5b50cef86da3df697b25229193a3214cff24e. Megana owns Trace 1 field recordings/calibration, Aarush owns Trace 2 independent validation/model methods, Jose owns Trace 3 product/API/Chalk/E2E. Do not take over teammates' scientific modules. New local, UNPUBLISHED Trace 3 implementation is being verified; review the following contract as a design only, not code execution.
+Goal: coastal teams trace pollution, freeze two interception layouts and a protected zone, then evaluate predicted vs recorded outcomes. Keep missing/unresolved trials and source UNKNOWN honest. Add an authenticated public evidence export, strict validation split import, safe report display, and a read-only Chalk review. No Photon replies or messages, camera off, no actuators/pump control, no purchases, billing or credentials. Sponsor access is now independently verified by our local backend using its model list; no keys are included here.
+Export GET /api/v1/prevention/comparisons/{id}/export returns analysis_bundle_v1: payload with exact comparison/source IDs/revision, frozen plan, strict provenance snapshots (layout/flow hashes, source polygons, declared scenarios, recording IDs/diagnostics), numerical report WITHOUT nominal paths, and redacted trial/evaluation ledger. No notes, trial keys, private paths, raw frames or model prose. payload_canonical_json is EXACT sorted compact ASCII Python JSON; payload_sha256 hashes its UTF8 bytes. The browser verifies the hash of this STRING and semantic equivalence to payload, never JSON.stringify(payload) because 1.0 normalizes to 1. Metadata time/archive status is detached from payload hash. Original evaluation.snapshot_hash remains an opaque original-ledger identity; it is NOT claimed recomputable from redacted export. Export checks original source/layout/flow/plan hashes and IDs in one SQLite read snapshot. Synthetic and physical outcome origins stay separate.
+Import POST /{id}/validation-reports accepts ONLY {report: {schema_version: validation_report_v1, comparison_id, input_payload_sha256, evaluation_snapshot_hash, data_origin:SYNTHETIC|MEASURED_TANK, outcome_origin:SYNTHETIC_DEMO|OPERATOR_REPORTED_PHYSICAL, protocol_id, purpose:CONTRACT_REHEARSAL|DECLARED_VALIDATION_SPLIT, development_trial_ids, validation_trial_ids}}. Bounded strict IDs/lists, no arbitrary uploaded prose or metrics. Development and validation IDs unique, disjoint, partition actual selected-origin trial IDs; physical recording sets cannot leak into flow fits/development. Server recomputes descriptive validation counts and conservative planned-denominator bounds from saved ledger, not supplied metrics or new ML. Label IDENTITY_AND_ACCOUNTING_CHECKED_METHOD_NOT_RERUN, method_rerun:false, physical_validation:false, supports_causal_claim:false even for operator-reported physical releases. Template endpoint returns only actual existing trials as a clearly labeled CONTRACT_REHEARSAL, never independent validation. Accepted report immutable/idempotent; case+trial-snapshot CAS inside transaction. Changed ledger/evidence/STOP archives read history but rejects new save.
+Frontend export/download and explicit bounded local JSON import share the parent write lock, abort/stale guards, operator auth and case/comparison/source/evaluation identity. Render only backend accepted typed summaries; archived reports cannot explain current evidence. Numerical predictions remain separate from descriptive counts and unknown mass. Chalk selected-validation review must read get_case, get_source_evidence, get_prevention_evidence and get_validation_evidence; cite exact source/comparison/evaluation/report IDs. Only locally reconstructed aggregate summary exposed, never imported text or hidden release truth as source input; retain no-digit prose and deterministic tables, bounded model requests/no retries. After network turn atomic freshness check prevents saving a stale answer. Unknown source remains UNKNOWN.
+Task: provide at most FIVE concrete material invariants/regressions for this design and a concise next-measurement priority that improves evidence without adaptive confirmation leakage. Focus on canonical hash/privacy, false trust in imported manifests, no-data and development-only cells, archival identity and concurrency. Distinguish plain arithmetic checking from independent scientific validation. Do not claim to have inspected unpublished files or executed tests. Do not propose new services/frameworks/deep neural models. We will implement, test locally, push main and verify CI ourselves. Return a compact review suitable for the team prompt library.
+
+Grok
+Worked for 5s
+
+Trace 3 design review (export / validation-split import / Chalk)
+
+Static design review only. Public main at 4ef5b50 was not re-fetched for unpublished local changes; no tests were executed.
+
+Five concrete material invariants / regressions
+
+Canonical hash and privacy (export)
+payload_canonical_json must be the exact sorted, compact, ASCII Python json.dumps(..., sort_keys=True, separators=(",", ":"), allow_nan=False) string. payload_sha256 hashes its UTF-8 bytes. The browser must hash that returned string (or re-serialize only with the identical rules) and never JSON.stringify(payload) (which normalizes 1.0→1). Export must omit notes, trial keys, private paths, raw frames, model prose and nominal paths. Regression: alter any redacted field or change float formatting and both server and browser hashes must mismatch; a browser that stringifies the object must fail verification.
+No false trust in imported manifests (import)
+Accept only the strict {report: {schema_version: validation_report_v1, ...}} shape. Reject any supplied metrics, prose, or extra keys. Server recomputes all descriptive counts and planned-denominator bounds from the saved ledger. Label every accepted report IDENTITY_AND_ACCOUNTING_CHECKED_METHOD_NOT_RERUN, method_rerun: false, physical_validation: false, supports_causal_claim: false. Regression: an import that supplies its own entry rates or a “validated” flag is rejected; the stored summary equals the server-recomputed bounds and carries the identity-only label.
+No-data and development-only cells
+Development and validation ID lists must be unique, disjoint, and partition exactly the selected-origin trial IDs present in the ledger. Physical recording IDs used in flow fits must not appear in the validation set. A cell with zero validation trials or only development trials must be reported as no-data / development-only and must not contribute a benefit claim. Regression: overlapping IDs, a missing trial, or a physical recording that also appears in a flow-fit set are rejected; a development-only cell produces an explicit no-validation-data bound, never a zero-effect claim.
+Archival identity and concurrency
+Export and import share a single SQLite read/write snapshot that rechecks original source, layout, flow and plan hashes. Accepted reports are immutable and idempotent on the exact payload. Case revision, evidence ID, STOP or trial-ledger change after the request is formed must archive the history and reject the new save (CAS). Archived reports cannot be used to explain current evidence. Regression: concurrent trial append or STOP between import open and commit returns 409 and leaves no new report; an archived report’s identity fields no longer match the live case.
+Chalk read-only freshness and UNKNOWN preservation
+A selected-validation review may call only get_case, get_source_evidence, get_prevention_evidence and get_validation_evidence. It must cite the exact source, comparison, evaluation and report IDs. Only the locally reconstructed aggregate summary is exposed; imported text and hidden release labels never become source input. After the network turn an atomic case+ledger CAS must discard a stale answer. UNKNOWN source status remains UNKNOWN. Regression: a finish that omits any required ID, proposes collection, or upgrades UNKNOWN is rejected; a concurrent ledger change after the model returns prevents the receipt from being saved.
+
+Next-measurement priority (no adaptive confirmation leakage)
+
+Record a pre-declared, fixed-horizon set of one-token physical trials on both layouts after the plan and flows are frozen. Keep release labels only in the evaluation ledger. Do not inspect intermediate outcomes to add, drop or reorder trials. Report the conservative planned-denominator bounds (missing and unresolved remain unknown) and label the result a descriptive pilot, not independent scientific validation or a causal reef benefit.
+
+Plain arithmetic checking of identity, accounting and bounds is distinct from independent scientific validation; the latter still requires a held-out physical split that was not used to choose layouts, flows or the comparison itself.
+
+Continue with this design review
+What are the 5 concrete invariants?
+Review Trace 1 and 2 scientific modules
+
+
+
+
+Fast
+Type a message to send
+Attach to message
+Drop here to add files to your message
+Grok finished responding

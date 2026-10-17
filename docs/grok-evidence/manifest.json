@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "purpose": "Archive of inspected historical local Grok evidence and new actual RK4 review rounds; never a complete provider export or proof of provider execution.",
+  "purpose": "Archive of inspected historical local Grok evidence, including later-discovered ablation/cohort/Trace 3/page captures and actual RK4 review rounds; never a complete provider export or proof of provider execution.",
   "source_checkpoint_commit": "662d1ac583b5c6e04aa43e74fdd2340218371934",
   "contains_private_credentials": false,
   "files": [
@@ -187,8 +187,172 @@
       "sha256": "ba297bd96e15eb00397db452c3e650713648ccc356cae8ff2c475df484356208",
       "role": "local Python patch regression and exact pre-patch replay receipt, not Grok execution or new field evidence",
       "copied_without_text_edits": true
+    },
+    {
+      "file": "15-motion-ablation-code-assistance.txt",
+      "source_artifact_name": "grok-motion-ablation-code.txt",
+      "source_relative_path": "work/grok-motion-ablation-code.txt",
+      "bytes": 6362,
+      "sha256": "f1f2d6c29ae051d55a8b060570e431e5fc8f3f4eb7153ff74674cda059e78345",
+      "role": "saved Grok code-assistance response with draft functions/regression sketches; static assistance, not executed code or the authoritative implementation",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "16-motion-ablation-static-review.txt",
+      "source_artifact_name": "grok-motion-ablation-review.txt",
+      "source_relative_path": "work/grok-motion-ablation-review.txt",
+      "bytes": 2010,
+      "sha256": "de38f43baa4da379e3fd1945330a291558ae22fc621070ac377c4932e2f3759c",
+      "role": "saved Grok static review of the pasted ablation implementation; no repository fetch or test execution claimed",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "17-multidrifter-design-assistance.txt",
+      "source_artifact_name": "grok-multidrifter-design.txt",
+      "source_relative_path": "work/grok-multidrifter-design.txt",
+      "bytes": 4778,
+      "sha256": "31f4bb12a3f418afa10a144b8b29bfed43e96381f832bf35f0a0da3b7a30cd0f",
+      "role": "saved Grok protocol/design draft; contains placeholder/global-variable sketches, not standalone accepted executable code",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "18-multidrifter-final-static-review.txt",
+      "source_artifact_name": "grok-multidrifter-final-review.txt",
+      "source_relative_path": "work/grok-multidrifter-final-review.txt",
+      "bytes": 1937,
+      "sha256": "bf916eb4fcfe99ab0ffe98297be8d6b45d8378f549cee400322f8910c178709e",
+      "role": "saved Grok static source review of the supplied four-group implementation; not a local execution receipt",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "19-cohort-coverage-static-review.txt",
+      "source_artifact_name": "grok-cohort-review.txt",
+      "source_relative_path": "work/grok-cohort-review.txt",
+      "bytes": 2794,
+      "sha256": "62ecf81f70e1392cbf0b5fe1fbe4fe80bbccbf54dc8dd2001c2965ec00ba9b1d",
+      "role": "saved Grok static coverage/preregistration interpretation; the sorting critique is advice to check, not proof of a sorting defect",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "20-trace3-review-conversation-capture.txt",
+      "source_artifact_name": "grok-trace3-review.txt",
+      "source_relative_path": "work/grok-trace3-review.txt",
+      "bytes": 14010,
+      "sha256": "e4318edde4f00317e4d4103ae447b26cacc3a487a403e8884dc7a884df105428",
+      "role": "partial browser conversation capture covering prevention and unpublished Trace 3 design; starts mid-sentence and includes UI/repeated context, not a complete provider export",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "21-ml-response-page-capture.txt",
+      "source_artifact_name": "grok-ml-response-page.txt",
+      "source_relative_path": "work/grok-ml-response-page.txt",
+      "bytes": 55755,
+      "sha256": "0be1b87683836203f1ff226bd633915ab7e41e47afe4f2298c4ae40b8d7e512d",
+      "role": "larger browser accessibility-text capture with historical ML prompt/response/project context and UI; overlaps earlier records, not independent execution or a complete provider export",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "22-final-review-page-capture.txt",
+      "source_artifact_name": "grok-final-review-page.txt",
+      "source_relative_path": "work/grok-final-review-page.txt",
+      "bytes": 48054,
+      "sha256": "ca024a9ab0551f248c5996594893d0bddf96f1ffc10c4688cd7a476ab7b774d9",
+      "role": "larger browser accessibility-text capture with earlier benchmark/static-review history and UI; overlapping source context, not a complete provider export or test execution",
+      "copied_without_text_edits": true,
+      "inventory_append": "Rediscovered historical local capture; no new model call or execution performed by this archive update."
+    },
+    {
+      "file": "rk4-fractional-clock-review-prompt.txt",
+      "source_artifact_name": "rk4-fractional-clock-review-prompt.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-review-prompt.txt",
+      "bytes": 2342,
+      "sha256": "3104b894bb8a8096d384d3684fc2a875141bc468cdb126ca6e6151d70085cc45",
+      "role": "actual outbound static repair-review prompt; synthetic fractional-time fixture, not a new field experiment",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-fractional-clock-review-response.txt",
+      "source_artifact_name": "rk4-fractional-clock-review-response.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-review-response.txt",
+      "bytes": 2864,
+      "sha256": "713d019aeb67b2039b1657922b270aa85df1a6e5c4053b3255d3eeca6b4a1367",
+      "role": "saved static response with rejected advice to retain an absolute-epoch progress guard; no execution",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-fractional-clock-correction-prompt.txt",
+      "source_artifact_name": "rk4-fractional-clock-correction-prompt.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-correction-prompt.txt",
+      "bytes": 1696,
+      "sha256": "744be333b508ae39d800d928e21ff865626625729411ab5df501cbd6156353b2",
+      "role": "actual correction prompt rejecting the epoch guard using a reported bounded prototype; not a formal suite receipt",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-fractional-clock-correction-response.txt",
+      "source_artifact_name": "rk4-fractional-clock-correction-response.txt",
+      "source_relative_path": "../work/rk4-fractional-clock-correction-response.txt",
+      "bytes": 2498,
+      "sha256": "62ea38ce4758000f192a60a44e6fa68da46d7e3d808db05e67d8956d49d214d1",
+      "role": "saved corrected static response explicitly rejecting the old epoch guard; local-axis support/progress discussion, not execution",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
+    },
+    {
+      "file": "rk4-relative-time-verification.json",
+      "source_artifact_name": "rk4-relative-time-verification.json",
+      "source_relative_path": "../work/rk4-relative-time-verification.json",
+      "bytes": 2158,
+      "sha256": "8682ee4651110f5d5be220f304ca1a95e82584138044f78b99d4a96dac7957f9",
+      "role": "separate local execution receipt: 234 related tests/Ruff and six exact snapshot tracks plus both scenarios unchanged; not Grok execution or new field/physical validation",
+      "copied_without_text_edits": true,
+      "inventory_append": "Stage I fractional-clock review/correction and local regression receipt; full integration/live verification pending at this publication snapshot."
     }
   ],
-  "completeness": "Locally available artifacts inspected for this package; not a complete provider export.",
-  "append_checkpoint": "17 October 2026: four actual Grok web RK4 prompt/response rounds and separate local patch-verification receipt."
+  "completeness": "Thirty-six locally saved artifacts inspected for this package; overlapping/partial page captures do not establish unique turns or a complete provider export.",
+  "append_checkpoint": "17 October 2026: four actual Grok web RK4 prompt/response rounds and separate local patch-verification receipt.",
+  "artifact_count": 36,
+  "rediscovered_append_source_baseline": "d42a386b17628fdf135f38c59542aeb4b65587c3",
+  "rediscovered_append_scan": {
+    "new_artifact_count": 8,
+    "new_source_bytes": 135700,
+    "source_bytes_preserved": true,
+    "categories": [
+      "home_path",
+      "provider_key",
+      "email_address",
+      "phone_number",
+      "redeemable_credit_code"
+    ],
+    "findings": 0,
+    "provider_calls": false,
+    "code_execution_claimed": false
+  },
+  "fractional_clock_append": {
+    "stage": "I",
+    "artifact_count": 5,
+    "prompt_response_pairs": 2,
+    "local_execution_receipts": 1,
+    "new_source_bytes": 11558,
+    "privacy_findings": 0,
+    "source_bytes_preserved": true,
+    "related_tests_passed": 234,
+    "ruff": "passed",
+    "pinned_track_count": 6,
+    "fixed_scenario_count": 2,
+    "full_integration_live_verification": "pending",
+    "new_field_or_physical_evidence": false,
+    "reported_prototype_24_of_492_is_formal_suite_count": false,
+    "external_500_case_chat_report_claimed_as_local_execution": false
+  }
 }

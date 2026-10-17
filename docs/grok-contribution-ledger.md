@@ -7,6 +7,13 @@ and remaining sponsor requirements. It is intended for the team's Trov workspace
 and an honest SpaceXAI application. It is not a complete account export or a claim
 that an external model authored the whole repository.
 
+A later local inventory recheck at documentation baseline
+`d42a386b17628fdf135f38c59542aeb4b65587c3` found eight
+existing ablation/cohort/Trace 3/page captures that the original package omitted.
+They are now preserved without text edits, correcting the earlier claim that the
+standalone ablation response was absent. This is an archive-completeness update,
+not eight new model calls or eight independent reviews.
+
 ## 1. What Grok actually contributed
 
 Grok was used for **research planning, mathematical/code drafts, adversarial static
@@ -39,14 +46,18 @@ only requested recurring automation.
 | Data/protocol/forecast hashes | Identity, replay consistency and recorded local ordering | Signatures, independent notarization or freedom from upstream data processing |
 | Cursor build capture and original handoff | Recorded use of Cursor/Grok for the initial diagnostic | That all development occurred in Cursor or the use of Grok Voice/Imagine API |
 
-The [exact text archive](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/README.md) contains 14 inspected historical local
-artifacts plus the new RK4 prompts, responses and local verification receipt, with a
+The [exact text archive](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/README.md) contains **36 inspected artifacts**: 14 original historical local
+records, nine forcing-knot prompts/responses/local-receipt records, eight
+later-discovered historical ablation/cohort/Trace 3/larger page captures, and five
+fractional-clock prompts/responses/local-receipt records, with a
 [byte/hash manifest](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/manifest.json). The
 [single-file Trov evidence bundle](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-bundle.md) combines that archive
 with the committed research records and exact five-prompt ML sequence. Historical
 drafts are preserved as drafts, including mistakes corrected below. No `.env`,
 private message routing, provider keys, personal camera images or database is
 included. A missing transcript is identified as missing rather than reconstructed.
+Larger browser captures overlap numbered excerpts and have partial/UI boundaries;
+the artifact count is not a count of unique turns or independent experiments.
 
 ## 3. Work-by-work contribution ledger
 
@@ -58,7 +69,11 @@ limits, sponsor distinction and requested small reviewable reliability work.
 The [build record](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-ml-diagnostic.md) documents Cursor Grok 4.6 implementation
 and subsequent local corrections. The [source static review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/02-source-static-review.txt)
 and [case/Chalk static review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/03-case-and-chalk-static-review.txt)
-are preserved as model statements, not execution attestations.
+are preserved as model statements, not execution attestations. The later-found
+[larger ML page capture](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/21-ml-response-page-capture.txt)
+and [larger final-review page capture](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/22-final-review-page-capture.txt)
+add overlapping prompt/review/project context with UI and partial boundaries; they
+are not extra independent experiments or a complete provider export.
 
 **Accepted product.** [`diagnostics.py`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/apps/ocean/reeftrace_ocean/diagnostics.py)
 evaluates prefixes of 8–12 positions inside the first 18 positions of the pinned
@@ -86,8 +101,12 @@ Photon-off and disabled-voice statements are historical runtime settings.
 **Recorded assistance.** [Grok ablation record](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-motion-ablation.md): a prompt
 supplied public base `d3cda23`, model equations, ownership and regression scope.
 Grok drafted mean-drift and paired-summary functions plus isolation test sketches.
-The exact standalone response for that stage is not present in the inspected
-text archive; its contribution is recorded by the committed build document.
+The [standalone code-assistance response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/15-motion-ablation-code-assistance.txt)
+and [subsequent static review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/16-motion-ablation-static-review.txt)
+are now in the archive after a later inventory found their existing local files.
+The earlier absence claim was an inventory omission, not evidence that these
+records never existed. The response is draft assistance; the tested local
+implementation remains authoritative, and neither capture proves execution.
 
 **Accepted product.** [`ablation.py`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/apps/ocean/reeftrace_ocean/ablation.py),
 the [CLI](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/scripts/evaluate_motion_ablation.py), read-only API, and Data Lab
@@ -110,6 +129,16 @@ average. These small dependent windows cannot select a deployable model.
 
 **Recorded assistance.** Grok supplied static protocol/code-design assistance to
 the [original study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/data/public/noaa-multidrifter-v1/README.md).
+[The saved design outline](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/17-multidrifter-design-assistance.txt),
+[implementation review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/18-multidrifter-final-static-review.txt)
+and [cohort interpretation critique](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/19-cohort-coverage-static-review.txt)
+were also recovered from existing local records. The design uses unresolved
+context variables (`manifest_bytes`, `payload_bytes`, `protocol`) and returns
+per-drifter lists under a draft means label; those sketches are not standalone
+accepted code. Its independence-gate advice does not establish a justified gate.
+The cohort review's sorting concern was a question to check, not proof that the
+implemented numeric-sort rule was missing; the final static review describes that
+explicit rule. All raw advice remains unchanged, including limitations and errors.
 [Five exact follow-up prompts](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-ml-next-prompts.txt) and the
 [ML checkpoint](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-ml-next-study.md) preserve the subsequent extension/LOPO
 review and explicit correction of an overinterpreted negative result.
@@ -230,6 +259,12 @@ preserve static advice and code-grounded corrections. The latter includes repeat
 browser accessibility text; its displayed ordering is not a separately verified
 provider timestamp sequence.
 
+The later-recovered [Trace 3 conversation capture](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/20-trace3-review-conversation-capture.txt)
+adds a historical prevention review and unpublished export/validation design
+discussion. It starts mid-sentence and includes repeated context and UI text.
+The model explicitly describes static/design review rather than executing the
+unpublished implementation; its old Photon/camera settings are not current status.
+
 **Corrections retained.** Source report `UNKNOWN`/`INVALID` are not stored
 `CaseState` enum values. Chalk finishing a model turn with `STOP` does not stop a
 case. Explicit case STOP changes revision and archives stale comparison lineage.
@@ -347,6 +382,42 @@ snapshot; the new work must not be described as already on `main` or deployed.
 No model is trained, no completed NOAA study is retuned and no tank measurement
 is created by this work.
 
+### I. Two further Grok fractional-clock reviews and a local-axis repair
+
+**Actual assistance and correction.** The [fractional-clock repair prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-review-prompt.txt)
+and [initial static response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-review-response.txt)
+addressed cancellation when elapsed times were recomposed with a distant field
+epoch. The response endorsed local-origin sampling but incorrectly retained the
+absolute-epoch progress guard. The [correction prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-correction-prompt.txt)
+and [corrected response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-correction-response.txt)
+preserve both that wrong advice and its explicit rejection, without silently
+rewriting the record.
+
+The correction prompt reports a bounded read-only prototype that falsely censored
+24 of 492 synthetic cases under the old guard. This is a reported prototype result,
+not the formal local regression-suite count or newly acquired field evidence.
+For example, local elapsed `45.29670899999999 → 45.296709` has positive representable
+motion time even though recomposed distant epoch values can alias. The accepted
+local repair uses one elapsed axis for sampling, knot scheduling, acceptance and
+progress, computing datetime differences with Python integers before float or
+NumPy conversion. Invalid/nonfinite/no-progress steps still fail explicitly;
+masks, time bounds, positive integration and budgets remain strict. No epsilon,
+clamp or unintegrated time advance is introduced.
+
+**Bounded local verification.** The separate [relative-time verification receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-relative-time-verification.json)
+records **234 related tests and Ruff passing**, plus exact matches for all six
+pinned track arrays and all recorded release outcomes/layout summaries in both
+fixed ocean scenarios. It records source/reference hashes. This is local method
+regression evidence, not execution by Grok or improved physical waste forecasts.
+The independent 500-case chat report is not claimed as a locally executed test
+without a corresponding saved execution proof.
+
+**Current limit.** Full integration-suite, browser/live-Chalk verification and push
+remain pending after this later repair at this documentation snapshot. Stage H's
+1,331 Python / 190 frontend / 137 HTTP checkpoint predates Stage I and is not a
+full rerun of the later change. No new field data, tank release, API authorization
+or physical accuracy result follows from this numerical repair.
+
 ## 4. RK4: the existing numerical engine and its evidence boundary
 
 RK4 is already implemented in
@@ -391,8 +462,8 @@ reef benefit, forcing-aware learned residual or curved-path accuracy gain is
 claimed. Commit [`7fb4851`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/7fb4851).
 
 The older archived Grok records do **not** establish that Grok authored the original
-RK4 implementation. Stage H above records the new actual knot-fix reviews, local
-corrections and executed regressions without retrofitting that earlier authorship.
+RK4 implementation. Stages H–I above record the actual knot/fractional-clock reviews, local
+corrections and separately identified executed regressions without retrofitting that earlier authorship.
 
 ## 5. What is visible in the application
 

@@ -1,0 +1,13 @@
+Grok
+Worked for 37s
+
+Static source inspection only. The pasted implementation was reviewed; no tests were executed and no execution is claimed.
+
+No supported material defect.
+
+Protocol / selection integrity. _identity and the selection replay in load_multidrifter_inputs require the pinned protocol, selection and manifest hashes, evaluation_outcomes_computed is False, numeric-sort-then-first-two selection from the exact metadata bytes, and exclusion of 8707978. The detached implementation receipt is checked against the evaluator file itself before any scoring.
+Prefix / truth ordering. evaluate_trajectory builds every model’s predictions from records[:18] before indexing records[18 + horizon - 1]. Metadata (ID, UTC, cadence) may be read from all 24 records; future positions are not projected until after the forecasts exist.
+Outcomes accounting and denominators. aggregate_outcomes demands the exact Cartesian product of declared groups × models × horizons, rejects extras or duplicates, and keeps failed rows with null error_m and an explicit reason. Trajectory means, horizon means and paired summaries are emitted only when every declared acquired group is fully scored (ready); otherwise they are withheld with INCOMPLETE_COMMON_COHORT_COVERAGE. Windows inside a drifter are not treated as replicates.
+Scientific claims. The report sets PARTIAL_COVERAGE when declared != 6, records sampling_coverage_fraction = declared / 6 and missing_selection_slots, and the limitations text states that macros describe the acquired cohort only. Flags include test_data_used: True, model_selection_performed: False, statistical_independence: False and independent_replication_verified: False. No plastic-source or coral-benefit claim is present.
+
+The reported 4/6, 96/144 coverage and the retention of ridge losses on one of four groups are consistent with the code’s accounting. No correction is required for the inspected aspects.

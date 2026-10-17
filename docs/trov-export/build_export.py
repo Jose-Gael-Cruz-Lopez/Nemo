@@ -41,7 +41,7 @@ def sources() -> tuple[list[Path], list[dict]]:
         if duplicate:
             payload = path.read_bytes()
             excluded.append({"source_path": rel.as_posix(), "bytes": len(payload),
-                             "sha256": sha(payload), "reason": "Already in the separately published canonical Grok evidence pack; not duplicated."})
+                             "sha256": sha(payload), "reason": "Covered by the separate canonical Grok evidence pack; its publication is recorded separately, not asserted by this builder."})
         else:
             included.add(path)
     for folder in ("adapters", "firmware", "data", "tests"):
@@ -76,7 +76,7 @@ def header(part: int, entries: list[dict], captured: str) -> str:
             f"Snapshot: **{captured}**. Repository: {REPOSITORY}.\n\n"
             f"Git source baseline: `{BASELINE}` (**662d1ac**). This is a **working-tree snapshot including numerical-sensitivity documentation not yet pushed at capture time**; the baseline commit alone does not identify all content below. Per-source hashes identify these exact bytes.\n\n"
             "Use the current Product Handbook and navigation index for operating guidance. This archive preserves both current references and historical study protocols/verification records without silently rewriting them. Source claims are not independent verification. Numerical precision, AI output and passing software tests are not measured physical reef protection.\n\n"
-            "Scope: public documentation only. No provider credentials, personal contacts, local absolute home paths, private camera frames, recordings, database, runtime configuration or raw datasets are included. The separate canonical Grok evidence pack covers its full captured prompts/responses without duplicating them here.\n\n"
+            "Scope: public documentation only. No provider credentials, personal contacts, local absolute home paths, private camera frames, recordings, database, runtime configuration or raw datasets are included. The separate canonical Grok evidence pack covers its full captured prompts/responses without duplicating them here. This builder does not establish that any artifact has been uploaded.\n\n"
             "## Contents in this part\n\n" + toc + "\n")
 
 
@@ -125,7 +125,7 @@ def index_text(entries: list[dict], chunks: list[dict], exclusions: list[dict], 
             "## Every feature and its technical reference\n\n| Feature / question | Full source references in this package |\n| --- | --- |\n" + rows + "\n\n"
             "## Current evidence boundaries\n\nOcean trajectories use pinned model currents and hypothetical geometry; the central 2/6 versus flanking 4/6 result is an illustrative what-if, with the original zero-entry tie preserved. Numerical sensitivity is a separate diagnostic and not physical accuracy or ML improvement. Camera preview is not calibrated tank drift or a physical trial. Chalk explains exact evidence but does not replace deterministic physics; provider readiness is not a live response. Photon acceptance is not necessarily delivery. Historical protocols and test counts retain their dates and scope.\n\n"
             "## Deliberate exclusions and binary references\n\n"
-            f"- {len(exclusions)} canonical Grok bundle/raw capture files are listed with exact hashes in the manifest, but are covered by the separately published [Grok evidence bundle](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-bundle.md) rather than duplicated. Contribution ledgers, build records and the evidence README are included.\n"
+            f"- {len(exclusions)} canonical Grok bundle/raw capture files are listed with exact hashes in the manifest, but are covered by the separate [Grok evidence bundle](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-bundle.md) rather than duplicated. Contribution ledgers, build records and the evidence README are included. Publication is verified in a separate receipt.\n"
             "- Private/local/run directories, `.env`, credentials, contact routing, personal images, recorded camera frames and local databases are never collected.\n"
             "- Raw datasets, JSON evaluation artifacts, executable source, dependencies, generated build output and PDFs/images are not embedded in this text-only reference archive. Their human README/method documentation is included where present.\n"
             "- Binary build references remain linked: [rig guide PDF](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/tideward-rig-guide.pdf), [rig connections](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/assets/tideward-rig-connections.png), [measured map diagram](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/assets/tideward-rig-measured-map.png). These are planned/reference assets, not completed physical measurements.\n"

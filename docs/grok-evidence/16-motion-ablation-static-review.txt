@@ -1,0 +1,100 @@
+Grok
+Worked for 19s
+
+Static source inspection only of the supplied ablation.py. No repository fetch or test execution is claimed.
+
+No supported material correctness defect.
+
+Units. mean_drift_forecast computes
+
+𝑣
+ˉ
+=
+(
+𝑥
+𝑛
+−
+1
+−
+𝑥
+0
+)
+/
+(
+(
+𝑛
+−
+1
+)
+⋅
+Δ
+𝑡
+)
+v
+ˉ
+=(x
+n−1
+	​
+
+−x
+0
+	​
+
+)/((n−1)⋅Δt)
+and
+
+𝑥
+^
+ℎ
+=
+𝑥
+𝑛
+−
+1
++
+ℎ
+⋅
+Δ
+𝑡
+⋅
+𝑣
+ˉ
+x
+^
+h
+	​
+
+=x
+n−1
+	​
+
++h⋅Δt⋅
+v
+ˉ
+
+with positions already in the local east-north metre frame and 
+Δ
+𝑡
+Δt in seconds, so velocity is m/s. Errors later use the existing great_circle_distance_m (metres). The 50 km budget is applied to both prefix positions and the free-run forecast.
+Error pairing. paired_error_summary forms 
+𝛿
+=
+𝑒
+candidate
+−
+𝑒
+baseline
+δ=e
+candidate
+	​
+
+−e
+baseline
+	​
+
+ (negative favors the candidate), reports mean/median/min/max and exact lower/equal/higher counts on aligned lists, and sets skill to None with ZERO_BASELINE_ERROR when the baseline sum is zero. No per-origin ratio averaging or significance claim appears.
+Prefix/truth ordering. Inside the origin loop the code projects only training[:prefix_count], builds all four forecasts, then slices and projects training[prefix_count:prefix_count+horizons]. The final full-window projection occurs after every origin’s forecasts exist. Held-out records after training_count are never indexed.
+Nonfinite handling. _numeric_array rejects bool/string/complex before float coercion and checks isfinite. Arithmetic is wrapped in np.errstate(over="raise", invalid="raise", divide="raise").
+Provenance. Both the CSV SHA-256 and the pinned manifest SHA-256 are checked, together with EXPECTED_PROVENANCE, row count, drifter identity and endpoint times, before any forecast.
+
+The reported training-only deltas (ridge worse than last-drift at 1 h, mixed versus mean-drift) are consistent with the delta definition and are left un-optimized. No code or test correction is required for the inspected aspects.
