@@ -1,7 +1,9 @@
 # Local store
 
-SQLite WAL store: apps/core/reeftrace_core/store.py. Default file:
-data/runs/reeftrace.sqlite3 (ignored). Stores profiles, immutable cases/estimates,
-analyses, agent investigations, manual actions, approvals, messages and replies.
-Truth labels and evaluator full-frame archives are excluded from its query contract.
-Back up the database and all calibration artifacts before moving the experiment.
+The implemented SQLite WAL store is `apps/api/reeftrace_api/services/store.py`. It stores immutable evidence and frozen profiles, transactionally versioned cases/manual tasks, and a durable Photon inbox/outbox. The API chooses the database directory through REEFTRACE_DATA_DIR; local camera evidence and private settings are ignored by Git.
+
+
+This branch uses DATABASE_URL for Neon or Supabase Postgres, with SQLite when
+empty. The current workspace uses private schema `reeftrace_workspace`; earlier
+`/v1` evidence remains in `reeftrace`. Their formats differ and existing records
+are preserved separately rather than silently converted.

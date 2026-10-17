@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "provider": "NOAA Coral Reef Watch",
+  "dataset_id": "noaacrwdhwDaily",
+  "product_version": "3.1",
+  "data_origin": "REAL_HISTORICAL_NOAA_SATELLITE_DERIVED",
+  "source_url": "https://coastwatch.noaa.gov/erddap/griddap/noaacrwdhwDaily.csv?degree_heating_week%5B%282023-07-01T12%3A00%3A00Z%29%3A1%3A%282023-07-07T12%3A00%3A00Z%29%5D%5B%2824.575%29%5D%5B%28-81.525%29%5D",
+  "metadata_url": "https://coastwatch.noaa.gov/erddap/info/noaacrwdhwDaily/index.html",
+  "method_url": "https://coralreefwatch.noaa.gov/product/5km/index_5km_dhw.php",
+  "attribution": "NOAA Coral Reef Watch, daily global 5 km satellite DHW product, version 3.1",
+  "license": "NOAA CRW use without restriction; source citation and credit requested",
+  "license_url": "https://coastwatch.noaa.gov/erddap/info/noaacrwdhwDaily/index.html",
+  "retrieved_at_utc": "2026-10-17T02:04:02.088121Z",
+  "sha256": "5e3248ce6247aece0d5736678bba36010cb4b0a2053c40e1ba7b69bba125c101",
+  "bytes": 383,
+  "row_count": 7,
+  "time_start_utc": "2023-07-01T12:00:00Z",
+  "time_end_utc": "2023-07-07T12:00:00Z",
+  "latitude_deg": 24.575,
+  "longitude_deg": -81.525,
+  "units": "degree_Celsius_weeks",
+  "purpose": "independent historical reef thermal-stress context, not source tracing"
+}

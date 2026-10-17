@@ -22,7 +22,7 @@ class Connection:
 
     def execute(self, sql, parameters=()):
         # Store SQL is static: placeholders never occur inside string literals.
-        sql = sql.replace("?", "%s")
+        sql = sql.replace("?", "%s").replace("rowid", "insertion_order")
         if sql == "BEGIN IMMEDIATE":
             # The transaction-wide lock is already held by connect().
             return self.db.execute("SELECT 1")
@@ -40,13 +40,15 @@ class Connection:
 
 
 @contextmanager
-def connect(url, initialize=False):
+def connect(url, initialize=False, schema="reeftrace"):
+    if schema not in {"reeftrace", "reeftrace_workspace"}:
+        raise ValueError("Unsupported Reeftrace database schema")
     with psycopg.connect(url, connect_timeout=15, sslmode="require", row_factory=row_factory) as db:
         # Preserve SQLite's serialized approval/queue transitions across workers.
         db.execute("SET LOCAL lock_timeout = '15s'")
         db.execute("SET LOCAL statement_timeout = '30s'")
         db.execute("SELECT pg_advisory_xact_lock(7265667472616365)")
         if initialize:
-            db.execute("CREATE SCHEMA IF NOT EXISTS reeftrace")
-        db.execute("SET LOCAL search_path TO reeftrace")
+            db.execute("CREATE SCHEMA IF NOT EXISTS " + schema)
+        db.execute("SET LOCAL search_path TO " + schema)
         yield Connection(db)

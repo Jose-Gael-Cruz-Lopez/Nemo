@@ -1,0 +1,64 @@
+schema_version: 1
+reviewed_at: "2026-10-16"
+tabletop:
+  primary_data: own_camera_recordings
+  coordinate_space: tank_xy_centimetres
+  velocity_units: cm/s
+  public_dataset_is_ground_truth: false
+  split_unit: complete_run_or_session_not_frame
+  estimator_may_read_release_truth: false
+public_noaa_sample:
+  enabled_by_default: false
+  fetch_command: python scripts/fetch_public_sample.py
+  path: data/public/noaa-gdp-8707978-19871003.csv
+  provenance: data/public/noaa-gdp-8707978-19871003.provenance.json
+  dataset_id: drifter_hourly_qc
+  doi: 10.25921/x46c-3620
+  metadata_url: https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.html
+  historical_drifter_id: "8707978"
+  start_utc: "1987-10-03T00:00:00Z"
+  end_utc: "1987-10-03T23:00:00Z"
+  maximum_bytes: 32000
+  expected_rows: 24
+  coordinate_space: geographic_lonlat_degrees
+  velocity_units: m/s
+  license: CC-BY-4.0
+  purpose: ingestion_smoke_test_not_attribution_validation
+copernicus_future:
+  auto_download: false
+  product_id: GLOBAL_ANALYSISFORECAST_PHY_001_024
+  product_doi: 10.48670/moi-00016
+  product_url: https://data.marine.copernicus.eu/product/GLOBAL_ANALYSISFORECAST_PHY_001_024/description
+  dataset_id: cmems_mod_glo_phy_anfc_merged-uv_PT1H-i
+  u_variable: utotal
+  v_variable: vtotal
+  current_components: [uo, vo, vsdx, vsdy, utide, vtide]
+  time_step_hours: 1
+  nominal_grid_degrees: 0.08333333333333333
+  velocity_units: m/s
+  coordinate_space: geographic_lonlat_degrees
+  local_file_maximum_bytes: 50000000
+  local_selected_maximum_samples: 250000
+  credentials_required_for_download: true
+  download_requires_explicit_bounds_time_depth_variables: true
+  license_url: https://marine.copernicus.eu/user-corner/service-commitments-and-licence
+  no_tank_or_reef_scale_validation: true
+vision_catalog_only:
+  trashcan:
+    homepage: https://irvlab.cs.umn.edu/resources/trashcan
+    publisher_record: https://conservancy.umn.edu/handle/11299/214865
+    images: 7212
+    domain: underwater_ROV_instance_segmentation
+    license_status: primary_repository_rights_unverified_lab_says_academic_research_only
+    approved_weights_in_this_project: []
+    auto_download: false
+  marida:
+    homepage: https://marine-debris.github.io/
+    publisher_record: https://zenodo.org/records/5151941
+    doi: 10.5281/zenodo.5151941
+    patches: 1381
+    patch_pixels: [256, 256]
+    domain: Sentinel_2_multispectral_pixel_classification
+    license: CC-BY-4.0
+    approved_weights_in_this_project: []
+    auto_download: false

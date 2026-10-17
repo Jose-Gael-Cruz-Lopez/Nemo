@@ -1,0 +1,94 @@
+name: ReefTrace CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reeftrace-ci-${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GEMINI_ENABLED: "false"
+  GEMINI_API_KEY: ""
+  GEMINI_MODEL: ""
+  DATABASE_URL: ""
+  PHOTON_ENABLED: "false"
+  PHOTON_API_KEY: ""
+  PHOTON_PROJECT_ID: ""
+  PHOTON_ROUTES_JSON: "[]"
+  GROK_VOICE_ENABLED: "false"
+  XAI_API_KEY: ""
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  python:
+    name: Python tests and scientific replay
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      REEFTRACE_LOCAL_TOKEN: ci-local-test-only
+      PYTHONNOUSERSITE: "1"
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install project and offline test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[dev,sponsors,ocean]'
+          python -m pip check
+      - name: Require optional test SDKs and local NetCDF support
+        run: python -c "import netCDF4, photon_api, psycopg, xarray"
+      - name: Lint Python
+        run: python -m ruff check apps adapters scripts tests
+      - name: Run the full offline Python suite
+        env:
+          REEFTRACE_DATA_DIR: ${{ runner.temp }}/reeftrace-ci-data
+        run: python -m pytest -q --strict-config --strict-markers -ra
+      - name: Replay the pinned real NOAA fixture
+        run: python scripts/evaluate_real_data.py --output "${RUNNER_TEMP}/reeftrace-real-data.json"
+      - name: Check public and synthetic fixtures were not rewritten
+        run: git diff --exit-code -- data/public data/sample_runs
+
+  dashboard:
+    name: Dashboard tests, lint, types and production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: dashboard
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: dashboard/package-lock.json
+      - name: Install locked dashboard dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Check case and evidence freshness
+        run: node --test tests/*.test.mjs
+      - name: Lint dashboard
+        run: npm run lint
+      - name: Generate Next.js route types
+        run: npx next typegen
+      - name: Check TypeScript
+        run: npx tsc --noEmit
+      - name: Build dashboard
+        run: npm run build

@@ -1,0 +1,155 @@
+[
+  {
+    "case_id": "SYNTHETIC-CASE-001",
+    "profile_id": "SYNTHETIC-PROFILE-001",
+    "calibration_id": "SYNTHETIC-CAL-001",
+    "data_origin": "SYNTHETIC",
+    "token_class": "standard-float",
+    "association_valid": true,
+    "points": [
+      {
+        "t_s": 0.0,
+        "x_cm": 4.036447567599946,
+        "y_cm": 20.267130435061684,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 0.5,
+        "x_cm": 4.532964429027973,
+        "y_cm": 19.749901103114414,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 1.0,
+        "x_cm": 4.99277222032452,
+        "y_cm": 19.256826622743198,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 1.5,
+        "x_cm": 5.497426519031021,
+        "y_cm": 18.705786961139268,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 2.0,
+        "x_cm": 6.011043023708999,
+        "y_cm": 18.20348184808156,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 2.5,
+        "x_cm": 6.526493303529538,
+        "y_cm": 17.84241370020989,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 3.0,
+        "x_cm": 7.013816605694883,
+        "y_cm": 17.537648662382306,
+        "quality": 1.0,
+        "observed": true
+      }
+    ],
+    "evidence_frame_ids": [
+      "synthetic-case-001-frame-000",
+      "synthetic-case-001-frame-001",
+      "synthetic-case-001-frame-002",
+      "synthetic-case-001-frame-003",
+      "synthetic-case-001-frame-004",
+      "synthetic-case-001-frame-005",
+      "synthetic-case-001-frame-006"
+    ]
+  },
+  {
+    "case_id": "SYNTHETIC-CASE-002",
+    "profile_id": "SYNTHETIC-PROFILE-001",
+    "calibration_id": "SYNTHETIC-CAL-001",
+    "data_origin": "SYNTHETIC",
+    "token_class": "standard-float",
+    "points": [],
+    "endpoint": {
+      "x_cm": 25.0,
+      "y_cm": 14.699929138707466,
+      "retained": true,
+      "quality": 1.0
+    },
+    "evidence_frame_ids": [
+      "synthetic-case-002-frame-000"
+    ]
+  },
+  {
+    "case_id": "SYNTHETIC-CASE-003",
+    "profile_id": "SYNTHETIC-PROFILE-001",
+    "calibration_id": "SYNTHETIC-OLD-CALIBRATION",
+    "data_origin": "SYNTHETIC",
+    "token_class": "standard-float",
+    "association_valid": true,
+    "points": [
+      {
+        "t_s": 0.0,
+        "x_cm": 4.036447567599946,
+        "y_cm": 20.267130435061684,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 0.5,
+        "x_cm": 4.532964429027973,
+        "y_cm": 19.749901103114414,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 1.0,
+        "x_cm": 4.99277222032452,
+        "y_cm": 19.256826622743198,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 1.5,
+        "x_cm": 5.497426519031021,
+        "y_cm": 18.705786961139268,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 2.0,
+        "x_cm": 6.011043023708999,
+        "y_cm": 18.20348184808156,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 2.5,
+        "x_cm": 6.526493303529538,
+        "y_cm": 17.84241370020989,
+        "quality": 1.0,
+        "observed": true
+      },
+      {
+        "t_s": 3.0,
+        "x_cm": 7.013816605694883,
+        "y_cm": 17.537648662382306,
+        "quality": 1.0,
+        "observed": true
+      }
+    ],
+    "evidence_frame_ids": [
+      "synthetic-case-001-frame-000",
+      "synthetic-case-001-frame-001",
+      "synthetic-case-001-frame-002",
+      "synthetic-case-001-frame-003",
+      "synthetic-case-001-frame-004",
+      "synthetic-case-001-frame-005",
+      "synthetic-case-001-frame-006"
+    ]
+  }
+]

@@ -1,44 +1,59 @@
-# Version 3 architecture
+# Implemented software architecture
 
-The authoritative path is camera → permitted timestamped observations → measured
-calibration/profile → forward ensembles from A/B/C → trajectory or retained-endpoint
-likelihood → absolute fit, relative support and Unknown → immutable SQLite evidence.
-Observed history survives a later stop. Retained-only observations count actual
-modeled retention, never earlier passage. Submerged coral is not a surface barrier.
+The authoritative hardware plan is the USB Webcam Edition 5.0 PDF in this repository. The application has no serial driver, motor/pump command, gantry, ESP32 camera, or cloud video dependency. The existing pump circulates water on its original wall cord. The software observes, estimates, investigates and records a human response.
 
-The profile stores waterline, source polygons, downstream observation region,
-verified surface traps and a coarse measured flow grid with counts/dispersion.
-Unsupported cells terminate particles. Boundary, obstacle and trap intersections
-are checked along movement segments. Runtime currently uses piecewise-constant
-flow; dispersion is retained for development inspection and a global diffusion
-parameter must be tuned separately. It is not an ocean hydrodynamic model.
+```mermaid
+flowchart LR
+  Camera[C920s local USB] --> Capture[Isolated acquisition process]
+  Capture --> Vision[Red-token segmentation and calibrated tracking]
+  Vision --> Store[(Neon Postgres or SQLite; local frames)]
+  Drift[Independent measured drift runs] --> Field[IDW drift field and support mask]
+  Field --> Physics[Forward stochastic particles from A/B/C]
+  Store --> Physics
+  Physics --> Report[Immutable conditional source report or Unknown]
+  Report --> Dashboard[Next.js operator console]
+  Dashboard --> API[Local FastAPI control plane]
+  API --> Agent[Bounded shared investigator]
+  Agent --> Gemini[direct Gemini API]
+  Agent --> Tools[Case-bound evidence and sensitivity tools]
+  Tools --> Store
+  Photon[Photon prepared direct conversation] --> Inbox[Durable inbox and dedicated control lane]
+  Inbox --> Agent
+  Agent --> Outbox[Persisted immutable reply and idempotency key]
+  Outbox --> Photon
+  API --> Manual[Expiring manual recovery task]
+  Manual --> Outcome[Human reports counted outcome]
+```
 
-`apps/core/reeftrace_core/` owns contracts, simulation, evidence persistence,
-authorization and the shared investigator. Existing `apps/api`, `dashboard`,
-`apps/hardware` and `firmware` layouts are preserved. No duplicate server stack is
-needed. One local API worker owns startup approval invalidation; acquisition is an
-explicit camera CLI process. The API queues observation requests but does not
-claim automatic fulfilment or live video streaming.
+Python owns all scientific scores, camera freshness, case revision, task transitions and database transactions. The browser and LLM cannot supply numeric source scores. The source estimator accepts permitted observations and candidate geometry, not release truth. Source truth lives only in the evaluator file. A source ranking remains conditional on the declared model/candidates/age prior.
 
-Agent tools retrieve the active case/source report, run a named sensitivity set,
-queue one observation and propose one manual-net task. The JSON tool loop has call,
-time and operation budgets. Only returned evidence IDs are permitted. Numerical
-source tables bypass generated text. Free-text grounding remains a separate
-quality/evaluation concern. Neither the agent nor inference API exposes truth.
+The numerical core uses one forward advection–diffusion simulator. Recorded moving history uses correlated position residuals; first-seen-retained observations use retained-arrival support across unknown release ages. Unsupported geometry, poor fit, weak separation, invalid calibration or assumption sensitivity revoke ranking. It never claims that reversing arrows creates a reverse-time posterior.
 
-Photon's explicit worker runs ingress, investigation and durable outbox separately.
-Exact configured sender/agent mappings scope access. STOP/CANCEL/APPROVE parse
-before normal conversation. Stable IDs deduplicate incoming events and outgoing
-reply attempts. Accepted vendor sends are not claimed delivered. A persisted bounded
-session start is rescanned to accommodate late indexing and restarts.
+The API runs one worker on loopback. The USB camera is isolated in a spawned process with a bounded latest-frame queue; failed/stale acquisition cannot block an agent or STOP ingress. OS permission and actual delivered frame mode require hardware commissioning. A five-second observe-again tool persists new recordings without silently joining identities across a gap.
 
-Manual proposals bind case/evidence/profile/operator/conversation/body hash/expiry.
-Atomic approval inserts one unique response job. Fresh live evidence and a checked
-rig are required. Confirmation records human recovery evidence and marks RECOVERING.
-Rig changes/startup invalidate pending continuation; profile checks are explicit.
-The optional water-sampler sketch/test client has no agent or API dispatch path.
+Postgres (or SQLite) stores append-only profiles, calibrations, estimates, analyses and investigations; mutable cases/actions use transactions and revisions. Inbox IDs deduplicate reception. The immutable outbox key/body/route is saved before sends; leases recover interrupted jobs. Photon control commands have a dedicated processor and strict grammar, independent of the conversational model wait. Only an authorized direct route may select its preassigned case IDs. One data directory is bound to one Photon project.
 
-Offline truth and raw full-frame evaluator archives remain outside API/agent query
-interfaces. ReplayBackend exposes fixtures only; it has no camera, serial or physical
-control imports. Scientific metrics distinguish coverage, answered accuracy, wrong
-and Unknown, and reject synthetic/duplicate trials. Real tank validation, Butterbase account checks, sponsor device tests and ASUS measurements remain external gates.
+A proposal is a human manual-net task, not motor execution. Replay and synthetic cases cannot create one. Approval rechecks expiry, current evidence/revision, camera session/freshness and rig validity. STOP cancels pending software tasks and does not cut AC power. Failed/cancelled agent invocations cancel their own orphan proposals. Recovery or an operator-reported disturbance requires new measured drift and a physical configuration check before live use resumes.
+
+Public geographic datasets live in a separate ocean package and are not fed into tank-centimetre code. Copernicus authentication/data download and real Gemini/Photon account calls require the team's accounts; absent credentials are disclosed readiness failures, never simulated as live service success.
+
+## Satellite context and spoken evidence
+
+The case workspace reads a pinned historical NOAA Coral Reef Watch DHW sample through
+`GET /api/v1/research/satellite-context`. It is a separate ecological-context panel;
+there is no path from heat stress to the tank estimator's likelihoods or priors.
+`GET /api/v1/cases/{id}/briefing` produces a fixed script from the current immutable
+source report plus that independent context. An operator click on
+`POST /api/v1/cases/{id}/briefing/audio` invokes the server-only xAI TTS adapter when
+explicitly enabled. Case locks, revision checks and an atomic receipt commit prevent
+publishing results after STOP or a changed case. Permanent credentials never enter the
+browser; no background narration, retries, messages or actuation occur. Voice is
+currently disabled by the user's choice to finish without a live key.
+
+The Data Lab additionally exposes `GET /api/v1/research/training-diagnostic`, developed
+with Grok in Cursor. Its five overlapping prefix origins use only the first eighteen
+NOAA positions, keep the original six-hour holdout report unchanged, and cannot justify
+model promotion or generalization claims. See `grok-ml-diagnostic.md` for provenance and
+review corrections and `grok-space-context.md` for the source/API contracts.
+
+The workspace uses private Postgres schema `reeftrace_workspace`; preserved legacy `/v1` records use `reeftrace`. Existing data is not silently converted or uploaded.

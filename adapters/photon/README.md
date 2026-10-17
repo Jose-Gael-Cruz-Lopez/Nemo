@@ -1,11 +1,3 @@
-# Photon 2.0
+# Photon direct conversation adapter
 
-Install `pip install -e '.[photon]'` (photonhq-api==0.5.0). Worker:
-`python -m apps.core.reeftrace_core.photon`. This explicitly starts polling and
-sending replies; it does not start with FastAPI. Configure the exact project key,
-assigned human/agent handles, role, active case and allowed case IDs in .env.
-
-SDK request schemas were checked locally; account/device round-trip is unverified.
-Persistent inbox/outbox, full bounded-session rescan, paging and idempotency prevent
-logical duplicate work. STOP/CANCEL/APPROVE bypass ordinary agent turns. No physical
-pump/servo dispatch exists. See docs/GETTING_STARTED.md before starting the worker.
+Implemented `transport.py` and `worker.py` use the pinned official Photon Python0.5.0 SDK. Direct messages must match configured human/agent handles, role, project and exact allowed cases. Persistent SQLite inbox/outbox, stable reply keys, leases, and a dedicated STOP/CANCEL/APPROVE lane surround the same Gemini investigator used by the UI. Approval creates a human manual-net task and never controls hardware. SDK contract tests use HTTP mocks; real account sends were not executed. See `docs/integrations.md`.

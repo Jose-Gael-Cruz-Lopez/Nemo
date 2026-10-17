@@ -5,14 +5,16 @@ import sqlite3
 import psycopg
 from dotenv import load_dotenv
 
-from apps.core.reeftrace_core.service import get_store
+from apps.api.reeftrace_api.core.settings import Settings
+from apps.api.reeftrace_api.services.store import Store
 
 
 def main():
     load_dotenv()
     try:
-        store = get_store()
-        with store.connect() as db:
+        settings = Settings()
+        store = Store(settings.data_dir, database_url=settings.database_url)
+        with store.connection() as db:
             count = db.execute("SELECT count(*) FROM records").fetchone()[0]
         print(f"Database connected: {'Postgres' if store.is_postgres else 'SQLite'}; {count} records")
     except (psycopg.Error, sqlite3.Error, OSError, ValueError) as error:

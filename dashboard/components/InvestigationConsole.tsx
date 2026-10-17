@@ -10,7 +10,7 @@ type Proposal = { id:string; approval_token:string; mode:string; expires_at:numb
 
 export default function InvestigationConsole() {
   const [now,setNow] = useState(0);
-  useEffect(()=>{setNow(Date.now());const timer=setInterval(()=>setNow(Date.now()),1000);return ()=>clearInterval(timer);},[]);
+  useEffect(()=>{const timer=setInterval(()=>setNow(Date.now()),1000);return ()=>clearInterval(timer);},[]);
   const [token,setToken] = useState("");
   const [cases,setCases] = useState<Case[]>([]);
   const [active,setActive] = useState<Case|null>(null);

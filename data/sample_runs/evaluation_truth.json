@@ -1,0 +1,28 @@
+{
+  "data_origin": "SYNTHETIC",
+  "physical_validation": false,
+  "seed": 7,
+  "note": "Evaluator-only computational labels. Never pass this file to inference or the agent.",
+  "cases": [
+    {
+      "case_id": "SYNTHETIC-CASE-001",
+      "actual_source": "C",
+      "release_age_at_first_point_s": 3,
+      "expected_status": "ranked",
+      "expected_ranked_source": "C"
+    },
+    {
+      "case_id": "SYNTHETIC-CASE-002",
+      "actual_source": "A",
+      "release_age_at_endpoint_s": 30,
+      "expected_status": "unknown",
+      "expected_reason": "AMBIGUOUS_SOURCES"
+    },
+    {
+      "case_id": "SYNTHETIC-CASE-003",
+      "actual_source": "C",
+      "expected_status": "invalid",
+      "expected_reason": "CALIBRATION_INVALID"
+    }
+  ]
+}

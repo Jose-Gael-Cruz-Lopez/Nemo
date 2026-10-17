@@ -1,1 +1,1 @@
-"""Serial transport and safe coordinate conversion for the collection gantry."""
+"""No actuator implementation: USB webcam + original independent AC pump cord."""

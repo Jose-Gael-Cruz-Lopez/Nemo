@@ -1,24 +1,31 @@
-# Version 3 operator checklist. Runtime profile format: config/site.example.json.
-# All geometry in the example is illustrative; measure actual interior at waterline.
-site:
-  id: CAL-REPLACE
-  units: cm
-  water_depth_cm: 12 # Starting point from manual; verify delivered pump flooding.
-  runtime_profile: config/site.local.json
-  camera_calibration: config/camera.local.json
-  observation_mask: contained_in_runtime_profile
-collection:
-  mode: manual_net
-  optional_water_sampler_enabled: false
-  max_sample_pulse_ms: 5000
-hardware:
-  camera: Logitech C920s USB data to laptop
-  circulation_pump: Lifegard DC132 independent 5V supply
-  lighting: NEEWER BP66 two panels each on independent 5V supply
-  surface_trap: measured waterline-contact mesh pocket
-  submerged_coral: scenery_not_surface_obstacle
-  arduino: optional_water_sampling_or_separate_dry_bench
-computer:
-  model: ASUS_MODEL_TBD
-  os: OS_TBD
-  gpu_required: false
+# Measurement worksheet, not a valid ready-to-use profile. Do not copy demo geometry.
+site_id: actual-small-tank
+camera_model: Logitech_C920s
+capture_mode: usb_device
+coordinate_space: measured_water_surface_xy_centimetres
+bounds:
+  x_min_cm: null
+  x_max_cm: null
+  y_min_cm: null
+  y_max_cm: null
+water_depth_cm: null
+camera_session_id: null
+calibration_id: null
+pump:
+  model_verified: null
+  power: original_unmodified_AC_cord
+  role: fixed_circulation_only
+  manual_setting: null
+  return_direction: null
+pocket:
+  polygon_cm: null
+  retention_trial_duration_s: null
+  validated_on_same_token_class: false
+observation_polygon_cm: null
+source_polygons_cm:
+  A: null
+  B: null
+  C: null
+token_class: red-foam-10mm
+collection_mode: manual_net
+hardware_actuation: false
