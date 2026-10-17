@@ -10,7 +10,7 @@
 .metric strong { display: block; color: #235d7c; font-size: 28px; font-weight: 550; letter-spacing: -.7px; font-variant-numeric: tabular-nums; }
 .metric p { margin: 7px 0 0; color: #526f83; font-size: 12px; line-height: 1.75; }
 .metric span { font-weight: 600; }
-.figure { margin: 0; border: 1px solid #d7e9f3; border-radius: 12px; background: #fbfeff; overflow: hidden; }
+.figure { margin: 0; border: 1px solid #d7e9f3; background: #fbfeff; overflow: hidden; }
 .plot { display: block; width: 100%; height: auto; max-height: 580px; padding: 8px 0 0; }
 .caption { margin: 0; padding: 0 18px 16px; color: #526f83; font-size: 12px; line-height: 1.7; text-align: center; }
 .label { display: flex; flex-direction: column; gap: 8px; color: #3d657d; font-size: 12px; font-weight: 500; }
