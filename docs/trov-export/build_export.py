@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "docs" / "trov-export"
-BASELINE = "662d1ac583b5c6e04aa43e74fdd2340218371934"
+BASELINE = "69de839e004ff0d90156da489896f423bf08c182"
 REPOSITORY = "https://github.com/Jose-Gael-Cruz-Lopez/reeftrace"
 MAX_BYTES = 650_000
 PRIVATE_PARTS = {"node_modules", ".next", ".venv", "private", "local", "runs", "trov-export"}
@@ -33,16 +33,17 @@ def sources() -> tuple[list[Path], list[dict]]:
     excluded = []
     for path in (ROOT / "docs").rglob("*"):
         rel = path.relative_to(ROOT)
-        if not path.is_file() or path.suffix not in {".md", ".txt"} or set(rel.parts) & PRIVATE_PARTS:
+        if not path.is_file() or set(rel.parts) & PRIVATE_PARTS:
             continue
         duplicate = (rel.as_posix() == "docs/grok-evidence-bundle.md"
-                     or rel.parent.as_posix() == "docs/grok-evidence" and path.suffix == ".txt"
-                     or rel.as_posix() == "docs/grok-ml-next-prompts.txt")
+                     or rel.parent.as_posix() == "docs/grok-evidence" and path.suffix in {".txt", ".json"}
+                     or rel.as_posix() == "docs/grok-ml-next-prompts.txt"
+                     or rel.parent.as_posix() == "docs/research-evidence/matched-current-metadata")
         if duplicate:
             payload = path.read_bytes()
             excluded.append({"source_path": rel.as_posix(), "bytes": len(payload),
                              "sha256": sha(payload), "reason": "Covered by the separate canonical Grok evidence pack; its publication is recorded separately, not asserted by this builder."})
-        else:
+        elif path.suffix in {".md", ".txt"}:
             included.add(path)
     for folder in ("adapters", "firmware", "data", "tests"):
         for path in (ROOT / folder).rglob("README.md"):
@@ -74,7 +75,7 @@ def header(part: int, entries: list[dict], captured: str) -> str:
     toc = "\n".join(f"- [Document {e['number']:03d}](#document-{e['number']:03d}) — `{e['source_path']}`" for e in entries)
     return (f"# Tideward full technical documentation · part {part:02d}\n\n"
             f"Snapshot: **{captured}**. Repository: {REPOSITORY}.\n\n"
-            f"Git source baseline: `{BASELINE}` (**662d1ac**). This is a **working-tree snapshot including numerical-sensitivity documentation not yet pushed at capture time**; the baseline commit alone does not identify all content below. Per-source hashes identify these exact bytes.\n\n"
+            f"Git source baseline: `{BASELINE}` (**{BASELINE[:7]}**), the committed source checkpoint for the locally verified numerical-sensitivity work and metadata-only matched-current DRAFT. The source-status field distinguishes any working-tree additions; per-source hashes identify these exact bytes. This archive does not establish hosted CI or deployment success.\n\n"
             "Use the current Product Handbook and navigation index for operating guidance. This archive preserves both current references and historical study protocols/verification records without silently rewriting them. Source claims are not independent verification. Numerical precision, AI output and passing software tests are not measured physical reef protection.\n\n"
             "Scope: public documentation only. No provider credentials, personal contacts, local absolute home paths, private camera frames, recordings, database, runtime configuration or raw datasets are included. The separate canonical Grok evidence pack covers its full captured prompts/responses without duplicating them here. This builder does not establish that any artifact has been uploaded.\n\n"
             "## Contents in this part\n\n" + toc + "\n")
@@ -105,6 +106,7 @@ FEATURES = [
     ("Planned physical rig, inventory and unused firmware boundaries", "docs/four-person-build-plan.md", "firmware/reeftrace_arduino/README.md"),
     ("Team work split, handoffs and implementation contracts", "docs/software-handoffs.md", "docs/trace3-research-and-contract.md"),
     ("Next matched-current study and unacquired data/research proposals", "docs/next-current-data-study.md", "docs/research-learning-plan.md"),
+    ("Matched-current feasibility DRAFT, corrected reader tests and metadata-only gate", "docs/matched-current-study-plan.md", "docs/grok-contribution-ledger.md"),
     ("Synthetic fixture meaning and public data provenance READMEs", "data/sample_runs/README.md", "data/current_fields/pacioos-current-forecast-v1/README.md"),
 ]
 
@@ -118,14 +120,14 @@ def index_text(entries: list[dict], chunks: list[dict], exclusions: list[dict], 
     library = "\n".join(f"- **{c['file']}** — {c['document_count']} documents; {c['bytes']:,} bytes; SHA-256 `{c['sha256']}`." for c in chunks)
     source_list = "\n".join(f"| {e['number']:03d} | {link(e['source_path'])} | {e['bytes']:,} | {e['source_status']} |" for e in entries)
     return ("# Tideward complete documentation navigation\n\n"
-            f"Captured **{captured}**, from source baseline **662d1ac** (`{BASELINE}`), plus the **unpushed working-tree numerical-sensitivity work**. Repository: {REPOSITORY}.\n\n"
+            f"Captured **{captured}**, from committed source baseline **{BASELINE[:7]}** (`{BASELINE}`), including the **locally verified numerical-sensitivity work and metadata-only matched-current DRAFT**. Repository: {REPOSITORY}. Source states and exact hashes are listed below; hosted CI/deployment success is not established by this archive.\n\n"
             "Start with the current Product Handbook for readable operating guidance. The archive chunks preserve full source documentation as explicitly quoted reference blocks, including historical records that are not current runtime instructions. The source-controlled URLs and Trov Product handbook remain separate from this immutable snapshot.\n\n"
             f"Coverage: **{len(entries)} full text documents**, **{sum(e['bytes'] for e in entries):,} source bytes**, **{len(chunks)} Markdown upload chunks**, each at most **650,000 bytes** (below Trov's 750 KB Markdown limit). Source bytes are unchanged; no redactions were necessary in included files. `manifest.json` records individual source hashes, byte counts, source status, document numbers, chunk hashes and exclusions; `MANIFEST.md` is its Markdown upload view. Hashes establish byte identity, not the truth of a scientific claim.\n\n"
             "## Upload order\n\nUpload this navigation index and then the numbered reference-library chunks. Preserve organization visibility and the ReefTrace repository binding. This local build does not publish, send a message, change permissions or commit files.\n\n" + library + "\n\n"
             "## Every feature and its technical reference\n\n| Feature / question | Full source references in this package |\n| --- | --- |\n" + rows + "\n\n"
-            "## Current evidence boundaries\n\nOcean trajectories use pinned model currents and hypothetical geometry; the central 2/6 versus flanking 4/6 result is an illustrative what-if, with the original zero-entry tie preserved. Numerical sensitivity is a separate diagnostic and not physical accuracy or ML improvement. Camera preview is not calibrated tank drift or a physical trial. Chalk explains exact evidence but does not replace deterministic physics; provider readiness is not a live response. Photon acceptance is not necessarily delivery. Historical protocols and test counts retain their dates and scope.\n\n"
+            "## Current evidence boundaries\n\nOcean trajectories use pinned model currents and hypothetical geometry; the central 2/6 versus flanking 4/6 result is an illustrative what-if, with the original zero-entry tie preserved. Numerical sensitivity is a separate diagnostic and not physical accuracy or ML improvement. The final local post-guard checkpoint passed 1,365 Python, 191 frontend and 137 guarded HTTP checks, with six expected external/physical blockers, plus lint/types/build; a separate bounded live Chalk REPORT cites final comparison/method identities. This is not a hosted-CI/deployment pass or complete physical validation. The matched-current study is DRAFT: only metadata were retrieved, with no new study trajectories, current-vector values, fits or scores. Camera preview is not calibrated tank drift or a physical trial. Chalk explains exact evidence but does not replace deterministic physics; provider readiness alone is not a live response. Photon acceptance is not necessarily delivery. Historical protocols and test counts retain their dates and scope.\n\n"
             "## Deliberate exclusions and binary references\n\n"
-            f"- {len(exclusions)} canonical Grok bundle/raw capture files are listed with exact hashes in the manifest, but are covered by the separate [Grok evidence bundle](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-bundle.md) rather than duplicated. Contribution ledgers, build records and the evidence README are included. Publication is verified in a separate receipt.\n"
+            f"- {len(exclusions)} canonical Grok bundle/raw capture/receipt/metadata files are listed with exact hashes in the manifest, but are covered by the separate [Grok evidence bundle](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-bundle.md) and its exact archive manifest rather than duplicated. Contribution ledgers, build records, the evidence README and matched-current DRAFT are included. Public metadata bytes and institutional contacts remain in that separate evidence archive. Publication is verified in a separate receipt.\n"
             "- Private/local/run directories, `.env`, credentials, contact routing, personal images, recorded camera frames and local databases are never collected.\n"
             "- Raw datasets, JSON evaluation artifacts, executable source, dependencies, generated build output and PDFs/images are not embedded in this text-only reference archive. Their human README/method documentation is included where present.\n"
             "- Binary build references remain linked: [rig guide PDF](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/tideward-rig-guide.pdf), [rig connections](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/assets/tideward-rig-connections.png), [measured map diagram](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/assets/tideward-rig-measured-map.png). These are planned/reference assets, not completed physical measurements.\n"
@@ -180,9 +182,9 @@ def main() -> None:
     index = index_text(entries, chunks, exclusions, captured).encode()
     check_private(index.decode(), "README.md")
     outputs["README.md"] = index
-    manifest = {"schema_version": 1, "kind": "PUBLIC_DOCUMENTATION_WORKING_TREE_SNAPSHOT", "repository_url": REPOSITORY,
+    manifest = {"schema_version": 1, "kind": "PUBLIC_DOCUMENTATION_COMMITTED_SOURCE_SNAPSHOT", "repository_url": REPOSITORY,
                 "captured_at_utc": captured, "git_source_baseline": BASELINE,
-                "working_tree_scope": "Includes numerical-sensitivity documentation not yet pushed at capture; source baseline alone does not identify all archived content.",
+                "working_tree_scope": "Committed source checkpoint includes locally verified numerical-sensitivity documentation and metadata-only matched-current DRAFT; any additional source changes are explicitly identified per source. Generated export outputs are separate from the source baseline. Hosted CI/deployment success is not established by this archive.",
                 "source_document_count": len(entries), "source_bytes": sum(e["bytes"] for e in entries),
                 "source_content_modified": False, "upload_chunk_max_bytes": MAX_BYTES, "publication_performed": False,
                 "privacy_scan": {"passed": True, "categories": list(PATTERNS), "credential_files_read": False, "private_media_included": False, "redactions_required": False},

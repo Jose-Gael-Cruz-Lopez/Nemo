@@ -1,12 +1,12 @@
 # Tideward full technical documentation · part 01
 
-Snapshot: **2026-10-17T19:15:32.660063Z**. Repository: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace.
+Snapshot: **2026-10-17T19:53:43.955438Z**. Repository: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace.
 
-Git source baseline: `662d1ac583b5c6e04aa43e74fdd2340218371934` (**662d1ac**). This is a **working-tree snapshot including numerical-sensitivity documentation not yet pushed at capture time**; the baseline commit alone does not identify all content below. Per-source hashes identify these exact bytes.
+Git source baseline: `69de839e004ff0d90156da489896f423bf08c182` (**69de839**), the committed source checkpoint for the locally verified numerical-sensitivity work and metadata-only matched-current DRAFT. The source-status field distinguishes any working-tree additions; per-source hashes identify these exact bytes. This archive does not establish hosted CI or deployment success.
 
 Use the current Product Handbook and navigation index for operating guidance. This archive preserves both current references and historical study protocols/verification records without silently rewriting them. Source claims are not independent verification. Numerical precision, AI output and passing software tests are not measured physical reef protection.
 
-Scope: public documentation only. No provider credentials, personal contacts, local absolute home paths, private camera frames, recordings, database, runtime configuration or raw datasets are included. The separate canonical Grok evidence pack covers its full captured prompts/responses without duplicating them here.
+Scope: public documentation only. No provider credentials, personal contacts, local absolute home paths, private camera frames, recordings, database, runtime configuration or raw datasets are included. The separate canonical Grok evidence pack covers its full captured prompts/responses without duplicating them here. This builder does not establish that any artifact has been uploaded.
 
 ## Contents in this part
 
@@ -44,29 +44,28 @@ Scope: public documentation only. No provider credentials, personal contacts, lo
 - [Document 032](#document-032) — `docs/integrated-team-demo.txt`
 - [Document 033](#document-033) — `docs/integrations.md`
 - [Document 034](#document-034) — `docs/interface-design.md`
-- [Document 035](#document-035) — `docs/ml-experiment-audit.txt`
-- [Document 036](#document-036) — `docs/motion-vector-research.txt`
-- [Document 037](#document-037) — `docs/next-current-data-study.md`
-- [Document 038](#document-038) — `docs/ocean-prevention.md`
-- [Document 039](#document-039) — `docs/physics.md`
-- [Document 040](#document-040) — `docs/prevention-physics.md`
-- [Document 041](#document-041) — `docs/prevention-validation-protocol.md`
-- [Document 042](#document-042) — `docs/prevention-workflow.md`
-- [Document 043](#document-043) — `docs/public-ocean-showcase.md`
-- [Document 044](#document-044) — `docs/research-learning-plan.md`
-- [Document 045](#document-045) — `docs/research-real-data.md`
-- [Document 046](#document-046) — `docs/research-transport-physics.md`
-- [Document 047](#document-047) — `docs/rk4-numerical-quality.md`
-- [Document 048](#document-048) — `docs/software-demo-acceptance.md`
-- [Document 049](#document-049) — `docs/software-export-contract.md`
-- [Document 050](#document-050) — `docs/software-handoffs.md`
-- [Document 051](#document-051) — `docs/team-handoff-prompts.md`
+- [Document 035](#document-035) — `docs/matched-current-study-plan.md`
+- [Document 036](#document-036) — `docs/ml-experiment-audit.txt`
+- [Document 037](#document-037) — `docs/motion-vector-research.txt`
+- [Document 038](#document-038) — `docs/next-current-data-study.md`
+- [Document 039](#document-039) — `docs/ocean-prevention.md`
+- [Document 040](#document-040) — `docs/physics.md`
+- [Document 041](#document-041) — `docs/prevention-physics.md`
+- [Document 042](#document-042) — `docs/prevention-validation-protocol.md`
+- [Document 043](#document-043) — `docs/prevention-workflow.md`
+- [Document 044](#document-044) — `docs/public-ocean-showcase.md`
+- [Document 045](#document-045) — `docs/research-learning-plan.md`
+- [Document 046](#document-046) — `docs/research-real-data.md`
+- [Document 047](#document-047) — `docs/research-transport-physics.md`
+- [Document 048](#document-048) — `docs/rk4-numerical-quality.md`
+- [Document 049](#document-049) — `docs/software-demo-acceptance.md`
+- [Document 050](#document-050) — `docs/software-export-contract.md`
 
 ## Document 001
 
 Source path: `README.md`
 
-Source status: **modified_working_tree**. Bytes: **30803**. SHA-256: `c7f53f4e6f7a9d6882b0c8358653062ad163026a13d3456e6ec490b6663761d3`.
+Source status: **tracked_at_baseline**. Bytes: **32470**. SHA-256: `06ea886b3004a64cdc5e2e9fe58642136a7ca483e4b36c26fbf98bf7b0f817c6`.
 
 Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
 
@@ -115,6 +114,8 @@ Start in **Overview**, choose **Start software demo**, and follow **Follow the e
 **Data lab** opens the same combined ocean comparison, rather than a second default trajectory graph. For the six-group/five-model NOAA study, expand **Research details and historical buoy validation**, then choose **Load buoy comparison** and **Explain this result** under **What does this result mean?**. These read-only replays do not acquire data, retrain models or change a tank source report.
 
 The default ocean comparison uses only changing-current advection. The earlier single-release/frozen-current diagnostic remains a separate API and numerical baseline; its straight path is not the product's default forecast. The saved valid window is 17 October 2026 18:00 UTC–18 October 00:00 UTC and automatically becomes an archived model scenario afterward. See [ocean prevention](docs/ocean-prevention.md) for the current workflow and [current-driven prediction](docs/current-driven-prediction.md) for the underlying solver and earlier diagnostic.
+
+**Does a smaller time step change the result?** Open this disclosure beneath the ocean comparison in Prevention or Data Lab. It separates three RK4 integration-step runs from contact checks on one fine path, retaining all six releases and incomplete coverage. The solver lands on forcing timestamps and samples on a start-relative clock, avoiding fractional-timestamp false stops. The current numerical check retains central **2/6** versus flanking **4/6** and the control tie; agreement under these settings is numerical sensitivity, not physical accuracy or improved ML skill. See [the RK4 quality guide](docs/rk4-numerical-quality.md).
 
 Loading the source demo already prepares example evidence; explicitly recomputing a case creates a new evidence identity/revision. Repeated loads reuse active demo cases. Loading after STOP creates an active replacement while preserving the stopped history. The full workspace retains the other diagnostics, Camera commissioning and Settings for deliberate advanced use.
 
@@ -240,6 +241,10 @@ The older live-server commands `scripts/e2e_demo.py` and `scripts/e2e_prevention
 Ocean integration verification on 17 October 2026: **1,263 Python tests, 163 frontend tests and 137 guarded HTTP checks passed**, with zero HTTP failures and six explicitly blocked external/physical scopes. ESLint, TypeScript and the production build passed. Browser checks covered the single graph, layer and release filters, fixed scales, changing arrow times, scenario reset, the preserved tie, tank access and a 390 px viewport without horizontal overflow. A separate live Chalk `REPORT` cited the displayed comparison and method; these software checks do not establish physical protection or model accuracy.
 
 ## Reference map
+
+Latest numerical-quality verification: **1,365 Python tests, 191 frontend tests and 137 guarded HTTP checks passed**, with zero HTTP failures and six expected blocked external/physical scopes. Ruff, ESLint, route types, TypeScript and an isolated production build passed. Browser checks covered Data Lab/Prevention, layer/release controls, fixed axes, current times, scenario reset and the control tie. A separate live Chalk `REPORT` cited the exact final comparison/method and explained numerical precision separately from physical accuracy. The [safe local receipt](docs/grok-evidence/rk4-final-local-verification.json) records source hashes and scope; inspect hosted CI for the exact pushed commit separately. No physical trial or xAI API call was performed.
+
+The [next matched-current study](docs/matched-current-study-plan.md) is a **draft design**, not a completed new dataset/model result. It proposes a public NOAA/HYCOM pairing with a fixed six-hour horizon and remains separate from the completed frozen NOAA study.
 
 - [Complete product and team guide](docs/tideward-product-guide.md): every workspace feature, graph, integration, API family, evidence contract and remaining validation task; the team-facing copy is published in Trov.
 - [Architecture](docs/architecture.md), [algorithm/contract audit](docs/algorithm-contract-audit.md), [physics](docs/physics.md), [prevention physics](docs/prevention-physics.md).
@@ -1111,7 +1116,7 @@ Actual water-plane measurements, calibrated drift recordings, held-out flow/path
 
 Source path: `docs/chalk-user-guide.md`
 
-Source status: **untracked_working_tree**. Bytes: **14961**. SHA-256: `bc5a73f114f0655d20dba015326d2c9365570015c2625343eae9b40143c285b3`.
+Source status: **tracked_at_baseline**. Bytes: **15119**. SHA-256: `d7232e71e930ff12d1fc5456aad6ab7395512592205d69f7733e0de5a4588e18`.
 
 Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
 
@@ -1164,7 +1169,7 @@ The server binds the answer to the selected current snapshot, method, scenario a
 
 In the downstream illustrative scenario, the deterministic table shows central-layout entries of two out of six and flanking-layout entries of four out of six. Chalk explains why the central geometry performs better in that model, while retaining the ideal-capture assumption, coarse current support and hypothetical reef-area proxy. The original no-entry control remains a tie; a different number of captures does not prove protection when neither layout has a threatened entry.
 
-The new local numerical-quality work also passes a compact integration-step/contact-chord summary to this review. Smaller-step agreement concerns numerical sensitivity to a fixed field; it is not observed waste accuracy, a probability of reef protection or a measured effect. At this documentation checkpoint that extension has passed local suites and is awaiting final live-flow verification and push.
+The numerical-quality feature also passes a compact integration-step/contact-chord summary to this review. Smaller-step agreement concerns numerical sensitivity to a fixed field; it is not observed waste accuracy, a probability of reef protection or a measured effect. A separate final local live review cited the exact report/method and explained both checks without changing the scientific numbers.
 
 ### 3. Prevention: interpret tank predictions and recorded trials
 
@@ -1254,7 +1259,7 @@ An authorized Photon conversation can invoke the same source-case investigator. 
 
 ## What is verified, and what remains
 
-The local numerical-quality checkpoint passed **1,331 Python tests, 190 frontend tests and 137 guarded HTTP checks**, with zero HTTP failures and six deliberately blocked external/physical scopes; lint, TypeScript and the isolated production build passed. These checks cover contracts, failures, stale identities and workflows without proving a new live model turn or physical accuracy. No remote Chalk-hosted evaluation run is claimed. The new numerical-quality extension still needs its final live-flow check and push at this documentation snapshot.
+The final local numerical-quality checkpoint passed **1,365 Python tests, 191 frontend tests and 137 guarded HTTP checks**, with zero HTTP failures and six deliberately blocked external/physical scopes; lint, TypeScript and the isolated production build passed. These checks cover contracts, failures, stale identities and workflows; the guarded HTTP run does not invoke a provider. A separate browser-driven live Chalk `REPORT` was verified against the final report and method identities and explained the new numerical-quality summary. Neither that turn nor the tests establish physical accuracy. No remote Chalk-hosted evaluation run is claimed; inspect hosted CI for the exact pushed code commit separately.
 
 The real tank is not commissioned. Required work includes measured calibration, separate held-out drift runs, independently measured layout flows and frozen trials with all missing/failed outcomes retained. Chalk helps explain those requirements; it cannot complete them in prose.
 
@@ -2932,7 +2937,7 @@ Data Lab includes the frozen four-drifter study, an explicitly exploratory trans
 
 Source path: `docs/grok-contribution-ledger.md`
 
-Source status: **untracked_working_tree**. Bytes: **38096**. SHA-256: `c75218f65306770e043cec2ff048b60edd7ac19f3ec79ae8256bab562ab4dea8`.
+Source status: **tracked_at_baseline**. Bytes: **50053**. SHA-256: `26c106245f88d8c66851d0a7bfdae2cc0c5c7ee27a0fb4bd3bfe6837763e8a8a`.
 
 Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
 
@@ -2945,6 +2950,16 @@ This ledger separates recorded assistance, accepted implementation, local execut
 and remaining sponsor requirements. It is intended for the team's Trov workspace
 and an honest SpaceXAI application. It is not a complete account export or a claim
 that an external model authored the whole repository.
+
+A later local inventory recheck at documentation baseline
+`d42a386b17628fdf135f38c59542aeb4b65587c3` found eight
+existing ablation/cohort/Trace 3/page captures that the original package omitted.
+They are now preserved without text edits, correcting the earlier claim that the
+standalone ablation response was absent. This is an archive-completeness update,
+not eight new model calls or eight independent reviews. Stages J–K below append
+a later implementation review, final local verification and a draft-only
+matched-current design review. Final commit/push/CI/hosted verification are not
+claimed by those local receipts.
 
 ## 1. What Grok actually contributed
 
@@ -2978,14 +2993,21 @@ only requested recurring automation.
 | Data/protocol/forecast hashes | Identity, replay consistency and recorded local ordering | Signatures, independent notarization or freedom from upstream data processing |
 | Cursor build capture and original handoff | Recorded use of Cursor/Grok for the initial diagnostic | That all development occurred in Cursor or the use of Grok Voice/Imagine API |
 
-The [exact text archive](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/README.md) contains 14 inspected historical local
-artifacts plus the new RK4 prompts, responses and local verification receipt, with a
+The [exact text archive](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/README.md) contains **43 inspected raw artifacts**: 14 original historical local
+records, nine forcing-knot records, eight later-discovered historical captures,
+five fractional-clock records, three final implementation-review/local-receipt
+records and four matched-study design-review records, with a
 [byte/hash manifest](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/manifest.json). The
 [single-file Trov evidence bundle](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-bundle.md) combines that archive
 with the committed research records and exact five-prompt ML sequence. Historical
 drafts are preserved as drafts, including mistakes corrected below. No `.env`,
 private message routing, provider keys, personal camera images or database is
 included. A missing transcript is identified as missing rather than reconstructed.
+Larger browser captures overlap numbered excerpts and have partial/UI boundaries;
+the artifact count is not a count of unique turns or independent experiments.
+The bundle also embeds the draft matched-current plan and five separately
+manifested public metadata/derived-receipt sources. Those are not acquired
+trajectory/current values, a frozen study or extra raw Grok responses.
 
 ## 3. Work-by-work contribution ledger
 
@@ -2997,7 +3019,11 @@ limits, sponsor distinction and requested small reviewable reliability work.
 The [build record](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-ml-diagnostic.md) documents Cursor Grok 4.6 implementation
 and subsequent local corrections. The [source static review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/02-source-static-review.txt)
 and [case/Chalk static review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/03-case-and-chalk-static-review.txt)
-are preserved as model statements, not execution attestations.
+are preserved as model statements, not execution attestations. The later-found
+[larger ML page capture](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/21-ml-response-page-capture.txt)
+and [larger final-review page capture](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/22-final-review-page-capture.txt)
+add overlapping prompt/review/project context with UI and partial boundaries; they
+are not extra independent experiments or a complete provider export.
 
 **Accepted product.** [`diagnostics.py`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/apps/ocean/reeftrace_ocean/diagnostics.py)
 evaluates prefixes of 8–12 positions inside the first 18 positions of the pinned
@@ -3025,8 +3051,12 @@ Photon-off and disabled-voice statements are historical runtime settings.
 **Recorded assistance.** [Grok ablation record](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-motion-ablation.md): a prompt
 supplied public base `d3cda23`, model equations, ownership and regression scope.
 Grok drafted mean-drift and paired-summary functions plus isolation test sketches.
-The exact standalone response for that stage is not present in the inspected
-text archive; its contribution is recorded by the committed build document.
+The [standalone code-assistance response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/15-motion-ablation-code-assistance.txt)
+and [subsequent static review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/16-motion-ablation-static-review.txt)
+are now in the archive after a later inventory found their existing local files.
+The earlier absence claim was an inventory omission, not evidence that these
+records never existed. The response is draft assistance; the tested local
+implementation remains authoritative, and neither capture proves execution.
 
 **Accepted product.** [`ablation.py`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/apps/ocean/reeftrace_ocean/ablation.py),
 the [CLI](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/scripts/evaluate_motion_ablation.py), read-only API, and Data Lab
@@ -3049,6 +3079,16 @@ average. These small dependent windows cannot select a deployable model.
 
 **Recorded assistance.** Grok supplied static protocol/code-design assistance to
 the [original study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/data/public/noaa-multidrifter-v1/README.md).
+[The saved design outline](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/17-multidrifter-design-assistance.txt),
+[implementation review](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/18-multidrifter-final-static-review.txt)
+and [cohort interpretation critique](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/19-cohort-coverage-static-review.txt)
+were also recovered from existing local records. The design uses unresolved
+context variables (`manifest_bytes`, `payload_bytes`, `protocol`) and returns
+per-drifter lists under a draft means label; those sketches are not standalone
+accepted code. Its independence-gate advice does not establish a justified gate.
+The cohort review's sorting concern was a question to check, not proof that the
+implemented numeric-sort rule was missing; the final static review describes that
+explicit rule. All raw advice remains unchanged, including limitations and errors.
 [Five exact follow-up prompts](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-ml-next-prompts.txt) and the
 [ML checkpoint](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-ml-next-study.md) preserve the subsequent extension/LOPO
 review and explicit correction of an overinterpreted negative result.
@@ -3169,6 +3209,12 @@ preserve static advice and code-grounded corrections. The latter includes repeat
 browser accessibility text; its displayed ordering is not a separately verified
 provider timestamp sequence.
 
+The later-recovered [Trace 3 conversation capture](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/20-trace3-review-conversation-capture.txt)
+adds a historical prevention review and unpublished export/validation design
+discussion. It starts mid-sentence and includes repeated context and UI text.
+The model explicitly describes static/design review rather than executing the
+unpublished implementation; its old Photon/camera settings are not current status.
+
 **Corrections retained.** Source report `UNKNOWN`/`INVALID` are not stored
 `CaseState` enum values. Chalk finishing a model turn with `STOP` does not stop a
 case. Explicit case STOP changes revision and archives stale comparison lineage.
@@ -3281,10 +3327,112 @@ evidence. The complete local checkpoint passed **1,331 Python tests, 190 fronten
 tests and 137 guarded HTTP checks**, with zero HTTP failures and six intentionally
 blocked external/physical scopes, plus lint/types/isolated production build.
 These local checks do not prove a new live model response or a deployed build.
-Final live-flow verification and push remain pending at this documentation
-snapshot; the new work must not be described as already on `main` or deployed.
+At that Stage H checkpoint, final live-flow verification and push were pending.
+Stage J below records the later local integration/live result; it does not imply
+that the final implementation is already pushed, CI-verified or deployed.
 No model is trained, no completed NOAA study is retuned and no tank measurement
 is created by this work.
+
+### I. Two further Grok fractional-clock reviews and a local-axis repair
+
+**Actual assistance and correction.** The [fractional-clock repair prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-review-prompt.txt)
+and [initial static response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-review-response.txt)
+addressed cancellation when elapsed times were recomposed with a distant field
+epoch. The response endorsed local-origin sampling but incorrectly retained the
+absolute-epoch progress guard. The [correction prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-correction-prompt.txt)
+and [corrected response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-fractional-clock-correction-response.txt)
+preserve both that wrong advice and its explicit rejection, without silently
+rewriting the record.
+
+The correction prompt reports a bounded read-only prototype that falsely censored
+24 of 492 synthetic cases under the old guard. This is a reported prototype result,
+not the formal local regression-suite count or newly acquired field evidence.
+For example, local elapsed `45.29670899999999 → 45.296709` has positive representable
+motion time even though recomposed distant epoch values can alias. The accepted
+local repair uses one elapsed axis for sampling, knot scheduling, acceptance and
+progress, computing datetime differences with Python integers before float or
+NumPy conversion. Invalid/nonfinite/no-progress steps still fail explicitly;
+masks, time bounds, positive integration and budgets remain strict. No epsilon,
+clamp or unintegrated time advance is introduced.
+
+**Bounded local verification.** The separate [relative-time verification receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-relative-time-verification.json)
+records **234 related tests and Ruff passing**, plus exact matches for all six
+pinned track arrays and all recorded release outcomes/layout summaries in both
+fixed ocean scenarios. It records source/reference hashes. This is local method
+regression evidence, not execution by Grok or improved physical waste forecasts.
+The independent 500-case chat report is not claimed as a locally executed test
+without a corresponding saved execution proof.
+
+**Stage I checkpoint limit.** Full integration-suite, browser/live-Chalk verification
+and push were pending at that earlier snapshot; Stage J records subsequent local
+integration/live verification separately. Stage H's
+1,331 Python / 190 frontend / 137 HTTP checkpoint predates Stage I and is not a
+full rerun of the later change. No new field data, tank release, API authorization
+or physical accuracy result follows from this numerical repair.
+
+### J. Final relative-time implementation review and integrated local proof
+
+**Actual assistance.** The [final implementation prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-relative-implementation-review-prompt.txt)
+supplied the actual relative-clock code and regressions. The [static response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-relative-implementation-review-response.txt)
+found a direct-caller contract gap: `CurrentSampler(..., time_origin=...)` accepted
+a finite origin outside 1900–2100 although the normal advection entry point
+already checked that bound. The team added the same calendar rejection to the
+direct sampler and four regressions. This is a concrete review contribution;
+the model did not execute the code, and its saved response predates the guard.
+
+**Final local verification.** The separate [safe final receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-local-verification.json)
+records the post-guard **1,365 Python / 191 frontend / 137 HTTP** checkpoint,
+zero HTTP failures and six expected external/physical blockers, plus lint, types
+and isolated production build. The six pinned tracks match exactly. For both
+scenarios, comparison is recursive on the prepatch recorded layout fields; that
+capture omitted a derived entry-reduction field, so it is not a whole-report
+equality claim. Baseline outcomes also match the unchanged event evaluator on
+prepatch paths. A local-browser/live-Chalk `REPORT` cites the final
+new report and method identities; the exact identities are retained in the
+receipt. This supersedes older pending-local-integration prose without turning
+old suite counts into results for later code.
+
+**Boundary.** This is local execution and a bounded live Chalk explanation of
+frozen model evidence, not Grok execution, a new field/physical validation or a
+hosted pass. Final commit/push/CI and hosted verification remain pending at this
+archive checkpoint. Voice/Imagine use, billing, camera and Photon settings are
+not changed by this documentation append.
+
+### K. Matched-current feasibility design and corrected reader-test proposal
+
+**Actual assistance.** An [initial design prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-review-prompt.txt)
+and [static response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-review-response.txt)
+reviewed the proposed matched-forcing study. The [correction prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-correction-prompt.txt)
+and [corrected response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-matched-current-design-correction-response.txt)
+retain wrong suggestions and their rejection: `[0, 0.08]` does not exercise the
+western Atlantic longitude shift, and masking the next knot before any positive
+interval completes produces UNSUPPORTED rather than PARTIAL. The accepted
+synthetic design normalizes `[280, 281] → [-80, -79]`, keeps the immediate-failure
+case separate, and uses four `[0, 3, 6, 9] h` knots to produce a genuine supported
+prefix before the later mask. These are proposed reader tests, not executed
+reader-test results. The final draft also pins the 359.92-degree edge and raw
+fill/scale-once checks requested by the static correction.
+
+**Research state.** The [matched-current draft](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-study-plan.md)
+proposes two existing metadata-selected GDP identities, six-hour stationary,
+last-drift and HYCOM 15 m current-only comparisons, and all 36 planned model/hour
+cells retained. Only four bounded public metadata/identity-drogue responses and
+a safe derived receipt are preserved under
+[`docs/research-evidence/matched-current-metadata/`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/tree/main/docs/research-evidence/matched-current-metadata).
+Their exact bytes/hashes are embedded in the bundle. They establish specific
+metadata/transport observations, not successful current-value retrieval, wet-cell
+support, a completed physical identity audit or model accuracy.
+
+**Remaining gate.** No new study trajectory positions, current-vector values,
+fit, score or physical trial has been acquired/run. The reader must be implemented,
+reviewed and tested, then a formal protocol and exact code/data requests frozen
+before scientific acquisition. Current-only initializes at origin, last drift
+uses its final two context positions, and no fitting is proposed. The draft
+rejects the blanket assertion that any past/context-era field use inherently
+causes future leakage; it instead preserves the actual unresolved analysis/
+assimilation and publication-as-of limitations. It remains retrospective and
+non-independent unless a separate documented audit establishes more. No tuning
+or overwrite of the completed NOAA studies follows from this design.
 
 ## 4. RK4: the existing numerical engine and its evidence boundary
 
@@ -3330,8 +3478,8 @@ reef benefit, forcing-aware learned residual or curved-path accuracy gain is
 claimed. Commit [`7fb4851`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/7fb4851).
 
 The older archived Grok records do **not** establish that Grok authored the original
-RK4 implementation. Stage H above records the new actual knot-fix reviews, local
-corrections and executed regressions without retrofitting that earlier authorship.
+RK4 implementation. Stages H–J above record the actual knot/fractional-clock implementation reviews, local
+corrections and separately identified executed regressions without retrofitting that earlier authorship.
 
 ## 5. What is visible in the application
 
@@ -3339,7 +3487,7 @@ corrections and executed regressions without retrofitting that earlier authorshi
 | --- | --- | --- |
 | Data Lab research details | Original 18/6 fixture; training diagnostic; paired ablation; four-group study; post-hoc transfer; Kalman; fresh six-group study; motion vectors and denominators | Grok reviewed named research stages; Python computes and verifies reports |
 | Ocean Prevention and combined graph | Changing-current RK4 paths; A/B/common trajectories; layer checkboxes; equal axes; supported/unresolved outcomes; tie and conditional recommendation | Existing local implementation; no blanket Grok authorship claim |
-| New numerical-quality disclosure | Local solver-step and same-path contact-chord sensitivity, missing/partial coverage retained, compact evidence available to Chalk | Local suites passed; final live flow and push pending at this documentation snapshot; not physical accuracy |
+| New numerical-quality disclosure | Local solver-step and same-path contact-chord sensitivity, missing/partial coverage retained, compact evidence available to Chalk | Post-guard local suites and live Chalk passed as Stage J records; final commit/CI/hosted verification pending; not physical accuracy |
 | Chalk research explanations | Reads immutable numerical evidence and explains limits with exact hashes/citations | Chalk is a separate gateway/provider integration; Grok assistance does not make it the physics engine |
 | Evidence briefing | Frozen source text plus separately labelled satellite heat context; explicit disabled xAI speech path | Real space-data artifact and implemented adapter; no live Voice claim |
 | Camera/tank | Native USB preview, pixel grid; separately gated measured homography, empirical drift and real trial ledger | Not validated by historical buoy or ocean API results; zero physical tank commissioning claimed at this checkpoint |
@@ -3407,8 +3555,10 @@ their contents or a successful provider call.
    candidates unless a new acquisition record proves otherwise. The
    [next current-data study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/next-current-data-study.md)
    reviews NASA OSCAR, the limited historical `jplOscar` mirror, OpenDrift leeway
-   and current-plus-wind structures as candidates. It is a source-availability
-   review/proposal, not a newly acquired or completed matched-forcing experiment.
+   and current-plus-wind structures as candidates. The separate
+   [matched-current draft](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-study-plan.md) narrows a first HYCOM/GDP feasibility
+   design with metadata-only receipts and corrected reader-test proposals.
+   Neither document is a newly acquired or completed matched-forcing experiment.
 3. **Physical prevention validation:** fix the webcam above the measured water
    surface, independently validate mapping and drift, measure each layout's flow,
    freeze layouts/protocol, then log new known-source releases with measured
@@ -3424,7 +3574,7 @@ Existing authorized runtime settings are separate from this read-only inventory.
 
 Source path: `docs/grok-evidence/README.md`
 
-Source status: **untracked_working_tree**. Bytes: **4168**. SHA-256: `548eba819922ab58f69c97805f6c3308e1cc1ffd1290286b0ebeb3f56f73a36c`.
+Source status: **tracked_at_baseline**. Bytes: **13413**. SHA-256: `fbf1426131fc3e08c9393749127be4b8042996ceda9bdc72cbca6c0fdada4a03`.
 
 Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
 
@@ -3432,9 +3582,15 @@ Archived source text follows verbatim. Historical instructions, proposed work an
 # Saved Grok development evidence
 
 The original fourteen numbered files are byte-identical copies of inspected text
-artifacts saved by the builders. Nine added `rk4-*` files preserve four new actual
+artifacts saved by the builders. Nine `rk4-*` files preserve four actual
 Grok prompt/response rounds and a separate local Python verification receipt.
-[manifest.json](manifest.json) records all twenty-three artifact names, byte
+Eight later-discovered historical captures, numbered 15–22, now preserve
+ablation, multi-drifter/cohort, Trace 3 and larger page-review records too.
+Five Stage I files preserve two further fractional-clock prompt/response rounds
+and a separate local regression receipt.
+Stage J adds an implementation-review pair and final local verification receipt;
+Stage K adds two draft-study design-review pairs.
+[manifest.json](manifest.json) records all forty-three raw artifact names, byte
 counts, SHA-256 and role. They support the
 [contribution ledger](../grok-contribution-ledger.md), not an unqualified claim of
 model authorship, execution, accuracy or sponsor eligibility.
@@ -3445,6 +3601,40 @@ both prompt/response content and repeated historical messages. File 09 is a
 historical proposed code draft, intentionally archived as text: do not import or
 execute it instead of the reviewed current implementation. Files 04–06 are local
 handoff/verification records, not Grok-authored responses or provider receipts.
+
+## Later-discovered historical captures
+
+These eight files were already present as local text records when the archive was
+rechecked at documentation baseline
+`d42a386b17628fdf135f38c59542aeb4b65587c3`. They were not generated by a new
+model call. Their combined 135,700 bytes were privacy-scanned and copied without
+text edits; the manifest records each exact source name, byte count and hash.
+This corrects the earlier inventory's claim that the standalone ablation response
+was unavailable. The committed ablation build record's older “saved privately”
+wording describes its earlier state; these safe copies are now in this archive.
+
+| Archive record | What was saved | Evidence boundary |
+| --- | --- | --- |
+| [15: ablation code assistance](15-motion-ablation-code-assistance.txt) | Mean-drift/paired-summary draft and regression sketches | Static code assistance; local reviewed code remains authoritative |
+| [16: ablation static review](16-motion-ablation-static-review.txt) | Review of the supplied implementation | No repository fetch or test execution claimed |
+| [17: multi-drifter design](17-multidrifter-design-assistance.txt) | Frozen-protocol and aggregation outline | Contains placeholder/global-variable sketches, not a standalone executable module |
+| [18: multi-drifter final review](18-multidrifter-final-static-review.txt) | Static review of the supplied four-group implementation | Does not rerun source/selection hashes or outcomes |
+| [19: cohort coverage review](19-cohort-coverage-static-review.txt) | Incomplete-basin, sorting and chronology critique | Advice to check; not proof that the implementation omitted its numeric sort |
+| [20: Trace 3 conversation](20-trace3-review-conversation-capture.txt) | Prevention review and unpublished export/validation design discussion | Partial capture starts mid-sentence and includes repeated context/UI; historical settings stay historical |
+| [21: larger ML page capture](21-ml-response-page-capture.txt) | Earlier prompt, response and project/UI context | Overlaps existing records; not an independent turn or complete provider export |
+| [22: larger final-review page capture](22-final-review-page-capture.txt) | Earlier benchmark/static-review thread and UI | Overlapping history, not independent execution evidence |
+
+The design outline's `manifest_bytes`, `payload_bytes` and `protocol` references
+are unresolved sketch context, and its `per_drifter_means` value is a collection
+of lists rather than computed macro means. The raw draft remains unchanged so
+those limitations are visible; it must not be imported or executed instead of
+the tested implementation. A static response saying it inspected source or found
+no supported defect remains the model's claim, not an execution receipt.
+
+Page captures overlap one another and the numbered response excerpts. **Forty-three
+artifacts does not mean forty-three unique turns, experiments or independent
+reviews.** UI text, partial boundaries, corrected errors and obsolete settings
+are retained as historical evidence rather than reconstructed or silently fixed.
 
 ## New forcing-knot review and correction record
 
@@ -3472,9 +3662,98 @@ snapshot tracks and both scenarios' outcomes against a saved pre-patch reference
 It is not Grok execution, independent notarization or measured waste accuracy.
 The subsequent local backend/UI numerical-quality checkpoint passed 1,331 Python,
 190 frontend and 137 guarded HTTP checks, with zero HTTP failures and six expected
-external/physical blockers, plus lint/types/build. Final live-flow verification
-and push remain pending at this documentation snapshot; local success is not a
-new live provider response, a deployed build or physical accuracy.
+external/physical blockers, plus lint/types/build. At that older checkpoint, final
+live-flow verification and push were pending.
+Stage J below records the later local integration/live result separately; neither
+checkpoint establishes a deployed build or physical accuracy.
+
+## Stage I: fractional-clock review, rejected advice and local repair
+
+Two additional actual Grok web rounds are preserved exactly:
+
+1. [Repair prompt](rk4-fractional-clock-review-prompt.txt) →
+   [initial static response](rk4-fractional-clock-review-response.txt).
+2. [Correction prompt](rk4-fractional-clock-correction-prompt.txt) →
+   [corrected static response](rk4-fractional-clock-correction-response.txt).
+
+The initial response proposed local-origin sampling but incorrectly retained an
+absolute-epoch progress guard. The correction prompt reports a bounded read-only
+prototype in which that guard falsely censored 24 of 492 synthetic fractional-time
+cases; this is the prompt's prototype report, not the formal repository test-suite
+count or new field data. The corrected response explicitly rejects the guard:
+representable progress must be tested on the same local elapsed axis used for
+sampling, scheduling and acceptance. Strict masks/time support remain required;
+there is no epsilon, clamp or time-only snap. The original wrong advice is retained.
+
+The separate [local relative-time receipt](rk4-relative-time-verification.json)
+records 234 related tests and Ruff passing after the local repair, plus exact
+agreement for all six pinned tracks and both fixed scenario outcome sets. It
+identifies implementation/reference bytes and is local method-regression evidence,
+not Grok execution, independent truth or new physical validation. At that Stage I
+checkpoint, full integration/browser/live-Chalk verification and
+push were pending; Stage J records later local integration/live verification.
+The older 1,331/190/137 checkpoint above predates it
+and must not be advertised as a full rerun of the later repair. A separate
+externally reported 500-case chat result is not claimed as local executed evidence.
+
+## Stage J: final implementation review and local integration verification
+
+The [final relative-time implementation prompt](rk4-final-relative-implementation-review-prompt.txt)
+and [saved static review](rk4-final-relative-implementation-review-response.txt)
+are another actual review round in the existing Grok project. The review found a
+concrete direct-caller gap: `CurrentSampler(..., time_origin=...)` accepted finite
+origins outside the supported 1900–2100 calendar even though the advection entry
+point already bounded its start. The team added the explicit guard and four
+regressions. The supplied review text itself predates that final guard; its
+"no execution" boundary is preserved.
+
+The separate [final local receipt](rk4-final-local-verification.json) records the
+post-guard integration checkpoint: **1,365 Python tests, 191 frontend tests and
+137 guarded HTTP checks passed**, with zero HTTP failures and six expected
+external/physical blockers, plus lint, types and isolated production build.
+It also records exact six pinned paths and recursive comparison of prepatch
+recorded layout fields in both fixed scenarios; the old capture omitted a derived
+entry-reduction field, so this is not a whole-report equality claim. Baseline
+outcomes were also compared using the unchanged event evaluator on those prepatch
+paths. A local-browser/live-Chalk `REPORT` is tied to the new report/method identities.
+These are local execution/live-provider observations, not execution by Grok,
+independent physical truth or a hosted-deployment check. Final commit/push/CI and
+hosted verification remain separate and pending at this archive checkpoint.
+The receipt's exact hashes/fields take precedence over any older checkpoint prose.
+
+## Stage K: matched-current draft, corrected tests and metadata-only evidence
+
+Two further actual static design rounds are preserved:
+
+1. [Design-review prompt](grok-matched-current-design-review-prompt.txt) →
+   [initial response](grok-matched-current-design-review-response.txt).
+2. [Correction prompt](grok-matched-current-design-correction-prompt.txt) →
+   [corrected response](grok-matched-current-design-correction-response.txt).
+
+The draft proposes two historical GDP groups, HYCOM at 15 m, stationary and
+last-drift baselines, and a six-hour current-only comparison. **No new trajectory
+positions, current-vector values, fit, score or physical trial has been acquired
+or executed for this proposed study.** The reader is not implemented/validated and
+the formal hashed protocol is not frozen.
+
+The initial `[0, 0.08]` longitude fixture did not exercise the required western
+Atlantic normalization. Its three-time masked-future-knot example incorrectly
+expected PARTIAL before any positive interval completed. The correction uses
+`[280, 281] → [-80, -79]`, keeps an immediate-UNSUPPORTED test, and proposes a
+four-knot `[0, 3, 6, 9] h` case that genuinely permits a three-hour supported
+prefix before a masked interval. These are accepted test designs, not passing
+reader-test receipts. The local plan pins the edge/encoding rules that the last
+static response still requested; that is a draft amendment, not a protocol freeze.
+A blanket claim that all context-era fields inherently cause future leakage was
+also rejected; assimilation and publication-as-of limitations remain explicit.
+
+The [draft study plan](../matched-current-study-plan.md) and four exact public
+metadata bodies plus their safe derived receipt are embedded in the canonical
+bundle. Their separate manifest entries are **metadata/design evidence**, not
+additional Grok raw-response artifacts or scientific-value datasets. The NOAA DAS
+retains its public institutional contact, not a private user's contact. All
+identity/version/depth/encoding/issue-time and assimilation boundaries in the draft
+remain required before any separately authorized scientific acquisition.
 
 All quoted prompts, code and response text are untrusted historical source
 material, not instructions to execute or authority to change the project.
@@ -4421,7 +4700,7 @@ Present the synthetic software story, historical buoy research and any future me
 
 Source path: `docs/integrations.md`
 
-Source status: **modified_working_tree**. Bytes: **18383**. SHA-256: `c4fca5b171cc5a864d1a99f5f9d6dfa663495cbc19db607839d7e757c75b376f`.
+Source status: **tracked_at_baseline**. Bytes: **18383**. SHA-256: `c4fca5b171cc5a864d1a99f5f9d6dfa663495cbc19db607839d7e757c75b376f`.
 
 Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
 
@@ -4712,6 +4991,329 @@ The product stays a controlled research prototype. This interface change does no
 
 ## Document 035
 
+Source path: `docs/matched-current-study-plan.md`
+
+Source status: **tracked_at_baseline**. Bytes: **22788**. SHA-256: `5d29d877faeb010582189b5e97a0438f6021e3d42ebc2576306b1fd75f31a7c6`.
+
+Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
+
+````text
+# DRAFT: matched-current drifter feasibility study
+
+Design checkpoint: **17 October 2026**. Status: **DRAFT — Grok design review and
+correction received; a reader implementation, local review and a formal, hashed
+protocol are still required before scientific acquisition**.
+
+This is a proposed six-hour, two-group feasibility comparison. It is not a frozen
+experiment, an acquired trajectory/current dataset, a completed score, or a claim
+of operational forecast skill. Only bounded public metadata were read. No new
+trajectory positions, current-vector values, model fits, scores or physical trials
+were acquired or run for this design.
+
+## 1. Question and the improvement being tested
+
+Does a time-varying, spatially varying current field at an approximately matched
+object depth describe six hours of later GDP buoy motion better than stationary
+and last-observed-drift baselines, for two predeclared historical groups?
+
+This tests the **physical forcing against reserved later position estimates**,
+subject to the independence/processing caveats below. It is a stronger empirical
+question than whether a smaller RK4 step produces a numerically stable line.
+Numerical precision remains a separate diagnostic. A better integrator can still
+integrate the wrong current field or the wrong object-response model.
+
+The candidate forcing is **HYCOM GOFS 3.1, GLBy0.08, experiment 93.0, UV3Z, 2022,
+15 m**. Its explicit 15 m level is a closer match to the standard drogue-centered
+GDP object than OSCAR's daily upper-30-m mean. This is a rationale for testing,
+not a claim that HYCOM will outperform either baseline. A drogued buoy remains a
+different object from loose surface plastic or a tank token.
+
+## 2. What availability was actually verified
+
+| Source | Verified metadata/access | Remaining boundary |
+| --- | --- | --- |
+| [NOAA hourly GDP dataset](https://www.aoml.noaa.gov/phod/gdp/hourly_data.php) | Public ERDDAP schema/attributes and a fixed-origin identity/drogue query succeeded without credentials. The inspected endpoint identifies itself as **v2.01**, with actual time coverage ending **2022-10-31T00:00:00Z**. | The general webpage also describes release **v2.01.1**, with a different final-hour description. Do not silently call this endpoint v2.01.1. Pin the actual payload, metadata, DOI and retrieval date. No 31-position study track has been retrieved. |
+| [HYCOM 2022 UV3Z catalogue](https://tds.hycom.org/thredds/catalogs/GLBy0.08/expt_93.0_uv3z.html?dataset=GLBy0.08-expt_93.0-uv3z-2022) | The catalogue lists freely available OPeNDAP and NCSS access. **NCSS dataset metadata returned successfully without credentials**. | OPeNDAP DDS/DAS attempts timed out; the first proposed data path is the verified NCSS service. A successful metadata response is not proof that a chosen current subset has valid wet cells or successful value transport. |
+| [NOAA drifter construction/behavior](https://www.aoml.noaa.gov/phod/gdp/faq.php) | The standard drogue is centered around 15 m; losing it changes wind/wave response. | Retrospective drogue metadata are not a direct observation of the instantaneous drag depth or an operationally available status feed. |
+| [HYCOM missing/substituted-days notice](https://www.hycom.org/faqs/477-did-you-know-there-are-missing-days-in-the-gofs-31-global-analysis) | Some dates are missing or substituted, and the provider disclaims guaranteed availability. The proposed May 31–June 1 window is not among the listed 2022 substitution dates. | The list is not proof of complete support. Verify the actual requested times, cell masks and run lineage; never fill missing currents with zero. |
+
+Official supporting product specifications:
+[HYCOM GOFS 3.1 analysis](https://www.hycom.org/dataserver/gofs-3pt1/analysis).
+OSCAR is retained as a potential later comparator, not the selected first source:
+[NASA OSCAR final v2](https://podaac.jpl.nasa.gov/dataset/OSCAR_L4_OC_FINAL_V2.0).
+
+## 3. Proposed two identities and selection provenance
+
+The metadata-only candidate query used a fixed origin **2022-06-01T00:00:00Z** and
+the closed region **25–35°N, 80–65°W**. It requested identifiers, buoy class,
+drogue-loss metadata and nominal drogue depth, **not position columns or later
+motion**. Eleven identity rows were returned. Nine had loss dates preceding the
+origin. Two had metadata compatible with an attached 15 m drogue at that origin:
+
+| Proposed complete GDP group | WMO | Reported class/depth | Queried drogue-loss field | Interpretation for this draft |
+| --- | --- | --- | --- | --- |
+| `300234066836710` | `6202613` | SVPB / `15 m` | `2023-03-02T00:00:00Z` | Loss is after the proposed six-hour outcome window. |
+| `300534061292930` | `4102636` | SVPB / `15 m` | Empty/fill | This endpoint documents fill as still attached; zero instead means uncertain from the beginning. Do not conflate those states. |
+
+The two mappings occur once each in the project's saved identity registry; each
+WMO maps back to one GDP ID there. Neither GDP ID nor its mapped WMO is in the
+original 223-ID/known-alias exclusion set. Neither is among the six completed
+fresh-study GDP groups. Identity-registry appearances and an earlier metadata-only
+2021 candidate appearance for the first ID are disclosed; these are **not** claims
+that the IDs have never been seen in metadata.
+
+These checks use the existing saved registry/exclusions, not a newly complete
+physical-identity audit. Preserve the previously disclosed unresolved historical
+aliases. Set `physical_alias_resolution_verified=false` and
+`statistical_independence=false` unless a later documented review establishes
+otherwise. Future trajectories have not been inspected to establish row count,
+finite observations, six-hour survival, spatial coverage or path difficulty.
+
+The proposed two identities stay in the full planned denominator. Do not replace
+one because a download, mask, prefix or future observation fails. The eleven-row
+origin metadata frame is a selection-availability record, not eleven evaluated
+trajectories. Formal review must accept or amend this rule before acquisition.
+
+## 4. Proposed observation and forecast contract
+
+| Item | Proposed fixed value |
+| --- | --- |
+| Context | **25 hourly positions**, 2022-05-31T00:00:00Z through 2022-06-01T00:00:00Z, inclusive. |
+| Forecast origin | 2022-06-01T00:00:00Z. |
+| Reserved outcomes | **Next six hourly positions**, 2022-06-01T01:00:00Z through 2022-06-01T06:00:00Z. |
+| Forecast horizon | **21,600 seconds**, matching the existing `MAX_HORIZON_S`; no 24-hour forecast extension. |
+| Context use | The 25 positions are context/QC, not a fitting dataset. Stationary and current-only initialize from the origin position alone. Last drift uses only its own final two context positions, at May 31T23Z and June 1T00Z, with their actual elapsed time. No common learned model or cross-group fitting. |
+| Forcing support | Current-only receives exactly the declared tile at **June 1T00Z, 03Z and 06Z**, at 15 m. It receives no earlier current fields or later GDP positions. The model does not ingest the other 24 context positions. |
+| Comparison outputs | Same six UTC horizons and same observed targets for every candidate; great-circle position error in metres, six-hour endpoint error, status and coverage. |
+| Planned accounting | Two complete GDP groups × three candidates × six horizons = **36 planned model/horizon attempts**, using only **12 distinct later position estimates**. These are not 36 independent observations. |
+
+Fixed candidates, subject to exact implementation/version review before freezing:
+
+1. **Stationary:** remain at the origin position, without reading earlier context.
+2. **Last observed drift:** extrapolate the final context displacement with its
+   actual elapsed time; freeze the coordinate conversion and propagation method.
+3. **Current-only:** start at that origin position alone and integrate the
+   matched HYCOM 15 m field with the existing knot-aligned bounded advection
+   implementation. Proposed solver maximum step 300 s, hourly output, and forced
+   alignment with current-time knots; freeze the exact code revision and options.
+   Only the origin, 03Z and 06Z forcing slices enter this run. Earlier current
+   fields are unnecessary for these fixed candidates and are omitted from the
+   proposed scientific-value request.
+
+Do not train or introduce a learned residual, windage, Stokes coefficient, diffusion
+coefficient, kernel or new noise tuning before formal design review. Do not tune
+against these groups or the already completed NOAA studies. Any later candidate
+needs a separately declared development design and untouched comparison groups.
+
+## 5. Exact source paths and data-reader requirements
+
+GDP base:
+`https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc`
+
+Availability query, shown unescaped for readability:
+
+```text
+drifter_hourly_qc.csv?ID,WMO,typebuoy,drogue_lost_date,DrogueCenterDepth&time=2022-06-01T00:00:00Z&latitude>=25&latitude<=35&longitude>=-80&longitude<=-65&distinct()
+```
+
+This is the identity/drogue query already made, not a future acquisition command.
+Any later 31-position query must constrain one exact selected ID and the declared
+UTC window. Use the recorded positions as the target; GDP `ve`/`vn` are derived
+from the same processed track and are not independent forcing truth.
+
+HYCOM NCSS base:
+`https://ncss.hycom.org/thredds/ncss/grid/GLBy0.08/expt_93.0/uv3z/2022`
+
+Verified metadata path: the base plus `/dataset.xml`.
+
+The metadata report:
+
+- Grid axes: 4,251 latitude values, −80 to 90°, nominal increment 0.04°; 4,500
+  longitude values, 0 to 359.92°, nominal increment 0.08°.
+- Time: **2,920** valid times, three-hour increment; units `hours since 2000-01-01
+  00:00:00`, Gregorian calendar. The named 2022 aggregate spans **2022-01-01T12Z
+  through 2023-01-01T09Z**. Do not infer bounds from the year in the URL alone.
+- Forty fixed depths, positive downward in metres, including **15.0**.
+- `water_u` and `water_v` use dimensions `time depth lat lon`, stored as short
+  integers, units m/s, scale factor **0.001**, offset **0**, missing/fill **−30000**.
+
+Proposed first scientific subset: only those two variables, the 15 m level, the
+predeclared **25–35°N / 80–65°W** tile, native spatial resolution, and exactly
+**2022-06-01T00Z, 03Z and 06Z**. This tile is approximately 0.6 MB of packed two-component data
+for three times before format overhead; actual service dimensions/size must be
+recorded rather than assumed. Freeze a bounded request and byte/time budget before
+making it. Use one connection; checksum the exact returned bytes.
+
+### Longitude, support and CF decoding contract
+
+The reader's exact normalization is:
+
+```python
+normalized_lon = ((native_lon + 180.0) % 360.0) - 180.0
+```
+
+Pinned synthetic expectations: **280 → −80**, **281 → −79**, and
+**359.92 → approximately −0.08** (absolute floating-point tolerance `1e-10`
+degrees). This tolerance checks a synthetic representation conversion; it is not
+a measured geographic error bound or a time-snapping rule.
+
+For this western Atlantic tile the native source-longitude interval is 280–295°;
+the normalized interval is −80 to −65°. Keep the velocity arrays aligned with
+their coordinate indices. Reject non-finite, duplicate or non-monotonic axes,
+an unexpected discontinuity/dateline-crossing tile, and any sample outside the
+supported interval. Do not silently wrap an outside point, sort/reorder a changed
+axis, shift the whole field, expand support, interpolate across a seam, or silently
+substitute another product. A future dateline-capable reader would need its own
+explicitly reviewed contract; it is outside this draft.
+
+For both velocity components, compare the acquired variable's units, raw dtype,
+fill/missing sentinels, scale, offset, dimensions and selected depth against the
+pinned metadata. Expected values are raw short, m/s, `_FillValue` and
+`missing_value` **−30000**, scale **0.001**, offset **0**, dimensions
+`time depth lat lon`, and depth **15.0 m** positive downward. Reject an unexpected
+encoding, unit or depth change as a recorded failure for the planned groups.
+Do not adopt a new scale, unit conversion, fill value or nearest depth implicitly.
+
+Use one explicit raw-decoding path: reject/mask the **raw integer −30000 before
+scaling**, then multiply finite supported raw integers by **0.001 exactly once**.
+If a library performs automatic CF mask/scale, disable it for this path or prove
+the equivalent single-decoding behavior before freeze; never multiply an already
+decoded value again. The raw sentinel must remain missing, not become −30 m/s or
+zero. A raw `500` must become **0.5 m/s**, not 0.0005 m/s.
+
+Preserve native UTC valid times and masks, reject unsupported wet-cell stencils
+and retain domain/time exits. A missing or masked required knot must produce the
+actual integrator status and completed prefix; no invented finite continuation
+is allowed. Do not expand the tile or change the depth after observing an
+unfavorable outcome. A preliminary transport probe, if approved, must have its own
+predeclared tiny scope and must not become unreported cohort/model selection.
+
+### Required synthetic reader/integration fixtures before freeze
+
+These are **proposed tests using invented arrays**, not acquired HYCOM values,
+executed test receipts or observations of either GDP group:
+
+| Fixture | Exact input | Required assertion |
+| --- | --- | --- |
+| Conversion and scale-once | Native longitude `[280, 281]`, latitude `[-1, 1]`, one depth `15`, raw short `u=500`, `v=0`, scale `0.001`, fill `−30000`. | Longitude becomes `[-80, -79]`; the 359.92 edge also passes the separate conversion assertion; supported velocity is 0.5 m/s east. Raw sentinels are masked before scaling. Unexpected metadata/support changes fail explicitly. |
+| Immediate unsupported | Times `[0, 3, 6]` h; start at **3 h**, longitude **−79.9°**, latitude **0°**; request 6 h; mask the whole 6 h velocity slice. | First positive-time interpolation lacks support: **UNSUPPORTED**, completed elapsed **0**. It is not a PARTIAL result merely because the initial point exists. |
+| True partial prefix | Times `[0, 3, 6, 9]` h; same start at **3 h** and same location/constant velocity; request 6 h; mask only the whole 9 h velocity slice. | The 3→6 h interval completes, then the next interval fails with masked-current support: **PARTIAL**, completed elapsed **3 h**, east displacement **5,400 m** in the numerical frame within a declared floating-point test tolerance. Do not claim a completed six-hour path. |
+| Accounting | Exercise the two synthetic group slots × three candidates × six future horizons, with the missing-current cases above. | Retain **all 36 planned cells** and all group/status records. Mark unsupported later horizons explicitly; do not turn an available prefix into a full score or drop missing cells from the denominator. |
+| Context isolation | Change the first 23 synthetic context positions while preserving the final two, then separately change the penultimate position while preserving origin. | Last drift reads only the final two; stationary/current-only initialize only at origin. No fitted model, future GDP positions or context-era current slices enter current-only. |
+
+The original review's longitudes `[0, 0.08]` did not exercise the intended western
+Atlantic shift, and its masked-knot example incorrectly expected PARTIAL before
+any positive interval completed. Those suggestions were rejected and corrected.
+The corrected four-time fixture is required for a genuine partial-prefix case.
+These reader tests must be implemented and verified before formal protocol freeze;
+static review alone does not establish them as passing.
+
+## 6. Issue-time, processing and independence limits
+
+The inspected HYCOM metadata expose **Valid Time**; no verified run/issue timestamp
+or historical publication-as-of record has been established. The catalogue calls
+this an analysis/hindcast aggregate. Its future-valid current fields may contain
+information unavailable at the drifter forecast origin. Consequently this first
+comparison is a **retrospective forcing-supported motion diagnostic**, not a claim
+of prospective six-hour forecasting skill. An operational study requires archived
+run-specific forecasts, an issue cutoff and realistic delivery latency.
+
+HYCOM includes data assimilation. Before calling the evaluated observations
+independent, audit the product's actual assimilation inputs and whether the tested
+GDP observations, derived products or closely related data entered the forcing.
+Whole-ID holdout alone does not settle this. No assimilation-independence proof was
+obtained by the catalogue inspection.
+
+GDP hourly positions are quality-controlled processed/interpolated estimates,
+not raw instantaneous ground truth. Endpoint metadata include retrospective drogue
+information and processing/version inconsistencies; that also prevents an as-of
+operational claim. The two nearby groups and six dependent future hours support
+descriptive feasibility results only. Do not infer calibrated confidence,
+statistical significance, source attribution, plastic skill or reef protection.
+
+## 7. Preserve failures and report only supported comparisons
+
+Retain all two groups and every planned candidate/horizon, including transport
+failure, malformed/duplicate/missing rows, unresolved identity, missing current
+cells, time limits and domain exits. Distinguish these reasons explicitly.
+Never substitute zero currents, interpolate across unsupported masks or discard
+a failed group to improve an average.
+
+Any common-supported-prefix descriptive comparison must name its exact available
+horizons and flag incompleteness; it must not silently stand in for the full
+six-hour result. Report the planned two-group denominator, achieved per-candidate
+coverage and all failures next to any errors. Do not label synthetic paths or a
+fine numerical reference as observed outcomes.
+
+## 8. Metadata receipts and the review gate
+
+The following exact public metadata bodies are preserved under
+`docs/research-evidence/matched-current-metadata/`, with a safe, derived
+`receipt.json`. They were copied byte-for-byte from the original ignored local
+receipts, without another external request. The derived receipt includes only
+relative filenames, public URLs, retrieval times, curl outcomes, sizes and hashes;
+it excludes machine home paths, credentials and private user data. They are
+**metadata/design evidence, not acquired scientific-value fixtures or a frozen
+study protocol**.
+
+| Local receipt body | Retrieval start (UTC, 2026-10-17) | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| [gdp-hourly.dds](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-hourly.dds) | 19:34:51.733619 | 1,312 | `758a543dd887ff35ed052ef1ac9ba57380c78fed570b004e4b5ae031b6a3f0ad` |
+| [gdp-hourly.das](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-hourly.das) | 19:34:51.897741 | 18,686 | `66cdd12aff149d25cfa03fbcbe2046fb5657e7aa31795f0bfa0c41c3527efd39` |
+| [gdp-origin-identity-drogue.csv](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/gdp-origin-identity-drogue.csv) | 19:34:52.198899 | 640 | `fe20f70d249e8e099ba63e97341ed52c3c1dff34f5055b6946a4438679b6a339` |
+| [hycom-2022-ncss-dataset.xml](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/hycom-2022-ncss-dataset.xml) | 19:34:54.925023 | 159,404 | `741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d` |
+
+The [derived receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/research-evidence/matched-current-metadata/receipt.json)
+is 2,640 bytes, SHA-256
+`56328dff9fe82945fe0756967e1334a55471a5735f9e846bae721a186e88c993`.
+Repository links identify the intended durable source paths; no claim of a push
+or Trov publication is created by this draft.
+
+The `.dds`/`.das` URLs append those extensions to the GDP base; the candidate URL
+is the availability query above with encoded comparison characters. All four
+bounded curl requests completed with exit 0 using ordinary certificate
+verification and no supplied authentication. These hashes refer to the specific
+responses, not to every future response of those changing services.
+
+Existing identity-check sources:
+
+- `data/public/noaa-fresh-drifter-v2/raw/identity-aliases.csv`: 318,597 bytes,
+  SHA-256 `a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82`.
+- `data/public/noaa-fresh-drifter-v2/exclusions.json`: 10,625 bytes,
+  SHA-256 `40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e`.
+
+## 9. Design review decisions and the remaining gate
+
+Grok supplied an initial static design review and a correction after the local
+review challenged its longitude fixture, immediate-unsupported/PARTIAL distinction
+and leakage wording. Both initial advice and correction are retained as historical
+review evidence in the project's Grok archive; this draft records the accepted
+contracts rather than treating every model suggestion as correct or executed.
+
+Accepted: origin-only current initialization, final-two-position last drift,
+25-position QC context without fitting, exactly three current knots, explicit
+longitude/CF/depth/metadata validation, and full planned accounting on failures.
+Rejected: the blanket claim that using any past/context-era field would itself
+necessarily constitute future leakage. Properly declared development or past-only
+calibration can be scientifically legitimate. This feasibility draft deliberately
+uses no such fitting or earlier forcing because the fixed candidate is simpler;
+the actual unresolved operational issue is future-valid analysis/assimilation
+information without verified origin-time availability.
+
+**Next step:** implement and verify the synthetic reader contracts, review the
+exact implementation and protocol locally, resolve or retain every limitation
+above, then freeze a separate protocol and exact code/data hashes before requesting
+scientific values. The review has not frozen the study. This draft authorizes no
+automated acquisition, scoring, model promotion, tank operation or deployment.
+Keep the existing completed NOAA results unchanged.
+
+Related references: [next current-data study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/next-current-data-study.md),
+[fresh NOAA study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/fresh-noaa-study.md),
+and [RK4 numerical quality](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/rk4-numerical-quality.md).
+````
+
+## Document 036
+
 Source path: `docs/ml-experiment-audit.txt`
 
 Source status: **tracked_at_baseline**. Bytes: **9226**. SHA-256: `2ddd84b175c5aba86e1792a912128aa26c7a86f2b2bc6658b4b9d420d42fca42`.
@@ -4867,7 +5469,7 @@ interception decision survives independent recorded evidence, not whether an
 already inspected benchmark can be made to display a smaller error.
 ````
 
-## Document 036
+## Document 037
 
 Source path: `docs/motion-vector-research.txt`
 
@@ -5154,11 +5756,11 @@ validation, or NOAA buoy observations into proven plastic provenance.
 ACCESS LIMIT: Several supplied YouTube pages and the full Peanuts/CSU resources were not accessible in this audit. The technical recommendations above rely on primary documentation and papers that were readable, plus the actual local implementation; they do not claim that every linked video was watched.
 ````
 
-## Document 037
+## Document 038
 
 Source path: `docs/next-current-data-study.md`
 
-Source status: **untracked_working_tree**. Bytes: **5214**. SHA-256: `8526b3c0cfe74185a50d5aa5596a90d5ea6155d5f64cadb8c64dccd803c82165`.
+Source status: **tracked_at_baseline**. Bytes: **5214**. SHA-256: `8526b3c0cfe74185a50d5aa5596a90d5ea6155d5f64cadb8c64dccd803c82165`.
 
 Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
 
@@ -5225,7 +5827,7 @@ created by this research note. The current implementation and measured numerical
 checks are described in [RK4 numerical quality](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/rk4-numerical-quality.md).
 ````
 
-## Document 038
+## Document 039
 
 Source path: `docs/ocean-prevention.md`
 
@@ -5339,7 +5941,7 @@ For real coastal use, choose a real mapped target area, defensible release scena
 For the team's tank, use the retained **Tank** workflow with independently measured camera mapping, drift training/validation and frozen layouts, then record new known-source physical trials. Ocean metres/m/s cannot calibrate tank centimetres/cm/s. The camera and pump can stay off for this entire ocean-mode software demonstration.
 ````
 
-## Document 039
+## Document 040
 
 Source path: `docs/physics.md`
 
@@ -5636,7 +6238,7 @@ among ranked cases**, wrong rankings and abstentions separately. “Correct OR U
 would reward an estimator that always abstains and is not an acceptable success measure.
 ````
 
-## Document 040
+## Document 041
 
 Source path: `docs/prevention-physics.md`
 
@@ -5751,7 +6353,7 @@ baseline and downstream monitoring](https://theoceancleanup.com/updates/the-ocea
 and [SeaClear2's site-specific prevention and impact assessment](https://www.seaclear2.eu/project-overview/).
 ````
 
-## Document 041
+## Document 042
 
 Source path: `docs/prevention-validation-protocol.md`
 
@@ -6011,7 +6613,7 @@ cases. A separate parser test binds the example report to current bundle/evaluat
 lineage. Existing prevention tests remain unchanged; no numerical defect was found.
 ````
 
-## Document 042
+## Document 043
 
 Source path: `docs/prevention-workflow.md`
 
@@ -6100,7 +6702,7 @@ Run the repository Python suite, Ruff, dashboard Node tests, lint, generated rou
 With services running, `python scripts/e2e_prevention.py` exercises actual HTTP creation, trial submission and retry, conflict rejection, conservative unresolved bounds, a real bounded Chalk call, STOP and readable archival history. It refuses to run if Photon or the camera is active. It creates only synthetic outcomes and writes a report to ignored `work/e2e-prevention.json`. Provider availability and physical validation remain separate from software test success.
 ````
 
-## Document 043
+## Document 044
 
 Source path: `docs/public-ocean-showcase.md`
 
@@ -6140,7 +6742,7 @@ Both layouts have 2,000 m of ideal absorbing line. The downstream illustration g
 Python checks verify export identity, unchanged paths across freshness variants, the preserved control tie and absence of network/provider requests. Frontend checks exercise the actual Next handlers, mode selection at the UTC boundary, byte/report tampering, query rejection, blocked writes, local/cloud routing and the read-only result rendering. After deployment, verify the public page, both scenarios, checkboxes, release selector and current arrows in a browser. This verification demonstrates software behavior, not physical effectiveness.
 ````
 
-## Document 044
+## Document 045
 
 Source path: `docs/research-learning-plan.md`
 
@@ -6448,7 +7050,7 @@ scientific objective is independent motion and source validation. Increasing mod
 comes after those measurements identify an error that learning can actually reduce.
 ````
 
-## Document 045
+## Document 046
 
 Source path: `docs/research-real-data.md`
 
@@ -6573,7 +7175,7 @@ The following sources were researched, **not downloaded, trained on or integrate
 Keep these three future experiments separate: **detecting an object**, **predicting its motion**, and **distinguishing its possible entry sites** require different evidence and evaluation labels. A dataset's availability does not establish any of the other two tasks.
 ````
 
-## Document 046
+## Document 047
 
 Source path: `docs/research-transport-physics.md`
 
@@ -6824,11 +7426,11 @@ The reproducible current NOAA example illustrates the distinction: learned ADE i
 “ReefTrace combines measured motion, a transparent particle-transport model and an LLM investigator to compare declared possible entry points and explain when the evidence cannot distinguish them. The software has a separate reproducible NOAA motion-learning experiment; physical tank validation and real-reef source attribution remain future work.”
 ````
 
-## Document 047
+## Document 048
 
 Source path: `docs/rk4-numerical-quality.md`
 
-Source status: **untracked_working_tree**. Bytes: **6177**. SHA-256: `8b320c22cfb0cae42f6e8db3165bf67337897ff6217d9e9afa8e0bccf5929675`.
+Source status: **tracked_at_baseline**. Bytes: **8109**. SHA-256: `9d4f6fe0ac3a0c4e6b2aef371bab6828de4b02c6f3097d2a45032515451008f0`.
 
 Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
 
@@ -6892,6 +7494,17 @@ default steps. Its six track arrays and every release outcome in both scenarios
 were checked against a saved pre-patch reference and remained exactly unchanged.
 Method hashes change with source bytes; historical receipts are not relabelled.
 
+A second regression addressed fractional timestamps: constructing sampler time as
+an epoch offset plus elapsed seconds could round an exact supported endpoint one
+ULP beyond the field. Forcing timestamps are now subtracted from the requested
+start before conversion to floating seconds; RK4 sampling, scheduling and progress
+all use that same local axis. The rejected absolute-epoch progress guard is not
+retained. Direct sampler origins share the 1900–2100 calendar bound, preventing
+unsupported calendar arithmetic. A synthetic constant 0.5 m/s case now integrates
+the full 566.734631 s and approximately 283.3673155 m, including the final supported
+timestamp. Exact rational signed-flow tests and strict masked-future tests retain
+the supported prefix without an epsilon, extrapolation or time-only snap.
+
 ## Two different sensitivity checks
 
 **Integration sensitivity** reruns the fixed releases with maximum solver steps of
@@ -6911,6 +7524,22 @@ event-time differences are retained for all releases.
 The main decision still evaluates all layouts against one common default path
 per release. Additional diagnostic reruns are separate and never promote a model,
 retune a completed study or replace the default decision.
+
+In the pinned downstream comparison, 300- and 150-second integrations differ
+from the 75-second reference by at most approximately 0.000840 m and 0.000326 m
+at accepted common output times. Contact spacing of 300 and 150 seconds differs
+from 75 seconds by at most approximately 0.152 s and 0.0435 s for matching events
+on the same fine path. Every level retains all six releases, central 2/6 versus
+flanking 4/6, and the original no-entry control remains tied. These particular
+differences are numerical sensitivity results, not physical error bounds.
+
+Final local verification passed 1,365 Python tests, 191 frontend tests and 137
+guarded HTTP checks, plus Ruff, ESLint, TypeScript and a production build. Browser
+checks verified both product surfaces and a separate live Chalk explanation
+bound to the exact report/method identities. The
+[safe local receipt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/rk4-final-local-verification.json)
+pins tested source bytes, comparison scope and explicitly untested physical
+claims; hosted CI must be checked for the actual pushed code commit.
 
 ## What this proves and what it does not
 
@@ -6935,7 +7564,7 @@ the optional numerical field remain readable as historical snapshots.
 - [Grok contribution and correction ledger](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-contribution-ledger.md): actual prompts, static responses, rejected arithmetic/time snapping and local verification are preserved separately.
 ````
 
-## Document 048
+## Document 049
 
 Source path: `docs/software-demo-acceptance.md`
 
@@ -7128,7 +7757,7 @@ write into an active `.next`. `work/` is git-ignored.
   recording, contact, token or provider output is committed.
 ````
 
-## Document 049
+## Document 050
 
 Source path: `docs/software-export-contract.md`
 
@@ -7377,551 +8006,4 @@ checkout and `PYTHON_DOTENV_DISABLED=1`; the new fixture also disables dotenv
 loading in its test process. No live application configuration was edited.
 No browser execution occurred. CI on the PR commit remains a separate check;
 local passes are not represented as a green PR check before CI finishes.
-````
-
-## Document 050
-
-Source path: `docs/software-handoffs.md`
-
-Source status: **tracked_at_baseline**. Bytes: **18198**. SHA-256: `e4f7f8fd209a8d61a6ffc607690585e2ab950467e9780d6f1fcb58ba257e36f9`.
-
-Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
-
-````text
-# Two software-only handoffs
-
-These are the current assignments for **Megana** and **Aarush**. They supersede the hardware/field portions of older Trace 1/Trace 2 prompts for this iteration. Both can start from the current repository without a tank, camera, pump, electronics, new model or new dataset.
-
-Repository: [Jose-Gael-Cruz-Lopez/reeftrace](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace). Product: Tideward; existing ReefTrace package/API names remain unchanged. Jose owns final integration, shared workspace state, scientific interfaces and live provider configuration. These prompts are repository deliverables; they do not claim a Trove post or teammate acknowledgment has occurred.
-
-## Shared start and merge rules
-
-1. Read [README](../README.md), [the algorithm/contract audit](algorithm-contract-audit.md), [the integrated demo](integrated-team-demo.txt), and the task-specific documents below. Inspect current code before relying on a historical prompt.
-2. Use a clean checkout of the latest `origin/main`, record its exact SHA, and create the task branch below. Preserve existing local work; do not reset or discard it. If another teammate has already changed an owned file, coordinate the overlap before editing it.
-3. Work only in the assigned files. Do not push directly to `main`; open a PR with the actual behavior, evidence and remaining blockers. Jose merges after checks and review.
-4. Automated tests use temporary stores, synthetic inputs and mocked providers. The guarded `scripts/e2e_offline.py` creates its own loopback API, turns providers off in that child process, and records attempted side effects. It does not point at or reconfigure the running application.
-5. Preserve every declared missing/failed/unresolved outcome. A contract test is software evidence, not a new NOAA score, real physical release or live provider evaluation.
-
-**Out of scope for both tasks:** physical capture, camera selection/calibration, electronics/tubing/pump work, field admission or flow thresholds, scientific estimator/simulator changes, frozen NOAA protocols/data/reports/model files, provider keys/billing/routes/enable flags, Photon messages or automatic-reply changes, and shared `main.py`/Runtime/Store/workspace orchestration changes. Identify a required shared-contract fix with a reproducible test and a proposed minimal patch for Jose; do not silently redefine it in your lane.
-
-## Megana — demo acceptance, accessibility and browser E2E
-
-Branch: `team/software-demo-acceptance`.
-
-**Outcome:** a new teammate can understand and complete the existing software demo, including its honest failure states, with mouse or keyboard. This lane validates and improves presentation of current behavior; it does not add scientific capability or physical setup.
-
-Allowed scope:
-
-- New `docs/software-demo-acceptance.md` with the exact tested checkpoint, browser/version, click sequence, expected/actual results and sanitized evidence references.
-- Focused new acceptance tests under `dashboard/tests/` using the existing test stack. Browser automation may exercise the existing app; clearly separate actual browser tests from Node-only parser tests.
-- Small accessibility fixes inside the existing leaf demo component and its CSS module, after confirming its current path with Jose. Keep component names/navigation/contracts stable. Shared workspace state, root routing and backend integration remain Jose's scope.
-- No new dependency, account, cloud deployment or test framework is required. If a real gap needs one, document the gap before proposing it.
-
-### Copyable prompt for Megana
-
-> Work on Tideward/ReefTrace's existing software demo from the latest green main. Record the starting SHA and use branch `team/software-demo-acceptance`. Read README, docs/algorithm-contract-audit.md and docs/integrated-team-demo.txt, then inspect the actual Overview demo component, operator provider, evidence-freshness helpers and relevant dashboard tests. Do not implement an older physical Trace 1 prompt.
->
-> Your task is demo acceptance, accessibility and browser end-to-end verification. First produce an acceptance matrix for Overview’s “Follow the evidence”: “Trace a source” / “Open source trace”, “Compare two layouts” / “Compare layouts”, and “Explain the evidence” / “Ask Chalk”. Also verify the separate existing fresh NOAA Data Lab study and its research discussion. Use the current UI's labels rather than inventing a new navigation structure. The stock prevention demo has its own source case; do not claim it inherited a different selected case ID.
->
-> Exercise the source demo: load/reuse the synthetic cases; inspect candidate C on the observed-trajectory example and its saved report; deliberately use “Recompute source support” to test evidence-revision behavior; inspect sensitivity; confirm retained endpoint stays Unknown and invalid calibration stays Invalid. Source bars are conditional support, not calibrated probabilities. Loading a demo can already prepare evidence. Recomputing changes its revision/evidence identity, so previous answers must not be presented as current.
->
-> Exercise Prevention: load the existing synthetic comparison, inspect the protected polygon and both layouts, then compare simulated entry bounds with separately labelled recorded synthetic outcomes. Confirm that the real physical count remains zero. Inspect missing/unresolved counts, planned versus released denominators, and archival behavior after the anchored source case changes. Do not edit a scientific profile to make an intervention appear better. When testing trial entry, create an explicitly synthetic disposable comparison rather than changing an immutable completed example or claiming a physical release.
->
-> Exercise Data Lab’s “Load buoy comparison” action and “Explain this result” discussion: all six target groups, five models, 180 scores and 36 unique observed intervals must remain distinguishable. Verify local metre paths, m/s errors, raw versus filtered model starts, provenance, amendment history and unresolved-alias limitations. Last drift currently has the lowest aggregate error; no model is automatically promoted and the data do not establish plastic sources or reef benefit.
->
-> Check the research discussion with the existing mocked/offline provider seams: exact study/protocol citations, unrelated/stale response rejection, configured-but-failed gateway, timeout, unconfigured STOP and an answer whose tool evidence was altered. The deterministic report must remain visible on failure. An earlier independently verified live Chalk REPORT is recorded evidence, not a reason to fabricate a new live success. No live provider call, key inspection or Photon message is needed for this assignment.
->
-> Test keyboard navigation, visible focus, accessible names, form labels, error/status announcements, disabled/loading controls, and cancellation when navigating away or changing the loaded report. Verify useful layout at approximately 390 px and desktop widths; no invisible or off-screen primary action. Preserve reduced-motion preferences where animations exist. Fix only small leaf-component accessibility/presentation defects within your scope. Do not redesign the site or change shared state/routing to make the checklist pass.
->
-> Use the existing team's local operator session privately for authorized app clicks; never put its token in screenshots, URLs, logs, fixtures or a PR. Do not change a running service's configuration. For automated mutation tests use public test-only credentials and disposable stores following existing fixtures. Keep the camera off and do not send messages. If a browser check cannot be executed in your environment, mark it BLOCKED with the exact reason instead of reporting a Node test as a browser pass.
->
-> Add meaningful regressions for defects you actually find. Produce docs/software-demo-acceptance.md with the acceptance matrix, reproduction steps, exact commands/results and remaining limitations. Run the relevant Node tests, lint and TypeScript checks; run the guarded offline HTTP workflow when checking the full story. Open a PR rather than pushing directly to main. State any proposed shared-contract fix separately for Jose. Do not alter frozen scientific artifacts, hardware paths, provider settings or another teammate's files.
-
-Acceptance before PR:
-
-- The same synthetic observation/case and its report identity are shown together; loading/recomputing/stopping cannot retain a stale answer as current.
-- Unknown, Invalid, no physical outcomes, unavailable acquisition and provider failure remain understandable successful handling of limitations.
-- The demo works with keyboard and small-screen layout; evidence includes real browser execution where available.
-- Node-only checks, actual browser checks and unavailable live/physical scopes are labelled separately.
-- No secret, contact, physical recording or false live/provider/physical result enters the PR.
-
-Suggested checks, using the already installed dashboard dependencies:
-
-```sh
-cd dashboard
-node --test tests/*.test.mjs
-npm run lint
-npx next typegen
-npx tsc --noEmit
-npm run build
-cd ..
-.venv/bin/python scripts/e2e_offline.py --output work/megana-software-http.json
-```
-
-Do not run a production build into a development server's active `.next` directory while teammates use it; use the project's existing isolated verification approach or coordinate the build window.
-
-## Aarush — export/validator contract and unresolved edge cases
-
-Branch: `team/software-export-validation`.
-
-**Outcome:** software consumers can tell exactly which export they have, which checks ran, and why incomplete or contradictory outcomes remain uncertain. The earlier merged P2 protocol is useful context; this assignment does not conduct its proposed physical pilot.
-
-Allowed scope:
-
-- New `docs/software-export-contract.md` describing the two existing wire formats and a reproducible synthetic export/import rehearsal.
-- New `tests/integration/test_software_export_edges.py` and focused new unit tests where they exercise an existing public function.
-- An optional, separate `tests/unit/test_prevention_bookkeeping_audit.py` after the primary contract work, limited to the existing synthetic algorithm invariants described below.
-- Small, explicitly synthetic new fixtures under `tests/fixtures/software_export_edges/`, if an inline disposable-store fixture is insufficient. Do not rewrite an existing fixture, public NOAA file, schema or reference report.
-- Clarifications to your own new documentation/tests only. Existing production exporters/validators and shared schemas remain unchanged unless Jose separately assigns a reviewed fix.
-
-### Copyable prompt for Aarush
-
-> Work from the latest green ReefTrace main, record its SHA, and use branch `team/software-export-validation`. Read README, docs/algorithm-contract-audit.md, docs/trace3-research-and-contract.md, docs/prevention-validation-protocol.md and your merged docs/experiment-validation-v2.md. Inspect the actual ComparisonInput/TrialInput, evidence-export schemas/service, validation-report schemas/service, offline Trace 2 validator, and existing integration tests. Do not rerun or rebuild the old physical P2 assignment.
->
-> Own the software contract audit and new edge-case regressions. Create docs/software-export-contract.md explaining that the product analysis_bundle_v1 uses payload_sha256/payload_canonical_json, while the distinct offline method envelope uses content_hash and full immutable replay inputs. An accepted current-case manifest proves identity, declared partition and recomputed accounting only: IDENTITY_AND_ACCOUNTING_CHECKED_METHOD_NOT_RERUN. It does not rerun a numerical method or establish an independent experiment. Do not invent a bridge by renaming hash fields or treating a redacted export as full method input.
->
-> Build disposable synthetic comparisons through existing services/schemas. Add targeted tests for zero recorded releases, missing planned slots, unresolved/lost-token outcomes, an observed zone entry followed by later collection, and no-entry/interception requiring the complete frozen horizon. Show exact planned and released denominators; missing/unresolved states must not become successes or zero error. Preserve an outcome that contradicts the simulated recommendation.
->
-> Test exact trial-key/body retries and changed-body conflicts, per-source/layout quota, duplicate record/identity handling, and source-case revision/STOP archival. The current API can record an out-of-plan order and marks order_followed=false; test that behavior rather than silently changing it to rejection. Synthetic and operator-reported physical origins stay separate, and a synthetic profile must reject a physical-outcome claim. No physical recording or measured profile is needed for those negative tests.
->
-> Audit export whitelist/canonical hashing and immutable comparison/profile/evaluation binding. Test that altered identities, changed payloads, incompatible envelope fields, overlapping or incomplete development/validation partitions, and a stale evaluation cannot produce a current accepted receipt. Recomputing a JSON hash alone must not turn changed scientific inputs into a trusted method replay. If a protection belongs to a different existing layer, name and test that layer rather than duplicating its implementation.
->
-> Verify that trial release labels remain evaluator truth and never enter source-estimator observations or Chalk's source evidence as new identifying data. Read-only prevention Chalk reviews may inspect deterministic aggregate counts and an exact current validation receipt; they cannot change the ledger or promote a rehearsal to physical validation. Tests use mocked provider transports only. Do not inspect or change keys, messages, enable flags, hardware settings, camera calibration, field thresholds, frozen models or the scientific engine.
->
-> Only after the primary export/ledger cases are covered, optionally propose a bounded synthetic bookkeeping audit from docs/algorithm-contract-audit.md section 11. For the existing competing ensemble, Z (zone first), T (other trap first) and F (no event by horizon) are disjoint and sum exactly to N. Support S is orthogonal, so the six cells Z&S, Z&~S, T&S, T&~S, F&S and F&~S also sum exactly to N. Unsupported particles are not a fourth destination. Use equal 1/N weights, retain admitted initially unsupported particles, and distinguish a rejected invalid configuration from an admitted ensemble. Check persistent absorption, node-time event bounds and support only through the first event/horizon against independently derived synthetic expectations. Use exact integer conservation, not an arbitrary 1e-12 mass-leak or physical-success tolerance. Do not confuse the model's F/unresolved_count with an unresolved operator trial. This is an optional new test/proposal, not permission to change frozen source/prevention code, physics, thresholds or empirical claims.
->
-> Put new regressions in tests/integration/test_software_export_edges.py and any narrowly justified new unit/fixture files. Use temporary stores and explicitly synthetic inputs; never call the running user's API/store. Keep full raw/expected result comparisons meaningful, including discrete IDs, status, origin and denominators, rather than asserting only that a request returned success. Use narrow floating tolerance only where the actual calculation requires it; never apply it to hashes, IDs or counts.
->
-> Write the exact accepted/refused input example, authoritative output fields, method-not-rerun boundary and remaining unimplemented bridge in docs/software-export-contract.md. Run focused tests, Ruff and the guarded offline HTTP runner. If you find a production defect, provide its failing regression and a minimal proposed patch for Jose instead of changing shared APIs, Runtime/Store, main.py, export schemas or frozen scientific code yourself. Open a PR with exact evidence and remaining blockers; do not push directly to main or claim a physical trial occurred.
-
-The optional follow-up is specified in [section 11 of the mathematical audit](algorithm-contract-audit.md#11-next-synthetic-audit-first-passage-bookkeeping). It must remain a separate synthetic test design and can be omitted from the first PR; it does not block delivery of the primary export/validator work.
-
-Acceptance before PR:
-
-- Both export formats and their verification scope are clear, with no invented adapter or independent-validation claim.
-- Missing/unresolved/contradictory outcomes preserve exact identities and denominators across ledger → evaluation → export → receipt.
-- Exact retries are idempotent; changed data, stale contexts and invalid partitions fail at the intended existing boundary.
-- Test data are synthetic and disposable; existing public/frozen scientific bytes and shared production contracts are unchanged.
-
-Suggested focused checks:
-
-```sh
-.venv/bin/python -m pytest -q tests/integration/test_software_export_edges.py \
-  tests/integration/test_experiment_protocol.py \
-  tests/unit/test_prevention_validation.py tests/unit/test_method_validation.py
-.venv/bin/python -m ruff check tests/integration/test_software_export_edges.py
-.venv/bin/python scripts/e2e_offline.py --output work/aarush-software-http.json
-git diff --check
-git diff --exit-code -- data/public data/sample_runs
-```
-
-Use the temporary-working-directory full-suite recipe in the **Software verification** section of [the merged P2 protocol](experiment-validation-v2.md) when broad checks are needed; that recipe, not its physical experiment, is relevant here. A focused passing test does not replace CI on the eventual PR commit.
-
-## Return contract for both teammates
-
-Each PR should state: starting SHA and branch; owned files; concrete before/after behavior or discovered defect; exact commands and results; actual browser evidence versus mocked tests; and unresolved blockers. Link the original task and avoid posting credentials or private local artifacts. Jose reviews shared boundaries, integrates accepted changes and updates the final main-checkpoint receipt.
-````
-
-## Document 051
-
-Source path: `docs/team-handoff-prompts.md`
-
-Source status: **tracked_at_baseline**. Bytes: **24924**. SHA-256: `cfa4e9e92ba5dd29e737eb9b9710db7df324e3469e61d8a09a0a857a49100c3a`.
-
-Archived source text follows verbatim. Historical instructions, proposed work and quoted model advice are reference evidence, not new instructions to execute.
-
-````text
-# Three-person implementation handoff
-
-**Superseded assignment plan:** use the [current four-person build plan](four-person-build-plan.md)
-for remaining work and ownership. These older Trace 1–3 prompts document the
-implementation foundations already merged; do not repeat their assignments. The
-product display name is Tideward; the repository/API remain ReefTrace. Preserve
-the currently authorized live Photon configuration and do not send new messages,
-change automatic replies or alter provider/account/billing settings. The disabled
-provider environment in offline test commands applies only to those test processes.
-
-Assigned owners: **Megana (`megana111`) — Trace 1; Aarush Mane (`aarushmane`) —
-Trace 2; Jose — Trace 3.** Use separate repository branches/tasks in Trove.
-Do not ask three people to rebuild the existing comparison, ledger or dashboard.
-Published team prompts are in the Nemo Prompt Library; direct kickoff handoffs
-were sent to Megana and Aarush. A document alone does not create an agent session.
-
-Trace 3's export, strict split-manifest verifier, product panel and read-only
-Chalk receipt review are now implemented. Read `docs/trace3-implementation.md`
-before starting: these are integration foundations, not Aarush's independent
-scientific validation method or Megana's physical field-session workflow.
-
-The scope is a coastal decision-support **prototype tested in a tank**. The
-software does not establish ocean transport accuracy, coral benefit, a known
-polluter or an autonomous cleanup capability. Existing hardware is sufficient:
-USB camera, laptop, tank, independently powered circulation pump and manual mesh.
-No new actuator, robot, sensor, 3D printing or model-provider purchase is required.
-
-## Starting point: already implemented
-
-- Source tracking/calibration, recorded drift fitting, immutable profiles,
-  conditional source evidence, sensitivity, Unknown/Invalid and durable STOP.
-- A bounded two-layout first-passage simulator; registered profiles, source and
-  flow hashes; frozen protected zone and experiment plan.
-- A separate idempotent one-token trial ledger, full-horizon attestation,
-  conservative missing/unresolved bounds and separate synthetic/physical groups.
-- A Prevention dashboard, explicitly synthetic rehearsal, read-only Chalk review
-  and a local HTTP audit. These are implemented, not new assignments.
-- Public NOAA drifter benchmark, training-only diagnostic and historical satellite
-  context. These do not supply tank flow or source labels.
-- Photon transport is implemented. Preserve its currently authorized live
-  configuration; no new test messages, reply-setting changes or channel experiments
-  are part of these handoffs.
-- xAI narration remains disabled/unverified. No new credentials or billing work.
-
-Read `README.md`, `docs/architecture.md`, `docs/verification.md`,
-`docs/prevention-workflow.md`, `docs/prevention-physics.md` and applicable
-`AGENTS.md` before editing. For dashboard code, read the installed Next.js guides
-required by `dashboard/AGENTS.md`.
-
-## Ownership and integration rules
-
-| Lane | Outcome | Exclusive write scope |
-| --- | --- | --- |
-| 1 — Field evidence | A guided, reproducible calibration/recording workflow and a frozen field-session manifest | New field-session backend/schema/router/tests; new field-workflow UI; vision fixes only when demonstrated by a regression |
-| 2 — Validation | Offline prediction-versus-outcome validation and an honest next-measurement recommendation | New validation module/CLI/fixtures/tests; numerical prevention fixes only when demonstrated by a regression |
-| 3 — Product integration | Mount the two additions, export reproducible evidence and verify the complete experience | Shared API/runtime wiring, product shell, Chalk integration, export, browser/E2E tests and CI |
-
-Lane 3 alone edits `apps/api/reeftrace_api/main.py`,
-`apps/api/reeftrace_api/services/runtime.py`,
-`apps/api/reeftrace_api/services/store.py`, `dashboard/app/page.tsx`,
-`adapters/chalk/**`, `.github/workflows/**`, and existing prevention UI/service
-wiring. Other lanes send a small integration request instead of editing them.
-Existing inference schemas stay unchanged unless all three approve a versioned
-contract change. In particular, **never add release truth to `CaseInput`**.
-
-Start each branch from the coordinator's exact green `main` SHA **after** the
-prevention slice lands. Record that SHA in the PR. Suggested branches:
-`team/field-evidence`, `team/prediction-validation`, `team/product-integration`.
-Do not push directly to `main`, force-push another person's branch or merge an
-unrelated historical implementation. Use one focused PR per lane. Lane 3 reviews
-contract compatibility; the coordinator merges only after required checks pass.
-Rebase/update from `main` after a prerequisite merges and rerun affected checks.
-
-## Shared contract freeze
-
-The existing prevention API is the baseline; inspect its current schemas instead
-of inventing a parallel contract:
-
-| Existing endpoint under `/api/v1` | Contract to preserve |
-| --- | --- |
-| POST `/prevention/comparisons` | Active case/current noninvalid source evidence, baseline profile matching case, compatible registered profiles, frozen zone/horizon/plan |
-| GET `/prevention/comparisons/{id}` | `{comparison,trials,evaluation,is_current,archive_reason}`; archival reads remain available |
-| POST `/prevention/comparisons/{id}/trials` | Exact stable `trial_key`, one token, explicit outcome/time/accounting/horizon attestation; retry never means release another token |
-| POST `/prevention/comparisons/{id}/investigate` | Read-only evidence review tied to source revision and `evaluation.snapshot_hash` |
-| POST `/prevention/demo` | Clearly synthetic software rehearsal, never physical rates |
-
-`comparison.data_origin` is `SYNTHETIC` or `MEASURED_TANK`. Trial origin is
-`SYNTHETIC_DEMO` or `OPERATOR_REPORTED_PHYSICAL`. Keep both evaluation groups,
-including empty groups. Planned slots and actual releases are different counts;
-missing/unresolved slots remain unknown. Source scores are not probabilities and
-cannot become weights for ecological benefit. The fixed field, reflecting walls
-and perfect absorbing retention are model assumptions, not measured guarantees.
-
-Field-manifest v1 remains a proposal for Trace 1. Analysis-bundle v1 and the
-validation split-manifest interface are implemented; their strict schemas and
-actual synthetic fixture take precedence over the earlier design sketch:
-
-1. **Field manifest v1, Lane 1 producer.** A frozen receipt references
-   `profile_id`, `calibration_id`, `camera_session_id`, disjoint training and
-   validation recording IDs, `rig_check_id` when applicable, checks and warnings.
-   Include `schema_version`, ID/hash and explicit provenance. Reuse existing
-   immutable artifacts; exclude source-release truth, credentials, absolute local
-   paths and raw camera images. Do not claim hardware is independently verified.
-2. **Analysis bundle v1, Lane 3 producer / Lane 2 consumer (implemented).** Whitelisted snapshots
-   of a comparison, numerical report, frozen plan, trial ledger, evaluation hash,
-   profile/flow provenance and optional field-manifest reference. Include an
-   explicit evaluation-truth section for trial source labels. Keep it out of
-   source inference. Exclude arbitrary notes by default, phone identities, tokens,
-   full SQLite dumps, raw images and unrelated cases. A content hash covers the
-   canonical payload; detached timestamp metadata must not change that hash.
-   Hash the returned `payload_canonical_json` bytes, preserving Python float text.
-3. **Validation split manifest v1, Lane 2 producer / Lane 3 consumer (implemented).**
-   The import accepts only exact input/evaluation hashes, comparison/origin,
-   protocol/purpose and disjoint development/validation trial IDs. It rejects
-   uploaded metrics and prose. The server recomputes descriptive accounting from
-   local saved trials; `method_rerun:false`, `physical_validation:false` and
-   `supports_causal_claim:false` stay explicit. Aarush's external method/CLI must
-   remain separately identified; importing a manifest does not validate it.
-
-Commit small non-personal **synthetic contract fixtures** under
-`tests/fixtures/team_handoff/`: Lane 1 owns `field_manifest_v1.json`; Lane 2 owns
-`validation_report_v1.json`; Lane 3 owns `analysis_bundle_v1.json`. Each owner
-provides a schema/type and a parser test. Never relabel a synthetic fixture as a
-physical experiment. Keep public NOAA and existing demo fixtures unchanged.
-
-## Copy/paste prompt 1 — Field evidence and commissioning
-
-```text
-ASSIGNED OWNER: Megana / @megana111. Trace 1. Repo:
-https://github.com/Jose-Gael-Cruz-Lopez/reeftrace . Start from latest green main.
-Trace 3's export/manifest-checker/UI/Chalk foundation now exists. Preserve it.
-Read docs/trace3-implementation.md for the implemented contracts before coding.
-You own Lane 1 of the next ReefTrace iteration. Start from the coordinator's green
-main SHA after the prevention slice merges, on branch team/field-evidence. Read
-README, architecture, verification, prevention workflow/physics and AGENTS first.
-The current tracking, recording, drift fitting and source/prevention engines
-already exist. Build the missing guided field workflow; do not rebuild them.
-
-Goal: let an operator turn one measured tank setup into a reproducible, validated
-profile and frozen field-session receipt without editing JSON by guesswork.
-
-Exclusive write scope:
-- New apps/api/reeftrace_api/schemas/field_sessions.py
-- New apps/api/reeftrace_api/services/field_sessions.py
-- New apps/api/reeftrace_api/api/v1/endpoints/field_sessions.py
-- New dashboard/app/components/field-workflow.tsx and field-workflow.module.css
-- New tests/integration/test_field_sessions.py, tests/unit/test_field_protocol.py
-- New dashboard/app/components/field-workflow-state.ts
-- New dashboard/tests/field-workflow-state.test.mjs
-- tests/fixtures/team_handoff/field_manifest_v1.json
-- docs/field-commissioning.md
-- Existing apps/vision/reeftrace_vision/{calibration,capture,tracking}.py and their
-  unit tests ONLY for an actual demonstrated bug; coordinate before a change.
-
-Do not edit main.py, Runtime/Store, CaseInput, page.tsx, existing prevention
-modules, sponsor adapters or CI. Lane 3 owns mounting your router/component.
-
-Deliver one linear workflow: operator-selected camera session; four or more
-mapping correspondences and at least three separate check points; approved
-water-plane mapping; separate training/validation drift recordings; immutable
-recorded-flow result; measured profile admission; first source observation.
-Reuse the existing endpoints and gates. Do not manufacture drift, weaken a gate,
-join tracks across gaps or substitute a fresh preview for fresh case evidence.
-Provide measured-unit help, explicit missing-data states and a saved receipt of
-which immutable objects passed. A draft is not an approved physical setup.
-
-Propose the field-manifest v1 JSON/schema to Lanes 2/3 before coding integration.
-Your new router can expose POST /field-sessions and GET /field-sessions/{id};
-these are NEW endpoints, mounted only by Lane 3. The POST should validate existing
-artifact references, persist an immutable receipt and require operator auth via
-the shared dependency provided by Lane 3. Do not accept arbitrary caller claims
-as evidence that existing numerical/calibration gates passed.
-
-Physical action and power stay manual. Preserve live Photon settings; no new
-messages or provider/account
-changes, no private-key inspection or automatic camera opening. Tests use
-explicit fake capture and synthetic image fixtures, labelled as such. Mock the
-capture device, not the admission gates that the workflow is meant to prove. If actual
-hardware is unavailable, produce an executable operator checklist and report
-that gate blocked instead of marking physical commissioning complete.
-
-Definition of done: wizard parses the actual API contracts, preserves draft on
-recoverable failure, explains every blocked step, never promotes incomplete data
-to measured validity, and returns a reproducible field-manifest ID/hash. Include
-router mount instructions and component props for Lane 3; no shared-file edits.
-
-Required E2E scenarios: missing camera; stale/restarted session; wrong units or
-invalid mapping; overlap between train/validation recordings; unsupported flow;
-successful explicit fake-capture protocol; rig disturbance; and a fresh case
-after revalidation. Invalid paths create no false READY receipt. Run your scoped
-Python/Node tests and Ruff; provide exact results and a PR with the starting SHA.
-```
-
-## Copy/paste prompt 2 — Prediction validation and next measurement
-
-```text
-ASSIGNED OWNER: Aarush Mane / @aarushmane. Trace 2. Repo:
-https://github.com/Jose-Gael-Cruz-Lopez/reeftrace . Start from latest green main.
-Trace 3 exports analysis_bundle_v1 and imports strict split manifests already.
-Read docs/trace3-implementation.md and the actual schema/fixture first. The import
-checks identities and accounting only; your independent method is not implemented
-by that checker. Do not replace the API verifier or upload arbitrary metrics to it.
-You own Lane 2 of the next ReefTrace iteration, branch team/prediction-validation
-from the coordinator's green main SHA. Existing compare_layouts, conservative
-trial evaluation, frozen plans and the NOAA diagnostic already exist. Do not
-rebuild them, fit a new detector for appearance, or change public-data results.
-
-Goal: produce one offline, reproducible validation report from an exported
-prevention analysis bundle, then recommend the most useful NEXT independent
-measurement when an intervention decision is unresolved.
-
-Exclusive write scope:
-- New apps/estimation/reeftrace_estimation/prevention_validation.py
-- New scripts/evaluate_prevention_validation.py
-- New tests/unit/test_prevention_validation.py
-- New tests/fixtures/team_handoff/validation_report_v1.json and owned small
-  validation fixtures under tests/fixtures/prevention_validation/
-- New docs/prevention-validation-protocol.md
-- Existing apps/estimation/reeftrace_estimation/prevention.py and
-  tests/unit/test_prevention.py ONLY for a demonstrated numerical defect;
-  preserve the frozen comparison contract and coordinate any output change.
-
-Do not edit API/runtime/store, trial schemas, dashboard, Chalk, CI or Lane 1's
-field-manifest implementation. Lane 3 provides a whitelisted analysis_bundle_v1
-export. Agree that schema and your validation_report_v1 fixture with Lane 3 first.
-
-Implement a bounded CLI accepting a local bundle path, explicit development/test
-protocol identifiers and an output path. Verify hashes/IDs, finite values, origin
-labels and denominator accounting. Refuse changed frozen plans, incompatible
-profiles, mixed synthetic/physical pooling and overlap between development and
-validation trial/recording IDs. Keep source-release labels in evaluation only.
-Do not call providers, download models/data, inspect .env, open cameras or alter
-SQLite. No training on held-out outcomes or relabelling development data as test.
-
-Compare per-source/per-layout simulated first-entry fractions/bounds against the
-recorded outcome bounds with their actual denominators. Report missing planned
-slots, unresolved observations and whether the suggested layout remained useful
-on new trials. Keep source identification accuracy and intervention performance
-separate. Fractions from particles are model-conditional, not proven calibrated
-probabilities. Overlapping trials/sessions and small pilot samples do not justify
-significance, ocean accuracy, coral survival or CO2 claims.
-
-Implement a transparent NEXT-MEASUREMENT heuristic, not an untested optimal
-active-learning claim: first request independent drift in unsupported regions;
-otherwise complete the frozen sequence's remaining slots before recommending a
-new protocol. After completing a plan, exploratory selection of a new paired
-block belongs to development; freeze a fresh confirmation protocol before
-claiming independent validation. Identify a declared source/scenario whose
-uncertainty changes the layout decision when the data supports it. If the saved
-report cannot identify a useful region, say so. Watching another image of an
-already retained endpoint does not recover missing history; cropping an already
-recorded full-frame image is not a new sensor observation. Never move a collector
-without requiring fresh layout-specific drift validation.
-
-Definition of done: identical input/config produces identical finite report/hash;
-invalid inputs fail clearly; the report exposes both predicted and observed
-quantities and cannot claim physical results from the synthetic demo. Supply a
-small pure-function interface and example report for Lane 3 to render/explain.
-
-Required tests: known synthetic first-entry/capture ordering; all-unresolved and
-incomplete/unbalanced plans; a model prediction contradicted by reported trials;
-mixed origins; duplicate recording/trial identities; stale/tampered hashes; train/
-test leakage; and a held-out result that does not favor the proposed model.
-Run scoped tests and Ruff, then provide a PR with commands/results and limitations.
-```
-
-## Copy/paste prompt 3 — Product, evidence export, Chalk and integration
-
-```text
-ASSIGNED OWNER: Jose. Trace 3. Repo:
-https://github.com/Jose-Gael-Cruz-Lopez/reeftrace . Start from latest green main.
-IMPLEMENTED FOUNDATION: exact-canonical export; strict split-manifest checker;
-server-recomputed accounting; report import/history panel; selected-receipt Chalk
-review; loopback e2e_validation.py. Preserve these working paths. The instructions
-below describe the overall lane; remaining work is reviewed integration of the
-actual Trace 1 field receipt and Trace 2 independent method once they arrive.
-Read docs/trace3-implementation.md and actual schemas before modifying contracts.
-You own Lane 3, branch team/product-integration from the coordinator's green main
-SHA after the current prevention slice lands. Your job is to integrate Lanes 1/2
-and prove the complete story; the current source/prevention application exists.
-
-Exclusive write scope:
-- apps/api/reeftrace_api/main.py and services/runtime.py: minimal shared wiring
-- services/store.py: only necessary reviewed transaction/integrity helpers
-- New apps/api/reeftrace_api/schemas/evidence_export.py
-- New apps/api/reeftrace_api/services/evidence_export.py
-- New apps/api/reeftrace_api/api/v1/endpoints/evidence_export.py
-- Existing prevention service/investigation wiring and adapters/chalk/**
-- dashboard/app/page.tsx and existing prevention workspace/state components
-- New dashboard/app/components/validation-report.tsx, validation-report.module.css
-  and validation-report-state.ts
-- New dashboard/tests/validation-report-state.test.mjs
-- scripts/e2e_demo.py, scripts/e2e_prevention.py
-- New tests/integration/test_evidence_export.py and test_team_workflow.py
-- .github/workflows/**, docs/verification.md, docs/integrations.md, README.md
-- tests/fixtures/team_handoff/analysis_bundle_v1.json
-
-Do not edit Lane 1's field-session/vision files or Lane 2's validation/numerical
-files. Integrate their small reviewed APIs; request changes rather than copying
-their algorithms into your UI or backend. Freeze shared contracts with both
-owners before wiring. Do not rewrite working components or replace the stack.
-
-Implement a deliberate evidence-export action for one selected comparison. A new
-GET /prevention/comparisons/{id}/export can return analysis_bundle_v1 with canonical
-hash, exact immutable comparison/plan/trials/evaluation and required profile/flow
-provenance. Validate identity and exclude credentials, phone handles, absolute
-paths, arbitrary notes, raw camera data and unrelated cases. Keep source-release
-truth in a marked evaluation section; never send it to source inference tools.
-Archive exports remain readable and labelled; stale plans cannot accept writes.
-
-Mount Lane 1's router with existing operator authentication and component with
-the existing request/token state. Surface Lane 2's report and deterministic next-
-measurement reasons. Prefer a small report view over another dashboard system.
-Add an explicit import/validate action if a local CLI report must return to UI;
-verify input comparison/evaluation hashes before accepting it. Do not accept an
-arbitrary file as the current authoritative numerical result.
-
-Extend the read-only Chalk evidence backend only when the new report contract is
-frozen. Return aggregate reports/IDs/digests, not full trajectories or raw notes.
-Preserve all strict JSON/tool/citation rules, Unknown/Invalid status and existing
-request/whole-turn limits. An unavailable provider must leave the deterministic
-report usable. A changed case or trial/evaluation digest must reject a stale model
-answer atomically; do not overwrite a prior manual outcome. Numerical tables are
-rendered from frozen backend reports, never from generated prose.
-
-Preserve the current live Photon settings and keep xAI voice disabled. Do not send
-new messages, change background replies, alter account/billing/model configuration, request private
-keys or add an actuator. All automated integration uses fake provider transport
-with explicit mock labels. Do not run a metered live model audit without separate
-human coordination; the existing HTTP scripts can call configured Chalk.
-
-Definition of done: the operator can complete a guided setup rehearsal, open a
-frozen comparison, log/recover one exact trial submission, export the evidence,
-validate it offline and view a matching report/Chalk explanation. Preserve
-refresh/reload recovery, accessibility, responsive layout, source lineage and
-archival states. No optimistic success or silent retry of writes/model calls.
-
-Required E2E scenarios: missing operator token; new field receipt and comparison;
-export roundtrip/hash tampering; duplicate/pending trial recovery after network
-failure; physical-vs-synthetic separation; incomplete and contradictory outcomes;
-STOP/recompute during async work; trial change during Chalk review; stale imported
-validation; offline provider fallback; and mobile keyboard/error states.
-
-Run the full offline Python/Ruff/dependency checks, dashboard Node tests/lint/types/
-production build, and the scientific fixture-diff check. Use explicit fake capture
-and fake providers, never physical claims. Add meaningful new checks to CI with
-read-only permissions and no secrets. Open a focused PR; after Lane 1/2 merges,
-update from main and repeat only checks affected by integration changes.
-```
-
-## Handoffs and definition of a finished iteration
-
-1. **Contract checkpoint:** all three agree the three versioned fixtures and
-   ownership boundaries. Record decisions in PR descriptions. No mid-build JSON
-   renames or hidden new required fields.
-2. **Lane 1 → Lane 3:** router factory/mount instruction, component props, fixture,
-   commissioning checklist and scoped test evidence. A blocked physical gate is
-   an explicit state, not a reason to fabricate a passing receipt.
-3. **Lane 3 → Lane 2:** a scrubbed synthetic export and parser contract first;
-   actual operator-reported data can follow privately. No unreviewed database dump.
-4. **Lane 2 → Lane 3:** deterministic function/CLI, report fixture, reason codes,
-   limitations and evidence that contradictory outcomes stay visible.
-5. **Final integration:** one demonstrable path, one adversarial path and one
-   unavailable-provider path. The coordinator reviews/merges green PRs and records
-   the final SHA and actual checks; no one claims another person's unfinished work.
-
-From the repository root, the shared offline baseline is:
-
-```sh
-CHALK_ENABLED=false PHOTON_ENABLED=false GROK_VOICE_ENABLED=false \
-  .venv/bin/python -m pytest -q --strict-config --strict-markers -ra
-.venv/bin/python -m ruff check apps adapters scripts tests
-.venv/bin/python -m pip check
-git diff --exit-code -- data/public data/sample_runs
-cd dashboard
-node --test tests/*.test.mjs
-npm run lint
-npx next typegen
-npx tsc --noEmit
-npm run build
-```
-
-Use isolated test data and explicit fake transports. Run `scripts/dev.py --check`
-for a read-only launch preflight. The existing HTTP demo scripts may make a real
-metered Chalk turn when credentials are configured; they are **not** the default
-offline smoke checks. A human must coordinate any such run; preserve the existing
-live Photon configuration and do not send new messages. Offline test processes
-use disabled fake transports without rewriting the live environment.
-
-The final demo should say: **we preserved uncertain source identity, compared a
-declared interception choice, and made the measured evidence and its limitations
-inspectable.** If hardware trials have not happened, show the synthetic rehearsal
-and the executable field protocol, and name physical validation as unfinished.
 ````
