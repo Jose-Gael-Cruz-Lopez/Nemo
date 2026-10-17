@@ -3,9 +3,9 @@ TIDEWARD — INTEGRATED DEMO GUIDE
 
 Tideward is the current product identity. The repository, API identifiers, environment variables and saved ReefTrace evidence remain compatible.
 
-ReefTrace observes a floating token, compares plausible entry points using a frozen drift model, and explains the evidence. It then helps the team compare an interception layout with a baseline and record whether tokens reached a protected surface zone.
+Tideward compares interception layouts before floating pollution reaches a protected area. Its default ocean view uses a real changing-current model, hypothetical releases and an illustrative reef proxy. The separate tank workflow observes a floating token, compares plausible entry points using a measured/frozen drift model, and keeps predictions separate from recorded outcomes.
 
-The current product is a controlled tank prototype. It does not identify an exact polluter, reconstruct a unique journey from an already-stuck object, or establish coral survival benefits.
+The current product is a software prototype with a planned controlled tank experiment. The ocean comparison does not use a real mapped reef boundary or prove measured interception benefit. Tideward does not identify an exact polluter, reconstruct a unique journey from an already-stuck object, or establish coral survival benefits.
 
 START HERE
 
@@ -17,7 +17,7 @@ If services need starting, run this from the reeftrace repository:
 
 The prepared Photon-enabled startup requires the explicit --allow-photon flag. Do not restart an already running service just to follow this guide. The default launcher does not silently enable messaging.
 
-The root page is the public introduction. Choose “Enter Tideward” or “Open workspace” to use /login and verify the shared local operator token, or enter /workspace for public research. This is local operator access, not individual email accounts. The token stays in React memory during in-app navigation; a reload clears it. The workspace’s “Operator access” dialog can also connect access for loading demos, computing evidence, saving trials and asking Chalk. Provider keys stay on the server; public research replays need no operator token.
+The root page is the public introduction. Choose “Start your experiment” to use /login and verify the shared local operator token, or “Explore NOAA evidence” for public Data Lab research. This is local operator access, not individual email accounts. The token stays in React memory during in-app navigation; a reload clears it. The workspace’s “Operator access” dialog can also connect access for loading tank demos, computing evidence, saving trials and asking Chalk. Provider keys stay on the server; public research replays need no operator token.
 
 This software-only presentation does not require a camera, pump or new physical recording. Leave capture off. The software has no pump actuator; “Stop task” stops software work, not external AC power. The current software-only teammate prompts are in docs/software-handoffs.md; the later physical instructions below are not part of those assignments.
 
@@ -44,9 +44,33 @@ The synthetic source demo and the stock prevention demo use separate saved examp
 
 If a saved report fails to load, use “Reload source report”. Recomputing a case changes its evidence identity; an old answer or sensitivity result should disappear. Use “Stop task” only when you intend to archive that case’s ongoing work. Reloading the demo after a stopped case creates an active replacement while preserving history.
 
-2. COMPARE TWO PREVENTION LAYOUTS
+2A. COMPARE TWO OCEAN LAYOUTS: DEFAULT DEMO
 
-Open “Prevention” and click “Load prevention demo”. This loads its own synthetic source case, baseline/intervention layouts, a protected-zone proxy and hand-authored synthetic trial records. It does not automatically inherit the observation selected in Investigations.
+Open “Prevention”. The initial environment is “Ocean · changing currents”. Data Lab starts with the same ocean comparison, not a second default forecast graph. No camera, tank case or token is required to load these numbers.
+
+1) Keep “Ocean scenario” on “Downstream corridor · illustrative what-if”. Click “Compare ocean layouts”. The server checks saved current-file hashes and integrates the same six hypothetical releases through changing current speed/direction at their moving positions and times.
+2) Read the result: “Central coverage has fewer predicted reef entries.” Central has 2 of 6 predicted entries and 4 idealized captures; flanking has 4 entries and 2 idealized captures. Without interception, all 6 model releases reach this proxy. These are simulated counts, not measured kilograms, probabilities or field efficiency.
+3) Read the selection disclosure: this downstream reef proxy was chosen AFTER viewing the current preview. It is an illustrative what-if, not independent performance evidence. Both layouts were kept at 2,000 m total idealized line, with identical releases, horizon and unmodified flow. It is not a mapped real reef or an engineered boom deployment.
+4) Inspect the SINGLE combined graph. Blue paths are Layout A / central coverage; dashed gold paths are Layout B / flanking coverage. Initially the two layout paths, proxy and interceptor geometry are shown; no-interception context and current arrows are unchecked to reduce clutter. Overlapping paths before contact are expected because every layout sees exactly the same currents.
+5) Toggle the “Choose the layers to compare” checkboxes one at a time. No-interception paths, both layout paths, reef proxy, interceptor geometry and current arrows are independent. Hide one layout to inspect the other. Restore both. Confirm the numerical cards and plot scale do not change.
+6) Select one item under “Inspect a release”, then return to “All six releases”. Only the drawing changes; all six fixed releases remain in the comparison denominator. Hover a path dot or endpoint for its release, UTC time and modeled outcome. Square = idealized capture; triangle = proxy entry; circle = horizon completed without entry; cross = unresolved.
+7) Turn on current arrows and move their valid-time slider. Only the arrow display time changes. The full predicted paths, outcomes, common arrow-speed scale and common east/north metre scale stay fixed. The arrows interpolate the coarse source grid; they are not finer measurements.
+8) Connect local operator access if needed and click “Ask Chalk about these layouts” ONCE. Read the REPORT/STOP and live-response label. Expand “Comparison evidence citations”: a REPORT must cite ocean-comparison:<report hash> and ocean-method:<method hash> for this exact scenario. It should explain the conditional model preference and missing physical evidence, not invent a measured benefit. Provider failure or a stale response leaves the numerical comparison available and does not trigger automatic retries.
+9) Expand “Scientific method, current source and full report” only when asked about assumptions. The source is the saved PacIOOS ROMS surface-current snapshot: roughly 4 km spacing, 3-hour forcing, 0.25 m depth, valid 17 October 2026 18:00 UTC through 18 October 00:00 UTC. RK4 samples moving-position/time flow; first contact is localized on supported five-minute output chords. Neither the smaller solver step nor the drawn reef polygon establishes reef-scale resolution. The report becomes archived after its valid-time window ends; neither forecast mode is a live water measurement.
+10) Select “Original proxy · no-entry model control”, then click “Compare ocean layouts” again. The prior report and explanation clear. This preserved initial geometry has 0 of 6 predicted entries with no interception and 0 with either layout: a TIE. Central still captures 4 model particles and flanking 2, but that difference cannot establish protection of an area the baseline paths never reach. Chalk must not invent a winner for this tie.
+
+Scientific rules to say aloud:
+  - Capture is perfect absorption on geometric first contact. Lines do not change the current field; actual boom efficiency, waves, object response and barrier hydrodynamics are unmeasured.
+  - Reef-boundary contact counts as entry; approximately simultaneous capture/entry ties count as entry conservatively.
+  - Missing forcing stops a path. Its unresolved outcome remains in all six releases, with entry-count bounds [known entries, known entries + unresolved]. Those are accounting bounds, not statistical confidence intervals.
+  - A preferred layout requires strictly nonoverlapping entry bounds. Equal resolved results return TIE; overlapping unresolved ranges return INDETERMINATE.
+  - The ocean load/review is read-only: no tank case, physical trial, hardware action or Photon message is created.
+
+The complete API, method and next-measurement guide is docs/ocean-prevention.md. For the sustainability pitch: “We can compare where to intercept pollution before a protected area, keep uncertainty visible, then test the decision with independently recorded outcomes.” The current ocean example demonstrates that decision workflow; physical benefit remains to be measured.
+
+2B. TANK EXPERIMENT AND RECORDED TRIAL LEDGER
+
+In “Prevention”, deliberately click “Tank experiment & trial ledger”, then “Load prevention demo”. This retains the original centimetre-scale software experiment: its own synthetic source case, baseline/intervention layouts, protected-zone proxy and hand-authored synthetic trial records. It does not inherit an ocean prediction or automatically reuse the observation selected in Investigations.
 
 “Has it worked in recorded trials?” keeps the physical and synthetic outcome counts visible. Expand “Review recorded outcomes” for the detailed ledgers and trial controls. Zero operator-reported physical outcomes is the actual current result, not a hidden success.
 
@@ -77,7 +101,9 @@ Recorded entry bounds use the frozen planned denominator: known entries form the
 
 If a save’s outcome is uncertain because of a network failure, the tab retains its exact retry key and payload. Retry the same trial; do not release another token to compensate. A confirmed rejection can be reconciled and corrected explicitly. Stopping or recomputing the source case archives its comparison rather than silently changing frozen evidence.
 
-3. UNDERSTAND THE TWO VALIDATION PATHS
+3. UNDERSTAND THE TWO TANK VALIDATION PATHS
+
+Stay in “Prevention” → “Tank experiment & trial ledger” for the exports and numerical validation examples below. The public ocean report does not create one of these tank comparisons or receipts.
 
 A. Current-case export and accounting receipt
 
@@ -124,13 +150,13 @@ The current software plan uses USB camera → laptop. It does not require the in
 
 5. DATA LAB: REAL NOAA DATA WITH HONEST LIMITS
 
-Open “Data lab”. Start with the current “Six real buoy groups. Five forecasts.” card and “Load buoy comparison” action. Loading is an offline, read-only replay of saved artifacts, not a download or first evaluation.
+Open “Data lab”. Its first card is the same dynamic-current ocean comparison described in section 2A, with one combined graph. To reach historical buoy forecasts, expand “Research details and historical buoy validation”, then find “Six real buoy groups. Five forecasts.” and “Load buoy comparison”. Loading is an offline, read-only replay of saved artifacts, not a download or first evaluation. These historical validation plots have their own data roles; they are not merged into an ocean-interception score or used as tank measurements.
 
 CURRENT SIX-GROUP STUDY
 
 1) Click “Load buoy comparison”. The completed v2 report has six selected/downloaded GDP-ID days, five fixed models and 180/180 scored model-hour outcomes. They reuse 36 unique observed intervals; these are not 180 independent experiments.
 2) Inspect the six-slot and common-model tables. Last drift has the lowest aggregate ADE here (1573.423 m), compared with Kalman (1655.662 m) and ridge (1772.130 m). Lower is better, but there is no significance claim or automatic promotion.
-3) Choose a “Buoy group” and “Prediction model” to inspect the path on the main card. Expand “Research details” for target coverage, vector metrics, exact assumptions, provenance and limitations. Observed and forecast paths use local metres; vector errors use m/s. Kalman starts at a filtered last context state; the other models start at the raw last observation.
+3) Choose a “Buoy group” and “Prediction model” to inspect the path within the historical study. Use its Recorded/Forecast checkboxes to reduce overlap without changing scores or plot scale. “Compare all five models” opens the full score table; “Research details” exposes coverage, vector metrics, exact assumptions, provenance and limitations. Observed and forecast paths use local metres; vector errors use m/s. Kalman starts at a filtered last context state; the other models start at the raw last observation. Straight persistence/constant-velocity forecasts remain honest historical baselines, not the default ocean-mode forecast.
 4) Under “What does this result mean?”, click “Explain this result” for one explicit operator-authorized research review. Ask what the comparison supports and what the amendment/alias/interpolation limits mean. Inspect the fresh-study canonical snapshot citation, fresh-protocol citation and read-only tool trace. It cannot change source scores, acquire data, tune models, record outcomes or message anyone. A failed review leaves the deterministic report visible.
 
 This v2 design preserves v1’s zero-trajectory/zero-model-outcome attempt and the pre-outcome parser/transport amendment. All six selected IDs are outside 223 pre-study fixture exclusions and have distinct positive selected WMOs, but ten older aliases remain unresolved. Say “previously unscored GDP-ID groups with known-alias exclusions”, not “proven physically independent drifters” or “IDs never appearing in metadata”. NOAA hourly positions are historical QC/interpolated products, not live raw fixes or plastic-source truth.

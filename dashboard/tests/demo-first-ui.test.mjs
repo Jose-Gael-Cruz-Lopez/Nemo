@@ -68,13 +68,13 @@ test("Overview has three explicit demo steps, distinguishes separate examples an
   assert.equal((renderToStaticMarkup(React.createElement(DemoGuide, { disabled: true, onTrace: noAction, onPrevention: noAction, onChalk: noAction })).match(/disabled=""/g) ?? []).length, 3);
 });
 
-test("Data Lab exposes one primary study and keeps earlier study controls behind a closed disclosure", () => {
+test("Data Lab defaults to one changing-current comparison and keeps historical benchmarks closed", () => {
   const html = render(React.createElement(RealDataLab, { api: "" }));
   const visible = defaultVisible(html);
-  assert.match(visible, /How well does it predict/);
-  assert.match(visible, /Load buoy comparison/);
-  assert.match(html, /<details class="card"><summary>Research details and earlier studies/);
-  assert.doesNotMatch(visible, /Run reference buoy replay|Load fixed Kalman study|Load motion-vector diagnostic/);
+  assert.match(visible, /Follow the flow. Compare protection/);
+  assert.match(visible, /Compare ocean layouts/);
+  assert.match(html, /<details class="card"><summary>Research details and historical buoy validation/);
+  assert.doesNotMatch(visible, /Load buoy comparison|Load current-driven prediction|Run reference buoy replay|Load fixed Kalman study|Load motion-vector diagnostic/);
 });
 
 test("completed study keeps the summary and plot visible while full model scores and provenance stay inspectable", () => {

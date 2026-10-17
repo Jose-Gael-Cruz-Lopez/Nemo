@@ -1,0 +1,26 @@
+.card { overflow: hidden; }
+.header { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.stack { display: flex; flex-direction: column; gap: 18px; }
+.summary h3 { margin: 0 0 8px; color: #265f7b; font-size: 20px; font-weight: 550; letter-spacing: -.35px; }
+.summary p, .note { margin: 0; color: #526f83; font-size: 12px; line-height: 1.75; }
+.scope { padding: 13px 16px; border: 1px solid #cce4f2; background: #edf8ff; color: #315d77; font-size: 12px; line-height: 1.75; }
+.metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.metric { padding: 18px; border: 1px solid #d5e9f4; background: #f6fcff; }
+.metric h4 { margin: 0 0 12px; color: #315d77; font-size: 13px; font-weight: 600; }
+.metric strong { display: block; color: #235d7c; font-size: 28px; font-weight: 550; letter-spacing: -.7px; font-variant-numeric: tabular-nums; }
+.metric p { margin: 7px 0 0; color: #526f83; font-size: 12px; line-height: 1.75; }
+.metric span { font-weight: 600; }
+.figure { margin: 0; border: 1px solid #d7e9f3; background: #f8fcff; }
+.plot { display: block; width: 100%; height: auto; max-height: 550px; }
+.caption { margin: 0; padding: 0 18px 16px; color: #526f83; font-size: 12px; line-height: 1.7; text-align: center; }
+.label { display: flex; flex-direction: column; gap: 8px; color: #3d657d; font-size: 12px; font-weight: 500; }
+.label input { width: 100%; accent-color: #087fac; }
+.chalk { display: flex; flex-direction: column; gap: 12px; padding: 20px; border: 1px solid #cce3f0; background: #f2faff; }
+.chalk h3 { margin: 0; color: #315e78; font-size: 16px; font-weight: 550; }
+.answer { padding: 16px; background: #fff; border: 1px solid #d2e8f4; color: #305a73; font-size: 12px; line-height: 1.8; }
+.answer p { margin: 10px 0 0; }
+.method p { color: #526f83; font-size: 12px; line-height: 1.8; }
+.identity { overflow-wrap: anywhere; }
+@media(max-width:760px) { .header { align-items: flex-start; flex-direction: column; } .metrics { grid-template-columns: 1fr; } .metric { padding: 14px 16px; } .metric strong { font-size: 24px; } }
+.label select { padding: 11px 12px; width: 100%; font: inherit; font-weight: 400; }
+.plot g[tabindex]:focus { outline: 2px solid #1d6890; outline-offset: 3px; }

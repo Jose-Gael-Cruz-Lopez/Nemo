@@ -21,6 +21,7 @@ from .api.v1.endpoints.field_sessions import create_field_sessions_router
 from .api.v1.endpoints.fresh_physics import create_fresh_physics_router
 from .api.v1.endpoints.health import router as health_router
 from .api.v1.endpoints.method_validation import create_method_validation_router
+from .api.v1.endpoints.ocean_prevention import create_ocean_prevention_router
 from .core.settings import Settings
 from .schemas.contracts import (
     CalibrationInput,
@@ -116,6 +117,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(create_field_sessions_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_fresh_physics_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_current_forecast_router(runtime, operator), prefix="/api/v1")
+    app.include_router(create_ocean_prevention_router(runtime, operator), prefix="/api/v1")
 
     @app.get("/")
     def root():

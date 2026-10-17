@@ -391,6 +391,42 @@ def extra(result, api, token):
             and current_review["method_sha256"] == currents["method_sha256"]
             and current_review["store_written"] is False
             and current_review["hardware_actuation"] is False)
+        ocean = req("/research/ocean-prevention", auth=False)
+        control = req("/research/ocean-prevention?scenario_id=initial-proxy-v1", auth=False)
+        req("/research/ocean-prevention?scenario_id=invented", expected=422, auth=False)
+        check("ocean prevention compares equal layouts with the same changing-current releases",
+            ocean["kind"] == "OCEAN_PREVENTION_COMPARISON"
+            and ocean["scenario"]["id"] == "downstream-corridor-v2"
+            and ocean["method"]["trajectory"] == "dynamic_current_advection_only"
+            and ocean["method"]["identical_unmodified_forcing_for_every_layout"] is True
+            and ocean["method"]["barriers_modify_flow"] is False
+            and len(ocean["releases"]) == 6
+            and ocean["baseline"]["summary"]["entered_count"] == 6
+            and [layout["total_length_m"] for layout in ocean["layouts"]] == [2000, 2000]
+            and [layout["summary"]["entered_count"] for layout in ocean["layouts"]] == [2, 4]
+            and ocean["recommendation"]["best_layout_id"] == "central"
+            and ocean["validation"]["physical_validation"] is False
+            and ocean["validation"]["measured_entry_count"] is None)
+        check("the original unexposed proxy stays a no-benefit control, not a forced winner",
+            control["baseline"]["summary"]["entered_count"] == 0
+            and control["recommendation"]["status"] == "TIE"
+            and control["recommendation"]["best_layout_id"] is None)
+        ocean_question = {"question": "Explain the predicted protection comparison and its limits.",
+            "scenario_id": ocean["scenario"]["id"],
+            **{key: ocean[key] for key in (
+                "snapshot_sha256", "method_sha256", "scenario_sha256", "report_sha256")}}
+        req("/research/ocean-prevention/investigate", ocean_question, expected=401, auth=False)
+        req("/research/ocean-prevention/investigate", {
+            **ocean_question, "report_sha256": "0" * 64}, expected=409)
+        ocean_review = req("/research/ocean-prevention/investigate", ocean_question)
+        check("disabled Chalk preserves the exact ocean scenario and numerical comparison",
+            ocean_review["action"] == "STOP"
+            and ocean_review["failure_code"] == "NOT_CONFIGURED"
+            and ocean_review["live_model_response"] is False
+            and ocean_review["research_report"] == ocean
+            and ocean_review["report_sha256"] == ocean["report_sha256"]
+            and ocean_review["store_written"] is False
+            and ocean_review["hardware_actuation"] is False)
         check("real-vector units and synthetic vision evidence stay separated", noaa["noaa"]["velocity_units"] == "m/s"
             and noaa["synthetic_tank"]["coordinates"]["velocity_units"] == "cm/s"
             and noaa["synthetic_tank"]["data_origin"] == "SYNTHETIC_SOFTWARE_REPLAY"
@@ -421,6 +457,9 @@ def extra(result, api, token):
             fresh_study_snapshot_sha256=snapshot_hash,
             current_forecast_snapshot_sha256=currents["snapshot_sha256"],
             current_forecast_method_sha256=currents["method_sha256"],
+            ocean_prevention_report_sha256=ocean["report_sha256"],
+            ocean_prevention_scenario_sha256=ocean["scenario_sha256"],
+            ocean_prevention_recommendation=ocean["recommendation"],
             no_live_provider_calls=True, no_physical_trials=True)
 
 

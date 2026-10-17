@@ -11,7 +11,7 @@ import { VectorDiagnostic } from "./vector-diagnostic";
 import { CohortVectors } from "./cohort-vectors";
 import { KalmanDiagnostic } from "./kalman-diagnostic";
 import { FreshDrifterStudy } from "./fresh-drifter-study";
-import { CurrentForecastPreview } from "./current-forecast";
+import { OceanPrevention } from "./ocean-prevention";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -81,11 +81,11 @@ export function RealDataLab({ api }: { api: string }) {
     finally { if (!pending.signal.aborted) { controller.current = null; setLoading(false); } }
   }
   return <>
-    <div className="page-heading"><div><p className="kicker">Data Lab</p><h1>How well does it predict?</h1><p className="page-description">Test buoy-motion models or follow a changing ocean-current forecast.</p></div></div>
-    <p className="settings-note">Historical buoy motion tests the forecasting software. It does not identify a plastic source or validate the tank.</p>
+    <div className="page-heading"><div><p className="kicker">Data Lab · ocean mode</p><h1>Follow the flow. Compare protection.</h1><p className="page-description">One plot for changing-current paths, interception layouts and the protected area.</p></div></div>
+    <OceanPrevention api={api} />
+    <details className="card"><summary>Research details and historical buoy validation</summary><div className="card-body data-lab-results">
+    <p className="settings-note">These historical NOAA benchmarks cover different places and dates from the ocean comparison. They test motion models separately; they are not additional trajectories for its map.</p>
     <FreshDrifterStudy api={api} />
-    <CurrentForecastPreview api={api} />
-    <details className="card"><summary>Research details and earlier studies</summary><div className="card-body data-lab-results">
     <button className="secondary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running reference replay…" : "Run reference buoy replay"}</button>
     <CohortVectors api={api} />
     <KalmanDiagnostic api={api} />
