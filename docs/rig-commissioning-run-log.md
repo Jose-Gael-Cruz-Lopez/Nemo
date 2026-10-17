@@ -58,8 +58,8 @@ short wall. Measure on the **water surface**.
 
 | Quantity | Value | Method / note |
 | --- | --- | --- |
-| Origin corner and axis directions | | |
-| Bin interior length × width × depth | 41.3 × 28.6 × 17.1 cm (operator-reported) | Not stated whether measured at the rim, inside or at the waterline; the bin tapers. Measure inside length and width **at the waterline** before using them for mapping. |
+| Origin corner and axis directions | Bottom-right inside corner at the waterline = (0, 0). +x along the bottom long wall toward bottom-left; +y up the right short wall toward top-right. | Operator-reported, 2026-10-17. |
+| Bin interior length × width × depth | Overall 41.3 × 28.6 × 17.1 cm (rim/outer, reported earlier). **At the waterline (inside): 14 in × 9 in = 35.56 × 22.86 cm.** | Operator-measured in inches and converted at 2.54 cm/in. Measured diagonal 16.5 in vs 16.64 in for a perfect rectangle (difference 0.14 in ≈ 0.36 cm): consistent and near-square. |
 | Waterline height above the floor, and its tape mark | | |
 | Pump minimum operating depth (from the manual) | | |
 | Overflow margin above the waterline | | |
@@ -99,7 +99,7 @@ Nothing opens it automatically.
 | Device index and backend shown in Status | |
 | Camera session ID | |
 | Frame size (px) | |
-| Mapping marks used (count) and check marks (count, all different) | |
+| Mapping marks used (count) and check marks (count, all different) | 4 inside waterline corners: (0,0), (35.56,0), (35.56,22.86), (0,22.86) cm. 3 tape check marks at the waterline: bottom-wall midpoint (17.78,0), top-wall midpoint (17.78,22.86), right-wall midpoint (0,11.43) cm |
 | Declared check-point tolerance (cm, set before fitting) | |
 | Calibration ID | |
 | Approved? Max / mean check error (cm) | |
