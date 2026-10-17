@@ -11,7 +11,10 @@ from .store import Store
 
 @lru_cache
 def get_store():
-    return Store(os.environ.get("REEFTRACE_DB_PATH", "data/runs/reeftrace.sqlite3"))
+    return Store(
+        os.environ.get("DATABASE_URL")
+        or os.environ.get("REEFTRACE_DB_PATH", "data/runs/reeftrace.sqlite3")
+    )
 
 
 def profile_for(store, calibration_id):

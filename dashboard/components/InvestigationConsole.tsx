@@ -42,7 +42,7 @@ export default function InvestigationConsole() {
   return <section className="workspace" aria-label="Version 3 evidence investigation">
     <p className="eyebrow">FORWARD MODEL · STORED EVIDENCE · MANUAL RECOVERY</p>
     <h2>Investigate a case</h2>
-    <p className="muted">Load a recorded or live case. Source tables come directly from the estimator. The investigator uses Chalk when configured. ASUS computer details are pending; the baseline runs on CPU.</p>
+    <p className="muted">Load a recorded or live case. Source tables come directly from the estimator. The investigator uses the configured AI provider. ASUS computer details are pending; the baseline runs on CPU.</p>
     <label>Local operator token <input type="password" autoComplete="off" value={token} onChange={e=>setToken(e.target.value)} style={{padding:10,margin:10}} /></label>
     <button disabled={busy || !token} onClick={()=>void perform(async()=>setCases(await request("/cases")))}>Load cases</button>
     <p className="muted">Token stays in this component&apos;s memory. Configure REEFTRACE_LOCAL_TOKEN in the API environment.</p>
@@ -68,8 +68,8 @@ export default function InvestigationConsole() {
       </div>
       {analysis!==null && <details open><summary>Stored sensitivity result</summary><pre style={{overflowX:"auto",maxHeight:320}}>{JSON.stringify(analysis,null,2)}</pre></details>}
       <label>Investigation question <textarea value={question} onChange={e=>setQuestion(e.target.value)} maxLength={4000} style={{display:"block",width:"100%",minHeight:80,margin:"12px 0"}} /></label>
-      <button disabled={busy||!question.trim()} onClick={()=>void perform(async()=>setAnswer(await request(`/cases/${active.id}/investigate`,{question})))}>Ask through Chalk</button>
-      {answer && <div><p><strong>{answer.action}</strong> · Chalk gateway</p><p>{answer.explanation}</p><p>Evidence: {answer.evidence_ids.join(", ")}</p><p>Tools: {answer.trace.map(t=>t.tool).join(" → ")}</p></div>}
+      <button disabled={busy||!question.trim()} onClick={()=>void perform(async()=>setAnswer(await request(`/cases/${active.id}/investigate`,{question})))}>Ask investigator</button>
+      {answer && <div><p><strong>{answer.action}</strong> · AI investigator</p><p>{answer.explanation}</p><p>Evidence: {answer.evidence_ids.join(", ")}</p><p>Tools: {answer.trace.map(t=>t.tool).join(" → ")}</p></div>}
       <h3>Optional manual net recovery</h3>
       <p className="muted">Creates a human task. Approval requires a fresh live observation, checked rig, and unchanged evidence. No pump or servo is triggered.</p>
       <button disabled={busy} onClick={()=>void perform(async()=>setProposal(await request("/actions/propose",{case_id:active.id,evidence_id:evidence.id,mode:"manual_net"})))}>Propose manual recovery</button>

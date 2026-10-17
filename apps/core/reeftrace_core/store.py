@@ -1,4 +1,4 @@
-"""Local SQLite evidence, atomic manual approvals and durable messaging queues."""
+"""SQLite/Postgres evidence, atomic manual approvals and durable messaging queues."""
 
 import hashlib
 import json
@@ -22,8 +22,10 @@ def encode(value):
 class Store:
     def __init__(self, path):
         self.path = str(path)
-        Path(self.path).parent.mkdir(parents=True, exist_ok=True)
-        with self.connect() as db:
+        self.is_postgres = self.path.startswith(("postgresql://", "postgres://"))
+        if not self.is_postgres:
+            Path(self.path).parent.mkdir(parents=True, exist_ok=True)
+        with self.connect(initialize=True) as db:
             db.executescript("""
             PRAGMA journal_mode=WAL;
             CREATE TABLE IF NOT EXISTS records (
@@ -46,7 +48,13 @@ class Store:
             """)
 
     @contextmanager
-    def connect(self):
+    def connect(self, initialize=False):
+        if self.is_postgres:
+            from .postgres import connect
+
+            with connect(self.path, initialize=initialize) as db:
+                yield db
+            return
         db = sqlite3.connect(self.path, timeout=10)
         db.row_factory = sqlite3.Row
         try:
@@ -101,8 +109,10 @@ class Store:
     def list(self, kind, parent=None):
         with self.connect() as db:
             rows = db.execute(
-                "SELECT * FROM records WHERE kind=? AND (? IS NULL OR parent=?) ORDER BY created DESC LIMIT 100",
-                (kind, parent, parent),
+                "SELECT * FROM records WHERE kind=?"
+                + (" AND parent=?" if parent is not None else "")
+                + " ORDER BY created DESC LIMIT 100",
+                (kind, parent) if parent is not None else (kind,),
             ).fetchall()
         return [
             {"id": r["id"], "created_at": r["created"], **json.loads(r["payload"])} for r in rows

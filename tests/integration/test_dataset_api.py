@@ -6,6 +6,7 @@ from apps.core.reeftrace_core.service import get_store
 
 def test_registry_auth_and_read_only_external_records(tmp_path, monkeypatch):
     monkeypatch.setenv("REEFTRACE_LOCAL_TOKEN", "dataset-test-token-32-characters-long")
+    monkeypatch.delenv("DATABASE_URL", raising=False)
     monkeypatch.setenv("REEFTRACE_DB_PATH", str(tmp_path / "store.db"))
     get_store.cache_clear()
     with TestClient(app) as client:

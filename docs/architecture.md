@@ -41,5 +41,4 @@ The optional water-sampler sketch/test client has no agent or API dispatch path.
 Offline truth and raw full-frame evaluator archives remain outside API/agent query
 interfaces. ReplayBackend exposes fixtures only; it has no camera, serial or physical
 control imports. Scientific metrics distinguish coverage, answered accuracy, wrong
-and Unknown, and reject synthetic/duplicate trials. Real tank validation, hosted
-Chalk evaluation, sponsor device tests and ASUS measurements remain external gates.
+and Unknown, and reject synthetic/duplicate trials. Real tank validation, Butterbase account checks, sponsor device tests and ASUS measurements remain external gates.

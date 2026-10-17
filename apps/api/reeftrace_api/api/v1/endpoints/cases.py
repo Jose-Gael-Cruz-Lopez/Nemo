@@ -9,6 +9,7 @@ from fastapi.responses import FileResponse
 from pydantic import Field
 
 from apps.core.reeftrace_core.agent import investigate
+from apps.core.reeftrace_core.ai import ai_configured, ai_provider
 from apps.core.reeftrace_core.contracts import CaseInput, Contract, Profile
 from apps.core.reeftrace_core.service import (
     LocalBackend,
@@ -65,10 +66,13 @@ def guarded(function, *args):
 @router.get("/system")
 def system():
     return {
+        "database": "postgresql" if get_store().is_postgres else "sqlite",
+        "ai_provider": ai_provider(),
+        "ai_configured": ai_configured(),
         "manual_recovery": True,
         "hardware_enabled": False,
-        "chalk_configured": all(
-            os.environ.get(k) for k in ["CHALK_ROUTER_API_KEY", "CHALK_ENV_ID", "CHALK_MODEL"]
+        "butterbase_configured": all(
+            os.environ.get(k) for k in ["BUTTERBASE_API_KEY", "BUTTERBASE_MODEL"]
         ),
         "photon_configured": all(
             os.environ.get(k) for k in ["PHOTON_API_KEY", "PHOTON_PROJECT_ID", "PHOTON_ROUTES_JSON"]

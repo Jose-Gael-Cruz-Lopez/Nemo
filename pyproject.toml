@@ -9,6 +9,7 @@ description = "Controlled source-intelligence proof of concept for floating debr
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+  "psycopg[binary]>=3.2,<4",
   "httpx>=0.27,<1.0",
   "python-dotenv>=1,<2",
   "fastapi>=0.115,<1.0",
@@ -24,7 +25,6 @@ dependencies = [
 [project.optional-dependencies]
 marine = ["copernicusmarine>=2.5,<3", "xarray>=2024.1", "h5netcdf[h5py]>=1.3"]
 photon = ["photonhq-api==0.5.0"]
-evaluation = ["chalkcompute", "pyarrow"]
 dev = [
   "pytest>=8.3,<9.0",
   "httpx>=0.27,<1.0",

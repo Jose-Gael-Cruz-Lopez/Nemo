@@ -1,4 +1,4 @@
-"""Evaluate the shared agent on fixture-only tools through actual Chalk requests.
+"""Evaluate the shared agent on fixture-only tools through actual Butterbase requests.
 Never imports serial, camera acquisition, or physical action dispatch.
 """
 
@@ -7,6 +7,7 @@ import asyncio
 import json
 from pathlib import Path
 
+import httpx
 from dotenv import load_dotenv
 
 from apps.core.reeftrace_core.agent import investigate
@@ -35,7 +36,14 @@ async def run(path):
                     "output_error": None,
                 }
             )
-        except (ValueError, RuntimeError, KeyError, TypeError, TimeoutError) as error:
+        except (
+            ValueError,
+            RuntimeError,
+            KeyError,
+            TypeError,
+            TimeoutError,
+            httpx.HTTPError,
+        ) as error:
             results.append(
                 {"case_id": row["fixture"]["case_id"], "output_error": type(error).__name__}
             )

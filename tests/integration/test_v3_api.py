@@ -5,6 +5,7 @@ from apps.core.reeftrace_core.service import get_store
 
 
 def test_local_auth_cases_and_no_truth(monkeypatch, tmp_path):
+    monkeypatch.delenv("DATABASE_URL", raising=False)
     monkeypatch.setenv("REEFTRACE_DB_PATH", str(tmp_path / "api.db"))
     monkeypatch.setenv("REEFTRACE_LOCAL_TOKEN", "x" * 32)
     get_store.cache_clear()

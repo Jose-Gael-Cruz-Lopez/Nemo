@@ -8,7 +8,7 @@ This guide follows the updated 66-page **Build Manual 3.0**, October 16, 2026. T
 - Keep a recorded moving history when the token later stops. First-seen retained cases use only endpoint/verified-trap evidence.
 - Submerged artificial coral is scenery, not an assumed surface obstacle or absorbing trap. Build and map a real mesh pocket touching the waterline.
 - Manual net recovery is the complete baseline. No gantry is required. Optional peristaltic control samples water; the small tube is not a vacuum for 8–10 mm plastic tokens.
-- Chalk powers bounded investigation; Photon 2.0 provides the optional phone interface. Source arithmetic remains in Python.
+- Butterbase powers bounded investigation; Photon 2.0 provides the optional phone interface. Source arithmetic remains in Python.
 
 ## Physical assembly with the planned materials
 
@@ -134,15 +134,35 @@ SQLite in `data/runs/reeftrace.sqlite3` holds immutable profiles, cases, estimat
 - `GET /v1/cases/{id}/evidence` retrieves the authoritative report.
 - `POST /v1/cases/{id}/sensitivity` accepts only `age_short_v1` or `age_wide_v1`.
 - `POST /v1/cases/{id}/observe` queues a fixed 3-second recording request. **It does not open the camera automatically or claim new evidence.** Run the recorder and create a new case; current capture uses an explicit CLI process.
-- `POST /v1/cases/{id}/investigate` runs the shared Chalk tool loop if configured. No canned response is presented as live agent reasoning.
+- `POST /v1/cases/{id}/investigate` runs the shared Butterbase tool loop if configured. No canned response is presented as live agent reasoning.
 - Manual proposals bind operator, conversation, evidence ID, calibration, expiry and body hash. Approval is atomic and creates one logical human task. It requires a live observation under 15 seconds old and a checked rig. Synthetic/replay cases cannot authorize a physical task.
 - Confirm actual recovery with `/v1/recovery-evidence` (action ID, frame reference and human statement), then `/v1/actions/{id}/outcome`. Camera disappearance alone is not proof. Confirmation switches the rig to RECOVERING; check it before another attribution trial.
 
 Camera frame IDs reference masked images saved in `data/runs/frames/` and retrievable through authenticated `/v1/frames/{frame_id}`. Endpoint-only recording saves only its final permitted frame. Recovery references identify externally saved images; the API does not certify that an operator-supplied recovery reference depicts a recovered token. Use independent physical checks. There is no automatic recovery verifier or integrated continuous camera feed.
 
-## Chalk and Photon provisioning
+## Butterbase and Photon provisioning
 
-Set the four `CHALK_*` variables in `.env`. Use a real Model Gateway router key, environment ID and model available to that key. The implementation uses the documented bearer header, `X-Chalk-Env-Id`, and `/chat/completions`. The bounded JSON loop retrieves evidence, allows named sensitivity, permits one recording request/proposal, and validates final actions and returned evidence IDs. Numerical tables are rendered separately. Free-text explanation correctness still requires review/evaluation.
+Butterbase's AI gateway now powers the bounded investigator. Keep these values in your ignored `.env`:
+
+```dotenv
+BUTTERBASE_ACCOUNT_ID=88f8efa4-330d-4a0c-b570-0ea1858f446d
+BUTTERBASE_API_URL=https://api.butterbase.ai
+BUTTERBASE_API_KEY=
+BUTTERBASE_MODEL=
+```
+
+The UUID above is your **account/user ID**, retained as local metadata. It is not an API key, app ID or model name and is not sent as an authentication header. The AI gateway requires no app ID or separate provider connection. Obtain a personal Butterbase API key with `ai:gateway` scope, place it in `BUTTERBASE_API_KEY`, and ensure the account has AI credits. Keep your existing Photon and Copernicus credentials intact. The runtime reads `.env`, not `.env.example`.
+
+```sh
+python scripts/check_butterbase.py --public
+python scripts/check_butterbase.py
+# Set BUTTERBASE_MODEL to one exact ID returned by the authenticated command.
+python scripts/check_butterbase.py --test
+```
+
+The public catalog command needs no key and does not prove account access or credit availability. The default command checks authenticated model discovery. `--test` explicitly makes one model request and may consume credits. No model is silently chosen. The adapter uses `POST https://api.butterbase.ai/v1/chat/completions` with your personal key; no environment header is needed. A 401 means invalid credentials, 403 indicates permission/scope, 402 indicates credits and 404 indicates model/endpoint selection.
+
+Once the test succeeds, restart the API, load a synthetic case and use **Ask through Butterbase**. The same bounded tool loop serves the dashboard, Photon and fixture replay. It validates source evidence, limits tools and proposals, and never directly actuates hardware. Source arithmetic and approvals remain local; case evidence passed to the model is sent to Butterbase for inference. Free-text explanation correctness still requires evaluation. SQLite remains the evidence/approval store; replacing the AI gateway does not automatically upload the database.
 
 Photon is optional and starts **only explicitly**, after the real project/channel/sender assignment is ready. Install the `photon` extra (SDK 0.5.0). Set `PHOTON_API_KEY`, `PHOTON_PROJECT_ID` and route JSON, for example:
 
@@ -158,7 +178,7 @@ This command starts outbound polling **and sends queued replies**. It was not ru
 
 To begin a deliberately new bounded Photon demo session after the previous one ends, back up the database and remove only its `photon_session_start` setting using a SQLite tool; otherwise restart resumes the same session. Live account provisioning, device round-trip and provider-specific model behavior remain unverified.
 
-References: [Chalk gateway](https://docs.chalk.ai/docs/model-gateway), [Photon SDK](https://github.com/photon-hq/api), [Chalk evaluations](https://docs.chalk.ai/docs/evaluations/quick-start).
+References: [Butterbase AI API](https://docs.butterbase.ai/api-reference/ai-api/), [Photon SDK](https://github.com/photon-hq/api).
 
 ## Optional water sampler
 
@@ -182,11 +202,11 @@ npm run lint
 npm run build
 ```
 
-`data/replay/agent.synthetic.jsonl` contains synthetic protocol fixtures only. With real Chalk configuration, `python -m eval.run_replay data/replay/agent.synthetic.jsonl` runs the shared investigator against fixture-only tools and saves every row/failure. No camera or hardware dispatch exists in that backend. Expected answers stay outside model context. A managed Chalk evaluation deployment still needs account access and packaging/provisioning; this local runner is not a claimed hosted evaluation.
+`data/replay/agent.synthetic.jsonl` contains synthetic protocol fixtures only. With real Butterbase configuration, `python -m eval.run_replay data/replay/agent.synthetic.jsonl` runs the shared investigator against fixture-only tools and saves every row/failure. No camera or hardware dispatch exists in that backend. Expected answers stay outside model context. Evaluation runs locally against fixture-only tools while model requests use Butterbase. Results and row failures are saved locally; no managed evaluation deployment is required or claimed.
 
 For scientific metrics, an evaluator-only JSONL uses `run_id`, `actual`, `predicted`, `evidence_mode`, `mode`, `split: "test"`. Run `python -m eval.metrics data/evaluator/frozen-trials.jsonl`. It reports answered/all, correct/answered, correct/all, wrong and Unknown separately, with per-mode counts. It rejects synthetic records and duplicate run IDs. No physical trials have been run or accuracy figures invented. Nearest-source and upstream-direction baselines are saved with estimator reports using the same permitted observations. Collect larger held-out datasets and compare their actual performance separately.
 
-Current dashboard dependencies retain the previously reported npm advisories; a framework upgrade is a separate unresolved task. Keep the prototype local. The source pipeline still requires measured profiles, retention tests, held-out trials, real sponsor credentials and ASUS-specific verification. The optional sampling action remains deliberately outside the agent and API actuation path.
+Current dashboard dependencies retain the previously reported npm advisories; a framework upgrade is a separate unresolved task. Keep the prototype local. The source pipeline still requires measured profiles, retention tests, held-out trials, a Butterbase personal key/model, Photon setup and ASUS-specific verification. The optional sampling action remains deliberately outside the agent and API actuation path.
 
 ## Next steps with the currently confirmed equipment
 
@@ -219,7 +239,7 @@ not require another download to start the application.
 8. Record both trajectory-history and first-seen-retained trials; keep wrong and
    Unknown results. Compare the stored baselines and report accuracy separately
    from coverage. Do not count synthetic cases as physical trials.
-9. Provision Chalk/Photon only when needed for the conversation demo. A cached
+9. Provision Butterbase/Photon only when needed for the conversation demo. A cached
    dataset import does not establish a trained detector or a live agent. Copernicus
    already has a local currents import; it is not your tank's flow calibration.
 10. Keep the optional water sampler disabled until its driver, fused supply,

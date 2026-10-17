@@ -40,7 +40,8 @@ def finish(action="UNKNOWN", evidence="e-1"):
     }
 
 
-def test_grounded_replay_and_no_hardware():
+def test_grounded_replay_and_no_hardware(monkeypatch):
+    monkeypatch.setenv("REEFTRACE_AI_PROVIDER", "gemini")
     response = asyncio.run(
         investigate(
             "Explain",
@@ -51,6 +52,7 @@ def test_grounded_replay_and_no_hardware():
     )
     assert response["action"] == "UNKNOWN"
     assert response["physical_dispatch"] is False
+    assert response["gateway"] == "gemini"
 
 
 def test_agent_cannot_invent_evidence_or_promote_unknown():
