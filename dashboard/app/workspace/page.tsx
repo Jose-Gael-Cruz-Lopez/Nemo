@@ -162,7 +162,7 @@ export default function Workspace() {
   const answer = evidence && currentSourceEvidence(answerResult?.source_report, selected, selectedEvidenceId) ? answerResult : null;
   const analysis = evidence && analysisResult?.parent_estimate_id === evidence.id ? analysisResult : null;
   const sourceReadError = currentSourceEvidence(evidenceReadFailure, selected, selectedEvidenceId)?.message ?? "";
-  const visibleNotice = !noticeScope || currentSourceEvidence(noticeScope, selected, selectedEvidenceId) ? notice : "";
+  const visibleNotice = !noticeScope || (view === "investigations" && currentSourceEvidence(noticeScope, selected, selectedEvidenceId)) ? notice : "";
 
   function setEvidence(value: Evidence | null) {
     ++evidenceReadRun.current;

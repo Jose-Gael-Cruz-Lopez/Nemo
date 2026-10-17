@@ -1,10 +1,13 @@
 # ReefTrace
 
+The product display name is **Tideward**. The repository, Python packages and API
+identifiers remain **ReefTrace** so existing links and integrations keep working.
+
 A local USB-camera experiment for comparing candidate floating-debris entry points. OpenCV observes a standardized token; a measured drift field drives a forward particle model; the estimator saves conditional source evidence or **Unknown**. A bounded Chalk-backed investigator uses those saved reports in the dashboard and a Photon direct conversation. Recovery is manual.
 
 The **Prevention** workspace turns tracing into a testable intervention: freeze a protected surface zone, compare two interception layouts, log independent one-token trials, and inspect simulated predictions beside separately labelled outcomes. Source uncertainty remains intact. See [the prevention build and demo guide](docs/prevention-workflow.md).
 
-For parallel work after this slice, use the [three-person handoff prompts](docs/team-handoff-prompts.md): field evidence, prediction validation, and product/Chalk/E2E integration, with separate ownership and shared contract fixtures.
+For current parallel work, use the [four-workstream build plan](docs/four-person-build-plan.md): Megana owns rig/camera commissioning; Aarush owns experiment validation; Jose owns product/Chalk/Trove integration **and** the Grok-assisted ML/dataset stream. A fourth builder can assist when assigned. It includes the actual hardware checklist, dependency gates and copyable prompts. The [older three-person prompts](docs/team-handoff-prompts.md) are retained as implementation history. The [Grok build record](docs/grok-kalman-build.md) explains the new isolated motion diagnostic and its evidence limits.
 
 This repository now implements the computational and application paths, rather than only starter directories. It follows **ReefTrace_Final_Plan.pdf, USB Webcam Edition 5.0**. Real tank calibration and held-out trials are still required; synthetic fixtures and passing tests are software evidence, not reef or tank accuracy claims.
 
@@ -91,8 +94,9 @@ offline; the user selected completing the integration without a live key. No liv
 speech result or completed Voice API eligibility is claimed. Permanent keys must
 never enter frontend environment variables. See [the data and API contract](docs/grok-space-context.md).
 
-Chalk was separately verified with a real Gemini Flash investigation; Photon replies
-remain disabled. GitHub checks run on every push and pull request without sponsor
+Chalk was separately verified with a real Gemini Flash investigation. Preserve the
+currently authorized live Photon configuration; these build tasks do not authorize
+new messages or changes to automatic replies. GitHub checks run on every push and pull request without sponsor
 credentials or hardware access. See [integration verification](docs/integrations.md)
 and [CI](docs/ci.md). Cursor's Grok implementation and the reviewed ML diagnostic are
 recorded separately from proof of any live Grok Voice request.

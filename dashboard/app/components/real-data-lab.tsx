@@ -9,6 +9,7 @@ import { DatasetReadiness } from "./dataset-readiness";
 import { TransferDiagnostic } from "./transfer-diagnostic";
 import { VectorDiagnostic } from "./vector-diagnostic";
 import { CohortVectors } from "./cohort-vectors";
+import { KalmanDiagnostic } from "./kalman-diagnostic";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -81,6 +82,7 @@ export function RealDataLab({ api }: { api: string }) {
     <div className="page-heading"><div><p className="kicker">Measured ocean observations</p><h1>Real data, honest limits.</h1><p className="page-description">Compare observed and predicted motion across real NOAA drifters, then inspect the drift recorded in your tank.</p></div><button className="primary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running real-data replay…" : "Run reference buoy replay"}</button></div>
     <div className="notice info"><Icon name="help" /><span>This is a separate geographic motion benchmark. Buoy positions do not identify a plastic source or validate your tank.</span></div>
     <CohortVectors api={api} />
+    <KalmanDiagnostic api={api} />
     {loading && <div className="busy-notice" role="status">Loading the verified dataset and fitting the predeclared motion models…</div>}
     {error && <div className="notice error" role="alert">{error}<button className="card-link" onClick={() => void run()}>Retry replay <Icon name="arrow" /></button></div>}
     {!data && !loading && !error && <section className="card dataset-intro"><span className="observation-icon"><Icon name="wave" /></span><h2>A small real-data test you can inspect.</h2><p>Train on the first eighteen hourly positions. Forecast the next six hours without reading those held-out positions.</p><div className="dataset-methods"><span>Stationary baseline</span><span>Last observed drift</span><span>Regularized velocity model</span></div><p className="settings-note">The replay runs locally from the collected NOAA CSV. No account, camera, or sponsor credentials are required.</p></section>}

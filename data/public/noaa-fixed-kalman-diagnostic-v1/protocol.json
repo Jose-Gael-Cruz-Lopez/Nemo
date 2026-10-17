@@ -1,0 +1,172 @@
+{
+  "acceleration_spectral_density_m2_s3": 1e-06,
+  "baseline_prefix_adaptation_permitted": true,
+  "coverage": {
+    "acquired_groups": 4,
+    "attempted_outcomes": 120,
+    "horizons": 6,
+    "missing_groups": 2,
+    "models": 5,
+    "planned_outcomes": 180,
+    "target_groups": 6,
+    "unique_observed_intervals": 24
+  },
+  "design_assistance": {
+    "corrections": "Independent numerical review fixed gain solve dimensions and retained correlated two-fix initialization; synthetic tests and OLS oracle precede new real score.",
+    "project_url": "https://grok.com/project/709fdaeb-06db-41bd-843b-81f567b993da",
+    "provider": "Grok project static reasoning, not remote execution"
+  },
+  "design_status": "POST_HOC_ALREADY_VIEWED_FIXED_PARAMETER_COMPARISON",
+  "drifter_ids": [
+    "12730",
+    "12731",
+    "300234063243480",
+    "300234063472530"
+  ],
+  "failure_policy": "Retain every declared group/model/horizon. Failed tracks keep six null outcomes and explicit reasons. Any failed acquired outcome withholds all five common acquired-cohort aggregates and uncertainty fraction ranges.",
+  "frozen_at_utc": "2026-10-17T09:29:35.181155+00:00",
+  "kalman": {
+    "covariance_update": "Joseph form with symmetry/PSD roundoff checks; no clipping, no future measurement correction.",
+    "forecast_anchor": "Filtered last training state; other models use raw last training position.",
+    "gain": "Solve S*X=H*P, then K=X.T; never invert innovation covariance.",
+    "initialization": "At second observation: p=z1, v=(z1-z0)/dt0, Ppp=rI, Ppv=(r/dt0)I, Pvv=(2r/dt0^2)I. Correct only prefix indices 2 onward.",
+    "initialization_assumptions": "Constant first-interval velocity and independent IID isotropic position errors; upstream NOAA interpolation may violate both.",
+    "measurement_covariance_m2": [
+      [
+        10000,
+        0
+      ],
+      [
+        0,
+        10000
+      ]
+    ],
+    "measurement_matrix": [
+      [
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "numeric_budgets": {
+      "covariance_absolute_tolerance": 1e-08,
+      "covariance_relative_tolerance": 1e-10,
+      "maximum_horizon_s": 86400,
+      "maximum_local_position_norm_m": 50000,
+      "maximum_prefix_s": 604800,
+      "minimum_dt_s": 1e-06
+    },
+    "process_noise": "Continuous white acceleration: Q=q*[[dt^3/3*I,dt^2/2*I],[dt^2/2*I,dt*I]]; q units m^2/s^3.",
+    "state_order": [
+      "x_m",
+      "y_m",
+      "vx_m_s",
+      "vy_m_s"
+    ],
+    "transition": "F=[[I,dt*I],[0,I]] using actual finite interval seconds."
+  },
+  "limitations": [
+    "Already viewed four acquired buoy-days, not unseen independent evidence; two original target slots remain missing.",
+    "120 model outcomes reuse only 24 observed intervals and cannot be treated as 120 independent observations.",
+    "NOAA hourly QC/interpolation may use future raw fixes upstream. Prefix-only code is not proof of operational real-time independence.",
+    "Assumed q/R and IID initialization are uncalibrated, not NOAA measurement-error estimates; state covariance is not a source probability.",
+    "No currents/forcing, wall/retention physics, debris identity, reef impact, physical camera/tank validation, provider calls or model promotion."
+  ],
+  "metrics": {
+    "ade_m": "Mean six great-circle errors then equal-drifter macro mean.",
+    "fde_m": "Sixth-hour great-circle error then equal-drifter macro mean.",
+    "geodesy": {
+      "earth_mean_radius_m": 6371008.8,
+      "projection": "spherical_azimuthal_equidistant"
+    },
+    "uncertainty": "For observed-position hits use latent position covariance plus assumed R. Nominal 50% and 90% 2D Gaussian thresholds -2log(0.5), -2log(0.1). Report per-drifter counts/fractions and their range only; no calibrated coverage claim.",
+    "vector_rmse_m_s": "Root mean squared local interval displacement residual divided by 3600; predicted first increment begins at each model anchor, observed first increment at raw last prefix point."
+  },
+  "model_ids": [
+    "stationary",
+    "last_drift",
+    "mean_drift",
+    "ridge_ar1",
+    "kalman_cv"
+  ],
+  "noaa_inputs": {
+    "new_acquisition": false,
+    "position_noise_not_observed_from_noaa": true,
+    "previously_viewed": true,
+    "velocity_columns_used": false,
+    "velocity_uncertainty_columns_used": false
+  },
+  "origin": {
+    "cadence_s": 3600,
+    "forecast_hours": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "heldout_count": 6,
+    "origins_per_drifter": 1,
+    "training_count": 18
+  },
+  "original_lineage": {
+    "directory": "data/public/noaa-multidrifter-v1",
+    "implementation_receipt_sha256": "24e203eb766ba9af5efca2432f76e9df35e80e5f7ee5ecb96e4d8e3f48547712",
+    "manifest_sha256": "6b6f5bc13aaf3f370b5e2ce90fcfbde0a4f7a18f3aa1ff76bd533b09856d9f2f",
+    "protocol_sha256": "e8ad0cec2b48fa0e516a03b0bc14c42ba2f055439e534878f3db55def4d25845",
+    "selection_sha256": "18533ebefa4a766b368f28316eb5c883482acd0c5862eb56cd25b6b2531c7079",
+    "sources": [
+      {
+        "block_id": "atlantic-2000",
+        "bytes": 1880,
+        "drifter_id": "12730",
+        "sha256": "d5bf7f8c95f269548ced072d2471a0fa283ecb2cad9b3962b83d6846bb097ae6",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%2212730%22&time%3E=2000-06-01T00%3A00%3A00Z&time%3C=2000-06-01T23%3A00%3A00Z"
+      },
+      {
+        "block_id": "atlantic-2000",
+        "bytes": 1875,
+        "drifter_id": "12731",
+        "sha256": "9e92070b2018a5004c69870fdba6152c8b213163e9dc725bddbd239a87d38498",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%2212731%22&time%3E=2000-06-01T00%3A00%3A00Z&time%3C=2000-06-01T23%3A00%3A00Z"
+      },
+      {
+        "block_id": "north-pacific-2020",
+        "bytes": 2624,
+        "drifter_id": "300234063243480",
+        "sha256": "b1e6c6451fb478ef5ddb318c6fb2a70a039688434b89ecb17374883ec96c14a3",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234063243480%22&time%3E=2020-06-01T00%3A00%3A00Z&time%3C=2020-06-01T23%3A00%3A00Z"
+      },
+      {
+        "block_id": "north-pacific-2020",
+        "bytes": 2609,
+        "drifter_id": "300234063472530",
+        "sha256": "4448235ed193d832a258efc090d5cc946c154fde5b9f2d094b7f3087d860cc62",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234063472530%22&time%3E=2020-06-01T00%3A00%3A00Z&time%3C=2020-06-01T23%3A00%3A00Z"
+      }
+    ]
+  },
+  "parameter_fitting_performed": false,
+  "parameter_fitting_scope": "KALMAN_NOISE_HYPERPARAMETERS_ONLY",
+  "position_std_m": 100.0,
+  "purpose": "Isolated fixed-noise Kalman motion diagnostic beside four unchanged baselines; no selection, promotion, source inference or physical claims.",
+  "real_kalman_outcomes_computed": false,
+  "references": [
+    "https://docs.opencv.org/4.13.0/dd/d6a/classcv_1_1KalmanFilter.html",
+    "https://filterpy.readthedocs.io/en/latest/_modules/filterpy/common/discretization.html",
+    "https://www.aoml.noaa.gov/phod/gdp/hourly_data.php",
+    "https://www.aoml.noaa.gov/phod/gdp/papers/Elipot_et_al-2016.pdf"
+  ],
+  "schema_version": 1,
+  "state_estimation_performed": true,
+  "study_id": "noaa-already-viewed-fixed-kalman-diagnostic-v1",
+  "truth_gate": "Create all 20 complete tracks using prefixes and future time metadata before reading any held-out latitude or longitude. Never update state using future fixes."
+}

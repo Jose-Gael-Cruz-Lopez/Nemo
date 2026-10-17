@@ -1,8 +1,8 @@
-.welcome{--welcome-ink:#263e4c;--welcome-muted:#5a7c90;--welcome-accent:#519fcc;color:var(--welcome-ink);background:#edf5f9;min-height:100vh;padding:18px}
+.welcome{--welcome-ink:#23465c;--welcome-muted:#526f83;--welcome-accent:#267da8;color:var(--welcome-ink);background:#e8f3fc;min-height:100vh;padding:18px}
 .welcome a:focus-visible,.welcome button:focus-visible,.welcome input:focus-visible{outline:3px solid #60add9;outline-offset:5px}
-.landingFrame,.loginFrame{max-width:1640px;margin:0 auto;overflow:hidden;border:1px solid #ffffffe6;border-radius:24px;background:radial-gradient(ellipse at 13% 30%,#e1f2fb60,transparent 47%),radial-gradient(ellipse at 90% 12%,#cce3f03b,transparent 50%),#f7fafc;box-shadow:0 18px 65px #53768a08,inset 0 1px 0 white}
+.landingFrame,.loginFrame{max-width:1640px;margin:0 auto;overflow:hidden;border:1px solid #ffffffe6;border-radius:24px;background:radial-gradient(ellipse at 13% 30%,#c9e9fc70,transparent 47%),radial-gradient(ellipse at 90% 12%,#b8dff660,transparent 50%),#f0f8fd;box-shadow:0 18px 65px #53768a08,inset 0 1px 0 white}
 .header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 34px}
-.wordmark{display:inline-flex;align-items:center;flex-shrink:0;gap:9px;font-size:21px;font-weight:650;letter-spacing:-.9px;line-height:1}
+.wordmark{display:inline-flex;align-items:center;flex-shrink:0;gap:9px;color:#234f69;font-size:21px;font-weight:650;letter-spacing:-.9px;line-height:1}
 .mark{display:grid;place-items:center;height:30px;width:30px;border-radius:10px;background:#569fc9;color:white;box-shadow:0 3px 8px #4383a81a}
 .mark svg{width:19px;height:19px;stroke-width:1.6}
 .brandLabel{font:500 8px/1.5 monospace;letter-spacing:1.4px;color:#6a8da1;border-left:1px solid #ced9e0;padding-left:15px;margin-left:11px}
@@ -12,15 +12,15 @@
 .navLogin:hover{background:white;transform:translateY(-1px)}
 .navLogin svg{width:14px}
 .hero{position:relative;padding-top:57px;text-align:center}
-.eyebrow{display:flex;align-items:center;justify-content:center;gap:7px;color:#62879d;font:500 9px/1.5 monospace;letter-spacing:1.9px;margin-bottom:17px}
+.eyebrow{display:flex;align-items:center;justify-content:center;gap:7px;color:#526f83;font:500 9px/1.5 monospace;letter-spacing:1.9px;margin-bottom:17px}
 .eyebrow>span{width:5px;height:5px;border-radius:50%;background:#69a5c7;box-shadow:0 0 0 4px #71abcd10}
 .hero h1{font-size:clamp(36px,4.5vw,68px);font-weight:450;letter-spacing:-2.9px;line-height:1.11;margin:0 14px 19px}
-.hero h1>span{color:#689ebe}
+.hero h1>span{color:#4c819f}
 .heroDescription{font-size:13px;color:#60859a;line-height:1.8;margin-bottom:23px}
 .heroActions{display:flex;justify-content:center;align-items:center;gap:26px}
-.primary{display:inline-flex;justify-content:center;align-items:center;gap:28px;min-height:43px;padding:12px 22px;border:1px solid #60a6ce;border-radius:30px;background:linear-gradient(145deg,#6cb2da,#5196be);box-shadow:inset 0 1px 0 #ffffff50,0 5px 14px #559bc324;color:#fff;font-size:11px;font-weight:550;transition:transform .2s,box-shadow .2s}
+.primary{display:inline-flex;justify-content:center;align-items:center;gap:28px;min-height:43px;padding:12px 22px;border:1px solid #96c8e4;border-radius:30px;background:linear-gradient(145deg,#d1edfc,#a9d8f1);box-shadow:inset 0 1px 0 #ffffff50,0 5px 14px #559bc324;color:#174b69;font-size:11px;font-weight:550;transition:transform .2s,box-shadow .2s}
 .primary svg{width:15px;height:15px}
-.primary:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff50,0 8px 18px #559bc335}
+.primary:hover{background:linear-gradient(145deg,#c2e7fa,#97cfea);transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff50,0 8px 18px #559bc335}
 .primary:disabled{transform:none}
 .textLink{display:flex;gap:9px;align-items:center;font-size:11px;color:#5b7d91}
 .textLink:hover{color:#306a8c}
@@ -38,9 +38,9 @@
 .floatingInsight strong{display:block;font-size:12px;font-weight:550}
 .floatingInsight p{font-size:10px;line-height:1.65;color:#63889d;margin:5px 0 0}
 .phaseSwitch{position:absolute;bottom:29px;left:50%;transform:translateX(-50%);display:flex;padding:4px;gap:3px;border-radius:30px;border:1px solid #ffffffed;background:#ffffff91;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 5px 22px #436d8514}
-.phaseSwitch button{display:flex;align-items:center;gap:6px;min-height:32px;border:0;border-radius:20px;padding:7px 14px;font-size:10px;background:transparent;color:#61869b;transition:color .2s,background .2s;white-space:nowrap}
+.phaseSwitch button{display:flex;align-items:center;gap:6px;min-height:32px;border:0;border-radius:20px;padding:7px 14px;font-size:10px;background:transparent;color:#526f83;transition:color .2s,background .2s;white-space:nowrap}
 .phaseSwitch button>span{font-size:8px;font-family:monospace;opacity:.7}
-.phaseSwitch button[aria-pressed="true"]{background:#61a0c5;color:white;box-shadow:0 2px 4px #4378971c}
+.phaseSwitch button[aria-pressed="true"]{background:#b7def4;color:#174b69;box-shadow:0 2px 4px #4378971c}
 .heroFoot{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:60px;padding:14px 34px;border-top:1px solid #dde8ef80;font:8px/1.6 monospace;letter-spacing:1px;color:#7999ab}
 .heroFoot>span:first-child{display:flex;align-items:center;gap:8px}
 .smallDot{width:5px;height:5px;background:#74a3be;border-radius:50%}
@@ -71,13 +71,13 @@
 .footer>a:last-child{display:flex;gap:12px;align-items:center;color:#5d8094}
 .footer>a:last-child svg{width:13px}
 .loginPage{display:flex;align-items:center}
-.loginFrame{width:100%;min-height:calc(100vh - 36px);display:flex;flex-direction:column;background:radial-gradient(ellipse at 19% 57%,#c2e0f24d,transparent 60%),radial-gradient(ellipse at 95% 5%,#cee2ee50,transparent 70%),#f3f9fc}
+.loginFrame{width:100%;min-height:calc(100vh - 36px);display:flex;flex-direction:column;background:radial-gradient(ellipse at 19% 57%,#b4def76b,transparent 60%),radial-gradient(ellipse at 95% 5%,#c6e8fa70,transparent 70%),#edf7fd}
 .loginGrid{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;flex:1;gap:6%;padding:45px 8% 65px 6%}
 .backLink{font-size:11px;color:#6e90a4}
 .loginStory{position:relative;min-height:510px;overflow:hidden;padding-top:52px}
 .loginStory .eyebrow{justify-content:flex-start;font-size:8px}
 .loginStory h1{position:relative;z-index:1;font-size:clamp(35px,4vw,61px);font-weight:450;letter-spacing:-2.3px;line-height:1.12;margin-bottom:20px}
-.loginStory h1>span{color:#73a1bc}
+.loginStory h1>span{color:#4c819f}
 .loginStory>p{position:relative;z-index:1;font-size:12px;color:#6e90a4;line-height:1.9}
 .loginTerrain{position:absolute;width:145%;height:auto;bottom:20px;left:-30%}
 .loginCaption{position:absolute;bottom:9px;color:#89a5b5;font:8px monospace;letter-spacing:1.5px}
@@ -120,7 +120,7 @@
 @media(prefers-reduced-motion:reduce){.welcome *{scroll-behavior:auto!important;transition:none!important}}
 /* Keep the frosted finish readable; reserve pale sea blue for decoration. */
 .heroDescription,.sectionHeading>p,.workflowCard p,.floatingInsight p,.loginStory>p,.loginIntro,.tokenHelp,.privacyNote{color:#56778a}
-.heroFoot,.mapCaption,.footer,.loginBottom,.loginCaption{color:#5e8297}
+.heroFoot,.mapCaption,.footer,.loginBottom,.loginCaption{color:#526f83}
 .workflowCard p{font-size:12px}.evidenceNote>p{font-size:11px;color:#56778a}
 .loginIntro{font-size:12px}.loginForm>label{font-size:12px;color:#4c6979}.tokenField input{font-size:12px}.tokenHelp{font-size:10px}.privacyNote{font-size:9px}
 .loginTerrain{top:245px;bottom:auto}
@@ -128,71 +128,13 @@
 @keyframes arrive{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:no-preference){.hero>.eyebrow,.hero>h1,.heroDescription,.heroActions{animation:arrive .65s both}.hero>h1{animation-delay:.06s}.heroDescription{animation-delay:.12s}.heroActions{animation-delay:.18s}.loginPanel{animation:arrive .5s both}.terrain g{transition:opacity .35s}}
 
-/* Deep ocean arrival: white wave, sea blue light and quiet glass surfaces. */
-.welcome{--welcome-ink:#effaff;--welcome-muted:#acc8d8;--welcome-accent:#78d9ef;color:var(--welcome-ink);background:radial-gradient(ellipse at 75% 0%,#0a3b52 0,transparent 58%),#031b2b}
-.welcome a:focus-visible,.welcome button:focus-visible,.welcome input:focus-visible{outline-color:#7fdef3}
-.welcome h1,.welcome h2,.welcome h3{color:#effaff}
-.landingFrame,.loginFrame{border-color:#9ddbf027;background:radial-gradient(ellipse at 78% 5%,#0d597745,transparent 52%),radial-gradient(ellipse at 10% 80%,#0b49624d,transparent 58%),#052638;box-shadow:0 22px 80px #000b1730,inset 0 1px 0 #bbebff0d}
-.header{color:#f1fbff}
-.wordmark{color:#f4fcff}
-.mark{color:white;background:#ffffff0a;border:1px solid #bdeaff24;box-shadow:none}
-.brandLabel{color:#9ac4d8;border-color:#abd7e82b}
-.navigation{color:#b0d0df}
-.navigation>a:not(.navLogin):hover{color:#fff}
-.navLogin{color:#eafaff;background:#b9e5f010;border-color:#95cbdf40;box-shadow:none}
-.navLogin:hover{color:#fff;background:#b9e5f024}
-.eyebrow{color:#93c8dc}
-.eyebrow>span{background:#76d9ed;box-shadow:0 0 0 4px #77d9eb10}
-.hero h1>span,.loginStory h1>span{color:#8ad6ed}
-.heroDescription,.sectionHeading>p,.workflowCard p,.floatingInsight p,.loginStory>p,.loginIntro,.tokenHelp,.privacyNote{color:#acc8d8}
-.primary{color:white;border-color:#2395be;background:linear-gradient(135deg,#0c7ba3,#086b93);box-shadow:inset 0 1px 0 #c1f1ff2e,0 6px 24px #00172938}
-.primary:hover{background:linear-gradient(135deg,#0d7299,#075d85);box-shadow:inset 0 1px 0 #c1f1ff40,0 9px 24px #00172950}
-.textLink{color:#c0deeb}.textLink:hover{color:#fff}
-.playIcon{border-color:#9bcfe84a;background:#bee8f012}
-.mapCaption,.mapCaption>span:last-child,.heroFoot,.footer,.loginBottom,.loginCaption{color:#8db3c9}
-.mapCross,.smallDot{color:#79cbe4;background-color:transparent}.smallDot{background:#79cbe4}
-.floatingInsight{background:#0a334ad9;border-color:#9cd9ef3b;box-shadow:0 14px 45px #000f2633,inset 0 1px 0 #a0e0f014;color:#effaff}
-.insightIcon{color:#91e0f2;border-color:#8acee631;background:#1c607b47}
-.floatingInsight small{color:#91b9cd}
-.phaseSwitch{border-color:#9cd9ef33;background:#052336c9;box-shadow:0 8px 30px #00152940}
-.phaseSwitch button{color:#accddf}
-.phaseSwitch button[aria-pressed="true"]{color:#fff;background:#147ea6;box-shadow:0 2px 6px #00172838}
-.heroFoot{border-color:#9bd6e720}.heroFoot>a{color:#acd1e3}
-.workflowSection{color:#eaf8ff}
-.workflowCard{background:linear-gradient(135deg,#0b3548df,#06293ed9);border-color:#b4e3f224;box-shadow:0 14px 38px #00101c26,inset 0 1px 0 #c4edff0a}
-.workflowCard:hover{border-color:#a2def54d;box-shadow:0 18px 44px #000d1c40}
-.workflowCard>svg,.cardAction{color:#88cde7}
-.stepNumber{color:#6f9cb6}
-.evidenceNote{color:#accbdc;border-color:#7fbdd22e;background:#07304766}
-.evidenceNote>p{color:#accbdc}.evidenceNote>a{color:#90d5ee}
-.footer{border-color:#8dcde52b}.footer .wordmark{color:#e6f7ff}.footer>a:last-child{color:#a5cfe3}
-.loginFrame{background:radial-gradient(ellipse at 5% 70%,#0b526c80,transparent 60%),radial-gradient(ellipse at 98% 0%,#0d496760,transparent 60%),#042437}
-.backLink{color:#acd0e1}
-.loginPanel{background:linear-gradient(140deg,#103a50e8,#082c40e8);border-color:#b5e7f334;box-shadow:0 22px 70px #000c1f38,inset 0 1px 0 #a9ddec12}
-.loginPanelIcon{background:linear-gradient(140deg,#245c75,#16445e);border-color:#93cae136;color:#ace8f5;box-shadow:none}
-.loginForm>label{color:#c3dfec}
-.tokenField{background:#001a2d66;border-color:#82bad542}
-.tokenField:focus-within{border-color:#7bdbed;box-shadow:0 0 0 3px #81dcf014}
-.tokenField>svg{color:#8db7d0}
-.tokenField input{color:#eefaff}
-.tokenField input::placeholder{color:#91afc4}
-.tokenField>button,.tokenHelp code{color:#aedbed}
-.loginError{background:#652c3b;color:#ffe2e8}
-.loginDivider{color:#97b9ce}.loginDivider>span{background:#8ec3d72b}
-.exploreLink{color:#d1e9f5;background:#97cde50c;border-color:#9ad5e838}
-.exploreLink:hover{color:#fff;background:#9ad5e81f}
-.privacyNote svg{color:#9bd6e7}
-.loginBottom{border-color:#a5deee20}
-.connectedState>p{color:#b2cede}.connectedBadge{color:#b4efff}.textButton{color:#a8d7ea}
-@media(prefers-reduced-transparency:reduce){.floatingInsight,.phaseSwitch,.loginPanel{backdrop-filter:none;-webkit-backdrop-filter:none;background:#082d41}}
-
-/* The wave is a freestanding white mark, never a square application badge. */
-.mark{width:40px;height:32px;border:0;border-radius:0;background:transparent;box-shadow:none;color:#fff}
+/* The ocean blue wave stays unboxed against the pale glass surfaces. */
+.mark{width:40px;height:32px;border:0;border-radius:0;background:transparent;box-shadow:none;color:#267da8}
 .mark svg{display:block;width:100%;height:100%;stroke-width:0}
 .footer .mark{width:30px;height:25px;border:0;border-radius:0;background:transparent}
 .footer .mark svg{width:100%;height:100%}
 .hero{padding-top:27px}
-.heroEmblem{display:grid;position:relative;place-items:center;width:96px;height:77px;margin:0 auto 22px;color:#fff;filter:drop-shadow(0 0 26px #7edcf02b)}
+.heroEmblem{display:grid;position:relative;place-items:center;width:96px;height:77px;margin:0 auto 22px;color:#267da8;filter:drop-shadow(0 0 26px #8ed3f338)}
 .heroEmblem svg{display:block;width:100%;height:100%;position:relative}
 .heroEmblem::before{content:"";position:absolute;inset:-35px;background:radial-gradient(ellipse,#63d5ed14,transparent 67%);pointer-events:none}
 @media(min-width:1500px){.hero{padding-top:32px}}

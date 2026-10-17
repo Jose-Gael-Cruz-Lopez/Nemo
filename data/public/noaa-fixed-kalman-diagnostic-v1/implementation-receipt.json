@@ -1,0 +1,17 @@
+{
+  "frozen_at_utc": "2026-10-17T09:29:35.181999+00:00",
+  "implementation_sha256": {
+    "apps/ocean/reeftrace_ocean/kalman.py": "c5a2f170353fa86c54bb013a8e60240496f00bbfc030e989dbb092d65f254a89",
+    "apps/ocean/reeftrace_ocean/kalman_diagnostic.py": "5ffd221b88bac887271f2d4d58eca75119bbecddf67bcfc3269be1543e42051d"
+  },
+  "protocol_sha256": "a50881870c14d992a296fb29a524f5b5d833188f984846014cce67001bb729af",
+  "real_kalman_outcomes_computed": false,
+  "schema_version": 1,
+  "study_id": "noaa-already-viewed-fixed-kalman-diagnostic-v1",
+  "verification_before_freeze": {
+    "independent_review": "algebra, irregular-time OLS oracle, all-20-before-future-coordinate sentinel",
+    "provider_calls": 0,
+    "real_new_kalman_scores": 0,
+    "synthetic_pytest_passed": 42
+  }
+}

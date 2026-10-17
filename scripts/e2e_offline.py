@@ -328,6 +328,7 @@ def extra(result, api, token):
         snapshots = req("/cases")
         noaa = req("/research/vector-diagnostic")
         cohort = req("/research/cohort-vectors")
+        kalman = req("/research/kalman-diagnostic")
         check("real-vector units and synthetic vision evidence stay separated", noaa["noaa"]["velocity_units"] == "m/s"
             and noaa["synthetic_tank"]["coordinates"]["velocity_units"] == "cm/s"
             and noaa["synthetic_tank"]["data_origin"] == "SYNTHETIC_SOFTWARE_REPLAY"
@@ -338,6 +339,12 @@ def extra(result, api, token):
             and cohort["coverage"]["planned_model_intervals"] == 144
             and cohort["coverage"]["missing_drifters"] == 2
             and not cohort["independent_evaluation"] and not cohort["automatic_model_promotion"])
+        check("fixed Kalman study replays 120 acquired outcomes without hiding 60 missing target slots",
+            kalman["kind"] == "FIXED_KALMAN_MOTION_DIAGNOSTIC"
+            and kalman["coverage"]["scored_outcomes"] == 120
+            and kalman["coverage"]["planned_outcomes"] == 180
+            and kalman["coverage"]["unique_observed_intervals"] == 24
+            and not kalman["independent_evaluation"] and not kalman["automatic_model_promotion"])
         check("vector inspection does not modify operational cases", req("/cases") == snapshots)
         req("/field-sessions/preflight", {"camera_session_id": "not-started"}, expected=401, auth=False)
         check("no physical session was fabricated", req("/field-sessions") == [])
@@ -347,6 +354,7 @@ def extra(result, api, token):
             validation_report_id=receipt["report"]["id"], export_payload_sha256=bundle["payload_sha256"],
             synthetic_evaluation=ledger, real_vector_metrics=[{"id": model["id"], "metrics": model["metrics"]}
                 for model in noaa["noaa"]["models"]], cohort_coverage=cohort["coverage"],
+            fixed_kalman_coverage=kalman["coverage"],
             no_live_provider_calls=True, no_physical_trials=True)
 
 

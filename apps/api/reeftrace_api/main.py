@@ -172,6 +172,20 @@ def create_app(settings: Settings | None = None):
         except (FileNotFoundError, PermissionError):
             raise HTTPException(503, "The pinned transfer diagnostic is unavailable locally") from None
 
+    @app.get("/api/v1/research/kalman-diagnostic")
+    def kalman_diagnostic(response: Response):
+        """Replay a fixed, post-hoc model study without altering operational evidence."""
+        from apps.ocean.reeftrace_ocean.kalman_diagnostic import run_kalman_diagnostic
+        response.headers["Cache-Control"] = "no-store"
+        try:
+            return run_kalman_diagnostic()
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(503, "The pinned Kalman diagnostic is unavailable locally",
+                                headers={"Cache-Control": "no-store"}) from None
+        except (ValueError, TypeError):
+            raise HTTPException(409, "The fixed Kalman study failed its integrity or numerical checks",
+                                headers={"Cache-Control": "no-store"}) from None
+
     @app.get("/api/v1/research/vector-diagnostic")
     def vector_diagnostic(response: Response):
         """Read-only motion comparison; never acquires evidence or contacts a provider."""

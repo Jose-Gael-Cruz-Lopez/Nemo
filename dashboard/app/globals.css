@@ -1,35 +1,21 @@
 :root {
   color-scheme: light;
-  --canvas: #031b2b;
+  --canvas: #e8f3fc;
   --surface: #ffffff;
-  --ink: #21333d;
-  --muted: #527284;
-  --line: #d6e5ed;
-  --purple: #54a8d8;
-  --purple-hover: #3b8dbd;
-  --purple-soft: #e0f1fb;
-  --glass: rgb(255 255 255 / 64%);
-  --glass-strong: rgb(255 255 255 / 88%);
-  --glass-border: rgb(255 255 255 / 86%);
+  --ink: #193d53;
+  --muted: #526d7d;
+  --line: #d0e3ee;
+  /* Legacy accent names are shared by existing controls. */
+  --purple: #236f97;
+  --purple-hover: #195b80;
+  --purple-soft: #dceffc;
+  --glass: rgb(255 255 255 / 68%);
+  --glass-strong: rgb(255 255 255 / 90%);
+  --glass-border: rgb(255 255 255 / 88%);
   --glass-shadow: 0 12px 42px rgb(48 99 128 / 6%), inset 0 1px 0 rgb(255 255 255 / 78%);
   --green: #438466;
   --amber: #9a7431;
   --red: #ab4e56;
-}
-
-/* Ocean brand tokens retain the legacy accent names used by existing controls. */
-:root {
-  --surface: #f5fcff;
-  --ink: #12364b;
-  --muted: #526d7d;
-  --line: #d0e3ec;
-  --purple: #087eac;
-  --purple-hover: #09678d;
-  --purple-soft: #d9f0fa;
-  --glass: rgb(243 251 255 / 97%);
-  --glass-strong: rgb(255 255 255 / 96%);
-  --glass-border: rgb(196 232 247 / 30%);
-  --glass-shadow: 0 12px 42px rgb(0 12 22 / 14%), inset 0 1px 0 rgb(255 255 255 / 75%);
 }
 * {
   box-sizing: border-box;
@@ -2569,10 +2555,10 @@ button:active:not(:disabled) {
 /* Ocean glass frames the workspace; measured evidence stays legible. */
 .app-shell {
   isolation: isolate;
-  background-color: #e7f3fa;
+  background-color: #e8f3fc;
   background-image:
     radial-gradient(ellipse at 80% 0%, rgb(158 211 242 / 33%), transparent 45%),
-    radial-gradient(ellipse at 0% 75%, rgb(194 204 250 / 42%), transparent 46%),
+    radial-gradient(ellipse at 0% 75%, rgb(177 219 247 / 42%), transparent 46%),
     linear-gradient(rgb(106 162 194 / 3%) 1px, transparent 1px),
     linear-gradient(90deg, rgb(106 162 194 / 3%) 1px, transparent 1px);
   background-size: auto, auto, 64px 64px, 64px 64px;
@@ -2599,7 +2585,18 @@ button:active:not(:disabled) {
   letter-spacing: -.8px;
 }
 .app-shell .brand-symbol {
-  color: var(--purple);
+  width: 40px;
+  height: 33px;
+  flex-shrink: 0;
+  color: #267da8;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+.app-shell .brand-symbol svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .app-shell .workspace-switch {
   padding: 11px 9px;
@@ -2636,8 +2633,8 @@ button:active:not(:disabled) {
 .app-shell .nav-item[aria-current="page"],
 .app-shell .nav-item[aria-current="true"],
 .app-shell .nav-item.active {
-  color: #367ea7;
-  background: linear-gradient(115deg, #ddf0fb, #eaf5fc);
+  color: #225f82;
+  background: linear-gradient(115deg, #d2eafa, #e4f3fc);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 70%), 0 3px 10px rgb(75 143 183 / 5%);
 }
 .app-shell .nav-item[aria-current="page"] svg,
@@ -2748,13 +2745,14 @@ button:active:not(:disabled) {
   border-radius: 10px;
 }
 .app-shell .primary-button {
-  border-color: #58a8d7;
-  background: linear-gradient(135deg, #64b6e6, #4d9dcc);
-  box-shadow: 0 4px 12px rgb(76 156 202 / 16%), inset 0 1px 0 rgb(255 255 255 / 23%);
+  color: #174b69;
+  border-color: #91c5e4;
+  background: linear-gradient(135deg, #d0ebfc, #a5d5f1);
+  box-shadow: 0 4px 12px rgb(76 156 202 / 12%), inset 0 1px 0 rgb(255 255 255 / 70%);
 }
 .app-shell .primary-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #54a6d6, #3a8bba);
-  border-color: #4193c3;
+  background: linear-gradient(135deg, #c1e5fa, #93ccea);
+  border-color: #76b5d9;
   box-shadow: 0 6px 16px rgb(76 156 202 / 22%);
 }
 .app-shell .secondary-button {
@@ -2961,115 +2959,3 @@ button:active:not(:disabled) {
   .app-shell .evidence-panel,
   .app-shell .integration-card { background: #f9fcfe; -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
-
-/* Deep water surrounds pale evidence surfaces, keeping plots and controls clear. */
-.app-shell {
-  background-color: #031b2b;
-  background-image:
-    radial-gradient(ellipse at 75% 0%, rgb(25 119 154 / 28%), transparent 48%),
-    radial-gradient(ellipse at 5% 70%, rgb(11 79 106 / 30%), transparent 50%),
-    linear-gradient(rgb(110 194 223 / 3%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(110 194 223 / 3%) 1px, transparent 1px);
-}
-.app-shell .sidebar {
-  color: #e8f6fc;
-  border-color: rgb(155 214 237 / 18%);
-  background: rgb(5 35 51 / 89%);
-  box-shadow: 0 16px 50px rgb(0 9 18 / 18%), inset 0 1px 0 rgb(181 228 245 / 6%);
-}
-.app-shell .brand,.app-shell .brand-symbol { color: #f4fcff; }
-.app-shell .workspace-switch {
-  color: #ebf8fe;
-  background: rgb(69 141 171 / 12%);
-  border-color: rgb(154 210 231 / 18%);
-  box-shadow: none;
-}
-.app-shell .workspace-switch > svg:last-child { color: #a6cada; }
-.app-shell .workspace-avatar,.app-shell .team-avatar {
-  color: #dcf4ff;
-  background: #164761;
-  border-color: #2a5b73;
-}
-.app-shell .workspace-name small,.app-shell .workspace-name > span,
-.app-shell .team-meta small,.app-shell .team-meta > span,
-.app-shell .sidebar-section,.app-shell .local-indicator { color: #a5c2d1; }
-.app-shell .nav-item { color: #b8d0dc; }
-.app-shell .nav-item svg { color: #99c0d3; }
-.app-shell .nav-item:hover { color: #f4fcff; background: rgb(67 133 164 / 17%); }
-.app-shell .nav-item[aria-current="page"],.app-shell .nav-item[aria-current="true"],.app-shell .nav-item.active {
-  color: #f4fcff;
-  background: linear-gradient(110deg, #15516c, #10445e);
-  box-shadow: inset 0 1px 0 rgb(160 225 249 / 12%);
-}
-.app-shell .nav-item[aria-current="page"] svg,.app-shell .nav-item[aria-current="true"] svg,.app-shell .nav-item.active svg { color: #7ed8f3; }
-.app-shell .nav-count { color: #d3ebf7; background: #113b51; border-color: #2b566c; }
-.app-shell .team-profile { color: #e8f6fc; border-color: #22495e; }
-.app-shell .team-profile > svg { color: #a5c2d1; }
-.app-shell .topbar {
-  color: #e1f3fb;
-  border-color: rgb(155 214 237 / 18%);
-  background: rgb(8 43 60 / 84%);
-  box-shadow: 0 8px 32px rgb(0 10 20 / 10%), inset 0 1px 0 rgb(181 228 245 / 5%);
-}
-.app-shell .breadcrumb,.app-shell .breadcrumb strong,.app-shell .breadcrumb > span:last-child { color: #bbd4e1; }
-.app-shell .breadcrumb svg { color: #8db5c9; }
-.app-shell .topbar .icon-button { color: #c5e1ed; }
-.app-shell .topbar .icon-button:hover { color: #fff; background: #174b65; }
-.app-shell .search-field { color: #31566b; background: #effaff; border-color: #d3eaf4; }
-.app-shell .search-field input { color: #153f56; background: transparent; }
-.app-shell .search-shortcut { color: #53778c; border-color: #c5dde9; }
-.app-shell .page-heading h1 { color: #f1fbff; }
-.app-shell .page-heading .page-description,.app-shell .page-heading .kicker { color: #b2cedd; }
-.app-shell .page-heading > .secondary-button { color: #d9f3ff; border-color: #3d6d84; background: #0e3a51; box-shadow: none; }
-.app-shell .page-heading > .secondary-button:hover:not(:disabled) { color: #fff; background: #174f6c; border-color: #6197ae; }
-.app-shell .card,.app-shell .summary-strip,.app-shell .case-list,.app-shell .map-panel,.app-shell .evidence-panel,.app-shell .integration-card {
-  background: var(--glass);
-  border-color: var(--glass-border);
-  box-shadow: var(--glass-shadow);
-}
-.app-shell .card-header { border-bottom-color: #d7e8f0; }
-.app-shell .card-title,.app-shell .card-header h2,.app-shell .case-detail-heading h2 { color: #183f55; }
-.app-shell .card-header > svg,.app-shell .card-title svg { color: #397e9f; }
-.app-shell .card-subtitle,.app-shell .settings-note,.app-shell .muted,
-.app-shell .integration-card > .card-body > p:first-child,.app-shell .check-copy > span:last-child { color: #526d7d; }
-.app-shell .primary-button {
-  color: #fff;
-  border-color: #0879a5;
-  background: linear-gradient(135deg, #087ba8, #076b92);
-  box-shadow: 0 4px 12px rgb(7 100 138 / 16%), inset 0 1px 0 rgb(255 255 255 / 18%);
-}
-.app-shell .primary-button:hover:not(:disabled) { background: linear-gradient(135deg, #0876a0, #075e84); border-color: #08688d; box-shadow: 0 6px 16px rgb(7 100 138 / 22%); }
-.app-shell .secondary-button { color: #285b75; border-color: #bdd9e7; background: #fafdff; }
-.app-shell .secondary-button:hover:not(:disabled) { background: #eaf7fd; border-color: #86b7cc; }
-.app-shell .ghost-button { color: #3e708a; }
-.app-shell .summary-strip { background: #edf9ff; }
-.app-shell .summary-value { color: #176c96; }
-.app-shell .observation-row,.app-shell .case-item,.app-shell .check-row,.app-shell .tool-row,.app-shell .setting-row { border-bottom-color: #d7e8f0; }
-.app-shell .observation-row:hover,.app-shell .case-item:hover { background: #e6f5fc; }
-.app-shell .case-item[aria-current="true"],.app-shell .case-item[aria-current="page"] { background: #dbf0fa; border-left-color: #2899c6; }
-.app-shell .observation-title,.app-shell .case-item strong { color: #204a62; }
-.app-shell .observation-icon,.app-shell .step-index,.app-shell .tool-logo { color: #26789c; background: #e2f2fa; border-color: #c9e3ef; }
-.app-shell .pill.purple { color: #17648a; border-color: #bddfea; background: #def3fc; }
-.app-shell .pill.neutral { color: #46697c; border-color: #d0e3ed; background: #edf6fa; }
-.app-shell .report-grid .map-panel { background: #fbfeff; border-color: #cee4ee; }
-.app-shell .report-grid .evidence-panel { background: transparent; box-shadow: none; }
-.app-shell .score-track,.app-shell meter.score-track,.app-shell meter.score-track::-webkit-meter-bar { background: #d8eaf3; }
-.app-shell .score-fill,.app-shell meter.score-track::-webkit-meter-optimum-value { background: linear-gradient(90deg, #68bddb, #1188b3); }
-.app-shell meter.score-track::-moz-meter-bar { background: #168bb4; }
-.app-shell .answer,.app-shell .manual-task-status { color: #31586f; background: #eaf6fd; border-color: #c8e2ef; }
-.app-shell input,.app-shell textarea,.app-shell select { color: #153f55; background: var(--glass-strong); border-color: #bdd8e7; }
-.app-shell input::placeholder,.app-shell textarea::placeholder { color: #658496; }
-.app-shell .notice.info,.app-shell .busy-notice { color: #285c78; background: #e8f6fd; border-color: #b8dcec; }
-.app-shell .table-scroll { border-color: #cce2ed; background: #fbfeff; }
-.app-shell .metrics-table th,.app-shell .metrics-table td { border-bottom-color: #d7e8f0; }
-.app-shell .metrics-table thead th { color: #315d76; background: #e8f5fc; }
-.app-shell .workspace-footer { color: #a4c3d4; border-color: #275064; }
-.operator-dialog { color: #183f55; background: #f1fbff; border-color: #cce5f1; box-shadow: 0 24px 100px rgb(0 11 24 / 35%); }
-.operator-dialog::backdrop { background: rgb(1 15 27 / 62%); }
-@media (prefers-reduced-transparency: reduce) {
-  .app-shell .sidebar { background: #062334; }
-  .app-shell .topbar { background: #082b3d; }
-  .app-shell .card,.app-shell .summary-strip,.app-shell .case-list,.app-shell .map-panel,.app-shell .evidence-panel,.app-shell .integration-card { background: #f2fbff; }
-}
-.app-shell .brand-symbol { width: 40px; height: 33px; flex-shrink: 0; background: transparent; border: 0; border-radius: 0; color: #fff; }
-.app-shell .brand-symbol svg { display: block; width: 100%; height: 100%; }

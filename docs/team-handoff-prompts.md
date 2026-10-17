@@ -1,5 +1,13 @@
 # Three-person implementation handoff
 
+**Superseded assignment plan:** use the [current four-person build plan](four-person-build-plan.md)
+for remaining work and ownership. These older Trace 1–3 prompts document the
+implementation foundations already merged; do not repeat their assignments. The
+product display name is Tideward; the repository/API remain ReefTrace. Preserve
+the currently authorized live Photon configuration and do not send new messages,
+change automatic replies or alter provider/account/billing settings. The disabled
+provider environment in offline test commands applies only to those test processes.
+
 Assigned owners: **Megana (`megana111`) — Trace 1; Aarush Mane (`aarushmane`) —
 Trace 2; Jose — Trace 3.** Use separate repository branches/tasks in Trove.
 Do not ask three people to rebuild the existing comparison, ledger or dashboard.
@@ -29,8 +37,9 @@ No new actuator, robot, sensor, 3D printing or model-provider purchase is requir
   and a local HTTP audit. These are implemented, not new assignments.
 - Public NOAA drifter benchmark, training-only diagnostic and historical satellite
   context. These do not supply tank flow or source labels.
-- Photon transport is implemented, but **`PHOTON_ENABLED=false` must stay false**.
-  No test messages, automatic replies or channel experiments are authorized.
+- Photon transport is implemented. Preserve its currently authorized live
+  configuration; no new test messages, reply-setting changes or channel experiments
+  are part of these handoffs.
 - xAI narration remains disabled/unverified. No new credentials or billing work.
 
 Read `README.md`, `docs/architecture.md`, `docs/verification.md`,
@@ -162,7 +171,8 @@ artifact references, persist an immutable receipt and require operator auth via
 the shared dependency provided by Lane 3. Do not accept arbitrary caller claims
 as evidence that existing numerical/calibration gates passed.
 
-Physical action and power stay manual. Keep Photon false, no provider/account
+Physical action and power stay manual. Preserve live Photon settings; no new
+messages or provider/account
 changes, no private-key inspection or automatic camera opening. Tests use
 explicit fake capture and synthetic image fixtures, labelled as such. Mock the
 capture device, not the admission gates that the workflow is meant to prove. If actual
@@ -313,8 +323,8 @@ report usable. A changed case or trial/evaluation digest must reject a stale mod
 answer atomically; do not overwrite a prior manual outcome. Numerical tables are
 rendered from frozen backend reports, never from generated prose.
 
-Keep PHOTON_ENABLED=false and xAI voice disabled. Do not send messages, enable
-background replies, alter account/billing/model configuration, request private
+Preserve the current live Photon settings and keep xAI voice disabled. Do not send
+new messages, change background replies, alter account/billing/model configuration, request private
 keys or add an actuator. All automated integration uses fake provider transport
 with explicit mock labels. Do not run a metered live model audit without separate
 human coordination; the existing HTTP scripts can call configured Chalk.
@@ -373,7 +383,9 @@ npm run build
 Use isolated test data and explicit fake transports. Run `scripts/dev.py --check`
 for a read-only launch preflight. The existing HTTP demo scripts may make a real
 metered Chalk turn when credentials are configured; they are **not** the default
-offline smoke checks. A human must coordinate any such run, while Photon stays off.
+offline smoke checks. A human must coordinate any such run; preserve the existing
+live Photon configuration and do not send new messages. Offline test processes
+use disabled fake transports without rewriting the live environment.
 
 The final demo should say: **we preserved uncertain source identity, compared a
 declared interception choice, and made the measured evidence and its limitations
