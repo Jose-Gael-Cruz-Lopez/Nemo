@@ -1,5 +1,7 @@
 "use client";
 
+import { BRAND_NAME } from "./brand";
+
 import { useEffect, useId, useRef, useState } from "react";
 import { Icon } from "./icons";
 import styles from "./reef-briefing.module.css";
@@ -135,10 +137,10 @@ function HeatChart({ data }: { data: SatelliteContext }) {
       })}
       <line x1="44" y1={thresholdY} x2="464" y2={thresholdY} stroke="#b2935c" strokeDasharray="5 4" />
       <text x="464" y={thresholdY - 6} textAnchor="end" fontSize="9" fill="#927242">Bleaching-risk level ({data.summary.bleaching_risk_threshold_c_weeks.toFixed(0)})</text>
-      <polyline points={points.map((point, index) => position(point, index).join(",")).join(" ")} fill="none" stroke="#7160aa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <polyline points={points.map((point, index) => position(point, index).join(",")).join(" ")} fill="none" stroke="#087fac" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
       {points.map((point, index) => {
         const [x, y] = position(point, index);
-        return <g key={point.time_utc}><circle cx={x} cy={y} r="3.5" fill="#7160aa" stroke="white" strokeWidth="1"><title>{point.time_utc.slice(0, 10)}: {point.degree_heating_week_c_weeks.toFixed(2)} °C-weeks</title></circle><text x={x} y="155" textAnchor="middle" fontSize="9" fill="#687782">{index + 1} Jul</text></g>;
+        return <g key={point.time_utc}><circle cx={x} cy={y} r="3.5" fill="#087fac" stroke="white" strokeWidth="1"><title>{point.time_utc.slice(0, 10)}: {point.degree_heating_week_c_weeks.toFixed(2)} °C-weeks</title></circle><text x={x} y="155" textAnchor="middle" fontSize="9" fill="#687782">{index + 1} Jul</text></g>;
       })}
     </svg>
     <figcaption>Accumulated thermal stress, not confirmed coral bleaching. One approximately {data.location.nominal_resolution_km} km grid cell; no tank or plastic-source measurement.</figcaption>
@@ -247,7 +249,7 @@ function ReefBriefingSession({ api, caseId, evidenceId, operatorToken, stopped }
           <div className={styles.voiceActions}><button className="secondary-button" disabled={busy !== null || !operatorToken || stopped || Boolean(audioUrl)} onClick={() => void run("audio")}><Icon name="play" />{busy === "audio" ? "Generating narration…" : audioUrl ? "Narration ready" : "Generate Grok narration"}</button><span className="settings-note">{!operatorToken ? "Connect operator access to request audio." : audioUrl ? "Use the player to listen or replay." : "The text remains usable if speech is unavailable."}</span></div>
           {busy === "audio" && <p className="settings-note" role="status">Generating speech from this exact script. It does not change the source analysis.</p>}
           {voiceError && <div className="notice error" role="alert">{voiceError}</div>}
-          {audioUrl && <div className={styles.player}><audio controls preload="none" src={audioUrl} aria-label="ReefTrace evidence briefing" onError={() => setVoiceError("The browser could not play this audio. The full briefing text is still available above.")}>Your browser does not support audio playback. Read the transcript above.</audio><p className="settings-note">Grok speech from a deterministic script; no generated source claims, hardware action or messaging.</p></div>}
+          {audioUrl && <div className={styles.player}><audio controls preload="none" src={audioUrl} aria-label={`${BRAND_NAME} evidence briefing`} onError={() => setVoiceError("The browser could not play this audio. The full briefing text is still available above.")}>Your browser does not support audio playback. Read the transcript above.</audio><p className="settings-note">Grok speech from a deterministic script; no generated source claims, hardware action or messaging.</p></div>}
           <details className="details-panel"><summary>Script evidence</summary><p className="settings-note">Frozen source evidence</p><code className="evidence-id">{briefing.source_evidence_id}</code><p className="settings-note">Script SHA-256</p><code className="evidence-id">{briefing.script_hash}</code></details>
         </>}
       </div>

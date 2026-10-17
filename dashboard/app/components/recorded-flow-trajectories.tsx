@@ -15,12 +15,12 @@ function PathPlot({ report, run }: { report: RecordedTrajectoryReport; run: Traj
   const observed = [initial, ...run.comparisons.map(p => `${x(p.observed_x_cm)},${y(p.observed_y_cm)}`)].join(" ");
   const predicted = [initial, ...run.comparisons.map(p => `${x(p.predicted_x_cm)},${y(p.predicted_y_cm)}`)].join(" ");
   const last = run.comparisons[run.comparisons.length - 1];
-  return <div className={styles.plot}><svg viewBox="0 0 500 335" role="img" aria-label={`Recorded and free-running predicted paths in calibrated centimetres for ${run.recording_id}. Observed green; prediction purple dashed. Both start at the first observation.`}>
-    <rect x={left} y={top} width={width * scale} height={height * scale} fill="#f5f2fb" stroke="#b9b0cb" />
-    <polyline points={observed} fill="none" stroke="#267864" strokeWidth="3" /><polyline points={predicted} fill="none" stroke="#6350b2" strokeWidth="3" strokeDasharray="7 4" />
-    <circle cx={x(run.initial_position.x_cm!)} cy={y(run.initial_position.y_cm!)} r="5" fill="#443657"><title>Common initial observation; no later observation resets the prediction</title></circle>
-    <circle cx={x(last.observed_x_cm)} cy={y(last.observed_y_cm)} r="5" fill="#267864"><title>Recorded endpoint</title></circle><circle cx={x(last.predicted_x_cm)} cy={y(last.predicted_y_cm)} r="5" fill="#6350b2"><title>Predicted endpoint</title></circle>
-    <text x="35" y="18" fontSize="11" fill="#4d455e">Tank bounds · {number(width, 1)} × {number(height, 1)} cm</text><text x="35" y="325" fontSize="11" fill="#4d455e">Green: recorded · Purple dashed: predicted · Dot: shared start</text>
+  return <div className={styles.plot}><svg viewBox="0 0 500 335" role="img" aria-label={`Recorded and free-running predicted paths in calibrated centimetres for ${run.recording_id}. Observed green; prediction blue dashed. Both start at the first observation.`}>
+    <rect x={left} y={top} width={width * scale} height={height * scale} fill="#edf8fc" stroke="#a9c8d5" />
+    <polyline points={observed} fill="none" stroke="#267864" strokeWidth="3" /><polyline points={predicted} fill="none" stroke="#087fac" strokeWidth="3" strokeDasharray="7 4" />
+    <circle cx={x(run.initial_position.x_cm!)} cy={y(run.initial_position.y_cm!)} r="5" fill="#12364b"><title>Common initial observation; no later observation resets the prediction</title></circle>
+    <circle cx={x(last.observed_x_cm)} cy={y(last.observed_y_cm)} r="5" fill="#267864"><title>Recorded endpoint</title></circle><circle cx={x(last.predicted_x_cm)} cy={y(last.predicted_y_cm)} r="5" fill="#087fac"><title>Predicted endpoint</title></circle>
+    <text x="35" y="18" fontSize="11" fill="#345a6b">Tank bounds · {number(width, 1)} × {number(height, 1)} cm</text><text x="35" y="325" fontSize="11" fill="#345a6b">Green: recorded · Blue dashed: predicted · Dot: shared start</text>
   </svg><p className={styles.note}>Both axes share the same centimetre scale. Plot uses +x right, +y down as a display convention; physical coordinate directions follow your calibration. Lines join all {run.comparisons.length} scored timestamp positions; wall bounces and other motion between samples are not drawn. No ocean geography, traps or protection outcome is represented.</p></div>;
 }
 function Results({ report }: { report: RecordedTrajectoryReport }) {

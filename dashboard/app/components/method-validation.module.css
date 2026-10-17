@@ -1,9 +1,9 @@
 .stack { display: grid; gap: 13px; min-width: 0; }
 .header { flex-wrap: wrap; gap: 12px; }
-.scope { margin: 0; padding: 12px; color: #69547e; background: #f5effd; border: 1px solid #e2d6f2; border-radius: 12px; font-size: 11px; line-height: 1.75; }
+.scope { margin: 0; padding: 12px; color: #426276; background: #eaf7fb; border: 1px solid #c9e1ea; border-radius: 12px; font-size: 11px; line-height: 1.75; }
 .scope h3 { margin-top: 0; }
 .actions, .badges { display: flex; flex-wrap: wrap; gap: 9px; }
-.actions button[aria-pressed="true"] { border-color: #bcb0d3; background: var(--purple-soft); }
+.actions button[aria-pressed="true"] { border-color: #9ec6d7; background: var(--purple-soft); }
 .table { min-width: 850px; }
 .table small { display: block; color: var(--muted); }
 @media (max-width: 520px) { .header > button, .actions > button { width: 100%; justify-content: center; } }

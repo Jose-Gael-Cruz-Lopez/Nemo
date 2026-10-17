@@ -25,7 +25,7 @@ type RealData = {
   provenance: { source_url: string; metadata_url: string; product_doi: string; license: string; license_url: string; attribution: string; sha256: string; integrity_verified: boolean; row_count: number; drifter_id: string };
   limitations: string[];
 };
-const COLORS = ["#a78344", "#4f88ac", "#6258b4"];
+const COLORS = ["#a78344", "#4f88ac", "#087fac"];
 const metres = (value: number) => `${Math.round(value).toLocaleString()} m`;
 function utc(value: string) { return `${value.slice(11, 16)} UTC`; }
 function https(value: string) { return value.startsWith("https://") ? value : "#"; }

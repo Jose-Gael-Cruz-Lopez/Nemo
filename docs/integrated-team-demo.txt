@@ -1,5 +1,7 @@
-REEFTRACE — INTEGRATED DEMO GUIDE
+TIDEWARD — INTEGRATED DEMO GUIDE
 17 October 2026
+
+Tideward is the current product identity. The repository, API identifiers, environment variables and saved ReefTrace evidence remain compatible.
 
 ReefTrace observes a floating token, compares plausible entry points using a frozen drift model, and explains the evidence. It then helps the team compare an interception layout with a baseline and record whether tokens reached a protected surface zone.
 
@@ -160,7 +162,7 @@ its metric scale with NOAA m/s. No camera was opened and no measured profile adm
 
 After a recorded flow is fitted in Camera commissioning, “Inspect recorded drift vectors” reads only that immutable fit and its named validation recordings. Unsupported samples remain visible; conditional field interpolation at observed midpoints is not a future trajectory forecast. Stored capture claims are unverified and explicit fake flags stay synthetic.
 
-Then click “Replay free-running drift paths”. The new check initializes each declared validation run from its first recorded position only. Later observed coordinates score the already-created predictions; they never reset the prediction. Green and dashed purple lines show recorded and predicted paths at equal centimetre scales. Mean path error (ADE), final error (FDE) and position RMSE are distances in cm, separate from the vector error in cm/s.
+Then click “Replay free-running drift paths”. The new check initializes each declared validation run from its first recorded position only. Later observed coordinates score the already-created predictions; they never reset the prediction. Green and dashed blue lines show recorded and predicted paths at equal centimetre scales. Mean path error (ADE), final error (FDE) and position RMSE are distances in cm, separate from the vector error in cm/s.
 
 This diagnostic uses a frozen deterministic mean field, Euler steps no longer than 0.05 seconds, reflecting rectangular walls, no traps and no diffusion. It verifies coverage along every actual step segment, including wall reflections. Gaps, identity breaks, unsupported paths or exhausted budgets withhold the whole affected run and common aggregate metrics; planned points remain in the denominator. It reads existing recordings only and does not start a device, refit, promote a model or establish an independent physical test. It is not the stochastic prevention simulator and does not score protected-zone benefit.
 

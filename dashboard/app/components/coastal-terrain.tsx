@@ -31,20 +31,20 @@ const STATIONS = [{ x: 210, y: 400, top: 262, label: "OBS. 01" }, { x: 515, y: 2
 export function CoastalTerrain({ phase = 0, className = "" }: { phase?: number; className?: string }) {
   const id = useId().replaceAll(":", "");
   return <svg className={className} viewBox="0 0 1400 630" fill="none" role="img" aria-label="Illustrative coastal terrain with observation sites, a possible drift route, and a protected reef zone">
-    <defs><linearGradient id={`${id}-wash`} x1="150" y1="180" x2="1200" y2="600" gradientUnits="userSpaceOnUse"><stop stopColor="#ede8ff" stopOpacity=".15" /><stop offset=".5" stopColor="#c8bcfa" stopOpacity=".4" /><stop offset="1" stopColor="#dbd5f4" stopOpacity=".12" /></linearGradient><linearGradient id={`${id}-fade`} x1="0" y1="0" x2="0" y2="630" gradientUnits="userSpaceOnUse"><stop stopColor="#5f4c99" stopOpacity=".55" /><stop offset="1" stopColor="#5f4c99" stopOpacity=".18" /></linearGradient></defs>
+    <defs><linearGradient id={`${id}-wash`} x1="150" y1="180" x2="1200" y2="600" gradientUnits="userSpaceOnUse"><stop stopColor="#c4eef8" stopOpacity=".15" /><stop offset=".5" stopColor="#2786a9" stopOpacity=".4" /><stop offset="1" stopColor="#80c9df" stopOpacity=".12" /></linearGradient><linearGradient id={`${id}-fade`} x1="0" y1="0" x2="0" y2="630" gradientUnits="userSpaceOnUse"><stop stopColor="#72bfd4" stopOpacity=".55" /><stop offset="1" stopColor="#72bfd4" stopOpacity=".18" /></linearGradient></defs>
     <path d="M45 411 421 183 1360 413 989 615Z" fill={`url(#${id}-wash)`} />
     <g stroke={`url(#${id}-fade)`} strokeWidth="1" strokeLinejoin="round">{CONTOURS.map((d, i) => <path key={i} d={d} />)}</g>
-    <g stroke="#6c4fd2" opacity={phase > 0 ? .95 : .45}>
+    <g stroke="#75dcf1" opacity={phase > 0 ? .95 : .45}>
       <path d="M210 400C355 360 349 439 504 436S742 322 866 357 1008 434 1110 370" strokeWidth="2" strokeDasharray="5 8" />
-      <circle cx="504" cy="436" r="4" fill="#6c4fd2" /><circle cx="866" cy="357" r="4" fill="#6c4fd2" />
+      <circle cx="504" cy="436" r="4" fill="#75dcf1" /><circle cx="866" cy="357" r="4" fill="#75dcf1" />
     </g>
-    <path d="m1027 369 85-45 98 25-85 47Z" fill="#ac91e8" fillOpacity={phase === 2 ? .45 : .15} stroke="#8a63d0" strokeWidth="1.5" strokeDasharray="4 5" />
+    <path d="m1027 369 85-45 98 25-85 47Z" fill="#4cb4cf" fillOpacity={phase === 2 ? .45 : .15} stroke="#81d4e7" strokeWidth="1.5" strokeDasharray="4 5" />
     {STATIONS.map((s, i) => <g key={s.label} opacity={phase === 0 || phase === 1 && i < 3 || phase === 2 && i === 3 ? 1 : .45}>
-      <ellipse cx={s.x} cy={s.y} rx="9" ry="4" fill="#8663d1" fillOpacity=".2" />
-      <path d={`M${s.x} ${s.y}V${s.top}`} stroke="#8d69d8" strokeWidth="1.2" />
-      <path d={`m${s.x} ${s.top - 8} 7 4v8l-7 4-7-4v-8Z M${s.x} ${s.top - 8}v16m-7-12 7 4 7-4`} stroke="#7551c1" strokeWidth="1.1" fill="#faf7ff" />
-      <rect x={s.x + 11} y={s.top - 9} width={s.label.length * 6.5 + 12} height="20" rx="6" fill="#f8f5ff" fillOpacity=".85" />
-      <text x={s.x + 17} y={s.top + 5} fill="#6d538b" fontSize="9" fontFamily="monospace" letterSpacing=".6">{s.label}</text>
+      <ellipse cx={s.x} cy={s.y} rx="9" ry="4" fill="#7ad7ee" fillOpacity=".2" />
+      <path d={`M${s.x} ${s.y}V${s.top}`} stroke="#7fd4e6" strokeWidth="1.2" />
+      <path d={`m${s.x} ${s.top - 8} 7 4v8l-7 4-7-4v-8Z M${s.x} ${s.top - 8}v16m-7-12 7 4 7-4`} stroke="#61bdd9" strokeWidth="1.1" fill="#e9fbff" />
+      <rect x={s.x + 11} y={s.top - 9} width={s.label.length * 6.5 + 12} height="20" rx="6" fill="#e7f8fd" fillOpacity=".85" />
+      <text x={s.x + 17} y={s.top + 5} fill="#164861" fontSize="9" fontFamily="monospace" letterSpacing=".6">{s.label}</text>
     </g>)}
   </svg>;
 }

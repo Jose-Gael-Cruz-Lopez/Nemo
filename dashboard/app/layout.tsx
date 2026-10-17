@@ -1,9 +1,10 @@
+import { BRAND_NAME } from "./components/brand";
 import type { Metadata } from "next";
 import "./globals.css";
 import { OperatorProvider } from "./components/operator-provider";
 
 export const metadata: Metadata = {
-  title: "Reeftrace | Source intelligence",
+  title: `${BRAND_NAME} | Coastal intelligence`,
   description: "Trace floating pollution. Compare interventions. Protect what matters.",
 };
 

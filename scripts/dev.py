@@ -80,7 +80,10 @@ def verified_service(name: str) -> bool:
         html = body.decode("utf-8", errors="replace")
         return (
             "text/html" in content_type
-            and re.search(r"<title\b[^>]*>[^<]*reeftrace", html, re.IGNORECASE) is not None
+            and re.search(
+                r"<title\b[^>]*>\s*(?:Reeftrace \| Source intelligence|Tideward \| Coastal intelligence)\s*</title>",
+                html, re.IGNORECASE,
+            ) is not None
             and "/_next/" in html
         )
     except (LauncherError, URLError, HTTPError, OSError, ValueError, AttributeError, TypeError):

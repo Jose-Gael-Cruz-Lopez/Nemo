@@ -155,12 +155,23 @@ def test_api_identity_requires_root_health_and_schema(monkeypatch):
     assert not dev.verified_service("API")
 
 
-def test_dashboard_identity_requires_title_and_next_assets(monkeypatch):
+@pytest.mark.parametrize("title", ["Reeftrace | Source intelligence", "Tideward | Coastal intelligence"])
+def test_dashboard_identity_requires_title_and_next_assets(monkeypatch, title):
     monkeypatch.setattr(dev, "http_get", lambda *_: (
-        "text/html", b'<title>Reeftrace | Source intelligence</title><script src="/_next/x.js"></script>',
+        "text/html", f'<title>{title}</title><script src="/_next/x.js"></script>'.encode(),
     ))
     assert dev.verified_service("dashboard")
     monkeypatch.setattr(dev, "http_get", lambda *_: ("text/html", b"Another project"))
+    assert not dev.verified_service("dashboard")
+
+
+@pytest.mark.parametrize("html", [
+    '<title>Tideward | Coastal intelligence</title>',
+    '<title>Another Tideward app</title><script src="/_next/x.js"></script>',
+    '<p>Tideward | Coastal intelligence</p><script src="/_next/x.js"></script>',
+])
+def test_rebrand_does_not_accept_a_title_without_assets_or_an_unrelated_page(monkeypatch, html):
+    monkeypatch.setattr(dev, "http_get", lambda *_: ("text/html", html.encode()))
     assert not dev.verified_service("dashboard")
 
 

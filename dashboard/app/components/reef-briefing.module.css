@@ -11,10 +11,10 @@
 .scope {
   margin: 0 0 17px;
   padding: 11px 13px;
-  border: 1px solid #e2d6f2;
+  border: 1px solid #c9e1ea;
   border-radius: 12px;
-  color: #69547e;
-  background: #f5effd;
+  color: #426276;
+  background: #eaf7fb;
   font-size: 11px;
   line-height: 1.65;
 }
@@ -36,7 +36,7 @@
 }
 
 .metrics strong {
-  color: #62518a;
+  color: #12364b;
   font-size: 19px;
   font-weight: 550;
 }
@@ -61,7 +61,7 @@
 
 .transcript {
   margin: 15px 0 18px;
-  color: #605c69;
+  color: #426276;
   font-size: 12px;
   line-height: 1.85;
   overflow-wrap: anywhere;

@@ -1,5 +1,7 @@
 "use client";
 
+import { BRAND_NAME } from "./brand";
+
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { Icon } from "./icons";
 import { ValidationWorkspace } from "./validation-report";
@@ -56,9 +58,9 @@ function LayoutMap({ profile, zone, label, paths = [] }: { profile?: SourceProfi
   return <figure className={styles.map}><svg role="img" aria-labelledby={`${id}-title ${id}-desc`} viewBox={`${b.x_min_cm - 1} ${b.y_min_cm - 1} ${w + 2} ${h + 2}`}>
     <title id={`${id}-title`}>{label} layout in tank centimetres</title><desc id={`${id}-desc`}>Candidate source regions, collector or retention areas, and the protected zone. Dashed lines, when present, are representative simulated paths, not observed motion.</desc>
     <rect x={b.x_min_cm} y={b.y_min_cm} width={w} height={h} fill="#f2f7f6" stroke="#c0ceca" strokeWidth={w * .002} />
-    {profile.sources.map((source, i) => <g key={source.id}><polygon points={pointsText(source.polygon_cm)} fill={["#a9a2d4", "#99b9cc", "#d5b281"][i % 3]} fillOpacity=".6" /><text x={source.polygon_cm[0][0]} y={source.polygon_cm[0][1] - h * .02} fontSize={w * .035} fill="#57516c">{source.id}</text></g>)}
+    {profile.sources.map((source, i) => <g key={source.id}><polygon points={pointsText(source.polygon_cm)} fill={["#8bc6d9", "#99b9cc", "#d5b281"][i % 3]} fillOpacity=".6" /><text x={source.polygon_cm[0][0]} y={source.polygon_cm[0][1] - h * .02} fontSize={w * .035} fill="#345a6b">{source.id}</text></g>)}
     {profile.traps?.map(trap => <polygon key={trap.id} points={pointsText(trap.polygon_cm)} fill="#dbe9e0" stroke="#9aafa0" strokeWidth={w * .003}><title>Collector or retention area {trap.id}</title></polygon>)}
-    {paths.filter(path => path.layout === label.toLowerCase()).map(path => path.paths.slice(0, 3).map((item, i) => <polyline key={`${path.source_id}-${i}`} points={item.points.map(point => `${point.x_cm},${point.y_cm}`).join(" ")} fill="none" stroke="#7164b1" strokeWidth={w * .002} strokeDasharray={`${w * .01} ${w * .008}`} opacity=".55" />))}
+    {paths.filter(path => path.layout === label.toLowerCase()).map(path => path.paths.slice(0, 3).map((item, i) => <polyline key={`${path.source_id}-${i}`} points={item.points.map(point => `${point.x_cm},${point.y_cm}`).join(" ")} fill="none" stroke="#087fac" strokeWidth={w * .002} strokeDasharray={`${w * .01} ${w * .008}`} opacity=".55" />))}
     {zone.length >= 3 && <polygon points={pointsText(zone)} fill="#f0c7a7" fillOpacity=".6" stroke="#bd8156" strokeWidth={w * .004}><title>Protected zone, a tabletop reef-area proxy</title></polygon>}
   </svg><figcaption><strong>{label} · {profile.id}</strong>Water plane · cm. {paths.length ? "At most three representative simulated paths per source." : "Geometry preview; no measured outcome is implied."}</figcaption></figure>;
 }
@@ -172,7 +174,7 @@ function TrialForm({ report, disabled, archived, request, mutate, onUpdated }: {
     }
   }
   return <section className="card"><div className="card-header"><h2 className="card-title">One-token trial ledger</h2><span className="pill">{physical ? "Operator-reported physical" : "Synthetic demonstration"}</span></div><div className={`card-body ${styles.form}`}>
-    <p className="settings-note">The source label is the operator’s release log for this experiment. It is not a source inferred by ReefTrace. Record exactly one token per trial, following the frozen sequence.</p>
+    <p className="settings-note">The source label is the operator’s release log for this experiment. It is not a source inferred by {BRAND_NAME}. Record exactly one token per trial, following the frozen sequence.</p>
     {alreadySaved ? <div className={styles.scope}><p>This tab’s pending trial is already present in the saved ledger. No duplicate will be posted.</p><button className="secondary-button" disabled={disabled || reconciling} onClick={acknowledge}>Acknowledge saved trial</button></div> : pending ? <div className={styles.scope}><p><strong>{pending.rejected_status ? `Rejected submission (HTTP ${pending.rejected_status})` : "Unconfirmed submission"}:</strong> {pending.payload.layout} · source {pending.payload.source_id} · {readable(pending.payload.outcome)}.</p><p>{pending.rejected_status ? "The completed rejection was reconciled against the ledger; this key was absent. You may correct the rejected draft explicitly." : "The exact payload and key are retained in this tab until confirmed. Retry the same trial; do not release another token."}</p><code className={styles.small}>{pending.payload.trial_key}</code>{pending.rejected_status && <button className="secondary-button" disabled={disabled || reconciling} onClick={correctRejected}>Correct rejected draft</button>}</div> : next ? <p className={styles.scope}><strong>Next trial {recorded.length + 1}/{comparison.plan.expected_total}:</strong> {next.layout} layout · source {next.source_id} · repeat {next.repeat}. Observe for the complete {comparison.horizon_s}-second horizon.</p> : <p className={styles.scope}>The frozen trial sequence is complete. Inspect its recorded outcomes below; additional trials require a new comparison.</p>}
     {reconciling && <p className="settings-note" role="status">Checking the saved ledger before unlocking this rejected draft…</p>}
     {!pending && next && <fieldset disabled={disabled || archived}><legend>{physical ? "What physically happened?" : "Enter a synthetic test outcome"}</legend><div className={styles.form}>

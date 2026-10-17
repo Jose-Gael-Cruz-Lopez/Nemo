@@ -24,12 +24,12 @@ export function SourceMap({ profile, points = [], endpoint }: {
       <rect x={b.x_min_cm} y={b.y_min_cm} width={width} height={height} fill="url(#tank-grid)" />
       {profile.traps?.map(trap => <polygon key={trap.id} points={trap.polygon_cm.map(p => p.join(",")).join(" ")} fill="#dbe9e0" stroke="#9aafa0" strokeWidth=".1"><title>Retention pocket: {trap.id}</title></polygon>)}
       {profile.sources.map((source, index) => <g key={source.id}>
-        <polygon points={source.polygon_cm.map(p => p.join(",")).join(" ")} fill={["#a9a2d4", "#99b9cc", "#d5b281"][index % 3]} fillOpacity=".7" />
-        <text x={source.polygon_cm[0][0]} y={source.polygon_cm[0][1] - .55} fontSize={Math.max(width, height) * .032} fontWeight="600" fill="#57516c">{source.id}</text>
+        <polygon points={source.polygon_cm.map(p => p.join(",")).join(" ")} fill={["#8bc6d9", "#99b9cc", "#d5b281"][index % 3]} fillOpacity=".7" />
+        <text x={source.polygon_cm[0][0]} y={source.polygon_cm[0][1] - .55} fontSize={Math.max(width, height) * .032} fontWeight="600" fill="#345a6b">{source.id}</text>
       </g>)}
-      <polyline points={points.map(p => `${p.x_cm},${p.y_cm}`).join(" ")} fill="none" stroke="#6356b1" strokeWidth=".16" strokeLinecap="round" strokeLinejoin="round" />
-      {points.map((point, index) => <circle key={index} cx={point.x_cm} cy={point.y_cm} r={radius * .32} fill="#6356b1" />)}
-      {endpoint && <circle cx={endpoint.x_cm} cy={endpoint.y_cm} r={radius} fill="#6356b1" stroke="white" strokeWidth=".08"><title>Observed retained endpoint</title></circle>}
+      <polyline points={points.map(p => `${p.x_cm},${p.y_cm}`).join(" ")} fill="none" stroke="#087fac" strokeWidth=".16" strokeLinecap="round" strokeLinejoin="round" />
+      {points.map((point, index) => <circle key={index} cx={point.x_cm} cy={point.y_cm} r={radius * .32} fill="#087fac" />)}
+      {endpoint && <circle cx={endpoint.x_cm} cy={endpoint.y_cm} r={radius} fill="#087fac" stroke="white" strokeWidth=".08"><title>Observed retained endpoint</title></circle>}
     </svg>
     <div className="map-footer"><span>Permitted observations</span><span>Water plane · cm</span></div>
   </div>;
