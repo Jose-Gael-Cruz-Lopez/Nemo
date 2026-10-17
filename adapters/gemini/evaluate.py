@@ -1,7 +1,7 @@
 """Frozen agent-policy evaluation. Default mode is an offline scripted rehearsal.
 
 No camera, application Store, Photon transport or inference truth is imported.
-Remote deployment definitions are imported only after explicit --mode remote.
+Live model calls are explicit; task scoring and results remain local.
 """
 
 from __future__ import annotations
@@ -11,7 +11,6 @@ import asyncio
 import copy
 import hashlib
 import json
-import os
 from pathlib import Path
 from typing import Any
 
@@ -287,10 +286,7 @@ def policy_scores(
 
 def settings_from_environment() -> GeminiSettings:
     """CLI-only settings boundary; the reusable agent itself never reads environment."""
-    return GeminiSettings(
-        enabled=True, api_key=os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", ""),
-        model=os.getenv("GEMINI_MODEL", ""),
-    )
+    return GeminiSettings.from_env()
 
 
 async def evaluate_local(
@@ -352,16 +348,11 @@ async def evaluate_local(
     }
 
 
-def run_remote(rows: list[dict], *, split: str, git_sha: str) -> dict:
-    raise ValueError("Remote gateway deployment was removed; use --mode local --live-model for Gemini")
-
-
 def main(argv: list[str] | None = None) -> int:
     from dotenv import load_dotenv
 
     load_dotenv(override=False)
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--mode", choices=("local", "remote"), default="local")
     parser.add_argument(
         "--live-model", action="store_true", help="Use configured live gateway in local mode"
     )
@@ -378,11 +369,7 @@ def main(argv: list[str] | None = None) -> int:
         else default_rows()
     )
     try:
-        result = (
-            run_remote(rows, split=args.split, git_sha=args.git_sha)
-            if args.mode == "remote"
-            else asyncio.run(evaluate_local(rows, live_model=args.live_model))
-        )
+        result = asyncio.run(evaluate_local(rows, live_model=args.live_model))
     except (ValueError, ImportError) as error:
         parser.exit(2, str(error) + "\n")
     result.update(

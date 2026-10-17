@@ -9,36 +9,11 @@ from __future__ import annotations
 import asyncio
 import json
 from collections.abc import Mapping
-from dataclasses import dataclass, field
 from typing import Any, Protocol
 
 import httpx
 
-
-@dataclass(frozen=True)
-class GeminiSettings:
-    enabled: bool = False
-    base_url: str = "https://generativelanguage.googleapis.com/v1beta/openai"
-    api_key: str = field(default="", repr=False)
-    model: str = ""
-    turn_timeout_s: float = 60.0
-    request_timeout_s: float = 25.0
-
-    def readiness(self) -> dict[str, Any]:
-        reasons = []
-        if not self.enabled:
-            reasons.append("disabled")
-        if not self.api_key:
-            reasons.append("missing_api_key")
-        if not self.model:
-            reasons.append("missing_model")
-        return {
-            "provider": "gemini",
-            "enabled": self.enabled,
-            "ready": not reasons,
-            "connection_verified": False,
-            "reasons": reasons,
-        }
+from .client import GeminiHTTPError, GeminiSettings, gemini_completion
 
 
 class ToolBackend(Protocol):
@@ -79,6 +54,30 @@ Only propose collection when the measured state and authenticated request permit
 Use REPORT for an ordinary completed investigation, UNKNOWN for insufficient source
 evidence, OBSERVE_MORE for a useful observation request, and STOP for invalid state.
 """
+
+
+def command_schema():
+    """Constrain command shape; evidence, state and permissions still validate locally."""
+    schemas = {name: {key: {"type": "string"} for key in sorted(keys)}
+               for name, keys in TOOL_ARGUMENTS.items()}
+    schemas["finish"] = {
+        "action": {"type": "string", "enum": sorted(FINAL_ACTIONS)},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}},
+        "explanation": {"type": "string", "description": "Grounded prose without digits"},
+        "proposal_id": {"type": ["string", "null"]},
+    }
+    return {
+        "type": "object", "additionalProperties": False,
+        "properties": {
+            "tool": {"type": "string", "enum": list(schemas)},
+            "arguments": {"anyOf": [
+                {"type": "object", "title": name, "properties": arguments,
+                 "required": list(arguments), "additionalProperties": False}
+                for name, arguments in schemas.items()
+            ]},
+        },
+        "required": ["tool", "arguments"],
+    }
 
 
 def _stop(reason: str, trace: list[dict[str, Any]]) -> dict[str, Any]:
@@ -188,22 +187,9 @@ async def investigate(
                 # HTTPX timeouts bound individual transport phases. This scope also
                 # bounds total request wall time, including a supplied transport.
                 async with asyncio.timeout(request_budget):
-                    response = await http.post(
-                        settings.base_url.rstrip("/") + "/chat/completions",
-                        headers={
-                            "Authorization": "Bearer " + settings.api_key,
-                        },
-                        json={"model": settings.model, "messages": messages,
-                              "response_format": {"type": "json_object"}, "max_tokens": 4096},
-                        timeout=request_budget,
+                    content = await gemini_completion(
+                        messages, settings, client=http, timeout=request_budget, schema=command_schema(),
                     )
-                response.raise_for_status()
-                choice = response.json()["choices"][0]
-                if choice.get("finish_reason", "stop") != "stop":
-                    raise ValueError("Incomplete provider response")
-                content = choice["message"]["content"]
-                if not isinstance(content, str) or len(content) > 12000:
-                    raise ValueError("Invalid provider content")
                 name, args = _command(content)
                 messages.append({"role": "assistant", "content": content})
                 if name == "finish":
@@ -245,12 +231,12 @@ async def investigate(
                         ),
                     }
                 )
-    except httpx.HTTPStatusError as error:
+    except GeminiHTTPError as error:
         # Status is actionable for local setup; provider body, headers and URL
         # may contain sensitive values and must never enter the browser/report.
         return {**_stop("Investigation unavailable or invalid; no action authorized.", trace),
                 "failure_code": "PROVIDER_HTTP_ERROR",
-                "provider_status_code": error.response.status_code}
+                "provider_status_code": error.status_code}
     except (httpx.HTTPError, TimeoutError, ValueError, KeyError, TypeError, IndexError) as error:
         failure = ("TIMEOUT" if isinstance(error, (TimeoutError, httpx.TimeoutException)) else
                    "PROVIDER_CONNECTION_ERROR" if isinstance(error, httpx.HTTPError) else

@@ -166,7 +166,7 @@ def test_dashboard_identity_requires_title_and_next_assets(monkeypatch):
 
 def test_dashboard_spawn_is_offline_loopback_and_excludes_server_secrets(ready_root, monkeypatch):
     monkeypatch.setenv("PHOTON_API_KEY", "private-photon")
-    monkeypatch.setenv("GEMINI_API_KEY", "private-chalk")
+    monkeypatch.setenv("GEMINI_API_KEY", "private-gemini")
     monkeypatch.setenv("REEFTRACE_LOCAL_TOKEN", "private-operator")
     calls = []
     monkeypatch.setattr(dev.subprocess, "Popen", lambda command, **kwargs: calls.append((command, kwargs)))
@@ -176,7 +176,7 @@ def test_dashboard_spawn_is_offline_loopback_and_excludes_server_secrets(ready_r
     assert command == ["/local/bin/npm", "--offline", "run", "dev", "--", "--hostname", "127.0.0.1", "--port", "3000"]
     assert kwargs["cwd"] == ready_root / "dashboard"
     assert "shell" not in kwargs
-    assert not any(key.startswith(("CHALK_", "GEMINI_", "GOOGLE_", "DATABASE_", "SUPABASE_", "BUTTERBASE_", "XAI_", "PHOTON_", "REEFTRACE_")) for key in kwargs["env"])
+    assert not any(key.startswith(("GEMINI_", "GOOGLE_", "DATABASE_", "SUPABASE_", "XAI_", "PHOTON_", "REEFTRACE_")) for key in kwargs["env"])
     assert kwargs["env"]["NEXT_PUBLIC_API_BASE_URL"] == "http://127.0.0.1:8000"
     assert kwargs.get("start_new_session") if os.name == "posix" else kwargs["creationflags"]
 

@@ -1,4 +1,4 @@
-"""Evaluate the shared agent on fixture-only tools through actual Butterbase requests.
+"""Evaluate the shared agent on fixture-only tools through actual Gemini requests.
 Never imports serial, camera acquisition, or physical action dispatch.
 """
 

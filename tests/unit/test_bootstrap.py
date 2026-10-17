@@ -43,7 +43,7 @@ def test_new_env_is_private_and_import_does_not_execute(root, monkeypatch, capsy
 ])
 def test_repair_blank_preserves_every_other_setting(root, monkeypatch, assignment):
     monkeypatch.setattr(setup.secrets, "token_urlsafe", lambda size: "new-local-token")
-    before = "# credentials must survive\nGEMINI_API_KEY=private-chalk-value\n"
+    before = "# credentials must survive\nGEMINI_API_KEY=private-gemini-value\n"
     after = "\nPHOTON_API_KEY='private-photon-value'\nUSER_SETTING=do-not-change\n"
     (root / ".env").write_text(before + assignment + after)
     result = setup.bootstrap(root)
@@ -108,13 +108,13 @@ def test_ambiguous_assignment_fails_without_touching_env(root, assignment):
 def test_console_output_never_discloses_generated_or_existing_secrets(root, monkeypatch, capsys):
     monkeypatch.setattr(setup.secrets, "token_urlsafe", lambda size: "private-generated-token")
     (root / ".env").write_text(
-        "REEFTRACE_LOCAL_TOKEN=\nGEMINI_API_KEY=private-chalk-key\n"
+        "REEFTRACE_LOCAL_TOKEN=\nGEMINI_API_KEY=private-gemini-key\n"
     )
     assert setup.main(["--root", str(root)]) == 0
     assert setup.main(["--root", str(root)]) == 0
     output = capsys.readouterr()
     assert "private-generated-token" not in output.out + output.err
-    assert "private-chalk-key" not in output.out + output.err
+    assert "private-gemini-key" not in output.out + output.err
 
 
 def test_concurrent_change_does_not_get_overwritten(root, monkeypatch):

@@ -2,7 +2,6 @@
 
 import asyncio
 import json
-import sys
 
 import httpx
 import pytest
@@ -80,8 +79,10 @@ def test_gateway_contract_reads_evidence_before_grounded_finish():
     assert [c[0] for c in backend.calls] == ["get_case", "get_source_evidence"]
     assert requests[0].url == "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions"
     assert requests[0].headers["Authorization"] == "Bearer secret"
-    assert "X-Chalk-Env-Id" not in requests[0].headers
     assert json.loads(requests[0].content)["model"] == "model-1"
+    output_format = json.loads(requests[0].content)["response_format"]
+    assert output_format["type"] == "json_schema"
+    assert output_format["json_schema"]["schema"]["required"] == ["tool", "arguments"]
     assert set(json.loads(requests[0].content)) == {"model", "messages", "response_format", "max_tokens"}
 
 
@@ -340,7 +341,7 @@ def test_offline_evaluation_uses_same_agent_but_never_claims_real_model_results(
     from adapters.gemini.evaluate import main
 
     output = tmp_path / "offline-evaluation.json"
-    assert main(["--mode", "local", "--output", str(output)]) == 0
+    assert main(["--output", str(output)]) == 0
     result = json.loads(output.read_text())
     assert result["mode"] == "local-scripted-contract"
     assert result["real_model_evaluation"] is False
@@ -355,7 +356,6 @@ def test_offline_evaluation_uses_same_agent_but_never_claims_real_model_results(
     assert result["aggregate"]["model_response_valid"] == 0.0
     assert result["valid_model_response_rows"] == 0
     assert all(not row["output"]["live_model_response"] for row in result["rows"])
-    assert "adapters.gemini.evaluation_tasks" not in sys.modules
 
 
 def test_evaluation_labels_cannot_enter_model_fixture():
@@ -388,10 +388,3 @@ def test_evaluation_metrics_reject_unknown_upgrade_and_numerical_prose():
     assert scores["source_status_preserved"] == 0.0
     assert scores["numerical_authority"] == 0.0
     assert scores["action_correct"] == 0.0
-
-
-def test_remote_evaluation_is_explicitly_unsupported():
-    from adapters.gemini.evaluate import run_remote
-
-    with pytest.raises(ValueError, match="Remote gateway deployment was removed"):
-        run_remote([], split="development", git_sha="test")

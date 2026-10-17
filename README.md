@@ -11,7 +11,7 @@ Python 3.12 and Node 20.9+ are supported starting points; the verified environme
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev,sponsors]'
+python -m pip install -e '.[dev,photon]'
 cd dashboard
 npm ci
 cd ..
@@ -95,13 +95,12 @@ recorded separately from proof of any live Grok Voice request.
 
 The workspace calls Gemini directly with `GEMINI_API_KEY` and `GEMINI_MODEL`
 (default local selection: `gemini-3.1-flash-lite`). Set `GEMINI_ENABLED=false`
-to disable model calls. `REEFTRACE_AI_PROVIDER=gemini` selects this setup.
-There is no Chalk gateway, environment ID, or hosted evaluation dependency.
+to disable model calls.
+Evaluation uses local frozen fixtures, with explicit optional Gemini requests.
 Run `python -m scripts.check_gemini --test` for an explicit small model request.
 
 Set the server-only `DATABASE_URL` to a Neon pooled Postgres URI or a Supabase
-session-pooler URI. Connections require TLS. Supabase is an alternative primary
-database; `SUPABASE_DATABASE_URL` does not automatically replicate records.
+session-pooler URI. Connections require TLS. Use one primary database; the application does not replicate records between services.
 Leave `DATABASE_URL` empty for local SQLite. Credentials belong only in ignored
 `.env`, never in frontend environment variables.
 

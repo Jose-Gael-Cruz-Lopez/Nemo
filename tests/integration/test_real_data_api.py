@@ -20,7 +20,7 @@ def app(tmp_path, monkeypatch):
     monkeypatch.setenv("PHOTON_ROUTES_JSON", "[]")
     # Realistic secrets present in the server environment must never enter a
     # public scientific report. Live transports remain explicitly disabled.
-    monkeypatch.setenv("GEMINI_API_KEY", "SECRET-CHALK-REAL-DATA-TEST")
+    monkeypatch.setenv("GEMINI_API_KEY", "SECRET-GEMINI-REAL-DATA-TEST")
     monkeypatch.setenv("PHOTON_API_KEY", "SECRET-PHOTON-REAL-DATA-TEST")
     return create_app(Settings(data_dir=tmp_path, local_token="SECRET-LOCAL-OPERATOR"))
 

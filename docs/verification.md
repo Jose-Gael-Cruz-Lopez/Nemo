@@ -1,7 +1,3 @@
-> This branch uses direct Gemini and Neon/Supabase-compatible Postgres.
-> Account-backed Chalk results below are historical main-branch receipts, not
-> claims about the current direct-provider path. See integrations.md for setup.
-
 # Start, demonstrate and verify ReefTrace
 
 Updated 16 October 2026 for the USB webcam build on branch `codex/software-execution`. The runnable product compares declared tank entry points and preserves Unknown when the observation cannot distinguish them. The separate Data lab forecasts a real historical buoy trajectory. Passing tests and synthetic demos do not establish real reef-cleanup or plastic-source accuracy.
@@ -96,27 +92,26 @@ The JSON report distinguishes:
 
 ### Current commissioning evidence
 
-The final expanded actual local HTTP audit recorded **27 PASS, 0 FAIL,
-3 BLOCKED** in `work/e2e-final.json`. Chalk returned a genuine **REPORT** with
-`live_model_response: true`, a nonempty tool trace and the current source evidence
-ID. The saved deterministic report stayed exactly equal to the re-computed
-report. The audit verified the training-only diagnostic, historical satellite
-provenance, all three frozen briefing statuses and STOP. Its remaining blockers
-are physical webcam/tank commissioning, the intentionally disabled Photon device
-conversation and uninvoked xAI speech. No camera, actuator, Photon send or audio
-request was used. The report passed a scan against the private credentials/route
-values and strong token patterns without exposing them.
+The merged workspace's local HTTP audit recorded **27 PASS, 0 FAIL, 3 BLOCKED**
+in `work/merge-main-e2e.json`, including a direct Gemini REPORT with actual
+case/source reads and the current Neon-backed evidence ID. Source reports stayed
+unchanged. This receipt is local and ignored by Git; it proves that turn, not
+future provider availability. Re-run the audit after configuration or code changes.
 
-Photon Beta **authentication was checked against the real service** after the user's approval. A 30-day custom project key with `project:read` and `project:write` is stored only in private `.env`. The official SDK's read-only `raw.projects.list_messages` request returned **HTTP 200** and its response passed schema validation. The local evidence record is `work/photon-live-auth.json`; it records no secret or account identifier. The shared-line assignment is Active, and the exact sender/agent route is configured privately. **The user prohibits test messages and automatic replies, so `PHOTON_ENABLED=false` remains required.** No messages were sent. Authentication and assignment do not establish a device conversation.
+After backend cleanup, `work/backend-cleanup-live.json` records a schema-constrained
+direct Gemini REPORT with successful case/source reads, the current evidence ID,
+and an unchanged Neon-backed source report. The cleanup HTTP audit separately
+passed all twenty-seven software assertions.
 
-Chalk has a configured native Gemini connection, a scoped gateway key and a permitted Flash model. Earlier real investigations completed with `live_model_response: true`, successful case/source tool reads and the frozen evidence ID. Subsequent rehearsals also encountered intermittent provider HTTP 503 and TIMEOUT responses. After the bounded latency fix and API restart, the final expanded audit again completed a genuine REPORT. A future failure still returns STOP with the unchanged numerical report, even after an earlier success. The request budget is now 25 seconds, bounded by the remaining 60-second whole-turn deadline; no retries or provider reasoning fields are added. Timeout diagnostics identify the stage and completed tools without exposing provider content. Readiness alone is not a live success. See [the current integration evidence and limits](integrations.md).
+Physical camera/tank commissioning, Photon device replies and xAI speech remain
+separate external checks. Keep `PHOTON_ENABLED=false` unless replies have been
+explicitly authorized. The audit sends no messages and opens no hardware.
 
 ### Direct Gemini API
 
 The active branch uses Gemini directly. Set these server-only values in `.env`:
 
 ```dotenv
-REEFTRACE_AI_PROVIDER=gemini
 GEMINI_ENABLED=true
 GEMINI_API_KEY=YOUR_API_KEY
 GEMINI_MODEL=gemini-3.1-flash-lite
@@ -166,33 +161,20 @@ npm run build
 npm audit --omit=dev
 ```
 
-The current strict full Python suite passed **320 tests**, with zero failures,
-errors or skips in **63.02 seconds** and one existing Starlette/httpx TestClient
-deprecation warning. All sponsor services were explicitly disabled for that test
-process. Full repository Ruff and `pip check` passed. This includes regressions
-for private-network CORS/authentication, model request/turn deadlines,
-truncated-output rejection, source/STOP races and the expanded audit's no-message
-and no-hardware guards. Six frontend state and read-recovery regressions also passed, covering
-atomic evidence refresh so recomputing source support clears an old
-investigation, sensitivity result and approval display together.
-
-The earlier actual loopback HTTP rehearsal returned an explicit Chalk TIMEOUT
-while preserving its source report. This motivated the bounded request-budget
-change and safe stage diagnostics. The final expanded script recorded **27 PASS,
-0 FAIL and 3 BLOCKED**, with a real Chalk REPORT; its added public-data/briefing
-checks and separate untested-audio blocker are included in those new counts.
-Earlier browser checks covered demo loading, ranked/Unknown/invalid evidence,
-sensitivity, NOAA replay, search, reload persistence, STOP and setup validation.
-These software checks do not substitute for physical or live-service
-commissioning.
+The offline suite covers private-network CORS/authentication, source/STOP races,
+request and whole-turn deadlines, incomplete-output rejection, immutable records,
+manual approvals and durable message queues. Opt-in Neon/Supabase tests are in
+`tests/integration/test_postgres_store.py`; their records roll back. Dashboard
+tests check that old evidence and investigation responses cannot cross case or
+revision changes. See the latest test output for counts and skipped live checks.
 
 | Area | Automated evidence | What still needs a real-world check |
 |---|---|---|
 | USB vision and geometry | Actual OpenCV images, projective mapping, association/freshness and simulated capture-worker tests | Connected C920s, intended OS permissions, real image quality and timing |
 | Tank transport and tracing | Measured-record admission, heldout split rules, bounded particle physics, sensitivity, ambiguity and source gates | Real independent drift/retention runs and blind source-release trials |
-| Case/action state | SQLite transactions, STOP races, task restoration, role/approval/outcome guards | A supervised physical recovery and honest recorded outcome |
+| Case/action state | Postgres and SQLite transactions, STOP races, task restoration, role/approval/outcome guards | A supervised physical recovery and honest recorded outcome |
 | Browser/API | Exact local-origin private-network preflights, untrusted-origin rejection and unchanged operator authentication | The intended browser/OS against the restarted local services |
-| Chalk | Real adapter with explicit HTTP MockTransport, strict tools/IDs/Unknown preservation, request and whole-turn deadlines; earlier account-backed REPORT | Current provider availability and review of each generated answer; a timeout remains a failed live response |
+| Gemini | Real adapter with explicit HTTP MockTransport, strict tools/IDs/Unknown preservation, request and whole-turn deadlines; earlier account-backed REPORT | Current provider availability and review of each generated answer; a timeout remains a failed live response |
 | Photon | Official 0.5.0 SDK contract tests, real read-only HTTP 200 auth/schema check and Active assignment | Actual device round trip remains untested; replies stay disabled by user instruction |
 | Public-data ML | Pinned real NOAA CSV, training-only fits, five-origin diagnostic, separate chronological holdout, geographic geometry and leakage regressions | Many independent trajectories and matched forcing before operational claims |
 | Satellite and briefing | Pinned NOAA heat-stress provenance, no source-ranking influence, immutable evidence/script hashes and mocked audio/STOP races | Explicitly authorized live xAI speech requires a configured key; no live speech claim |

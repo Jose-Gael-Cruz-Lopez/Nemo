@@ -79,7 +79,7 @@ def phone_message(case_id, text, *, role="operator", allowed_cases=None):
 
 
 def test_api_auth_and_sponsor_readiness_never_exposes_keys(app, monkeypatch):
-    monkeypatch.setenv("GEMINI_API_KEY", "SECRET-CHALK")
+    monkeypatch.setenv("GEMINI_API_KEY", "SECRET-GEMINI")
     monkeypatch.setenv("PHOTON_API_KEY", "SECRET-PHOTON")
     case, _ = seed_case(app.state.runtime)
     with TestClient(app) as client:
@@ -100,7 +100,7 @@ def test_api_auth_and_sponsor_readiness_never_exposes_keys(app, monkeypatch):
         assert client.post(f"/api/v1/cases/{case['id']}/stop", headers=AUTH).status_code == 200
 
 
-def test_api_disabled_chalk_is_graceful_and_saved_scores_remain_available(app):
+def test_api_disabled_gemini_is_graceful_and_saved_scores_remain_available(app):
     case, evidence = seed_case(app.state.runtime)
     with TestClient(app) as client:
         response = client.post(

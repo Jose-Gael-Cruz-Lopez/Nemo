@@ -68,12 +68,8 @@ class Runtime:
             return result
 
     def gemini_settings(self):
-        from adapters.gemini.agent import GeminiSettings
-        return GeminiSettings(
-            enabled=(os.getenv("REEFTRACE_AI_PROVIDER", "gemini") == "gemini"
-                     and os.getenv("GEMINI_ENABLED", "true").lower() == "true"),
-            api_key=os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", ""),
-            model=os.getenv("GEMINI_MODEL", ""))
+        from adapters.gemini.client import GeminiSettings
+        return GeminiSettings.from_env()
 
     def photon_settings(self):
         from adapters.photon.transport import PhotonSettings, RouteConfig

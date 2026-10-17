@@ -8,8 +8,8 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import Field
 
+from adapters.gemini.client import GeminiSettings
 from apps.core.reeftrace_core.agent import investigate
-from apps.core.reeftrace_core.ai import ai_configured, ai_provider
 from apps.core.reeftrace_core.contracts import CaseInput, Contract, Profile
 from apps.core.reeftrace_core.service import (
     LocalBackend,
@@ -67,13 +67,10 @@ def guarded(function, *args):
 def system():
     return {
         "database": "postgresql" if get_store().is_postgres else "sqlite",
-        "ai_provider": ai_provider(),
-        "ai_configured": ai_configured(),
+        "ai_provider": "gemini",
+        "ai_configured": GeminiSettings.from_env().readiness()["ready"],
         "manual_recovery": True,
         "hardware_enabled": False,
-        "butterbase_configured": all(
-            os.environ.get(k) for k in ["BUTTERBASE_API_KEY", "BUTTERBASE_MODEL"]
-        ),
         "photon_configured": all(
             os.environ.get(k) for k in ["PHOTON_API_KEY", "PHOTON_PROJECT_ID", "PHOTON_ROUTES_JSON"]
         ),

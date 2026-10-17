@@ -1,17 +1,19 @@
 # Gemini, Postgres and Photon integration
 
-This branch replaces Chalk Model Gateway with the direct Gemini API. Main's
+The direct Gemini API powers investigation. The workspace's
 case-bound tool loop, frozen numerical reports, revision checks, bounded tools,
 manual recovery approvals and Photon queue behavior are retained.
 
 ## Gemini
 
-Set `REEFTRACE_AI_PROVIDER=gemini`, `GEMINI_API_KEY` and `GEMINI_MODEL` in ignored
+Set `GEMINI_API_KEY` and `GEMINI_MODEL` in ignored
 `.env`. `GEMINI_ENABLED` defaults to true; false disables inference. Configuration
 readiness does not prove a live request. `GeminiSettings` accepts enabled,
 base_url, api_key, model, turn_timeout_s and request_timeout_s. Defaults use
 `https://generativelanguage.googleapis.com/v1beta/openai/chat/completions`, a
-server-only Bearer key and JSON output. No environment ID is required.
+server-only Bearer key and schema-constrained JSON commands.
+The schema constrains response shape; local validation still checks exact tool
+arguments, returned evidence IDs, source status, permissions and numerical prose. No environment ID is required.
 
 The same agent serves the new dashboard and Photon. Source numbers stay in the
 authoritative report; numerical generated prose is rejected. Unknown/invalid
@@ -19,16 +21,15 @@ reports cannot be upgraded by the model. Manual proposals require returned
 current evidence; the model never approves or actuates hardware.
 
 Run `python -m scripts.check_gemini --test` to check a small live JSON response.
-Run `python -m adapters.gemini.evaluate --mode local` for offline policy fixtures,
+Run `python -m adapters.gemini.evaluate` for offline policy fixtures,
 or add `--live-model` for actual inference. Evaluation results remain local.
-Chalk SDK dependencies and remote evaluation deployment have been removed.
+Model-policy scoring and evaluation results remain local.
 
 ## Neon or Supabase Postgres
 
 `DATABASE_URL` selects the server database. Neon uses its pooled URI; Supabase
 can use a session-pooler URI with the project's database password. Both use TLS.
-An empty value selects SQLite. `SUPABASE_DATABASE_URL` is only an optional saved
-alternative; the app uses one primary database and does not dual-write.
+An empty value selects SQLite. The app uses one primary database and does not dual-write.
 
 Workspace tables use private schema `reeftrace_workspace`. Earlier `/v1` records
 remain untouched in schema `reeftrace`. No existing SQLite data is uploaded.
@@ -37,7 +38,7 @@ stay local. Never expose database credentials through `NEXT_PUBLIC_` variables.
 
 ## Photon 2.0
 
-Install the optional pinned dependency with `pip install -e '.[sponsors]'`. The API is
+Install the optional pinned dependency with `pip install -e '.[photon]'`. The API is
 Photon **Beta**, package `photonhq-api==0.5.0`, import `photon_api`, bearer project key,
 base `https://api.photon.codes`. [Official iMessage setup](https://photon.codes/docs/beta/get-started/imessage)
 requires an assigned sender and a human-initiated conversation. Use a prepared operator
@@ -109,7 +110,7 @@ Official contracts: [SDK source](https://github.com/photon-hq/api/tree/main/pack
 Run `python -m pytest -q tests/test_gemini.py tests/test_photon.py`. The current tests
 check malformed/unauthorized tools, returned evidence/proposal IDs, deadlines,
 generated SDK request/response contracts, route filtering, session rescans, deduplication,
-durable-before-send ordering and identical retries. With the sponsors extra absent,
+durable-before-send ordering and identical retries. With the photon extra absent,
 the application starts offline and SDK contract tests skip.
 
 Gemini has separate live model proof as described above; Photon still needs an authorized

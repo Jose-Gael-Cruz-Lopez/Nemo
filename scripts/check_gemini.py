@@ -7,7 +7,7 @@ import json
 import httpx
 from dotenv import load_dotenv
 
-from apps.core.reeftrace_core.ai import ai_configured, ai_provider, gemini_completion
+from adapters.gemini.client import GeminiSettings, gemini_completion
 
 
 def main():
@@ -16,8 +16,8 @@ def main():
     parser.add_argument("--test", action="store_true")
     args = parser.parse_args()
     try:
-        if ai_provider() != "gemini" or not ai_configured():
-            raise RuntimeError("Set REEFTRACE_AI_PROVIDER=gemini, GEMINI_API_KEY and GEMINI_MODEL")
+        if not GeminiSettings.from_env().readiness()["ready"]:
+            raise RuntimeError("Set GEMINI_API_KEY and GEMINI_MODEL; enable GEMINI_ENABLED")
         if args.test:
             output = asyncio.run(gemini_completion([
                 {"role": "user", "content": 'Return only this JSON object: {"connected": true}'}

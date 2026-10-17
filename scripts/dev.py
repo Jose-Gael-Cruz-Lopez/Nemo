@@ -233,7 +233,8 @@ def start_child(name: str, report: Preflight) -> OwnedChild:
     else:
         # Sponsor/operator secrets are server-only and are not needed by Next's dev process.
         environment = {k: v for k, v in environment.items()
-                       if not k.startswith(("CHALK_", "GEMINI_", "GOOGLE_", "DATABASE_", "SUPABASE_", "BUTTERBASE_", "XAI_", "PHOTON_", "REEFTRACE_"))}
+                       if not k.endswith(("_API_KEY", "_TOKEN", "DATABASE_URL"))
+                       and not k.startswith(("GEMINI_", "GOOGLE_", "DATABASE_", "SUPABASE_", "XAI_", "PHOTON_", "REEFTRACE_"))}
         environment.update({
             "NEXT_PUBLIC_API_BASE_URL": "http://127.0.0.1:8000",
             "NPM_CONFIG_UPDATE_NOTIFIER": "false", "NPM_CONFIG_AUDIT": "false",

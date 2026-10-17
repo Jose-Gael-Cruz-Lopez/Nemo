@@ -147,8 +147,8 @@ Neon/Supabase database selection and the current workspace API. Set
 `GEMINI_API_KEY`, `GEMINI_MODEL` and `DATABASE_URL` in ignored `.env`.
 `python -m scripts.check_gemini --test` verifies a small model response;
 `python -m scripts.check_database` verifies workspace storage.
-The older `/v1` API remains available and can explicitly select Butterbase,
-but new workspace and Photon investigations use Gemini.
+The older `/v1` API remains available for its saved records. Both APIs and
+Photon investigations use the same Gemini client and configuration.
 
 ## Optional water sampler
 

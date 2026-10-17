@@ -47,7 +47,7 @@ jobs:
       - name: Install project and offline test dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e '.[dev,sponsors,ocean]'
+          python -m pip install -e '.[dev,photon,ocean]'
           python -m pip check
       - name: Require optional test SDKs and local NetCDF support
         run: python -c "import netCDF4, photon_api, psycopg, xarray"

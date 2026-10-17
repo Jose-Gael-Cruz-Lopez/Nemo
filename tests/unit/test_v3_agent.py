@@ -40,8 +40,7 @@ def finish(action="UNKNOWN", evidence="e-1"):
     }
 
 
-def test_grounded_replay_and_no_hardware(monkeypatch):
-    monkeypatch.setenv("REEFTRACE_AI_PROVIDER", "gemini")
+def test_grounded_replay_and_no_hardware():
     response = asyncio.run(
         investigate(
             "Explain",

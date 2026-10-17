@@ -17,7 +17,7 @@ def client(tmp_path):
 HEADERS={'Authorization':'Bearer test-token'}
 
 
-def test_demo_api_evidence_unknown_invalid_and_disabled_chalk(client):
+def test_demo_api_evidence_unknown_invalid_and_disabled_gemini(client):
     assert client.post('/api/v1/demo/load',json={}).status_code==401
     r=client.post('/api/v1/demo/load',json={},headers=HEADERS)
     assert r.status_code==200,r.text

@@ -6,7 +6,7 @@ The workflow needs only GitHub's built-in `contents: read` permission. Checkout 
 
 ## Python job
 
-Python 3.12 installs `.[dev,sponsors,evaluations,ocean]` from `pyproject.toml`, checks dependency consistency, verifies optional SDK imports, runs Ruff, and runs the full pytest suite. Sponsor SDKs and xarray/NetCDF are installed so their contract/reader tests do not silently skip because a package is absent. The macOS requirements snapshot is not used as a Linux lockfile.
+Python 3.12 installs `.[dev,photon,ocean]` from `pyproject.toml`, checks dependency consistency, verifies optional SDK imports, runs Ruff, and runs the full pytest suite. Sponsor SDKs and xarray/NetCDF are installed so their contract/reader tests do not silently skip because a package is absent. The macOS requirements snapshot is not used as a Linux lockfile.
 
 Gemini and Photon are explicitly disabled and their credentials/models/routes are empty. Runtime test data goes to the runner's temporary directory; its local operator token is a public, test-only string. Tests use explicit mocked HTTP transports for SDK contracts. The Gemini policy tests use mocked HTTP; hosted task deployment is not supported. This job never runs a live sponsor evaluation or camera capture.
 
@@ -19,7 +19,7 @@ Reproduce with a fresh Python 3.12 environment:
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev,sponsors,evaluations,ocean]'
+python -m pip install -e '.[dev,photon,ocean]'
 python -m pip check
 python -m ruff check apps adapters scripts tests
 GEMINI_ENABLED=false PHOTON_ENABLED=false PHOTON_ROUTES_JSON='[]' \

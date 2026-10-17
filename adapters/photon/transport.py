@@ -93,7 +93,7 @@ def normalize(
     """Accept only current, explicitly routed, plain direct iMessages.
 
     Importing the generated model types here keeps the local app usable without
-    the optional sponsors extra. Group chats, attachments and events are ignored.
+    the optional photon extra. Group chats, attachments and events are ignored.
     """
     from photon_api.generated.models import TextContent, UserSnapshot
 
