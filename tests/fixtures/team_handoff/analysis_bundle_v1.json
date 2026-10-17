@@ -1,0 +1,1039 @@
+{
+  "schema_version": "analysis_bundle_v1",
+  "payload": {
+    "comparison": {
+      "id": "prevention_comparison-fixture-005",
+      "case_id": "case-fixture-003",
+      "case_revision": 2,
+      "source_evidence_id": "estimate-fixture-004",
+      "source_evidence_status": "unknown",
+      "baseline_profile_id": "profile-fixture-001",
+      "intervention_profile_id": "profile-fixture-002",
+      "protected_zone_cm": [
+        [
+          8.0,
+          1.0
+        ],
+        [
+          9.0,
+          1.0
+        ],
+        [
+          9.0,
+          9.0
+        ],
+        [
+          8.0,
+          9.0
+        ]
+      ],
+      "horizon_s": 10.0,
+      "particles": 20,
+      "trials_per_source": 2,
+      "data_origin": "SYNTHETIC",
+      "physical_validation": false,
+      "numerical_report": {
+        "schema_version": 1,
+        "status": "SIMULATED_COMPARISON",
+        "data_origin": "SYNTHETIC",
+        "physical_validation": false,
+        "layouts": {
+          "baseline": {
+            "profile_id": "profile-fixture-001",
+            "profile_hash": "3ee51cef24b791286f20c0cf588712ffc0c903d06cf23a9d5351f321ee1dd0e2",
+            "flow_hash": "d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65"
+          },
+          "intervention": {
+            "profile_id": "profile-fixture-002",
+            "profile_hash": "003430615c8e1860c2028cd426e962efdefd0048f081473ae6a1f3266a90fe38",
+            "flow_hash": "d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65"
+          }
+        },
+        "protected_zone_cm": [
+          [
+            8.0,
+            1.0
+          ],
+          [
+            9.0,
+            1.0
+          ],
+          [
+            9.0,
+            9.0
+          ],
+          [
+            8.0,
+            9.0
+          ]
+        ],
+        "horizon_s": 10.0,
+        "particles_per_source": 20,
+        "seed": 17,
+        "scenario_ids": [
+          "nominal"
+        ],
+        "results": [
+          {
+            "scenario_id": "nominal",
+            "source_id": "A",
+            "baseline": {
+              "particles": 20,
+              "zone_entry_count": 20,
+              "zone_entry_fraction": 1.0,
+              "zone_entry_lower_fraction": 1.0,
+              "zone_entry_upper_fraction": 1.0,
+              "captured_before_zone_count": 0,
+              "captured_before_zone_fraction": 0.0,
+              "unresolved_count": 0,
+              "unsupported_count": 0,
+              "unsupported_fraction": 0.0,
+              "supported_particle_fraction": 1.0,
+              "path_coverage_fraction": 1.0
+            },
+            "intervention": {
+              "particles": 20,
+              "zone_entry_count": 0,
+              "zone_entry_fraction": 0.0,
+              "zone_entry_lower_fraction": 0.0,
+              "zone_entry_upper_fraction": 0.0,
+              "captured_before_zone_count": 20,
+              "captured_before_zone_fraction": 1.0,
+              "unresolved_count": 0,
+              "unsupported_count": 0,
+              "unsupported_fraction": 0.0,
+              "supported_particle_fraction": 1.0,
+              "path_coverage_fraction": 1.0
+            },
+            "benefit_fraction": 1.0,
+            "benefit_lower_fraction": 1.0,
+            "benefit_upper_fraction": 1.0
+          },
+          {
+            "scenario_id": "nominal",
+            "source_id": "B",
+            "baseline": {
+              "particles": 20,
+              "zone_entry_count": 20,
+              "zone_entry_fraction": 1.0,
+              "zone_entry_lower_fraction": 1.0,
+              "zone_entry_upper_fraction": 1.0,
+              "captured_before_zone_count": 0,
+              "captured_before_zone_fraction": 0.0,
+              "unresolved_count": 0,
+              "unsupported_count": 0,
+              "unsupported_fraction": 0.0,
+              "supported_particle_fraction": 1.0,
+              "path_coverage_fraction": 1.0
+            },
+            "intervention": {
+              "particles": 20,
+              "zone_entry_count": 0,
+              "zone_entry_fraction": 0.0,
+              "zone_entry_lower_fraction": 0.0,
+              "zone_entry_upper_fraction": 0.0,
+              "captured_before_zone_count": 20,
+              "captured_before_zone_fraction": 1.0,
+              "unresolved_count": 0,
+              "unsupported_count": 0,
+              "unsupported_fraction": 0.0,
+              "supported_particle_fraction": 1.0,
+              "path_coverage_fraction": 1.0
+            },
+            "benefit_fraction": 1.0,
+            "benefit_lower_fraction": 1.0,
+            "benefit_upper_fraction": 1.0
+          }
+        ],
+        "robust_benefit_min": 1.0,
+        "robust_benefit_max": 1.0,
+        "recommendation": "INTERVENTION",
+        "reason_codes": [],
+        "assumptions": {
+          "outcomes": "SIMULATED_FIRST_PASSAGE_NOT_PHYSICAL_TRIALS",
+          "world_units": "cm",
+          "time_units": "s",
+          "boundary": "reflecting_rectangle",
+          "retention": "perfect_absorbing_traps_no_escape_or_partial_capture",
+          "flow": "fixed_separate_layout_fields_no_predicted_hydrodynamic_change",
+          "source_weighting": "NONE_all_declared_sources_must_agree",
+          "source_prior_and_release_age": "NOT_USED_particles_released_at_t0",
+          "support_rule": "any_unsupported_time_node_until_first_event_or_horizon_is_unknown",
+          "unsupported_denominator": "all_particles_retained_unknown_outcomes_bound_benefit",
+          "minimum_supported_particle_fraction": 1.0,
+          "declared_profile_min_path_coverage": {
+            "baseline": 0.9,
+            "intervention": 0.9
+          },
+          "event_rule": "competing_absorbing_zone_and_traps_segment_crossing_including_reflections",
+          "touch_rule": "boundary_contact_counts_as_entry_overlapping_geometries_rejected",
+          "event_time_kind": "time_node_upper_bound_resolution_dt_not_exact_exposure_time",
+          "time_step_by_scenario_s": {
+            "nominal": 0.2
+          },
+          "recommendation_scope": "declared_sources_and_scenarios_not_statistical_confidence",
+          "monte_carlo": "fixed_seed_common_random_numbers_no_sampling_confidence_claim",
+          "display_paths": "decimated_illustrations_not_used_for_metrics",
+          "particle_time_states": 8160
+        }
+      }
+    },
+    "frozen_plan": {
+      "id": "prevention-plan-cbc7a3768188dad23f46",
+      "source_ids": [
+        "A",
+        "B"
+      ],
+      "layouts": [
+        "baseline",
+        "intervention"
+      ],
+      "trials_per_source": 2,
+      "horizon_s": 10.0,
+      "expected_total": 8,
+      "sequence": [
+        {
+          "layout": "baseline",
+          "source_id": "A",
+          "repeat": 1
+        },
+        {
+          "layout": "intervention",
+          "source_id": "A",
+          "repeat": 1
+        },
+        {
+          "layout": "intervention",
+          "source_id": "B",
+          "repeat": 1
+        },
+        {
+          "layout": "baseline",
+          "source_id": "B",
+          "repeat": 1
+        },
+        {
+          "layout": "intervention",
+          "source_id": "A",
+          "repeat": 2
+        },
+        {
+          "layout": "baseline",
+          "source_id": "A",
+          "repeat": 2
+        },
+        {
+          "layout": "baseline",
+          "source_id": "B",
+          "repeat": 2
+        },
+        {
+          "layout": "intervention",
+          "source_id": "B",
+          "repeat": 2
+        }
+      ],
+      "unit": "one_token_release",
+      "frozen_before_trials": true,
+      "order": "predeclared_counterbalanced_alternation_not_randomized"
+    },
+    "provenance": {
+      "layouts": {
+        "baseline": {
+          "id": "profile-fixture-001",
+          "profile_hash": "3ee51cef24b791286f20c0cf588712ffc0c903d06cf23a9d5351f321ee1dd0e2",
+          "data_origin": "SYNTHETIC",
+          "bounds": {
+            "x_min_cm": 0.0,
+            "x_max_cm": 10.0,
+            "y_min_cm": 0.0,
+            "y_max_cm": 10.0
+          },
+          "calibration_id": "test-map",
+          "token_class": "test-token",
+          "sources": [
+            {
+              "id": "A",
+              "polygon_cm": [
+                [
+                  1.0,
+                  2.0
+                ],
+                [
+                  2.0,
+                  2.0
+                ],
+                [
+                  2.0,
+                  3.0
+                ],
+                [
+                  1.0,
+                  3.0
+                ]
+              ],
+              "prior": null
+            },
+            {
+              "id": "B",
+              "polygon_cm": [
+                [
+                  1.0,
+                  7.0
+                ],
+                [
+                  2.0,
+                  7.0
+                ],
+                [
+                  2.0,
+                  8.0
+                ],
+                [
+                  1.0,
+                  8.0
+                ]
+              ],
+              "prior": null
+            }
+          ],
+          "traps": [],
+          "observation_polygon_cm": null,
+          "flow": {
+            "data_origin": "SYNTHETIC",
+            "flow_id": null,
+            "flow_hash": "d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65",
+            "training_recording_ids": [],
+            "validation_recording_ids": [],
+            "diagnostics": {
+              "sample_count": 9,
+              "node_count": 9,
+              "training_rmse_cm_s": 0.0,
+              "loo_rmse_cm_s": 1.4802973661668753e-16,
+              "loo_supported_nodes": 9,
+              "grid_coverage_fraction": 1.0,
+              "max_speed_cm_s": 1.0,
+              "validation_rmse_cm_s": 0.0,
+              "validation_coverage_fraction": 1.0
+            }
+          },
+          "transport": {
+            "dt_s": 0.2,
+            "max_age_s": 20.0,
+            "diffusivity_cm2_s": 0.01,
+            "drift_bias_cm_s": [
+              0.0,
+              0.0
+            ]
+          },
+          "scenarios": [
+            {
+              "id": "nominal",
+              "transport": {
+                "dt_s": 0.2,
+                "max_age_s": 20.0,
+                "diffusivity_cm2_s": 0.01,
+                "drift_bias_cm_s": [
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          ]
+        },
+        "intervention": {
+          "id": "profile-fixture-002",
+          "profile_hash": "003430615c8e1860c2028cd426e962efdefd0048f081473ae6a1f3266a90fe38",
+          "data_origin": "SYNTHETIC",
+          "bounds": {
+            "x_min_cm": 0.0,
+            "x_max_cm": 10.0,
+            "y_min_cm": 0.0,
+            "y_max_cm": 10.0
+          },
+          "calibration_id": "test-map",
+          "token_class": "test-token",
+          "sources": [
+            {
+              "id": "A",
+              "polygon_cm": [
+                [
+                  1.0,
+                  2.0
+                ],
+                [
+                  2.0,
+                  2.0
+                ],
+                [
+                  2.0,
+                  3.0
+                ],
+                [
+                  1.0,
+                  3.0
+                ]
+              ],
+              "prior": null
+            },
+            {
+              "id": "B",
+              "polygon_cm": [
+                [
+                  1.0,
+                  7.0
+                ],
+                [
+                  2.0,
+                  7.0
+                ],
+                [
+                  2.0,
+                  8.0
+                ],
+                [
+                  1.0,
+                  8.0
+                ]
+              ],
+              "prior": null
+            }
+          ],
+          "traps": [
+            {
+              "id": "mesh",
+              "polygon_cm": [
+                [
+                  5.0,
+                  1.0
+                ],
+                [
+                  6.0,
+                  1.0
+                ],
+                [
+                  6.0,
+                  9.0
+                ],
+                [
+                  5.0,
+                  9.0
+                ]
+              ],
+              "validated": true,
+              "retention": "absorbing"
+            }
+          ],
+          "observation_polygon_cm": null,
+          "flow": {
+            "data_origin": "SYNTHETIC",
+            "flow_id": null,
+            "flow_hash": "d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65",
+            "training_recording_ids": [],
+            "validation_recording_ids": [],
+            "diagnostics": {
+              "sample_count": 9,
+              "node_count": 9,
+              "training_rmse_cm_s": 0.0,
+              "loo_rmse_cm_s": 1.4802973661668753e-16,
+              "loo_supported_nodes": 9,
+              "grid_coverage_fraction": 1.0,
+              "max_speed_cm_s": 1.0,
+              "validation_rmse_cm_s": 0.0,
+              "validation_coverage_fraction": 1.0
+            }
+          },
+          "transport": {
+            "dt_s": 0.2,
+            "max_age_s": 20.0,
+            "diffusivity_cm2_s": 0.01,
+            "drift_bias_cm_s": [
+              0.0,
+              0.0
+            ]
+          },
+          "scenarios": [
+            {
+              "id": "nominal",
+              "transport": {
+                "dt_s": 0.2,
+                "max_age_s": 20.0,
+                "diffusivity_cm2_s": 0.01,
+                "drift_bias_cm_s": [
+                  0.0,
+                  0.0
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "independence": {
+        "status": "SYNTHETIC_NOT_PHYSICAL",
+        "independently_measured": false,
+        "distinct_flow_ids": false,
+        "disjoint_layout_recording_sets": false,
+        "outcome_validation": "NOT_AUTOMATICALLY_VERIFIED"
+      }
+    },
+    "source_evidence": {
+      "id": "estimate-fixture-004",
+      "case_id": "case-fixture-003",
+      "status": "unknown",
+      "data_origin": "SYNTHETIC"
+    },
+    "evaluation_truth": {
+      "purpose": "EVALUATION_ONLY_NEVER_SOURCE_INFERENCE_INPUT",
+      "trials": [
+        {
+          "id": "prevention-trial-5ce4c22137cc6ebda2a604a2",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 1,
+          "layout": "baseline",
+          "source_id": "A",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "zone_entry",
+          "entry_time_s": 7.0,
+          "interception_time_s": null,
+          "token_accounted": true,
+          "physical_confirmed": false,
+          "horizon_completed": true,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        },
+        {
+          "id": "prevention-trial-da7cde78294f6b23ba62892d",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 2,
+          "layout": "intervention",
+          "source_id": "A",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "intercepted_before_entry",
+          "entry_time_s": null,
+          "interception_time_s": 3.0,
+          "token_accounted": true,
+          "physical_confirmed": false,
+          "horizon_completed": true,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        },
+        {
+          "id": "prevention-trial-a9021df909e7a11a7fbb9e66",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 3,
+          "layout": "intervention",
+          "source_id": "B",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "intercepted_before_entry",
+          "entry_time_s": null,
+          "interception_time_s": 3.0,
+          "token_accounted": true,
+          "physical_confirmed": false,
+          "horizon_completed": true,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        },
+        {
+          "id": "prevention-trial-0c21658a2e5b563d68f8e930",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 4,
+          "layout": "baseline",
+          "source_id": "B",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "zone_entry",
+          "entry_time_s": 7.0,
+          "interception_time_s": null,
+          "token_accounted": true,
+          "physical_confirmed": false,
+          "horizon_completed": true,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        },
+        {
+          "id": "prevention-trial-9593c807320b3c629ad99fb6",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 5,
+          "layout": "intervention",
+          "source_id": "A",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "intercepted_before_entry",
+          "entry_time_s": null,
+          "interception_time_s": 3.0,
+          "token_accounted": true,
+          "physical_confirmed": false,
+          "horizon_completed": true,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        },
+        {
+          "id": "prevention-trial-2ebfaf338fae8a61c317bd42",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 6,
+          "layout": "baseline",
+          "source_id": "A",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "zone_entry",
+          "entry_time_s": 7.0,
+          "interception_time_s": null,
+          "token_accounted": true,
+          "physical_confirmed": false,
+          "horizon_completed": true,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        },
+        {
+          "id": "prevention-trial-5da43618b6b4221563a4970f",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 7,
+          "layout": "baseline",
+          "source_id": "B",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "unresolved",
+          "entry_time_s": null,
+          "interception_time_s": null,
+          "token_accounted": false,
+          "physical_confirmed": false,
+          "horizon_completed": false,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        },
+        {
+          "id": "prevention-trial-00f7450701f68b57d2b8fb26",
+          "comparison_id": "prevention_comparison-fixture-005",
+          "ordinal": 8,
+          "layout": "intervention",
+          "source_id": "B",
+          "data_origin": "SYNTHETIC_DEMO",
+          "outcome": "unresolved",
+          "entry_time_s": null,
+          "interception_time_s": null,
+          "token_accounted": false,
+          "physical_confirmed": false,
+          "horizon_completed": false,
+          "recording_id": null,
+          "outcome_verification": "operator_reported_not_automatically_camera_verified"
+        }
+      ],
+      "evaluation": {
+        "id": "prevention-evaluation-27b12dd70367000f7e89",
+        "snapshot_hash": "27b12dd70367000f7e89298bcf8b29eb439ac968f08069d0cee81c3603a410a2",
+        "comparison_id": "prevention_comparison-fixture-005",
+        "trial_ids": [
+          "prevention-trial-00f7450701f68b57d2b8fb26",
+          "prevention-trial-0c21658a2e5b563d68f8e930",
+          "prevention-trial-2ebfaf338fae8a61c317bd42",
+          "prevention-trial-5ce4c22137cc6ebda2a604a2",
+          "prevention-trial-5da43618b6b4221563a4970f",
+          "prevention-trial-9593c807320b3c629ad99fb6",
+          "prevention-trial-a9021df909e7a11a7fbb9e66",
+          "prevention-trial-da7cde78294f6b23ba62892d"
+        ],
+        "physical_validation": false,
+        "by_origin": {
+          "SYNTHETIC_DEMO": {
+            "data_origin": "SYNTHETIC_DEMO",
+            "layouts": {
+              "baseline": {
+                "planned": 4,
+                "released": 4,
+                "missing_planned": 0,
+                "zone_entries": 3,
+                "captured_before_entry": 0,
+                "no_entry": 0,
+                "unresolved": 1,
+                "token_accounted": 3,
+                "unaccounted": 1,
+                "recording_linked": 0,
+                "horizon_completed": 3,
+                "outcome_resolved": 3,
+                "tracking_verification": "not_automatically_verified",
+                "entry_rate_bounds": {
+                  "lower": 0.75,
+                  "upper": 1.0,
+                  "denominator": 4,
+                  "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                },
+                "observed_entry_rate_bounds": {
+                  "lower": 0.75,
+                  "upper": 1.0,
+                  "denominator": 4,
+                  "kind": "actual_releases_including_unresolved"
+                }
+              },
+              "intervention": {
+                "planned": 4,
+                "released": 4,
+                "missing_planned": 0,
+                "zone_entries": 0,
+                "captured_before_entry": 3,
+                "no_entry": 0,
+                "unresolved": 1,
+                "token_accounted": 3,
+                "unaccounted": 1,
+                "recording_linked": 0,
+                "horizon_completed": 3,
+                "outcome_resolved": 3,
+                "tracking_verification": "not_automatically_verified",
+                "entry_rate_bounds": {
+                  "lower": 0.0,
+                  "upper": 0.25,
+                  "denominator": 4,
+                  "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                },
+                "observed_entry_rate_bounds": {
+                  "lower": 0.0,
+                  "upper": 0.25,
+                  "denominator": 4,
+                  "kind": "actual_releases_including_unresolved"
+                }
+              }
+            },
+            "by_source": [
+              {
+                "source_id": "A",
+                "baseline": {
+                  "planned": 2,
+                  "released": 2,
+                  "missing_planned": 0,
+                  "zone_entries": 2,
+                  "captured_before_entry": 0,
+                  "no_entry": 0,
+                  "unresolved": 0,
+                  "token_accounted": 2,
+                  "unaccounted": 0,
+                  "recording_linked": 0,
+                  "horizon_completed": 2,
+                  "outcome_resolved": 2,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 1.0,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 1.0,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                },
+                "intervention": {
+                  "planned": 2,
+                  "released": 2,
+                  "missing_planned": 0,
+                  "zone_entries": 0,
+                  "captured_before_entry": 2,
+                  "no_entry": 0,
+                  "unresolved": 0,
+                  "token_accounted": 2,
+                  "unaccounted": 0,
+                  "recording_linked": 0,
+                  "horizon_completed": 2,
+                  "outcome_resolved": 2,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 0.0,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 0.0,
+                    "denominator": 2,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                }
+              },
+              {
+                "source_id": "B",
+                "baseline": {
+                  "planned": 2,
+                  "released": 2,
+                  "missing_planned": 0,
+                  "zone_entries": 1,
+                  "captured_before_entry": 0,
+                  "no_entry": 0,
+                  "unresolved": 1,
+                  "token_accounted": 1,
+                  "unaccounted": 1,
+                  "recording_linked": 0,
+                  "horizon_completed": 1,
+                  "outcome_resolved": 1,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 0.5,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 0.5,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                },
+                "intervention": {
+                  "planned": 2,
+                  "released": 2,
+                  "missing_planned": 0,
+                  "zone_entries": 0,
+                  "captured_before_entry": 1,
+                  "no_entry": 0,
+                  "unresolved": 1,
+                  "token_accounted": 1,
+                  "unaccounted": 1,
+                  "recording_linked": 0,
+                  "horizon_completed": 1,
+                  "outcome_resolved": 1,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 0.5,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 0.5,
+                    "denominator": 2,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                }
+              }
+            ],
+            "plan": {
+              "expected_total": 8,
+              "recorded_total": 8,
+              "complete": true,
+              "balanced": true,
+              "order_followed": true
+            },
+            "effect_bounds": {
+              "lower": 0.5,
+              "upper": 1.0,
+              "kind": "baseline_minus_intervention_planned_entry_fraction"
+            },
+            "observed_effect_bounds": {
+              "lower": 0.5,
+              "upper": 1.0,
+              "kind": "actual_releases_including_unresolved_not_causal_estimate"
+            },
+            "supports_causal_claim": false,
+            "physical_outcomes_automatically_verified": false
+          },
+          "OPERATOR_REPORTED_PHYSICAL": {
+            "data_origin": "OPERATOR_REPORTED_PHYSICAL",
+            "layouts": {
+              "baseline": {
+                "planned": 4,
+                "released": 0,
+                "missing_planned": 4,
+                "zone_entries": 0,
+                "captured_before_entry": 0,
+                "no_entry": 0,
+                "unresolved": 0,
+                "token_accounted": 0,
+                "unaccounted": 0,
+                "recording_linked": 0,
+                "horizon_completed": 0,
+                "outcome_resolved": 0,
+                "tracking_verification": "not_automatically_verified",
+                "entry_rate_bounds": {
+                  "lower": 0.0,
+                  "upper": 1.0,
+                  "denominator": 4,
+                  "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                },
+                "observed_entry_rate_bounds": {
+                  "lower": 0.0,
+                  "upper": 1.0,
+                  "denominator": 0,
+                  "kind": "actual_releases_including_unresolved"
+                }
+              },
+              "intervention": {
+                "planned": 4,
+                "released": 0,
+                "missing_planned": 4,
+                "zone_entries": 0,
+                "captured_before_entry": 0,
+                "no_entry": 0,
+                "unresolved": 0,
+                "token_accounted": 0,
+                "unaccounted": 0,
+                "recording_linked": 0,
+                "horizon_completed": 0,
+                "outcome_resolved": 0,
+                "tracking_verification": "not_automatically_verified",
+                "entry_rate_bounds": {
+                  "lower": 0.0,
+                  "upper": 1.0,
+                  "denominator": 4,
+                  "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                },
+                "observed_entry_rate_bounds": {
+                  "lower": 0.0,
+                  "upper": 1.0,
+                  "denominator": 0,
+                  "kind": "actual_releases_including_unresolved"
+                }
+              }
+            },
+            "by_source": [
+              {
+                "source_id": "A",
+                "baseline": {
+                  "planned": 2,
+                  "released": 0,
+                  "missing_planned": 2,
+                  "zone_entries": 0,
+                  "captured_before_entry": 0,
+                  "no_entry": 0,
+                  "unresolved": 0,
+                  "token_accounted": 0,
+                  "unaccounted": 0,
+                  "recording_linked": 0,
+                  "horizon_completed": 0,
+                  "outcome_resolved": 0,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 0,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                },
+                "intervention": {
+                  "planned": 2,
+                  "released": 0,
+                  "missing_planned": 2,
+                  "zone_entries": 0,
+                  "captured_before_entry": 0,
+                  "no_entry": 0,
+                  "unresolved": 0,
+                  "token_accounted": 0,
+                  "unaccounted": 0,
+                  "recording_linked": 0,
+                  "horizon_completed": 0,
+                  "outcome_resolved": 0,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 0,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                }
+              },
+              {
+                "source_id": "B",
+                "baseline": {
+                  "planned": 2,
+                  "released": 0,
+                  "missing_planned": 2,
+                  "zone_entries": 0,
+                  "captured_before_entry": 0,
+                  "no_entry": 0,
+                  "unresolved": 0,
+                  "token_accounted": 0,
+                  "unaccounted": 0,
+                  "recording_linked": 0,
+                  "horizon_completed": 0,
+                  "outcome_resolved": 0,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 0,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                },
+                "intervention": {
+                  "planned": 2,
+                  "released": 0,
+                  "missing_planned": 2,
+                  "zone_entries": 0,
+                  "captured_before_entry": 0,
+                  "no_entry": 0,
+                  "unresolved": 0,
+                  "token_accounted": 0,
+                  "unaccounted": 0,
+                  "recording_linked": 0,
+                  "horizon_completed": 0,
+                  "outcome_resolved": 0,
+                  "tracking_verification": "not_automatically_verified",
+                  "entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 2,
+                    "kind": "planned_slots_missing_and_unresolved_are_unknown"
+                  },
+                  "observed_entry_rate_bounds": {
+                    "lower": 0.0,
+                    "upper": 1.0,
+                    "denominator": 0,
+                    "kind": "actual_releases_including_unresolved"
+                  }
+                }
+              }
+            ],
+            "plan": {
+              "expected_total": 8,
+              "recorded_total": 0,
+              "complete": false,
+              "balanced": false,
+              "order_followed": true
+            },
+            "effect_bounds": {
+              "lower": -1.0,
+              "upper": 1.0,
+              "kind": "baseline_minus_intervention_planned_entry_fraction"
+            },
+            "observed_effect_bounds": {
+              "lower": -1.0,
+              "upper": 1.0,
+              "kind": "actual_releases_including_unresolved_not_causal_estimate"
+            },
+            "supports_causal_claim": false,
+            "physical_outcomes_automatically_verified": false
+          }
+        }
+      }
+    },
+    "limitations": [
+      "Content hashes verify bundle consistency, not physical truth or an authenticated signature.",
+      "Trial source labels are evaluation truth and must never enter source inference input.",
+      "Synthetic demonstrations and operator-reported physical trials remain separate.",
+      "Neither simulated outcomes nor operator reports establish reef benefit or causal effects.",
+      "The original evaluation snapshot hash includes private source records; the export payload hash binds this redacted bundle."
+    ]
+  },
+  "payload_canonical_json": "{\"comparison\":{\"baseline_profile_id\":\"profile-fixture-001\",\"case_id\":\"case-fixture-003\",\"case_revision\":2,\"data_origin\":\"SYNTHETIC\",\"horizon_s\":10.0,\"id\":\"prevention_comparison-fixture-005\",\"intervention_profile_id\":\"profile-fixture-002\",\"numerical_report\":{\"assumptions\":{\"boundary\":\"reflecting_rectangle\",\"declared_profile_min_path_coverage\":{\"baseline\":0.9,\"intervention\":0.9},\"display_paths\":\"decimated_illustrations_not_used_for_metrics\",\"event_rule\":\"competing_absorbing_zone_and_traps_segment_crossing_including_reflections\",\"event_time_kind\":\"time_node_upper_bound_resolution_dt_not_exact_exposure_time\",\"flow\":\"fixed_separate_layout_fields_no_predicted_hydrodynamic_change\",\"minimum_supported_particle_fraction\":1.0,\"monte_carlo\":\"fixed_seed_common_random_numbers_no_sampling_confidence_claim\",\"outcomes\":\"SIMULATED_FIRST_PASSAGE_NOT_PHYSICAL_TRIALS\",\"particle_time_states\":8160,\"recommendation_scope\":\"declared_sources_and_scenarios_not_statistical_confidence\",\"retention\":\"perfect_absorbing_traps_no_escape_or_partial_capture\",\"source_prior_and_release_age\":\"NOT_USED_particles_released_at_t0\",\"source_weighting\":\"NONE_all_declared_sources_must_agree\",\"support_rule\":\"any_unsupported_time_node_until_first_event_or_horizon_is_unknown\",\"time_step_by_scenario_s\":{\"nominal\":0.2},\"time_units\":\"s\",\"touch_rule\":\"boundary_contact_counts_as_entry_overlapping_geometries_rejected\",\"unsupported_denominator\":\"all_particles_retained_unknown_outcomes_bound_benefit\",\"world_units\":\"cm\"},\"data_origin\":\"SYNTHETIC\",\"horizon_s\":10.0,\"layouts\":{\"baseline\":{\"flow_hash\":\"d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65\",\"profile_hash\":\"3ee51cef24b791286f20c0cf588712ffc0c903d06cf23a9d5351f321ee1dd0e2\",\"profile_id\":\"profile-fixture-001\"},\"intervention\":{\"flow_hash\":\"d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65\",\"profile_hash\":\"003430615c8e1860c2028cd426e962efdefd0048f081473ae6a1f3266a90fe38\",\"profile_id\":\"profile-fixture-002\"}},\"particles_per_source\":20,\"physical_validation\":false,\"protected_zone_cm\":[[8.0,1.0],[9.0,1.0],[9.0,9.0],[8.0,9.0]],\"reason_codes\":[],\"recommendation\":\"INTERVENTION\",\"results\":[{\"baseline\":{\"captured_before_zone_count\":0,\"captured_before_zone_fraction\":0.0,\"particles\":20,\"path_coverage_fraction\":1.0,\"supported_particle_fraction\":1.0,\"unresolved_count\":0,\"unsupported_count\":0,\"unsupported_fraction\":0.0,\"zone_entry_count\":20,\"zone_entry_fraction\":1.0,\"zone_entry_lower_fraction\":1.0,\"zone_entry_upper_fraction\":1.0},\"benefit_fraction\":1.0,\"benefit_lower_fraction\":1.0,\"benefit_upper_fraction\":1.0,\"intervention\":{\"captured_before_zone_count\":20,\"captured_before_zone_fraction\":1.0,\"particles\":20,\"path_coverage_fraction\":1.0,\"supported_particle_fraction\":1.0,\"unresolved_count\":0,\"unsupported_count\":0,\"unsupported_fraction\":0.0,\"zone_entry_count\":0,\"zone_entry_fraction\":0.0,\"zone_entry_lower_fraction\":0.0,\"zone_entry_upper_fraction\":0.0},\"scenario_id\":\"nominal\",\"source_id\":\"A\"},{\"baseline\":{\"captured_before_zone_count\":0,\"captured_before_zone_fraction\":0.0,\"particles\":20,\"path_coverage_fraction\":1.0,\"supported_particle_fraction\":1.0,\"unresolved_count\":0,\"unsupported_count\":0,\"unsupported_fraction\":0.0,\"zone_entry_count\":20,\"zone_entry_fraction\":1.0,\"zone_entry_lower_fraction\":1.0,\"zone_entry_upper_fraction\":1.0},\"benefit_fraction\":1.0,\"benefit_lower_fraction\":1.0,\"benefit_upper_fraction\":1.0,\"intervention\":{\"captured_before_zone_count\":20,\"captured_before_zone_fraction\":1.0,\"particles\":20,\"path_coverage_fraction\":1.0,\"supported_particle_fraction\":1.0,\"unresolved_count\":0,\"unsupported_count\":0,\"unsupported_fraction\":0.0,\"zone_entry_count\":0,\"zone_entry_fraction\":0.0,\"zone_entry_lower_fraction\":0.0,\"zone_entry_upper_fraction\":0.0},\"scenario_id\":\"nominal\",\"source_id\":\"B\"}],\"robust_benefit_max\":1.0,\"robust_benefit_min\":1.0,\"scenario_ids\":[\"nominal\"],\"schema_version\":1,\"seed\":17,\"status\":\"SIMULATED_COMPARISON\"},\"particles\":20,\"physical_validation\":false,\"protected_zone_cm\":[[8.0,1.0],[9.0,1.0],[9.0,9.0],[8.0,9.0]],\"source_evidence_id\":\"estimate-fixture-004\",\"source_evidence_status\":\"unknown\",\"trials_per_source\":2},\"evaluation_truth\":{\"evaluation\":{\"by_origin\":{\"OPERATOR_REPORTED_PHYSICAL\":{\"by_source\":[{\"baseline\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":1.0},\"horizon_completed\":0,\"missing_planned\":2,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":0,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":1.0},\"outcome_resolved\":0,\"planned\":2,\"recording_linked\":0,\"released\":0,\"token_accounted\":0,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":0},\"intervention\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":1.0},\"horizon_completed\":0,\"missing_planned\":2,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":0,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":1.0},\"outcome_resolved\":0,\"planned\":2,\"recording_linked\":0,\"released\":0,\"token_accounted\":0,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":0},\"source_id\":\"A\"},{\"baseline\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":1.0},\"horizon_completed\":0,\"missing_planned\":2,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":0,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":1.0},\"outcome_resolved\":0,\"planned\":2,\"recording_linked\":0,\"released\":0,\"token_accounted\":0,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":0},\"intervention\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":1.0},\"horizon_completed\":0,\"missing_planned\":2,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":0,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":1.0},\"outcome_resolved\":0,\"planned\":2,\"recording_linked\":0,\"released\":0,\"token_accounted\":0,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":0},\"source_id\":\"B\"}],\"data_origin\":\"OPERATOR_REPORTED_PHYSICAL\",\"effect_bounds\":{\"kind\":\"baseline_minus_intervention_planned_entry_fraction\",\"lower\":-1.0,\"upper\":1.0},\"layouts\":{\"baseline\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":4,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":1.0},\"horizon_completed\":0,\"missing_planned\":4,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":0,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":1.0},\"outcome_resolved\":0,\"planned\":4,\"recording_linked\":0,\"released\":0,\"token_accounted\":0,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":0},\"intervention\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":4,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":1.0},\"horizon_completed\":0,\"missing_planned\":4,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":0,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":1.0},\"outcome_resolved\":0,\"planned\":4,\"recording_linked\":0,\"released\":0,\"token_accounted\":0,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":0}},\"observed_effect_bounds\":{\"kind\":\"actual_releases_including_unresolved_not_causal_estimate\",\"lower\":-1.0,\"upper\":1.0},\"physical_outcomes_automatically_verified\":false,\"plan\":{\"balanced\":false,\"complete\":false,\"expected_total\":8,\"order_followed\":true,\"recorded_total\":0},\"supports_causal_claim\":false},\"SYNTHETIC_DEMO\":{\"by_source\":[{\"baseline\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":1.0,\"upper\":1.0},\"horizon_completed\":2,\"missing_planned\":0,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":2,\"kind\":\"actual_releases_including_unresolved\",\"lower\":1.0,\"upper\":1.0},\"outcome_resolved\":2,\"planned\":2,\"recording_linked\":0,\"released\":2,\"token_accounted\":2,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":2},\"intervention\":{\"captured_before_entry\":2,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":0.0},\"horizon_completed\":2,\"missing_planned\":0,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":2,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":0.0},\"outcome_resolved\":2,\"planned\":2,\"recording_linked\":0,\"released\":2,\"token_accounted\":2,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":0,\"unresolved\":0,\"zone_entries\":0},\"source_id\":\"A\"},{\"baseline\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.5,\"upper\":1.0},\"horizon_completed\":1,\"missing_planned\":0,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":2,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.5,\"upper\":1.0},\"outcome_resolved\":1,\"planned\":2,\"recording_linked\":0,\"released\":2,\"token_accounted\":1,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":1,\"unresolved\":1,\"zone_entries\":1},\"intervention\":{\"captured_before_entry\":1,\"entry_rate_bounds\":{\"denominator\":2,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":0.5},\"horizon_completed\":1,\"missing_planned\":0,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":2,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":0.5},\"outcome_resolved\":1,\"planned\":2,\"recording_linked\":0,\"released\":2,\"token_accounted\":1,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":1,\"unresolved\":1,\"zone_entries\":0},\"source_id\":\"B\"}],\"data_origin\":\"SYNTHETIC_DEMO\",\"effect_bounds\":{\"kind\":\"baseline_minus_intervention_planned_entry_fraction\",\"lower\":0.5,\"upper\":1.0},\"layouts\":{\"baseline\":{\"captured_before_entry\":0,\"entry_rate_bounds\":{\"denominator\":4,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.75,\"upper\":1.0},\"horizon_completed\":3,\"missing_planned\":0,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":4,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.75,\"upper\":1.0},\"outcome_resolved\":3,\"planned\":4,\"recording_linked\":0,\"released\":4,\"token_accounted\":3,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":1,\"unresolved\":1,\"zone_entries\":3},\"intervention\":{\"captured_before_entry\":3,\"entry_rate_bounds\":{\"denominator\":4,\"kind\":\"planned_slots_missing_and_unresolved_are_unknown\",\"lower\":0.0,\"upper\":0.25},\"horizon_completed\":3,\"missing_planned\":0,\"no_entry\":0,\"observed_entry_rate_bounds\":{\"denominator\":4,\"kind\":\"actual_releases_including_unresolved\",\"lower\":0.0,\"upper\":0.25},\"outcome_resolved\":3,\"planned\":4,\"recording_linked\":0,\"released\":4,\"token_accounted\":3,\"tracking_verification\":\"not_automatically_verified\",\"unaccounted\":1,\"unresolved\":1,\"zone_entries\":0}},\"observed_effect_bounds\":{\"kind\":\"actual_releases_including_unresolved_not_causal_estimate\",\"lower\":0.5,\"upper\":1.0},\"physical_outcomes_automatically_verified\":false,\"plan\":{\"balanced\":true,\"complete\":true,\"expected_total\":8,\"order_followed\":true,\"recorded_total\":8},\"supports_causal_claim\":false}},\"comparison_id\":\"prevention_comparison-fixture-005\",\"id\":\"prevention-evaluation-27b12dd70367000f7e89\",\"physical_validation\":false,\"snapshot_hash\":\"27b12dd70367000f7e89298bcf8b29eb439ac968f08069d0cee81c3603a410a2\",\"trial_ids\":[\"prevention-trial-00f7450701f68b57d2b8fb26\",\"prevention-trial-0c21658a2e5b563d68f8e930\",\"prevention-trial-2ebfaf338fae8a61c317bd42\",\"prevention-trial-5ce4c22137cc6ebda2a604a2\",\"prevention-trial-5da43618b6b4221563a4970f\",\"prevention-trial-9593c807320b3c629ad99fb6\",\"prevention-trial-a9021df909e7a11a7fbb9e66\",\"prevention-trial-da7cde78294f6b23ba62892d\"]},\"purpose\":\"EVALUATION_ONLY_NEVER_SOURCE_INFERENCE_INPUT\",\"trials\":[{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":7.0,\"horizon_completed\":true,\"id\":\"prevention-trial-5ce4c22137cc6ebda2a604a2\",\"interception_time_s\":null,\"layout\":\"baseline\",\"ordinal\":1,\"outcome\":\"zone_entry\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"A\",\"token_accounted\":true},{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":null,\"horizon_completed\":true,\"id\":\"prevention-trial-da7cde78294f6b23ba62892d\",\"interception_time_s\":3.0,\"layout\":\"intervention\",\"ordinal\":2,\"outcome\":\"intercepted_before_entry\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"A\",\"token_accounted\":true},{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":null,\"horizon_completed\":true,\"id\":\"prevention-trial-a9021df909e7a11a7fbb9e66\",\"interception_time_s\":3.0,\"layout\":\"intervention\",\"ordinal\":3,\"outcome\":\"intercepted_before_entry\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"B\",\"token_accounted\":true},{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":7.0,\"horizon_completed\":true,\"id\":\"prevention-trial-0c21658a2e5b563d68f8e930\",\"interception_time_s\":null,\"layout\":\"baseline\",\"ordinal\":4,\"outcome\":\"zone_entry\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"B\",\"token_accounted\":true},{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":null,\"horizon_completed\":true,\"id\":\"prevention-trial-9593c807320b3c629ad99fb6\",\"interception_time_s\":3.0,\"layout\":\"intervention\",\"ordinal\":5,\"outcome\":\"intercepted_before_entry\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"A\",\"token_accounted\":true},{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":7.0,\"horizon_completed\":true,\"id\":\"prevention-trial-2ebfaf338fae8a61c317bd42\",\"interception_time_s\":null,\"layout\":\"baseline\",\"ordinal\":6,\"outcome\":\"zone_entry\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"A\",\"token_accounted\":true},{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":null,\"horizon_completed\":false,\"id\":\"prevention-trial-5da43618b6b4221563a4970f\",\"interception_time_s\":null,\"layout\":\"baseline\",\"ordinal\":7,\"outcome\":\"unresolved\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"B\",\"token_accounted\":false},{\"comparison_id\":\"prevention_comparison-fixture-005\",\"data_origin\":\"SYNTHETIC_DEMO\",\"entry_time_s\":null,\"horizon_completed\":false,\"id\":\"prevention-trial-00f7450701f68b57d2b8fb26\",\"interception_time_s\":null,\"layout\":\"intervention\",\"ordinal\":8,\"outcome\":\"unresolved\",\"outcome_verification\":\"operator_reported_not_automatically_camera_verified\",\"physical_confirmed\":false,\"recording_id\":null,\"source_id\":\"B\",\"token_accounted\":false}]},\"frozen_plan\":{\"expected_total\":8,\"frozen_before_trials\":true,\"horizon_s\":10.0,\"id\":\"prevention-plan-cbc7a3768188dad23f46\",\"layouts\":[\"baseline\",\"intervention\"],\"order\":\"predeclared_counterbalanced_alternation_not_randomized\",\"sequence\":[{\"layout\":\"baseline\",\"repeat\":1,\"source_id\":\"A\"},{\"layout\":\"intervention\",\"repeat\":1,\"source_id\":\"A\"},{\"layout\":\"intervention\",\"repeat\":1,\"source_id\":\"B\"},{\"layout\":\"baseline\",\"repeat\":1,\"source_id\":\"B\"},{\"layout\":\"intervention\",\"repeat\":2,\"source_id\":\"A\"},{\"layout\":\"baseline\",\"repeat\":2,\"source_id\":\"A\"},{\"layout\":\"baseline\",\"repeat\":2,\"source_id\":\"B\"},{\"layout\":\"intervention\",\"repeat\":2,\"source_id\":\"B\"}],\"source_ids\":[\"A\",\"B\"],\"trials_per_source\":2,\"unit\":\"one_token_release\"},\"limitations\":[\"Content hashes verify bundle consistency, not physical truth or an authenticated signature.\",\"Trial source labels are evaluation truth and must never enter source inference input.\",\"Synthetic demonstrations and operator-reported physical trials remain separate.\",\"Neither simulated outcomes nor operator reports establish reef benefit or causal effects.\",\"The original evaluation snapshot hash includes private source records; the export payload hash binds this redacted bundle.\"],\"provenance\":{\"independence\":{\"disjoint_layout_recording_sets\":false,\"distinct_flow_ids\":false,\"independently_measured\":false,\"outcome_validation\":\"NOT_AUTOMATICALLY_VERIFIED\",\"status\":\"SYNTHETIC_NOT_PHYSICAL\"},\"layouts\":{\"baseline\":{\"bounds\":{\"x_max_cm\":10.0,\"x_min_cm\":0.0,\"y_max_cm\":10.0,\"y_min_cm\":0.0},\"calibration_id\":\"test-map\",\"data_origin\":\"SYNTHETIC\",\"flow\":{\"data_origin\":\"SYNTHETIC\",\"diagnostics\":{\"grid_coverage_fraction\":1.0,\"loo_rmse_cm_s\":1.4802973661668753e-16,\"loo_supported_nodes\":9,\"max_speed_cm_s\":1.0,\"node_count\":9,\"sample_count\":9,\"training_rmse_cm_s\":0.0,\"validation_coverage_fraction\":1.0,\"validation_rmse_cm_s\":0.0},\"flow_hash\":\"d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65\",\"flow_id\":null,\"training_recording_ids\":[],\"validation_recording_ids\":[]},\"id\":\"profile-fixture-001\",\"observation_polygon_cm\":null,\"profile_hash\":\"3ee51cef24b791286f20c0cf588712ffc0c903d06cf23a9d5351f321ee1dd0e2\",\"scenarios\":[{\"id\":\"nominal\",\"transport\":{\"diffusivity_cm2_s\":0.01,\"drift_bias_cm_s\":[0.0,0.0],\"dt_s\":0.2,\"max_age_s\":20.0}}],\"sources\":[{\"id\":\"A\",\"polygon_cm\":[[1.0,2.0],[2.0,2.0],[2.0,3.0],[1.0,3.0]],\"prior\":null},{\"id\":\"B\",\"polygon_cm\":[[1.0,7.0],[2.0,7.0],[2.0,8.0],[1.0,8.0]],\"prior\":null}],\"token_class\":\"test-token\",\"transport\":{\"diffusivity_cm2_s\":0.01,\"drift_bias_cm_s\":[0.0,0.0],\"dt_s\":0.2,\"max_age_s\":20.0},\"traps\":[]},\"intervention\":{\"bounds\":{\"x_max_cm\":10.0,\"x_min_cm\":0.0,\"y_max_cm\":10.0,\"y_min_cm\":0.0},\"calibration_id\":\"test-map\",\"data_origin\":\"SYNTHETIC\",\"flow\":{\"data_origin\":\"SYNTHETIC\",\"diagnostics\":{\"grid_coverage_fraction\":1.0,\"loo_rmse_cm_s\":1.4802973661668753e-16,\"loo_supported_nodes\":9,\"max_speed_cm_s\":1.0,\"node_count\":9,\"sample_count\":9,\"training_rmse_cm_s\":0.0,\"validation_coverage_fraction\":1.0,\"validation_rmse_cm_s\":0.0},\"flow_hash\":\"d3d4d1b6a42afd6c6bb1b8502cd4ca91f2364dcdcdfd40d26412de94592abf65\",\"flow_id\":null,\"training_recording_ids\":[],\"validation_recording_ids\":[]},\"id\":\"profile-fixture-002\",\"observation_polygon_cm\":null,\"profile_hash\":\"003430615c8e1860c2028cd426e962efdefd0048f081473ae6a1f3266a90fe38\",\"scenarios\":[{\"id\":\"nominal\",\"transport\":{\"diffusivity_cm2_s\":0.01,\"drift_bias_cm_s\":[0.0,0.0],\"dt_s\":0.2,\"max_age_s\":20.0}}],\"sources\":[{\"id\":\"A\",\"polygon_cm\":[[1.0,2.0],[2.0,2.0],[2.0,3.0],[1.0,3.0]],\"prior\":null},{\"id\":\"B\",\"polygon_cm\":[[1.0,7.0],[2.0,7.0],[2.0,8.0],[1.0,8.0]],\"prior\":null}],\"token_class\":\"test-token\",\"transport\":{\"diffusivity_cm2_s\":0.01,\"drift_bias_cm_s\":[0.0,0.0],\"dt_s\":0.2,\"max_age_s\":20.0},\"traps\":[{\"id\":\"mesh\",\"polygon_cm\":[[5.0,1.0],[6.0,1.0],[6.0,9.0],[5.0,9.0]],\"retention\":\"absorbing\",\"validated\":true}]}}},\"source_evidence\":{\"case_id\":\"case-fixture-003\",\"data_origin\":\"SYNTHETIC\",\"id\":\"estimate-fixture-004\",\"status\":\"unknown\"}}",
+  "payload_sha256": "b0a711950ec66016e563b6c04955d80546ff115301e4aa15433b600ed9aaa96f",
+  "metadata": {
+    "exported_at_utc": "2026-10-17T00:00:00+00:00",
+    "is_current": true,
+    "archive_reason": null
+  }
+}

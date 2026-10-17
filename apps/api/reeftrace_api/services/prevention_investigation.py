@@ -8,12 +8,14 @@ import copy
 from adapters.chalk.agent import investigate
 
 from .investigation import CaseBackend, conditional_report
+from .validation_reports import get_validation_report
 
 
 class PreventionCaseBackend(CaseBackend):
-    def __init__(self, runtime, detail):
+    def __init__(self, runtime, detail, validation=None):
         self.detail = copy.deepcopy(detail)
         self.comparison = self.detail["comparison"]
+        self.validation = copy.deepcopy(validation)
         super().__init__(runtime, self.comparison["case_id"], operator=False)
 
     async def call(self, name, arguments):
@@ -22,13 +24,25 @@ class PreventionCaseBackend(CaseBackend):
                                                            require_active=True)
         if current["evaluation"]["snapshot_hash"] != self.detail["evaluation"]["snapshot_hash"]:
             raise ValueError("Trial ledger changed; start a review of the new evaluation")
+        if name == "get_validation_evidence" and not arguments and self.validation:
+            receipt = get_validation_report(self.service, self.validation["report"]["id"])
+            if not receipt["is_current"] or receipt != self.validation:
+                raise ValueError("Validation receipt changed or archived; start a new review")
+            # Only server-generated counts and fixed limitations enter the model.
+            # Split IDs, user protocol labels and imported text are not tool input.
+            return {"ok": True, "checks": receipt["checks"],
+                    "summary": receipt["summary"],
+                    "verification": receipt["report"]["verification"],
+                    "evidence_ids": [receipt["report"]["id"]]}
         if name == "get_prevention_evidence" and not arguments:
             # Raw release labels stay in their evaluation ledger. Only the
             # deterministic aggregate snapshot is supplied to the model.
             comparison = copy.deepcopy(self.comparison)
             comparison["numerical_report"].pop("nominal_paths", None)
+            aggregate = copy.deepcopy(self.detail["evaluation"])
+            aggregate.pop("trial_ids", None)
             return {"ok": True, "comparison": comparison,
-                    "evaluation": copy.deepcopy(self.detail["evaluation"]),
+                    "evaluation": aggregate,
                     "evidence_ids": [self.comparison["id"], self.detail["evaluation"]["id"]],
                     "interpretation": "Simulated layout predictions are separate from trial outcomes. Trial source labels are evaluation truth, never source inference. No reef benefit is established."}
         if name in {"get_case", "get_source_evidence"} and not arguments:
@@ -40,7 +54,8 @@ class PreventionCaseBackend(CaseBackend):
         raise ValueError("Prevention investigations permit read-only frozen evidence tools only")
 
 
-async def investigate_prevention(runtime, comparison_id, text, *, client=None):
+async def investigate_prevention(runtime, comparison_id, text, *, client=None,
+                                 validation_report_id=None):
     service = runtime.prevention
     initial = service.comparison_detail(comparison_id, require_active=True)
     case_id = initial["comparison"]["case_id"]
@@ -48,7 +63,14 @@ async def investigate_prevention(runtime, comparison_id, text, *, client=None):
     async with lock:
         detail = service.comparison_detail(comparison_id, require_active=True)
         comparison, evaluation = detail["comparison"], detail["evaluation"]
-        backend = PreventionCaseBackend(runtime, detail)
+        validation = None
+        if validation_report_id:
+            validation = get_validation_report(runtime, validation_report_id)
+            if (not validation["is_current"]
+                    or validation["report"]["comparison_id"] != comparison_id
+                    or validation["report"]["evaluation_snapshot_hash"] != evaluation["snapshot_hash"]):
+                raise ValueError("Select a current validation receipt for this comparison/evaluation")
+        backend = PreventionCaseBackend(runtime, detail, validation)
         source = runtime.store.get("estimate", comparison["source_evidence_id"])
         result = await investigate(text, backend,
             {"case_id": case_id, "role": "operator",
@@ -56,13 +78,18 @@ async def investigate_prevention(runtime, comparison_id, text, *, client=None):
              "source_evidence_id": comparison["source_evidence_id"],
              "prevention_comparison_id": comparison_id,
              "prevention_evaluation_id": evaluation["id"],
-             "evaluation_digest": evaluation["snapshot_hash"]},
+             "evaluation_digest": evaluation["snapshot_hash"],
+             **({"validation_report_id": validation_report_id} if validation_report_id else {})},
             runtime.chalk_settings(), client=client)
         result.update(case_id=case_id, comparison_id=comparison_id,
                       evaluation_digest=evaluation["snapshot_hash"],
                       source_report=conditional_report(source),
                       prevention_report=copy.deepcopy(comparison),
                       prevention_evaluation=copy.deepcopy(evaluation))
+        if validation:
+            result.update(validation_report_id=validation_report_id,
+                          validation_summary=copy.deepcopy(validation["summary"]),
+                          validation_checks=copy.deepcopy(validation["checks"]))
         # This transaction checks both case freshness and ledger freshness after
         # the network turn, including a concurrent manual trial or STOP.
         receipt = service.commit_for_comparison("prevention_investigation", result, comparison,

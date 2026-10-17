@@ -30,7 +30,15 @@ from .schemas.contracts import (
     SensitivityInput,
 )
 from .schemas.prevention import ComparisonInput, TrialInput
+from .schemas.validation_reports import PreventionQuestion, ValidationReportInput
+from .services.evidence_export import export_comparison
 from .services.runtime import Runtime
+from .services.validation_reports import (
+    accept_validation_report,
+    get_validation_report,
+    list_validation_reports,
+    template_validation_report,
+)
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -146,14 +154,38 @@ def create_app(settings: Settings | None = None):
     def prevention_comparison(comparison_id: str):
         return runtime.prevention.comparison_detail(comparison_id)
 
+    @app.get("/api/v1/prevention/comparisons/{comparison_id}/export", dependencies=[Depends(operator)])
+    def prevention_export(comparison_id: str):
+        return export_comparison(runtime, comparison_id)
+
+    @app.get("/api/v1/prevention/comparisons/{comparison_id}/validation-template", dependencies=[Depends(operator)])
+    def prevention_validation_template(comparison_id: str, origin: str = "SYNTHETIC_DEMO"):
+        return template_validation_report(runtime, comparison_id, origin)
+
+    @app.get("/api/v1/prevention/comparisons/{comparison_id}/validation-reports", dependencies=[Depends(operator)])
+    def prevention_validation_reports(comparison_id: str):
+        return list_validation_reports(runtime, comparison_id)
+
+    @app.get("/api/v1/prevention/comparisons/{comparison_id}/validation-reports/{report_id}", dependencies=[Depends(operator)])
+    def prevention_validation_report(comparison_id: str, report_id: str):
+        result = get_validation_report(runtime, report_id)
+        if result["report"]["comparison_id"] != comparison_id:
+            raise KeyError(report_id)
+        return result
+
+    @app.post("/api/v1/prevention/comparisons/{comparison_id}/validation-reports", dependencies=[Depends(operator)])
+    def prevention_accept_validation(comparison_id: str, body: ValidationReportInput):
+        return accept_validation_report(runtime, comparison_id, body)
+
     @app.post("/api/v1/prevention/comparisons/{comparison_id}/trials", dependencies=[Depends(operator)])
     def prevention_trial(comparison_id: str, body: TrialInput):
         return runtime.prevention.add_trial(comparison_id, body)
 
     @app.post("/api/v1/prevention/comparisons/{comparison_id}/investigate", dependencies=[Depends(operator)])
-    async def prevention_investigate(comparison_id: str, body: Question):
+    async def prevention_investigate(comparison_id: str, body: PreventionQuestion):
         from .services.prevention_investigation import investigate_prevention
-        return await investigate_prevention(runtime, comparison_id, body.text)
+        return await investigate_prevention(runtime, comparison_id, body.text,
+                                            validation_report_id=body.validation_report_id)
 
     @app.post("/api/v1/prevention/demo", dependencies=[Depends(operator)])
     async def prevention_demo():

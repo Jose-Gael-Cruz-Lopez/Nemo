@@ -84,7 +84,8 @@ def test_gateway_contract_reads_evidence_before_grounded_finish():
     assert requests[0].headers["Authorization"] == "Bearer secret"
     assert requests[0].headers["X-Chalk-Env-Id"] == "env-1"
     assert json.loads(requests[0].content)["model"] == "model-1"
-    assert set(json.loads(requests[0].content)) == {"model", "messages"}
+    assert set(json.loads(requests[0].content)) == {"model", "messages", "max_completion_tokens"}
+    assert json.loads(requests[0].content)["max_completion_tokens"] == 1024
 
 
 @pytest.mark.parametrize(

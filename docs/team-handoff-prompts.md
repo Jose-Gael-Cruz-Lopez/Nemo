@@ -1,9 +1,15 @@
 # Three-person implementation handoff
 
-These prompts are for the **next iteration after the current prevention slice is
-merged and green**. Give each person a separate repository branch/task in Trove.
+Assigned owners: **Megana (`megana111`) — Trace 1; Aarush Mane (`aarushmane`) —
+Trace 2; Jose — Trace 3.** Use separate repository branches/tasks in Trove.
 Do not ask three people to rebuild the existing comparison, ledger or dashboard.
-No external task has been created or messaged by this document.
+Published team prompts are in the Nemo Prompt Library; direct kickoff handoffs
+were sent to Megana and Aarush. A document alone does not create an agent session.
+
+Trace 3's export, strict split-manifest verifier, product panel and read-only
+Chalk receipt review are now implemented. Read `docs/trace3-implementation.md`
+before starting: these are integration foundations, not Aarush's independent
+scientific validation method or Megana's physical field-session workflow.
 
 The scope is a coastal decision-support **prototype tested in a tank**. The
 software does not establish ocean transport accuracy, coral benefit, a known
@@ -76,8 +82,9 @@ missing/unresolved slots remain unknown. Source scores are not probabilities and
 cannot become weights for ecological benefit. The fixed field, reflecting walls
 and perfect absorbing retention are model assumptions, not measured guarantees.
 
-The following **new contracts are proposals for this iteration**, not endpoints
-that already exist. Agree their exact JSON/type fixtures before parallel coding:
+Field-manifest v1 remains a proposal for Trace 1. Analysis-bundle v1 and the
+validation split-manifest interface are implemented; their strict schemas and
+actual synthetic fixture take precedence over the earlier design sketch:
 
 1. **Field manifest v1, Lane 1 producer.** A frozen receipt references
    `profile_id`, `calibration_id`, `camera_session_id`, disjoint training and
@@ -85,18 +92,21 @@ that already exist. Agree their exact JSON/type fixtures before parallel coding:
    Include `schema_version`, ID/hash and explicit provenance. Reuse existing
    immutable artifacts; exclude source-release truth, credentials, absolute local
    paths and raw camera images. Do not claim hardware is independently verified.
-2. **Analysis bundle v1, Lane 3 producer / Lane 2 consumer.** Whitelisted snapshots
+2. **Analysis bundle v1, Lane 3 producer / Lane 2 consumer (implemented).** Whitelisted snapshots
    of a comparison, numerical report, frozen plan, trial ledger, evaluation hash,
    profile/flow provenance and optional field-manifest reference. Include an
    explicit evaluation-truth section for trial source labels. Keep it out of
    source inference. Exclude arbitrary notes by default, phone identities, tokens,
    full SQLite dumps, raw images and unrelated cases. A content hash covers the
    canonical payload; detached timestamp metadata must not change that hash.
-3. **Validation report v1, Lane 2 producer / Lane 3 consumer.** Include input hash,
-   origin, protocol/split identity, denominators, missing/unresolved counts,
-   per-layout/per-source predicted-versus-observed diagnostics, limitations and a
-   recommendation with reason codes. No significance or calibrated-probability
-   claim. Output must be finite and deterministic for the same input/config.
+   Hash the returned `payload_canonical_json` bytes, preserving Python float text.
+3. **Validation split manifest v1, Lane 2 producer / Lane 3 consumer (implemented).**
+   The import accepts only exact input/evaluation hashes, comparison/origin,
+   protocol/purpose and disjoint development/validation trial IDs. It rejects
+   uploaded metrics and prose. The server recomputes descriptive accounting from
+   local saved trials; `method_rerun:false`, `physical_validation:false` and
+   `supports_causal_claim:false` stay explicit. Aarush's external method/CLI must
+   remain separately identified; importing a manifest does not validate it.
 
 Commit small non-personal **synthetic contract fixtures** under
 `tests/fixtures/team_handoff/`: Lane 1 owns `field_manifest_v1.json`; Lane 2 owns
@@ -107,6 +117,10 @@ physical experiment. Keep public NOAA and existing demo fixtures unchanged.
 ## Copy/paste prompt 1 — Field evidence and commissioning
 
 ```text
+ASSIGNED OWNER: Megana / @megana111. Trace 1. Repo:
+https://github.com/Jose-Gael-Cruz-Lopez/reeftrace . Start from latest green main.
+Trace 3's export/manifest-checker/UI/Chalk foundation now exists. Preserve it.
+Read docs/trace3-implementation.md for the implemented contracts before coding.
 You own Lane 1 of the next ReefTrace iteration. Start from the coordinator's green
 main SHA after the prevention slice merges, on branch team/field-evidence. Read
 README, architecture, verification, prevention workflow/physics and AGENTS first.
@@ -170,6 +184,12 @@ Python/Node tests and Ruff; provide exact results and a PR with the starting SHA
 ## Copy/paste prompt 2 — Prediction validation and next measurement
 
 ```text
+ASSIGNED OWNER: Aarush Mane / @aarushmane. Trace 2. Repo:
+https://github.com/Jose-Gael-Cruz-Lopez/reeftrace . Start from latest green main.
+Trace 3 exports analysis_bundle_v1 and imports strict split manifests already.
+Read docs/trace3-implementation.md and the actual schema/fixture first. The import
+checks identities and accounting only; your independent method is not implemented
+by that checker. Do not replace the API verifier or upload arbitrary metrics to it.
 You own Lane 2 of the next ReefTrace iteration, branch team/prediction-validation
 from the coordinator's green main SHA. Existing compare_layouts, conservative
 trial evaluation, frozen plans and the NOAA diagnostic already exist. Do not
@@ -212,8 +232,11 @@ significance, ocean accuracy, coral survival or CO2 claims.
 
 Implement a transparent NEXT-MEASUREMENT heuristic, not an untested optimal
 active-learning claim: first request independent drift in unsupported regions;
-otherwise identify a declared source/scenario whose uncertainty changes the
-layout decision and recommend another independent paired trial. If the saved
+otherwise complete the frozen sequence's remaining slots before recommending a
+new protocol. After completing a plan, exploratory selection of a new paired
+block belongs to development; freeze a fresh confirmation protocol before
+claiming independent validation. Identify a declared source/scenario whose
+uncertainty changes the layout decision when the data supports it. If the saved
 report cannot identify a useful region, say so. Watching another image of an
 already retained endpoint does not recover missing history; cropping an already
 recorded full-frame image is not a new sensor observation. Never move a collector
@@ -234,6 +257,14 @@ Run scoped tests and Ruff, then provide a PR with commands/results and limitatio
 ## Copy/paste prompt 3 — Product, evidence export, Chalk and integration
 
 ```text
+ASSIGNED OWNER: Jose. Trace 3. Repo:
+https://github.com/Jose-Gael-Cruz-Lopez/reeftrace . Start from latest green main.
+IMPLEMENTED FOUNDATION: exact-canonical export; strict split-manifest checker;
+server-recomputed accounting; report import/history panel; selected-receipt Chalk
+review; loopback e2e_validation.py. Preserve these working paths. The instructions
+below describe the overall lane; remaining work is reviewed integration of the
+actual Trace 1 field receipt and Trace 2 independent method once they arrive.
+Read docs/trace3-implementation.md and actual schemas before modifying contracts.
 You own Lane 3, branch team/product-integration from the coordinator's green main
 SHA after the current prevention slice lands. Your job is to integrate Lanes 1/2
 and prove the complete story; the current source/prevention application exists.
