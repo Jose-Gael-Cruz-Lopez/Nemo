@@ -9,9 +9,9 @@ from pathlib import Path
 
 import yaml
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import JSONResponse, Response, StreamingResponse
 
 from apps.vision.reeftrace_vision.calibration import fit_homography
 from apps.vision.reeftrace_vision.tracking import flow_samples
@@ -36,6 +36,7 @@ from .schemas.contracts import (
 )
 from .schemas.prevention import ComparisonInput, TrialInput
 from .schemas.validation_reports import PreventionQuestion, ValidationReportInput
+from .services.camera_stream import MJPEG_BOUNDARY, iter_camera_mjpeg
 from .services.evidence_export import export_comparison
 from .services.runtime import Runtime
 from .services.validation_reports import (
@@ -402,6 +403,22 @@ def create_app(settings: Settings | None = None):
         _, metadata = runtime.camera.image()
         return Response(metadata["jpeg"], media_type="image/jpeg",
                         headers={"Cache-Control": "no-store", "X-Frame-Id": str(metadata["sequence"])})
+
+    @app.get("/api/v1/camera/stream.mjpg")
+    async def camera_stream(request: Request, session_id: str = Query(min_length=1, max_length=80)):
+        try:
+            status, _ = runtime.camera.preview_snapshot()
+        except ValueError as error:
+            raise HTTPException(503, str(error),
+                                headers={"Cache-Control": "no-store"}) from None
+        if status["session_id"] != session_id:
+            raise HTTPException(409, "Camera session changed; reconnect the live preview",
+                                headers={"Cache-Control": "no-store"})
+        return StreamingResponse(
+            iter_camera_mjpeg(runtime.camera, request, session_id),
+            media_type=f"multipart/x-mixed-replace; boundary={MJPEG_BOUNDARY}",
+            headers={"Cache-Control": "no-store", "X-Accel-Buffering": "no"},
+        )
 
     @app.post("/api/v1/camera/record", dependencies=[Depends(operator)])
     async def record(body: RecordInput):

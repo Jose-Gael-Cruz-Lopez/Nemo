@@ -17,7 +17,7 @@ export const MAX_TABLETOP_SPAN_CM = 200;
 export const DRAFT_KEY = "reeftrace.field-workflow.draft.v1";
 
 export type CameraStatus = { running: boolean; session_id: string | null; fresh: boolean; width: number | null; height: number | null; backend: string | null; device_index: number | null };
-export type CalibrationReport = { calibration_id: string; approved: boolean; camera_session_id: string; max_error_cm: number; max_allowed_error_cm: number; mean_error_cm: number; validation_count: number; image_size_px: [number, number] };
+export type CalibrationReport = { calibration_id: string; approved: boolean; camera_session_id: string; max_error_cm: number; max_allowed_error_cm: number; mean_error_cm: number; validation_count: number; image_size_px: [number, number]; homography_image_to_cm?: number[][]; plane?: string; units?: string; mapping_polygon_px?: number[][] };
 export type RecordingSummary = { id: string; camera_session_id: string; calibration_id: string; profile_id: string | null; frames: number; observed: number; gaps: number; tracks: number };
 export type FlowNode = { x_cm: number; y_cm: number; vx_cm_s: number; vy_cm_s: number };
 export type FlowResult = { id: string; data_origin: string; nodes: FlowNode[]; diagnostics: { validation_rmse_cm_s: number | null; validation_coverage_fraction: number | null; node_count: number; sample_count: number }; provenance: { calibration_id: string; camera_session_id: string; training_recording_ids: string[]; validation_recording_ids: string[] }; [key: string]: unknown };
@@ -115,11 +115,25 @@ export function parseCameraStatus(value: unknown): CameraStatus {
   return { running: value.running, fresh: value.fresh, session_id: text(value.session_id) ? value.session_id : null, width: optionalNumber(value.width), height: optionalNumber(value.height), backend: text(value.backend) ? value.backend : null, device_index: optionalNumber(value.device_index) };
 }
 
-export function parseCalibration(value: unknown): CalibrationReport {
+export function parseCalibration(value: unknown, fittingPixels?: number[][]): CalibrationReport {
   if (!isObject(value) || !text(value.calibration_id) || typeof value.approved !== "boolean" || !text(value.camera_session_id)
     || !finite(value.max_error_cm) || !finite(value.max_allowed_error_cm) || !finite(value.mean_error_cm) || !finite(value.validation_count)
     || !Array.isArray(value.image_size_px) || value.image_size_px.length !== 2 || !value.image_size_px.every(finite)) fail("Mapping result was incomplete");
-  return { calibration_id: value.calibration_id, approved: value.approved, camera_session_id: value.camera_session_id, max_error_cm: value.max_error_cm, max_allowed_error_cm: value.max_allowed_error_cm, mean_error_cm: value.mean_error_cm, validation_count: value.validation_count, image_size_px: [value.image_size_px[0], value.image_size_px[1]] };
+  const matrix = value.homography_image_to_cm;
+  if (matrix !== undefined) {
+    if (!Array.isArray(matrix) || matrix.length !== 3 || matrix.some(row => !Array.isArray(row) || row.length !== 3 || !row.every(finite))) fail("Mapping matrix was invalid");
+    const scale = Math.max(...matrix.flat().map(Math.abs));
+    if (!scale) fail("Mapping matrix was invalid");
+    const [[a,b,c],[d,e,f],[g,h,i]] = matrix.map(row => row.map((v: number) => v / scale));
+    if (Math.abs(a*(e*i-f*h)-b*(d*i-f*g)+c*(d*h-e*g)) <= 1e-12) fail("Mapping matrix was singular");
+  }
+  const marks = fittingPixels ?? value.mapping_polygon_px;
+  const fittingMarks = Array.isArray(marks) && marks.length >= 4 && marks.length <= 100 && marks.every(p => Array.isArray(p) && p.length === 2 && p.every(finite)) ? marks as number[][] : null;
+  return { calibration_id: value.calibration_id, approved: value.approved, camera_session_id: value.camera_session_id, max_error_cm: value.max_error_cm, max_allowed_error_cm: value.max_allowed_error_cm, mean_error_cm: value.mean_error_cm, validation_count: value.validation_count, image_size_px: [value.image_size_px[0], value.image_size_px[1]],
+    ...(value.homography_image_to_cm !== undefined ? { homography_image_to_cm: value.homography_image_to_cm as number[][] } : {}),
+    ...(typeof value.plane === "string" ? { plane: value.plane } : {}), ...(typeof value.units === "string" ? { units: value.units } : {}),
+    ...(fittingMarks ? { mapping_polygon_px: fittingMarks.map(p => [...p]) } : {}),
+  };
 }
 
 export function parseRecording(value: unknown): RecordingSummary {

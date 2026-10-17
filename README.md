@@ -23,6 +23,12 @@ The root page is the public introduction. Use `/login` or the workspace's operat
 
 The launcher never changes sponsor enable flags. Starting a new API with `PHOTON_ENABLED=true` requires the explicit `--allow-photon` flag; an already running API and its authorized worker are left untouched. A software demo does not require changing any messaging setting or starting the Camera page.
 
+### View the connected camera without a tank
+
+Open **Camera** in the local workspace. The live preview and controls appear first; a tank is not required. The connected **C270 was verified as device 0 on this Mac at 1280 × 720**. The pixel grid has a checkbox and cursor coordinates; it does not claim centimetre calibration. A continuous, session-bound MJPEG connection displays the latest frames at up to 15 fps without per-frame React updates. Capture preserves the device's native mode (about 24 fps in a two-second C270 check), while recorded tracking defaults to 10 Hz. Tank commissioning is collapsed under **Calibrate a tank and record trials when ready**. See [camera preview and coordinate setup](docs/camera-preview.md).
+
+The [public ocean showcase deployment plan](docs/public-ocean-showcase.md) is a separate read-only view with checked numerical snapshots. It does not expose the local camera, experiment store or provider credentials; deployment status and its public URL must be verified separately.
+
 ## Three-part software demo
 
 Start in **Overview**, choose **Start software demo**, and follow **Follow the evidence**. The [click-by-click runbook](docs/integrated-team-demo.txt) covers the longer presentation.
@@ -48,7 +54,7 @@ Loading the source demo already prepares example evidence; explicitly recomputin
 | Changing ocean currents | Real PacIOOS three-hourly surface u/v, bounded WGS84/RK4 particle transport and time-selectable arrows; dynamic advection drives ocean-mode layout comparisons | Hypothetical six-hour releases, coarse source support, no measured waste skill or transfer into tank physics |
 | Chalk | Live case-bound investigations and a live fresh-study **REPORT verified on 17 October 2026**; exact evidence citations and bounded read-only research tools | Configuration readiness alone is not a live response; timeouts/provider failures preserve deterministic results |
 | Photon | Durable inbox/outbox, scoped direct conversation and strict control commands; a previously authorized automatic round trip was independently observed Delivered | No messages are needed by this demo or the software handoffs; HTTP 202 acceptance alone is not delivery |
-| Camera/field commissioning | Implemented capture, mapping, drift fitting, admission checks and immutable field receipts; synthetic contract tests | The real assembled rig, measured mapping/drift and physical trials have not been commissioned here |
+| Camera/field commissioning | Connected C270 live preview verified at 1280 × 720 on this Mac; pixel guide, conditional water-plane grid, mapping, drift fitting, admission checks and immutable field receipts | Live preview is not calibration; the tank rig, measured mapping/drift and physical trials have not been commissioned here |
 | Grok/xAI | Grok-assisted design/code review, deterministic evidence briefing and server-side Voice API adapter | No funded live xAI Voice result or completed Voice API eligibility is claimed; voice remains disabled |
 
 The final local software verification on 17 October 2026 passed **1,061 Python tests**, **122 frontend tests**, and **122 PASS / 0 FAIL / 6 expected BLOCKED** offline HTTP checks. Ruff, generated route types, TypeScript and the production build passed. Actual browser checks covered the revised guide, Ranked/Unknown/Invalid source states, separate prevention example, recorded-outcome disclosure and real NOAA results; the guide also had no horizontal overflow at 390 px. Live-provider failures were preserved and two discovered research-orchestration defects received regressions. The blocked offline scopes are not counted as successful physical or device tests. GitHub runs Python/scientific replay, isolated HTTP workflows, and dashboard lint/types/build on pushes and pull requests; inspect the exact commit's hosted result separately.
@@ -132,7 +138,7 @@ Next work is concrete: commission the physical camera/mapping and separately mea
 
 ## Updated physical rig guide
 
-The [11-page rig guide](docs/tideward-rig-guide.pdf) replaces the earlier clipped build guide. It distinguishes reported inventory from items still needing purchase or confirmation, specifies the selected C920s USB camera and actual pump-adapter check, and gives assembly, mapping, separate layout measurements and first-trial steps. [Connection diagram](docs/assets/tideward-rig-connections.png) · [measured tank map](docs/assets/tideward-rig-measured-map.png).
+The [11-page rig guide](docs/tideward-rig-guide.pdf) replaces the earlier clipped build guide. It distinguishes reported inventory from items still needing purchase or confirmation, specifies the earlier planned C920s USB camera and actual pump-adapter check, and gives assembly, mapping, separate layout measurements and first-trial steps. The available **C270 now supplies the live preview**; buying a C920s is not required for that step. See [the current camera guide](docs/camera-preview.md). [Connection diagram](docs/assets/tideward-rig-connections.png) · [measured tank map](docs/assets/tideward-rig-measured-map.png).
 
 Use the webcam's USB connection to the laptop and the pump's original, separately operated AC cord. The return tube carries water within the same bin; the original cord goes over the rim without cutting the tank. Decorative coral, 3D printing and the unused Arduino/ESP32 boards are not required by this selected plan. The guide is a planned build, not a claim that the rig or any physical trial has been completed. Megana and Aarush's current handoffs remain software-only.
 
@@ -160,8 +166,10 @@ Ocean integration verification on 17 October 2026: **1,263 Python tests, 163 fro
 
 ## Reference map
 
+- [Complete product and team guide](docs/tideward-product-guide.md): every workspace feature, graph, integration, API family, evidence contract and remaining validation task; the team-facing copy is published in Trov.
 - [Architecture](docs/architecture.md), [algorithm/contract audit](docs/algorithm-contract-audit.md), [physics](docs/physics.md), [prevention physics](docs/prevention-physics.md).
 - [Integrated demo](docs/integrated-team-demo.txt), [ocean prevention](docs/ocean-prevention.md), [tank prevention workflow](docs/prevention-workflow.md), [verification](docs/verification.md), [CI](docs/ci.md).
+- [Live camera and future calibration](docs/camera-preview.md), [read-only public ocean showcase](docs/public-ocean-showcase.md).
 - [Fresh NOAA study](docs/fresh-noaa-study.md), [datasets](docs/datasets.md), [original real-data research](docs/research-real-data.md), [motion-vector research](docs/motion-vector-research.txt), [current Grok build record](docs/grok-fresh-build.md), [earlier Kalman build record](docs/grok-kalman-build.md).
 - [Chalk/Photon contracts and live-verification history](docs/integrations.md), [satellite/Grok Voice contract](docs/grok-space-context.md).
 - [Later field commissioning](docs/field-commissioning.md), [original execution plan](docs/execution-plan.md). Camera frames, contacts, raw physical recordings and credentials stay in ignored local storage; no electronics purchase or physical experiment is required for the current software handoffs.

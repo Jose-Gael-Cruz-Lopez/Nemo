@@ -13,9 +13,13 @@ from apps.vision.reeftrace_vision import capture
 
 class FakeQueue(Queue):
     closed = False
+    feeder_join_cancelled = False
 
     def close(self):
         self.closed = True
+
+    def cancel_join_thread(self):
+        self.feeder_join_cancelled = True
 
 
 class FakeProcess:
@@ -25,6 +29,9 @@ class FakeProcess:
         self.killed = False
         self.fail_start = False
         self.ignore_terminate = False
+        self.stop_event = args[-1]
+        self.exit_on_stop = False
+        self.join_timeouts = []
 
     def start(self):
         if self.fail_start:
@@ -40,7 +47,9 @@ class FakeProcess:
             self.alive = False
 
     def join(self, timeout=None):
-        pass
+        self.join_timeouts.append(timeout)
+        if self.exit_on_stop and self.stop_event.is_set():
+            self.alive = False
 
     def kill(self):
         self.killed = True
@@ -57,6 +66,9 @@ class FakeContext:
         queue = FakeQueue(maxsize)
         self.queues.append(queue)
         return queue
+
+    def Event(self):
+        return threading.Event()
 
     def Process(self, **kwargs):
         process = FakeProcess(**kwargs)
@@ -234,6 +246,8 @@ def test_bounded_stop_kills_a_hung_worker_and_clears_session(monkeypatch):
     process.ignore_terminate = True
     camera.stop()
     assert process.terminated and process.killed
+    assert process.stop_event.is_set()
+    assert process.join_timeouts == [capture.GRACEFUL_STOP_S, 1, 1]
     assert not process.is_alive()
     assert context.queues[0].closed
     assert camera.status() == {
@@ -247,3 +261,149 @@ def test_bounded_stop_kills_a_hung_worker_and_clears_session(monkeypatch):
         "height": None,
         "backend": None,
     }
+
+
+def test_normal_stop_releases_worker_before_forced_termination(monkeypatch):
+    context = FakeContext()
+    monkeypatch.setattr(capture.mp, "get_context", lambda method: context)
+    camera = capture.Camera()
+    camera.start(0)
+    process = camera.process
+    process.exit_on_stop = True
+    camera.stop()
+    assert process.stop_event.is_set()
+    assert not process.alive
+    assert not process.terminated and not process.killed
+    assert process.join_timeouts[0] == capture.GRACEFUL_STOP_S
+    assert context.queues[0].closed
+    assert camera.stop_event is None
+
+
+def test_replacement_waits_for_old_release_and_keeps_only_one_owner(monkeypatch):
+    context = FakeContext()
+    monkeypatch.setattr(capture.mp, "get_context", lambda method: context)
+    camera = capture.Camera()
+    camera.start(0)
+    first = camera.process
+    first.exit_on_stop = True
+    first_session = camera.session_id
+    camera.start(0)
+    assert first.stop_event.is_set() and not first.is_alive()
+    assert not first.terminated and not first.killed
+    assert context.queues[0].closed
+    assert camera.session_id != first_session
+    assert camera.process is context.processes[1]
+    assert camera.stop_event is context.processes[1].stop_event
+    assert not camera.stop_event.is_set()
+    assert sum(process.is_alive() for process in context.processes) == 1
+    camera.stop()
+
+
+class WorkerStop:
+    def __init__(self, clock, *, cancel_first_wait=False):
+        self.clock = clock
+        self.cancel_first_wait = cancel_first_wait
+        self.stopped = False
+        self.waits = []
+
+    def is_set(self):
+        return self.stopped
+
+    def set(self):
+        self.stopped = True
+
+    def wait(self, delay):
+        self.waits.append(delay)
+        self.clock[0] += delay
+        if self.cancel_first_wait:
+            self.set()
+        return self.stopped
+
+
+class WorkerCapture:
+    def __init__(self, outcomes, *, opened=True, on_read=None):
+        self.outcomes = iter(outcomes)
+        self.opened = opened
+        self.on_read = on_read
+        self.read_count = 0
+        self.release_count = 0
+
+    def isOpened(self):
+        return self.opened
+
+    def set(self, prop, value):
+        raise AssertionError("Capture must preserve the backend's negotiated native mode")
+
+    def read(self):
+        self.read_count += 1
+        if self.on_read:
+            self.on_read()
+        if next(self.outcomes, False):
+            return True, np.zeros((12, 16, 3), dtype=np.uint8)
+        return False, None
+
+    def getBackendName(self):
+        return "FAKE_WORKER"
+
+    def release(self):
+        self.release_count += 1
+
+
+def run_fake_worker(monkeypatch, outcomes, *, cancel_first_wait=False, opened=True,
+                    stop_on_read=False):
+    clock = [100.0]
+    stop = WorkerStop(clock, cancel_first_wait=cancel_first_wait)
+    cap = WorkerCapture(outcomes, opened=opened, on_read=stop.set if stop_on_read else None)
+    queue = FakeQueue(1)
+    monkeypatch.setattr(capture, "time", SimpleNamespace(monotonic=lambda: clock[0]))
+    monkeypatch.setattr(capture.cv2, "VideoCapture", lambda *args: cap)
+    capture._capture_worker(0, queue, stop)
+    return cap, queue, stop
+
+
+def test_worker_recovers_transient_first_frame_read_then_exits_on_established_loss(monkeypatch):
+    cap, queue, stop = run_fake_worker(monkeypatch, [False, False, True, False, True])
+    assert cap.read_count == 4  # The second possible success must never be read.
+    assert stop.waits == [capture.FIRST_FRAME_RETRY_S] * 2
+    item = queue.get_nowait()
+    assert item["sequence"] == 1
+    assert item["received_mono_s"] == pytest.approx(100.1)
+    assert item["width"] == 16 and item["height"] == 12
+    assert cap.release_count == 1
+    assert queue.feeder_join_cancelled
+
+
+def test_worker_first_frame_retry_is_bounded_and_never_fakes_a_frame(monkeypatch, caplog):
+    cap, queue, stop = run_fake_worker(monkeypatch, [])
+    assert sum(stop.waits) == pytest.approx(capture.FIRST_FRAME_WARMUP_S)
+    assert cap.read_count <= 42
+    assert queue.empty()
+    assert cap.release_count == 1
+    assert queue.feeder_join_cancelled
+    assert "first-frame timeout" in caplog.text
+
+
+def test_worker_stop_interrupts_warmup_and_runs_native_release(monkeypatch):
+    cap, queue, stop = run_fake_worker(monkeypatch, [], cancel_first_wait=True)
+    assert cap.read_count == 1
+    assert len(stop.waits) == 1
+    assert stop.is_set()
+    assert queue.empty()
+    assert cap.release_count == 1
+    assert queue.feeder_join_cancelled
+
+
+def test_worker_does_not_publish_a_frame_if_stopped_during_native_read(monkeypatch):
+    cap, queue, _ = run_fake_worker(monkeypatch, [True], stop_on_read=True)
+    assert cap.read_count == 1 and queue.empty()
+    assert cap.release_count == 1
+    assert queue.feeder_join_cancelled
+
+
+def test_unopenable_device_is_not_reopened_or_retried(monkeypatch, caplog):
+    cap, queue, stop = run_fake_worker(monkeypatch, [], opened=False)
+    assert cap.read_count == 0 and stop.waits == []
+    assert queue.empty()
+    assert cap.release_count == 1
+    assert queue.feeder_join_cancelled
+    assert "USB camera 0 could not be opened" in caplog.text
