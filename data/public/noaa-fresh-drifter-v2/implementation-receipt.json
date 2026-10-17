@@ -1,0 +1,23 @@
+{
+  "evaluation_outcomes_computed": false,
+  "frozen_at_utc": "2026-10-17T15:02:47.765778+00:00",
+  "implementation_sha256": {
+    "apps/ocean/reeftrace_ocean/fresh_drifter.py": "35472107a2cf40a2c5efe8a3e34d5d515bf15378fd1f2154c378ebb383c5dd27",
+    "apps/ocean/reeftrace_ocean/fresh_drifter_protocol.py": "8752f6e407f91e4629807c6ca262757a065b8b03ede5bfa12dbff7ef1c19d4e1",
+    "scripts/fetch_fresh_drifter_study.py": "0c35b285765d08f1cf71eee386f9219b24059bd162bbf01b93516b214332add6"
+  },
+  "protocol_sha256": "0f34c38c8cb02a6934de6764d6ec958042eccacdf6b0081d7ec71bbffb570d3d",
+  "schema_version": 1,
+  "study_id": "noaa-fresh-gdp-id-study-v2",
+  "verification_before_first_score": {
+    "actual_new_model_scores": 0,
+    "command": ".venv/bin/python -m pytest -q tests/unit/test_fresh_drifter.py tests/unit/test_fresh_drifter_acquisition.py tests/unit/test_fresh_drifter_acquisition_boundaries.py",
+    "grok_review": "Root reports static review of actual _prepare/_score found no must-fix numerical/causality issue.",
+    "leakage_guard": "All30tracks constructed before future-coordinate access; future-coordinate changes leave predictions identical.",
+    "physical_actions": 0,
+    "provider_calls": 0,
+    "ruff_check": "passed",
+    "ruff_format": "applied only to new modules/scripts/tests",
+    "synthetic_passed": 23
+  }
+}
