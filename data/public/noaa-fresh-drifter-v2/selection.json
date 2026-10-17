@@ -1,0 +1,242 @@
+{
+  "aliases": {
+    "known_reserved_wmo_count": 222,
+    "physical_alias_resolution_verified": false,
+    "reserved_gdp_id_count": 223,
+    "statistical_independence": false,
+    "unresolved_reserved_alias_count": 10,
+    "unresolved_reserved_alias_ids": [
+      "12730",
+      "12731",
+      "27622",
+      "27924",
+      "27925",
+      "8707978",
+      "9624972",
+      "9624974",
+      "9712733",
+      "9815211"
+    ]
+  },
+  "blocks": [
+    {
+      "block_id": "atlantic-2021",
+      "candidate_count": 189,
+      "eligible_candidate_count": 187,
+      "rejected_counts": {
+        "MISSING_OR_AMBIGUOUS_NEW_ALIAS": 2
+      },
+      "selected_ids": [
+        "300234062321360",
+        "300234062953270"
+      ]
+    },
+    {
+      "block_id": "indian-2021",
+      "candidate_count": 107,
+      "eligible_candidate_count": 107,
+      "rejected_counts": {},
+      "selected_ids": [
+        "300234060609830",
+        "300234063435990"
+      ]
+    },
+    {
+      "block_id": "north-pacific-2022",
+      "candidate_count": 172,
+      "eligible_candidate_count": 100,
+      "rejected_counts": {
+        "EXPOSED_GDP_ID": 72
+      },
+      "selected_ids": [
+        "300234063123200",
+        "300234065385690"
+      ]
+    }
+  ],
+  "evaluation_outcomes_computed": false,
+  "exclusions_sha256": "40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e",
+  "frozen_at_utc": "2026-10-17T14:59:11.935245+00:00",
+  "groups": [
+    {
+      "block_id": "atlantic-2021",
+      "drifter_id": "300234062321360",
+      "end_utc": "2021-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234062321360",
+        "WMO": "4100729",
+        "expno": "2222",
+        "latitude": "30.68748",
+        "location_type": "GPS",
+        "longitude": "-40.31863",
+        "time": "2021-06-01T00:00:00Z"
+      },
+      "slot": 1,
+      "split_label": "evaluation",
+      "start_utc": "2021-06-01T00:00:00Z",
+      "wmo": "4100729"
+    },
+    {
+      "block_id": "atlantic-2021",
+      "drifter_id": "300234062953270",
+      "end_utc": "2021-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234062953270",
+        "WMO": "4401551",
+        "expno": "2222",
+        "latitude": "27.265114",
+        "location_type": "GPS",
+        "longitude": "-61.706387",
+        "time": "2021-06-01T00:00:00Z"
+      },
+      "slot": 2,
+      "split_label": "evaluation",
+      "start_utc": "2021-06-01T00:00:00Z",
+      "wmo": "4401551"
+    },
+    {
+      "block_id": "indian-2021",
+      "drifter_id": "300234060609830",
+      "end_utc": "2021-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234060609830",
+        "WMO": "1600665",
+        "expno": "9999",
+        "latitude": "-36.230938",
+        "location_type": "GPS",
+        "longitude": "71.0228",
+        "time": "2021-06-01T00:00:00Z"
+      },
+      "slot": 1,
+      "split_label": "evaluation",
+      "start_utc": "2021-06-01T00:00:00Z",
+      "wmo": "1600665"
+    },
+    {
+      "block_id": "indian-2021",
+      "drifter_id": "300234063435990",
+      "end_utc": "2021-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234063435990",
+        "WMO": "1601612",
+        "expno": "31312",
+        "latitude": "-32.67871",
+        "location_type": "GPS",
+        "longitude": "65.649025",
+        "time": "2021-06-01T00:00:00Z"
+      },
+      "slot": 2,
+      "split_label": "evaluation",
+      "start_utc": "2021-06-01T00:00:00Z",
+      "wmo": "1601612"
+    },
+    {
+      "block_id": "north-pacific-2022",
+      "drifter_id": "300234063123200",
+      "end_utc": "2022-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234063123200",
+        "WMO": "5102534",
+        "expno": "31312",
+        "latitude": "41.42473",
+        "location_type": "GPS",
+        "longitude": "-135.91171",
+        "time": "2022-06-01T00:00:00Z"
+      },
+      "slot": 1,
+      "split_label": "evaluation",
+      "start_utc": "2022-06-01T00:00:00Z",
+      "wmo": "5102534"
+    },
+    {
+      "block_id": "north-pacific-2022",
+      "drifter_id": "300234065385690",
+      "end_utc": "2022-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234065385690",
+        "WMO": "2101603",
+        "expno": "21312",
+        "latitude": "38.2992",
+        "location_type": "GPS",
+        "longitude": "-152.22989",
+        "time": "2022-06-01T00:00:00Z"
+      },
+      "slot": 2,
+      "split_label": "evaluation",
+      "start_utc": "2022-06-01T00:00:00Z",
+      "wmo": "2101603"
+    }
+  ],
+  "protocol_sha256": "0f34c38c8cb02a6934de6764d6ec958042eccacdf6b0081d7ec71bbffb570d3d",
+  "reason_codes": [],
+  "schema_version": 1,
+  "source_receipts": [
+    {
+      "bytes": 32265,
+      "finished_at_utc": "2026-10-17T14:58:54.032954+00:00",
+      "http_status": 200,
+      "raw_path": "raw/dataset-info.json",
+      "reason": null,
+      "response_complete": true,
+      "role": "dataset_metadata",
+      "sha256": "22799a625c750856f50b93a919a89c8660b0569db7da4058102e6a53d7eb9373",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+      "started_at_utc": "2026-10-17T14:58:53.865956+00:00",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 318597,
+      "finished_at_utc": "2026-10-17T14:58:54.426845+00:00",
+      "http_status": 200,
+      "raw_path": "raw/identity-aliases.csv",
+      "reason": null,
+      "response_complete": true,
+      "role": "identity_aliases",
+      "sha256": "a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO&distinct%28%29",
+      "started_at_utc": "2026-10-17T14:58:54.033867+00:00",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 14230,
+      "finished_at_utc": "2026-10-17T14:59:01.667128+00:00",
+      "http_status": 200,
+      "raw_path": "raw/metadata-atlantic-2021.csv",
+      "reason": null,
+      "response_complete": true,
+      "role": "block:atlantic-2021",
+      "sha256": "aeef5835616fd5a51bb82a0b56c6b373c53deeeb02eb1a6e3f7174e3009d81d0",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2021-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-80&longitude%3C=-20",
+      "started_at_utc": "2026-10-17T14:58:54.459359+00:00",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 8075,
+      "finished_at_utc": "2026-10-17T14:59:07.700348+00:00",
+      "http_status": 200,
+      "raw_path": "raw/metadata-indian-2021.csv",
+      "reason": null,
+      "response_complete": true,
+      "role": "block:indian-2021",
+      "sha256": "82dc5d62e6d0344ac389441039e4c8b7e36de81ad549441515611701d0faa228",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2021-06-01T00%3A00%3A00Z&latitude%3E=-40&latitude%3C=20&longitude%3E=40&longitude%3C=100",
+      "started_at_utc": "2026-10-17T14:59:01.668665+00:00",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 13100,
+      "finished_at_utc": "2026-10-17T14:59:11.875192+00:00",
+      "http_status": 200,
+      "raw_path": "raw/metadata-north-pacific-2022.csv",
+      "reason": null,
+      "response_complete": true,
+      "role": "block:north-pacific-2022",
+      "sha256": "4279026139467c925cb91909e2576d915c8e793d60b6f3647d53182a976e5bd9",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2022-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-180&longitude%3C=-120",
+      "started_at_utc": "2026-10-17T14:59:07.702101+00:00",
+      "status": "DOWNLOADED"
+    }
+  ],
+  "study_id": "noaa-fresh-gdp-id-study-v2",
+  "trajectory_payloads_fetched": false
+}

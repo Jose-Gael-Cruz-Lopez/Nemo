@@ -1,0 +1,3170 @@
+{
+  "declared_model_tracks": 30,
+  "forecast_tracks": {
+    "300234060609830": {
+      "group": {
+        "block_id": "indian-2021",
+        "drifter_id": "300234060609830",
+        "end_utc": "2021-06-01T23:00:00Z",
+        "selection_metadata": {
+          "ID": "300234060609830",
+          "WMO": "1600665",
+          "expno": "9999",
+          "latitude": "-36.230938",
+          "location_type": "GPS",
+          "longitude": "71.0228",
+          "time": "2021-06-01T00:00:00Z"
+        },
+        "slot": 1,
+        "split_label": "evaluation",
+        "start_utc": "2021-06-01T00:00:00Z",
+        "wmo": "1600665"
+      },
+      "models": {
+        "kalman_cv": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 15882.628290083263,
+            "y_m": -6922.286928978415
+          },
+          "parameters": {
+            "acceleration_spectral_density_m2_s3": 1e-06,
+            "forecast_start": "FILTERED_LAST_TRAINING_STATE",
+            "noise_parameter_fitting_performed": false,
+            "position_std_m": 100.0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -36.29916007508854,
+              "longitude_deg": 71.21536222719072,
+              "observation_covariance_m2": [
+                [
+                  79545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  79545.70112033412
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  69545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  69545.70112033412
+                ]
+              ],
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 17256.692591813466,
+              "y_m": -7603.107744740156
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -36.30525727503097,
+              "longitude_deg": 71.23071126300266,
+              "observation_covariance_m2": [
+                [
+                  293528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  293528.103041504
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  283528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  283528.103041504
+                ]
+              ],
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 18630.75689354367,
+              "y_m": -8283.928560501896
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -36.31135251243239,
+              "longitude_deg": 71.24606269892215,
+              "observation_covariance_m2": [
+                [
+                  754002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  754002.0668032442
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  744002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  744002.0668032442
+                ]
+              ],
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 20004.82119527387,
+              "y_m": -8964.749376263637
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -36.31744578654837,
+              "longitude_deg": 71.2614165350866,
+              "observation_covariance_m2": [
+                [
+                  1554279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1554279.5924055546
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  1544279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1544279.5924055546
+                ]
+              ],
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 21378.885497004074,
+              "y_m": -9645.570192025378
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -36.32353709663435,
+              "longitude_deg": 71.27677277163258,
+              "observation_covariance_m2": [
+                [
+                  2787672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2787672.6798484353
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  2777672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2777672.6798484353
+                ]
+              ],
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 22752.949798734277,
+              "y_m": -10326.391007787119
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -36.329626441945685,
+              "longitude_deg": 71.29213140869595,
+              "observation_covariance_m2": [
+                [
+                  4547493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4547493.329131886
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  4537493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4537493.329131886
+                ]
+              ],
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 24127.01410046448,
+              "y_m": -11007.21182354886
+            }
+          ],
+          "reason_codes": []
+        },
+        "last_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 15926.002894866508,
+            "y_m": -6943.947908669901
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "last_observed_velocity_m_s": [
+              0.3941677215075707,
+              -0.19358370944535308
+            ],
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -36.29949790860452,
+              "longitude_deg": 71.21634853674283,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 17345.006692293762,
+              "y_m": -7640.849262673172
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -36.30573872500108,
+              "longitude_deg": 71.23219961036375,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 18764.01048972102,
+              "y_m": -8337.750616676443
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -36.3119774483771,
+              "longitude_deg": 71.24805322099735,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 20183.01428714827,
+              "y_m": -9034.651970679715
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -36.31821407791992,
+              "longitude_deg": 71.26390936877709,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 21602.018084575524,
+              "y_m": -9731.553324682985
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -36.3244486128168,
+              "longitude_deg": 71.27976805383577,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 23021.02188200278,
+              "y_m": -10428.454678686256
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -36.3306810522549,
+              "longitude_deg": 71.29562927630514,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 24440.025679430037,
+              "y_m": -11125.356032689528
+            }
+          ],
+          "reason_codes": []
+        },
+        "mean_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 15926.002894866508,
+            "y_m": -6943.947908669901
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 2
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -36.29691251448809,
+              "longitude_deg": 71.21096177097698,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 16862.826594564536,
+              "y_m": -7352.415432709307
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -36.300569117507806,
+              "longitude_deg": 71.22142452291283,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 17799.650294262567,
+              "y_m": -7760.882956748713
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -36.304224808851735,
+              "longitude_deg": 71.23188825578615,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 18736.473993960597,
+              "y_m": -8169.350480788119
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -36.307879588312495,
+              "longitude_deg": 71.24235296957548,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 19673.297693658627,
+              "y_m": -8577.818004827524
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -36.311533455682664,
+              "longitude_deg": 71.25281866425908,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 20610.121393356658,
+              "y_m": -8986.28552886693
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -36.31518641075485,
+              "longitude_deg": 71.26328533981513,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 21546.94509305469,
+              "y_m": -9394.753052906337
+            }
+          ],
+          "reason_codes": []
+        },
+        "ridge_ar1": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 15926.002894866508,
+            "y_m": -6943.947908669901
+          },
+          "parameters": {
+            "constraint_applied": false,
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "hyperparameters_selected_on_holdout": false,
+            "learned_parameters": 6,
+            "maximum_spectral_radius": 0.98,
+            "mean_velocity_m_s": [
+              0.26022880547167493,
+              -0.11346320112205721
+            ],
+            "ridge_alpha": 1.0,
+            "spectral_radius_before_constraint": 0.8537464076503871,
+            "training_velocity_pairs": 16,
+            "velocity_transition_matrix_row_vector_convention": [
+              [
+                0.79872630748102,
+                0.2746037946448808
+              ],
+              [
+                -0.3724499518743906,
+                0.784507474721959
+              ]
+            ]
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -36.29774797574152,
+              "longitude_deg": 71.21645998883207,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 17355.383689653627,
+              "y_m": -7446.285443739957
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -36.30084176216493,
+              "longitude_deg": 71.23170191563952,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 18720.587580226555,
+              "y_m": -7793.136645694418
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -36.30299738047203,
+              "longitude_deg": 71.24572409697885,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 19976.62081178489,
+              "y_m": -8035.630878528363
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -36.30468747039644,
+              "longitude_deg": 71.25833881757114,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 21106.58881785654,
+              "y_m": -8226.234966277223
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -36.30632422283425,
+              "longitude_deg": 71.2696145469721,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 22116.538729833752,
+              "y_m": -8410.748836633835
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -36.30821568651403,
+              "longitude_deg": 71.27979646317667,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 23028.358731509354,
+              "y_m": -8623.442309987926
+            }
+          ],
+          "reason_codes": []
+        },
+        "stationary": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 15926.002894866508,
+            "y_m": -6943.947908669901
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -36.293254999999995,
+              "longitude_deg": 71.2005,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 15926.002894866508,
+              "y_m": -6943.947908669901
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -36.293254999999995,
+              "longitude_deg": 71.2005,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 15926.002894866508,
+              "y_m": -6943.947908669901
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -36.293254999999995,
+              "longitude_deg": 71.2005,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 15926.002894866508,
+              "y_m": -6943.947908669901
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -36.293254999999995,
+              "longitude_deg": 71.2005,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 15926.002894866508,
+              "y_m": -6943.947908669901
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -36.293254999999995,
+              "longitude_deg": 71.2005,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 15926.002894866508,
+              "y_m": -6943.947908669901
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -36.293254999999995,
+              "longitude_deg": 71.2005,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 15926.002894866508,
+              "y_m": -6943.947908669901
+            }
+          ],
+          "reason_codes": []
+        }
+      }
+    },
+    "300234062321360": {
+      "group": {
+        "block_id": "atlantic-2021",
+        "drifter_id": "300234062321360",
+        "end_utc": "2021-06-01T23:00:00Z",
+        "selection_metadata": {
+          "ID": "300234062321360",
+          "WMO": "4100729",
+          "expno": "2222",
+          "latitude": "30.68748",
+          "location_type": "GPS",
+          "longitude": "-40.31863",
+          "time": "2021-06-01T00:00:00Z"
+        },
+        "slot": 1,
+        "split_label": "evaluation",
+        "start_utc": "2021-06-01T00:00:00Z",
+        "wmo": "4100729"
+      },
+      "models": {
+        "kalman_cv": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -15903.722910256762,
+            "y_m": -9994.981308595925
+          },
+          "parameters": {
+            "acceleration_spectral_density_m2_s3": 1e-06,
+            "forecast_start": "FILTERED_LAST_TRAINING_STATE",
+            "noise_parameter_fitting_performed": false,
+            "position_std_m": 100.0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 30.588705229893442,
+              "longitude_deg": -40.49848177550038,
+              "observation_covariance_m2": [
+                [
+                  79545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  79545.70112033412
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  69545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  69545.70112033412
+                ]
+              ],
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -17215.671236829185,
+              "y_m": -10969.492013142792
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 30.57992167933589,
+              "longitude_deg": -40.512170132162055,
+              "observation_covariance_m2": [
+                [
+                  293528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  293528.103041504
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  283528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  283528.103041504
+                ]
+              ],
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -18527.619563401608,
+              "y_m": -11944.002717689658
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 30.571136697184127,
+              "longitude_deg": -40.525856009190136,
+              "observation_covariance_m2": [
+                [
+                  754002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  754002.0668032442
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  744002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  744002.0668032442
+                ]
+              ],
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -19839.56788997403,
+              "y_m": -12918.513422236525
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 30.56235028419864,
+              "longitude_deg": -40.53953940749793,
+              "observation_covariance_m2": [
+                [
+                  1554279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1554279.5924055546
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  1544279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1544279.5924055546
+                ]
+              ],
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -21151.516216546454,
+              "y_m": -13893.024126783392
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 30.553562441139654,
+              "longitude_deg": -40.55322032799893,
+              "observation_covariance_m2": [
+                [
+                  2787672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2787672.6798484353
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  2777672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2777672.6798484353
+                ]
+              ],
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -22463.464543118876,
+              "y_m": -14867.534831330258
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 30.544773168767097,
+              "longitude_deg": -40.56689877160676,
+              "observation_covariance_m2": [
+                [
+                  4547493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4547493.329131886
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  4537493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4537493.329131886
+                ]
+              ],
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -23775.4128696913,
+              "y_m": -15842.045535877125
+            }
+          ],
+          "reason_codes": []
+        },
+        "last_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -15946.014777469645,
+            "y_m": -9982.058735861898
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "last_observed_velocity_m_s": [
+              -0.37621720152058163,
+              -0.2643886292040073
+            ],
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 30.589024472339094,
+              "longitude_deg": -40.49936749739783,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -17300.39670294374,
+              "y_m": -10933.857800996324
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 30.580444417809723,
+              "longitude_deg": -40.513499493046226,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -18654.778628417833,
+              "y_m": -11885.65686613075
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 30.571862837204034,
+              "longitude_deg": -40.52762898779815,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -20009.16055389193,
+              "y_m": -12837.455931265176
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 30.563279731313916,
+              "longitude_deg": -40.54175598250686,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -21363.54247936602,
+              "y_m": -13789.254996399603
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 30.554695100930974,
+              "longitude_deg": -40.555880478025784,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -22717.924404840116,
+              "y_m": -14741.054061534029
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 30.546108946846537,
+              "longitude_deg": -40.57000247520861,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -24072.306330314208,
+              "y_m": -15692.853126668455
+            }
+          ],
+          "reason_codes": []
+        },
+        "mean_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -15946.014777469645,
+            "y_m": -9982.058735861898
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 2
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 30.59230950876322,
+              "longitude_deg": -40.4950235392738,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -16884.015646732565,
+              "y_m": -10569.238661500833
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 30.5870152846932,
+              "longitude_deg": -40.504813008976754,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -17822.016515995485,
+              "y_m": -11156.418587139768
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 30.58172032802454,
+              "longitude_deg": -40.514601409303225,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -18760.017385258405,
+              "y_m": -11743.598512778703
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 30.57642463899178,
+              "longitude_deg": -40.524388740447705,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -19698.018254521325,
+              "y_m": -12330.778438417638
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 30.57112821782946,
+              "longitude_deg": -40.53417500260477,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -20636.01912378425,
+              "y_m": -12917.958364056574
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 30.565831064772027,
+              "longitude_deg": -40.54396019596905,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -21574.019993047168,
+              "y_m": -13505.13828969551
+            }
+          ],
+          "reason_codes": []
+        },
+        "ridge_ar1": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -15946.014777469645,
+            "y_m": -9982.058735861898
+          },
+          "parameters": {
+            "constraint_applied": false,
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "hyperparameters_selected_on_holdout": false,
+            "learned_parameters": 6,
+            "maximum_spectral_radius": 0.98,
+            "mean_velocity_m_s": [
+              -0.26055579701747783,
+              -0.16310553489970422
+            ],
+            "ridge_alpha": 1.0,
+            "spectral_radius_before_constraint": 0.9487633757896409,
+            "training_velocity_pairs": 16,
+            "velocity_transition_matrix_row_vector_convention": [
+              [
+                1.0006113268164452,
+                -0.3823859914511028
+              ],
+              [
+                0.3727010535212222,
+                0.7571734009694603
+              ]
+            ]
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 30.591250623342294,
+              "longitude_deg": -40.50079403191245,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -17436.545185273233,
+              "y_m": -10686.100292410425
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 30.58705097407568,
+              "longitude_deg": -40.516815956441576,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -18970.96782215682,
+              "y_m": -11150.485181167121
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 30.584632993137213,
+              "longitude_deg": -40.53236615038915,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -20459.989228047678,
+              "y_m": -11416.624642173112
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 30.583409145753244,
+              "longitude_deg": -40.54667198118841,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -21829.69536817735,
+              "y_m": -11550.018733148712
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 30.582680599900122,
+              "longitude_deg": -40.55921469636101,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -23030.538962663868,
+              "y_m": -11628.526047028796
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 30.581747721809876,
+              "longitude_deg": -40.569777940558794,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -24041.96042165691,
+              "y_m": -11730.045225161928
+            }
+          ],
+          "reason_codes": []
+        },
+        "stationary": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -15946.014777469645,
+            "y_m": -9982.058735861898
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 30.597602999999992,
+              "longitude_deg": -40.485232999999994,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -15946.014777469645,
+              "y_m": -9982.058735861898
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 30.597602999999992,
+              "longitude_deg": -40.485232999999994,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -15946.014777469645,
+              "y_m": -9982.058735861898
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 30.597602999999992,
+              "longitude_deg": -40.485232999999994,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -15946.014777469645,
+              "y_m": -9982.058735861898
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 30.597602999999992,
+              "longitude_deg": -40.485232999999994,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -15946.014777469645,
+              "y_m": -9982.058735861898
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 30.597602999999992,
+              "longitude_deg": -40.485232999999994,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -15946.014777469645,
+              "y_m": -9982.058735861898
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 30.597602999999992,
+              "longitude_deg": -40.485232999999994,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -15946.014777469645,
+              "y_m": -9982.058735861898
+            }
+          ],
+          "reason_codes": []
+        }
+      }
+    },
+    "300234062953270": {
+      "group": {
+        "block_id": "atlantic-2021",
+        "drifter_id": "300234062953270",
+        "end_utc": "2021-06-01T23:00:00Z",
+        "selection_metadata": {
+          "ID": "300234062953270",
+          "WMO": "4401551",
+          "expno": "2222",
+          "latitude": "27.265114",
+          "location_type": "GPS",
+          "longitude": "-61.706387",
+          "time": "2021-06-01T00:00:00Z"
+        },
+        "slot": 2,
+        "split_label": "evaluation",
+        "start_utc": "2021-06-01T00:00:00Z",
+        "wmo": "4401551"
+      },
+      "models": {
+        "kalman_cv": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -26728.79915748599,
+            "y_m": -9171.604715468087
+          },
+          "parameters": {
+            "acceleration_spectral_density_m2_s3": 1e-06,
+            "forecast_start": "FILTERED_LAST_TRAINING_STATE",
+            "noise_parameter_fitting_performed": false,
+            "position_std_m": 100.0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 27.18663227355805,
+              "longitude_deg": -61.999152379649416,
+              "observation_covariance_m2": [
+                [
+                  79545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  79545.70112033412
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  69545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  69545.70112033412
+                ]
+              ],
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -28957.576418896857,
+              "y_m": -8692.91979250752
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 27.190888472610002,
+              "longitude_deg": -62.02169773535017,
+              "observation_covariance_m2": [
+                [
+                  293528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  293528.103041504
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  283528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  283528.103041504
+                ]
+              ],
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -31186.353680307722,
+              "y_m": -8214.234869546954
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 27.195141054594345,
+              "longitude_deg": -62.04424481375764,
+              "observation_covariance_m2": [
+                [
+                  754002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  754002.0668032442
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  744002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  744002.0668032442
+                ]
+              ],
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -33415.130941718584,
+              "y_m": -7735.549946586387
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 27.199390018576214,
+              "longitude_deg": -62.06679361385223,
+              "observation_covariance_m2": [
+                [
+                  1554279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1554279.5924055546
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  1544279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1544279.5924055546
+                ]
+              ],
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -35643.908203129446,
+              "y_m": -7256.86502362582
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 27.203635363621327,
+              "longitude_deg": -62.08934413461296,
+              "observation_covariance_m2": [
+                [
+                  2787672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2787672.6798484353
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  2777672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2777672.6798484353
+                ]
+              ],
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -37872.68546454031,
+              "y_m": -6778.180100665253
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 27.207877088795964,
+              "longitude_deg": -62.11189637501741,
+              "observation_covariance_m2": [
+                [
+                  4547493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4547493.329131886
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  4537493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4537493.329131886
+                ]
+              ],
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -40101.46272595117,
+              "y_m": -6299.495177704686
+            }
+          ],
+          "reason_codes": []
+        },
+        "last_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -26722.328016032807,
+            "y_m": -9186.569870321468
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "last_observed_velocity_m_s": [
+              -0.6191355429284532,
+              0.13301624950675078
+            ],
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 27.186499384454027,
+              "longitude_deg": -61.99908772545322,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -28951.21597057524,
+              "y_m": -8707.711372097165
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 27.190757152425647,
+              "longitude_deg": -62.02163417534305,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -31180.10392511767,
+              "y_m": -8228.852873872862
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 27.195011302978987,
+              "longitude_deg": -62.044182348651475,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -33408.9918796601,
+              "y_m": -7749.994375648559
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 27.199261835178753,
+              "longitude_deg": -62.06673224435903,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -35637.87983420253,
+              "y_m": -7271.135877424256
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 27.20350874809022,
+              "longitude_deg": -62.08928386144487,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -37866.76778874497,
+              "y_m": -6792.277379199953
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 27.207752040779244,
+              "longitude_deg": -62.11183719888675,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -40095.655743287396,
+              "y_m": -6313.418880975651
+            }
+          ],
+          "reason_codes": []
+        },
+        "mean_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -26722.328016032807,
+            "y_m": -9186.569870321468
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 2
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 27.177346819331685,
+              "longitude_deg": -61.992422005548434,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -28294.229664034738,
+              "y_m": -9726.956333281554
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 27.17245385071821,
+              "longitude_deg": -62.008299618945856,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -29866.131312036665,
+              "y_m": -10267.34279624164
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 27.167559094692052,
+              "longitude_deg": -62.02417584009828,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -31438.032960038596,
+              "y_m": -10807.729259201726
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 27.16266255178578,
+              "longitude_deg": -62.040050668912244,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -33009.93460804052,
+              "y_m": -11348.115722161812
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 27.157764222531963,
+              "longitude_deg": -62.05592410529482,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -34581.83625604246,
+              "y_m": -11888.502185121899
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 27.152864107463277,
+              "longitude_deg": -62.0717961491535,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -36153.737904044385,
+              "y_m": -12428.888648081986
+            }
+          ],
+          "reason_codes": []
+        },
+        "ridge_ar1": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -26722.328016032807,
+            "y_m": -9186.569870321468
+          },
+          "parameters": {
+            "constraint_applied": false,
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "hyperparameters_selected_on_holdout": false,
+            "learned_parameters": 6,
+            "maximum_spectral_radius": 0.98,
+            "mean_velocity_m_s": [
+              -0.4366393466672028,
+              -0.1501073508222462
+            ],
+            "ridge_alpha": 1.0,
+            "spectral_radius_before_constraint": 0.04590512237488366,
+            "training_velocity_pairs": 16,
+            "velocity_transition_matrix_row_vector_convention": [
+              [
+                -0.013871043762514064,
+                0.03993214746764314
+              ],
+              [
+                0.017866875002808265,
+                -0.023633132097548477
+              ]
+            ]
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 27.1768948197324,
+              "longitude_deg": -61.9921446217696,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -28266.905855906618,
+              "y_m": -9777.279158165982
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 27.172022362687382,
+              "longitude_deg": -62.00803515883774,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -29840.08562526885,
+              "y_m": -10315.385236822503
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 27.16712669431291,
+              "longitude_deg": -62.023910736557596,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -31411.92880105215,
+              "y_m": -10855.87663053671
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 27.162230224694063,
+              "longitude_deg": -62.03978554288338,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -32983.83313490945,
+              "y_m": -11396.258278733167
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 27.157331923514075,
+              "longitude_deg": -62.05565892828332,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -34555.73465963099,
+              "y_m": -11936.644962733171
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 27.152431838604915,
+              "longitude_deg": -62.07153092249959,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -36127.636313292234,
+              "y_m": -12477.03141554654
+            }
+          ],
+          "reason_codes": []
+        },
+        "stationary": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": -26722.328016032807,
+            "y_m": -9186.569870321468
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 27.182238,
+              "longitude_deg": -61.97654299999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": -26722.328016032807,
+              "y_m": -9186.569870321468
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 27.182238,
+              "longitude_deg": -61.97654299999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": -26722.328016032807,
+              "y_m": -9186.569870321468
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 27.182238,
+              "longitude_deg": -61.97654299999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": -26722.328016032807,
+              "y_m": -9186.569870321468
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 27.182238,
+              "longitude_deg": -61.97654299999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": -26722.328016032807,
+              "y_m": -9186.569870321468
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 27.182238,
+              "longitude_deg": -61.97654299999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": -26722.328016032807,
+              "y_m": -9186.569870321468
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 27.182238,
+              "longitude_deg": -61.97654299999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": -26722.328016032807,
+              "y_m": -9186.569870321468
+            }
+          ],
+          "reason_codes": []
+        }
+      }
+    },
+    "300234063123200": {
+      "group": {
+        "block_id": "north-pacific-2022",
+        "drifter_id": "300234063123200",
+        "end_utc": "2022-06-01T23:00:00Z",
+        "selection_metadata": {
+          "ID": "300234063123200",
+          "WMO": "5102534",
+          "expno": "31312",
+          "latitude": "41.42473",
+          "location_type": "GPS",
+          "longitude": "-135.91171",
+          "time": "2022-06-01T00:00:00Z"
+        },
+        "slot": 1,
+        "split_label": "evaluation",
+        "start_utc": "2022-06-01T00:00:00Z",
+        "wmo": "5102534"
+      },
+      "models": {
+        "kalman_cv": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -6110.173927653182,
+            "y_m": -6750.448324016962
+          },
+          "parameters": {
+            "acceleration_spectral_density_m2_s3": 1e-06,
+            "forecast_start": "FILTERED_LAST_TRAINING_STATE",
+            "noise_parameter_fitting_performed": false,
+            "position_std_m": 100.0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 41.35765899255652,
+              "longitude_deg": -135.97305486526685,
+              "observation_covariance_m2": [
+                [
+                  79545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  79545.70112033412
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  69545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  69545.70112033412
+                ]
+              ],
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -5120.025952058213,
+              "y_m": -7456.1533598338465
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 41.35131814044096,
+              "longitude_deg": -135.96118672411478,
+              "observation_covariance_m2": [
+                [
+                  293528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  293528.103041504
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  283528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  283528.103041504
+                ]
+              ],
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -4129.8779764632445,
+              "y_m": -8161.858395650731
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 41.34497606773779,
+              "longitude_deg": -135.94932089641446,
+              "observation_covariance_m2": [
+                [
+                  754002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  754002.0668032442
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  744002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  744002.0668032442
+                ]
+              ],
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -3139.730000868276,
+              "y_m": -8867.563431467615
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 41.33863277495695,
+              "longitude_deg": -135.9374573816443,
+              "observation_covariance_m2": [
+                [
+                  1554279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1554279.5924055546
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  1544279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1544279.5924055546
+                ]
+              ],
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -2149.5820252733074,
+              "y_m": -9573.268467284499
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 41.33228826260815,
+              "longitude_deg": -135.92559617928234,
+              "observation_covariance_m2": [
+                [
+                  2787672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2787672.6798484353
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  2777672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2777672.6798484353
+                ]
+              ],
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -1159.4340496783389,
+              "y_m": -10278.973503101382
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 41.32594253120102,
+              "longitude_deg": -135.9137372888065,
+              "observation_covariance_m2": [
+                [
+                  4547493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4547493.329131886
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  4537493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4537493.329131886
+                ]
+              ],
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -169.2860740833704,
+              "y_m": -10984.678538918266
+            }
+          ],
+          "reason_codes": []
+        },
+        "last_drift": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -6113.942005005386,
+            "y_m": -6796.994044236807
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "last_observed_velocity_m_s": [
+              0.2740649843887968,
+              -0.1821780935726699
+            ],
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 41.35768878719812,
+              "longitude_deg": -135.97314214297447,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -5127.308061205717,
+              "y_m": -7452.835181098419
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 41.351796362065066,
+              "longitude_deg": -135.9613164285325,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -4140.674117406049,
+              "y_m": -8108.67631796003
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 41.34590272507146,
+              "longitude_deg": -135.94949285628283,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -3154.0401736063804,
+              "y_m": -8764.517454821642
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 41.34000787668778,
+              "longitude_deg": -135.93767142583386,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -2167.4062298067124,
+              "y_m": -9420.358591683253
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 41.33411181738438,
+              "longitude_deg": -135.92585213679376,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -1180.7722860070435,
+              "y_m": -10076.199728544865
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 41.32821454763149,
+              "longitude_deg": -135.9140349887704,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -194.138342207375,
+              "y_m": -10732.040865406478
+            }
+          ],
+          "reason_codes": []
+        },
+        "mean_drift": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -6113.942005005386,
+            "y_m": -6796.994044236807
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 2
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 41.359981495236404,
+              "longitude_deg": -135.98927512191432,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -6473.5856523586435,
+              "y_m": -7196.81722330956
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 41.356382830054095,
+              "longitude_deg": -135.99357976775983,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -6833.229299711902,
+              "y_m": -7596.640402382313
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 41.35278400449109,
+              "longitude_deg": -135.99788393762816,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -7192.87294706516,
+              "y_m": -7996.4635814550675
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 41.34918501858545,
+              "longitude_deg": -136.00218763161106,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -7552.516594418417,
+              "y_m": -8396.28676052782
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 41.34558587237522,
+              "longitude_deg": -136.00649084980023,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -7912.160241771676,
+              "y_m": -8796.109939600574
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 41.341986565898395,
+              "longitude_deg": -136.01079359228726,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -8271.803889124934,
+              "y_m": -9195.933118673327
+            }
+          ],
+          "reason_codes": []
+        },
+        "ridge_ar1": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -6113.942005005386,
+            "y_m": -6796.994044236807
+          },
+          "parameters": {
+            "constraint_applied": false,
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "hyperparameters_selected_on_holdout": false,
+            "learned_parameters": 6,
+            "maximum_spectral_radius": 0.98,
+            "mean_velocity_m_s": [
+              -0.0999010131536828,
+              -0.11106199418687594
+            ],
+            "ridge_alpha": 1.0,
+            "spectral_radius_before_constraint": 0.8743663729076322,
+            "training_velocity_pairs": 16,
+            "velocity_transition_matrix_row_vector_convention": [
+              [
+                0.8008167042257957,
+                -0.2517480902199082
+              ],
+              [
+                0.3533158458001705,
+                0.8436012399368512
+              ]
+            ]
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 41.35499851549601,
+              "longitude_deg": -135.97743607723362,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -5485.9192701347165,
+              "y_m": -7751.717102424949
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 41.34495845372801,
+              "longitude_deg": -135.97460797778126,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -5250.67810052486,
+              "y_m": -8868.297633059534
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 41.33457722463113,
+              "longitude_deg": -135.97623272314482,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -5387.16977926431,
+              "y_m": -10022.539319214984
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 41.32474966571915,
+              "longitude_deg": -135.98158178795526,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -5834.657615487985,
+              "y_m": -11114.968968221348
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 41.31609310308239,
+              "longitude_deg": -135.98965116082772,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -6509.357197389103,
+              "y_m": -12076.961217333337
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 41.30893875051849,
+              "longitude_deg": -135.9993470565352,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -7319.926140357364,
+              "y_m": -12871.716191110463
+            }
+          ],
+          "reason_codes": []
+        },
+        "stationary": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -6113.942005005386,
+            "y_m": -6796.994044236807
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 41.363580000000006,
+              "longitude_deg": -135.98497,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -6113.942005005386,
+              "y_m": -6796.994044236807
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 41.363580000000006,
+              "longitude_deg": -135.98497,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -6113.942005005386,
+              "y_m": -6796.994044236807
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 41.363580000000006,
+              "longitude_deg": -135.98497,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -6113.942005005386,
+              "y_m": -6796.994044236807
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 41.363580000000006,
+              "longitude_deg": -135.98497,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -6113.942005005386,
+              "y_m": -6796.994044236807
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 41.363580000000006,
+              "longitude_deg": -135.98497,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -6113.942005005386,
+              "y_m": -6796.994044236807
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 41.363580000000006,
+              "longitude_deg": -135.98497,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -6113.942005005386,
+              "y_m": -6796.994044236807
+            }
+          ],
+          "reason_codes": []
+        }
+      }
+    },
+    "300234063435990": {
+      "group": {
+        "block_id": "indian-2021",
+        "drifter_id": "300234063435990",
+        "end_utc": "2021-06-01T23:00:00Z",
+        "selection_metadata": {
+          "ID": "300234063435990",
+          "WMO": "1601612",
+          "expno": "31312",
+          "latitude": "-32.67871",
+          "location_type": "GPS",
+          "longitude": "65.649025",
+          "time": "2021-06-01T00:00:00Z"
+        },
+        "slot": 2,
+        "split_label": "evaluation",
+        "start_utc": "2021-06-01T00:00:00Z",
+        "wmo": "1601612"
+      },
+      "models": {
+        "kalman_cv": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 14487.55296436629,
+            "y_m": 3608.347466686535
+          },
+          "parameters": {
+            "acceleration_spectral_density_m2_s3": 1e-06,
+            "forecast_start": "FILTERED_LAST_TRAINING_STATE",
+            "noise_parameter_fitting_performed": false,
+            "position_std_m": 100.0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -32.642712008400515,
+              "longitude_deg": 65.81231460755845,
+              "observation_covariance_m2": [
+                [
+                  79545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  79545.70112033412
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  69545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  69545.70112033412
+                ]
+              ],
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 15289.107270614863,
+              "y_m": 3991.040248475784
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -32.63925900317897,
+              "longitude_deg": 65.82086868060566,
+              "observation_covariance_m2": [
+                [
+                  293528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  293528.103041504
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  283528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  283528.103041504
+                ]
+              ],
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 16090.661576863435,
+              "y_m": 4373.733030265033
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -32.63580541829029,
+              "longitude_deg": 65.82942209342502,
+              "observation_covariance_m2": [
+                [
+                  754002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  754002.0668032442
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  744002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  744002.0668032442
+                ]
+              ],
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 16892.215883112007,
+              "y_m": 4756.425812054283
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -32.63235125385619,
+              "longitude_deg": 65.83797484604435,
+              "observation_covariance_m2": [
+                [
+                  1554279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1554279.5924055546
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  1544279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1544279.5924055546
+                ]
+              ],
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 17693.77018936058,
+              "y_m": 5139.118593843532
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -32.62889650999837,
+              "longitude_deg": 65.84652693849148,
+              "observation_covariance_m2": [
+                [
+                  2787672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2787672.6798484353
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  2777672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2777672.6798484353
+                ]
+              ],
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 18495.324495609155,
+              "y_m": 5521.811375632781
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -32.62544118683851,
+              "longitude_deg": 65.85507837079442,
+              "observation_covariance_m2": [
+                [
+                  4547493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4547493.329131886
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  4537493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4537493.329131886
+                ]
+              ],
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 19296.87880185773,
+              "y_m": 5904.50415742203
+            }
+          ],
+          "reason_codes": []
+        },
+        "last_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 14513.741733995106,
+            "y_m": 3581.6706257721344
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "last_observed_velocity_m_s": [
+              0.2295251819483489,
+              0.0990087942465089
+            ],
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -32.64318738359396,
+              "longitude_deg": 65.8128593657562,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 15340.032389009162,
+              "y_m": 3938.1022850595664
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -32.639970150902435,
+              "longitude_deg": 65.82167809727116,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 16166.323044023218,
+              "y_m": 4294.533944346998
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -32.63675230204595,
+              "longitude_deg": 65.83049619454735,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 16992.613699037276,
+              "y_m": 4650.96560363443
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -32.63353383714502,
+              "longitude_deg": 65.83931365758747,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 17818.90435405133,
+              "y_m": 5007.397262921862
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -32.630314756320224,
+              "longitude_deg": 65.84813048639418,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 18645.195009065385,
+              "y_m": 5363.828922209294
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -32.62709505969205,
+              "longitude_deg": 65.85694668097028,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 19471.485664079442,
+              "y_m": 5720.260581496726
+            }
+          ],
+          "reason_codes": []
+        },
+        "mean_drift": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 14513.741733995106,
+            "y_m": 3581.6706257721344
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 2
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -32.6444977151148,
+              "longitude_deg": 65.81315503696541,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 15367.491247759524,
+              "y_m": 3792.357133170495
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -32.64259077160766,
+              "longitude_deg": 65.82226968531467,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 16221.240761523943,
+              "y_m": 4003.043640568856
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -32.64068316955495,
+              "longitude_deg": 65.83138394495853,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 17074.99027528836,
+              "y_m": 4213.730147967217
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -32.63877490903299,
+              "longitude_deg": 65.84049781580796,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 17928.73978905278,
+              "y_m": 4424.416655365578
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -32.63686599011817,
+              "longitude_deg": 65.84961129777389,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 18782.489302817197,
+              "y_m": 4635.103162763939
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -32.634956412886886,
+              "longitude_deg": 65.85872439076726,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 19636.238816581616,
+              "y_m": 4845.789670162299
+            }
+          ],
+          "reason_codes": []
+        },
+        "ridge_ar1": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 14513.741733995106,
+            "y_m": 3581.6706257721344
+          },
+          "parameters": {
+            "constraint_applied": false,
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "hyperparameters_selected_on_holdout": false,
+            "learned_parameters": 6,
+            "maximum_spectral_radius": 0.98,
+            "mean_velocity_m_s": [
+              0.23715264271233832,
+              0.058524029832878015
+            ],
+            "ridge_alpha": 1.0,
+            "spectral_radius_before_constraint": 0.8216812513360097,
+            "training_velocity_pairs": 16,
+            "velocity_transition_matrix_row_vector_convention": [
+              [
+                0.4268151925175652,
+                -0.14821387659147423
+              ],
+              [
+                -0.3774905337093191,
+                0.6799893177596986
+              ]
+            ]
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -32.643570769934044,
+              "longitude_deg": 65.81244056543298,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 15300.753974503525,
+              "y_m": 3895.532063472497
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -32.64094496432955,
+              "longitude_deg": 65.82083357827275,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 16087.071446629961,
+              "y_m": 4186.267811319237
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -32.638458965429336,
+              "longitude_deg": 65.82931644460456,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 16881.822110060926,
+              "y_m": 4461.381311414916
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -32.636079019276885,
+              "longitude_deg": 65.8379004827259,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 17686.06943830336,
+              "y_m": 4724.621933945196
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -32.63378361038947,
+              "longitude_deg": 65.84657540032731,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 18498.8519862544,
+              "y_m": 4978.38158905354
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -32.631556834246126,
+              "longitude_deg": 65.85532715412859,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 19318.856471100742,
+              "y_m": 5224.429249592365
+            }
+          ],
+          "reason_codes": []
+        },
+        "stationary": {
+          "forecast_anchor": {
+            "time_utc": "2021-06-01T17:00:00Z",
+            "x_m": 14513.741733995106,
+            "y_m": 3581.6706257721344
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": -32.64640399999999,
+              "longitude_deg": 65.80403999999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "x_m": 14513.741733995106,
+              "y_m": 3581.6706257721344
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": -32.64640399999999,
+              "longitude_deg": 65.80403999999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "x_m": 14513.741733995106,
+              "y_m": 3581.6706257721344
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": -32.64640399999999,
+              "longitude_deg": 65.80403999999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "x_m": 14513.741733995106,
+              "y_m": 3581.6706257721344
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": -32.64640399999999,
+              "longitude_deg": 65.80403999999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "x_m": 14513.741733995106,
+              "y_m": 3581.6706257721344
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": -32.64640399999999,
+              "longitude_deg": 65.80403999999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "x_m": 14513.741733995106,
+              "y_m": 3581.6706257721344
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": -32.64640399999999,
+              "longitude_deg": 65.80403999999999,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "x_m": 14513.741733995106,
+              "y_m": 3581.6706257721344
+            }
+          ],
+          "reason_codes": []
+        }
+      }
+    },
+    "300234065385690": {
+      "group": {
+        "block_id": "north-pacific-2022",
+        "drifter_id": "300234065385690",
+        "end_utc": "2022-06-01T23:00:00Z",
+        "selection_metadata": {
+          "ID": "300234065385690",
+          "WMO": "2101603",
+          "expno": "21312",
+          "latitude": "38.2992",
+          "location_type": "GPS",
+          "longitude": "-152.22989",
+          "time": "2022-06-01T00:00:00Z"
+        },
+        "slot": 2,
+        "split_label": "evaluation",
+        "start_utc": "2022-06-01T00:00:00Z",
+        "wmo": "2101603"
+      },
+      "models": {
+        "kalman_cv": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -2872.7027806457486,
+            "y_m": -8943.580082269598
+          },
+          "parameters": {
+            "acceleration_spectral_density_m2_s3": 1e-06,
+            "forecast_start": "FILTERED_LAST_TRAINING_STATE",
+            "noise_parameter_fitting_performed": false,
+            "position_std_m": 100.0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 38.22214511912115,
+              "longitude_deg": -152.26359340987338,
+              "observation_covariance_m2": [
+                [
+                  79545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  79545.70112033412
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  69545.70112033412,
+                  0.0
+                ],
+                [
+                  0.0,
+                  69545.70112033412
+                ]
+              ],
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -2944.224075636959,
+              "y_m": -8567.58727909733
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 38.22552626139809,
+              "longitude_deg": -152.2644137409154,
+              "observation_covariance_m2": [
+                [
+                  293528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  293528.103041504
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  283528.103041504,
+                  0.0
+                ],
+                [
+                  0.0,
+                  283528.103041504
+                ]
+              ],
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -3015.745370628169,
+              "y_m": -8191.5944759250615
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 38.22890739794718,
+              "longitude_deg": -152.26523414834128,
+              "observation_covariance_m2": [
+                [
+                  754002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  754002.0668032442
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  744002.0668032442,
+                  0.0
+                ],
+                [
+                  0.0,
+                  744002.0668032442
+                ]
+              ],
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -3087.266665619379,
+              "y_m": -7815.601672752793
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 38.23228852876722,
+              "longitude_deg": -152.26605463216725,
+              "observation_covariance_m2": [
+                [
+                  1554279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1554279.5924055546
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  1544279.5924055546,
+                  0.0
+                ],
+                [
+                  0.0,
+                  1544279.5924055546
+                ]
+              ],
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -3158.7879606105894,
+              "y_m": -7439.608869580525
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 38.23566965385695,
+              "longitude_deg": -152.26687519240957,
+              "observation_covariance_m2": [
+                [
+                  2787672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2787672.6798484353
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  2777672.6798484353,
+                  0.0
+                ],
+                [
+                  0.0,
+                  2777672.6798484353
+                ]
+              ],
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -3230.3092556017996,
+              "y_m": -7063.616066408256
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 38.23905077321518,
+              "longitude_deg": -152.26769582908443,
+              "observation_covariance_m2": [
+                [
+                  4547493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4547493.329131886
+                ]
+              ],
+              "position_covariance_m2": [
+                [
+                  4537493.329131886,
+                  0.0
+                ],
+                [
+                  0.0,
+                  4537493.329131886
+                ]
+              ],
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -3301.83055059301,
+              "y_m": -6687.623263235988
+            }
+          ],
+          "reason_codes": []
+        },
+        "last_drift": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -2840.103246852098,
+            "y_m": -8942.587637798986
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "last_observed_velocity_m_s": [
+              -0.010641635634152383,
+              0.10335337390872762
+            ],
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 38.222118998349536,
+              "longitude_deg": -152.2628400405677,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -2878.4131351350466,
+              "y_m": -8570.515491727567
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 38.225464995048256,
+              "longitude_deg": -152.26328012171157,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -2916.723023417995,
+              "y_m": -8198.443345656147
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 38.2288109900958,
+              "longitude_deg": -152.26372024344028,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -2955.0329117009437,
+              "y_m": -7826.371199584728
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 38.232156983491855,
+              "longitude_deg": -152.2641604057623,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -2993.3427999838923,
+              "y_m": -7454.2990535133085
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 38.23550297523603,
+              "longitude_deg": -152.26460060868635,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -3031.652688266841,
+              "y_m": -7082.226907441889
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 38.238848965328,
+              "longitude_deg": -152.26504085222095,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -3069.9625765497894,
+              "y_m": -6710.15476137047
+            }
+          ],
+          "reason_codes": []
+        },
+        "mean_drift": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -2840.103246852098,
+            "y_m": -8942.587637798986
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 2
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 38.21404172095289,
+              "longitude_deg": -152.2643101136058,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -3007.1681437257507,
+              "y_m": -9468.622204728339
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 38.209310410959404,
+              "longitude_deg": -152.26621997885863,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -3174.2330405994035,
+              "y_m": -9994.65677165769
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 38.204579070028856,
+              "longitude_deg": -152.26812959583148,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -3341.2979374730567,
+              "y_m": -10520.691338587043
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 38.19984769817048,
+              "longitude_deg": -152.2700389645971,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -3508.3628343467094,
+              "y_m": -11046.725905516396
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 38.19511629539358,
+              "longitude_deg": -152.2719480852283,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -3675.427731220362,
+              "y_m": -11572.760472445747
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 38.190384861707436,
+              "longitude_deg": -152.27385695779788,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -3842.492628094015,
+              "y_m": -12098.7950393751
+            }
+          ],
+          "reason_codes": []
+        },
+        "ridge_ar1": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -2840.103246852098,
+            "y_m": -8942.587637798986
+          },
+          "parameters": {
+            "constraint_applied": false,
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "hyperparameters_selected_on_holdout": false,
+            "learned_parameters": 6,
+            "maximum_spectral_radius": 0.98,
+            "mean_velocity_m_s": [
+              -0.04640691579823691,
+              -0.14612071303593113
+            ],
+            "ridge_alpha": 1.0,
+            "spectral_radius_before_constraint": 0.9109825644502122,
+            "training_velocity_pairs": 16,
+            "velocity_transition_matrix_row_vector_convention": [
+              [
+                0.8532880900055507,
+                -0.305083956571196
+              ],
+              [
+                0.3225793998595925,
+                0.8572432238096754
+              ]
+            ]
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 38.22061353641884,
+              "longitude_deg": -152.25973925684085,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -2607.59230387708,
+              "y_m": -8738.007398199656
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 38.22042016126061,
+              "longitude_deg": -152.25505082230814,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -2198.0226097353425,
+              "y_m": -8759.63155118857
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 38.21799706688086,
+              "longitude_deg": -152.24946765045166,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -1710.3396691985058,
+              "y_m": -9029.185671271236
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 38.213447989536874,
+              "longitude_deg": -152.24403694717589,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -1235.980725833373,
+              "y_m": -9535.107173895216
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 38.20711289806614,
+              "longitude_deg": -152.23960947367027,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -849.2382389726827,
+              "y_m": -10239.588075757878
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 38.19948718319954,
+              "longitude_deg": -152.23677121914565,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -601.3090027786177,
+              "y_m": -11087.552301930498
+            }
+          ],
+          "reason_codes": []
+        },
+        "stationary": {
+          "forecast_anchor": {
+            "time_utc": "2022-06-01T17:00:00Z",
+            "x_m": -2840.103246852098,
+            "y_m": -8942.587637798986
+          },
+          "parameters": {
+            "forecast_start": "RAW_LAST_TRAINING_POSITION",
+            "learned_parameters": 0
+          },
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "latitude_deg": 38.218773000000006,
+              "longitude_deg": -152.2624,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "x_m": -2840.103246852098,
+              "y_m": -8942.587637798986
+            },
+            {
+              "horizon_hours": 2,
+              "latitude_deg": 38.218773000000006,
+              "longitude_deg": -152.2624,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "x_m": -2840.103246852098,
+              "y_m": -8942.587637798986
+            },
+            {
+              "horizon_hours": 3,
+              "latitude_deg": 38.218773000000006,
+              "longitude_deg": -152.2624,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "x_m": -2840.103246852098,
+              "y_m": -8942.587637798986
+            },
+            {
+              "horizon_hours": 4,
+              "latitude_deg": 38.218773000000006,
+              "longitude_deg": -152.2624,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "x_m": -2840.103246852098,
+              "y_m": -8942.587637798986
+            },
+            {
+              "horizon_hours": 5,
+              "latitude_deg": 38.218773000000006,
+              "longitude_deg": -152.2624,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "x_m": -2840.103246852098,
+              "y_m": -8942.587637798986
+            },
+            {
+              "horizon_hours": 6,
+              "latitude_deg": 38.218773000000006,
+              "longitude_deg": -152.2624,
+              "observation_covariance_m2": null,
+              "position_covariance_m2": null,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "x_m": -2840.103246852098,
+              "y_m": -8942.587637798986
+            }
+          ],
+          "reason_codes": []
+        }
+      }
+    }
+  },
+  "frozen_at_utc": "2026-10-17T15:03:41.081532+00:00",
+  "future_coordinates_accessed": false,
+  "implementation_receipt_sha256": "dc6a7ed28021573a571d15b2cf08b317dfadac8beafcef07681cc97ec1d09146",
+  "manifest_sha256": "82b281000d816d117fc2b144082c9fc67d88527f6c1f493ac5168472c96a95d1",
+  "protocol_sha256": "0f34c38c8cb02a6934de6764d6ec958042eccacdf6b0081d7ec71bbffb570d3d",
+  "schema_version": 1,
+  "selected_model_tracks": 30,
+  "study_id": "noaa-fresh-gdp-id-study-v2",
+  "unfilled_model_tracks": 0
+}

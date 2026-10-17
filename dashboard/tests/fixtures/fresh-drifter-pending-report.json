@@ -1,0 +1,4395 @@
+{
+  "schema_version": 1,
+  "kind": "FRESH_NOAA_DRIFTER_STUDY",
+  "study_id": "noaa-fresh-gdp-id-study-v2",
+  "report_id": "noaa-fresh-gdp-id-study-v2",
+  "status": "PARTIAL_COVERAGE",
+  "design_status": "FROZEN_NEW_GDP_ID_GROUP_EVALUATION_WITH_KNOWN_ALIAS_EXCLUSIONS",
+  "data_origin": "REAL_HISTORICAL_NOAA_GDP_NEW_ID_GROUPS",
+  "protocol_sha256": "0f34c38c8cb02a6934de6764d6ec958042eccacdf6b0081d7ec71bbffb570d3d",
+  "protocol": {
+    "acquisition_or_scores_computed": false,
+    "alias_policy": {
+      "claim": "New unscored GDP-ID groups with known-alias exclusions; physical_alias_resolution_verified=false if any reserved alias unresolved; statistical_independence=false.",
+      "exclude": "Every reserved GDP ID; every known positive reserved WMO; every already selected GDP ID/WMO. No replacement after selection.",
+      "identity_query": "ID,WMO&distinct()",
+      "missing_reserved_alias": "Retain exact unresolved reserved IDs and counts; do not block new candidates solely because old aliases are unresolved.",
+      "new_candidate": "One positive canonical WMO per ID, one canonical GDP ID per WMO in frozen global metadata; candidate snapshot WMO must agree."
+    },
+    "assignment": {
+      "development": "All existing exposed IDs are development/excluded only. No shared model is fitted from them in this study.",
+      "evaluation": "Every selected whole GDP ID and its complete day remain evaluation-group data.",
+      "global_training": false,
+      "heldout_tuning": false,
+      "prefix_adaptation": "Each fixed algorithm can estimate its state/parameters only from its own first18 positions. These are allowed observation context, not cross-ID training.",
+      "unit": "ENTIRE_CANONICAL_GDP_ID_WITH_KNOWN_WMO_EXCLUSIONS"
+    },
+    "budgets": {
+      "connect_timeout_s": 5,
+      "fallback_endpoints": false,
+      "identity_bytes": 2097152,
+      "metadata_bytes_per_block": 262144,
+      "metadata_info_bytes": 1048576,
+      "redirects": false,
+      "requests_max": 11,
+      "retries": 0,
+      "timeout_s": 45,
+      "total_bytes": 4194304,
+      "trajectory_bytes": 32768,
+      "wall_time_s": 300
+    },
+    "design_status": "FROZEN_NEW_GDP_ID_GROUP_EVALUATION_WITH_KNOWN_ALIAS_EXCLUSIONS",
+    "exclusions": {
+      "reserved_gdp_id_count": 223,
+      "rule": "Re-derive from every pinned existing public CSV/JSON, including unscored metadata candidates; do not alter the snapshot or pre-existing fixtures.",
+      "snapshot_path": "exclusions.json",
+      "snapshot_sha256": "40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e"
+    },
+    "frozen_at_utc": "2026-10-17T14:55:59.497166+00:00",
+    "limitations": [
+      "QC/interpolated historical NOAA positions may use future raw fixes upstream: operational_causality=false.",
+      "Same-date nearby drifters and unresolved old WMO aliases prevent claims of statistical independence.",
+      "No current forcing, observed plastic identity, physical tank trial, ecological benefit or source attribution.",
+      "No model promotion, significance claim, hyperparameter tuning, camera/provider/message actions."
+    ],
+    "metrics": {
+      "ade_m": "Mean six great-circle errors; primary equal-GDP-ID macro mean.",
+      "failure_policy": "Preserve every six-slot group/model/horizon cell; acquisition/model/missing truth failures stay failed or unfilled. No silent successful subset ranking.",
+      "fde_m": "Sixth-hour great-circle error; primary equal-GDP-ID macro mean.",
+      "primary": "Withhold every common-target model metric if any of 180 target model/horizon outcomes is missing/failed; successful per-group rows remain visible.",
+      "uncertainty": "Kalman observed ellipse uses Pxy+assumedR; nominal50/90 per-group counts only, never calibrated confidence.",
+      "vector_rmse_m_s": "RMS local interval displacement residual / actual interval seconds; first predicted anchor filtered for Kalman, raw for others."
+    },
+    "models": {
+      "acceleration_spectral_density_m2_s3": 1e-06,
+      "all_model_tracks_before_any_future_coordinate": true,
+      "forecast_anchor": "Kalman filtered final prefix state; other models raw final prefix position.",
+      "ids": [
+        "stationary",
+        "last_drift",
+        "mean_drift",
+        "ridge_ar1",
+        "kalman_cv"
+      ],
+      "implementation_sha256": {
+        "apps/ocean/reeftrace_ocean/ablation.py": "35ce38e4c4a12a57112e2c5865ce7084e7e6659b7c896c7d6625326d74189238",
+        "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde",
+        "apps/ocean/reeftrace_ocean/data.py": "4883727618060510a13182825cba6c1edb052ce539fee22b6048eef7dfe3de87",
+        "apps/ocean/reeftrace_ocean/kalman.py": "c5a2f170353fa86c54bb013a8e60240496f00bbfc030e989dbb092d65f254a89"
+      },
+      "kalman_noise_fitting": false,
+      "maximum_ar_spectral_radius": 0.98,
+      "position_std_m": 100.0,
+      "ridge_alpha": 1.0
+    },
+    "origin": {
+      "cadence_s": 3600,
+      "forecast_hours": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "heldout_count": 6,
+      "origins_per_drifter": 1,
+      "training_count": 18
+    },
+    "pre_outcome_amendment": {
+      "claim": "Previously unscored GDP-ID groups with known-alias exclusions and unseen future positions at selection; not IDs never appearing in selection metadata.",
+      "exposure": "V1 exposed selection-origin metadata and an identifier-only global ID/WMO registry, never trajectories or forecast truth/outcomes.",
+      "parent_directory": "data/public/noaa-fresh-drifter-v1",
+      "parent_manifest_sha256": "78ca3ff6a94b9d11b858581984e248c80bddb7f82295864a3374bede0998fa08",
+      "parent_model_outcomes": 0,
+      "parent_protocol_sha256": "025bb06739d7d53439ea41902436a4bb2bff12b5926abfaa60cf5ac1f9d0bb4f",
+      "parent_selection_sha256": "de099ecea1173ef12d4fd9a27fa4d76ed7759ebe36e431856e9cab61869d0214",
+      "parent_trajectory_payloads": 0,
+      "preserved": "Original223exclusions, blocks, fixed models, strict alias/selection gates and all v1 raw/failure receipts.",
+      "reason": [
+        "Two v1 metadata streams reached HTTP200 but ReadTimeout before body bytes.",
+        "One complete v1 metadata snapshot declared expno unit count; a new-parser empty-unit expectation rejected it."
+      ],
+      "registry_exemption": "Fresh-study v1/v2 metadata registries are not training evidence or new exclusion universes. Re-derive the unchanged original28-fixture/223-ID snapshot excluding both lineage directories."
+    },
+    "preprocessing": {
+      "csv_columns": [
+        "ID",
+        "time",
+        "latitude",
+        "longitude",
+        "ve",
+        "vn",
+        "err_ve",
+        "err_vn"
+      ],
+      "earth_mean_radius_m": 6371008.8,
+      "eligibility": "Exact requested ID/24 hourly UTC rows. Prefix map domain failures retained, never replaced. Do not exclude future truth by displacement/error.",
+      "interpolation": false,
+      "maximum_local_position_m": 50000,
+      "projection": "spherical_azimuthal_equidistant",
+      "units": [
+        "",
+        "UTC",
+        "degrees_north",
+        "degrees_east",
+        "m/s",
+        "m/s",
+        "m/s",
+        "m/s"
+      ],
+      "velocity_features": false
+    },
+    "purpose": "Fixed algorithms on new previously unscored GDP-ID groups with known-alias exclusions; not proven statistically independent or alias-complete physical drifters.",
+    "schema_version": 1,
+    "selection": {
+      "blocks": [
+        {
+          "end_utc": "2021-06-01T23:00:00Z",
+          "id": "atlantic-2021",
+          "latitude_max": 45,
+          "latitude_min": 0,
+          "longitude_max": -20,
+          "longitude_min": -80,
+          "start_utc": "2021-06-01T00:00:00Z"
+        },
+        {
+          "end_utc": "2021-06-01T23:00:00Z",
+          "id": "indian-2021",
+          "latitude_max": 20,
+          "latitude_min": -40,
+          "longitude_max": 100,
+          "longitude_min": 40,
+          "start_utc": "2021-06-01T00:00:00Z"
+        },
+        {
+          "end_utc": "2022-06-01T23:00:00Z",
+          "id": "north-pacific-2022",
+          "latitude_max": 45,
+          "latitude_min": 0,
+          "longitude_max": -120,
+          "longitude_min": -180,
+          "start_utc": "2022-06-01T00:00:00Z"
+        }
+      ],
+      "metadata_columns": [
+        "ID",
+        "time",
+        "latitude",
+        "longitude",
+        "WMO",
+        "expno",
+        "location_type"
+      ],
+      "metadata_units": [
+        "",
+        "UTC",
+        "degrees_north",
+        "degrees_east",
+        "",
+        "count",
+        ""
+      ],
+      "method": "First two eligible canonical GDP IDs in ascending numeric order per ordered block; exclude reserved/known-alias/shared-selected/ambiguous IDs before sorting.",
+      "no_replacements": true,
+      "selection_frozen_before_trajectory_requests": true,
+      "target_groups": 6,
+      "target_per_block": 2
+    },
+    "source": {
+      "base_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv",
+      "dataset_id": "drifter_hourly_qc",
+      "license_name": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+      "product_doi": "10.25921/x46c-3620",
+      "provider": "NOAA AOML Global Drifter Program"
+    },
+    "study_id": "noaa-fresh-gdp-id-study-v2"
+  },
+  "coverage": {
+    "target_groups": 6,
+    "selected_groups": 6,
+    "downloaded_groups": 6,
+    "scored_groups": 0,
+    "models": 5,
+    "horizons": 6,
+    "planned_outcomes": 180,
+    "attempted_outcomes": 180,
+    "scored_outcomes": 0,
+    "failed_outcomes": 180,
+    "unfilled_outcomes": 0,
+    "unique_observed_intervals": 0,
+    "unique_observed_positions": 0,
+    "common_target_cohort_complete": false
+  },
+  "groups": [
+    {
+      "block_id": "atlantic-2021",
+      "slot": 1,
+      "drifter_id": "300234062321360",
+      "wmo": "4100729",
+      "status": "FAILED",
+      "reason_codes": [
+        "EVALUATION_NOT_FROZEN"
+      ],
+      "coordinate_system": null,
+      "training_track": [],
+      "heldout_track": [],
+      "models": [
+        {
+          "id": "stationary",
+          "label": "Stationary position persistence",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "last_drift",
+          "label": "Last observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "mean_drift",
+          "label": "Mean observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "ridge_ar1",
+          "label": "Own-prefix ridge velocity AR(1)",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "kalman_cv",
+          "label": "Fixed-noise constant-velocity Kalman",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "block_id": "atlantic-2021",
+      "slot": 2,
+      "drifter_id": "300234062953270",
+      "wmo": "4401551",
+      "status": "FAILED",
+      "reason_codes": [
+        "EVALUATION_NOT_FROZEN"
+      ],
+      "coordinate_system": null,
+      "training_track": [],
+      "heldout_track": [],
+      "models": [
+        {
+          "id": "stationary",
+          "label": "Stationary position persistence",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "last_drift",
+          "label": "Last observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "mean_drift",
+          "label": "Mean observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "ridge_ar1",
+          "label": "Own-prefix ridge velocity AR(1)",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "kalman_cv",
+          "label": "Fixed-noise constant-velocity Kalman",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "block_id": "indian-2021",
+      "slot": 1,
+      "drifter_id": "300234060609830",
+      "wmo": "1600665",
+      "status": "FAILED",
+      "reason_codes": [
+        "EVALUATION_NOT_FROZEN"
+      ],
+      "coordinate_system": null,
+      "training_track": [],
+      "heldout_track": [],
+      "models": [
+        {
+          "id": "stationary",
+          "label": "Stationary position persistence",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "last_drift",
+          "label": "Last observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "mean_drift",
+          "label": "Mean observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "ridge_ar1",
+          "label": "Own-prefix ridge velocity AR(1)",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "kalman_cv",
+          "label": "Fixed-noise constant-velocity Kalman",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "block_id": "indian-2021",
+      "slot": 2,
+      "drifter_id": "300234063435990",
+      "wmo": "1601612",
+      "status": "FAILED",
+      "reason_codes": [
+        "EVALUATION_NOT_FROZEN"
+      ],
+      "coordinate_system": null,
+      "training_track": [],
+      "heldout_track": [],
+      "models": [
+        {
+          "id": "stationary",
+          "label": "Stationary position persistence",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "last_drift",
+          "label": "Last observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "mean_drift",
+          "label": "Mean observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "ridge_ar1",
+          "label": "Own-prefix ridge velocity AR(1)",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "kalman_cv",
+          "label": "Fixed-noise constant-velocity Kalman",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2021-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2021-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2021-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2021-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2021-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2021-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "block_id": "north-pacific-2022",
+      "slot": 1,
+      "drifter_id": "300234063123200",
+      "wmo": "5102534",
+      "status": "FAILED",
+      "reason_codes": [
+        "EVALUATION_NOT_FROZEN"
+      ],
+      "coordinate_system": null,
+      "training_track": [],
+      "heldout_track": [],
+      "models": [
+        {
+          "id": "stationary",
+          "label": "Stationary position persistence",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "last_drift",
+          "label": "Last observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "mean_drift",
+          "label": "Mean observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "ridge_ar1",
+          "label": "Own-prefix ridge velocity AR(1)",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "kalman_cv",
+          "label": "Fixed-noise constant-velocity Kalman",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        }
+      ]
+    },
+    {
+      "block_id": "north-pacific-2022",
+      "slot": 2,
+      "drifter_id": "300234065385690",
+      "wmo": "2101603",
+      "status": "FAILED",
+      "reason_codes": [
+        "EVALUATION_NOT_FROZEN"
+      ],
+      "coordinate_system": null,
+      "training_track": [],
+      "heldout_track": [],
+      "models": [
+        {
+          "id": "stationary",
+          "label": "Stationary position persistence",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "last_drift",
+          "label": "Last observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "mean_drift",
+          "label": "Mean observed drift",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "ridge_ar1",
+          "label": "Own-prefix ridge velocity AR(1)",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        },
+        {
+          "id": "kalman_cv",
+          "label": "Fixed-noise constant-velocity Kalman",
+          "status": "FAILED",
+          "reason_codes": [
+            "EVALUATION_NOT_FROZEN"
+          ],
+          "forecast_anchor": null,
+          "parameters": {},
+          "predictions": [
+            {
+              "horizon_hours": 1,
+              "time_utc": "2022-06-01T18:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 2,
+              "time_utc": "2022-06-01T19:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 3,
+              "time_utc": "2022-06-01T20:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 4,
+              "time_utc": "2022-06-01T21:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 5,
+              "time_utc": "2022-06-01T22:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            },
+            {
+              "horizon_hours": 6,
+              "time_utc": "2022-06-01T23:00:00Z",
+              "status": "FAILED",
+              "reason_codes": [
+                "EVALUATION_NOT_FROZEN"
+              ],
+              "latitude_deg": null,
+              "longitude_deg": null,
+              "x_m": null,
+              "y_m": null,
+              "position_error_m": null,
+              "observed_velocity_m_s": null,
+              "predicted_velocity_m_s": null,
+              "residual_velocity_m_s": null,
+              "position_covariance_m2": null,
+              "observation_covariance_m2": null,
+              "ellipse_hits": null
+            }
+          ],
+          "metrics": null
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "stationary",
+      "label": "Stationary position persistence",
+      "complete_groups": 0,
+      "metrics": null,
+      "reason_codes": [
+        "INCOMPLETE_TARGET_COHORT"
+      ]
+    },
+    {
+      "id": "last_drift",
+      "label": "Last observed drift",
+      "complete_groups": 0,
+      "metrics": null,
+      "reason_codes": [
+        "INCOMPLETE_TARGET_COHORT"
+      ]
+    },
+    {
+      "id": "mean_drift",
+      "label": "Mean observed drift",
+      "complete_groups": 0,
+      "metrics": null,
+      "reason_codes": [
+        "INCOMPLETE_TARGET_COHORT"
+      ]
+    },
+    {
+      "id": "ridge_ar1",
+      "label": "Own-prefix ridge velocity AR(1)",
+      "complete_groups": 0,
+      "metrics": null,
+      "reason_codes": [
+        "INCOMPLETE_TARGET_COHORT"
+      ]
+    },
+    {
+      "id": "kalman_cv",
+      "label": "Fixed-noise constant-velocity Kalman",
+      "complete_groups": 0,
+      "metrics": null,
+      "reason_codes": [
+        "INCOMPLETE_TARGET_COHORT"
+      ]
+    }
+  ],
+  "uncertainty": {
+    "kind": "UNCALIBRATED_OBSERVATION_PREDICTIVE_ELLIPSE_HITS",
+    "comparison_covariance": "position_covariance_plus_assumed_R",
+    "chi2_thresholds": {
+      "nominal50": 1.3862943611198906,
+      "nominal90": 4.605170185988091
+    },
+    "per_drifter": []
+  },
+  "provenance": {
+    "integrity_verified": true,
+    "hashes": {
+      "protocol_sha256": "0f34c38c8cb02a6934de6764d6ec958042eccacdf6b0081d7ec71bbffb570d3d",
+      "exclusions_sha256": "40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e",
+      "selection_sha256": "831c90e39790786b2368c7ce79fb8f2265e9fc24b3048671cd15b9f4123131b4",
+      "manifest_sha256": "82b281000d816d117fc2b144082c9fc67d88527f6c1f493ac5168472c96a95d1",
+      "identity_receipt_sha256": "e9371a85009d0ae45478c4605f03fa7fb7bdc2af884ecbf5fcea1b1b7f5a6be5",
+      "implementation_receipt_sha256": null,
+      "forecast_receipt_sha256": null,
+      "reference_report_sha256": null
+    },
+    "provider": "NOAA AOML Global Drifter Program",
+    "source_receipts": [
+      {
+        "bytes": 32265,
+        "finished_at_utc": "2026-10-17T14:58:54.032954+00:00",
+        "http_status": 200,
+        "raw_path": "raw/dataset-info.json",
+        "reason": null,
+        "response_complete": true,
+        "role": "dataset_metadata",
+        "sha256": "22799a625c750856f50b93a919a89c8660b0569db7da4058102e6a53d7eb9373",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+        "started_at_utc": "2026-10-17T14:58:53.865956+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 318597,
+        "finished_at_utc": "2026-10-17T14:58:54.426845+00:00",
+        "http_status": 200,
+        "raw_path": "raw/identity-aliases.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "identity_aliases",
+        "sha256": "a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO&distinct%28%29",
+        "started_at_utc": "2026-10-17T14:58:54.033867+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 14230,
+        "finished_at_utc": "2026-10-17T14:59:01.667128+00:00",
+        "http_status": 200,
+        "raw_path": "raw/metadata-atlantic-2021.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "block:atlantic-2021",
+        "sha256": "aeef5835616fd5a51bb82a0b56c6b373c53deeeb02eb1a6e3f7174e3009d81d0",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2021-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-80&longitude%3C=-20",
+        "started_at_utc": "2026-10-17T14:58:54.459359+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 8075,
+        "finished_at_utc": "2026-10-17T14:59:07.700348+00:00",
+        "http_status": 200,
+        "raw_path": "raw/metadata-indian-2021.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "block:indian-2021",
+        "sha256": "82dc5d62e6d0344ac389441039e4c8b7e36de81ad549441515611701d0faa228",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2021-06-01T00%3A00%3A00Z&latitude%3E=-40&latitude%3C=20&longitude%3E=40&longitude%3C=100",
+        "started_at_utc": "2026-10-17T14:59:01.668665+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 13100,
+        "finished_at_utc": "2026-10-17T14:59:11.875192+00:00",
+        "http_status": 200,
+        "raw_path": "raw/metadata-north-pacific-2022.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "block:north-pacific-2022",
+        "sha256": "4279026139467c925cb91909e2576d915c8e793d60b6f3647d53182a976e5bd9",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2022-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-180&longitude%3C=-120",
+        "started_at_utc": "2026-10-17T14:59:07.702101+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 2596,
+        "finished_at_utc": "2026-10-17T14:59:12.486688+00:00",
+        "http_status": 200,
+        "raw_path": "raw/drifter-300234062321360.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "trajectory:300234062321360",
+        "sha256": "e9507b94f2d431effbbb26663fd90f1ae737b945455d9735913b6a5402eb1ba2",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234062321360%22&time%3E=2021-06-01T00%3A00%3A00Z&time%3C=2021-06-01T23%3A00%3A00Z",
+        "started_at_utc": "2026-10-17T14:59:11.935793+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 2585,
+        "finished_at_utc": "2026-10-17T14:59:13.031005+00:00",
+        "http_status": 200,
+        "raw_path": "raw/drifter-300234062953270.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "trajectory:300234062953270",
+        "sha256": "8eba693a66e9c3b21d4c673c24ab3678cea4e173cba631afd31f63d3bddf5efb",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234062953270%22&time%3E=2021-06-01T00%3A00%3A00Z&time%3C=2021-06-01T23%3A00%3A00Z",
+        "started_at_utc": "2026-10-17T14:59:12.487863+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 2582,
+        "finished_at_utc": "2026-10-17T14:59:13.526407+00:00",
+        "http_status": 200,
+        "raw_path": "raw/drifter-300234060609830.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "trajectory:300234060609830",
+        "sha256": "24d8a76675677c7e57fb37f8e5ce698895cccee44e44aacecd2ae2e3bf141d59",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234060609830%22&time%3E=2021-06-01T00%3A00%3A00Z&time%3C=2021-06-01T23%3A00%3A00Z",
+        "started_at_utc": "2026-10-17T14:59:13.032540+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 2554,
+        "finished_at_utc": "2026-10-17T14:59:14.051580+00:00",
+        "http_status": 200,
+        "raw_path": "raw/drifter-300234063435990.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "trajectory:300234063435990",
+        "sha256": "d7f0546a225ee5a6fea61bf3d84e877526ac8b6b802a4601c1145f87b9135392",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234063435990%22&time%3E=2021-06-01T00%3A00%3A00Z&time%3C=2021-06-01T23%3A00%3A00Z",
+        "started_at_utc": "2026-10-17T14:59:13.527671+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 2598,
+        "finished_at_utc": "2026-10-17T14:59:14.641650+00:00",
+        "http_status": 200,
+        "raw_path": "raw/drifter-300234063123200.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "trajectory:300234063123200",
+        "sha256": "8831e52feb71ca0c84c186006b851840d39501db82346e42c056c7335eb1ba37",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234063123200%22&time%3E=2022-06-01T00%3A00%3A00Z&time%3C=2022-06-01T23%3A00%3A00Z",
+        "started_at_utc": "2026-10-17T14:59:14.053177+00:00",
+        "status": "DOWNLOADED"
+      },
+      {
+        "bytes": 2597,
+        "finished_at_utc": "2026-10-17T14:59:15.151116+00:00",
+        "http_status": 200,
+        "raw_path": "raw/drifter-300234065385690.csv",
+        "reason": null,
+        "response_complete": true,
+        "role": "trajectory:300234065385690",
+        "sha256": "5af52c7262f3e9a5c67abd5cfe35709a14a1200334678f9491a6b5a0b5dfc665",
+        "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,ve,vn,err_ve,err_vn&ID=%22300234065385690%22&time%3E=2022-06-01T00%3A00%3A00Z&time%3C=2022-06-01T23%3A00%3A00Z",
+        "started_at_utc": "2026-10-17T14:59:14.643066+00:00",
+        "status": "DOWNLOADED"
+      }
+    ],
+    "aliases": {
+      "known_reserved_wmo_count": 222,
+      "physical_alias_resolution_verified": false,
+      "reserved_gdp_id_count": 223,
+      "statistical_independence": false,
+      "unresolved_reserved_alias_count": 10,
+      "unresolved_reserved_alias_ids": [
+        "12730",
+        "12731",
+        "27622",
+        "27924",
+        "27925",
+        "8707978",
+        "9624972",
+        "9624974",
+        "9712733",
+        "9815211"
+      ]
+    },
+    "excluded_gdp_id_count": 223,
+    "acquisition_timestamps": {
+      "started_at_utc": "2026-10-17T14:58:53.865852+00:00",
+      "finished_at_utc": "2026-10-17T14:59:15.152739+00:00"
+    }
+  },
+  "flags": {
+    "physical_validation": false,
+    "calibrated_probability": false,
+    "automatic_model_promotion": false,
+    "operational_causality": false,
+    "statistical_independence": false,
+    "physical_alias_resolution_verified": false,
+    "provider_calls": false,
+    "camera_started": false,
+    "store_written": false,
+    "global_training": false,
+    "heldout_tuning": false,
+    "acquisition_attempted": true,
+    "new_acquisition": true,
+    "new_gdp_id_group_evaluation": false
+  },
+  "replay": {
+    "verified_numeric_replay": false,
+    "reference_report_sha256": null
+  },
+  "limitations": [
+    "New previously unscored canonical GDP-ID groups with known-alias exclusions, not proven physically or statistically independent.",
+    "All existing exposed fixture IDs are excluded; no cross-ID/shared training or held-out tuning is performed.",
+    "18 prefix positions are permitted observation context for each fixed algorithm, not evaluation labels for shared fitting.",
+    "NOAA hourly positions are QC/interpolated historical estimates; upstream raw-fix causality is not established.",
+    "Assumed Kalman noise and ellipse spread are uncalibrated; no source probability or physical benefit follows.",
+    "No matched current forcing, observed plastic labels, source/prevention mutation, camera access or provider calls."
+  ]
+}

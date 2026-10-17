@@ -17,50 +17,58 @@ If services need starting, run this from the reeftrace repository:
 
 The prepared Photon-enabled startup requires the explicit --allow-photon flag. Do not restart an already running service just to follow this guide. The default launcher does not silently enable messaging.
 
-The root page is the public introduction. Choose “Enter ReefTrace” to use /login and verify the shared local operator token, or enter /workspace for public research. This is local operator access, not individual email accounts. The token stays in React memory during in-app navigation; a reload clears it. The workspace’s “Operator access” dialog can also connect access for loading demos, computing evidence, saving trials and asking Chalk. Provider keys stay on the server; public research replays need no operator token.
+The root page is the public introduction. Choose “Enter Tideward” or “Open workspace” to use /login and verify the shared local operator token, or enter /workspace for public research. This is local operator access, not individual email accounts. The token stays in React memory during in-app navigation; a reload clears it. The workspace’s “Operator access” dialog can also connect access for loading demos, computing evidence, saving trials and asking Chalk. Provider keys stay on the server; public research replays need no operator token.
 
-At this handoff, camera capture and the physical pump are off. The software has no pump actuator. Pump power remains manual on its original cord; “Stop task” stops software work, not a wall-powered pump.
+This software-only presentation does not require a camera, pump or new physical recording. Leave capture off. The software has no pump actuator; “Stop task” stops software work, not external AC power. The current software-only teammate prompts are in docs/software-handoffs.md; the later physical instructions below are not part of those assignments.
+
+OVERVIEW: FOLLOW THE EVIDENCE
+
+Choose “Start software demo”. The three guide actions are “Open source trace”, “Compare layouts”, and “Ask Chalk”. The last action opens the selected source investigator; it does not send a message or automatically invoke the provider. “Setup and saved observations” is collapsed by default. Other workspace pages remain available.
+
+The synthetic source demo and the stock prevention demo use separate saved examples. Loading a source demo prepares its example estimates; explicitly computing again changes that case’s revision/evidence ID. A prevention comparison already anchored to the old evidence then becomes archival, even if the new source result looks the same.
 
 1. DEMONSTRATE SOURCE TRACING AND CHALK
 
-1) Open Overview or Investigations and click “Load demo”. Connect operator access if prompted, then click “Load demo” again.
-2) Use the initially selected observed-trajectory example. Click “Compute source support”. The committed synthetic trajectory is designed to rank candidate C.
+1) In Overview click “Start software demo”, or use “Load demo” in Investigations. Connect operator access privately if prompted, then repeat that load action. Active demo cases/reports are reused; stopped cases stay preserved and get an active replacement.
+2) Use the initially selected observed-trajectory example and its already saved source report: candidate C is the synthetic designed result. Recomputing is optional. “Recompute source support” explicitly creates a new estimate and advances the evidence identity, so do not click it merely to reveal the existing answer.
 3) Read the map and source report:
    - The map is a water-plane view in tank centimetres. Candidate polygons are possible entry regions; the path or retained endpoint is the observation.
    - The source bars show relative support under the frozen model and candidate set. A displayed percentage is not a calibrated probability that a particular polluter caused the plastic.
    - “Ranked” means the model can distinguish candidates under its gates. “Unknown” means evidence is insufficient or ambiguous. “Invalid” means the inputs or calibration fail a gate.
-4) Click “Test sensitivity”. Inspect whether the source conclusion survives the predeclared transport variants. This tests assumptions; it does not create a new observation.
-5) In “Ask the investigator”, enter:
+4) Expand “Analysis tools and software stop”, then click “Test sensitivity”. Inspect whether the source conclusion survives the predeclared transport variants. This tests assumptions; it does not create a new observation.
+5) In the source “Ask Chalk” panel, expand “Change the question” to enter:
    “Which candidate fits this observation, what evidence supports it, and what remains uncertain?”
    Click “Ask Chalk” once.
-6) Inspect the answer, “Live model response: yes/no”, evidence IDs and “Tool trace”. A configuration-ready label alone is not proof of a successful live investigation. If the provider returns a quota/rate-limit error, retain the deterministic source report and describe the model call as blocked; do not present a fallback as a live answer.
-7) Select the retained-endpoint example and compute its source support. Expect “Unknown”: several entry histories can end in the same pocket. Also inspect the invalid-calibration example. Unknown and Invalid are deliberate scientific outcomes, not demo failures.
+6) Inspect the answer, “Live Chalk explanation” or “No live model response”, and “Evidence citations and tool trace”. A configuration-ready label alone is not proof of a successful live investigation. If the provider returns a quota/rate-limit error, retain the deterministic source report and describe the model call as blocked; do not present a fallback as a live answer.
+7) Expand “Choose a different observation” and select the retained-endpoint example; inspect its prepared report or deliberately recompute it. Expect “Unknown”: several entry histories can end in the same pocket. Also inspect the invalid-calibration example. Unknown and Invalid are deliberate scientific outcomes, not demo failures.
 
 If a saved report fails to load, use “Reload source report”. Recomputing a case changes its evidence identity; an old answer or sensitivity result should disappear. Use “Stop task” only when you intend to archive that case’s ongoing work. Reloading the demo after a stopped case creates an active replacement while preserving history.
 
 2. COMPARE TWO PREVENTION LAYOUTS
 
-Open “Prevention” and click “Load prevention demo”. This loads a synthetic source case, baseline/intervention layouts, a protected-zone proxy and hand-authored synthetic trial records.
+Open “Prevention” and click “Load prevention demo”. This loads its own synthetic source case, baseline/intervention layouts, a protected-zone proxy and hand-authored synthetic trial records. It does not automatically inherit the observation selected in Investigations.
+
+“Has it worked in recorded trials?” keeps the physical and synthetic outcome counts visible. Expand “Review recorded outcomes” for the detailed ledgers and trial controls. Zero operator-reported physical outcomes is the actual current result, not a hidden success.
 
 What the visuals mean:
   - Baseline and intervention maps use the same sources, tank bounds and protected zone. The collector/retention position differs.
   - Dashed routes are illustrative simulated paths, not filmed token trajectories.
-  - “Predicted entry, by source” shows simulated first-entry counts and conservative bounds for the model’s particles. Particles are hypothetical alternatives, not measured releases.
+  - “Which layout lets fewer tokens through?” shows simulated first-entry counts; expand “Prediction bounds and model assumptions” for the conservative bounds. Particles are hypothetical alternatives, not measured releases.
   - Benefit is baseline entry fraction minus intervention entry fraction. Positive values favor intervention. Bounds crossing zero do not establish improvement.
   - Unsupported flow paths remain unknown and can withhold a recommendation.
   - “Recorded physical outcomes” and “Synthetic ledger outcomes” are separate. “No physical trials yet” is an honest result. Never describe the synthetic ledger as measured water-tank performance.
 
 The demonstration ledger can already be complete. To exercise new-trial entry without modifying that ledger:
 
-1) Expand “Simulation assumptions and full frozen comparison”. Note its case_id and baseline/intervention profile IDs.
-2) Expand “Create a frozen comparison from source evidence”. Select that source case; the baseline is fixed by its profile.
+1) Expand the frozen comparison’s research/assumption details (“Simulation assumptions and full frozen comparison”). Note its case_id and baseline/intervention profile IDs.
+2) Expand “Create your own comparison from a source case”. Select that source case; the baseline is fixed by its profile.
 3) Choose the registered intervention profile “prevention-demo-intervention-v1” when the baseline is “prevention-demo-baseline-v1”. Do not choose an unrelated profile merely because it is synthetic.
 4) Use this protected-zone JSON for the standard prevention demo:
    [[30,10],[34,10],[34,20],[30,20]]
    Give the comparison a distinct name, then click “Freeze comparison”. The plan fixes a 20-second horizon, 100 simulated particles per source/layout/scenario, and five one-token trials per source/layout.
 5) Follow the exact “Next trial” source/layout label. It is the operator’s release log, not ReefTrace’s inferred answer.
 6) For a SOFTWARE REHEARSAL, enter a clearly labeled synthetic outcome. For example, a baseline zone entry at 15 seconds, with a note saying “Hand-authored synthetic demonstration; no physical trial.” Confirm token accounting for that synthetic record. For interception/no-entry, the form also requires an explicit full-horizon confirmation. Never claim a physical observation that did not happen.
-7) Click “Save one-token outcome”. Follow the next displayed slot rather than assuming the next source/layout order. Missing and unresolved slots keep the result uncertain.
+7) Click “Save one-token outcome”. Follow the next displayed slot rather than assuming the next source/layout order. The API enforces per-source/layout quotas and exact immutable retries; it can record a reordered run, while evaluation reports order_followed=false. Missing and unresolved slots keep the result uncertain.
 8) Ask “Ask Chalk about prevention”:
    “Compare the frozen predictions with the recorded outcomes. Is either layout supported, and what measurement is missing?”
    Check the live-response flag, evaluation identity and tool trace.
@@ -79,7 +87,7 @@ This current Trace 3 receipt is labeled “Identity and accounting checked · me
 
 B. Separate Trace 2 numerical method example
 
-Below the Prevention workspace, click “Run Trace 2 validation example”. This is a different, explicitly synthetic demonstration, not a replay of the selected live case.
+Expand “Research details: prevention method checks”, then click “Run Trace 2 validation example”. This is a different, explicitly synthetic demonstration, not a replay of the selected live case.
 
 The server verifies the pinned bytes of both published example bundles, reruns the actual Trace 2 validator, and checks the unresolved result against the exact shared report. It does not trust a report merely because someone recomputed its hash.
 
@@ -91,7 +99,7 @@ Each alternative contains eight synthetic releases. They reuse trial identities 
 
 The transport envelope is prevention_method_replay_v1. It deliberately leaves the existing Trace 3 export/receipt contract unchanged. A genuine current-case numerical validation needs full immutable flow inputs plus protocols, frozen selections and recording/session receipts captured before validation releases. The current redacted export does not contain all of that information; do not manufacture it at import time.
 
-4. FIELD COMMISSIONING: WHAT WAITS FOR THE REAL RIG
+4. LATER FIELD COMMISSIONING: NOT PART OF THE SOFTWARE HANDOFFS
 
 Open “Camera”. The Field commissioning wizard appears before the legacy controls. Keep the camera/pump off during a software-only presentation. Missing hardware is a reason to leave physical commissioning incomplete, not to use synthetic results as a substitute.
 
@@ -116,7 +124,22 @@ The current software plan uses USB camera → laptop. It does not require the in
 
 5. DATA LAB: REAL NOAA DATA WITH HONEST LIMITS
 
-Open “Data lab”. These are separate geographic motion experiments, not tank source validation:
+Open “Data lab”. Start with the current “Six real buoy groups. Five forecasts.” card and “Load buoy comparison” action. Loading is an offline, read-only replay of saved artifacts, not a download or first evaluation.
+
+CURRENT SIX-GROUP STUDY
+
+1) Click “Load buoy comparison”. The completed v2 report has six selected/downloaded GDP-ID days, five fixed models and 180/180 scored model-hour outcomes. They reuse 36 unique observed intervals; these are not 180 independent experiments.
+2) Inspect the six-slot and common-model tables. Last drift has the lowest aggregate ADE here (1573.423 m), compared with Kalman (1655.662 m) and ridge (1772.130 m). Lower is better, but there is no significance claim or automatic promotion.
+3) Choose a “Buoy group” and “Prediction model” to inspect the path on the main card. Expand “Research details” for target coverage, vector metrics, exact assumptions, provenance and limitations. Observed and forecast paths use local metres; vector errors use m/s. Kalman starts at a filtered last context state; the other models start at the raw last observation.
+4) Under “What does this result mean?”, click “Explain this result” for one explicit operator-authorized research review. Ask what the comparison supports and what the amendment/alias/interpolation limits mean. Inspect the fresh-study canonical snapshot citation, fresh-protocol citation and read-only tool trace. It cannot change source scores, acquire data, tune models, record outcomes or message anyone. A failed review leaves the deterministic report visible.
+
+This v2 design preserves v1’s zero-trajectory/zero-model-outcome attempt and the pre-outcome parser/transport amendment. All six selected IDs are outside 223 pre-study fixture exclusions and have distinct positive selected WMOs, but ten older aliases remain unresolved. Say “previously unscored GDP-ID groups with known-alias exclusions”, not “proven physically independent drifters” or “IDs never appearing in metadata”. NOAA hourly positions are historical QC/interpolated products, not live raw fixes or plastic-source truth.
+
+A live read-only fresh-study Chalk REPORT was verified in the browser on 17 October 2026, with the exact saved study/protocol citations. That recorded success is separate from configuration readiness or future availability; no new provider request or message is automatic.
+
+EARLIER RESEARCH
+
+The “Research details and earlier studies” disclosure contains the following separate geographic experiments, not tank source validation:
 
   “Run reference buoy replay”: the original 24-row NOAA buoy-day uses the first 18 positions for fitting and the final six for a free-running retrospective forecast. Mean/RMSE/endpoint errors are distances in metres. Lower is better, and worse model results remain visible.
 
@@ -124,7 +147,7 @@ Open “Data lab”. These are separate geographic motion experiments, not tank 
 
   “Run motion ablation” / “What does learning add?”: compares learned ridge velocity memory with stationary, last-drift and mean-drift baselines. Delta is candidate minus baseline error: negative favors ridge. Negative MAE skill means worse performance; undefined skill for a zero-error baseline stays unavailable.
 
-  “Run multi-drifter study”: the new frozen acquisition selected four different drifters out of a planned target of six. It scores 96 model/horizon outcomes: four acquired drifters × four fixed models × six horizons. The full planned target was 144 outcomes. Two selection slots remain missing because an acquisition request failed; they were not replaced after seeing model results.
+  “Run multi-drifter study”: the earlier frozen acquisition selected four different drifters out of a planned target of six. It scores 96 model/horizon outcomes: four acquired drifters × four fixed models × six horizons. The full planned target was 144 outcomes. Two selection slots remain missing because an acquisition request failed; they were not replaced after seeing model results.
 
 The study remains PARTIAL_COVERAGE even when all 96 acquired-cohort forecasts score. Its macro means describe the four acquired drifters, conditional on acquisition, with equal weight per drifter. The coverage matrix retains failures in their denominators; primary aggregate metrics are withheld if a declared group fails. One origin per drifter and different IDs do not establish statistical independence. The original development buoy is excluded from this new cohort.
 
@@ -168,7 +191,7 @@ This diagnostic uses a frozen deterministic mean field, Euler steps no longer th
 
 For a repeatable software-only HTTP regression, run:
   .venv/bin/python scripts/e2e_offline.py
-This starts a disposable API with its own temporary store and loopback port, checks four workflows, and shuts it down. It accepts no existing API address and disables/guards all external providers, cameras and Photon actions. The six live-provider/hardware scopes remain explicitly blocked rather than counted as successful live tests. The same harness runs on every push in CI.
+This starts a disposable API with its own temporary store and loopback port, checks source/prevention/export/research workflows including the fresh public study, and shuts it down. It accepts no existing API address and disables/guards all external providers, cameras and Photon actions. The six live-provider/hardware scopes remain explicitly blocked rather than counted as successful live tests. The same harness runs on every push in CI.
 
 Expand exact interval components or provenance to inspect the full report. Ocean-
 current forcing and debris survey context are explicitly not connected. Parcels,
@@ -177,7 +200,7 @@ in docs/motion-vector-research.txt, not newly acquired or validated ocean eviden
 
 6. PHOTON STATUS: WHAT WAS ACTUALLY PROVED
 
-Photon is enabled in the current local configuration. Settings distinguishes configuration from whether the automatic worker is actually running; “Automatic replies on” requires the running-worker status.
+Settings distinguishes configuration from whether the automatic worker is actually running; “Automatic replies on” requires the running-worker status. Read the current status rather than inferring it from a past test. This guide does not change configuration, enable replies or request additional messages.
 
 The live automatic path is now VERIFIED for one synthetic demo case and the paired line. The user explicitly approved one additional automated test. A fresh human question was sent from the paired Mac; the restarted, corrected worker processed it, saved one immutable outbox response, and the provider accepted the first send attempt with HTTP 202 and no error. A separate read-only check through the official SDK confirmed exactly one matching delivered message, with the exact response body in the authorized conversation and to the authorized recipient. The send did not use an unsupported parent-thread field.
 
@@ -187,10 +210,13 @@ The earlier manually delivered reply through the official Photon dashboard is a 
 
 7. TEAM OWNERSHIP AND MERGED WORK
 
-Megana — Trace 1: field evidence, camera/calibration/drift commissioning and frozen field receipts.
-Aarush — Trace 2: offline prevention prediction validation, outcome accounting and next-measurement reasoning.
-Jose — Trace 3: application/backend/Chalk integration, evidence exports/receipts and end-to-end product verification.
-A fourth builder can operate/log the physical rig and capture the demo, keeping hidden source-answer labels out of source inference. Known release labels used for prevention trials belong only to the designated evaluation ledger.
+CURRENT SOFTWARE-ONLY ASSIGNMENTS
+
+Megana — demo acceptance, accessibility and browser E2E on the existing software.
+Aarush — export/validator contract documentation and missing/unresolved/retry edge-case tests.
+Jose — shared product state, scientific interfaces, provider configuration and final integration.
+
+Use docs/software-handoffs.md for the bounded prompts, branches, files and acceptance criteria. These tasks do not require hardware, calibration, a measured flow profile, new model training or provider keys. The old physical Trace 1/Trace 2 ownership is history rather than an instruction to resume hardware work.
 
 Both teammate pull requests are merged:
   PR #2 — prediction validation:
@@ -198,7 +224,7 @@ Both teammate pull requests are merged:
   PR #3 — field evidence/commissioning:
   https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/3
 
-The distinct method-replay bridge, acquired-cohort study and motion-vector diagnostic are integrated in the current implementation. Exact test counts, commit, push and CI status belong to the corresponding dated verification receipt; this guide does not assert an unpublished result.
+Aarush’s later PR #5 is also merged: protocol/checklist, blank private-log template and four synthetic integration scenarios. It performed no physical releases. The distinct method-replay example, acquired-cohort study, fresh six-GDP-ID study and motion-vector diagnostic are integrated in the current implementation. Exact test counts, commit, push and CI status belong to the corresponding dated verification receipt; this guide does not assert an unpublished result.
 
 JUDGING LANGUAGE
 

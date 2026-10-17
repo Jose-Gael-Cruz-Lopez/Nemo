@@ -329,6 +329,41 @@ def extra(result, api, token):
         noaa = req("/research/vector-diagnostic")
         cohort = req("/research/cohort-vectors")
         kalman = req("/research/kalman-diagnostic")
+        fresh = req("/research/fresh-physics")
+        fresh_coverage = fresh["coverage"]
+        check("fresh study keeps the frozen requested cohort and all missing or failed outcomes",
+            fresh["kind"] == "FRESH_NOAA_DRIFTER_STUDY"
+            and fresh["design_status"] == "FROZEN_NEW_GDP_ID_GROUP_EVALUATION_WITH_KNOWN_ALIAS_EXCLUSIONS"
+            and fresh_coverage["target_groups"] == len(fresh["groups"]) == 6
+            and fresh_coverage["models"] == len(fresh["models"]) == 5
+            and fresh_coverage["horizons"] == 6
+            and fresh_coverage["planned_outcomes"] == 180
+            and fresh_coverage["scored_outcomes"] + fresh_coverage["failed_outcomes"]
+                + fresh_coverage["unfilled_outcomes"] == 180
+            and fresh["provenance"]["integrity_verified"] is True
+            and fresh["flags"]["physical_validation"] is False
+            and fresh["flags"]["automatic_model_promotion"] is False
+            and fresh["flags"]["statistical_independence"] is False)
+        if not fresh_coverage["common_target_cohort_complete"]:
+            check("incomplete fresh target never becomes a successful-subset aggregate",
+                  all(model["metrics"] is None for model in fresh["models"]))
+        req("/research/fresh-physics/investigate", {"question": "Explain this study."},
+            expected=401, auth=False)
+        req("/research/fresh-physics/investigate", {"question": "Explain this study.",
+            "source_id": "invented-source"}, expected=422)
+        fresh_review = req("/research/fresh-physics/investigate", {
+            "question": "What can these new GDP-ID motion results establish, and what remains uncertain?"})
+        snapshot_hash = hashlib.sha256(json.dumps(fresh, sort_keys=True, separators=(",", ":"),
+            ensure_ascii=True, allow_nan=False).encode()).hexdigest()
+        check("disabled Chalk preserves exact fresh-study evidence without a provider call",
+            fresh_review["kind"] == "FRESH_DRIFTER_RESEARCH_INVESTIGATION"
+            and fresh_review["action"] == "STOP"
+            and fresh_review["failure_code"] == "NOT_CONFIGURED"
+            and fresh_review["live_model_response"] is False
+            and fresh_review["research_report"] == fresh
+            and fresh_review["snapshot_report_sha256"] == snapshot_hash
+            and fresh_review["store_written"] is False
+            and fresh_review["hardware_actuation"] is False)
         check("real-vector units and synthetic vision evidence stay separated", noaa["noaa"]["velocity_units"] == "m/s"
             and noaa["synthetic_tank"]["coordinates"]["velocity_units"] == "cm/s"
             and noaa["synthetic_tank"]["data_origin"] == "SYNTHETIC_SOFTWARE_REPLAY"
@@ -355,6 +390,8 @@ def extra(result, api, token):
             synthetic_evaluation=ledger, real_vector_metrics=[{"id": model["id"], "metrics": model["metrics"]}
                 for model in noaa["noaa"]["models"]], cohort_coverage=cohort["coverage"],
             fixed_kalman_coverage=kalman["coverage"],
+            fresh_study_coverage=fresh_coverage,
+            fresh_study_snapshot_sha256=snapshot_hash,
             no_live_provider_calls=True, no_physical_trials=True)
 
 

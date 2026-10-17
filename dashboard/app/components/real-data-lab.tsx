@@ -10,6 +10,7 @@ import { TransferDiagnostic } from "./transfer-diagnostic";
 import { VectorDiagnostic } from "./vector-diagnostic";
 import { CohortVectors } from "./cohort-vectors";
 import { KalmanDiagnostic } from "./kalman-diagnostic";
+import { FreshDrifterStudy } from "./fresh-drifter-study";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -79,8 +80,11 @@ export function RealDataLab({ api }: { api: string }) {
     finally { if (!pending.signal.aborted) { controller.current = null; setLoading(false); } }
   }
   return <>
-    <div className="page-heading"><div><p className="kicker">Measured ocean observations</p><h1>Real data, honest limits.</h1><p className="page-description">Compare observed and predicted motion across real NOAA drifters, then inspect the drift recorded in your tank.</p></div><button className="primary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running real-data replay…" : "Run reference buoy replay"}</button></div>
-    <div className="notice info"><Icon name="help" /><span>This is a separate geographic motion benchmark. Buoy positions do not identify a plastic source or validate your tank.</span></div>
+    <div className="page-heading"><div><p className="kicker">Data Lab</p><h1>How well does it predict?</h1><p className="page-description">Compare a forecast with where a real NOAA buoy actually went.</p></div></div>
+    <p className="settings-note">Historical buoy motion tests the forecasting software. It does not identify a plastic source or validate the tank.</p>
+    <FreshDrifterStudy api={api} />
+    <details className="card"><summary>Research details and earlier studies</summary><div className="card-body data-lab-results">
+    <button className="secondary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running reference replay…" : "Run reference buoy replay"}</button>
     <CohortVectors api={api} />
     <KalmanDiagnostic api={api} />
     {loading && <div className="busy-notice" role="status">Loading the verified dataset and fitting the predeclared motion models…</div>}
@@ -99,5 +103,6 @@ export function RealDataLab({ api }: { api: string }) {
     <MultiDrifterStudy api={api} />
     <TransferDiagnostic api={api} />
     <DatasetReadiness api={api} />
+    </div></details>
   </>;
 }

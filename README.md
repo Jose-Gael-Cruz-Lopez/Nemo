@@ -1,102 +1,133 @@
-# ReefTrace
+# Tideward · ReefTrace
 
-The product display name is **Tideward**. The repository, Python packages and API
-identifiers remain **ReefTrace** so existing links and integrations keep working.
+Tideward helps teams compare where to intercept floating pollution before it reaches a protected area, then inspect whether recorded outcomes support that choice. The software demonstrates source tracing, two-layout comparisons and Chalk explanations with synthetic examples, alongside a separate forecast study using real historical NOAA drifters.
 
-A local USB-camera experiment for comparing candidate floating-debris entry points. OpenCV observes a standardized token; a measured drift field drives a forward particle model; the estimator saves conditional source evidence or **Unknown**. A bounded Chalk-backed investigator uses those saved reports in the dashboard and a Photon direct conversation. Recovery is manual.
-
-The **Prevention** workspace turns tracing into a testable intervention: freeze a protected surface zone, compare two interception layouts, log independent one-token trials, and inspect simulated predictions beside separately labelled outcomes. Source uncertainty remains intact. See [the prevention build and demo guide](docs/prevention-workflow.md).
-
-For current parallel work, use the [four-workstream build plan](docs/four-person-build-plan.md): Megana owns rig/camera commissioning; Aarush owns experiment validation; Jose owns product/Chalk/Trove integration **and** the Grok-assisted ML/dataset stream. A fourth builder can assist when assigned. It includes the actual hardware checklist, dependency gates and copyable prompts. The [older three-person prompts](docs/team-handoff-prompts.md) are retained as implementation history. The [Grok build record](docs/grok-kalman-build.md) explains the new isolated motion diagnostic and its evidence limits.
-
-This repository now implements the computational and application paths, rather than only starter directories. It follows **ReefTrace_Final_Plan.pdf, USB Webcam Edition 5.0**. Real tank calibration and held-out trials are still required; synthetic fixtures and passing tests are software evidence, not reef or tank accuracy claims.
+**Tideward** is the product name. Repository names, Python packages, environment variables and API identifiers remain **ReefTrace**. The current product is a controlled prototype: its software works without a physical rig, while real tank performance and environmental benefit remain unmeasured.
 
 ## Start locally
 
-Python 3.12 and Node 20.9+ are supported starting points; the verified environment uses Python 3.12 and Node 24. Run this installation once from the repository root:
+Use Python 3.12 and Node 20.9+; the verified development environment uses Python 3.12 and Node 24. From the repository root:
 
 ```sh
 python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[dev,sponsors]'
+.venv/bin/python -m pip install -e '.[dev,sponsors]'
 cd dashboard
 npm ci
 cd ..
+.venv/bin/python scripts/dev.py
 ```
 
-Start both services in one terminal:
+The launcher checks dependencies and local ports, bootstraps a private `.env` and a missing/blank `REEFTRACE_LOCAL_TOKEN`, then starts the single-worker API at **http://127.0.0.1:8000** and dashboard at **http://127.0.0.1:3000**. Existing nonblank settings are preserved. Verified running services are reused; unrelated listeners are reported rather than killed. Ctrl+C stops only services that invocation started. `.venv/bin/python scripts/dev.py --check` performs a read-only preflight.
+
+The root page is the public introduction. Use `/login` or the workspace's operator-access control to enter the local `REEFTRACE_LOCAL_TOKEN` privately; `/workspace` also permits public research viewing. This is shared local operator access, not individual email accounts. The token lives in tab memory and clears on reload; provider keys stay on the server.
+
+The launcher never changes sponsor enable flags. Starting a new API with `PHOTON_ENABLED=true` requires the explicit `--allow-photon` flag; an already running API and its authorized worker are left untouched. A software demo does not require changing any messaging setting or starting the Camera page.
+
+## Three-part software demo
+
+Start in **Overview**, choose **Start software demo**, and follow **Follow the evidence**. The [click-by-click runbook](docs/integrated-team-demo.txt) covers the longer presentation.
+
+1. **Trace a source — Open source trace.** In Investigations, connect operator access, choose **Load demo**, then inspect the saved observed-trajectory report. The synthetic moving example already ranks candidate C; **Recompute source support** is an optional deliberate recomputation that changes its evidence identity. **Test sensitivity** reruns the declared assumption variants, not a new observation. Expand **Choose a different observation** to inspect the retained endpoint (**Unknown**) or invalid-mapping example (**Invalid**). Ask Chalk to explain the saved evidence and its limits.
+2. **Compare two layouts — Compare layouts.** In Prevention, choose **Load prevention demo**. Inspect the protected surface polygon, baseline/intervention paths, predicted entry bounds and separately labelled synthetic trial outcomes. The stock prevention demo uses its own frozen synthetic case/layout fixture; it does not silently reuse the source case selected in Investigations. The advanced creation form can anchor a new comparison to a chosen active source report. Physical trial count remains zero.
+3. **Explain the evidence — Ask Chalk.** Ask the source investigator what supports its conclusion, or ask the prevention investigator to compare frozen predictions with the recorded outcomes. Inspect its live-response flag, cited evidence IDs and tool trace. A prevention review binds the exact comparison/evaluation snapshot and cannot turn an Unknown source into an accepted ranking. Provider failure leaves the numerical evidence available.
+
+For real geographic evidence, open **Data lab** and choose **Load buoy comparison**. Inspect all six groups and five models, then choose **Explain this result** under **What does this result mean?**. This separate research discussion does not fetch more NOAA data, train a shared model or change a tank source report. Setup/saved observations and research details are collapsed disclosures; the advanced pages remain available.
+
+Loading the source demo already prepares example evidence; explicitly recomputing a case creates a new evidence identity/revision. Repeated loads reuse active demo cases. Loading after STOP creates an active replacement while preserving the stopped history. The full workspace retains the other diagnostics, Camera commissioning and Settings for deliberate advanced use.
+
+## What is working, and what the evidence proves
+
+| Part | Current implementation and evidence | Remaining boundary |
+| --- | --- | --- |
+| Source tracing | Synthetic moving, retained-endpoint and invalid examples; forward simulation, sensitivity gates, saved reports and explanatory Chalk tools | No measured physical source-identification accuracy |
+| Prevention | Protected zone, two frozen layouts, simulated first-entry outcomes, separate trial ledgers, retry safety, exports and validation receipts | No completed physical release or measured interception benefit |
+| Fresh NOAA study | Six acquired GDP-ID days, five fixed algorithms, **180/180 scored outcomes**, **36 unique later intervals**, verified raw/selection/forecast/report lineage | Historical buoy motion, not observed plastic, a water-tank validation or an independent reef experiment |
+| Chalk | Live case-bound investigations and a live fresh-study **REPORT verified on 17 October 2026**; exact evidence citations and bounded read-only research tools | Configuration readiness alone is not a live response; timeouts/provider failures preserve deterministic results |
+| Photon | Durable inbox/outbox, scoped direct conversation and strict control commands; a previously authorized automatic round trip was independently observed Delivered | No messages are needed by this demo or the software handoffs; HTTP 202 acceptance alone is not delivery |
+| Camera/field commissioning | Implemented capture, mapping, drift fitting, admission checks and immutable field receipts; synthetic contract tests | The real assembled rig, measured mapping/drift and physical trials have not been commissioned here |
+| Grok/xAI | Grok-assisted design/code review, deterministic evidence briefing and server-side Voice API adapter | No funded live xAI Voice result or completed Voice API eligibility is claimed; voice remains disabled |
+
+The final local software verification on 17 October 2026 passed **1,061 Python tests**, **122 frontend tests**, and **122 PASS / 0 FAIL / 6 expected BLOCKED** offline HTTP checks. Ruff, generated route types, TypeScript and the production build passed. Actual browser checks covered the revised guide, Ranked/Unknown/Invalid source states, separate prevention example, recorded-outcome disclosure and real NOAA results; the guide also had no horizontal overflow at 390 px. Live-provider failures were preserved and two discovered research-orchestration defects received regressions. The blocked offline scopes are not counted as successful physical or device tests. GitHub runs Python/scientific replay, isolated HTTP workflows, and dashboard lint/types/build on pushes and pull requests; inspect the exact commit's hosted result separately.
+
+## Data roles, units and algorithms
+
+The [algorithm and contract audit](docs/algorithm-contract-audit.md) gives the equations, actual code references, assumptions and failure rules. The following datasets have different jobs:
+
+| Input or output | Role and units | What it must not be used as |
+| --- | --- | --- |
+| Synthetic token observations/profiles | Reproducible software development fixtures; tank positions in **cm**, elapsed time in **s** | Measured water behavior or an independent physical test |
+| Recorded token tracks, when available | Mapping starts in pixels; accepted water-plane positions are **cm**, token drift is **cm/s**. Separate recordings fit and validate a local field | NOAA ocean forcing or a measurement of pure water velocity independent of token behavior |
+| Known release labels and trial outcomes | Evaluator truth in the separate trial ledger; zone/capture times in **s** | Source-estimator features or proof that a model's guess was correct |
+| Fresh NOAA positions | Historical latitude/longitude mapped to local **m**; velocity errors in **m/s**; each GDP-ID day's first **18** positions are permitted context, final **6** are evaluation positions | Tank calibration, plastic-source labels or proof of operational real-time causality |
+| Satellite reef context | Pinned historical NOAA Coral Reef Watch heat stress in degree-heating weeks | Current tank conditions, confirmed bleaching, or input to source rankings |
+
+The tank path uses OpenCV red HSV segmentation and gap-preserving single-token tracking, a checked planar homography, finite-difference drift samples, spatial cell medians and inverse-distance interpolation. A bounded forward advection–diffusion simulator compares declared candidate releases with the observed history or retained endpoint. It saves conditional relative support, then applies observation, fit, separation and sensitivity gates. It does not reconstruct a unique past by reversing a velocity arrow. Source percentages are **relative support under assumptions**, not calibrated polluter probabilities.
+
+Prevention compares the same protected polygon and declared sources across two registered layouts. It tracks first zone entry and retention events under frozen scenarios; unsupported paths remain unknown. Predicted particles, recorded synthetic releases and operator-reported physical releases keep separate denominators. The trial ledger's missing/unresolved bounds are accounting bounds, not statistical confidence intervals or demonstrated ecological benefit. A numerical report can be `SIMULATED_COMPARISON` or `WITHHELD_UNSUPPORTED_FLOW`; withholding is not a zero-effect result.
+
+The fresh geographic study compares stationary persistence, last drift, mean drift, own-prefix ridge velocity AR(1), and a fixed constant-velocity Kalman estimator. Kalman assumes position standard deviation **100 m** (`R = 10000 I m²`) and continuous white-acceleration spectral density **1e-6 m²/s³**. Its forecast begins at the filtered last context state; other models begin at the raw last context observation. No future measurement updates are used. Observed ellipse diagnostics use `P_position + R`, not the latent position covariance alone; nominal hit counts remain uncalibrated.
+
+On these six new GDP-ID days, last drift has the lowest mean position error (**ADE 1,573.423 m**), compared with Kalman **1,655.662 m** and ridge **1,772.130 m**. That negative result for the more complex models is retained without retuning or automatic promotion. Different IDs and distinct selected WMOs do not prove physical or statistical independence: **10 old aliases remain unresolved**, and NOAA hourly positions are retrospectively QC/interpolated, potentially using later raw fixes upstream. The earlier blocked acquisition and pre-outcome parser/transport amendment are preserved. See the [fresh study guide](docs/fresh-noaa-study.md) for all metrics, identities, hashes and limitations.
+
+Older reference-buoy, training-origin, four-drifter, transfer, Kalman and motion-vector panels remain inspectable research history. Their already-viewed outcomes must not be relabelled as new independent tests. No trained neural trash detector or matched ocean-current forcing has been added to the operational tank model.
+
+## Application states and evidence freshness
+
+Numerical status, case state, agent action and delivery status are separate contracts:
+
+| Contract | Actual states/transitions |
+| --- | --- |
+| Case | New observation → `OBSERVED`. A committed estimate → `INVESTIGATE` and a new revision/evidence ID, even if its numerical result is Invalid. STOP → `STOPPED`, increments revision and cancels pending recovery tasks. Any recorded manual terminal outcome → `RECOVERING`; new observations/revalidation are required for later live work. |
+| Source report | `ranked`, `unknown` or `invalid`. Unknown may retain conditional support values but has no accepted ranked source. Invalid/Unknown are scientific outcomes, not fabricated zero error or a forced winner. |
+| Manual recovery task | Current eligible LIVE case → `proposed`; approval within the 60-second expiry gate → `awaiting_human`; operator outcome → `manual_recovered`, `failed` or `uncertain`. Pending tasks can be `cancelled`. Approval is a human task, not motor execution. Synthetic/replay cases cannot create one. |
+| Prevention comparison | Frozen to exact source evidence/revision, layout/profile identities and trial plan. A recompute, STOP or recovery makes it archival (`CASE_CHANGED_OR_STOPPED`); history remains readable, while new trials/reviews are rejected. New trials create a new evaluation digest; a stale Chalk answer/receipt cannot silently follow it. |
+| Trial ledger | Immutable one-release rows: `zone_entry`, `intercepted_before_entry`, `no_entry` or `unresolved`. The same key/body retries exactly; a changed body with the same key conflicts. Per-source/layout quotas are enforced. The UI shows the counterbalanced next slot; the API records out-of-order entries and reports `order_followed=false` rather than silently correcting them. |
+| Chalk result | Case agent actions include `REPORT`, `UNKNOWN`, `OBSERVE_MORE`, `REQUEST_APPROVAL`, `STOP`; a research review permits only `REPORT`/`STOP`. An agent's STOP ends that turn without authorizing an action; it is not automatically a case STOP. Revision/snapshot checks reject results made stale while a model was responding. |
+| Photon | Inbox `pending → processing → done/failed`; outbox `pending → sending → accepted/failed`, with leases and immutable-key/body retries for retryable transport failures. `accepted` means HTTP 202, not Delivered/read. Strict authorized `STOP`, `CANCEL`, `APPROVE` commands bypass conversational generation; quoted prose is not a command. |
+
+STOP never erases saved evidence and does not cut external pump power. The software contains no pump, gantry or autonomous robot actuator. Public research loads are read-only; source/prevention model calls and state changes require local operator access.
+
+### Two export/validation contracts
+
+The current-case `analysis_bundle_v1` export has `payload_sha256` and `payload_canonical_json`. Importing its validation manifest checks exact identity, partition and recomputed trial accounting; it returns **`IDENTITY_AND_ACCOUNTING_CHECKED_METHOD_NOT_RERUN`**. It does not rerun the separate numerical method or prove an independent experiment.
+
+Trace 2's offline validator uses its distinct `content_hash` envelope and full immutable method inputs. Its published synthetic alternatives are alternative outcomes for the same fixture, not additive independent trials. Do not rename hashes or treat a redacted product export as a complete method-replay bundle. [The validation protocol](docs/prevention-validation-protocol.md), [Trace 3 contract](docs/trace3-research-and-contract.md), and [Aarush's merged rehearsal](docs/experiment-validation-v2.md) explain the boundary.
+
+## Current software-only team work
+
+Use the two copyable prompts in [software handoffs](docs/software-handoffs.md):
+
+- **Megana:** existing-demo acceptance, accessibility and browser end-to-end evidence.
+- **Aarush:** export/validator contract documentation and missing/unresolved/retry edge-case tests.
+
+These assignments do not depend on a webcam, pump, calibration or new physical data. Jose owns shared application state, scientific interfaces, live provider configuration and final integration. Earlier [four-person](docs/four-person-build-plan.md) and [three-person](docs/team-handoff-prompts.md) plans remain history; they do not expand these current software-only scopes.
+
+Next software work is concrete: extend guided-demo acceptance/accessibility regressions, strengthen the export/method boundary tests, keep hosted CI green on each exact commit, and retain provider-failure/stale-response behavior. An [optional synthetic first-passage bookkeeping audit](docs/algorithm-contract-audit.md#11-next-synthetic-audit-first-passage-bookkeeping) tests exact destination/support partitions; it changes neither frozen algorithms nor physical evidence. Physical calibration and independent source/interception trials are a separate later measurement task; extra ocean-model training cannot replace them. Grok is used interactively for review; its recurring research schedule remains paused. GitHub checks run on code changes.
+
+## Reproduce software checks
+
+The safest complete software rehearsal starts its own temporary API/store on a random loopback port and guards every provider, camera and Photon path:
 
 ```sh
-python scripts/dev.py
-```
-
-The launcher checks the repository environment, dependencies, configuration and fixed local ports, then starts the single-worker API on http://127.0.0.1:8000 and the dashboard on http://127.0.0.1:3000. Existing verified ReefTrace services are reused; an unrelated port listener is reported as a conflict. Ctrl+C stops only services started by this invocation. `python scripts/dev.py --check` performs a read-only preflight. It does not install packages or start a camera.
-
-Local bootstrap creates a private `.env`, or repairs a missing/blank operator token while preserving other settings. Existing nonblank tokens are kept. Open the root `.env` locally. Click **Load demo** in the dashboard, then enter `REEFTRACE_LOCAL_TOKEN` in **Connect operator** when prompted; vendor keys never go into the browser. After connecting, click **Load demo** to open the cases in **Investigations**. The workspace includes **Overview**, **Investigations**, **Camera**, **Data lab**, and **Settings**. The committed three cases demonstrate a ranked path, ambiguous retained endpoint, and invalid calibration. Chalk/Photon configuration is separate from a verified live response. Camera access starts only when explicitly selected by the operator.
-
-If you explicitly enable the prepared Photon worker in `.env`, use `python scripts/dev.py --allow-photon` to start that messaging-enabled API. The default startup does not enable sponsor services.
-
-## Run the complete demo
-
-1. Connect operator access, then **Load demo**. Repeated loads reopen the same active observations. Loading after STOP makes a replacement while preserving the stopped case and its evidence.
-2. Select **Observed trajectory**, run **Compute source support**, then **Test sensitivity**. This explicitly synthetic development path should rank candidate **C**.
-3. Ask Chalk which candidate fits and what remains uncertain. A configured, successful model response includes the saved evidence ID and tool trace. If the gateway is unavailable, the app keeps the deterministic report and clearly says no live model response occurred.
-4. Select **Retained endpoint** to see **Unknown**: the shared pocket has erased the distinguishing history. Select the invalid-mapping example to see **Invalid**. These are intended scientific outcomes.
-5. Open **Data lab** (or **Explore real data** from Overview), then click **Run real-data replay**. It fits three motion models on the first 18 historical hourly positions and forecasts the final six without reading their positions during fitting. This separate experiment cannot identify a plastic release source.
-6. Open **Prevention**, then **Load synthetic prevention demo**. Inspect the protected zone and both layouts, nominal predictions by source, and separate synthetic trial bounds. **No physical trials yet** is intentional. Create a fresh frozen comparison to log one-token outcomes and ask Chalk about that exact trial snapshot. See the [prevention guide](docs/prevention-workflow.md) for the full sequence and physical measurement requirements.
-
-Run the same backend story over HTTP while the local services are running:
-
-```sh
-python scripts/e2e_demo.py --output work/e2e-demo.json
-python scripts/e2e_prevention.py
-```
-
-The audit reads the private local operator token itself. It does not open a webcam, operate the pump, or send Photon messages. A configured Chalk gateway may make a real, metered request. Its JSON separates **PASS**, **FAIL**, and **BLOCKED**. Missing live credentials and physical trials remain blockers even when every local software assertion passes. See [the reproducible verification guide](docs/verification.md) for the exact checks and sponsor commissioning steps.
-
-## What to build/measure next
-
-See [docs/execution-plan.md](docs/execution-plan.md) for exact four-person execution, software responsibilities, first physical dataset, measurement gates, setup payloads and judging. [docs/physics.md](docs/physics.md) derives the implemented mathematics. [docs/datasets.md](docs/datasets.md) researches Copernicus, NOAA, TrashCan and MARIDA, with access/licensing/domain limits and the verified public data fixture. [docs/integrations.md](docs/integrations.md) documents exact Chalk/Photon contracts. [docs/architecture.md](docs/architecture.md) maps running modules and state ownership.
-
-No neural network is needed for the controlled red-token MVP. The fitted drift field is the local learned model; source inference is a physics-based inverse comparison. The Data lab adds a training-only ridge velocity autoregression and two baselines on the pinned real NOAA sample. The learned model improves average error on this selected day but has worse final-position error than stationary persistence; all results stay visible. [The research note](docs/research-real-data.md) documents the data, mathematics and limits. Ocean currents or underwater trash photographs cannot supply this tank's flow or hidden release labels.
-
-## Verification
-
-```sh
-python -m pytest -q
-python -m ruff check apps adapters scripts tests
+.venv/bin/python scripts/e2e_offline.py --output work/offline-http-audit.json
+.venv/bin/python scripts/evaluate_fresh_drifter_study.py --output work/fresh-noaa-replay.json
+.venv/bin/python -m ruff check apps adapters scripts tests
 cd dashboard
+node --test tests/*.test.mjs
 npm run lint
+npx next typegen
+npx tsc --noEmit
 npm run build
 ```
 
-`python scripts/evaluate.py` generates a separate reproducible scientific software report on the synthetic cases. Public NOAA ingestion: `python scripts/fetch_public_sample.py --output-dir work/noaa-smoke`. Copernicus NetCDF support requires `pip install -e '.[ocean]'`; authenticated downloads are explicit and bounded, not run automatically.
+For the full Python suite and optional SDK/NetCDF dependencies, use the isolated recipe in [CI](docs/ci.md); use a source copy without private `.env` or a live store. `.[ocean]` enables the prepared Copernicus/NetCDF readers, not automatic downloads. `.[evaluations]` enables explicit Chalk remote-evaluation tooling; importing/deploying real cloud tasks is outside the offline demo.
 
-Reproduce the real-data benchmark without accounts or network access:
+The older live-server commands `scripts/e2e_demo.py` and `scripts/e2e_prevention.py` can contact a configured Chalk gateway and read private local settings. They do not send Photon messages or open a camera, but they are distinct from the guarded offline runner. A passing local suite is not a completed hosted CI run, a live provider response or a physical accuracy measurement.
 
-```sh
-python scripts/evaluate_real_data.py --output work/real-data-example.json
-```
+## Reference map
 
-The implementation has no pump/robot actuation. Do not enable a serial/gantry feature from an older plan. Camera frames and private settings belong in ignored `data/local/` and `.env`; the committed small replay is explicitly synthetic. Reproducing a live sponsor call or physical source trial requires real credentials/hardware and a separate recorded result.
-## Grok, satellite context and the SpaceXAI build
-
-The investigation workspace includes a pinned NOAA Coral Reef Watch satellite-derived
-heat-stress sample and a deterministic spoken-briefing script. Historical ecological
-context is displayed separately and **never changes the tank source ranking**.
-Use **Load satellite context**, then **Read briefing text** on a saved case.
-The chart covers one Florida Keys-area grid cell on 1–7 July 2023, not present tank
-conditions or confirmed bleaching.
-
-**Generate Grok narration** is an explicit, operator-authenticated server request to
-the xAI text-to-speech API. `GROK_VOICE_ENABLED=false` and no `XAI_API_KEY` keeps it
-offline; the user selected completing the integration without a live key. No live
-speech result or completed Voice API eligibility is claimed. Permanent keys must
-never enter frontend environment variables. See [the data and API contract](docs/grok-space-context.md).
-
-Chalk was separately verified with a real Gemini Flash investigation. Preserve the
-currently authorized live Photon configuration; these build tasks do not authorize
-new messages or changes to automatic replies. GitHub checks run on every push and pull request without sponsor
-credentials or hardware access. See [integration verification](docs/integrations.md)
-and [CI](docs/ci.md). Cursor's Grok implementation and the reviewed ML diagnostic are
-recorded separately from proof of any live Grok Voice request.
+- [Architecture](docs/architecture.md), [algorithm/contract audit](docs/algorithm-contract-audit.md), [physics](docs/physics.md), [prevention physics](docs/prevention-physics.md).
+- [Integrated demo](docs/integrated-team-demo.txt), [prevention workflow](docs/prevention-workflow.md), [verification](docs/verification.md), [CI](docs/ci.md).
+- [Fresh NOAA study](docs/fresh-noaa-study.md), [datasets](docs/datasets.md), [original real-data research](docs/research-real-data.md), [motion-vector research](docs/motion-vector-research.txt), [current Grok build record](docs/grok-fresh-build.md), [earlier Kalman build record](docs/grok-kalman-build.md).
+- [Chalk/Photon contracts and live-verification history](docs/integrations.md), [satellite/Grok Voice contract](docs/grok-space-context.md).
+- [Later field commissioning](docs/field-commissioning.md), [original execution plan](docs/execution-plan.md). Camera frames, contacts, raw physical recordings and credentials stay in ignored local storage; no electronics purchase or physical experiment is required for the current software handoffs.
