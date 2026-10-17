@@ -1,0 +1,19 @@
+{
+  "evaluation_outcomes_computed": false,
+  "protocol_sha256": "025bb06739d7d53439ea41902436a4bb2bff12b5926abfaa60cf5ac1f9d0bb4f",
+  "receipt": {
+    "bytes": 318597,
+    "finished_at_utc": "2026-10-17T14:50:32.718473+00:00",
+    "http_status": 200,
+    "raw_path": "raw/identity-aliases.csv",
+    "reason": null,
+    "response_complete": true,
+    "role": "identity_aliases",
+    "sha256": "a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82",
+    "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO&distinct%28%29",
+    "started_at_utc": "2026-10-17T14:50:32.446157+00:00",
+    "status": "DOWNLOADED"
+  },
+  "saved_before_block_metadata": true,
+  "schema_version": 1
+}

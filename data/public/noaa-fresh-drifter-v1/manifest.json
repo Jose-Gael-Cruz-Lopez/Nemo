@@ -1,0 +1,81 @@
+{
+  "evaluation_outcomes_computed": false,
+  "exclusions_sha256": "40601110d4ac510766c561f1534fc98d1e5221884cbd5c2e76ff73415d52d82e",
+  "finished_at_utc": "2026-10-17T14:51:21.424267+00:00",
+  "no_replacements": true,
+  "protocol_sha256": "025bb06739d7d53439ea41902436a4bb2bff12b5926abfaa60cf5ac1f9d0bb4f",
+  "requests_attempted": 5,
+  "response_bytes_received": 363962,
+  "schema_version": 1,
+  "selection_sha256": "de099ecea1173ef12d4fd9a27fa4d76ed7759ebe36e431856e9cab61869d0214",
+  "source_receipts": [
+    {
+      "bytes": 32265,
+      "finished_at_utc": "2026-10-17T14:50:32.444228+00:00",
+      "http_status": 200,
+      "raw_path": "raw/dataset-info.json",
+      "reason": null,
+      "response_complete": true,
+      "role": "dataset_metadata",
+      "sha256": "22799a625c750856f50b93a919a89c8660b0569db7da4058102e6a53d7eb9373",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+      "started_at_utc": "2026-10-17T14:50:32.200394+00:00",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 318597,
+      "finished_at_utc": "2026-10-17T14:50:32.718473+00:00",
+      "http_status": 200,
+      "raw_path": "raw/identity-aliases.csv",
+      "reason": null,
+      "response_complete": true,
+      "role": "identity_aliases",
+      "sha256": "a18a8568a93a4da3285ec6e2d2fb927a5d9f3f420deaf961f99b0421011fab82",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,WMO&distinct%28%29",
+      "started_at_utc": "2026-10-17T14:50:32.446157+00:00",
+      "status": "DOWNLOADED"
+    },
+    {
+      "bytes": 0,
+      "finished_at_utc": "2026-10-17T14:50:53.304887+00:00",
+      "http_status": 200,
+      "raw_path": "raw/metadata-atlantic-2021.csv",
+      "reason": "ReadTimeout",
+      "response_complete": false,
+      "role": "block:atlantic-2021",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2021-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-80&longitude%3C=-20",
+      "started_at_utc": "2026-10-17T14:50:32.720830+00:00",
+      "status": "FETCH_FAILED"
+    },
+    {
+      "bytes": 0,
+      "finished_at_utc": "2026-10-17T14:51:14.084231+00:00",
+      "http_status": 200,
+      "raw_path": "raw/metadata-indian-2021.csv",
+      "reason": "ReadTimeout",
+      "response_complete": false,
+      "role": "block:indian-2021",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2021-06-01T00%3A00%3A00Z&latitude%3E=-40&latitude%3C=20&longitude%3E=40&longitude%3C=100",
+      "started_at_utc": "2026-10-17T14:50:53.306234+00:00",
+      "status": "FETCH_FAILED"
+    },
+    {
+      "bytes": 13100,
+      "finished_at_utc": "2026-10-17T14:51:21.349554+00:00",
+      "http_status": 200,
+      "raw_path": "raw/metadata-north-pacific-2022.csv",
+      "reason": "SNAPSHOT_SCHEMA_OR_IDENTITY_INVALID",
+      "response_complete": true,
+      "role": "block:north-pacific-2022",
+      "sha256": "4279026139467c925cb91909e2576d915c8e793d60b6f3647d53182a976e5bd9",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,WMO,expno,location_type&time=2022-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-180&longitude%3C=-120",
+      "started_at_utc": "2026-10-17T14:51:14.084657+00:00",
+      "status": "METADATA_INVALID"
+    }
+  ],
+  "started_at_utc": "2026-10-17T14:50:32.200296+00:00",
+  "study_id": "noaa-fresh-gdp-id-study-v1",
+  "trajectories": []
+}
