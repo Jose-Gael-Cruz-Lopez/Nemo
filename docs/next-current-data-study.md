@@ -1,11 +1,22 @@
 # Next data and model study: match the forcing to the observation
 
-Research checkpoint: 17 October 2026. This is a proposal and source-availability
-review, **not a frozen completed experiment or a new acquired trajectory dataset**.
-The existing NOAA studies and their negative results remain unchanged.
+Historical proposal checkpoint: 17 October 2026. This note preserves the original
+source-availability review and future-study design; it is not itself an executed
+experiment. Subsequent work acquired matched NOAA GDP/HYCOM inputs in a separately
+frozen [v2 compatibility amendment](matched-current-v2-results.md) and scored
+**36/36** planned cells across two buoy groups. Current-only RK4 had larger mean
+errors than last observed drift on that small retrospective sample; no model was
+promoted. The preserved [v1 attempt](matched-current-results.md) remains **0/36**,
+and the earlier six-group NOAA study is unchanged. Issue-time availability and
+independence from assimilation remain unverified. The OSCAR, wind/leeway and
+learned-residual candidates below remain proposals, not acquired or validated
+additions to that comparison.
 
-The next useful empirical comparison is a current-driven forecast against an
-independent object's later recorded motion at the **same place and time**. Adding
+## Original research rationale
+
+At this proposal's original checkpoint, the next useful empirical comparison was
+a current-driven forecast against an independent object's later recorded motion
+at the **same place and time**. Adding
 a bigger learned model to unrelated currents and buoy positions would not test
 that claim. The present PacIOOS forecast and historical GDP studies have different
 locations/times; the UI correctly keeps them separate.

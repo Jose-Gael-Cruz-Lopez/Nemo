@@ -6468,3 +6468,1335 @@ Kind: **FROZEN_V2_PROTOCOL_NOT_GROK_RESPONSE**. Original bytes: **14096**. SHA-2
   ]
 }
 ```
+
+
+## Additive origin-residual checkpoint — two actual reviews, no candidate result
+
+Checkpoint: **17 October 2026**. This section appends to, rather than rewrites,
+the complete **377,243-byte** preceding continuation. Its prior SHA-256 is
+`0f82064391b61e6b9fc240a83ed6acb2d60f9f28dc66860ba216ef1dd5793909`.
+The continuation now contains **eleven actual Grok web prompt/response rounds,
+twenty-two Grok capture files**, alongside separately labeled local records.
+The earlier canonical bundle and its 43-record manifest remain unchanged.
+
+### Current release versus the new development candidate
+
+The existing matched-current v2 result remains **36/36**, with current-only RK4
+performing worse than last drift on the two-group descriptive comparison. The
+preserved v1 attempt remains **0/36**, and the earlier fresh six-group study
+remains **180/180**. None is overwritten or newly evaluated by this addition.
+
+The prior software release at
+[`33280da7c348930ca7e63cf16b6a98c4cdf9987d`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/33280da7c348930ca7e63cf16b6a98c4cdf9987d)
+passed all three jobs in
+[hosted CI 39075407005](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39075407005):
+**1,809 Python tests, 225 frontend tests and 174 guarded HTTP checks**, zero HTTP
+failures and six explicitly blocked external/physical scopes, with the distinct
+portable v2 verification and fixture-preservation checks passing. This is a
+named historical release check, not hosted verification of the new uncommitted
+origin-residual implementation. The earlier failed byte-exact Linux replay
+remains recorded; the separate post-outcome portability check preserves exact
+frozen inputs and reports bounded computed-float differences without changing
+that first score.
+
+### What Grok reviewed and what local execution actually established
+
+The two exact new exchanges cover the design and the complete three-file
+implementation of a **separate post-outcome exploratory origin-residual
+candidate**. The final two context fixes, exactly one hour apart, supply the
+existing origin-tangent mean-sphere displacement velocity. The origin current
+is subtracted to obtain a constant local east/north residual in m/s. A copied
+field adds that residual while retaining the actual axes and masks; the existing
+WGS84 RK4/support/speed/budget rules remain authoritative. There is no fitted
+decay, clipping, coefficient search or mutation of the source field.
+
+Accepted constraints include four candidates, **48 planned model/hour cells**,
+only **12 already-viewed target positions**, candidate-specific failures,
+complete-cell primary summaries only when all 48 score, duplicate-UTC rejection,
+a forecast content hash and persisted readback before this diagnostic's target
+number decoding, exclusive first-score artifacts, and a committed-method guard.
+A colocated detached hash does not become a public trust anchor: the planned
+public reader requires a separately reviewed external result identity.
+
+**Local disposition:** the implementation is **unscored and under review**.
+**40 focused synthetic contract tests passed**, and the three new files passed
+Ruff. These tests are separate from the earlier 1,809-test hosted release; they
+must not be added together as a new full-suite or hosted count. The real
+`data/research/origin-residual-v1` directory is absent at this checkpoint. No real
+candidate forecast/score, new outcome, new acquired dataset, trained model,
+operational winner, improved skill or physical validation is asserted. Static
+Grok agreement does not execute the repository, authorize first scoring or
+supply new scientific evidence. The original frozen evaluator/source/data
+identities remain unchanged.
+
+**Correction retained alongside the raw advice:** Grok's design review proposed
+a turning-flow exact-integral oracle without fully qualifying changing WGS84
+metrics. The local tests instead use an exact geographic integral only for
+fixed-latitude eastward flow, and a separate independent high-accuracy SciPy
+DOP853 reference for synthetic turning geographic flow. The later response's
+compressed wording about that check is not evidence of a real-ocean experiment
+or a test of parallel transport. No parallel-transport alternative is implemented
+or validated; the residual explicitly retains constant local east/north
+components. Masked origin/all-masked fields, domain exit, invalid cadence,
+corrected-grid speed excess and failed readback have synthetic regression
+coverage. This does not imply every possible intermediate-stage failure or
+physical assumption has been independently validated.
+
+The residual combines object, forcing, sampling and processing discrepancy; it
+does not identify a windage coefficient or diagnose current-model bias. Even a
+later lower score on these two viewed groups would be **exploratory**, not an
+untouched test. A later metadata-selected and separately frozen whole-GDP-ID
+cohort, with all prior identities/known aliases excluded and forcing-exposure,
+as-of and assimilation limitations disclosed, is needed before a transfer claim.
+
+This documentation makes no xAI API call, spends no credits, changes no billing
+or provider configuration, sends no Photon message, starts no camera and operates
+no pump. No private credentials, contacts, camera frames, database or shared-chat
+transcript appears in these captures. GitHub push/PR checks remain the only
+requested recurring automation; publication and merge status are separate.
+
+### Exact new saved Grok records
+
+#### grok-origin-residual-design-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-design-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Bytes: **4,747**; SHA-256: `3919780b4f411745b8728e481495c4915ed8e69f246395503714932ab2731337`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+Tideward next physics development: static research/design review in the SAME existing project. No API calls, execution or new data acquisition is requested. Frozen v1/v2 results and all pinned numerical sources must remain unchanged.
+
+Current evidence: the completed retrospective v2 compares stationary, last-observed drift and current-only RK4 on TWO GDP groups, SIX hourly future positions per group. All36 candidate/hour cells scored, reusing only12 later QC/interpolated position estimates. Equal-ID macro ADE: stationary3490.119m,last-drift1510.232m,current-only5063.020m. No model promotion. These outcomes have ALREADY BEEN VIEWED; any new candidate evaluated here is post-outcome EXPLORATORY development, never an untouched test. HYCOM is a15m retrospective analysis with00/03/06Z knots; no issue-time or assimilation independence claim. This does not validate plastic/tank/reef forecasting.
+
+Proposed finite next build, in NEW files only: observed-origin-residual current advection. From the final TWO context positions exactly1hour apart, compute the unchanged last-drift model's backward mean-sphere log displacement expressed in origin-local east/north m/s, v_last. Sample u0=HYCOM east/north at origin/time. Define r0=v_last-u0 and a new derived velocity field u_corrected(X,t)=u_HYCOM(X,t)+r0. r0 east/north components are held constant in the LOCAL EAST/NORTH convention across this bounded domain; they are not a globally parallel-transported vector or an identified wind/current-bias coefficient. Copy arrays, retain all original times/actual coordinate axes/masks, never overwrite forcing, never fill missing cells, never tune decay/clipping/coefficient after these outcomes. Original knot-aligned WGS84 RK4 samples corrected m/s at all4stages and uses existing support, speed<=10m/s, horizon<=6h, step/sample budgets. Derived field may legitimately fail if its grid speeds exceed the unchanged bound; do not clip to rescue a candidate. r0=0 should reproduce the existing current-only TRACK (provenance can differ).
+
+The context last-drift velocity is a one-hour mean-sphere origin-tangent estimate, not an instantaneous current measurement. Original last-drift extrapolation uses mean-sphere exp, RK4 uses WGS84 differential metrics; constant corrected flow need not exactly reproduce the global last-drift track. r0 bundles object, forcing, sampling and processing discrepancy; improvement would not identify its physical cause.
+
+New report: keep original3candidates unchanged, add this4thcandidate in a separately identified EXPLORATORY report. Full48plannedcells=2groups*4models*6h, still12distinct targets. Persist all4forecast outputs/hash before decoding target numeric coordinates for this diagnostic; no future positions in candidate API. Complete-case primary only when ALL48score. Preserve unsupported/missing cells, paired common-support counts and per-group ADE/FDE. No learned parameters/no training/neural-model claim. Do not amend the existing36-cell result or retroactively call this predeclared. A later new metadata-selected GDP cohort, frozen after code review and excluding prior IDs/known aliases, is necessary to test transfer; old HYCOM forcing is already exposed.
+
+Primary sources checked today (please verify claims against original documents, do not invent sources):
+https://opendrift.github.io/choosing_a_model.html (OceanDrift separates current, optional wind factor and Stokes; Leeway object coefficients are empirical, not coefficients established for our tokens)
+https://docs.oceanparcels.org/en/latest/reference/parcels/kernels/index.html (distinct RK4, adaptiveRK45 and stochastic advection/diffusion kernels)
+https://www.aoml.noaa.gov/global-drifter-program/ (hourly GDP is QC/interpolated, drogue centered15m; buoy motion is not surface-plastic truth)
+
+Correct your earlier result-review phrase 'every RK4 stage ... exact': RK4 only approximates the interpolated field; knot splitting does NOT make every stage/integral exact. Proposed wind/wave/depth/assimilation explanations remain hypotheses, not diagnosed causes from2buoys.
+
+Please provide: A) GO/NO-GO with concrete corrections for this bounded exploratory build; B) exact equation/units/coordinate caveats and whether constantENU residual is legitimate as an explicitly stated local model; C) at least6 hostile scientific tests including manufactured time-varying/turning-flow oracles, zero residual, field immutability, mask/domain failures and target-isolation; D) what DataLab/Chalk can honestly say if it helps OR worsens; E) next confirmatory-data gate. Do not execute code, invent scores or choose a residual decay time. We will implement/review locally and preserve your exact advice separately from actual software execution.
+
+``````
+
+#### grok-origin-residual-design-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-design-response.txt
+
+Role: `ACTUAL_GROK_WEB_RESPONSE`. Bytes: **4,070**; SHA-256: `f184d40911816b9af47f2dcb48da3212122e79deabd6a31a63ddd5abcccc9cc6`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+**A. GO for a separately identified exploratory build, with corrections.**  
+The proposal is acceptable only as a post-outcome diagnostic in new files. Do not amend the frozen 36-cell v2 result, do not call the residual pre-declared, and do not treat a lower error on these two already-viewed groups as confirmatory. Hold \(r_0\) constant in the local east/north frame; do not decay, clip or retune it after seeing the new errors. If the corrected field exceeds 10 m/s anywhere on the supported grid, fail that candidate closed rather than clip. Persist all four forecast outputs and their hash before any future coordinate is decoded. Primary macro only when all 48 cells score.
+
+**Correction of prior wording.** RK4 approximates the interpolated field; knot splitting keeps each stage inside one linear time piece but does not make the integral or every stage exact.
+
+**B. Equation, units and caveats.**  
+From the final two context fixes exactly 3600 s apart, the existing last-drift mean-sphere log map at the origin supplies  
+\[
+\mathbf{v}_{\text{last}}=\frac{-\operatorname{Log}_{\text{origin}}(\mathbf{p}_{\text{prev}})}{3600}\quad(\mathrm{m/s,\ east/north}).
+\]  
+Sample \(\mathbf{u}_0=\) HYCOM east/north at the origin and origin time. Define  
+\[
+\mathbf{r}_0=\mathbf{v}_{\text{last}}-\mathbf{u}_0,\qquad\mathbf{u}_{\text{corrected}}(\mathbf{X},t)=\mathbf{u}_{\text{HYCOM}}(\mathbf{X},t)+\mathbf{r}_0.
+\]  
+\(\mathbf{r}_0\) is held constant in the local east/north convention across this bounded tile; it is not a parallel-transported global vector and not an identified wind or bias coefficient. Units remain m/s. A constant local-ENU residual is legitimate as an explicitly labelled local model. It bundles object response, forcing error, sampling and processing discrepancy; a lower error would not identify the physical cause. Because last-drift uses the mean-sphere exponential while RK4 uses WGS84 metric derivatives, \(\mathbf{r}_0=0\) must reproduce the existing current-only track, but a nonzero constant residual need not reproduce the pure last-drift track.
+
+**C. Hostile tests.**  
+1. Zero residual: \(\mathbf{r}_0=\mathbf{0}\) reproduces the existing current-only track positions (provenance may differ).  
+2. Field immutability: the original HYCOM arrays and masks are unchanged after the derived field is built.  
+3. Mask/domain: a masked cell or an out-of-support sample on the corrected field stops with the existing reason and retains the last supported point; no zero-fill.  
+4. Speed bound: a manufactured residual that pushes any supported cell above 10 m/s fails the candidate; no clip.  
+5. Manufactured turning-flow oracle: a spatially uniform but time-varying analytic current whose exact integral is known; the corrected RK4 matches that integral within the declared float tolerance when \(\mathbf{r}_0\) is the constant difference at the origin.  
+6. Target isolation: mutating any future lat/lon string after the four forecast hashes are stored does not change those hashes; the model helper accepts no future argument.
+
+**D. Data Lab / Chalk.**  
+If the residual candidate has lower descriptive error: “On this already-viewed two-group exploratory diagnostic a constant local residual reduced error relative to current-only; this is not a pre-declared test, not an identified physical cause, and not a promoted model.”  
+If it worsens: “The constant local residual increased error on this cohort; the negative exploratory result is retained.”  
+In both cases show 48 planned cells, the 12-target reuse, and the flags retrospective / not operational / not independent / not plastic. No winner is selected from unequal support, and primary macro appears only when all 48 score.
+
+**E. Next confirmatory-data gate.**  
+A later cohort of whole GDP IDs, metadata-selected and frozen after this code is reviewed, excluding every previously viewed ID and known alias, with forecasts saved before any new future coordinate is decoded. Until that cohort exists, the residual remains an exploratory diagnostic on already-viewed data.
+``````
+
+#### grok-origin-residual-code-review-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-code-review-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Bytes: **59,373**; SHA-256: `17cc4963a246d9c4ec38218cfea1c661d07f8449f9dba3225951d200916d3605`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+Static adversarial CODE review of the new origin-residual diagnostic you approved as exploratory. No real candidate outcome has been computed; its result directory does not exist. All old frozen science remains unchanged. Local synthetic tests currently40PASS, RuffPASS. Those are separately executed tests, not your execution. Root will commit exact reviewed methods before any first-score action. User currently asked for BlueMarine-inspired UI too; that unrelated UI work must not turn this candidate into an app recommendation or a performance claim.
+
+Review the exact THREE source files below. Need conditional GO/NO-GO with concrete failure paths, not praise. Check: constantENU coordinate convention; no mutation/clipping/fill/mask expansion; source and derived field provenance; origin-tangent mean-sphere context velocity vs WGS84 RK4;2fixes/1hour; speed/domain/time/budget stops; all48cells plus12already-viewedtargets; primary withheld if incomplete; missing/duplicate target treatment; exact future isolation; source/method hashes + committed-method guard; exclusive first-score writes and forecast readback before numeric target decode; bounded read-only default and separate external result identity requirement. No network/provider/hardware/automaticpromotion. No tuning residual decay/coefficient/newIDs.
+
+We corrected the turning-flow test: only east-only fixed-latitude forcing has an analytic geographic integral; turning geographic forcing is compared with independent high-accuracy DOP853, not by adding velocity integrals directly to degrees. Zero-residual track equality and immutable arrays/masks/metadata tested. Helpers reject bool/string residuals. Missingcontext preserves transportreason. Duplicate target UTC invalidates thatUTC even if one duplicate has invalidcoordinates. Public app integration will be separate: no endpoint is installed until a real immutable result and separately trusted identity exist. The strict originalv2evaluator and data pins remain unchanged; latestmain33280da hostedCI nowgreen1809Python/225frontend/174HTTP+6blocked.
+
+No new result/skill score is provided and you must NOT invent one, claim code execution or approve unseen physical behavior. Return exact necessary corrections or conditionalGO, identify untested assumptions, and clearly distinguish approved software contract from a new independent scientific protocol.
+
+EXACT SOURCE apps/ocean/reeftrace_ocean/origin_residual.py
+BYTES 21619
+SHA256 37b84b13bb085651ae2b5b1140b6bc43d8ad5897719eb34b7b525cd8709fa02e
+```python
+"""Post-outcome, unfitted origin-residual development diagnostic.
+
+The original matched-current experiment is immutable. This distinct candidate
+adds a constant local east/north discrepancy to a copied, supported current
+field. The two already-viewed GDP groups are development data, not a new test.
+Candidate construction has no reserved-target argument or future access.
+"""
+
+from __future__ import annotations
+
+import copy
+import hashlib
+import itertools
+import json
+import math
+from collections.abc import Mapping, Sequence
+from datetime import UTC, datetime, timedelta
+from numbers import Real
+
+import numpy as np
+
+from . import matched_current as original
+from .advection import CurrentSampler, advect_current
+from .benchmark import SphericalLocalFrame, great_circle_distance_m
+from .field import OceanField
+
+GROUP_IDS = original.GROUP_IDS
+MODEL_IDS = (*original.MODEL_IDS, "origin_residual_current")
+HORIZONS_S = original.HORIZONS_S
+ORIGIN = original.ORIGIN
+ORIGIN_TIME_UTC = original.ORIGIN_TIME_UTC
+STUDY_ID = "origin-residual-gdp-hycom-15m-exploratory-v1"
+PLANNED_CELLS = len(GROUP_IDS) * len(MODEL_IDS) * len(HORIZONS_S)
+PLANNED_DISTINCT_TARGETS = len(GROUP_IDS) * len(HORIZONS_S)
+
+
+class _PositionInputError(ValueError):
+    """Scientific input type failures remain explicit candidate/target failures."""
+
+
+def canonical_sha256(value: dict) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
+                                    allow_nan=False).encode()).hexdigest()
+
+
+def forecast_sha256(value: dict) -> str:
+    return canonical_sha256({key: item for key, item in value.items()
+                             if key != "forecast_sha256"})
+
+
+def _fix(row, group_id):
+    if not isinstance(row, Mapping):
+        raise _PositionInputError("INVALID_POSITION_ROW")
+    if row.get("drifter_id", group_id) != group_id:
+        raise ValueError("ID_MISMATCH")
+    when = row.get("time_utc")
+    try:
+        when = datetime.fromisoformat(when) if isinstance(when, str) else when
+    except ValueError:
+        raise ValueError("INVALID_TIME") from None
+    if (not isinstance(when, datetime) or when.utcoffset() != timedelta(0)):
+        raise ValueError("INVALID_TIME")
+    coordinates = []
+    for key, lower, upper in (("latitude_deg", -90, 90), ("longitude_deg", -180, 180)):
+        value = row.get(key)
+        if isinstance(value, (bool, np.bool_)) or not isinstance(value, (Real, str)):
+            raise _PositionInputError("INVALID_COORDINATE")
+        try:
+            number = float(value)
+        except (ValueError, TypeError, OverflowError):
+            raise ValueError("INVALID_COORDINATE") from None
+        if not math.isfinite(number) or not lower <= number <= upper:
+            raise ValueError("INVALID_COORDINATE")
+        coordinates.append(number)
+    return when.astimezone(UTC), *coordinates
+
+
+def _blank_candidate():
+    return {"model_id": MODEL_IDS[-1], "status": "UNSUPPORTED", "reason_code": None,
+        "requested_horizon_s": HORIZONS_S[-1], "completed_horizon_s": 0.0,
+        "planned_count": len(HORIZONS_S), "available_count": 0, "context_rows_used": 2,
+        "learned_parameters": 0, "future_positions_used": False,
+        "residual_definition": "last_observed_origin_tangent_velocity_minus_origin_current",
+        "residual_units": "m/s", "residual_transport": "constant_local_east_north_components",
+        "residual_east_north_m_s": None, "last_observed_velocity_m_s": None,
+        "origin_current_east_north_m_s": None,
+        "cells": [{"horizon_hours": h // 3600, "elapsed_s": h,
+            "time_utc": (ORIGIN + timedelta(seconds=h)).isoformat().replace("+00:00", "Z"),
+            "forecast_status": "UNAVAILABLE", "forecast_reason_code": None,
+            "latitude_deg": None, "longitude_deg": None} for h in HORIZONS_S]}
+
+
+def _failure(candidate, reason):
+    candidate["reason_code"] = reason
+    for cell in candidate["cells"]:
+        if cell["forecast_status"] != "AVAILABLE":
+            cell["forecast_reason_code"] = reason
+    return candidate
+
+
+def corrected_field(field: OceanField, residual_east_north_m_s) -> OceanField:
+    """Copy actual axes/masks and add the declared local residual without clipping.
+
+    This is a derived model field, not a change to the source NetCDF. Existing
+    CurrentSampler/advect_current validate the corrected whole supported grid,
+    including its unchanged 10 m/s bound. Missing cells remain missing.
+    """
+    if not isinstance(field, OceanField):
+        raise TypeError("An OceanField is required")
+    raw_residual = np.asarray(residual_east_north_m_s, dtype=object)
+    if (raw_residual.shape != (2,)
+            or any(isinstance(value, (bool, np.bool_)) or not isinstance(value, Real)
+                   for value in raw_residual)):
+        raise ValueError("A finite numeric east/north residual pair in m/s is required")
+    residual = raw_residual.astype(float)
+    if not np.isfinite(residual).all():
+        raise ValueError("A finite east/north residual pair in m/s is required")
+    arrays = {key: np.array(getattr(field, key), copy=True) for key in (
+        "time_utc", "longitude_deg", "latitude_deg", "eastward_m_s",
+        "northward_m_s", "valid_mask")}
+    arrays["eastward_m_s"] = arrays["eastward_m_s"].astype(float) + residual[0]
+    arrays["northward_m_s"] = arrays["northward_m_s"].astype(float) + residual[1]
+    metadata = copy.deepcopy(field.metadata)
+    source = copy.deepcopy(metadata)
+    digest = hashlib.sha256()
+    for key in ("time_utc", "longitude_deg", "latitude_deg", "eastward_m_s",
+                "northward_m_s", "valid_mask"):
+        value = arrays[key]
+        raw = (value.astype("datetime64[us]").astype("<i8") if key == "time_utc"
+               else value.astype("u1") if key == "valid_mask" else value.astype("<f8"))
+        digest.update(key.encode() + str(raw.shape).encode() + raw.tobytes(order="C"))
+    digest.update(json.dumps({"source": source, "residual_m_s": residual.tolist()},
+                             sort_keys=True, allow_nan=False).encode())
+    metadata.update({"sha256": digest.hexdigest(), "data_kind": "DERIVED_EXPLORATORY_FIELD",
+        "source_field_provenance": source, "residual_east_north_m_s": residual.tolist(),
+        "velocity_units": "m/s", "source_bytes_modified": False,
+        "residual_transport": "constant_local_east_north_components"})
+    return OceanField(**arrays, selected_depth_m=field.selected_depth_m, metadata=metadata)
+
+
+def build_origin_residual_candidate(context, field, *, group_id: str, failure: str | None = None,
+                                    context_failure: str | None = None):
+    """Use only a permitted prefix, never a future position or fitted coefficient."""
+    if group_id not in GROUP_IDS:
+        raise ValueError("Only the two fixed development groups are accepted")
+    candidate = _blank_candidate()
+    if (not isinstance(context, Sequence) or isinstance(context, (str, bytes))
+            or len(context) != original.CONTEXT_COUNT):
+        return _failure(candidate, context_failure or "CONTEXT_COUNT_INVALID")
+    try:
+        now, latitude, longitude = _fix(context[-1], group_id)
+        if now != ORIGIN:
+            raise ValueError("ORIGIN_TIME_MISMATCH")
+        before, previous_latitude, previous_longitude = _fix(context[-2], group_id)
+        if (now - before).total_seconds() != original.CONTEXT_STEP_S:
+            raise ValueError("CONTEXT_CADENCE_MISMATCH")
+        frame = SphericalLocalFrame(latitude, longitude)
+        velocity = -frame.to_xy(previous_latitude, previous_longitude) / original.CONTEXT_STEP_S
+    except ValueError as error:
+        return _failure(candidate, "LOCAL_GEOMETRY_BUDGET_EXCEEDED" if "50 km" in str(error)
+                        else str(error))
+    candidate["last_observed_velocity_m_s"] = velocity.tolist()
+    if field is None:
+        return _failure(candidate, failure or "CURRENT_FIELD_UNAVAILABLE")
+    try:
+        sampler = CurrentSampler(field, time_origin=np.datetime64(ORIGIN.replace(tzinfo=None), "us"))
+        initial = np.asarray(sampler.sample(latitude, longitude, 0.0))
+        residual = velocity - initial
+        candidate["origin_current_east_north_m_s"] = initial.tolist()
+        candidate["residual_east_north_m_s"] = residual.tolist()
+        derived = corrected_field(field, residual)
+        result = advect_current(derived, latitude_deg=latitude, longitude_deg=longitude,
+            start_time_utc=ORIGIN, horizon_s=HORIZONS_S[-1], step_s=300, output_step_s=3600)
+    except (ValueError, TypeError, OverflowError) as error:
+        reason = getattr(error, "reason", None)
+        if reason is None:
+            if isinstance(field, OceanField) and np.asarray(field.valid_mask).dtype == np.dtype(bool) and not np.asarray(field.valid_mask).any():
+                reason = "CURRENT_FIELD_ALL_MASKED"
+            else:
+                reason = ("CORRECTED_FIELD_SPEED_BUDGET_EXCEEDED" if "speed exceeds" in str(error)
+                          else "CURRENT_CONFIGURATION_INVALID")
+        return _failure(candidate, reason)
+    candidate.update({"advection": result, "derived_field_sha256": derived.metadata["sha256"],
+        "source_field_sha256": field.metadata.get("sha256"), "status": result["status"],
+        "reason_code": result["reason_code"], "completed_horizon_s": result["completed_horizon_s"]})
+    accepted = {point["elapsed_s"]: point for point in result["track"]}
+    for cell in candidate["cells"]:
+        point = accepted.get(cell["elapsed_s"])
+        if point is None:
+            cell["forecast_reason_code"] = result["reason_code"] or "HOURLY_OUTPUT_UNAVAILABLE"
+        else:
+            cell.update({"latitude_deg": point["latitude_deg"], "longitude_deg": point["longitude_deg"],
+                         "forecast_status": "AVAILABLE", "forecast_reason_code": None})
+            candidate["available_count"] += 1
+    return candidate
+
+
+def build_forecasts(context_by_group, fields_by_group=None, *, failures_by_group=None,
+                    current_failures_by_group=None) -> dict:
+    """Allocate all 48 cells and build all four candidates before target access."""
+    fields_by_group = {} if fields_by_group is None else fields_by_group
+    for values in (context_by_group, fields_by_group, failures_by_group or {},
+                   current_failures_by_group or {}):
+        if not isinstance(values, Mapping) or set(values) - set(GROUP_IDS):
+            raise ValueError("Only the two fixed development groups are accepted")
+    groups = [{"group_id": group, "context_count": 0, "origin_position": None,
+               "candidates": [None, None, None, _blank_candidate()]} for group in GROUP_IDS]
+    baseline = original.build_matched_current_forecasts(context_by_group, fields_by_group,
+        failures_by_group=failures_by_group, current_failures_by_group=current_failures_by_group)
+    for group, old in zip(groups, baseline["groups"], strict=True):
+        group.update({"context_count": old["context_count"],
+                      "origin_position": copy.deepcopy(old["origin_position"])})
+        group["candidates"][:3] = copy.deepcopy(old["candidates"])
+        group["candidates"][3] = build_origin_residual_candidate(
+            context_by_group.get(group["group_id"]), fields_by_group.get(group["group_id"]),
+            group_id=group["group_id"],
+            failure=(current_failures_by_group or {}).get(group["group_id"]),
+            context_failure=(failures_by_group or {}).get(group["group_id"]))
+    report = {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_EXPLORATORY_FORECASTS",
+        "study_id": STUDY_ID, "group_ids": list(GROUP_IDS), "model_ids": list(MODEL_IDS),
+        "origin_time_utc": ORIGIN_TIME_UTC, "horizons_s": list(HORIZONS_S),
+        "planned_group_count": len(GROUP_IDS), "planned_cell_count": PLANNED_CELLS,
+        "planned_distinct_target_count": PLANNED_DISTINCT_TARGETS,
+        "all_forecasts_built_before_target_decode": True, "future_positions_used": False,
+        "previously_viewed_target_outcomes": True, "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+        "learned_parameters": 0, "automatic_model_promotion": False,
+        "groups": groups}
+    report["forecast_sha256"] = forecast_sha256(report)
+    return report
+
+
+def _validate_forecasts(report):
+    if (not isinstance(report, dict) or report.get("forecast_sha256") != forecast_sha256(report)
+            or type(report.get("schema_version")) is not int or report.get("schema_version") != 1
+            or report.get("kind") != "ORIGIN_RESIDUAL_EXPLORATORY_FORECASTS"
+            or report.get("study_id") != STUDY_ID or report.get("model_ids") != list(MODEL_IDS)
+            or report.get("group_ids") != list(GROUP_IDS)
+            or report.get("horizons_s") != list(HORIZONS_S)
+            or report.get("planned_cell_count") != PLANNED_CELLS
+            or report.get("all_forecasts_built_before_target_decode") is not True
+            or report.get("future_positions_used") is not False
+            or report.get("previously_viewed_target_outcomes") is not True
+            or report.get("analysis_scope") != "POST_OUTCOME_EXPLORATORY"
+            or report.get("automatic_model_promotion") is not False):
+        raise ValueError("Complete frozen four-candidate forecasts are required before target decoding")
+    if len(report["groups"]) != len(GROUP_IDS):
+        raise ValueError("Every fixed development group is required")
+    for group, identity in zip(report["groups"], GROUP_IDS, strict=True):
+        if group["group_id"] != identity or len(group["candidates"]) != len(MODEL_IDS):
+            raise ValueError("Fixed forecast groups/candidates changed")
+        for candidate, model in zip(group["candidates"], MODEL_IDS, strict=True):
+            if (candidate["model_id"] != model or len(candidate["cells"]) != len(HORIZONS_S)
+                    or candidate["future_positions_used"] is not False
+                    or type(candidate["learned_parameters"]) is not int
+                    or candidate["learned_parameters"] != 0):
+                raise ValueError("Every planned candidate/hour cell is required")
+            for cell, h in zip(candidate["cells"], HORIZONS_S, strict=True):
+                if (cell["elapsed_s"] != h or cell["horizon_hours"] != h // 3600
+                        or cell["time_utc"] != (ORIGIN + timedelta(seconds=h)).isoformat().replace("+00:00", "Z")):
+                    raise ValueError("Fixed forecast times changed")
+                if cell["forecast_status"] == "AVAILABLE":
+                    _fix(cell, identity)
+                elif (cell["forecast_status"] != "UNAVAILABLE" or cell["latitude_deg"] is not None
+                      or cell["longitude_deg"] is not None):
+                    raise ValueError("Unavailable forecast must retain null coordinates")
+
+
+def _targets(rows, identity):
+    values, issues, seen, duplicates = {}, [], set(), set()
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes)):
+        return values, ["TARGETS_UNAVAILABLE"]
+    if len(rows) > 64:
+        return values, ["TARGET_ROW_BUDGET_EXCEEDED"]
+    allowed = {ORIGIN + timedelta(seconds=h) for h in HORIZONS_S}
+    for row in rows:
+        try:
+            if not isinstance(row, Mapping):
+                raise _PositionInputError("INVALID_POSITION_ROW")
+            raw_time = row.get("time_utc")
+            when = datetime.fromisoformat(raw_time) if isinstance(raw_time, str) else raw_time
+            if (not isinstance(when, datetime) or when.utcoffset() != timedelta(0)):
+                raise ValueError("INVALID_TIME")
+            if when in seen:
+                values.pop(when, None)
+                duplicates.add(when)
+                issues.append("DUPLICATE_TARGET_TIME")
+                continue
+            seen.add(when)
+            when, latitude, longitude = _fix(row, identity)
+            if when not in allowed:
+                raise ValueError("UNPLANNED_TARGET_TIME")
+            values[when] = latitude, longitude
+        except ValueError as error:
+            issues.append(str(error))
+    return {when: value for when, value in values.items() if when not in duplicates}, sorted(set(issues))
+
+
+def _metrics(cells, planned):
+    errors = [cell["error_m"] for cell in cells if cell["score_status"] == "SCORED"]
+    return {"planned_count": planned, "scored_count": len(errors),
+        "coverage_complete": len(errors) == planned,
+        "available_cell_mean_error_m": math.fsum(errors) / len(errors) if errors else None,
+        "full_horizon_ade_m": math.fsum(errors) / planned if len(errors) == planned else None}
+
+
+def score_forecasts(forecasts: dict, reserved_targets_by_group: Mapping) -> dict:
+    """Score only after all four forecast candidates have a valid content digest."""
+    _validate_forecasts(forecasts)
+    if not isinstance(reserved_targets_by_group, Mapping) or set(reserved_targets_by_group) - set(GROUP_IDS):
+        raise ValueError("Reserved targets must use the two fixed development identities")
+    groups, all_cells = [], {model: [] for model in MODEL_IDS}
+    for group in forecasts["groups"]:
+        identity = group["group_id"]
+        targets, issues = _targets(reserved_targets_by_group.get(identity), identity)
+        candidates = []
+        for candidate in group["candidates"]:
+            cells = []
+            for prediction in candidate["cells"]:
+                cell = copy.deepcopy(prediction)
+                target = targets.get(ORIGIN + timedelta(seconds=cell["elapsed_s"]))
+                status = ("FORECAST_UNAVAILABLE" if cell["forecast_status"] != "AVAILABLE" else
+                          "TARGET_UNAVAILABLE" if target is None else "SCORED")
+                cell.update({"group_id": identity, "model_id": candidate["model_id"],
+                    "target_latitude_deg": target[0] if target else None,
+                    "target_longitude_deg": target[1] if target else None,
+                    "score_status": status, "error_m": great_circle_distance_m(
+                        (cell["latitude_deg"], cell["longitude_deg"]), target) if status == "SCORED" else None})
+                cells.append(cell)
+            metrics = _metrics(cells, len(HORIZONS_S))
+            metrics["endpoint_fde_m"] = cells[-1]["error_m"]
+            candidates.append({"model_id": candidate["model_id"], "prediction_status": candidate["status"],
+                "prediction_reason_code": candidate["reason_code"], "metrics": metrics, "cells": cells})
+            all_cells[candidate["model_id"]].extend(cells)
+        groups.append({"group_id": identity, "target_issues": issues, "candidates": candidates})
+    models = [{"model_id": model, "metrics": _metrics(cells, PLANNED_DISTINCT_TARGETS)}
+              for model, cells in all_cells.items()]
+    complete = sum(row["metrics"]["scored_count"] for row in models) == PLANNED_CELLS
+    primary = None
+    if complete:
+        primary = [{"model_id": model, "group_count": len(GROUP_IDS),
+            "equal_id_macro_ade_m": math.fsum(group["candidates"][i]["metrics"]["full_horizon_ade_m"]
+                for group in groups) / len(GROUP_IDS),
+            "equal_id_macro_fde_m": math.fsum(group["candidates"][i]["metrics"]["endpoint_fde_m"]
+                for group in groups) / len(GROUP_IDS)} for i, model in enumerate(MODEL_IDS)]
+    paired = []
+    for a, b in itertools.combinations(MODEL_IDS, 2):
+        common = [{"group_id": x["group_id"], "horizon_hours": x["horizon_hours"],
+                   "error_a_m": x["error_m"], "error_b_m": y["error_m"]}
+                  for x, y in zip(all_cells[a], all_cells[b], strict=True)
+                  if x["score_status"] == y["score_status"] == "SCORED"]
+        paired.append({"model_a": a, "model_b": b, "planned_common_cell_count": PLANNED_DISTINCT_TARGETS,
+            "common_scored_count": len(common), "coverage_complete": len(common) == PLANNED_DISTINCT_TARGETS,
+            "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT" if complete else "SECONDARY_COMMON_AVAILABLE_CELLS",
+            "mean_delta_a_minus_b_m": math.fsum(row["error_a_m"] - row["error_b_m"]
+                for row in common) / len(common) if common else None, "cells": common})
+    return {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_EXPLORATORY_SCORES",
+        "study_id": STUDY_ID, "planned_group_count": len(GROUP_IDS),
+        "planned_cell_count": PLANNED_CELLS, "planned_distinct_target_count": PLANNED_DISTINCT_TARGETS,
+        "scored_cell_count": sum(row["metrics"]["scored_count"] for row in models),
+        "groups": groups, "models": models, "paired_comparisons": paired,
+        "primary_common_cohort_complete": complete, "primary_equal_id_macro_results": primary,
+        "analysis_scope": "POST_OUTCOME_EXPLORATORY", "previously_viewed_target_outcomes": True,
+        "statistical_independence": False, "automatic_winner_selected": False,
+        "automatic_model_promotion": False, "operational_forecast_skill_verified": False,
+        "physical_validation": False, "heldout_tuning": False, "global_training": False,
+        "limitations": ["These 48 model/hour cells reuse only 12 already-viewed processed GDP targets.",
+            "The residual is constant local east/north discrepancy, not an identified physical coefficient.",
+            "Mean-sphere context velocity and WGS84 RK4 are distinct coordinate constructions.",
+            "Lower descriptive error is not confirmatory skill, statistical significance or model promotion.",
+            "Issue-time availability, assimilation independence, plastic, tank and reef accuracy remain unverified."]}
+
+```
+
+EXACT SOURCE scripts/evaluate_origin_residual_diagnostic.py
+BYTES 14696
+SHA256 961a5f75b0dcbec7287f7815260c010ef53a0a0f9ad26447d2265e80881a84d9
+```python
+"""Read a saved exploratory diagnostic; first scoring requires --first-score.
+
+The completed v2 source study is immutable. This script never downloads, repairs
+or re-scores that source experiment. Its separate first-score mode requires all
+method sources committed, writes new exclusive artifacts, then reads every
+forecast back before decoding this diagnostic's already-viewed target numbers.
+The default is a read-only integrity check, not a new numerical replay.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import subprocess
+from datetime import UTC, datetime
+from pathlib import Path
+
+from apps.ocean.reeftrace_ocean import origin_residual as model
+from apps.ocean.reeftrace_ocean.matched_current_v2_protocol import load_acquisition
+from apps.ocean.reeftrace_ocean.matched_current_v2_result_identity import (
+    FORECAST_SHA256,
+    MANIFEST_SHA256,
+    REPORT_SHA256,
+)
+from scripts import evaluate_matched_current_v2_study as source
+
+ROOT = Path(__file__).resolve().parents[1]
+DIRECTORY = ROOT / "data/research/origin-residual-v1"
+SOURCE_DIRECTORY = source.DIRECTORY
+METHOD_FILES = (
+    "apps/ocean/reeftrace_ocean/origin_residual.py",
+    "scripts/evaluate_origin_residual_diagnostic.py",
+    "tests/unit/test_origin_residual.py",
+)
+MAX_FILE_BYTES = 4_194_304
+
+
+def _raw(path):
+    path = Path(path)
+    if path.is_symlink():
+        raise ValueError("Diagnostic artifacts must not be symlinks")
+    with path.open("rb") as stream:
+        raw = stream.read(MAX_FILE_BYTES + 1)
+    if len(raw) > MAX_FILE_BYTES:
+        raise ValueError("Diagnostic artifact exceeds its bounded byte budget")
+    return raw
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _canonical(value):
+    return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n").encode()
+
+
+def _save(path, value):
+    raw = _canonical(value)
+    if len(raw) > MAX_FILE_BYTES:
+        raise ValueError("Diagnostic artifact exceeds its bounded byte budget")
+    with path.open("xb") as stream:
+        stream.write(raw)
+    with path.with_suffix(".sha256").open("x") as stream:
+        stream.write(_sha(raw) + "\n")
+    return _sha(raw)
+
+
+def _load(path):
+    raw = _raw(path)
+    detached = _raw(path.with_suffix(".sha256"))
+    if len(detached) != 65 or detached != (_sha(raw) + "\n").encode():
+        raise ValueError("Diagnostic artifact detached hash changed")
+    value = json.loads(raw)
+    if not isinstance(value, dict):
+        raise TypeError("Diagnostic artifact must be an object")
+    return value, _sha(raw)
+
+
+def _method_hashes():
+    return {relative: _sha(_raw(ROOT / relative)) for relative in METHOD_FILES}
+
+
+def _committed_method():
+    """Require the exact reviewed source bytes in HEAD before an actual first score."""
+    try:
+        head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, check=True,
+                              capture_output=True, timeout=10).stdout.decode().strip()
+        for relative in METHOD_FILES:
+            committed = subprocess.run(["git", "show", f"HEAD:{relative}"], cwd=ROOT,
+                check=True, capture_output=True, timeout=10).stdout
+            if committed != _raw(ROOT / relative):
+                raise ValueError("Commit the exact reviewed diagnostic sources before first scoring")
+    except (subprocess.SubprocessError, UnicodeError):
+        raise ValueError("Committed reviewed diagnostic sources are required before first scoring") from None
+    return head
+
+
+def _source_pins():
+    """Hash original outcomes without decoding any target number for this run."""
+    pins = {"forecasts.json": FORECAST_SHA256, "evaluation.json": REPORT_SHA256,
+            "manifest.json": MANIFEST_SHA256}
+    for name, expected in pins.items():
+        if _sha(_raw(SOURCE_DIRECTORY / name)) != expected:
+            raise ValueError("The trusted immutable v2 source artifact changed")
+    return pins
+
+
+def _clock(value):
+    try:
+        when = datetime.fromisoformat(value)
+    except (TypeError, ValueError):
+        raise ValueError("Diagnostic requires a timezone-aware UTC clock") from None
+    if when.utcoffset() is None or when.utcoffset().total_seconds() != 0:
+        raise ValueError("Diagnostic requires a timezone-aware UTC clock")
+    return when
+
+
+def _contract(hashes, source_pins, head):
+    return {"schema_version": 1, "kind": "POST_OUTCOME_EXPLORATORY_METHOD_CONTRACT",
+        "study_id": model.STUDY_ID, "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+        "previously_viewed_target_outcomes": True, "confirmatory": False,
+        "models": list(model.MODEL_IDS), "groups": list(model.GROUP_IDS),
+        "origin_time_utc": model.ORIGIN_TIME_UTC, "horizons_s": list(model.HORIZONS_S),
+        "planned_cell_count": model.PLANNED_CELLS,
+        "planned_distinct_target_count": model.PLANNED_DISTINCT_TARGETS,
+        "residual": "v_last_origin_mean_sphere_minus_current_at_origin",
+        "residual_transport": "constant_local_east_north_m_s",
+        "coefficient_fitting": False, "decay_or_clipping": False,
+        "source_study_id": "matched-current-gdp-hycom-15m-v2",
+        "source_artifact_pins": source_pins, "source_acquisition_lineage": hashes,
+        "method_source_sha256": _method_hashes(), "reviewed_code_commit": head,
+        "maximum_speed_m_s": 10, "maximum_horizon_s": 21600,
+        "requested_step_s": 300, "hourly_output_s": 3600,
+        "primary_requires_all_cells": True,
+        "forecast_and_score_clock_kind": "local_execution_receipt_not_external_attestation",
+        "physical_validation": False, "automatic_model_promotion": False}
+
+
+def first_score(directory: Path = DIRECTORY) -> dict:
+    """Create one new diagnostic; refuse any existing attempt and never repair it."""
+    directory = Path(directory)
+    if directory.exists() or directory.is_symlink():
+        raise ValueError("A diagnostic attempt already exists; never overwrite its artifacts")
+    pins = _source_pins()
+    head = _committed_method()
+    (_protocol, _manifest, hashes, contexts, targets, _original_forecasts,
+     forcing, current_failure) = source._inputs(SOURCE_DIRECTORY)
+    contract = _contract(hashes, pins, head)
+    # The directory is itself an exclusive attempt sentinel. Any failed attempt
+    # stays visible and cannot silently be retried into the same identity.
+    directory.mkdir(parents=True, exist_ok=False)
+    contract["frozen_at_utc"] = datetime.now(UTC).isoformat()
+    contract_sha = _save(directory / "protocol.json", contract)
+    fields = dict.fromkeys(model.GROUP_IDS, forcing) if forcing is not None else {}
+    failures = dict.fromkeys(model.GROUP_IDS, current_failure) if current_failure else {}
+    forecasts = model.build_forecasts(contexts, fields, current_failures_by_group=failures)
+    document = {"schema_version": 1, "kind": "FROZEN_ORIGIN_RESIDUAL_EXPLORATORY_FORECASTS",
+        "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+        "source_artifact_pins": pins, "future_coordinates_decoded_in_this_diagnostic": False,
+        "previously_viewed_target_outcomes": True, "forecasts": forecasts,
+        "frozen_at_utc": datetime.now(UTC).isoformat()}
+    if _clock(document["frozen_at_utc"]) < _clock(contract["frozen_at_utc"]):
+        raise ValueError("Forecast receipt predates the exploratory method receipt")
+    forecast_file_sha = _save(directory / "forecasts.json", document)
+    saved, readback_sha = _load(directory / "forecasts.json")
+    if (saved != document or forecast_file_sha != readback_sha
+            or saved["forecasts"]["forecast_sha256"] != model.forecast_sha256(forecasts)):
+        raise ValueError("All four prior forecast candidates must be persisted and read back before scoring")
+    # This is the first numeric target decode in this diagnostic. These targets
+    # were viewed in the prior v2 study; this ordering does not make them unseen.
+    scores = model.score_forecasts(forecasts, targets)
+    result = {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_EXPLORATORY_DIAGNOSTIC",
+        "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+        "forecast_file_sha256": forecast_file_sha,
+        "forecast_frozen_at_utc": document["frozen_at_utc"],
+        "source_artifact_pins": pins, "method_source_sha256": contract["method_source_sha256"],
+        "source_acquisition_lineage": hashes, "scores": scores,
+        "all_four_forecasts_saved_before_this_diagnostic_target_decode": True,
+        "previously_viewed_target_outcomes": True, "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+        "new_data_acquisition": False, "frozen_source_study_changed": False,
+        "provider_calls": False, "physical_validation": False,
+        "scored_at_utc": datetime.now(UTC).isoformat()}
+    if _clock(result["scored_at_utc"]) < _clock(document["frozen_at_utc"]):
+        raise ValueError("Score receipt predates the forecast receipt")
+    if _source_pins() != pins or _method_hashes() != contract["method_source_sha256"]:
+        raise ValueError("Source inputs or method changed during the diagnostic")
+    result_sha = _save(directory / "evaluation.json", result)
+    identity = {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_LOCAL_RESULT_IDENTITY",
+        "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+        "forecast_file_sha256": forecast_file_sha, "report_sha256": result_sha,
+        "externally_trusted_pin_required_for_publication": True}
+    _save(directory / "identity.json", identity)
+    return result
+
+
+def read_diagnostic(directory: Path = DIRECTORY, *, expected_identity_sha256: str | None = None):
+    """Verify saved bytes/lineage, without forecasts, fitting or score execution.
+
+    A colocated hash is not an external trust anchor. Public integrations must
+    supply the separately reviewed identity digest after an actual result exists.
+    """
+    directory = Path(directory)
+    if directory.is_symlink():
+        raise ValueError("A symlinked diagnostic directory is not accepted")
+    identity, identity_sha = _load(directory / "identity.json")
+    if expected_identity_sha256 is not None and identity_sha != expected_identity_sha256:
+        raise ValueError("The external diagnostic result identity changed")
+    contract, contract_sha = _load(directory / "protocol.json")
+    forecasts, forecast_sha = _load(directory / "forecasts.json")
+    result, report_sha = _load(directory / "evaluation.json")
+    if identity != {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_LOCAL_RESULT_IDENTITY",
+            "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+            "forecast_file_sha256": forecast_sha, "report_sha256": report_sha,
+            "externally_trusted_pin_required_for_publication": True}:
+        raise ValueError("The diagnostic result identity does not bind its exact artifacts")
+    pins = _source_pins()
+    _, manifest, source_hashes, _ = load_acquisition(SOURCE_DIRECTORY)
+    expected_contract = _contract(source_hashes, pins, contract["reviewed_code_commit"])
+    expected_contract["frozen_at_utc"] = contract["frozen_at_utc"]
+    if (contract["study_id"] != model.STUDY_ID or result["study_id"] != model.STUDY_ID
+            or forecasts["study_id"] != model.STUDY_ID
+            or contract != expected_contract
+            or contract["source_artifact_pins"] != pins
+            or result["source_artifact_pins"] != pins or forecasts["source_artifact_pins"] != pins
+            or contract["method_source_sha256"] != _method_hashes()
+            or result["method_source_sha256"] != contract["method_source_sha256"]
+            or manifest is None or contract["source_acquisition_lineage"] != source_hashes
+            or result["source_acquisition_lineage"] != source_hashes
+            or result["protocol_sha256"] != contract_sha
+            or forecasts["protocol_sha256"] != contract_sha
+            or result["forecast_file_sha256"] != forecast_sha
+            or result["forecast_frozen_at_utc"] != forecasts["frozen_at_utc"]
+            or not _clock(contract["frozen_at_utc"]) <= _clock(forecasts["frozen_at_utc"])
+            <= _clock(result["scored_at_utc"])):
+        raise ValueError("Diagnostic method, source lineage or chronology changed")
+    model._validate_forecasts(forecasts["forecasts"])
+    if (not contract["analysis_scope"] == result["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+            or result["previously_viewed_target_outcomes"] is not True
+            or forecasts["future_coordinates_decoded_in_this_diagnostic"] is not False
+            or result["all_four_forecasts_saved_before_this_diagnostic_target_decode"] is not True
+            or result["new_data_acquisition"] is not False
+            or result["frozen_source_study_changed"] is not False
+            or result["provider_calls"] is not False or result["physical_validation"] is not False):
+        raise ValueError("Exploratory diagnostic claim boundaries changed")
+    # Read each exact artifact once more so a concurrent overwrite cannot return
+    # a mixed generation. No numerical replay is implied by this byte check.
+    for name, expected in (("identity", identity_sha), ("protocol", contract_sha),
+                           ("forecasts", forecast_sha), ("evaluation", report_sha)):
+        if _load(directory / f"{name}.json")[1] != expected:
+            raise ValueError("Diagnostic artifacts changed during verification")
+    if (_source_pins() != pins or load_acquisition(SOURCE_DIRECTORY)[2] != source_hashes
+            or _method_hashes() != contract["method_source_sha256"]):
+        raise ValueError("Diagnostic source inputs or method changed during verification")
+    return {"report": result, "forecasts": forecasts["forecasts"],
+        "artifact_identity": {**identity, "identity_sha256": identity_sha,
+            "integrity_verified": True, "numeric_replay_verified": False,
+            "external_result_pin_verified": expected_identity_sha256 is not None,
+            "verification_scope": "SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY"}}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--directory", type=Path, default=DIRECTORY)
+    parser.add_argument("--first-score", action="store_true")
+    parser.add_argument("--expected-identity-sha256")
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+    value = first_score(args.directory) if args.first_score else read_diagnostic(
+        args.directory, expected_identity_sha256=args.expected_identity_sha256)
+    raw = _canonical(value)
+    if args.output:
+        with args.output.open("xb") as stream:
+            stream.write(raw)
+    else:
+        print(raw.decode(), end="")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+EXACT SOURCE tests/unit/test_origin_residual.py
+BYTES 20207
+SHA256 d0ff8188f9d17c89700968cd4e40a951f5980aacf73351aa5f7bce2c9d9b0de1
+```python
+"""Synthetic development contracts; never score the already-viewed real cohort."""
+
+import copy
+import math
+from datetime import timedelta
+
+import numpy as np
+import pytest
+from scipy.integrate import solve_ivp
+
+from apps.ocean.reeftrace_ocean import matched_current as original
+from apps.ocean.reeftrace_ocean import origin_residual as model
+from apps.ocean.reeftrace_ocean.advection import advect_current
+from apps.ocean.reeftrace_ocean.benchmark import SphericalLocalFrame
+from apps.ocean.reeftrace_ocean.field import OceanField
+from scripts import evaluate_origin_residual_diagnostic as runner
+
+LATITUDE, LONGITUDE = 30.0, -79.5
+
+
+def context(identity, *, east=0.5, north=0.0):
+    frame = SphericalLocalFrame(LATITUDE, LONGITUDE)
+    previous = frame.to_latlon(np.array([-east, -north]) * 3600)
+    rows = [{"drifter_id": identity,
+        "time_utc": (model.ORIGIN - timedelta(hours=24 - index)).isoformat(),
+        "latitude_deg": str(LATITUDE), "longitude_deg": str(LONGITUDE)} for index in range(25)]
+    rows[-2].update({"latitude_deg": str(previous[0]), "longitude_deg": str(previous[1])})
+    return rows
+
+
+def contexts(**kwargs):
+    return {identity: context(identity, **kwargs) for identity in model.GROUP_IDS}
+
+
+def field(*, east=(0.2, 0.7, 0.1), north=(0.0, 0.0, 0.0), mask=None,
+          longitude=(-80.0, -78.0)):
+    shape = (3, 2, 2)
+    return OceanField(
+        time_utc=np.array(["2022-06-01T00:00:00", "2022-06-01T03:00:00", "2022-06-01T06:00:00"],
+                          dtype="datetime64[us]"),
+        longitude_deg=np.array(longitude), latitude_deg=np.array([29.0, 31.0]),
+        eastward_m_s=np.broadcast_to(np.asarray(east)[:, None, None], shape).copy(),
+        northward_m_s=np.broadcast_to(np.asarray(north)[:, None, None], shape).copy(),
+        valid_mask=np.ones(shape, dtype=bool) if mask is None else np.array(mask, copy=True),
+        selected_depth_m=15.0,
+        metadata={"velocity_units": "m/s", "data_kind": "SYNTHETIC_TEST",
+                  "sha256": "a" * 64, "nested": {"untouched": [1, 2]}})
+
+
+def fields(value=None):
+    return dict.fromkeys(model.GROUP_IDS, field() if value is None else value)
+
+
+def targets():
+    return {identity: [{"drifter_id": identity,
+        "time_utc": (model.ORIGIN + timedelta(seconds=h)).isoformat(),
+        "latitude_deg": str(LATITUDE), "longitude_deg": str(LONGITUDE)}
+        for h in model.HORIZONS_S] for identity in model.GROUP_IDS}
+
+
+def test_plan_allocates_four_candidates_and_keeps_original_three_outputs_exact():
+    ctx, forcing = contexts(), fields()
+    before = original.build_matched_current_forecasts(ctx, forcing)
+    result = model.build_forecasts(ctx, forcing)
+    assert result["planned_cell_count"] == 48 and result["planned_distinct_target_count"] == 12
+    assert len(result["groups"]) == 2
+    for old, group in zip(before["groups"], result["groups"], strict=True):
+        assert group["candidates"][:3] == old["candidates"]
+        assert len(group["candidates"]) == 4
+        assert all(item["learned_parameters"] == 0 for item in group["candidates"])
+        assert all(item["future_positions_used"] is False for item in group["candidates"])
+    assert sum(len(c["cells"]) for g in result["groups"] for c in g["candidates"]) == 48
+    assert result["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+    assert result["previously_viewed_target_outcomes"] is True
+    assert result["forecast_sha256"] == model.forecast_sha256(result)
+
+
+def test_zero_residual_reproduces_current_track_with_separate_derived_provenance():
+    ctx = context(model.GROUP_IDS[0])
+    frame = SphericalLocalFrame(LATITUDE, LONGITUDE)
+    velocity = -frame.to_xy(float(ctx[-2]["latitude_deg"]), float(ctx[-2]["longitude_deg"])) / 3600
+    forcing = field(east=(velocity[0],) * 3, north=(velocity[1],) * 3)
+    candidate = model.build_origin_residual_candidate(ctx, forcing, group_id=model.GROUP_IDS[0])
+    original_track = advect_current(forcing, latitude_deg=LATITUDE, longitude_deg=LONGITUDE,
+        start_time_utc=model.ORIGIN, horizon_s=21600, step_s=300, output_step_s=3600)
+    assert candidate["residual_east_north_m_s"] == [0.0, 0.0]
+    assert candidate["advection"]["track"] == original_track["track"]
+    assert candidate["advection"]["status"] == original_track["status"] == "COMPLETED"
+    assert candidate["derived_field_sha256"] != candidate["source_field_sha256"]
+
+
+def test_copy_has_actual_axes_masks_and_immutable_original_arrays_and_metadata():
+    forcing = field()
+    before = copy.deepcopy(forcing)
+    result = model.corrected_field(forcing, [0.3, -0.2])
+    for name in ("time_utc", "longitude_deg", "latitude_deg", "valid_mask"):
+        assert np.array_equal(getattr(result, name), getattr(forcing, name))
+        assert not np.shares_memory(getattr(result, name), getattr(forcing, name))
+    assert np.array_equal(result.eastward_m_s, forcing.eastward_m_s + 0.3)
+    result.metadata["source_field_provenance"]["nested"]["untouched"].append(3)
+    for name in ("time_utc", "longitude_deg", "latitude_deg", "valid_mask",
+                 "eastward_m_s", "northward_m_s"):
+        assert np.array_equal(getattr(forcing, name), getattr(before, name))
+    assert forcing.metadata == before.metadata
+
+
+@pytest.mark.parametrize("residual", [[True, 0.0], ["0.3", "0.0"], [0.0, "1"],
+                                     [0.0], [0.0, 0.0, 0.0], [float("nan"), 0.0]])
+def test_residual_rejects_boolean_strings_nonfinite_and_wrong_shape(residual):
+    with pytest.raises(ValueError):
+        model.corrected_field(field(), residual)
+
+
+def test_missing_context_preserves_upstream_failure_in_48_cell_plan():
+    result = model.build_forecasts({}, {}, failures_by_group={model.GROUP_IDS[0]: "HTTP_TIMEOUT"})
+    assert result["groups"][0]["candidates"][3]["reason_code"] == "HTTP_TIMEOUT"
+    assert sum(len(c["cells"]) for g in result["groups"] for c in g["candidates"]) == 48
+
+
+def test_corrected_east_only_piecewise_linear_flow_has_independent_exact_integral():
+    forcing = model.corrected_field(field(), [0.3, 0.0])
+    result = advect_current(forcing, latitude_deg=LATITUDE, longitude_deg=LONGITUDE,
+        start_time_utc=model.ORIGIN, horizon_s=21600, step_s=300, output_step_s=3600)
+    # Latitude is constant, so WGS84 metres per longitude degree is constant.
+    # This exact oracle is valid for east-only flow, not general turning flow.
+    f, a = 1 / 298.257223563, 6378137.0
+    e2 = f * (2 - f)
+    phi = math.radians(LATITUDE)
+    metres_per_degree = math.pi / 180 * a * math.cos(phi) / math.sqrt(1 - e2 * math.sin(phi) ** 2)
+    east_metres = ((0.5 + 1.0) / 2 + (1.0 + 0.4) / 2) * 10800
+    assert result["track"][-1]["latitude_deg"] == LATITUDE
+    assert result["track"][-1]["longitude_deg"] == pytest.approx(
+        LONGITUDE + east_metres / metres_per_degree, abs=2e-12)
+
+
+def test_turning_geographic_flow_matches_independent_dop853_reference_not_cartesian_integral():
+    east, north, residual = np.array([0.2, 0.8, -0.1]), np.array([0.0, 0.6, -0.2]), [0.3, -0.1]
+    forcing = model.corrected_field(field(east=east, north=north), residual)
+    result = advect_current(forcing, latitude_deg=LATITUDE, longitude_deg=LONGITUDE,
+        start_time_utc=model.ORIGIN, horizon_s=21600, step_s=300, output_step_s=3600)
+
+    def derivative(t, position):
+        phi = math.radians(position[0])
+        a, f = 6378137.0, 1 / 298.257223563
+        e2 = f * (2 - f)
+        factor = 1 - e2 * math.sin(phi) ** 2
+        east_scale = math.pi / 180 * a * math.cos(phi) / math.sqrt(factor)
+        north_scale = math.pi / 180 * a * (1 - e2) / factor ** 1.5
+        u = np.interp(t, [0, 10800, 21600], east) + residual[0]
+        v = np.interp(t, [0, 10800, 21600], north) + residual[1]
+        return [v / north_scale, u / east_scale]
+
+    state = [LATITUDE, LONGITUDE]
+    for begin, end in ((0, 10800), (10800, 21600)):
+        reference = solve_ivp(derivative, (begin, end), state, method="DOP853",
+                              rtol=2e-13, atol=2e-13, max_step=60)
+        assert reference.success
+        state = reference.y[:, -1]
+    assert [result["track"][-1][key] for key in ("latitude_deg", "longitude_deg")] == pytest.approx(state, abs=2e-11)
+
+
+@pytest.mark.parametrize("delta", [0, -3600, 1800, 3601, 7200])
+def test_bad_context_cadence_fails_residual_only(delta):
+    ctx = contexts()
+    ctx[model.GROUP_IDS[0]][-2]["time_utc"] = (model.ORIGIN - timedelta(seconds=delta)).isoformat()
+    result = model.build_forecasts(ctx, fields())
+    assert result["groups"][0]["candidates"][3]["reason_code"] == "CONTEXT_CADENCE_MISMATCH"
+    assert result["groups"][0]["candidates"][0]["status"] == "COMPLETED"
+    assert result["groups"][0]["candidates"][2]["status"] == "COMPLETED"
+
+
+@pytest.mark.parametrize(("change", "reason"), [
+    ("origin_time", "ORIGIN_TIME_MISMATCH"), ("origin_nan", "INVALID_COORDINATE"),
+    ("previous_nan", "INVALID_COORDINATE"), ("previous_id", "ID_MISMATCH"),
+    ("far_previous", "LOCAL_GEOMETRY_BUDGET_EXCEEDED"),
+])
+def test_bad_fix_contract_is_explicit(change, reason):
+    ctx = context(model.GROUP_IDS[0])
+    if change == "origin_time":
+        ctx[-1]["time_utc"] = (model.ORIGIN + timedelta(seconds=1)).isoformat()
+    elif change == "previous_id":
+        ctx[-2]["drifter_id"] = "wrong"
+    elif change == "far_previous":
+        ctx[-2]["longitude_deg"] = "-70"
+    else:
+        ctx[-1 if change == "origin_nan" else -2]["latitude_deg"] = "NaN"
+    candidate = model.build_origin_residual_candidate(ctx, field(), group_id=model.GROUP_IDS[0])
+    assert candidate["reason_code"] == reason
+    assert candidate["available_count"] == 0 and len(candidate["cells"]) == 6
+
+
+def test_masked_origin_and_future_gap_never_become_zero_filled_current():
+    mask = np.ones((3, 2, 2), dtype=bool)
+    mask[0] = False
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]), field(mask=mask), group_id=model.GROUP_IDS[0])
+    assert result["status"] == "UNSUPPORTED" and result["reason_code"] == "MASKED_CURRENT_CELL"
+    mask[:] = True
+    mask[2] = False
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]), field(mask=mask), group_id=model.GROUP_IDS[0])
+    assert result["status"] == "PARTIAL" and result["completed_horizon_s"] == 10800
+    assert result["available_count"] == 3
+    assert all(row["latitude_deg"] is None for row in result["cells"][3:])
+
+
+def test_all_masked_field_is_explicitly_unavailable():
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]),
+        field(mask=np.zeros((3, 2, 2), dtype=bool)), group_id=model.GROUP_IDS[0])
+    assert result["reason_code"] == "CURRENT_FIELD_ALL_MASKED" and result["available_count"] == 0
+
+
+def test_first23_context_values_are_not_new_residual_inputs():
+    ctx = contexts()
+    before = model.build_forecasts(ctx, fields())
+    for rows in ctx.values():
+        for row in rows[:23]:
+            row["latitude_deg"], row["longitude_deg"] = "not read", "not read"
+    assert model.build_forecasts(ctx, fields()) == before
+
+
+def test_corrected_whole_grid_speed_excess_fails_without_clipping():
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]),
+        field(east=(0, 9.9, 0)), group_id=model.GROUP_IDS[0])
+    assert result["reason_code"] == "CORRECTED_FIELD_SPEED_BUDGET_EXCEEDED"
+    assert result["available_count"] == 0
+
+
+def test_domain_exit_retains_only_supported_prefix_and_no_artificial_hourly_tail():
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]),
+        field(longitude=(-80, -79.45)), group_id=model.GROUP_IDS[0])
+    assert result["status"] == "PARTIAL"
+    assert result["reason_code"] == "OUTSIDE_CURRENT_DOMAIN"
+    assert result["available_count"] < 6
+    assert result["advection"]["track"][-1]["elapsed_s"] == result["completed_horizon_s"]
+    assert all(cell["latitude_deg"] is None for cell in result["cells"] if cell["elapsed_s"] > result["completed_horizon_s"])
+
+
+@pytest.mark.parametrize("supplied", [None, "invalid", 17])
+def test_missing_or_invalid_field_has_no_silent_fallback(supplied):
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]), supplied, group_id=model.GROUP_IDS[0])
+    assert result["available_count"] == 0
+    assert result["reason_code"] == ("CURRENT_FIELD_UNAVAILABLE" if supplied is None else "CURRENT_CONFIGURATION_INVALID")
+
+
+def test_all48_cells_and_missing_targets_are_retained_with_primary_withheld():
+    forecasts = model.build_forecasts(contexts(), {})
+    scored = model.score_forecasts(forecasts, targets())
+    assert scored["planned_cell_count"] == 48 and scored["planned_distinct_target_count"] == 12
+    assert scored["scored_cell_count"] == 24
+    assert scored["primary_common_cohort_complete"] is False
+    assert scored["primary_equal_id_macro_results"] is None
+    assert all(row["analysis_scope"] == "SECONDARY_COMMON_AVAILABLE_CELLS" for row in scored["paired_comparisons"])
+    assert sum(len(c["cells"]) for g in scored["groups"] for c in g["candidates"]) == 48
+    absent = model.score_forecasts(model.build_forecasts({}, {}), {})
+    assert absent["scored_cell_count"] == 0 and len(absent["models"]) == 4
+
+
+def test_complete48_scores_have_equal_id_macros_and_common_pair_denominators():
+    forecasts = model.build_forecasts(contexts(), fields())
+    before = copy.deepcopy(forecasts)
+    scored = model.score_forecasts(forecasts, targets())
+    assert forecasts == before
+    assert scored["scored_cell_count"] == 48 and scored["primary_common_cohort_complete"] is True
+    assert len(scored["primary_equal_id_macro_results"]) == 4
+    assert len(scored["paired_comparisons"]) == 6
+    assert all(row["common_scored_count"] == 12 for row in scored["paired_comparisons"])
+    assert scored["automatic_winner_selected"] is False
+    assert scored["physical_validation"] is False
+
+
+def test_no_target_number_is_read_until_every_forecast_and_hash_exists():
+    state = {"built": False}
+
+    class Future(str):
+        def __float__(self):
+            assert state["built"]
+            return float(str(self))
+
+    held = targets()
+    for rows in held.values():
+        for row in rows:
+            row["latitude_deg"] = Future(row["latitude_deg"])
+    forecasts = model.build_forecasts(contexts(), fields())
+    assert forecasts["forecast_sha256"] == model.forecast_sha256(forecasts)
+    assert all(len(g["candidates"]) == 4 for g in forecasts["groups"])
+    state["built"] = True
+    assert model.score_forecasts(forecasts, held)["scored_cell_count"] == 48
+
+
+def test_invalid_forecast_hash_or_rehashed_coordinates_fail_before_target_access():
+    forecasts = model.build_forecasts(contexts(), fields())
+    forecasts["groups"][0]["candidates"][3]["cells"][0]["latitude_deg"] = float("nan")
+    with pytest.raises(ValueError):
+        model.score_forecasts(forecasts, {})
+    forecasts = model.build_forecasts(contexts(), fields())
+    forecasts["groups"][0]["candidates"][3]["cells"][0]["latitude_deg"] = 100.0
+    forecasts["forecast_sha256"] = model.forecast_sha256(forecasts)
+    with pytest.raises(ValueError, match="INVALID_COORDINATE"):
+        model.score_forecasts(forecasts, {})
+
+
+def test_missing_bad_and_duplicate_targets_remain_unknown_in_planned_denominator():
+    forecasts = model.build_forecasts(contexts(), fields())
+    held = targets()
+    held[model.GROUP_IDS[0]][2]["latitude_deg"] = "NaN"
+    held[model.GROUP_IDS[1]].append(copy.deepcopy(held[model.GROUP_IDS[1]][0]))
+    held[model.GROUP_IDS[1]][-1]["latitude_deg"] = "invalid"
+    scored = model.score_forecasts(forecasts, held)
+    assert scored["scored_cell_count"] == 40
+    assert scored["primary_equal_id_macro_results"] is None
+    assert "DUPLICATE_TARGET_TIME" in scored["groups"][1]["target_issues"]
+
+
+@pytest.fixture
+def synthetic_runner(monkeypatch):
+    hashes = {"protocol_sha256": "b" * 64, "manifest_sha256": "c" * 64}
+    pins = {"forecasts.json": "d" * 64, "evaluation.json": "e" * 64, "manifest.json": "f" * 64}
+    held = targets()
+    forcing = field()
+    monkeypatch.setattr(runner, "_source_pins", lambda: pins)
+    monkeypatch.setattr(runner, "_committed_method", lambda: "1" * 40)
+    monkeypatch.setattr(runner.source, "_inputs", lambda directory: (
+        {}, {}, hashes, contexts(), held, None, forcing, None))
+    monkeypatch.setattr(runner, "load_acquisition", lambda directory: ({}, {}, hashes, {}))
+    return held
+
+
+def test_default_read_never_scores_or_creates_a_missing_diagnostic(tmp_path, monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Read-only default must not build or score")
+
+    monkeypatch.setattr(model, "build_forecasts", forbidden)
+    monkeypatch.setattr(model, "score_forecasts", forbidden)
+    target = tmp_path / "absent"
+    with pytest.raises(FileNotFoundError):
+        runner.read_diagnostic(target)
+    assert not target.exists()
+
+
+def test_first_score_persists_all_four_and_reads_back_before_numeric_target_decode(
+        tmp_path, synthetic_runner, monkeypatch):
+    directory = tmp_path / "synthetic"
+    numeric_reads = []
+
+    class Future(str):
+        def __float__(self):
+            document, digest = runner._load(directory / "forecasts.json")
+            assert document["forecasts"]["forecast_sha256"] == model.forecast_sha256(document["forecasts"])
+            assert sum(len(c["cells"]) for g in document["forecasts"]["groups"] for c in g["candidates"]) == 48
+            assert len(digest) == 64
+            numeric_reads.append(True)
+            return float(str(self))
+
+    for rows in synthetic_runner.values():
+        for row in rows:
+            row["latitude_deg"] = Future(row["latitude_deg"])
+    report = runner.first_score(directory)
+    assert len(numeric_reads) == 12 and report["scores"]["scored_cell_count"] == 48
+    before = {p.name: p.read_bytes() for p in directory.iterdir()}
+    monkeypatch.setattr(model, "build_forecasts", lambda *a, **kw: pytest.fail("reader built forecasts"))
+    monkeypatch.setattr(model, "score_forecasts", lambda *a, **kw: pytest.fail("reader scored targets"))
+    view = runner.read_diagnostic(directory)
+    assert view["report"] == report
+    assert view["artifact_identity"]["external_result_pin_verified"] is False
+    identity_sha = runner._load(directory / "identity.json")[1]
+    assert runner.read_diagnostic(directory, expected_identity_sha256=identity_sha)["artifact_identity"]["external_result_pin_verified"] is True
+    assert {p.name: p.read_bytes() for p in directory.iterdir()} == before
+    with pytest.raises(ValueError, match="never overwrite"):
+        runner.first_score(directory)
+
+
+def test_failed_readback_never_decodes_or_scores_targets_and_attempt_is_not_retried(
+        tmp_path, synthetic_runner, monkeypatch):
+    directory = tmp_path / "synthetic"
+    monkeypatch.setattr(runner, "_load", lambda path: ({}, "0" * 64))
+    monkeypatch.setattr(model, "score_forecasts", lambda *a, **kw: pytest.fail("scored after failed readback"))
+    with pytest.raises(ValueError, match="persisted and read back"):
+        runner.first_score(directory)
+    assert (directory / "forecasts.json").exists()
+    assert not (directory / "evaluation.json").exists()
+    with pytest.raises(ValueError, match="never overwrite"):
+        runner.first_score(directory)
+
+
+def test_saved_artifact_tampering_and_external_pin_mismatch_are_rejected(tmp_path, synthetic_runner):
+    directory = tmp_path / "synthetic"
+    runner.first_score(directory)
+    with pytest.raises(ValueError, match="external diagnostic result identity"):
+        runner.read_diagnostic(directory, expected_identity_sha256="0" * 64)
+    path = directory / "forecasts.json"
+    path.write_bytes(path.read_bytes() + b" ")
+    with pytest.raises(ValueError, match="detached hash"):
+        runner.read_diagnostic(directory)
+
+
+def test_method_must_be_committed_before_any_new_diagnostic_attempt(tmp_path, synthetic_runner, monkeypatch):
+    directory = tmp_path / "synthetic"
+
+    def uncommitted():
+        raise ValueError("Commit reviewed sources first")
+
+    monkeypatch.setattr(runner, "_committed_method", uncommitted)
+    with pytest.raises(ValueError, match="Commit reviewed"):
+        runner.first_score(directory)
+    assert not directory.exists()
+
+```
+
+``````
+
+#### grok-origin-residual-code-review-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-code-review-response.txt
+
+Role: `ACTUAL_GROK_WEB_RESPONSE`. Bytes: **2,056**; SHA-256: `ff30a0cd820d4515dcb919d9219951047eb270cb965c8ab7237a11514940ff59`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+**Conditional GO for the software contract.** No result exists, no score is invented, and no physical behavior is approved. The shown files implement the reviewed exploratory design: constant local east/north residual, copy-on-write field, no clip/fill/mask expansion, origin-tangent mean-sphere \(v_{\text{last}}\) versus WGS84 RK4, exact 3600 s cadence, 48-cell plan with primary withheld unless all score, duplicate-UTC invalidation, forecast hash and read-back before numeric target decode, exclusive first-score directory, and committed-method guard. The original v2 evaluator and data pins are untouched.
+
+**Concrete failure paths that are present and correct.**  
+- Non-3600 s or >50 km penultimate fix → `CONTEXT_CADENCE_MISMATCH` / `LOCAL_GEOMETRY_BUDGET_EXCEEDED` on the residual candidate only.  
+- Masked origin or all-masked field → `UNSUPPORTED` / `CURRENT_FIELD_ALL_MASKED`.  
+- Corrected grid speed >10 m/s → `CORRECTED_FIELD_SPEED_BUDGET_EXCEEDED`, no clip.  
+- Domain exit or missing hourly output → `PARTIAL` with null coordinates after the last supported hour.  
+- Duplicate target UTC → that UTC dropped even if one copy is invalid; primary remains null.  
+- Failed forecast read-back → no score, directory retained, retry refused.
+
+**Untested assumptions.**  
+The real HYCOM residual candidate has not been run. The DOP853 check is synthetic and east-only analytic; no test confirms that a residual valid at the origin but singular at an intermediate stage is rejected solely by the existing sampler. Constant local-ENU addition is not tested against any parallel-transport alternative; the code simply does not implement one.
+
+**Distinction.** This GO approves the software contract for a post-outcome exploratory diagnostic on the two already-viewed groups. It is not a new independent scientific protocol, not a confirmatory test, and not authorization to promote the residual or to treat a later lower error as skill. A later metadata-selected cohort that excludes these IDs remains required before any transfer claim.
+``````
+
+### Origin-residual additive source manifest
+
+```json
+{
+  "actual_grok_rounds_added": 2,
+  "files": [
+    {
+      "bytes": 4747,
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "path": "docs/grok-evidence/grok-origin-residual-design-prompt.txt",
+      "sha256": "3919780b4f411745b8728e481495c4915ed8e69f246395503714932ab2731337"
+    },
+    {
+      "bytes": 4070,
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "path": "docs/grok-evidence/grok-origin-residual-design-response.txt",
+      "sha256": "f184d40911816b9af47f2dcb48da3212122e79deabd6a31a63ddd5abcccc9cc6"
+    },
+    {
+      "bytes": 59373,
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "path": "docs/grok-evidence/grok-origin-residual-code-review-prompt.txt",
+      "sha256": "17cc4963a246d9c4ec38218cfea1c661d07f8449f9dba3225951d200916d3605"
+    },
+    {
+      "bytes": 2056,
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "path": "docs/grok-evidence/grok-origin-residual-code-review-response.txt",
+      "sha256": "ff30a0cd820d4515dcb919d9219951047eb270cb965c8ab7237a11514940ff59"
+    }
+  ],
+  "implementation_source_hashes_at_synthetic_review": [
+    {
+      "bytes": 21619,
+      "path": "apps/ocean/reeftrace_ocean/origin_residual.py",
+      "sha256": "37b84b13bb085651ae2b5b1140b6bc43d8ad5897719eb34b7b525cd8709fa02e"
+    },
+    {
+      "bytes": 14696,
+      "path": "scripts/evaluate_origin_residual_diagnostic.py",
+      "sha256": "961a5f75b0dcbec7287f7815260c010ef53a0a0f9ad26447d2265e80881a84d9"
+    },
+    {
+      "bytes": 20207,
+      "path": "tests/unit/test_origin_residual.py",
+      "sha256": "d0ff8188f9d17c89700968cd4e40a951f5980aacf73351aa5f7bce2c9d9b0de1"
+    }
+  ],
+  "kind": "ADDITIVE_ORIGIN_RESIDUAL_REVIEW_CAPTURE_MANIFEST",
+  "local_execution_scope": "40_FOCUSED_SYNTHETIC_TESTS_AND_RUFF_NOT_GROK_EXECUTION",
+  "new_full_suite_or_hosted_run_claimed": false,
+  "previous_prefix_bytes": 377243,
+  "previous_prefix_sha256": "0f82064391b61e6b9fc240a83ed6acb2d60f9f28dc66860ba216ef1dd5793909",
+  "real_candidate_outcomes_computed": false,
+  "real_diagnostic_directory_exists": false,
+  "schema_version": 1,
+  "total_grok_capture_files_in_continuation": 22,
+  "total_grok_rounds_in_continuation": 11
+}
+```
