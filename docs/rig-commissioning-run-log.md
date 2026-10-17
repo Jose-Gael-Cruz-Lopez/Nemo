@@ -31,7 +31,7 @@ Do not buy or cut tubing until the barb fit row says PRESENT.
 
 | # | Item | Acceptance check | Status | Checked by / time | Notes |
 | - | ---- | ---------------- | ------ | ----------------- | ----- |
-| 1 | Laptop and charger | Runs the repo; a USB data port works; sits outside the splash area | UNCHECKED | | |
+| 1 | Laptop and charger | Runs the repo; a USB data port works; sits outside the splash area | **PRESENT** | Megana (reported), 14:49 UTC
 | 2 | External USB webcam (C920s or equivalent) | macOS lists it; OpenCV opens it at an explicit device index; the full bin is sharp in frame | **NOT DETECTED** | Claude, 14:47 UTC | `system_profiler` listed only the built-in FaceTime camera and an iPhone Continuity Camera. Neither is the rig camera. Plug in the webcam and recheck. |
 | 3 | Webcam data cable and host adapter | Carries data, not charge only; matches the laptop's ports | UNCHECKED | | |
 | 4 | Rigid overhead mount | Clamp, tripod or support holding the whole bin in view; no hand-held camera; cable secured | UNCHECKED | | |
