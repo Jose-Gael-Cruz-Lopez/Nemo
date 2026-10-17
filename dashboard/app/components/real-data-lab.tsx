@@ -46,7 +46,7 @@ function ForecastMap({ data }: { data: RealData }) {
   const lastTraining = data.training_track[data.training_track.length - 1];
   return <div className="geographic-map">
     <svg viewBox="0 0 520 500" role="img" aria-label="Real NOAA buoy training positions, held-out positions, and three motion forecast paths">
-      <rect x="25" y="15" width="470" height="470" rx="8" fill="#f5f8fa" stroke="#e3e9ed" />
+      <rect x="25" y="15" width="470" height="470" rx="0" fill="#f5f8fa" stroke="#e3e9ed" />
       {[1, 2, 3, 4].map(i => <g key={i} stroke="#e4e9ed" strokeWidth="1"><path d={`M${25 + i * 94} 15v470`} /><path d={`M25 ${15 + i * 94}h470`} /></g>)}
       {data.models.map((model, i) => <polyline key={model.id} points={polyline([lastTraining, ...model.predictions])} fill="none" stroke={COLORS[i % COLORS.length]} strokeWidth="2.5" strokeDasharray="6 5"><title>{model.label}</title></polyline>)}
       <polyline points={polyline(data.training_track)} fill="none" stroke="#a4b1ba" strokeWidth="3" />

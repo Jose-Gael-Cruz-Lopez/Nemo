@@ -12,7 +12,7 @@
 .controls { display: flex; flex-wrap: wrap; gap: 14px; }
 .label { flex: 1; min-width: 210px; display: flex; flex-direction: column; gap: 7px; color: #3d657d; font-size: 12px; font-weight: 500; }
 .label select,.label textarea { padding: 11px 12px; width: 100%; font: inherit; font-weight: 400; }
-.plotFrame { border: 1px solid #d7e9f3; border-radius: 0; background: linear-gradient(155deg,#ffffffc9,#eef8fdb3); overflow: hidden; }
+.plotFrame { margin: 0; border: 1px solid #d7e9f3; border-radius: 0; background: linear-gradient(155deg,#ffffffc9,#eef8fdb3); overflow: hidden; }
 .plot { display: block; width: 100%; height: auto; max-height: 410px; }
 .legend { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; padding: 12px; border-top: 1px solid #deedf5; color: #43677e; font-size: 11px; }
 .legend span { display: flex; align-items: center; gap: 7px; }

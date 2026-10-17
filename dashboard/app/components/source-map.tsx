@@ -23,7 +23,7 @@ export function SourceMap({ profile, points = [], endpoint }: {
   return <div className="map-panel">
     <svg className="source-map" role="img" aria-label="Candidate source regions, retained pocket, and permitted debris observations in centimeters" viewBox={`${b.x_min_cm - 2} ${b.y_min_cm - 2} ${width + 4} ${height + 4}`}>
       <defs><pattern id={gridId} width="2" height="2" patternUnits="userSpaceOnUse"><path d="M 2 0 L 0 0 0 2" fill="none" stroke="#e1e8e7" strokeWidth=".04" /></pattern></defs>
-      <rect x={b.x_min_cm} y={b.y_min_cm} width={width} height={height} rx=".25" fill="#f2f7f6" stroke="#c0ceca" strokeWidth=".08" />
+      <rect x={b.x_min_cm} y={b.y_min_cm} width={width} height={height} rx="0" fill="#f2f7f6" stroke="#c0ceca" strokeWidth=".08" />
       <rect x={b.x_min_cm} y={b.y_min_cm} width={width} height={height} fill={`url(#${gridId})`} />
       {profile.traps?.map(trap => <polygon key={trap.id} points={trap.polygon_cm.map(p => p.join(",")).join(" ")} fill="#dbe9e0" stroke="#9aafa0" strokeWidth=".1"><title>{`Retention pocket: ${trap.id}`}</title></polygon>)}
       {profile.sources.map((source, index) => <g key={source.id}>

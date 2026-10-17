@@ -43,7 +43,7 @@ export function CoastalTerrain({ phase = 0, className = "" }: { phase?: number; 
       <ellipse cx={s.x} cy={s.y} rx="9" ry="4" fill="#7ad7ee" fillOpacity=".2" />
       <path d={`M${s.x} ${s.y}V${s.top}`} stroke="#7fd4e6" strokeWidth="1.2" />
       <path d={`m${s.x} ${s.top - 8} 7 4v8l-7 4-7-4v-8Z M${s.x} ${s.top - 8}v16m-7-12 7 4 7-4`} stroke="#61bdd9" strokeWidth="1.1" fill="#e9fbff" />
-      <rect x={s.x + 11} y={s.top - 9} width={s.label.length * 6.5 + 12} height="20" rx="6" fill="#e7f8fd" fillOpacity=".85" />
+      <rect x={s.x + 11} y={s.top - 9} width={s.label.length * 6.5 + 12} height="20" rx="0" fill="#e7f8fd" fillOpacity=".85" />
       <text x={s.x + 17} y={s.top + 5} fill="#164861" fontSize="9" fontFamily="monospace" letterSpacing=".6">{s.label}</text>
     </g>)}
   </svg>;
