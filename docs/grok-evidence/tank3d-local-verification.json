@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "kind": "LOCAL_TANK_3D_VERIFICATION_NOT_PHYSICAL_VALIDATION",
+  "base_commit": "6f8af1cd1cbd7d2027539d9785352afd6a50742c",
+  "code_files_match_tested_source_copy": true,
+  "changed_after_test_copy": [],
+  "tested_source_sha256": {
+    "apps/api/reeftrace_api/services/tank_scene.py": "536d38048faa2a4726e251ea634594e256e1a63715f8fe727d317ccf9af61968",
+    "apps/ocean/reeftrace_ocean/hycom.py": "e45d44bbec956a224584ad256f63b077f06c6e08bc93f846438acc6915f78921",
+    "apps/ocean/reeftrace_ocean/matched_current.py": "37e1638ae65faa52157e067fe828d30b42b1241a4f62933eba864baca5be4796",
+    "apps/ocean/reeftrace_ocean/matched_current_protocol.py": "95b46e42b9aad6937bc40772480a21fbcd2a80f85a803270e345daefd5514267",
+    "dashboard/app/components/tank-simulator-scene.tsx": "9479db8437459c8c7d7706b8f29efd91ca81185efe3133bfc29299b62b7e3c9d",
+    "dashboard/app/components/tank-simulator-state.ts": "d6ff83834353de5f3493621a721e42dd43733abf637152168184385a055ff418",
+    "dashboard/app/components/tank-simulator.module.css": "24996ecf667c593e1e8a736fc870c6f0ca81ba050c0e8cb2aa5c3b889aab778f",
+    "dashboard/app/components/tank-simulator.tsx": "3edf3b77b1d7550557971d3e167e8c42a87e9e163d0c9bb21ab1e9ac84378397",
+    "dashboard/tests/tank-simulator.test.mjs": "0140565b5864df37d476b04c266615dc97f178dfc3ec6099e2a237c4912a730c",
+    "scripts/evaluate_matched_current_study.py": "be9fc3b0ea0f4bb6b47faae45aea96708d743169a047d4e8df8aec4f55f016ec",
+    "scripts/fetch_matched_current_study.py": "d9322e79dbd0c7bacecd25f204a4418016a2f095355467a2fd222a403a59fa52",
+    "scripts/freeze_matched_current_protocol.py": "f6a8910fa6278502dec5a68265a596f582a7a117d6fade03d1cefbec01a06e45",
+    "tests/unit/test_hycom_field.py": "005bb28c1b60ffdd5c156ac14bc83e53b01173b3f48a753aa0cdae7ef80b645a",
+    "tests/unit/test_matched_current.py": "a09155b9ccad9c0f155128125b9b7d1b7a0f1b6780174edc3d661b0ce2eb82fe",
+    "tests/unit/test_matched_current_acquisition.py": "456eb0c903c0184b4c8c5b7b67f78b9510da7b35782a78a966ab2f01a6d03e47",
+    "tests/unit/test_matched_current_replay.py": "9e62a542b334e2f17e9d39b2bf3365d1f00f9174757f8e4b90d214ce9075341a",
+    "tests/unit/test_tank_scene.py": "22a3bc8cf4948ea57a519ee864b08dda746c2fad2b57a82b362d23802ad55533",
+    "apps/api/reeftrace_api/main.py": "4004b83e483a8e6e98315a11e1a0da05aaebeacaff1638e8b3000a599ecfd986",
+    "dashboard/app/components/prevention-workspace.tsx": "db7ab167d492738bf89af2ad565788aa926f7fce2818c7da2279f62a61783bc3",
+    "dashboard/package-lock.json": "f882269886072006072bcf5a9e3c38b67af47a26bec1fb8cf8f17005e7ef3fb6",
+    "dashboard/package.json": "8c913a34d1cfc804fd2a522ee0896898231952552073cce75705f5c266f4a309",
+    "scripts/e2e_prevention.py": "c121b8eb3a9cb107a2afbba784cb1cd6e7a5d7bb65b3df1f66f82c5cbad2d448"
+  },
+  "tests": {
+    "python_passed": 1549,
+    "frontend_passed": 208,
+    "ruff": "passed",
+    "eslint": "passed",
+    "route_types": "passed",
+    "typescript": "passed",
+    "production_build": "passed",
+    "guarded_http": {
+      "PASS": 142,
+      "FAIL": 0,
+      "BLOCKED": 6,
+      "software_workflow_passed": true,
+      "expected_external_scopes_blocked": true,
+      "complete_live_product_verified": false,
+      "physical_validation": false,
+      "live_provider_round_trip_verified": false
+    },
+    "hosted_ci": "pending_exact_new_commit"
+  },
+  "scene": {
+    "comparison_id": "prevention_comparison-35ae7f4be069463b",
+    "evaluation_snapshot_hash": "65e2ecd71bc4c29b000e8fd73c91bbafed2cd39a9bd07df10b528774ed04c479",
+    "scene_sha256": "1988a8c90a405689a08ad25aeb7388a9ebe2cc515681f377b1ce9f30fc97f166",
+    "numerical_report_sha256": "53fcc107a4d32be907e84ab2addc99f9d95acf50aceb64a62157fbf42f652b63",
+    "data_origin": "SYNTHETIC",
+    "representative_paths": 36,
+    "nominal_particles": 600,
+    "predicted_zone_entries": {
+      "baseline": 300,
+      "intervention": 0
+    },
+    "physical_trials": 0,
+    "actual_status": "NOT_CAPTURED",
+    "measured_depth_cm": null,
+    "positional_error_metrics": null
+  },
+  "preserved_runtime": {
+    "camera_running": false,
+    "photon_enabled": true,
+    "new_photon_messages_requested": false,
+    "xai_api_called": false,
+    "billing_changed": false
+  },
+  "new_matched_current_study": {
+    "protocol_frozen": false,
+    "identity_file_exists": false,
+    "study_directory_exists": false,
+    "scientific_values_acquired": false,
+    "scores_computed": false
+  },
+  "created_at_utc": "2026-10-17T20:44:40.148912+00:00",
+  "browser": {
+    "schema_version": 1,
+    "kind": "ACTUAL_BROWSER_TANK_3D_VERIFICATION",
+    "started_at_utc": "2026-10-17T20:38:47.024Z",
+    "captured_at_utc": "2026-10-17T20:43:53.631Z",
+    "checks": {
+      "canvas_before_open": 0,
+      "canvas_after_open": 1,
+      "canvas_after_close": 0,
+      "webgl_rendered": true,
+      "baseline_vs_intervention_counts": "300/300 versus 0/300, synthetic nominal model",
+      "source_filter_routes": "6/6 for one source; full-source counts unchanged",
+      "keyboard_orbit_and_overhead": true,
+      "slider_keyboard_seconds": 6,
+      "model_horizon_seconds": 20,
+      "playback_reached_horizon": true,
+      "physical_capture_clock_disabled_without_recordings": true,
+      "mobile": {
+        "width": 390,
+        "page_width": 390,
+        "canvas_width": 290,
+        "horizontal_overflow": false
+      }
+    },
+    "fresh_browser_errors": [],
+    "chalk": {
+      "live_model_response": true,
+      "evidence_line": "Live model response: yes \u00b7 Evaluation 65e2ecd71bc4c29b000e8fd73c91bbafed2cd39a9bd07df10b528774ed04c479 \u00b7 Evidence estimate-c5887b6307e14751, prevention_comparison-35ae7f4be069463b, prevention-evaluation-65e2ecd71bc4c29b000e",
+      "tools": [
+        "get_case",
+        "get_source_evidence",
+        "get_prevention_evidence"
+      ],
+      "explanation": "Source identity remains UNKNOWN: the saved source report cannot distinguish the declared candidates under its priors and release window. The frozen simulation favors the intervention layout, with the mesh pocket upstream of the protected tabletop zone, under its assumed flow and perfect capture. This is a conditional prediction, not measured prevention. The synthetic demonstration records show a zone entry under the baseline and no entry under the intervention, but do not verify capture or establish a causal effect; most planned releases are missing. No operator-reported physical releases are recorded. Independent, calibrated tracking of repeated releases under both layouts and declared sources is still needed, including timed zone crossings, capture or escape, flow and retention measurements, and complete token accounting. The viewer replays illustrative saved simulation paths rather than independently observed positions, so its playback neither validates physical behavior nor measures position error. The protected zone is a tabletop proxy; no reef benefit has been demonstrated.",
+      "source_identity": "UNKNOWN",
+      "physical_validation": false
+    }
+  }
+}

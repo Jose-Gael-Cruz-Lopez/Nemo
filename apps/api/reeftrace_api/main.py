@@ -257,6 +257,17 @@ def create_app(settings: Settings | None = None):
     def prevention_comparison(comparison_id: str):
         return runtime.prevention.comparison_detail(comparison_id)
 
+    @app.get("/api/v1/prevention/comparisons/{comparison_id}/scene")
+    def prevention_scene(comparison_id: str, request: Request, response: Response,
+                         evaluation_snapshot_hash: str = Query(pattern=r"^[0-9a-f]{64}$")):
+        from .services.tank_scene import build_tank_scene
+
+        response.headers["Cache-Control"] = "no-store"
+        comparison = runtime.store.get("prevention_comparison", comparison_id)
+        if comparison["data_origin"] == "MEASURED_TANK":
+            operator(request)
+        return build_tank_scene(runtime, comparison_id, evaluation_snapshot_hash)
+
     @app.get("/api/v1/prevention/comparisons/{comparison_id}/export", dependencies=[Depends(operator)])
     def prevention_export(comparison_id: str):
         return export_comparison(runtime, comparison_id)

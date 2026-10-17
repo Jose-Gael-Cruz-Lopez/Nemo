@@ -1,0 +1,150 @@
+Continue the same Tideward/ReefTrace Grok project. User now explicitly asks for an interactive3D simulator of the actualplannedtankrig, embedded in an existingfeature, comparing simulatedexpectedresults against future IRLrecordings/trialoutcomes. They supplied a separateChatGPTrepoexplanation; Ireadalltwo completeexchanges. Its scope matches our mission: predefinedsources -> conditionaltracing; compareinterceptionlayouts; independentlyverifyexpectedvsactual. Grokitselfisnotbeingtrained; webassistedresearchonly. DoNOTcallxAIAPI/spendcredits/turnonbilling/Photon/camera. No newphysicaltrials exist. Reviewandcode suggestions are static, notexecution.
+
+We are implementing a genuinely interactiveThree.js3Dview inside existingPrevention/TankComparisonDetail. ExistingcomparisonGET contains40x30cmSYNTHETICdemo bounds (NOTmeasuredcontainerdimensions),20shorizon,3sourcesA/B/C,twofrozenlayouts,100particles/source/layout=>600nominalparticles,6representativepaths/source/layout=>36displaypaths(max80decimatedpoints each), and30SYNTHETICledgertrials/0physicaltrials. Datasetdriven means SAMEsavedmodeloutput+profilegeometry; no frontendrandomphysics. RealPacIOOS/NOAA remain oceanresearch(metres/geographic) and are NOTshrunkeninto tankcm. FutureadmittedMEASURED_TANKprofilescanusethe3Dview withsameprovenancecontracts.
+
+HARDWARE: basicwatertightbin,purchasedPondBoss80GPHcordedpump,3/8inchIDvinyl tubingwithcorrectphysicaladapterfit,meshcollector,redfloatingtoken, dryfixedUSBwebcam(C270currently),laptop+lamp/ruler/marks. NoArduinoactuation, noESP32CAM, no3Dprinterrequired, noautonomousunderwaterrobot. Pumporiginalcordmanuallypowered; USBcamconnectslaptop. No measuredwaterdepth,pumpXYZ/cameramountheight currently. RenderXY atzeroheight, tankextrusion+equipmentcontext plainlyschematic/unmeasured. Collector/source/protectedpolygonsfollowfrozenprofileXY. Fakecoralproxyisvisualonly, notlivingcoral/hydrodynamicobstacle.
+
+SCIENCE: tanktransportexistingEuler-Maruyama usesstaticmeasuredIDWmarkerdrift+declarednoise/reflectingbounds/absorbingtraps; oceanRK4separate. BelowistheACTUALexistingserializer/core comparison toreview, notgenerateddraft. Numericalreportnominal_paths areillustrations fromcollector-onlyensemble; fullheadlinemetricsfromseparatecompeting-absorber paths. supportedboolcoversfirstevent/horizon,notalllaterpoints. Newreadonlysceneendpointwillpreserveoldimmutablecomparisonsandcounts, validatesnapshot/profile/flow/calibration hashes, exportboundedsafegeometry/staticvectorsandlegacyrepresentativepaths withconservativefirsteventprefix disclosure. Noengine/oldserializerchanges. Ifunsupportedprefixcannotbeestablished, don'tshowanimatedsupportedtruth. InterpolationinsceneisvisualONLY; no scorechangesunderfilter/playback/cameraorbit.
+
+ACTUALS: TrialInputrecordsoutcomes/eventtimes/optionalrecording_id. Camera t_s starts atCAPTURESTART, NOTverifiedrelease. Newsceneendpointwillwhitelistonlylinkedphysicalrecordingswithmatchinglayout/profile/calibration/session/prospectivecapture/uniqueID. Returnonlytimedcmsegmentswithgaps,noimages/privatepaths. MarkcaptureclockUNALIGNED,releaseanchorMISSING,positionalerrormetricsNULL. DoNOTcomputeRMSEbyaligningrecordingt0tosimrelease orchoosingnearestMonteCarloparticle. Existingpredictedvsindependentlyreportedoutcomecountsboundsremainavailable, withallplannedmissing/unresolveddenominators. Syntheticledgerrecordsseparatefromphysical.
+
+UI: large3Dscene,lazyThree.jsimportONLYafterOpen3Dtankbutton; play/pause/scrub/speed, baseline/intervention/sourcechoice, checkboxespaths/grid/vectors/labels, orbit/reset/overheadview, fixedscores, actualcaptureseparateclockwhenavailable. Reducedmotion; pausedrenderonchange; animateonlyplaying/visible;DPRcap1.5;disposeRAF/geometries/materials/context;accessible2Dmapsremainfallback. Same lightblueprofessionalsharpcornerstyle. Newendpoint GET/prevention/comparisons/{id}/scene?evaluation_snapshot_hash=... mustclearoldsceneonID/snapshotchange andcheckstaleasyncresults.
+
+Pleasegive(A) concrete scientific/kinematic/timealignment bugs toprevent, referencingexactserializersemanticsbelow;(B) useful3Dvisual/control hierarchy forabeginnerdemo;(C) exactmeaningful test cases includingunsupportedfirstevent/decimation andfuturephysicalrecordings;(D) onespecificsmallimplementationrecommendationthatimprovesthiswithoutinventingnewmeasurements/CFD. Avoidclaims ofrunningcode orvalidatingphysicalbenefit. Supplyreviewwecanactuallyimplementandtest.
+
+ACTUALPUBLICREPOSITORYCODE:
+def _paths(actual: Ensemble, detail: dict, layout: str, source: str) -> dict:
+    paths = []
+    selected = np.linspace(0, actual.positions_cm.shape[1] - 1,
+                           min(MAX_PATHS, actual.positions_cm.shape[1]), dtype=int)
+    indices = np.unique(np.linspace(0, len(actual.times_s) - 1,
+                                    min(MAX_PATH_POINTS, len(actual.times_s)), dtype=int))
+    for particle in selected:
+        # Decimated paths are illustrative; event counts come from the full
+        # competing simulation and never from these display segments.
+        paths.append({
+            "particle_index": int(particle),
+            "points": [{"t_s": float(actual.times_s[i]),
+                        "x_cm": float(actual.positions_cm[i, particle, 0]),
+                        "y_cm": float(actual.positions_cm[i, particle, 1])} for i in indices],
+            "zone_entry_s": (float(detail["zone_entry_s"][particle])
+                             if math.isfinite(detail["zone_entry_s"][particle]) else None),
+            "capture_s": (float(detail["capture_s"][particle])
+                          if math.isfinite(detail["capture_s"][particle]) else None),
+            "supported": bool(detail["supported"][particle]),
+        })
+    return {"layout": layout, "source_id": source, "paths": paths}
+
+def compare_layouts(baseline: dict, intervention: dict, protected_zone_cm: list, *,
+                    horizon_s=20, particles=100, seed=17) -> dict:
+    """Compare frozen layouts; reject malformed input and withhold unsupported claims.
+
+    Bounds, token class and candidate source geometries must agree. Source priors
+    and release-age priors are not used: all particles start in a source at t=0.
+    Recommendations are conditional on the complete predeclared scenario set,
+    not statistical confidence statements or observed environmental benefits.
+    """
+    horizon = _number(horizon_s, "horizon seconds", 1, 20)
+    count = _integer(particles, "particles per source", 20, 200)
+    random_seed = _integer(seed, "seed", 0, 2**32 - 1)
+    try:
+        baseline, baseline_hash = _snapshot(baseline)
+        intervention, intervention_hash = _snapshot(intervention)
+        bounds = Bounds.from_dict(baseline["bounds"])
+        zone = _polygon(protected_zone_cm, bounds)
+        a, b = (_prepare(profile, zone, horizon) for profile in (baseline, intervention))
+        if a["bounds"] != b["bounds"] or a["origin"] != b["origin"] or a["token"] != b["token"]:
+            raise ValueError("Layouts require identical bounds, data origin and token class")
+        if set(a["sources"]) != set(b["sources"]):
+            raise ValueError("Layouts require the same declared source IDs")
+        for sid in a["sources"]:
+            if _polygon_key(a["sources"][sid]) != _polygon_key(b["sources"][sid]):
+                raise ValueError("Layouts require identical source polygons")
+        if set(a["scenarios"]) != set(b["scenarios"]):
+            raise ValueError("Layouts require matching complete scenario IDs")
+        scenarios = ["nominal"] + sorted(set(a["scenarios"]) - {"nominal"})
+        steps = {sid: _common_step(a, b, sid, zone, horizon) for sid in scenarios}
+        work = sum(4 * len(a["sources"]) * count * (n + 1) for _, n in steps.values())
+        if work > MAX_TOTAL_STATES:
+            raise ValueError("Total comparison workload exceeded; simplify the frozen experiment")
+        rows, display_paths = [], []
+        coverage_ok = True
+        for scenario in scenarios:
+            dt, _ = steps[scenario]
+            for source in sorted(a["sources"]):
+                row = {"scenario_id": scenario, "source_id": source}
+                for name, layout, profile in (("baseline", a, baseline), ("intervention", b, intervention)):
+                    settings = layout["scenarios"][scenario]
+                    args = {"bounds": profile["bounds"], "particles": count, "dt_s": dt,
+                            "horizon_s": horizon, "seed": random_seed, "max_steps": MAX_STEPS,
+                            "diffusivity_cm2_s": settings["diffusivity_cm2_s"],
+                            "drift_bias_cm_s": settings["drift_bias_cm_s"]}
+                    actual = simulate(profile["flow"], layout["sources"][source].tolist(),
+                                      traps=profile.get("traps", []), **args)
+                    competing = simulate(profile["flow"], layout["sources"][source].tolist(),
+                                         traps=profile.get("traps", []) + [
+                                             {"polygon_cm": zone.tolist(), "retention": "absorbing"}], **args)
+                    metrics, details = _first_passage(actual, competing, zone)
+                    row[name] = metrics
+                    # A single unsupported particle in ANY declared scenario
+                    # withholds a prototype recommendation. Unknown outcomes
+                    # still appear in conservative bounds and all denominators.
+                    coverage_ok &= metrics["unsupported_count"] == 0
+                    if scenario == "nominal":
+                        display_paths.append(_paths(actual, details, name, source))
+                row["benefit_fraction"] = row["baseline"]["zone_entry_fraction"] - row["intervention"]["zone_entry_fraction"]
+                row["benefit_lower_fraction"] = row["baseline"]["zone_entry_lower_fraction"] - row["intervention"]["zone_entry_upper_fraction"]
+                row["benefit_upper_fraction"] = row["baseline"]["zone_entry_upper_fraction"] - row["intervention"]["zone_entry_lower_fraction"]
+                rows.append(row)
+        lower = min(row["benefit_lower_fraction"] for row in rows)
+        upper = max(row["benefit_upper_fraction"] for row in rows)
+        recommendation, reasons = "NO_ROBUST_RECOMMENDATION", []
+        if not coverage_ok:
+            reasons.append("UNSUPPORTED_FLOW_PATHS")
+        elif lower > 1e-12:
+            recommendation = "INTERVENTION"
+        elif upper < -1e-12:
+            recommendation = "BASELINE"
+        else:
+            reasons.append("MIXED_OR_ZERO_EFFECT")
+        report = {
+            "schema_version": 1,
+            "status": "SIMULATED_COMPARISON" if coverage_ok else "WITHHELD_UNSUPPORTED_FLOW",
+            "data_origin": a["origin"], "physical_validation": False,
+            "layouts": {name: {"profile_id": profile["id"], "profile_hash": digest,
+                                "flow_hash": _snapshot(profile["flow"])[1]}
+                        for name, profile, digest in (("baseline", baseline, baseline_hash),
+                                                       ("intervention", intervention, intervention_hash))},
+            "protected_zone_cm": zone.tolist(), "horizon_s": horizon,
+            "particles_per_source": count, "seed": random_seed, "scenario_ids": scenarios,
+            "results": rows, "robust_benefit_min": lower, "robust_benefit_max": upper,
+            "recommendation": recommendation, "reason_codes": reasons,
+            "nominal_paths": display_paths,
+            "assumptions": {
+                "outcomes": "SIMULATED_FIRST_PASSAGE_NOT_PHYSICAL_TRIALS",
+                "world_units": "cm", "time_units": "s", "boundary": "reflecting_rectangle",
+                "retention": "perfect_absorbing_traps_no_escape_or_partial_capture",
+                "flow": "fixed_separate_layout_fields_no_predicted_hydrodynamic_change",
+                "source_weighting": "NONE_all_declared_sources_must_agree",
+                "source_prior_and_release_age": "NOT_USED_particles_released_at_t0",
+                "support_rule": "any_unsupported_time_node_until_first_event_or_horizon_is_unknown",
+                "unsupported_denominator": "all_particles_retained_unknown_outcomes_bound_benefit",
+                "minimum_supported_particle_fraction": 1.0,
+                "declared_profile_min_path_coverage": {"baseline": a["minimum_coverage"], "intervention": b["minimum_coverage"]},
+                "event_rule": "competing_absorbing_zone_and_traps_segment_crossing_including_reflections",
+                "touch_rule": "boundary_contact_counts_as_entry_overlapping_geometries_rejected",
+                "event_time_kind": "time_node_upper_bound_resolution_dt_not_exact_exposure_time",
+                "time_step_by_scenario_s": {sid: value[0] for sid, value in steps.items()},
+                "recommendation_scope": "declared_sources_and_scenarios_not_statistical_confidence",
+                "monte_carlo": "fixed_seed_common_random_numbers_no_sampling_confidence_claim",
+                "display_paths": "decimated_illustrations_not_used_for_metrics",
+                "particle_time_states": work,
+                "limitations": ["No coral injury, avoided mortality or real-world pollution reduction is measured.",
+                                "Input data origin does not validate simulated intervention outcomes.",
+                                "Time-node support is a finite-step diagnostic, not continuous spatial coverage proof."],
+            },
+        }
+        json.dumps(report, allow_nan=False)
+        return report
+    except (KeyError, TypeError, IndexError, OverflowError) as exc:
+        raise ValueError("Malformed prevention comparison input") from exc

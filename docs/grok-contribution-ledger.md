@@ -17,6 +17,25 @@ a later implementation review, final local verification and a draft-only
 matched-current design review. Final commit/push/CI/hosted verification are not
 claimed by those local receipts.
 
+### Later continuation: matched-current contracts and the 3D tank view
+
+The [separate continuation](grok-evidence-continuation.md) preserves **three more
+actual Grok web prompts and three static responses**, with exact raw-file hashes.
+The large earlier bundle remains an unchanged historical archive. Useful review
+constraints were implemented; incorrect float32 multiplication advice, unsupported
+path rendering and invented exact event markers were rejected or corrected.
+
+The accepted implementation adds a lazy, read-only 3D replay of the existing tank
+comparison, with schematic equipment and independent recorded-track clocks. It
+does not add CFD, physical measurements or a new motion model. The matched-current
+reader/evaluator/acquisition infrastructure remains DRAFT, without a frozen study
+identity, scientific acquisition or new score. The [separate local receipt](grok-evidence/tank3d-local-verification.json)
+records **1,549 Python / 208 frontend / 142 guarded HTTP** passes, six expected
+external/physical blockers, build/lint/types and actual browser/live-Chalk checks.
+Those executions were local, not performed by Grok web; exact-commit hosted CI
+requires a separate check. No xAI API, funded Voice result, paid billing or new
+sponsor-eligibility claim is created by this work.
+
 ## 1. What Grok actually contributed
 
 Grok was used for **research planning, mathematical/code drafts, adversarial static

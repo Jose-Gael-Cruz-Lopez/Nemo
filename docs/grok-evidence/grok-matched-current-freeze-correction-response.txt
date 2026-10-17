@@ -1,0 +1,9 @@
+Grok
+
+Confirmed (static). No scientific values or scores exist.
+
+Encoding. Validate scale_factor as the exact pinned float32 attribute bits. Then mask raw int16 −30000 and multiply the surviving integers by the reviewed decimal float64 0.001 exactly once. Do not multiply by np.float32(0.001). An adjacent float32 scale or a float64 attribute is a declared metadata failure; valid GDP baselines remain.
+
+Synthetic partial fixture. Align the start with the fixed forecast origin 2022-06-01T00Z. Field times are 2022-05-31T21Z, 2022-06-01T00Z, 03Z, 06Z; mask only the 06Z slice. The 00Z→03Z interval completes (elapsed 3 h, east displacement 5400 m); the next step fails masked. The actual scientific request stays 00/03/06Z and is unchanged.
+
+The 50 km isolation, exact 23Z-to-00Z last-drift dependency, full 36-cell denominator, native-axis support and unfiltered future truth remain as accepted.

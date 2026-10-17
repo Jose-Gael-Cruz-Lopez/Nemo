@@ -192,3 +192,12 @@ copied; use exact public Git commits for source provenance.
 
 The [single-file Trov bundle](../grok-evidence-bundle.md) embeds this archive and
 the committed research records for an organization-visible publication.
+
+The later [Grok evidence continuation](../grok-evidence-continuation.md) separately
+preserves three additional web-review exchanges (six exact raw text files) and a
+distinct [local 3D verification receipt](tank3d-local-verification.json). Its inline
+manifest covers those additions; the earlier forty-three-file manifest and large
+bundle remain historical snapshots without being silently rewritten. This split
+keeps each native Trov publication below its size limit. The continuation covers
+the unacquired matched-current infrastructure and schematic 3D tank replay, not
+new real-data scores or measured physical validation.

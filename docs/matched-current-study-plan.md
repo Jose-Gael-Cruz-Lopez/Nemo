@@ -1,14 +1,23 @@
 # DRAFT: matched-current drifter feasibility study
 
-Design checkpoint: **17 October 2026**. Status: **DRAFT — Grok design review and
-correction received; a reader implementation, local review and a formal, hashed
-protocol are still required before scientific acquisition**.
+Design checkpoint: **17 October 2026**. Status: **DRAFT — local reader, fixed-model
+evaluator and bounded acquisition/replay infrastructure implemented and tested with
+synthetic or mocked inputs; final source review and a formal, hashed protocol are
+still required before scientific acquisition**.
 
 This is a proposed six-hour, two-group feasibility comparison. It is not a frozen
 experiment, an acquired trajectory/current dataset, a completed score, or a claim
 of operational forecast skill. Only bounded public metadata were read. No new
 trajectory positions, current-vector values, model fits, scores or physical trials
 were acquired or run for this design.
+
+The new `hycom.py`, `matched_current.py`, `matched_current_protocol.py` and the
+three matched-current scripts are infrastructure, not a completed study. The
+trusted `matched_current_identity.py` and the `data/public/matched-current-v1`
+protocol/acquisition directory do not yet exist. Default evaluation is replay-only
+and refuses an unscored study. No endpoint or Data Lab panel presents new study
+scores. The first scientific request and first scoring operation remain separate,
+explicit gates after a reviewed source freeze; existing NOAA results are unchanged.
 
 ## 1. Question and the improvement being tested
 
