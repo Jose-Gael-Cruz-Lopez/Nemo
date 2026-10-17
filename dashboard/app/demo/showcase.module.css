@@ -1,0 +1,16 @@
+.main { width: min(1060px, 100%); margin: 0 auto; padding: 26px 28px 48px; }
+.header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.brand svg { width: 34px; height: 34px; }
+.brand strong { font-size: 22px; font-weight: 550; letter-spacing: -.7px; }
+.brand span, .kicker { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); }
+.intro { max-width: 800px; padding: 34px 0 22px; }
+.intro h1 { font-size: clamp(29px, 5vw, 43px); line-height: 1.12; margin: 10px 0 18px; letter-spacing: -1.5px; font-weight: 500; }
+.intro p, .validation p { color: var(--muted); line-height: 1.8; }
+.disclosure { font-size: 12px; padding: 15px 17px; border-left: 3px solid #4387ab; background: #f4fbff; }
+.validation { margin-top: 24px; padding: 22px; border: 1px solid var(--line); background: #f5fbff; }
+.validation h2 { margin: 0 0 12px; font-size: 18px; font-weight: 550; }
+.validation p { margin: 8px 0 0; font-size: 12px; }
+.footer { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; font-size: 11px; color: var(--muted); overflow-wrap: anywhere; }
+.footer a { color: #236f97; }
+@media(max-width:600px) { .main { padding: 18px 12px 32px; } .header { align-items: flex-start; flex-direction: column; gap: 14px; } .brand span { display: none; } .intro { padding-top: 24px; } }

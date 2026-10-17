@@ -123,7 +123,8 @@ function component(path) {
     return require(name);
   }, mod, mod.exports); return mod.exports;
 }
-const { OceanPreventionFigure, OceanPrevention, DEFAULT_OCEAN_VISIBILITY } = component("app/components/ocean-prevention.tsx");
+const { OceanPreventionFigure, OceanPrevention, OceanResults, DEFAULT_OCEAN_VISIBILITY } = component("app/components/ocean-prevention.tsx");
+const { OperatorProvider } = component("app/components/operator-provider.tsx");
 const draw = (report = fixture(), visible = DEFAULT_OCEAN_VISIBILITY, releaseId = "all", frame = 0) => renderToStaticMarkup(React.createElement(OceanPreventionFigure, { report, visible, releaseId, frame, onToggle: () => assert.fail("Render must not mutate or call a provider") }));
 const pathPoints = (html, layer) => [...(html.match(new RegExp(`data-ocean-layer="${layer}"[\\s\\S]*?</g></g>`))?.[0] ?? "").matchAll(/<polyline points="([^"]*)"/g)].map(m => m[1]);
 const grid = html => html.match(/Plot grid: ([^<]+)/)?.[1];
@@ -132,6 +133,15 @@ test("the first view is concise, dynamic by default and offers only one explicit
   assert.match(html, /Compare ocean layouts/); assert.match(html, /One changing-current comparison/); assert.match(html, /downstream-corridor-v2/); assert.match(html, /initial-proxy-v1/);
   assert.equal((html.match(/<svg/g) ?? []).length, 2); // two decorative button/title icons, no unloaded plot
   assert.equal(DEFAULT_OCEAN_VISIBILITY.baseline, false); assert.equal(DEFAULT_OCEAN_VISIBILITY.layoutA, true); assert.equal(DEFAULT_OCEAN_VISIBILITY.layoutB, true);
+});
+test("public results keep the real comparison controls but cannot offer sign-in or a live Chalk request", () => {
+  const html = renderToStaticMarkup(React.createElement(OperatorProvider, null, React.createElement(OceanResults, { api: "/showcase", report: fixture(), readOnly: true })));
+  assert.match(html, /Chalk unavailable in public showcase/);
+  assert.match(html, /does not call a model or display a live Chalk response/);
+  assert.match(html, /type="button" class="primary-button" disabled=""/);
+  assert.doesNotMatch(html, /Sign in to use Chalk|href="\/login"|Ask Chalk about these layouts/);
+  assert.equal((html.match(/type="checkbox"/g) ?? []).length, 6);
+  assert.match(html, /Ocean comparison release/);
 });
 test("the combined figure exposes checkboxes and preserves coordinates when hiding a layout", () => {
   const report = fixture(), before = JSON.stringify(report), all = draw(report), a = draw(report, { ...DEFAULT_OCEAN_VISIBILITY, layoutB: false });
