@@ -16,7 +16,9 @@ from fastapi.responses import JSONResponse, Response
 from apps.vision.reeftrace_vision.calibration import fit_homography
 from apps.vision.reeftrace_vision.tracking import flow_samples
 
+from .api.v1.endpoints.field_sessions import create_field_sessions_router
 from .api.v1.endpoints.health import router as health_router
+from .api.v1.endpoints.method_validation import create_method_validation_router
 from .core.settings import Settings
 from .schemas.contracts import (
     CalibrationInput,
@@ -56,7 +58,9 @@ def create_app(settings: Settings | None = None):
         ps = runtime.photon_settings()
         if ps.readiness()["ready"]:
             runtime.store.bind_photon_project(ps.project_id)
-            worker = asyncio.create_task(PhotonWorker(ps, runtime.store, runtime.photon_handler).run(stop))
+            runtime.photon_worker = PhotonWorker(ps, runtime.store, runtime.photon_handler)
+            worker = asyncio.create_task(runtime.photon_worker.run(stop))
+            runtime.photon_task = worker
         try:
             yield
         finally:
@@ -97,6 +101,9 @@ def create_app(settings: Settings | None = None):
         if not hmac.compare_digest(auth, "Bearer " + settings.local_token):
             raise HTTPException(401, "Operator token required")
 
+    app.include_router(create_method_validation_router(), prefix="/api/v1")
+    app.include_router(create_field_sessions_router(runtime, operator), prefix="/api/v1")
+
     @app.get("/")
     def root():
         return {"name": "ReefTrace API", "docs": "/docs"}
@@ -104,7 +111,7 @@ def create_app(settings: Settings | None = None):
     @app.get("/api/v1/status")
     def status():
         return {"camera": runtime.camera.status(), "chalk": runtime.chalk_settings().readiness(),
-                "photon": runtime.photon_settings().readiness(),
+                "photon": runtime.photon_status(),
                 "grok": runtime.grok_settings().readiness(), "collection_mode": "manual_net",
                 "hardware_actuation": False, "operator_configured": bool(settings.local_token)}
 
@@ -131,6 +138,14 @@ def create_app(settings: Settings | None = None):
             return run_motion_ablation()
         except (FileNotFoundError, PermissionError):
             raise HTTPException(503, "The pinned motion dataset is unavailable locally") from None
+
+    @app.get("/api/v1/research/multi-drifter")
+    def multi_drifter():
+        from apps.ocean.reeftrace_ocean.multidrifter import run_multidrifter_study
+        try:
+            return run_multidrifter_study()
+        except (FileNotFoundError, PermissionError):
+            raise HTTPException(503, "The pinned multi-drifter study is unavailable locally") from None
 
     @app.get("/api/v1/cases/{case_id}/briefing")
     def briefing(case_id: str):

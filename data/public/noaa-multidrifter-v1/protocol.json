@@ -1,0 +1,172 @@
+{
+  "assignment": {
+    "adaptation": "Each fixed algorithm may fit only its allowed 18-position prefix at inference; no global tuning on evaluation outcomes.",
+    "development_only": [
+      "8707978"
+    ],
+    "evaluation": "all selected distinct IDs; all their positions remain evaluation-group data",
+    "excluded": "all unselected IDs; selected failures stay attempted evaluation groups",
+    "unit": "entire_drifter_ID"
+  },
+  "budgets": {
+    "metadata_bytes_per_block": 256000,
+    "metadata_info_bytes": 1000000,
+    "requests_max": 10,
+    "selected_trajectories_max": 6,
+    "timeout_s": 40,
+    "trajectory_bytes": 32000
+  },
+  "eligibility": {
+    "failures_retained": true,
+    "future_truth_gate": "No future-position distance/speed/error exclusion; missing/invalid truth is explicitly unavailable, never a selection replacement",
+    "no_extra_quality_filter": "Published location_type/experiment are descriptors only; no new drogue or sensor accuracy claim",
+    "pre_score_metadata_only": [
+      "selected numeric ID not reserved",
+      "exact 24 finite parsed positions in requested order with regular one-hour UTC cadence",
+      "all18 prefix positions within fixed computational geometry domain"
+    ]
+  },
+  "frozen_at_utc": "2026-10-17T05:40:21.798819+00:00",
+  "limitations": [
+    "NOAA hourly positions are QC/interpolated retrospective products and may use future raw fixes upstream.",
+    "Unseen drifter IDs are disjoint from development but ocean/time blocks and nearby deployments need not be statistically independent.",
+    "Only a six-drifter feasibility study; no significance, operational prediction, source attribution, reef impact, or automatic model promotion.",
+    "Models adapt on permitted observation prefixes; unseen refers to unscored groups, not a single globally trained model with no adaptation."
+  ],
+  "metrics": {
+    "calibrated_probability": false,
+    "conditional_success_metrics": "Optional common-success subset clearly labelled, identical all-four-model cohort and full attempted/failure denominators; no ranking or promotion",
+    "error": "spherical_great_circle_position_error_m",
+    "pair_counts": "lower/equal/higher trajectory-mean errors; exact equality",
+    "paired_baselines": [
+      "stationary",
+      "last_drift",
+      "mean_drift"
+    ],
+    "paired_candidate": "ridge_ar1",
+    "paired_delta": "candidate_minus_baseline_error_m; negative favors candidate",
+    "paired_skill": "1-sum(candidate trajectory mean errors)/sum(baseline trajectory mean errors); zero denominator ->null ZERO_BASELINE_ERROR",
+    "per_horizon": "error per model per drifter; equal-drifter macro mean and RMS with attempted/scored/failed counts",
+    "primary_macro": "equal-weight mean trajectory errors across the complete declared selected cohort; withhold if any required group/model/horizon missing",
+    "primary_unit": "one_drifter_with_one_origin",
+    "significance_claim": false,
+    "trajectory_summary": "mean of six hourly position errors per model; not six independent replicates"
+  },
+  "models": {
+    "free_run": true,
+    "global_parameter_tuning": false,
+    "ids": [
+      "stationary",
+      "last_drift",
+      "mean_drift",
+      "ridge_ar1"
+    ],
+    "implementation_sha256": {
+      "apps/ocean/reeftrace_ocean/ablation.py": "35ce38e4c4a12a57112e2c5865ce7084e7e6659b7c896c7d6625326d74189238",
+      "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde"
+    },
+    "maximum_ar_spectral_radius": 0.98,
+    "mean_drift": "mean_v=(x_last-x_first)/((n-1)*3600); prediction_h=x_last+h*3600*mean_v",
+    "model_selection_performed": false,
+    "ridge_alpha": 1.0
+  },
+  "origin": {
+    "evaluation_hours": "18:00..23:00 UTC",
+    "forecast_hours": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "justification": "24 observed hours exactly support the unchanged 18-position fit plus six fixed forecast horizons, not an asserted physical ocean validity timescale.",
+    "origins_per_drifter": 1,
+    "prefix_hours": "00:00..17:00 UTC",
+    "training_count": 18,
+    "window_hours": 24
+  },
+  "preprocessing": {
+    "allow_interpolation_in_our_code": false,
+    "allow_velocity_or_uncertainty_as_features": false,
+    "cadence_s": 3600,
+    "csv_columns": [
+      "ID",
+      "time",
+      "latitude",
+      "longitude",
+      "ve",
+      "vn",
+      "err_ve",
+      "err_vn"
+    ],
+    "earth_mean_radius_m": 6371008.8,
+    "geometry": "Existing spherical azimuthal equidistant frame centered on first prefix position; great-circle errors in metres",
+    "geometry_justification": {
+      "kind": "computational_approximation_domain_not_environmental_filter",
+      "note": "The inherited 50 km cap bounds local spherical-map tangential distortion near 10.3ppm; sphere/ellipsoid discrepancy is larger and is not forecast uncertainty. Prefix/domain failures stay in attempted coverage; future truth is not filtered by local distance.",
+      "sphere_not_wgs84": true,
+      "tangential_scale_relative_error_bound": 1.0265390365971072e-05
+    },
+    "maximum_local_distance_m": 50000.0,
+    "require_exact_expected_ID_time_rows": true
+  },
+  "purpose": "Fixed-model retrospective motion comparison on metadata-selected previously unscored drifter groups; no model selection or plastic attribution.",
+  "schema_version": 1,
+  "selection": {
+    "blocks": [
+      {
+        "end_utc": "2000-06-01T23:00:00Z",
+        "id": "atlantic-2000",
+        "latitude_max": 45,
+        "latitude_min": 0,
+        "longitude_max": -20,
+        "longitude_min": -80,
+        "start_utc": "2000-06-01T00:00:00Z"
+      },
+      {
+        "end_utc": "2010-06-01T23:00:00Z",
+        "id": "indian-2010",
+        "latitude_max": 20,
+        "latitude_min": -40,
+        "longitude_max": 100,
+        "longitude_min": 40,
+        "start_utc": "2010-06-01T00:00:00Z"
+      },
+      {
+        "end_utc": "2020-06-01T23:00:00Z",
+        "id": "north-pacific-2020",
+        "latitude_max": 45,
+        "latitude_min": 0,
+        "longitude_max": -120,
+        "longitude_min": -180,
+        "start_utc": "2020-06-01T00:00:00Z"
+      }
+    ],
+    "excluded_entire_drifter_ids": [
+      "8707978"
+    ],
+    "justification": "Three prechosen ocean/time blocks provide a modest diverse feasibility cohort; boundaries and decades are workload/design choices, not an independence guarantee. Snapshot positions are selection metadata, not scored forecast outcomes.",
+    "metadata_columns": [
+      "ID",
+      "time",
+      "latitude",
+      "longitude",
+      "expno",
+      "location_type"
+    ],
+    "method": "first_two_distinct_numeric_IDs_in_each_metadata_snapshot_ascending_numeric_order",
+    "no_replacements": true,
+    "target_per_block": 2
+  },
+  "source": {
+    "base_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv",
+    "dataset_id": "drifter_hourly_qc",
+    "license_name": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "metadata_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+    "product_doi": "10.25921/x46c-3620",
+    "provider": "NOAA AOML Global Drifter Program"
+  },
+  "study_id": "noaa-multidrifter-retrospective-v1"
+}

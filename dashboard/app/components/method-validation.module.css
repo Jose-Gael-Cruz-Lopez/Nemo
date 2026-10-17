@@ -1,0 +1,9 @@
+.stack { display: grid; gap: 13px; min-width: 0; }
+.header { flex-wrap: wrap; gap: 12px; }
+.scope { margin: 0; padding: 12px; color: #655c77; background: #faf8fc; border: 1px solid #e8e2ef; border-radius: 5px; font-size: 11px; line-height: 1.75; }
+.scope h3 { margin-top: 0; }
+.actions, .badges { display: flex; flex-wrap: wrap; gap: 9px; }
+.actions button[aria-pressed="true"] { border-color: #bcb0d3; background: var(--purple-soft); }
+.table { min-width: 850px; }
+.table small { display: block; color: var(--muted); }
+@media (max-width: 520px) { .header > button, .actions > button { width: 100%; justify-content: center; } }

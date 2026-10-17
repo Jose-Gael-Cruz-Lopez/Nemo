@@ -76,6 +76,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const [rigChecks, setRigChecks] = useState<Record<string, boolean>>({});
   const [tick, setTick] = useState(0);
   const mounted = useRef(true);
+  const running = useRef(false);
 
   useEffect(() => {
     const restore = setTimeout(() => { setDraft(loadDraft()); setRestored(true); }, 0);
@@ -112,11 +113,13 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   useEffect(() => () => onBusyChange?.(false), [onBusyChange]);
 
   async function run(label: string, action: () => Promise<void>) {
+    if (running.current || blocked) return;
     if (!operatorConnected) { onRequireOperator(); return; }
+    running.current = true;
     setBusy(label); onBusyChange?.(true); setError(""); setNotice("");
     try { await action(); }
     catch (cause) { setError(failureNotice(cause).message); }
-    finally { setBusy(""); onBusyChange?.(false); void refreshCamera(); }
+    finally { running.current = false; setBusy(""); onBusyChange?.(false); void refreshCamera(); }
   }
   const update = (change: (current: Draft) => Draft) => setDraft(current => change(current));
   const field = <K extends keyof Draft>(key: K) => (value: Draft[K]) => update(current => ({ ...current, [key]: value }));
@@ -132,6 +135,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   }
 
   function pick(event: MouseEvent<HTMLImageElement>) {
+    if (locked || !sessionCurrent) return;
     if (!camera?.width || !camera.height) return;
     const box = event.currentTarget.getBoundingClientRect();
     const [x, y] = previewPixel(event.clientX - box.left, event.clientY - box.top, box.width, box.height, camera.width, camera.height);
@@ -168,7 +172,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
         <div className={styles.form}>
           {sessionCurrent && camera?.width && camera.height ? <div className={styles.preview}><Image unoptimized width={camera.width} height={camera.height} src={`${apiBase}/api/v1/camera/frame.jpg?t=${tick}`} alt="Latest frame. Click a mark to add its pixel position." onClick={pick} /></div> : <p className={styles.explain}>A preview appears when the selected session has fresh frames.</p>}
           <div className={styles.grid2}>
-            <label>Clicking the preview adds to<select value={pickTarget} onChange={event => setPickTarget(event.target.value as "mapping" | "check")}><option value="mapping">Mapping pixel points</option><option value="check">Check pixel points</option></select></label>
+            <label>Clicking the preview adds to<select value={pickTarget} disabled={locked} onChange={event => setPickTarget(event.target.value as "mapping" | "check")}><option value="mapping">Mapping pixel points</option><option value="check">Check pixel points</option></select></label>
             <label>Measured unit<select value={draft.unit} disabled={locked} onChange={event => field("unit")(event.target.value as LengthUnit)}><option value="cm">Centimetres</option><option value="mm">Millimetres</option><option value="in">Inches</option></select></label>
           </div>
           <div className={styles.grid2}>
@@ -261,7 +265,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
             const item = parseCase(await request<unknown>(`/recordings/${encodeURIComponent(recording.id)}/case`, { observation_type: "trajectory" }));
             update(current => ({ ...current, firstCaseId: item.id, manifestId: null }));
           })}>Record new source case</button>
-          {draft.firstCaseId && onOpenCase && <button className="ghost-button" onClick={() => onOpenCase(draft.firstCaseId!)}>Open case</button>}
+          {draft.firstCaseId && onOpenCase && <button className="ghost-button" disabled={locked} onClick={() => onOpenCase(draft.firstCaseId!)}>Open case</button>}
         </div>
       </Step>
 

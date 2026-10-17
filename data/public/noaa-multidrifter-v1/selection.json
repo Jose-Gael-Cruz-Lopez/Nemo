@@ -1,0 +1,135 @@
+{
+  "blocks": [
+    {
+      "block_id": "atlantic-2000",
+      "bytes": 600,
+      "candidate_count": 9,
+      "eligible_candidate_count": 9,
+      "http_status": 200,
+      "raw_path": "raw/metadata-atlantic-2000.csv",
+      "reason": null,
+      "reserved_excluded_ids": [],
+      "retrieved_at_utc": "2026-10-17T05:48:56.433637+00:00",
+      "selected_ids": [
+        "12730",
+        "12731"
+      ],
+      "sha256": "64f15c35165bd695d5947a805da5dd5d04efc2dee44514e25ecb1c56bdfd24cf",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,expno,location_type&time=2000-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-80&longitude%3C=-20",
+      "status": "DOWNLOADED"
+    },
+    {
+      "block_id": "indian-2010",
+      "candidate_count": 0,
+      "eligible_candidate_count": 0,
+      "http_status": null,
+      "raw_path": "raw/metadata-indian-2010.csv",
+      "reason": "ReadTimeout",
+      "reserved_excluded_ids": [],
+      "retrieved_at_utc": "2026-10-17T05:48:58.962417+00:00",
+      "selected_ids": [],
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,expno,location_type&time=2010-06-01T00%3A00%3A00Z&latitude%3E=-40&latitude%3C=20&longitude%3E=40&longitude%3C=100",
+      "status": "FETCH_FAILED"
+    },
+    {
+      "block_id": "north-pacific-2020",
+      "bytes": 14450,
+      "candidate_count": 213,
+      "eligible_candidate_count": 213,
+      "http_status": 200,
+      "raw_path": "raw/metadata-north-pacific-2020.csv",
+      "reason": null,
+      "reserved_excluded_ids": [],
+      "retrieved_at_utc": "2026-10-17T05:49:39.593953+00:00",
+      "selected_ids": [
+        "300234063243480",
+        "300234063472530"
+      ],
+      "sha256": "6a2523c81b6ce19296f679beb1fff20eb0ef5fa039d58f469dd55d225a3a5797",
+      "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/tabledap/drifter_hourly_qc.csv?ID,time,latitude,longitude,expno,location_type&time=2020-06-01T00%3A00%3A00Z&latitude%3E=0&latitude%3C=45&longitude%3E=-180&longitude%3C=-120",
+      "status": "DOWNLOADED"
+    }
+  ],
+  "dataset_metadata": {
+    "bytes": 32265,
+    "http_status": 200,
+    "raw_path": "raw/dataset-info.json",
+    "reason": null,
+    "retrieved_at_utc": "2026-10-17T05:48:56.189870+00:00",
+    "sha256": "22799a625c750856f50b93a919a89c8660b0569db7da4058102e6a53d7eb9373",
+    "source_url": "https://erddap.aoml.noaa.gov/gdp/erddap/info/drifter_hourly_qc/index.json",
+    "status": "DOWNLOADED"
+  },
+  "development_only_drifter_ids": [
+    "8707978"
+  ],
+  "evaluation_outcomes_computed": false,
+  "frozen_at_utc": "2026-10-17T05:49:57.346894+00:00",
+  "groups": [
+    {
+      "block_id": "atlantic-2000",
+      "drifter_id": "12730",
+      "end_utc": "2000-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "12730",
+        "expno": "9435",
+        "latitude": "44.25733",
+        "location_type": "Argos",
+        "longitude": "-21.70342",
+        "time": "2000-06-01T00:00:00Z"
+      },
+      "split_label": "evaluation",
+      "start_utc": "2000-06-01T00:00:00Z"
+    },
+    {
+      "block_id": "atlantic-2000",
+      "drifter_id": "12731",
+      "end_utc": "2000-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "12731",
+        "expno": "9435",
+        "latitude": "44.76603",
+        "location_type": "Argos",
+        "longitude": "-23.79531",
+        "time": "2000-06-01T00:00:00Z"
+      },
+      "split_label": "evaluation",
+      "start_utc": "2000-06-01T00:00:00Z"
+    },
+    {
+      "block_id": "north-pacific-2020",
+      "drifter_id": "300234063243480",
+      "end_utc": "2020-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234063243480",
+        "expno": "21312",
+        "latitude": "20.466314",
+        "location_type": "GPS",
+        "longitude": "-147.43446",
+        "time": "2020-06-01T00:00:00Z"
+      },
+      "split_label": "evaluation",
+      "start_utc": "2020-06-01T00:00:00Z"
+    },
+    {
+      "block_id": "north-pacific-2020",
+      "drifter_id": "300234063472530",
+      "end_utc": "2020-06-01T23:00:00Z",
+      "selection_metadata": {
+        "ID": "300234063472530",
+        "expno": "21312",
+        "latitude": "28.79847",
+        "location_type": "GPS",
+        "longitude": "-153.8789",
+        "time": "2020-06-01T00:00:00Z"
+      },
+      "split_label": "evaluation",
+      "start_utc": "2020-06-01T00:00:00Z"
+    }
+  ],
+  "protocol_sha256": "e8ad0cec2b48fa0e516a03b0bc14c42ba2f055439e534878f3db55def4d25845",
+  "schema_version": 1,
+  "study_id": "noaa-multidrifter-retrospective-v1",
+  "trajectory_payloads_fetched": false,
+  "unselected_groups": "excluded"
+}

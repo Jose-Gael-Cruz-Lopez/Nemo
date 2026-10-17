@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "./icons";
 import { TrainingDiagnostic } from "./training-diagnostic";
 import { MotionAblation } from "./motion-ablation";
+import { MultiDrifterStudy } from "./multi-drifter-study";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -87,5 +88,6 @@ export function RealDataLab({ api }: { api: string }) {
     </div>}
     <TrainingDiagnostic api={api} />
     <MotionAblation api={api} />
+    <MultiDrifterStudy api={api} />
   </>;
 }

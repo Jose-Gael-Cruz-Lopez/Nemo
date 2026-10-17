@@ -87,19 +87,11 @@ class SyntheticFakeCapture:
                        "jpeg": jpeg.tobytes(), "backend": self.backend, "session_id": self.session_id}
 
 
-def shared_operator(app):
-    """The exact operator dependency main.py already applies to POST /profiles."""
-    route = next(r for r in app.routes if getattr(r, "path", "") == "/api/v1/profiles"
-                 and "POST" in r.methods)
-    return route.dependencies[0].dependency
-
-
 @pytest.fixture
 def env(tmp_path):
     app = create_app(Settings(data_dir=tmp_path, local_token=TOKEN, camera_sample_hz=20))
     runtime = app.state.runtime
     runtime.camera = SyntheticFakeCapture()
-    app.include_router(create_field_sessions_router(runtime, shared_operator(app)), prefix="/api/v1")
     with TestClient(app) as client:
         yield client, runtime, tmp_path
 

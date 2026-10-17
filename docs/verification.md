@@ -103,7 +103,7 @@ conversation and uninvoked xAI speech. No camera, actuator, Photon send or audio
 request was used. The report passed a scan against the private credentials/route
 values and strong token patterns without exposing them.
 
-Photon Beta **authentication was checked against the real service** after the user's approval. A 30-day custom project key with `project:read` and `project:write` is stored only in private `.env`. The official SDK's read-only `raw.projects.list_messages` request returned **HTTP 200** and its response passed schema validation. The local evidence record is `work/photon-live-auth.json`; it records no secret or account identifier. The shared-line assignment is Active, and the exact sender/agent route is configured privately. **The user prohibits test messages and automatic replies, so `PHOTON_ENABLED=false` remains required.** No messages were sent. Authentication and assignment do not establish a device conversation.
+Photon's real read-only authentication/schema check passed, and its paired shared-line route is Active. The user subsequently authorized automatic replies and one demo reply, and the local worker is enabled. One inbound question and the exact generated answer completed a **dashboard-mediated** round trip with provider status Delivered. The first automatic send had failed with HTTP 409 because direct iMessage Spaces reject threaded `parentMessageId`; the same answer was sent once through the official inbox. The corrected direct-message transport is regression-tested, preserves its local parent binding/idempotency and does not retry the old failed row with a changed body. The user then approved one additional automated test. A new paired-Mac question passed through the corrected worker, was accepted on its first attempt and was independently verified by the official SDK as exactly one Delivered response with the saved body and authorized route; the Mac also displayed the answer. This verifies that one synthetic-case automatic round trip. See [current integration evidence](integrations.md). Software-only audits continue to require messaging off and record that separate boundary explicitly.
 
 Chalk has a configured native Gemini connection, a scoped gateway key and a permitted Flash model. Earlier real investigations completed with `live_model_response: true`, successful case/source tool reads and the frozen evidence ID. Subsequent rehearsals also encountered intermittent provider HTTP 503 and TIMEOUT responses. After the bounded latency fix and API restart, the final expanded audit again completed a genuine REPORT. A future failure still returns STOP with the unchanged numerical report, even after an earlier success. The request budget is now 25 seconds, bounded by the remaining 60-second whole-turn deadline; no retries or provider reasoning fields are added. Timeout diagnostics identify the stage and completed tools without exposing provider content. Readiness alone is not a live success. See [the current integration evidence and limits](integrations.md).
 
@@ -134,8 +134,8 @@ PHOTON_PROJECT_ID=YOUR_PROJECT_ID
 PHOTON_ROUTES_JSON=[{"human_handle":"YOUR_SEND_FROM_IDENTITY","agent_handle":"PHOTON_ASSIGNED_NUMBER","role":"operator","allowed_cases":["ACTUAL_CASE_ID"]}]
 ```
 
-Keep the current worker disabled. Only after a new explicit authorization for
-replies, set `PHOTON_ENABLED=true` and start that messaging-enabled configuration with:
+The example defaults to messaging off. After explicit authorization for replies,
+set `PHOTON_ENABLED=true` and start that messaging-enabled configuration with:
 
 ```sh
 .venv/bin/python scripts/dev.py --allow-photon
@@ -156,7 +156,7 @@ npm run build
 npm audit --omit=dev
 ```
 
-The current strict full Python suite passed **320 tests**, with zero failures,
+The earlier strict full Python suite passed **320 tests**, with zero failures,
 errors or skips in **63.02 seconds** and one existing Starlette/httpx TestClient
 deprecation warning. All sponsor services were explicitly disabled for that test
 process. Full repository Ruff and `pip check` passed. This includes regressions
@@ -183,7 +183,7 @@ commissioning.
 | Case/action state | SQLite transactions, STOP races, task restoration, role/approval/outcome guards | A supervised physical recovery and honest recorded outcome |
 | Browser/API | Exact local-origin private-network preflights, untrusted-origin rejection and unchanged operator authentication | The intended browser/OS against the restarted local services |
 | Chalk | Real adapter with explicit HTTP MockTransport, strict tools/IDs/Unknown preservation, request and whole-turn deadlines; earlier account-backed REPORT | Current provider availability and review of each generated answer; a timeout remains a failed live response |
-| Photon | Official 0.5.0 SDK contract tests, real read-only HTTP 200 auth/schema check and Active assignment | Actual device round trip remains untested; replies stay disabled by user instruction |
+| Photon | Official SDK contract tests, real read-only HTTP 200, Active paired route, enabled worker and one dashboard-mediated Delivered reply | One explicitly authorized synthetic-case automatic round trip verified as Delivered via SDK and visible on the paired Mac; no general delivery guarantee |
 | Public-data ML | Pinned real NOAA CSV, training-only fits, five-origin diagnostic, separate chronological holdout, geographic geometry and leakage regressions | Many independent trajectories and matched forcing before operational claims |
 | Satellite and briefing | Pinned NOAA heat-stress provenance, no source-ranking influence, immutable evidence/script hashes and mocked audio/STOP races | Explicitly authorized live xAI speech requires a configured key; no live speech claim |
 

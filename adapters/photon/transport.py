@@ -221,7 +221,9 @@ class PhotonTransport:
                     "body": {
                         "spaceId": row.space_id,
                         "senderId": row.agent_id,
-                        "parentMessageId": row.parent_message_id,
+                        # Direct iMessage Spaces do not support threaded replies.
+                        # The parent remains required on the durable local row
+                        # for inbound binding and deduplication, not on the wire.
                         "content": {"type": "text", "format": "plain", "text": row.text},
                     },
                 }

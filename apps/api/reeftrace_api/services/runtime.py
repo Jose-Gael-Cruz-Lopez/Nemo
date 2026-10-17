@@ -26,6 +26,8 @@ class Runtime:
         self.demo_lock = asyncio.Lock()
         self.model_budget = asyncio.Semaphore(1)
         self.voice_budget = asyncio.Semaphore(1)
+        self.photon_worker = None
+        self.photon_task = None
         from .prevention import PreventionService
         self.prevention = PreventionService(self)
 
@@ -83,6 +85,12 @@ class Runtime:
         return PhotonSettings(enabled=os.getenv("PHOTON_ENABLED", "false").lower() == "true",
                               api_key=os.getenv("PHOTON_API_KEY", ""),
                               project_id=os.getenv("PHOTON_PROJECT_ID", ""), routes=routes)
+
+    def photon_status(self):
+        readiness = (self.photon_worker.readiness() if self.photon_worker is not None
+                     else self.photon_settings().readiness())
+        running = self.photon_task is not None and not self.photon_task.done()
+        return {**readiness, "worker_running": running and readiness["ready"]}
 
     def register_profile(self, profile):
         return self._register_profile(profile)

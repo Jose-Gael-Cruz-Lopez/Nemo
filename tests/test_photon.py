@@ -163,7 +163,58 @@ def test_official_sdk_http_contract_get_and_idempotent_post():
     body = json.loads(requests[1].content)
     assert body["senderId"] == "agent-1"
     assert body["spaceId"] == "space-1"
-    assert body["parentMessageId"] == "incoming-1"
+    assert "parentMessageId" not in body
+
+
+def test_direct_imessage_send_omits_unsupported_parent_and_keeps_durable_payload_stable():
+    pytest.importorskip("photon_api")
+    requests = []
+
+    def serve(request):
+        requests.append(request)
+        body = json.loads(request.content)
+        if "parentMessageId" in body:
+            return httpx.Response(409, json={
+                "code": "SPACE_NOT_SENDABLE", "detail": "Replies are not supported for this Space"
+            })
+        dispatched = copy.deepcopy(message_payload())
+        dispatched.update(status="dispatched", id="outgoing-direct", timestamps={"dispatchedAt": TIME})
+        dispatched["sentBy"], dispatched["receivedBy"] = (
+            dispatched["receivedBy"], dispatched["sentBy"]
+        )
+        return httpx.Response(202, headers={"x-request-id": "direct-request"}, json=dispatched)
+
+    row = Outgoing(
+        "reeftrace:reply:incoming-1", "space-1", "agent-1", "incoming-1", "Source remains unknown."
+    )
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(serve)) as client:
+            # Negative control uses its own key; no changed-body fallback may
+            # reuse the durable direct message's idempotency key.
+            threaded = await client.post(
+                "https://api.photon.codes/v1/projects/project-1/messages",
+                headers={"idempotency-key": "threaded-negative-control"},
+                json={"spaceId": row.space_id, "senderId": row.agent_id,
+                      "parentMessageId": row.parent_message_id,
+                      "content": {"type": "text", "format": "plain", "text": row.text}},
+            )
+            assert threaded.status_code == 409
+            transport = PhotonTransport(SETTINGS, client=client)
+            assert await transport.send_saved(row) == (202, "direct-request")
+            assert await transport.send_saved(row) == (202, "direct-request")
+            await transport.close()
+
+    asyncio.run(run())
+    assert len(requests) == 3  # One negative control and exactly two explicit sends.
+    assert row.parent_message_id == "incoming-1"  # Durable inbound binding stays intact.
+    first, repeated = requests[1:]
+    assert first.content == repeated.content
+    assert first.headers["idempotency-key"] == repeated.headers["idempotency-key"] == row.key
+    assert json.loads(first.content) == {
+        "spaceId": row.space_id, "senderId": row.agent_id,
+        "content": {"type": "text", "format": "plain", "text": row.text},
+    }
 
 
 def test_poll_rescans_session_deduplicates_and_follows_empty_page_token():

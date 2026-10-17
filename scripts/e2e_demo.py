@@ -174,7 +174,7 @@ def audit(api_url: str, token: str, *, client: httpx.Client | None = None) -> di
             {"check": "physical webcam/tank calibration", "status": "BLOCKED",
              "reason": "Requires connected external camera, measured drift and blind physical trials; audit does not open hardware."},
             {"check": "Photon device round trip", "status": "BLOCKED",
-             "reason": "Replies are disabled by user instruction; audit sends no messages and cannot verify a device round trip.",
+             "reason": "Photon is disabled for this software-only audit; this audit sends no messages and does not verify a device round trip.",
              "configuration_reasons": readiness["photon"]["reasons"]},
             {"check": "xAI speech provider round trip", "status": "BLOCKED",
              "reason": "Frozen briefing text and hashes were verified; this audit never requests provider audio.",

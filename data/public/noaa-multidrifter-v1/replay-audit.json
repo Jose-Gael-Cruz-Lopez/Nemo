@@ -1,0 +1,20 @@
+{
+  "first_evaluation_report_sha256": "81c003c5663127a0bf84a6898e6bd8ba1a0db10e79551ef83f60ddf15943e1c3",
+  "first_evaluation_was_already_computed": true,
+  "kind": "POST_EVALUATION_REPLAY_AUDIT_NOT_PREREGISTRATION",
+  "limitations": [
+    "Parser hash and runtime versions were observed after evaluation; they were not pinned in the original preregistration.",
+    "Do not claim all software and environment dependencies were fully pinned before outcomes.",
+    "The shared CSV parser requires finite ancillary velocity/uncertainty fields as well as positions; a missing unused ancillary value would reject that payload, preserving all attempted failures rather than censoring successful forecasts.",
+    "All four acquired payloads passed that existing ingestion gate; no data replacement, model retuning or post-outcome evaluator-code change occurred.",
+    "Future protocols should declare position-only versus complete-row validity and per-horizon truth availability explicitly before acquiring/scoring new cohorts."
+  ],
+  "numpy_version": "2.5.4",
+  "observed_at_utc": "2026-10-17T05:59:15.971356+00:00",
+  "original_implementation_receipt_sha256": "24e203eb766ba9af5efca2432f76e9df35e80e5f7ee5ecb96e4d8e3f48547712",
+  "parser_path": "apps/ocean/reeftrace_ocean/data.py",
+  "parser_sha256": "4883727618060510a13182825cba6c1edb052ce539fee22b6048eef7dfe3de87",
+  "protocol_sha256": "e8ad0cec2b48fa0e516a03b0bc14c42ba2f055439e534878f3db55def4d25845",
+  "python_version": "3.12.14",
+  "schema_version": 1
+}
