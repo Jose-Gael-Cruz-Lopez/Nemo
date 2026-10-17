@@ -29,6 +29,7 @@ from .schemas.contracts import (
     RecordInput,
     SensitivityInput,
 )
+from .schemas.prevention import ComparisonInput, TrialInput
 from .services.runtime import Runtime
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -132,6 +133,31 @@ def create_app(settings: Settings | None = None):
     @app.get("/api/v1/profiles")
     def profiles():
         return runtime.store.list("profile")
+
+    @app.get("/api/v1/prevention/comparisons")
+    def prevention_comparisons():
+        return runtime.prevention.list_comparisons()
+
+    @app.post("/api/v1/prevention/comparisons", dependencies=[Depends(operator)])
+    async def create_prevention_comparison(body: ComparisonInput):
+        return await runtime.prevention.create_comparison(body)
+
+    @app.get("/api/v1/prevention/comparisons/{comparison_id}")
+    def prevention_comparison(comparison_id: str):
+        return runtime.prevention.comparison_detail(comparison_id)
+
+    @app.post("/api/v1/prevention/comparisons/{comparison_id}/trials", dependencies=[Depends(operator)])
+    def prevention_trial(comparison_id: str, body: TrialInput):
+        return runtime.prevention.add_trial(comparison_id, body)
+
+    @app.post("/api/v1/prevention/comparisons/{comparison_id}/investigate", dependencies=[Depends(operator)])
+    async def prevention_investigate(comparison_id: str, body: Question):
+        from .services.prevention_investigation import investigate_prevention
+        return await investigate_prevention(runtime, comparison_id, body.text)
+
+    @app.post("/api/v1/prevention/demo", dependencies=[Depends(operator)])
+    async def prevention_demo():
+        return await runtime.prevention.load_demo()
 
     @app.post("/api/v1/profiles", dependencies=[Depends(operator)])
     def add_profile(profile: dict):

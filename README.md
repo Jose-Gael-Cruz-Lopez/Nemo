@@ -2,6 +2,10 @@
 
 A local USB-camera experiment for comparing candidate floating-debris entry points. OpenCV observes a standardized token; a measured drift field drives a forward particle model; the estimator saves conditional source evidence or **Unknown**. A bounded Chalk-backed investigator uses those saved reports in the dashboard and a Photon direct conversation. Recovery is manual.
 
+The **Prevention** workspace turns tracing into a testable intervention: freeze a protected surface zone, compare two interception layouts, log independent one-token trials, and inspect simulated predictions beside separately labelled outcomes. Source uncertainty remains intact. See [the prevention build and demo guide](docs/prevention-workflow.md).
+
+For parallel work after this slice, use the [three-person handoff prompts](docs/team-handoff-prompts.md): field evidence, prediction validation, and product/Chalk/E2E integration, with separate ownership and shared contract fixtures.
+
 This repository now implements the computational and application paths, rather than only starter directories. It follows **ReefTrace_Final_Plan.pdf, USB Webcam Edition 5.0**. Real tank calibration and held-out trials are still required; synthetic fixtures and passing tests are software evidence, not reef or tank accuracy claims.
 
 ## Start locally
@@ -36,11 +40,13 @@ If you explicitly enable the prepared Photon worker in `.env`, use `python scrip
 3. Ask Chalk which candidate fits and what remains uncertain. A configured, successful model response includes the saved evidence ID and tool trace. If the gateway is unavailable, the app keeps the deterministic report and clearly says no live model response occurred.
 4. Select **Retained endpoint** to see **Unknown**: the shared pocket has erased the distinguishing history. Select the invalid-mapping example to see **Invalid**. These are intended scientific outcomes.
 5. Open **Data lab** (or **Explore real data** from Overview), then click **Run real-data replay**. It fits three motion models on the first 18 historical hourly positions and forecasts the final six without reading their positions during fitting. This separate experiment cannot identify a plastic release source.
+6. Open **Prevention**, then **Load synthetic prevention demo**. Inspect the protected zone and both layouts, nominal predictions by source, and separate synthetic trial bounds. **No physical trials yet** is intentional. Create a fresh frozen comparison to log one-token outcomes and ask Chalk about that exact trial snapshot. See the [prevention guide](docs/prevention-workflow.md) for the full sequence and physical measurement requirements.
 
 Run the same backend story over HTTP while the local services are running:
 
 ```sh
 python scripts/e2e_demo.py --output work/e2e-demo.json
+python scripts/e2e_prevention.py
 ```
 
 The audit reads the private local operator token itself. It does not open a webcam, operate the pump, or send Photon messages. A configured Chalk gateway may make a real, metered request. Its JSON separates **PASS**, **FAIL**, and **BLOCKED**. Missing live credentials and physical trials remain blockers even when every local software assertion passes. See [the reproducible verification guide](docs/verification.md) for the exact checks and sponsor commissioning steps.

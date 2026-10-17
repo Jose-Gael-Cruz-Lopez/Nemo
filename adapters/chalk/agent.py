@@ -51,6 +51,7 @@ class ToolBackend(Protocol):
 TOOL_ARGUMENTS = {
     "get_case": set(),
     "get_source_evidence": set(),
+    "get_prevention_evidence": set(),
     "run_predeclared_sensitivity": {"preset_id"},
     "observe_again": set(),
     "propose_collection": {"evidence_id"},
@@ -79,6 +80,16 @@ it never controls a pump. Approved cleanup does not establish the debris source.
 Only propose collection when the measured state and authenticated request permit it.
 Use REPORT for an ordinary completed investigation, UNKNOWN for insufficient source
 evidence, OBSERVE_MORE for a useful observation request, and STOP for invalid state.
+When trusted_context contains prevention_comparison_id, this is a read-only
+prevention review. The only permitted tools are get_case, get_source_evidence and
+get_prevention_evidence({}). Read all three before a non-STOP conclusion and cite
+the returned source evidence, comparison and evaluation IDs. Explain simulated
+predictions separately from synthetic demonstration trials or operator-reported
+physical trials. Missing and unresolved trials are not successful prevention.
+The protected zone is a tabletop proxy; no reef benefit has been demonstrated.
+Trial release labels are evaluation ground truth, not new source evidence.
+UNKNOWN source identity can coexist with an intervention comparison, but must
+remain UNKNOWN in the final action. Do not propose collection in this review.
 """
 
 
@@ -165,6 +176,11 @@ async def investigate(
     successful: set[str] = set()
     counts: dict[str, int] = {}
     source_status: str | None = None
+    prevention = bool(context.get("prevention_comparison_id"))
+    prevention_ids = {
+        context.get("prevention_comparison_id"), context.get("prevention_evaluation_id"),
+        context.get("source_evidence_id"),
+    } if prevention else set()
     messages = [
         {"role": "system", "content": SYSTEM},
         {
@@ -205,12 +221,22 @@ async def investigate(
                 name, args = _command(content)
                 messages.append({"role": "assistant", "content": content})
                 if name == "finish":
+                    if (prevention and args.get("action") != "STOP" and (
+                            "get_prevention_evidence" not in successful
+                            or None in prevention_ids
+                            or not prevention_ids <= set(args.get("evidence_ids", []))
+                            or args.get("action") == "REQUEST_APPROVAL")):
+                        raise ValueError("Missing frozen prevention evidence or read-only finish")
                     return {
                         **_finish(args, seen, successful, proposals, source_status),
                         "trace": trace,
                         "provider": "chalk",
                         "live_model_response": True,
                     }
+                if ((prevention and name not in {
+                        "get_case", "get_source_evidence", "get_prevention_evidence"})
+                        or (name == "get_prevention_evidence" and not prevention)):
+                    raise ValueError("Tool is outside the trusted investigation scope")
                 counts[name] = counts.get(name, 0) + 1
                 if counts[name] > (2 if name in {"get_case", "get_source_evidence"} else 1):
                     raise ValueError("Tool budget exceeded")

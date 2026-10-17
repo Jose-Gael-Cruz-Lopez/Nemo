@@ -26,6 +26,8 @@ class Runtime:
         self.demo_lock = asyncio.Lock()
         self.model_budget = asyncio.Semaphore(1)
         self.voice_budget = asyncio.Semaphore(1)
+        from .prevention import PreventionService
+        self.prevention = PreventionService(self)
 
     def grok_settings(self):
         from adapters.grok import GrokVoiceSettings

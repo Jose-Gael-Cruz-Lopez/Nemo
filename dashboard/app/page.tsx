@@ -7,10 +7,11 @@ import { Icon, type IconName } from "./components/icons";
 import { SourceMap, type SourceProfile } from "./components/source-map";
 import { RealDataLab } from "./components/real-data-lab";
 import { ReefBriefing } from "./components/reef-briefing";
+import { PreventionWorkspace } from "./components/prevention-workspace";
 import { canReloadSourceEvidence, currentSourceEvidence } from "./components/evidence-state";
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8000";
-type View = "overview" | "investigations" | "camera" | "data" | "settings";
+type View = "overview" | "investigations" | "prevention" | "camera" | "data" | "settings";
 type Case = { id: string; profile_id: string; mode: string; state: string; evidence_id: string | null; points: { x_cm: number; y_cm: number }[]; endpoint?: { x_cm: number; y_cm: number; retained: boolean } | null };
 type Evidence = { id: string; case_id: string; status: string; relative_support: Record<string, number>; reason_codes?: string[]; inference_mode?: string; [key: string]: unknown };
 type Readiness = { enabled?: boolean; ready: boolean; connection_verified: boolean; reasons: string[] };
@@ -21,6 +22,7 @@ type Sensitivity = { parent_estimate_id: string; [key: string]: unknown };
 const VIEWS: { id: View; label: string; icon: IconName }[] = [
   { id: "overview", label: "Overview", icon: "overview" },
   { id: "investigations", label: "Investigations", icon: "cases" },
+  { id: "prevention", label: "Prevention", icon: "check" },
   { id: "camera", label: "Camera", icon: "camera" },
   { id: "data", label: "Data lab", icon: "wave" },
   { id: "settings", label: "Settings", icon: "settings" },
@@ -130,11 +132,14 @@ export default function Home() {
   const [recordProfileId, setRecordProfileId] = useState("");
   const [tokenDraft, setTokenDraft] = useState("");
   const [stopping, setStopping] = useState(false);
+  const [preventionBusy, setPreventionBusy] = useState(false);
   const operatorDialog = useRef<HTMLDialogElement>(null);
   const searchInput = useRef<HTMLInputElement>(null);
   const actionRun = useRef(0);
   const actionController = useRef<AbortController | null>(null);
   const stoppingRef = useRef(false);
+  const preventionBusyRef = useRef(false);
+  const onPreventionBusyChange = useCallback((value: boolean) => { preventionBusyRef.current = value; setPreventionBusy(value); }, []);
   const refreshRun = useRef(0);
   const selectedRef = useRef("");
   const evidenceReadRun = useRef(0);
@@ -163,13 +168,14 @@ export default function Home() {
   }
 
   function navigate(nextView: View) {
+    if (preventionBusyRef.current) return;
     setView(nextView);
     const route = `#${nextView}${selectedRef.current ? `?case=${encodeURIComponent(selectedRef.current)}` : ""}`;
     if (window.location.hash !== route) window.history.pushState(null, "", route);
     window.scrollTo({ top: 0, behavior: "auto" });
   }
   function selectCase(id: string, internal = false) {
-    if (!internal && (actionController.current || stoppingRef.current)) return;
+    if (!internal && (actionController.current || stoppingRef.current || preventionBusyRef.current)) return;
     selectedRef.current = id;
     window.history.replaceState(null, "", `#${view}?case=${encodeURIComponent(id)}`);
     setSelected(id); setEvidence(null); setAnswer(null); setAnalysis(null); setActionId(""); setActionState("");
@@ -178,6 +184,7 @@ export default function Home() {
   }
   function openCase(id: string, internal = false) { selectCase(id, internal); navigate("investigations"); }
   function openOperator() {
+    if (preventionBusyRef.current) return;
     setTokenDraft(token); operatorDialog.current?.showModal();
   }
   const request = useCallback(async <T,>(path: string, body?: unknown, options: RequestOptions = {}): Promise<T> => {
@@ -255,7 +262,7 @@ export default function Home() {
   useEffect(() => () => { actionController.current?.abort(); }, []);
   useEffect(() => {
     function restoreLocation() {
-      if (actionController.current || stoppingRef.current) return;
+      if (actionController.current || stoppingRef.current || preventionBusyRef.current) return;
       const [route, search = ""] = window.location.hash.slice(1).split("?");
       const nextView = VIEWS.find(item => item.id === route)?.id;
       if (nextView) setView(nextView);
@@ -282,7 +289,7 @@ export default function Home() {
     return () => window.removeEventListener("keydown", focusSearch);
   }, []);
   async function perform(name: string, job: () => Promise<void | CompletionNotice>, caseId = "") {
-    if (actionController.current || stoppingRef.current) return;
+    if (actionController.current || stoppingRef.current || preventionBusyRef.current) return;
     if (!token) { openOperator(); return; }
     const run = ++actionRun.current;
     const controller = new AbortController();
@@ -325,7 +332,7 @@ export default function Home() {
   const currentAction = caseActions.find(item => item.id === actionId);
   const actionExpired = currentAction ? currentAction.expires_at * 1000 <= clock : false;
   const validOutcome = ["manual_recovered", "failed", "uncertain"].includes(manualOutcome) && Number.isInteger(recoveredCount) && recoveredCount >= 0 && recoveredCount <= 20 && (manualOutcome !== "manual_recovered" || recoveredCount > 0) && !!outcomeNote.trim() && physicalConfirmed;
-  const locked = !!busy || !token || stopping;
+  const locked = !!busy || !token || stopping || preventionBusy;
   const connected = status !== null && !connectionError;
   const currentView = VIEWS.find(item => item.id === view)!;
   const reportCount = cases.filter(item => item.evidence_id).length;
@@ -347,18 +354,18 @@ export default function Home() {
   return <div className="app-shell">
     <a className="sr-only skip-link" href="#workspace-main">Skip to workspace</a>
     <aside className="sidebar" aria-label="Workspace navigation">
-      <button className="brand" onClick={() => navigate("overview")} aria-label="ReefTrace overview"><span className="brand-symbol"><Icon name="wave" /></span>ReefTrace</button>
+      <button className="brand" disabled={preventionBusy} onClick={() => navigate("overview")} aria-label="ReefTrace overview"><span className="brand-symbol"><Icon name="wave" /></span>ReefTrace</button>
       <div className="workspace-switch"><span className="workspace-avatar">R</span><div className="workspace-name"><strong>ReefTrace team</strong><span>Tank experiment</span></div></div>
       <div className="sidebar-section">Workspace</div>
-      <nav>{VIEWS.slice(0, 4).map(item => <button className="nav-item" key={item.id} aria-current={view === item.id ? "page" : undefined} onClick={() => navigate(item.id)}><Icon name={item.icon} /><span className="nav-label">{item.label}</span>{item.id === "investigations" && status && <span className="nav-count">{cases.length}</span>}</button>)}</nav>
+      <nav>{VIEWS.filter(item => item.id !== "settings").map(item => <button className="nav-item" key={item.id} disabled={preventionBusy} aria-current={view === item.id ? "page" : undefined} onClick={() => navigate(item.id)}><Icon name={item.icon} /><span className="nav-label">{item.label}</span>{item.id === "investigations" && status && <span className="nav-count">{cases.length}</span>}</button>)}</nav>
       <div className="sidebar-section">Manage</div>
-      <button className="nav-item" aria-current={view === "settings" ? "page" : undefined} onClick={() => navigate("settings")}><Icon name="settings" /><span>Settings</span></button>
-      <button className="nav-item" onClick={openOperator}><Icon name="key" /><span>Operator access</span></button>
+      <button className="nav-item" disabled={preventionBusy} aria-current={view === "settings" ? "page" : undefined} onClick={() => navigate("settings")}><Icon name="settings" /><span>Settings</span></button>
+      <button className="nav-item" disabled={preventionBusy} onClick={openOperator}><Icon name="key" /><span>Operator access</span></button>
       <div className="sidebar-bottom"><div className="local-indicator"><span className={`status-dot ${connected ? "is-live" : "is-off"}`} />{connectionError ? "Local API unavailable" : connected ? "Local API connected" : "Connecting to API"}</div><div className="team-profile"><span className="team-avatar">RT</span><div className="team-meta"><strong>ReefTrace workspace</strong><span>4 builders · local prototype</span></div></div></div>
     </aside>
     <div className="main-column">
-      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><Icon name="chevron" /><strong>{currentView.label}</strong></div><div className="topbar-actions"><label className="search-field"><Icon name="search" /><span className="sr-only">Search observations</span><input ref={searchInput} type="search" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Enter") navigate("investigations"); }} placeholder="Find an observation…" /><kbd className="search-shortcut" aria-hidden="true">/</kbd></label><button className="icon-button" title="Operator access" aria-label="Open operator access" onClick={openOperator}><Icon name="key" /></button></div></header>
-      <main id="workspace-main" className="page-content" tabIndex={-1} aria-busy={!!busy}>
+      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><Icon name="chevron" /><strong>{currentView.label}</strong></div><div className="topbar-actions"><label className="search-field"><Icon name="search" /><span className="sr-only">Search observations</span><input ref={searchInput} type="search" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Enter") navigate("investigations"); }} placeholder="Find an observation…" /><kbd className="search-shortcut" aria-hidden="true">/</kbd></label><button className="icon-button" disabled={preventionBusy} title="Operator access" aria-label="Open operator access" onClick={openOperator}><Icon name="key" /></button></div></header>
+      <main id="workspace-main" className="page-content" tabIndex={-1} aria-busy={!!busy || preventionBusy}>
         {connectionError && <div className="notice error" role="alert">Could not reach the local API. {connectionError}</div>}
         {visibleNotice && <div className={`notice operation-notice ${noticeTone}`} role="status"><Icon name={noticeTone === "success" ? "check" : "help"} /><span>{visibleNotice}</span><button className="icon-button" aria-label="Dismiss notice" onClick={() => setNotice("")}><Icon name="close" /></button></div>}
         {error && <div className="notice error" role="alert">{error}<button className="icon-button" aria-label="Dismiss error" onClick={() => setError("")}><Icon name="close" /></button></div>}
@@ -406,6 +413,8 @@ export default function Home() {
           <details className="card setup-steps"><summary>Measured tank setup and recordings <span>Mapping → drift → profile → source trial</span></summary><div className="card-body"><p className="settings-note">Use your actual tank measurements. JSON templates are in the repository’s config folder; the API reference describes each field.</p><a className="card-link" href={`${API}/docs`} target="_blank" rel="noreferrer">Open API reference <Icon name="arrow" /></a><div className="setup-step"><h3><span className="step-index">01</span>Map the water surface</h3><label>Calibration request JSON<textarea rows={5} value={calibration} onChange={event => setCalibration(event.target.value)} /></label><button className="secondary-button" disabled={locked || !calibration} onClick={() => void perform("Validating water-plane mapping", async () => { const result = await request<{ calibration_id: string }>("/vision/calibrate", parseRequestJson(calibration, "Calibration request")); setCalibrationId(result.calibration_id); setSetupResult(result); })}>Fit and validate mapping</button></div><div className="setup-step"><h3><span className="step-index">02</span>Record and validate drift</h3><label>Calibration ID<input value={calibrationId} onChange={event => setCalibrationId(event.target.value)} /></label><button className="secondary-button" disabled={locked || !calibrationId || !status?.camera.fresh} onClick={() => void perform("Recording five seconds of drift", async () => setSetupResult(await request("/camera/record", { calibration_id: calibrationId, duration_s: 5 })))}>Record flow calibration</button><label>Recorded-flow fit JSON<textarea rows={5} value={flowJson} onChange={event => setFlowJson(event.target.value)} /></label><p className="settings-note">Use separate training_recording_ids and validation_recording_ids.</p><button className="secondary-button" disabled={locked || !flowJson} onClick={() => void perform("Fitting measured drift", async () => setSetupResult(await request("/flow/fit-recordings", parseRequestJson(flowJson, "Recorded-flow request"))))}>Fit measured flow</button></div><div className="setup-step"><h3><span className="step-index">03</span>Freeze a measured profile</h3><label>Complete measured profile JSON<textarea rows={5} value={profileJson} onChange={event => setProfileJson(event.target.value)} /></label><button className="secondary-button" disabled={locked || !profileJson} onClick={() => void perform("Freezing measured profile", async () => { const result = await request<{ id: string }>("/profiles", parseRequestJson(profileJson, "Measured profile")); setRecordProfileId(result.id); setSetupResult(result); })}>Register frozen profile</button></div><div className="setup-step"><h3><span className="step-index">04</span>Record a source trial</h3><div className="form-grid"><label>Measured profile<select value={recordProfileId} onChange={event => setRecordProfileId(event.target.value)}><option value="">Select a frozen measured profile</option>{measuredProfiles.map(item => <option key={item.id} value={item.id}>{item.id}</option>)}</select></label><label>Evidence mode<select value={observationType} onChange={event => setObservationType(event.target.value)}><option value="trajectory">Observed moving trajectory</option><option value="retained_endpoint">First seen already retained</option></select></label></div><button className="primary-button" disabled={locked || !recordProfileId || !status?.camera.fresh} onClick={() => void perform("Recording permitted observation", async () => { const recording = await request<{ id: string }>("/camera/record", { profile_id: recordProfileId, duration_s: 5 }); const item = await request<Case>(`/recordings/${recording.id}/case`, { observation_type: observationType }); openCase(item.id, true); })}>Record a new source case</button></div>{setupResult != null && <details className="details-panel" open><summary>Setup result</summary><pre className="code-block">{JSON.stringify(setupResult, null, 2)}</pre></details>}</div></details>
         </>}
 
+        {view === "prevention" && <PreventionWorkspace request={request} operatorConnected={!!token} onRequireOperator={openOperator} cases={cases} profiles={profiles} selectedCaseId={selected} onSelectCase={selectCase} onBusyChange={onPreventionBusyChange} onStopCase={stopCase} blocked={!!busy || stopping} />}
+
         {view === "data" && <RealDataLab api={API} />}
 
         {view === "settings" && <>
@@ -417,6 +426,6 @@ export default function Home() {
         <footer className="workspace-footer"><span>ReefTrace · Source tracing first</span><span>Demo data is not physical validation.</span></footer>
       </main>
     </div>
-    <dialog ref={operatorDialog} className="operator-dialog" aria-labelledby="operator-title" onClick={event => { if (event.target === event.currentTarget) operatorDialog.current?.close(); }}><div className="dialog-header"><h2 id="operator-title">Connect operator</h2><button className="icon-button" aria-label="Close operator access" onClick={() => operatorDialog.current?.close()}><Icon name="close" /></button></div><p className="dialog-help">Find <code>REEFTRACE_LOCAL_TOKEN</code> in your local <code>reeftrace/.env</code>. Enter it here to run workspace actions.</p><form method="dialog" onSubmit={() => { setToken(tokenDraft.trim()); setNoticeScope(null); setNoticeTone("info"); setNotice(tokenDraft.trim() ? "Operator token entered for this browser tab. Actions will verify it with the API." : "Operator access cleared for this tab."); }}><label>Local operator token<input type="password" autoComplete="off" value={tokenDraft} onChange={event => setTokenDraft(event.target.value)} disabled={!!busy} placeholder="Enter your local token" /></label><p className="settings-note">Stored only in this tab’s memory. Sponsor keys stay on the server.</p><div className="dialog-actions">{tokenDraft && <button type="button" className="ghost-button" disabled={!!busy} onClick={() => setTokenDraft("")}>Clear token</button>}<button className="primary-button" type="submit" disabled={!!busy}>Done</button></div></form></dialog>
+    <dialog ref={operatorDialog} className="operator-dialog" aria-labelledby="operator-title" onClick={event => { if (event.target === event.currentTarget) operatorDialog.current?.close(); }}><div className="dialog-header"><h2 id="operator-title">Connect operator</h2><button className="icon-button" aria-label="Close operator access" onClick={() => operatorDialog.current?.close()}><Icon name="close" /></button></div><p className="dialog-help">Find <code>REEFTRACE_LOCAL_TOKEN</code> in your local <code>reeftrace/.env</code>. Enter it here to run workspace actions.</p><form method="dialog" onSubmit={() => { setToken(tokenDraft.trim()); setNoticeScope(null); setNoticeTone("info"); setNotice(tokenDraft.trim() ? "Operator token entered for this browser tab. Actions will verify it with the API." : "Operator access cleared for this tab."); }}><label>Local operator token<input type="password" autoComplete="off" value={tokenDraft} onChange={event => setTokenDraft(event.target.value)} disabled={!!busy || preventionBusy} placeholder="Enter your local token" /></label><p className="settings-note">Stored only in this tab’s memory. Sponsor keys stay on the server.</p><div className="dialog-actions">{tokenDraft && <button type="button" className="ghost-button" disabled={!!busy || preventionBusy} onClick={() => setTokenDraft("")}>Clear token</button>}<button className="primary-button" type="submit" disabled={!!busy || preventionBusy}>Done</button></div></form></dialog>
   </div>;
 }
