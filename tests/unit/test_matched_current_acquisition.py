@@ -209,6 +209,22 @@ def test_failed_acquisition_and_crash_sentinel_cannot_be_retried(frozen):
         fetch.acquire_study(directory, root=root, client=client)
 
 
+@pytest.mark.parametrize("sidecar", ["acquisition-start.sha256", "manifest.sha256"])
+def test_orphaned_acquisition_sidecar_blocks_all_requests_and_new_artifacts(frozen, sidecar):
+    root, directory, protocol = frozen
+    path = directory / sidecar
+    original = b"preserve this orphaned receipt as evidence\n"
+    path.write_bytes(original)
+    _, seen, client = responses(protocol)
+    with client, pytest.raises(ValueError, match="never overwrite"):
+        fetch.acquire_study(directory, root=root, client=client)
+    assert seen == []
+    assert path.read_bytes() == original
+    assert not any((directory / name).exists() for name in (
+        "raw", "acquisition-start.json", "manifest.json",
+    ))
+
+
 def test_source_and_protocol_tampering_fail_before_any_transport(frozen):
     root, directory, protocol = frozen
     path = root / "apps/ocean/reeftrace_ocean/hycom.py"
@@ -261,6 +277,25 @@ def rewrite_manifest(directory, manifest):
     payload = p.canonical_json(manifest)
     (directory / "manifest.json").write_bytes(payload)
     (directory / "manifest.sha256").write_text(p.sha(payload) + "\n")
+
+
+def test_rehashed_overlapping_serial_receipts_fail_replay(frozen):
+    _, (_, manifest, _, _), _ = acquire(frozen)
+    first, second = manifest["source_receipts"][:2]
+    second["started_at_utc"] = first["started_at_utc"]
+    assert p.when(second["started_at_utc"]) < p.when(first["finished_at_utc"])
+    rewrite_manifest(frozen[1], manifest)
+    with pytest.raises(ValueError, match="acquisition receipt changed"):
+        p.load_acquisition(frozen[1], root=frozen[0])
+
+
+def test_touching_serial_receipt_boundaries_remain_valid(frozen):
+    _, (_, manifest, _, _), _ = acquire(frozen)
+    first, second = manifest["source_receipts"][:2]
+    second["started_at_utc"] = first["finished_at_utc"]
+    rewrite_manifest(frozen[1], manifest)
+    _, replayed, _, _ = p.load_acquisition(frozen[1], root=frozen[0])
+    assert replayed["source_receipts"] == manifest["source_receipts"]
 
 
 @pytest.mark.parametrize("status,reason,role", [

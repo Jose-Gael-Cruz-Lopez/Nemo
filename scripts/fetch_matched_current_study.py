@@ -174,7 +174,10 @@ def acquire_study(directory=None, *, client=None, root=None):
     root = Path(root or ROOT)
     directory = Path(directory or root / "data/public/matched-current-v1")
     protocol, hashes = load_protocol(directory, root=root)
-    if any((directory / name).exists() for name in ("raw", "acquisition-start.json", "manifest.json")):
+    if any((directory / name).exists() for name in (
+        "raw", "acquisition-start.json", "acquisition-start.sha256",
+        "manifest.json", "manifest.sha256",
+    )):
         raise ValueError("Acquisition already attempted; never overwrite or replace a failure")
     head = _require_committed(root, directory, protocol)
     # Exclusive sentinel survives crashes, so a failed/partial attempt is not retried silently.

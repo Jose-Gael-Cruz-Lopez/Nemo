@@ -40,7 +40,8 @@ def fake_inputs():
         {"kind": "SYNTHETIC_TEST_FIELD"},
     )
     forecasts = build_matched_current_forecasts(contexts, {group: field for group in GROUP_IDS})
-    return ({"study_id": "synthetic-wrapper-test"}, {"source_receipts": []},
+    return ({"study_id": "synthetic-wrapper-test"},
+            {"source_receipts": [], "finished_at_utc": "2026-01-01T00:00:00Z"},
             {"protocol_sha256": "a" * 64, "manifest_sha256": "b" * 64},
             contexts, targets, forecasts, field, None)
 
@@ -156,6 +157,37 @@ def test_acquisition_after_forecast_clock_is_rejected(tmp_path, monkeypatch):
     assert not (tmp_path / "forecasts.json").exists()
 
 
+def test_acquisition_manifest_completion_bounds_forecast_even_after_all_requests_finished(tmp_path, monkeypatch):
+    inputs = list(fake_inputs())
+    inputs[1] = {"source_receipts": [{"finished_at_utc": "2026-01-01T00:00:00Z"}],
+                 "finished_at_utc": "2099-01-01T00:00:00Z"}
+    monkeypatch.setattr(wrapper, "_inputs", lambda _directory: tuple(inputs))
+    with pytest.raises(ValueError, match="predates acquisition manifest"):
+        wrapper.evaluate_study(tmp_path, first_score=True)
+    assert not (tmp_path / "forecasts.json").exists()
+
+
+def test_rehashed_replay_forecast_cannot_precede_manifest_completion_with_coherent_result_hashes(tmp_path, monkeypatch):
+    inputs = list(fake_inputs())
+    inputs[1] = {"source_receipts": [{"finished_at_utc": "2026-01-01T00:00:00Z"}],
+                 "finished_at_utc": "2026-02-01T00:00:00Z"}
+    monkeypatch.setattr(wrapper, "_inputs", lambda _directory: tuple(inputs))
+    wrapper.evaluate_study(tmp_path, first_score=True)
+    forecast_path, result_path = tmp_path / "forecasts.json", tmp_path / "evaluation.json"
+    forecast, result = json.loads(forecast_path.read_text()), json.loads(result_path.read_text())
+    forecast["frozen_at_utc"] = "2026-01-15T00:00:00Z"
+    payload = wrapper.canonical_json(forecast)
+    forecast_path.write_bytes(payload)
+    forecast_path.with_suffix(".sha256").write_text(wrapper._sha(payload) + "\n")
+    result["forecast_file_sha256"] = wrapper._sha(payload)
+    result["forecast_frozen_at_utc"] = forecast["frozen_at_utc"]
+    payload = wrapper.canonical_json(result)
+    result_path.write_bytes(payload)
+    result_path.with_suffix(".sha256").write_text(wrapper._sha(payload) + "\n")
+    with pytest.raises(ValueError, match="predates acquisition manifest"):
+        wrapper.evaluate_study(tmp_path)
+
+
 def test_context_qc_is_descriptive_and_does_not_read_future():
     context = [{"time_utc": (ORIGIN - timedelta(hours=24 - i)).isoformat(),
                 "latitude_deg": "bad" if i < 23 else "30", "longitude_deg": "-75"}
@@ -224,7 +256,7 @@ def test_current_reader_bytes_must_match_verified_acquisition_before_forecasting
         protocol, {"source_receipts": receipts}, {}, sources,
     ))
     field = fake_inputs()[6]
-    # Simulate a valid reader result from different bytes after load_acquisition.
+    # A changed decoder contract cannot claim that a different payload was read.
     field.metadata["sha256"] = "f" * 64
     monkeypatch.setattr(wrapper, "_study_field", lambda _path: field)
 
@@ -234,4 +266,48 @@ def test_current_reader_bytes_must_match_verified_acquisition_before_forecasting
     monkeypatch.setattr(wrapper, "build_matched_current_forecasts", no_forecast_on_mismatched_bytes)
     with pytest.raises(ValueError, match="(?i)(hycom|provenance|bytes|identity)"):
         wrapper._inputs(tmp_path)
+    assert not (tmp_path / "forecasts.json").exists()
+
+
+def test_wrapper_decodes_verified_memory_bytes_without_reopening_mutable_raw_path(tmp_path, monkeypatch):
+    from apps.ocean.reeftrace_ocean import hycom, matched_current_protocol
+
+    payload = b"synthetic already verified payload; byte transport contract test only"
+    sources = {"trajectory:" + group: csv_bytes(group) for group in GROUP_IDS}
+    sources["hycom_currents"] = payload
+    raw_path = tmp_path / "raw" / "synthetic-current.nc"
+    raw_path.parent.mkdir()
+    raw_path.write_bytes(b"concurrent malformed replacement, never scientific data")
+    receipts = [{"role": "trajectory:" + group} for group in GROUP_IDS]
+    receipts.append({"role": "hycom_currents", "raw_path": "raw/synthetic-current.nc",
+                     "sha256": wrapper._sha(payload)})
+    protocol = {"groups": [{"drifter_id": group} for group in GROUP_IDS],
+                "models": list(wrapper.MODEL_IDS),
+                "windows": {"horizons_s": list(wrapper.HORIZONS_S),
+                            "origin_time_utc": wrapper.EXPECTED_TIMES[24]}}
+    monkeypatch.setattr(matched_current_protocol, "load_acquisition", lambda _directory: (
+        protocol, {"source_receipts": receipts}, {}, sources,
+    ))
+    field = fake_inputs()[6]
+    field.latitude_deg[:] = [30, 30.04]
+    field.longitude_deg[:] = [-75, -74.92]
+    field.metadata["sha256"] = wrapper._sha(payload)
+    seen = []
+
+    def memory_only(value):
+        assert value is payload
+        seen.append(value)
+        return field
+
+    def forbidden_file_read(*args, **kwargs):
+        pytest.fail("Verified forcing was reopened from a mutable filesystem path")
+
+    monkeypatch.setattr(wrapper, "load_hycom_field_bytes", memory_only)
+    monkeypatch.setattr(hycom, "load_hycom_field", forbidden_file_read)
+    result = wrapper._inputs(tmp_path)
+    assert seen == [payload]
+    assert result[-1] is None
+    assert result[5]["planned_cell_count"] == 36
+    assert all(candidate["status"] == "COMPLETED" for group in result[5]["groups"]
+               for candidate in group["candidates"])
     assert not (tmp_path / "forecasts.json").exists()

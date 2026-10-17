@@ -18,7 +18,7 @@ from pathlib import Path
 
 import numpy as np
 
-from apps.ocean.reeftrace_ocean.hycom import load_hycom_field
+from apps.ocean.reeftrace_ocean.hycom import load_hycom_field_bytes
 from apps.ocean.reeftrace_ocean.matched_current import (
     GROUP_IDS,
     HORIZONS_S,
@@ -82,6 +82,8 @@ def _utc_clock(value, label: str) -> datetime:
 
 def _forecast_chronology(document: dict, manifest: dict) -> datetime:
     frozen = _utc_clock(document.get("frozen_at_utc"), "forecast")
+    if frozen < _utc_clock(manifest.get("finished_at_utc"), "acquisition manifest"):
+        raise ValueError("Forecast receipt predates acquisition manifest completion")
     for receipt in manifest["source_receipts"]:
         if frozen < _utc_clock(receipt.get("finished_at_utc"), "acquisition"):
             raise ValueError("Forecast receipt predates acquisition completion")
@@ -123,8 +125,8 @@ def _context_qc(context: list[dict]) -> dict:
             "first_23_positions_used_by_models": False}
 
 
-def _study_field(path: Path):
-    field = load_hycom_field(path)
+def _study_field(payload: bytes):
+    field = load_hycom_field_bytes(payload)
     expected = np.array(["2022-06-01T00:00:00", "2022-06-01T03:00:00",
                          "2022-06-01T06:00:00"], dtype="datetime64[us]")
     if not np.array_equal(field.time_utc, expected):
@@ -169,13 +171,13 @@ def _inputs(directory: Path):
     current = receipts["hycom_currents"]
     if sources.get("hycom_currents") is not None:
         try:
-            forcing = _study_field(directory / current["raw_path"])
+            forcing = _study_field(sources["hycom_currents"])
         except (ValueError, ImportError) as error:
             current_failure = str(error)
         else:
-            # The reader opens the file after acquisition verification. Bind the
-            # bytes actually decoded to that verified receipt before forecasting;
-            # a concurrent swap is a hard provenance failure, not missing forcing.
+            # The decoder consumes the immutable bytes already returned by
+            # acquisition verification. Retain this independent digest check as
+            # a guard against a changed decoder contract or wrong object.
             if (forcing.metadata.get("sha256") != current["sha256"]
                     or forcing.metadata.get("sha256") != _sha(sources["hycom_currents"])):
                 raise ValueError("HYCOM decoded byte identity differs from verified acquisition provenance")

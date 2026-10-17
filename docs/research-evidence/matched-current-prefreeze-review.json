@@ -1,0 +1,53 @@
+{
+  "actual_grok_web_review": true,
+  "decisions": [
+    "Decode verified immutable forcing bytes directly.",
+    "Forecast follows manifest and per-source completion.",
+    "Reject orphan sentinels before requests.",
+    "Require sequential nonoverlapping source clocks.",
+    "All-masked forcing remains explicitly unsupported.",
+    "Include package initializers in numerical source dependency hashes."
+  ],
+  "fixed_candidates": [
+    "stationary",
+    "last_drift",
+    "current_only"
+  ],
+  "focused_tests_passed": 159,
+  "grok_api_used": false,
+  "grok_execution_claim": false,
+  "grok_files": [
+    {
+      "bytes": 45919,
+      "path": "docs/grok-evidence/grok-matched-current-final-prefreeze-prompt.txt",
+      "sha256": "560336035e2cef3ff83fcdae017b0362f59d54c482f4b41dd5d24bcc44306c38"
+    },
+    {
+      "bytes": 3003,
+      "path": "docs/grok-evidence/grok-matched-current-final-prefreeze-response.txt",
+      "sha256": "8f7ed71fa710ce9afc9db681f8894d21f368b533f70eb36f04211cf9655302e8"
+    }
+  ],
+  "planned_cells": 36,
+  "ruff": "PASS",
+  "runtime_versions_at_review": {
+    "httpx": "0.28.1",
+    "netCDF4": "1.7.5",
+    "numpy": "2.5.4",
+    "pytest": "8.4.2",
+    "python": "3.12.14"
+  },
+  "schema_version": 1,
+  "scientific_boundaries": {
+    "assimilation_independence_verified": false,
+    "no_heldout_tuning": true,
+    "no_model_promotion": true,
+    "no_replacements": true,
+    "operational_causality": false,
+    "physical_validation": false
+  },
+  "scientific_values_acquired_at_review": false,
+  "source_dependency_package_initializers_pinned": true,
+  "stage": "PRE_ACQUISITION_REVIEW",
+  "unique_later_position_estimates": 12
+}

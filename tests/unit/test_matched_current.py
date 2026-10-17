@@ -103,6 +103,38 @@ def test_origin_anchored_last_drift_uses_actual_positive_delta_and_spherical_exp
         assert point["latitude_deg"] == pytest.approx(0, abs=1e-12)
 
 
+def test_nonzero_latitude_last_drift_reverses_the_origin_tangent_bearing_on_the_mean_sphere():
+    def direct(latitude, longitude, bearing_deg, distance_m):
+        # Independent spherical forward-geodesic equations, not the model frame.
+        phi, lam, bearing = map(math.radians, (latitude, longitude, bearing_deg))
+        delta = distance_m / 6_371_008.8
+        destination_lat = math.asin(
+            math.sin(phi) * math.cos(delta) + math.cos(phi) * math.sin(delta) * math.cos(bearing),
+        )
+        destination_lon = lam + math.atan2(
+            math.sin(bearing) * math.sin(delta) * math.cos(phi),
+            math.cos(delta) - math.sin(phi) * math.sin(destination_lat),
+        )
+        return math.degrees(destination_lat), (math.degrees(destination_lon) + 180) % 360 - 180
+
+    supplied = contexts()
+    origin = (32.5, -72.4)
+    penultimate = direct(*origin, 225, 1800)
+    for rows in supplied.values():
+        rows[-1].update(latitude_deg=origin[0], longitude_deg=origin[1])
+        rows[-2].update(latitude_deg=penultimate[0], longitude_deg=penultimate[1])
+    forecasts = matched.build_matched_current_forecasts(supplied)
+    for group_index in range(2):
+        drift = candidate(forecasts, "last_drift", group_index)
+        assert drift["status"] == "COMPLETED"
+        assert drift["last_observed_velocity_m_s"] == pytest.approx(
+            [0.5 / math.sqrt(2), 0.5 / math.sqrt(2)], abs=2e-12,
+        )
+        for point in drift["cells"]:
+            expected = direct(*origin, 45, point["elapsed_s"] * 0.5)
+            assert (point["latitude_deg"], point["longitude_deg"]) == pytest.approx(expected, abs=2e-11)
+
+
 def test_current_hourly_points_follow_wgs84_metric_not_spherical_last_drift_geometry():
     forecasts = matched.build_matched_current_forecasts(contexts(), fields())
     current = candidate(forecasts, "current_only")
@@ -285,6 +317,26 @@ def test_invalid_current_configuration_is_recorded_without_blocking_baselines():
     assert candidate(result, "current_only")["reason_code"] == "CURRENT_CONFIGURATION_INVALID"
     assert candidate(result, "stationary")["status"] == "COMPLETED"
     assert candidate(result, "last_drift")["status"] == "COMPLETED"
+
+
+def test_all_masked_forcing_is_explicitly_unsupported_and_never_a_zero_current_forecast():
+    source = field()
+    source.valid_mask[:] = False
+    source.eastward_m_s[:] = np.nan
+    source.northward_m_s[:] = np.nan
+    forecasts = matched.build_matched_current_forecasts(contexts(), fields(source))
+    scores = matched.score_matched_current_forecasts(forecasts, all_targets())
+    assert scores["planned_cell_count"] == 36
+    assert scores["scored_cell_count"] == 24
+    assert scores["primary_equal_id_macro_results"] is None
+    for index in range(2):
+        current = candidate(forecasts, "current_only", index)
+        assert current["status"] == "UNSUPPORTED"
+        assert current["reason_code"] == "CURRENT_FIELD_ALL_MASKED"
+        assert current["available_count"] == 0
+        assert all(point["latitude_deg"] is None for point in current["cells"])
+        assert candidate(forecasts, "stationary", index)["status"] == "COMPLETED"
+        assert candidate(forecasts, "last_drift", index)["status"] == "COMPLETED"
 
 
 def test_all36_cells_survive_absent_or_bad_context_and_targets():

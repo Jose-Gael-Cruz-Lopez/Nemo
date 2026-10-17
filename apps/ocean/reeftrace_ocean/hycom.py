@@ -125,27 +125,29 @@ def _raw_velocity(dataset, name: str) -> np.ndarray:
     return raw[:, 0, :, :]
 
 
-def load_hycom_field(path: str | Path, *, max_samples: int = MAX_SAMPLES,
-                     max_file_bytes: int = MAX_FILE_BYTES) -> OceanField:
-    """Read bounded local bytes with CF mask/scale disabled; never access a URL.
+def _reader_budgets(max_samples: int, max_file_bytes: int) -> None:
+    _require(type(max_file_bytes) is int and 0 < max_file_bytes <= MAX_FILE_BYTES
+             and type(max_samples) is int and 0 < max_samples <= MAX_SAMPLES,
+             "reader budgets must be positive integers within the hard bounds")
+
+
+def load_hycom_field_bytes(payload: bytes, *, max_samples: int = MAX_SAMPLES,
+                           max_file_bytes: int = MAX_FILE_BYTES) -> OceanField:
+    """Decode one immutable bounded byte object, with no path reopening or I/O.
 
     Public provenance contains a byte digest and reviewed format contract, not a
     machine path, copied global attributes or proof of scientific acquisition.
     Missing either velocity component masks both; missing currents are not zero.
+    The acquisition wrapper passes its already hash-verified bytes to this seam,
+    so a later filesystem change cannot become different or unavailable forcing.
     """
+    _reader_budgets(max_samples, max_file_bytes)
+    _require(type(payload) is bytes, "the decoder requires immutable bytes")
+    _require(0 < len(payload) <= max_file_bytes, "local bytes exceed their byte budget")
     try:
         from netCDF4 import Dataset
     except ImportError as error:
         raise ImportError("Install the ocean extra to read local HYCOM NetCDF") from error
-    _require(type(max_file_bytes) is int and 0 < max_file_bytes <= MAX_FILE_BYTES
-             and type(max_samples) is int and 0 < max_samples <= MAX_SAMPLES,
-             "reader budgets must be positive integers within the hard bounds")
-    source = Path(path)
-    _require(source.is_file(), "select an existing local NetCDF file")
-    _require(0 < source.stat().st_size <= max_file_bytes, "local file exceeds its byte budget")
-    with source.open("rb") as handle:
-        payload = handle.read(max_file_bytes + 1)
-    _require(0 < len(payload) <= max_file_bytes, "local file exceeds its byte budget")
     try:
         dataset = Dataset("hycom-local-subset", mode="r", memory=payload)
     except (OSError, ValueError, RuntimeError) as error:
@@ -197,3 +199,19 @@ def load_hycom_field(path: str | Path, *, max_samples: int = MAX_SAMPLES,
         ],
     }
     return OceanField(when, longitude, latitude, east, north, valid, DEPTH_M, metadata)
+
+
+def load_hycom_field(path: str | Path, *, max_samples: int = MAX_SAMPLES,
+                     max_file_bytes: int = MAX_FILE_BYTES) -> OceanField:
+    """Read one bounded local file, then use the same immutable-byte decoder.
+
+    This convenience reader makes no transport claim. Scientific orchestration
+    must pass acquisition-verified bytes directly to ``load_hycom_field_bytes``.
+    """
+    _reader_budgets(max_samples, max_file_bytes)
+    source = Path(path)
+    _require(source.is_file(), "select an existing local NetCDF file")
+    _require(0 < source.stat().st_size <= max_file_bytes, "local file exceeds its byte budget")
+    with source.open("rb") as handle:
+        payload = handle.read(max_file_bytes + 1)
+    return load_hycom_field_bytes(payload, max_samples=max_samples, max_file_bytes=max_file_bytes)

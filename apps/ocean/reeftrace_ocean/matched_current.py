@@ -195,7 +195,12 @@ def _current(candidate: dict, field: OceanField | None,
             start_time_utc=ORIGIN, horizon_s=HORIZONS_S[-1], step_s=300,
             output_step_s=3600,
         )
-    except (ValueError, TypeError, OverflowError):
+    except (ValueError, TypeError, OverflowError) as error:
+        if (isinstance(field, OceanField)
+                and str(error) == "Valid current samples must be finite and nonempty"
+                and not np.asarray(field.valid_mask).any()):
+            _fail(candidate, "CURRENT_FIELD_ALL_MASKED", status="UNSUPPORTED")
+            return
         _fail(candidate, "CURRENT_CONFIGURATION_INVALID")
         return
     candidate["advection"] = result

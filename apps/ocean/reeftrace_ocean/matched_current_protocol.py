@@ -32,6 +32,7 @@ METADATA = {
     "hycom_metadata": ("hycom-2022-ncss-dataset.xml", "741d5fcc5cd784415c9b8582394a05f4102f81f0d883821e8267a61ea698164d"),
 }
 SOURCE_PATHS = (
+    "apps/__init__.py", "apps/ocean/__init__.py", "apps/ocean/reeftrace_ocean/__init__.py",
     "apps/ocean/reeftrace_ocean/matched_current_protocol.py",
     "apps/ocean/reeftrace_ocean/matched_current.py", "apps/ocean/reeftrace_ocean/hycom.py",
     "apps/ocean/reeftrace_ocean/advection.py", "apps/ocean/reeftrace_ocean/field.py",
@@ -417,6 +418,7 @@ def load_acquisition(directory=None, *, root=None):
         raise ValueError("Matched-current acquisition chronology changed")
     sources, attempts, received, retained = {}, 0, 0, 0
     previous_elapsed = 0
+    previous_finished = started
     statuses = {"DOWNLOADED", "FETCH_FAILED", "BLOCKED", "METADATA_INVALID", "SCHEMA_INVALID"}
     for row in manifest["source_receipts"]:
         role = row["role"]
@@ -434,7 +436,7 @@ def load_acquisition(directory=None, *, root=None):
                 or type(row["elapsed_wall_s"]) not in {int, float}
                 or not math.isfinite(row["elapsed_wall_s"])
                 or row["elapsed_wall_s"] < previous_elapsed
-                or when(row["started_at_utc"]) < started
+                or when(row["started_at_utc"]) < previous_finished
                 or not when(row["started_at_utc"]) <= when(row["finished_at_utc"]) <= finished):
             raise ValueError("Matched-current acquisition receipt changed")
         if row["raw_path"] is None:
@@ -469,6 +471,7 @@ def load_acquisition(directory=None, *, root=None):
         received += row["received_bytes"]
         retained += row["retained_bytes"]
         previous_elapsed = row["elapsed_wall_s"]
+        previous_finished = when(row["finished_at_utc"])
     if (attempts != manifest["requests_attempted"] or attempts > protocol["budgets"]["requests_max"]
             or received != manifest["response_bytes_received"]
             or retained != manifest["response_bytes_retained"]

@@ -79,6 +79,40 @@ def test_raw_int16_is_masked_before_exact_decimal_scale_once_and_axes_are_preser
     assert str(path.resolve()) not in json.dumps(field.metadata)
 
 
+def test_verified_immutable_bytes_use_the_same_decoder_without_reopening_a_changed_file(tmp_path):
+    path = write_subset(tmp_path / "immutable.nc", masked_v=(2, 0, 1, 0))
+    payload = path.read_bytes()
+    from_file = hycom.load_hycom_field(path)
+    path.write_bytes(b"concurrent malformed replacement; synthetic test only")
+    from_bytes = hycom.load_hycom_field_bytes(payload)
+    assert from_bytes.metadata == from_file.metadata
+    for name in ("time_utc", "longitude_deg", "latitude_deg", "eastward_m_s", "northward_m_s", "valid_mask"):
+        np.testing.assert_array_equal(getattr(from_bytes, name), getattr(from_file, name))
+    path.unlink()
+    assert hycom.load_hycom_field_bytes(payload).metadata["sha256"] == hashlib.sha256(payload).hexdigest()
+    assert from_bytes.metadata["source_bytes"] == len(payload)
+
+
+@pytest.mark.parametrize("value", [bytearray(b"CDF\x01"), memoryview(b"CDF\x01"), "CDF", None])
+def test_byte_decoder_refuses_mutable_buffers_or_nonbyte_inputs(value):
+    with pytest.raises(ValueError, match="immutable bytes"):
+        hycom.load_hycom_field_bytes(value)
+
+
+def test_byte_decoder_enforces_limits_before_opening_netcdf(tmp_path, monkeypatch):
+    payload = write_subset(tmp_path / "bounded-memory.nc").read_bytes()
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("NetCDF decoder was called for rejected input bytes")
+
+    monkeypatch.setattr(netcdf, "Dataset", forbidden)
+    for value, options in ((b"", {}), (payload, {"max_file_bytes": len(payload) - 1}),
+                           (payload, {"max_samples": False}),
+                           (payload, {"max_file_bytes": hycom.MAX_FILE_BYTES + 1})):
+        with pytest.raises(ValueError, match="HYCOM_METADATA_ERROR"):
+            hycom.load_hycom_field_bytes(value, **options)
+
+
 def test_reviewed_float32_encoding_is_not_adopted_as_a_different_physical_scale(tmp_path):
     encoded = np.float32("0.001")
     assert float(encoded) != 0.001  # The reviewed metadata are binary float32.

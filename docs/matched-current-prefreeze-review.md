@@ -1,0 +1,11 @@
+# Matched-current study: pre-acquisition review decision
+
+The local review accepts the fixed two-group, three-candidate, six-hour retrospective design for one bounded acquisition attempt. This decision records a source review, **not a scientific result**. The preceding six-group NOAA study, current ocean presets and tank comparison remain unchanged.
+
+The exact design is in `docs/matched-current-study-plan.md`; executable query/budget/identity contracts live in `matched_current_protocol.py`. The review fixes decode acquisition-verified immutable bytes, enforce the acquisition-manifest/source/forecast/score clock chain, reject orphan hash sentinels before requests, and require serial source clocks. All-masked currents remain unsupported. Package initialization code is included in the implementation hash set.
+
+The local focused suite passed **159 tests** using invented arrays and mocked transport. Ruff and diff checks passed. The actual Grok web prompt and answer are retained in `docs/grok-evidence/grok-matched-current-final-prefreeze-{prompt,response}.txt`. Grok gave conditional static acceptance; it did not execute code, acquire values, validate physical behavior, or consume an xAI API. The review receipt records exact file hashes and local dependency versions.
+
+The next operations are distinct: commit reviewed source; generate the metadata-only protocol and trusted identity; commit that freeze; run the immutable acquisition command once; persist all fixed forecasts before numeric future-coordinate decoding; explicitly compute the first score; verify offline replay. The public reader and API may read saved artifacts but may never run any of these operations. Any failure stays in the original denominator; no alternative endpoint, retry, replacement group, expanded tile, changed depth or tuned coefficient follows a disappointing outcome.
+
+Primary comparison requires all **36 model-hour cells**, which reuse only **12 later processed position estimates**. Partial results may report explicitly named secondary supports without selecting a winner. HYCOM future-valid analysis at 15 m does not establish origin-time availability, assimilation independence, surface-plastic accuracy, tank performance or reef protection.
