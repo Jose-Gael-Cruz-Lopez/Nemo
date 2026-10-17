@@ -14,6 +14,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from fastapi import APIRouter, Depends, HTTPException
+from pydantic import ValidationError
 
 from ....schemas.field_sessions import FieldSessionInput, Preflight
 from ....services.field_sessions import Blocked, FieldSessionService
@@ -28,7 +29,10 @@ def create_field_sessions_router(runtime, operator: Callable) -> APIRouter:
     @router.post("/preflight", response_model=Preflight, dependencies=[Depends(operator)])
     def preflight(body: FieldSessionInput):
         """Explain every workflow step without saving anything."""
-        return service.preflight(body)
+        try:
+            return service.preflight(body)
+        except ValidationError:
+            raise HTTPException(409, "Field receipt has invalid public fields; source values were withheld") from None
 
     @router.post("", dependencies=[Depends(operator)])
     def freeze(body: FieldSessionInput):
@@ -37,13 +41,21 @@ def create_field_sessions_router(runtime, operator: Callable) -> APIRouter:
             return service.create(body)
         except Blocked as blocked:
             raise HTTPException(409, str(blocked)[:600]) from None
+        except ValidationError:
+            raise HTTPException(409, "Field receipt has invalid public fields; source values were withheld") from None
 
     @router.get("")
     def list_manifests():
-        return service.list()
+        try:
+            return service.list()
+        except ValidationError:
+            raise HTTPException(409, "Field receipt has invalid public fields; source values were withheld") from None
 
     @router.get("/{manifest_id}")
     def manifest(manifest_id: str):
-        return service.detail(manifest_id)
+        try:
+            return service.detail(manifest_id)
+        except ValidationError:
+            raise HTTPException(409, "Field receipt has invalid public fields; source values were withheld") from None
 
     return router

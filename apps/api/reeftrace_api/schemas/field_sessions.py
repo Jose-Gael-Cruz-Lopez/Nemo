@@ -6,9 +6,16 @@ attestations are recorded as attestations, never as independent verification.
 """
 from __future__ import annotations
 
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import Field, FiniteFloat, model_validator
+from pydantic import (
+    AfterValidator,
+    Field,
+    FiniteFloat,
+    TypeAdapter,
+    ValidationError,
+    model_validator,
+)
 
 from .contracts import StrictModel
 
@@ -20,6 +27,28 @@ ATTESTATION_KEYS = ("waterline_unchanged", "pump_setting_unchanged", "hose_and_p
                     "camera_and_light_unchanged", "coordinates_measured_in_cm")
 
 Id = Field(min_length=1, max_length=100)
+
+
+def _public_identifier(value):
+    if value.lower().startswith(("sk-", "sk_", "ck-", "xai-", "ghp_", "github_pat_", "ya29.", "aiza")):
+        raise ValueError("Credential-shaped identifiers cannot enter a field receipt")
+    return value
+
+
+PublicId = Annotated[str, Field(min_length=1, max_length=100,
+                               pattern=r"^[A-Za-z][A-Za-z0-9_.:-]*$"),
+                     AfterValidator(_public_identifier)]
+_PUBLIC_ID = TypeAdapter(PublicId)
+
+
+def public_identifiers(values):
+    """A non-echoing guard for free-form references before messages are built."""
+    try:
+        for value in values:
+            _PUBLIC_ID.validate_python(value)
+    except ValidationError:
+        return False
+    return True
 
 
 class OperatorAttestations(StrictModel):
@@ -78,7 +107,7 @@ class Preflight(StrictModel):
 # Frozen receipt -----------------------------------------------------------------
 
 class CaptureRef(StrictModel):
-    camera_session_id: str = Id
+    camera_session_id: PublicId
     device_index: int | None = Field(ge=0, le=20)
     backend: str = Field(min_length=1, max_length=80)
     capture_origin: Literal["USB_CAMERA_DEVICE", "SYNTHETIC_FAKE_CAPTURE"]
@@ -86,7 +115,7 @@ class CaptureRef(StrictModel):
 
 
 class CalibrationRef(StrictModel):
-    calibration_id: str = Id
+    calibration_id: PublicId
     content_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
     validation_count: int = Field(ge=3)
     mean_error_cm: FiniteFloat = Field(ge=0)
@@ -96,8 +125,8 @@ class CalibrationRef(StrictModel):
 
 
 class RecordingsRef(StrictModel):
-    training_recording_ids: list[str] = Field(min_length=1)
-    validation_recording_ids: list[str] = Field(min_length=1)
+    training_recording_ids: list[PublicId] = Field(min_length=1, max_length=100)
+    validation_recording_ids: list[PublicId] = Field(min_length=1, max_length=100)
     training_sample_count: int = Field(ge=1)
     validation_sample_count: int = Field(ge=1)
     frame_splits_disjoint: Literal[True]
@@ -105,7 +134,7 @@ class RecordingsRef(StrictModel):
 
 
 class FlowRef(StrictModel):
-    flow_id: str = Id
+    flow_id: PublicId
     content_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
     data_origin: Literal["MEASURED_TANK"]
     validation_rmse_cm_s: FiniteFloat = Field(ge=0)
@@ -114,17 +143,17 @@ class FlowRef(StrictModel):
 
 
 class ProfileRef(StrictModel):
-    profile_id: str = Id
+    profile_id: PublicId
     content_hash: str = Field(pattern=r"^[0-9a-f]{64}$")
     data_origin: Literal["MEASURED_TANK"]
-    source_ids: list[str] = Field(min_length=2, max_length=5)
+    source_ids: list[PublicId] = Field(min_length=2, max_length=5)
     max_validation_rmse_cm_s: FiniteFloat = Field(gt=0)
     revalidation_max_rmse_cm_s: FiniteFloat = Field(gt=0)
 
 
 class ObservationRef(StrictModel):
-    case_id: str = Id
-    recording_id: str = Id
+    case_id: PublicId
+    recording_id: PublicId
     mode: Literal["LIVE"]
     evidence_frame_count: int = Field(ge=1)
 
@@ -145,7 +174,8 @@ class ManifestBody(StrictModel):
     recordings: RecordingsRef
     flow: FlowRef
     profile: ProfileRef
-    rig_check_id: str | None
+    rig_check_id: PublicId | None
+    rig_change_id: PublicId | None = None
     first_observation: ObservationRef
     operator_attestations: OperatorAttestations
     checks: list[StepResult]

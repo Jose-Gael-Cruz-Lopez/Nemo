@@ -54,6 +54,7 @@
     "revalidation_max_rmse_cm_s": 1.0
   },
   "rig_check_id": null,
+  "rig_change_id": null,
   "first_observation": {
     "case_id": "case-synthetic000001",
     "recording_id": "recording-synthetic-case-1",
@@ -144,7 +145,7 @@
       "free_text_notes"
     ]
   },
-  "manifest_id": "fm-7f20a8036312f94b",
-  "content_hash": "7f20a8036312f94bcc536c640e5021239850e4b51e763098e0b7d48ed85f2e29",
+  "manifest_id": "fm-233fcd2bdb9e0271",
+  "content_hash": "233fcd2bdb9e0271d19e679564fcd37a1e11477b21873ba2175f140a6d103443",
   "created_at": 1792195200.0
 }

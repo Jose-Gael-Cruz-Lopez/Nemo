@@ -40,6 +40,17 @@ The new endpoints only **re-read** those stored artifacts and decide:
   `FIRST_OBSERVATION_INACTIVE` or `FIRST_OBSERVATION_MISSING`. A stale receipt stays
   readable and is never edited.
 
+Freezing repeats the complete readiness check while holding the camera lifecycle
+lock and one SQLite writer reservation through the insert. The hash-covered
+`rig_change_id` records the latest committed disturbance by insertion order.
+Currentness compares that identity rather than timestamps, because a queued
+disturbance may carry a timestamp created before its database commit. A stale or
+unavailable camera also archives the receipt as `CAMERA_STALE_OR_UNAVAILABLE`.
+
+Receipt IDs and candidate-source labels are bounded public identifiers. Paths,
+contacts and known credential prefixes are rejected, rather than renamed. These
+values are withheld from blocked messages and public receipt-validation errors.
+
 The request body (`FieldSessionInput`) contains only IDs and the five operator
 attestation booleans. Extra fields are rejected with 422, so a caller cannot send
 `status`, `approved`, `checks` or `true_source`. The server derives every pass/fail
@@ -77,6 +88,7 @@ flow             flow_id, content_hash, data_origin MEASURED_TANK,
 profile          profile_id, content_hash, data_origin MEASURED_TANK, source_ids,
                  max_validation_rmse_cm_s, revalidation_max_rmse_cm_s
 rig_check_id     latest rig check after a disturbance, or null
+rig_change_id    latest committed disturbance ID at freezing, or null
 first_observation case_id, recording_id, mode LIVE, evidence_frame_count
 operator_attestations  five booleans, all true
 checks           the eight steps, in order, all PASSED

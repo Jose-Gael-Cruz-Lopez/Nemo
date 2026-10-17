@@ -8,8 +8,10 @@ physical tank measurement; the resulting manifests are labelled synthetic.
 from __future__ import annotations
 
 import json
+import threading
 import time
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 
 import cv2
@@ -20,7 +22,13 @@ from fastapi.testclient import TestClient
 from apps.api.reeftrace_api.api.v1.endpoints.field_sessions import create_field_sessions_router
 from apps.api.reeftrace_api.core.settings import Settings
 from apps.api.reeftrace_api.main import create_app
-from apps.api.reeftrace_api.services.field_sessions import KIND, verify_manifest
+from apps.api.reeftrace_api.schemas.field_sessions import FieldSessionInput
+from apps.api.reeftrace_api.services.field_sessions import (
+    KIND,
+    Blocked,
+    FieldSessionService,
+    verify_manifest,
+)
 
 TOKEN = "field-session-test-only"
 AUTH = {"Authorization": "Bearer " + TOKEN}
@@ -38,17 +46,20 @@ class SyntheticFakeCapture:
     backend = "SYNTHETIC_FAKE_CAPTURE"
 
     def __init__(self):
+        self.lock = threading.RLock()
         self.session_id = self.device = None
         self.sequence = 0
         self.frozen = False
         self.script = (5.0, 10.0, 3.0, 0.0, time.monotonic())
 
     def start(self, device):
-        self.session_id, self.device, self.frozen = "usb-fake-" + uuid.uuid4().hex[:12], device, False
-        return self.status()
+        with self.lock:
+            self.session_id, self.device, self.frozen = "usb-fake-" + uuid.uuid4().hex[:12], device, False
+            return self.status()
 
     def stop(self):
-        self.session_id = self.device = None
+        with self.lock:
+            self.session_id = self.device = None
 
     def drift(self, x_cm, y_cm, vx_cm_s=3.0, vy_cm_s=0.0):
         self.script = (x_cm, y_cm, vx_cm_s, vy_cm_s, time.monotonic())
@@ -251,6 +262,9 @@ def test_stale_and_restarted_camera_sessions_block_and_mark_old_receipt(env):
     stale = post(client, "/field-sessions/preflight", request)
     assert steps(stale)["camera_session"] == ("BLOCKED", "CAMERA_STALE")
     assert stale["status"] == "BLOCKED"
+    stale_receipt = client.get(f"/api/v1/field-sessions/{manifest['manifest_id']}").json()
+    assert stale_receipt["is_current"] is False
+    assert "CAMERA_STALE_OR_UNAVAILABLE" in stale_receipt["stale_reasons"]
 
     post(client, "/camera/start", {"device_index": 1})  # operator restarts the device
     restarted = post(client, "/field-sessions/preflight", request)
@@ -344,3 +358,123 @@ def test_rig_disturbance_then_revalidation_requires_a_fresh_case(env):
     assert renewed["manifest"]["rig_check_id"] == check["id"]
     assert renewed["manifest"]["manifest_id"] != first["manifest_id"]
     assert client.get(f"/api/v1/field-sessions/{first['manifest_id']}").json()["is_current"] is False
+
+
+@pytest.mark.parametrize("change", ["rig", "stop", "camera"])
+def test_freeze_rechecks_state_after_initial_readiness_before_saving(env, monkeypatch, change):
+    client, runtime, _ = env
+    request, flow = commission(client, runtime.camera)
+    request = FieldSessionInput(**admit_and_observe(client, runtime.camera, request, flow))
+    service = FieldSessionService(runtime)
+    original = service.evaluate
+    calls = 0
+
+    def change_after_initial_check(body):
+        nonlocal calls
+        steps, manifest = original(body)
+        calls += 1
+        if calls == 1:
+            assert manifest is not None
+            if change == "rig":
+                runtime.store.put("rig_change", {"changed_at": time.time(), "reason": "operator_reported"})
+            elif change == "stop":
+                runtime.store.stop_case(body.first_case_id)
+            else:
+                runtime.camera.start(1)
+        return steps, manifest
+
+    monkeypatch.setattr(service, "evaluate", change_after_initial_check)
+    with pytest.raises(Blocked):
+        service.create(request)
+    assert calls == 2
+    assert no_manifest(runtime)
+
+
+def test_queued_backdated_rig_change_cannot_remain_current_after_commit(env, monkeypatch):
+    import apps.api.reeftrace_api.services.field_sessions as field_service
+
+    client, runtime, _ = env
+    request, flow = commission(client, runtime.camera)
+    request = FieldSessionInput(**admit_and_observe(client, runtime.camera, request, flow))
+    service = FieldSessionService(runtime)
+    sealed, release, writer_started = threading.Event(), threading.Event(), threading.Event()
+    original = field_service.seal
+
+    def pause_at_commit_boundary(body):
+        result = original(body)
+        sealed.set()
+        assert release.wait(5)
+        return result
+
+    def queued_disturbance():
+        # A route can create this timestamp before waiting for the write lock.
+        changed_at = time.time() - 100
+        writer_started.set()
+        return runtime.store.put("rig_change", {"changed_at": changed_at, "reason": "operator_reported"})
+
+    monkeypatch.setattr(field_service, "seal", pause_at_commit_boundary)
+    with ThreadPoolExecutor(max_workers=2) as workers:
+        freezing = workers.submit(service.create, request)
+        try:
+            assert sealed.wait(5)
+            assert not runtime.camera.lock.acquire(blocking=False), "Camera lifecycle must be pinned during commit"
+            changing = workers.submit(queued_disturbance)
+            assert writer_started.wait(2)
+            assert not changing.done(), "Rig writer must wait until the receipt commit completes"
+        finally:
+            release.set()
+        receipt = freezing.result(timeout=5)
+        change = changing.result(timeout=5)
+    assert change["changed_at"] < receipt["manifest"]["created_at"]
+    assert receipt["manifest"]["rig_change_id"] is None
+    detail = service.detail(receipt["manifest"]["manifest_id"])
+    assert detail["is_current"] is False
+    assert "RIG_CHANGED_AFTER_RECEIPT" in detail["stale_reasons"]
+
+
+@pytest.mark.parametrize("unsafe", ["contact@example.test", "+15555550123", "/private/frames",
+                                    "ck-FAKE-NOT-A-REAL-KEY"])
+def test_unsafe_artifact_references_are_blocked_without_echo_or_capture(env, monkeypatch, unsafe):
+    client, runtime, _ = env
+    def forbidden_capture():
+        raise AssertionError("Identifier validation must not capture a frame")
+    monkeypatch.setattr(runtime.camera, "image", forbidden_capture)
+    request = {"camera_session_id": unsafe}
+    preflight = post(client, "/field-sessions/preflight", request)
+    assert preflight["status"] == "BLOCKED"
+    assert all(step["code"] == "UNSAFE_IDENTIFIER" for step in preflight["steps"])
+    assert unsafe not in json.dumps(preflight)
+    response = client.post("/api/v1/field-sessions", headers=AUTH, json=request)
+    assert response.status_code == 409 and unsafe not in response.text
+    assert no_manifest(runtime)
+
+
+def test_freeform_profile_source_is_withheld_before_it_can_enter_a_receipt(env):
+    _, runtime, _ = env
+    unsafe = "ck-FAKE-NOT-A-REAL-KEY"
+    flow = {"diagnostics": {"validation_rmse_cm_s": 0.01}}
+    profile = runtime.store.put("profile", {"data_origin": "MEASURED_TANK", "calibration_id": "cal-policy",
+        "flow": flow, "max_validation_rmse_cm_s": 1, "revalidation_max_rmse_cm_s": 1,
+        "sources": [{"id": "A"}, {"id": unsafe}], "observation_polygon_cm": [[0, 0], [1, 0], [1, 1]]})
+    service = FieldSessionService(runtime)
+    step, value = service._profile(FieldSessionInput(camera_session_id="usb-policy",
+        calibration_id="cal-policy", profile_id=profile["id"]), flow)
+    assert value is None and step["code"] == "UNSAFE_SOURCE_IDENTIFIERS"
+    assert unsafe not in json.dumps(step)
+    assert no_manifest(runtime)
+
+
+def test_public_receipt_reads_sanitize_invalid_stored_identifier_errors(env):
+    from pathlib import Path
+
+    client, runtime, _ = env
+    source = Path(__file__).parents[1] / "fixtures/team_handoff/field_manifest_v1.json"
+    manifest = json.loads(source.read_text())
+    unsafe = "ck-FAKE-NOT-A-REAL-KEY"
+    manifest["profile"]["source_ids"] = ["A", unsafe]
+    runtime.store.put(KIND, manifest, manifest["manifest_id"])
+    for path in ("/api/v1/field-sessions", "/api/v1/field-sessions/" + manifest["manifest_id"]):
+        response = client.get(path)
+        assert response.status_code == 409
+        assert unsafe not in response.text
+        assert response.json()["detail"] == "Field receipt has invalid public fields; source values were withheld"

@@ -21,6 +21,7 @@ from ..schemas.field_sessions import (
     FieldManifestV1,
     FieldSessionInput,
     ManifestBody,
+    public_identifiers,
 )
 
 KIND = "field_manifest"
@@ -100,6 +101,14 @@ class Blocked(ValueError):
 class FieldSessionService:
     def __init__(self, runtime):
         self.runtime = runtime
+
+    def _rig_change_id(self):
+        # Invocation timestamps can precede a queued INSERT. Commit/insertion
+        # order, not changed_at or created_at, defines the frozen generation.
+        with self.runtime.store.connection() as db:
+            row = db.execute("SELECT id FROM records WHERE kind='rig_change' "
+                             "ORDER BY rowid DESC LIMIT 1").fetchone()
+        return row[0] if row else None
 
     def _get(self, kind, record_id):
         try:
@@ -277,6 +286,9 @@ class FieldSessionService:
         if rmse > limit:
             return _step(name, "BLOCKED", "PROFILE_RMSE_EXCEEDED", "Held-out drift error exceeds the profile limit."), None
         sources = [s.get("id") for s in profile.get("sources") or []]
+        if not public_identifiers(sources):
+            return _step(name, "BLOCKED", "UNSAFE_SOURCE_IDENTIFIERS",
+                         "Source identifiers must be bounded public labels; private values were withheld."), None
         if not 2 <= len(sources) <= 5 or not profile.get("observation_polygon_cm"):
             return _step(name, "BLOCKED", "PROFILE_GEOMETRY", "The profile lacks 2-5 sources or an observation region."), None
         return _passed(name, "PROFILE_ADMITTED", f"Measured profile with sources {', '.join(map(str, sources))}."), profile
@@ -348,6 +360,14 @@ class FieldSessionService:
         return _passed(name, "OPERATOR_ATTESTED", "Operator confirmed the physical setup (not independently verified)."), True
 
     def evaluate(self, request: FieldSessionInput):
+        identifiers = [value for key, value in request.model_dump().items()
+                       if key not in {"attestations", "training_recording_ids", "validation_recording_ids"}
+                       and value is not None]
+        identifiers += request.training_recording_ids + request.validation_recording_ids
+        if not public_identifiers(identifiers):
+            return [_step(step, "BLOCKED", "UNSAFE_IDENTIFIER",
+                          "Artifact identifiers must be bounded public labels; private values were withheld.")
+                    for step in STEP_IDS], None
         camera_step, camera = self._camera(request)
         mapping_step, calibration = self._mapping(request, camera)
         recordings_step, recordings = self._recordings(request)
@@ -390,6 +410,7 @@ class FieldSessionService:
                         "max_validation_rmse_cm_s": profile["max_validation_rmse_cm_s"],
                         "revalidation_max_rmse_cm_s": profile["revalidation_max_rmse_cm_s"]},
             "rig_check_id": rig_check_id or None,
+            "rig_change_id": self._rig_change_id(),
             "first_observation": observation,
             "operator_attestations": request.attestations.model_dump(),
             "checks": steps, "warnings": warnings,
@@ -413,27 +434,41 @@ class FieldSessionService:
         steps, body = self.evaluate(request)
         if body is None:
             raise Blocked(steps)
-        sealed = seal(body)
-        existing = self._get(KIND, sealed["manifest_id"])
-        if existing is None:
-            try:
-                existing = self.runtime.store.put(KIND, {**sealed, "created_at": time.time()}, sealed["manifest_id"])
-            except ValueError:  # A concurrent identical freeze won the insert.
-                existing = self.runtime.store.get(KIND, sealed["manifest_id"])
-        stored = {k: v for k, v in existing.items() if k != "id"}
-        if stored["content_hash"] != sealed["content_hash"]:
-            raise ValueError("A different manifest already uses this ID")
+        # The first evaluation gives quick diagnostics. The committing check
+        # must exclude camera restarts and committed case/rig changes until the
+        # insert completes. Store reads use separate read connections; the WAL
+        # writer reservation keeps their source data fixed without Store changes.
+        with self.runtime.camera.lock, self.runtime.store.connection() as db:
+            db.execute("BEGIN IMMEDIATE")
+            steps, body = self.evaluate(request)
+            if body is None:
+                raise Blocked(steps)
+            sealed = seal(body)
+            row = db.execute("SELECT payload FROM records WHERE kind=? AND id=?",
+                             (KIND, sealed["manifest_id"])).fetchone()
+            if row is None:
+                created_at = time.time()
+                existing = {**sealed, "created_at": created_at, "id": sealed["manifest_id"]}
+                db.execute("INSERT INTO records VALUES(?,?,?,?)", (
+                    KIND, sealed["manifest_id"], json.dumps(existing, allow_nan=False), created_at))
+            else:
+                existing = json.loads(row[0])
+            stored = {k: v for k, v in existing.items() if k != "id"}
+            if stored["content_hash"] != sealed["content_hash"]:
+                raise ValueError("A different manifest already uses this ID")
         return self.detail(sealed["manifest_id"])
 
     def detail(self, manifest_id: str) -> dict:
         stored = {k: v for k, v in self.runtime.store.get(KIND, manifest_id).items() if k != "id"}
         manifest = verify_manifest(stored).model_dump(mode="json")
         reasons = []
-        changes = self.runtime.store.list("rig_change", 1)
-        if changes and changes[0]["changed_at"] > (manifest["created_at"] or 0):
+        if self._rig_change_id() != manifest["rig_change_id"]:
             reasons.append("RIG_CHANGED_AFTER_RECEIPT")
-        if self.runtime.camera.session_id != manifest["capture"]["camera_session_id"]:
+        camera = self.runtime.camera.status()
+        if camera.get("session_id") != manifest["capture"]["camera_session_id"]:
             reasons.append("CAMERA_SESSION_ENDED")
+        elif not camera.get("running") or not camera.get("fresh"):
+            reasons.append("CAMERA_STALE_OR_UNAVAILABLE")
         try:
             if self.runtime.store.case(manifest["first_observation"]["case_id"])["state"] in {"STOPPED", "RECOVERING"}:
                 reasons.append("FIRST_OBSERVATION_INACTIVE")
@@ -444,6 +479,7 @@ class FieldSessionService:
     def list(self) -> list[dict]:
         rows = []
         for record in self.runtime.store.list(KIND, 50):
+            verify_manifest({key: value for key, value in record.items() if key != "id"})
             capture, profile = record.get("capture", {}), record.get("profile", {})
             rows.append({"manifest_id": record["id"], "content_hash": record.get("content_hash"),
                          "created_at": record.get("created_at"), "profile_id": profile.get("profile_id"),

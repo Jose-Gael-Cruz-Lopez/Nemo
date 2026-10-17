@@ -61,6 +61,7 @@ def test_detached_timestamp_does_not_change_identity():
     (("recordings", "validation_recording_ids"), ["recording-other"]),
     (("first_observation", "case_id"), "case-other"),
     (("rig_check_id",), "rig_check-other"),
+    (("rig_change_id",), "rig-change-other"),
 ])
 def test_any_body_change_breaks_the_content_address(path, value):
     document = copy.deepcopy(fixture())
@@ -118,6 +119,21 @@ def test_request_boundary_rejects_overlap_duplicates_and_extra_claims():
                     {"attestations": {"waterline_unchanged": True}}, {"camera_session_id": ""}):
         with pytest.raises(ValidationError):
             FieldSessionInput(**{**base, **changes})
+
+
+@pytest.mark.parametrize("unsafe", ["contact@example.test", "+15555550123", "/private/frames",
+                                    "ck-FAKE-NOT-A-REAL-KEY", "ghp_FAKE_NOT_A_REAL_KEY"])
+def test_receipt_identifiers_reject_contacts_paths_and_credential_shapes(unsafe):
+    for section, key, value in (("capture", "camera_session_id", unsafe),
+                                ("calibration", "calibration_id", unsafe),
+                                ("recordings", "training_recording_ids", [unsafe]),
+                                ("flow", "flow_id", unsafe), ("profile", "profile_id", unsafe),
+                                ("profile", "source_ids", ["A", unsafe]),
+                                ("first_observation", "case_id", unsafe)):
+        draft = body()
+        draft[section][key] = value
+        with pytest.raises(ValueError):
+            seal(draft)
 
 
 def test_saved_calibration_integrity_is_recomputed_from_its_own_report():
