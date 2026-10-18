@@ -145,12 +145,19 @@ def token_area_range(measured_area_px):
     return (0.35 * measured_area_px, 3.0 * measured_area_px)
 
 
-def measure_token_area(frame, reference):
-    """One-token check on the rig: exactly one blob must appear; returns its area in px."""
-    found = detect_foreground(frame, reference, max_area_fraction=0.2)
-    if len(found) != 1:
-        raise ValueError(f"Expected exactly one token in view, found {len(found)}")
-    return found[0]["area_px"]
+def measure_token_area(frame, reference, *, dominance=4.0):
+    """One-token check on the rig: one blob must clearly dominate; returns its area in px.
+
+    Running water leaves small ripple sparkles that differ from the reference. The
+    token must be at least ``dominance`` times larger than any other changed blob,
+    so sparkles neither hide it nor pass as a token when the tank is empty.
+    """
+    found = sorted((d["area_px"] for d in detect_foreground(frame, reference, max_area_fraction=0.2)),
+                   reverse=True)
+    if not found or (len(found) > 1 and found[0] < dominance * found[1]):
+        raise ValueError("Expected exactly one token in view, found "
+                         f"{0 if not found else sum(a >= found[0] / dominance for a in found)}")
+    return found[0]
 
 
 def detect_foreground(frame, reference, *, min_area_px=25, max_area_fraction=0.02,

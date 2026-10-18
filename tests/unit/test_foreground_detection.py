@@ -174,3 +174,23 @@ def test_moving_green_cap_forms_one_continuous_track_at_the_true_speed(reference
     assert len(observed) == 31 and len({p["track_id"] for p in observed}) == 1
     slope = np.polyfit([p["t_s"] for p in observed], [p["x_cm"] for p in observed], 1)[0]
     assert abs(slope - 3.0) < 0.05
+
+
+def test_token_measurement_ignores_small_ripple_sparkles(reference):
+    sparkly = cap(BASE, 450, 250)
+    for x, y in [(100, 80), (180, 300), (560, 60), (520, 300)]:
+        cv2.circle(sparkly, (x, y), 4, (255, 255, 255), -1)   # small specular sparkles
+    area = measure_token_area(camera(sparkly, 21), reference)
+    assert 250 < area < 600
+    with pytest.raises(ValueError, match="exactly one"):
+        measure_token_area(camera(cap(cap(BASE, 150, 120), 450, 250), 22), reference)
+
+
+def test_token_measurement_refuses_sparkles_alone():
+    calm = [camera(BASE, s) for s in range(30, 38)]
+    ref = EmptyTankReference(calm, roi_polygon_px=ROI)
+    sparkly = BASE.copy()
+    for x, y in [(100, 80), (180, 300), (560, 60)]:
+        cv2.circle(sparkly, (x, y), 4, (255, 255, 255), -1)
+    with pytest.raises(ValueError, match="exactly one"):
+        measure_token_area(camera(sparkly, 23), ref)
