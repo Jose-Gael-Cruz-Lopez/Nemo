@@ -249,3 +249,28 @@ test("malformed check inputs never invalidate or submit an existing mapping", as
   assert.equal(calls, 0); assert.equal(h.invalidated.length, 0); assert.equal(h.applied.length, 0);
   assert.match(textOf(h.render()), /Confirm the camera/); h.unmount();
 });
+
+
+test("sibling capture disable/re-enable preserves observed checks and confirmation while discarding a pending response", async () => {
+  const pending = deferred(), h = harness({ request: async () => pending.promise });
+  await settle(); await h.load(); h.checks();
+  const values = () => h.elements().filter(item => item.type === "textarea").map(item => item.props.value);
+  const confirmed = () => h.elements().find(item => item.type === "input" && item.props.type === "checkbox").props.checked;
+  assert.deepEqual(values(), [pixelText, worldText]); assert.equal(confirmed(), true);
+  h.button("Check alignment, then use mapping").props.onClick();
+  h.render({ disabled: true }); await settle(); h.render();
+  assert.deepEqual(values(), [pixelText, worldText]); assert.equal(confirmed(), true);
+  h.render({ disabled: false }); await settle(); h.render();
+  assert.deepEqual(values(), [pixelText, worldText]); assert.equal(confirmed(), true);
+  pending.resolve(result()); await settle(); h.render();
+  assert.equal(h.applied.length, 0); assert.deepEqual(values(), [pixelText, worldText]); assert.equal(confirmed(), true);
+  h.unmount();
+});
+
+test("a genuinely stale frame clears pixel checks and confirmation while retaining surveyed centimetres", async () => {
+  const h = harness(); await settle(); await h.load(); h.checks();
+  h.render({ camera: { ...camera, fresh: false } }); await settle(); h.render();
+  assert.deepEqual(h.elements().filter(item => item.type === "textarea").map(item => item.props.value), ["", worldText]);
+  assert.equal(h.elements().find(item => item.type === "input" && item.props.type === "checkbox").props.checked, false);
+  h.unmount();
+});

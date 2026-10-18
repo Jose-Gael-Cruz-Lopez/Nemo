@@ -54,7 +54,13 @@ export function SavedCalibration({ request, camera, disabled, onApply, onCheckSt
     pending.current?.abort();
     const reset = setTimeout(() => { setPixelText(""); setUnchanged(false); setNotice(""); }, 0);
     return () => clearTimeout(reset);
-  }, [camera?.session_id, camera?.width, camera?.height, camera?.running, camera?.fresh, disabled, setPixelText]);
+  }, [camera?.session_id, camera?.width, camera?.height, camera?.running, camera?.fresh, setPixelText]);
+
+  // A sibling capture temporarily disables this form. Cancel requests, but keep
+  // the operator's already observed pixel checks and water-plane confirmation.
+  useEffect(() => {
+    if (disabled) { generation.current++; pending.current?.abort(); }
+  }, [disabled]);
 
   function choose(next: SavedCalibrationBundle) {
     generation.current++;
