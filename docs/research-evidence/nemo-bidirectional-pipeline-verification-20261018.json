@@ -71,7 +71,12 @@
     "ruff": "PASS",
     "eslint": "PASS",
     "typescript": "PASS",
-    "isolated_production_build": "PASS"
+    "isolated_production_build": "PASS",
+    "additional_guard_file_after_full_suite": {
+      "passed": 11,
+      "failed": 0,
+      "scope": "Includes the newly added fail-fast callable wiring regression; overlaps ten full-suite tests and is not eleven additional independent tests."
+    }
   },
   "browser": {
     "actual_cua_interactions": true,
