@@ -1,0 +1,8 @@
+/*
+ * AtomicGlobe
+ *
+ * Learn More: https://www.framer.com/asset-urls
+ */
+
+export * from "https://framerusercontent.com/modules/XyVMghtHL6KMTfaGxKNh/BpxtjRcprRbfudB8iUUS/AtomicGlobe.js"
+export { default } from "https://framerusercontent.com/modules/XyVMghtHL6KMTfaGxKNh/BpxtjRcprRbfudB8iUUS/AtomicGlobe.js"

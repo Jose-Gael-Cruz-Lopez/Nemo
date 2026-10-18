@@ -82,7 +82,7 @@ export function RealDataLab({ api }: { api: string }) {
     finally { if (!pending.signal.aborted) { controller.current = null; setLoading(false); } }
   }
   return <>
-    <div className="page-heading"><div><p className="kicker">Data Lab · ocean mode</p><h1>Follow the flow. Compare protection.</h1><p className="page-description">One plot for changing-current paths, interception layouts and the protected area.</p></div></div>
+    <div className="page-heading"><div><h1>Data Lab</h1><p className="page-description">Compare current-driven paths, interception layouts, and recorded evidence.</p></div></div>
     <OceanPrevention api={api} />
     <details className="card"><summary>Research details and historical buoy validation</summary><div className="card-body data-lab-results">
     <MatchedCurrentStudy api={api} />

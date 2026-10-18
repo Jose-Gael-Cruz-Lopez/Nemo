@@ -1,0 +1,30 @@
+{
+  "kind": "PUBLIC_COMPONENT_SOURCE_CAPTURE",
+  "captured_at_utc": "2026-10-17T23:44:19.168670+00:00",
+  "requested_entry": "https://framer.com/m/Glyph-Trail-IibOD8.js@mcfjQvnnHs7ZBfjTsYps",
+  "resolved_source": "https://framerusercontent.com/modules/W7GVKeL0PHO5Y7ihQdhb/mcfjQvnnHs7ZBfjTsYps/Glyph_Trail.js",
+  "credited_creator": {
+    "name": "Justyna",
+    "website": "https://justbuilt.it",
+    "evidence": "Creator credit in the source speed property-control description"
+  },
+  "files": {
+    "Glyph_Trail.js.txt": {
+      "bytes": 15078,
+      "sha256": "09092a4b69ad5321dd6c7f5a54ada9f248f468f2be74eb3164197e5922337a89"
+    },
+    "Framer-entry.js.txt": {
+      "bytes": 307,
+      "sha256": "26d8ed3ca65e8b92226137bc1728c978df68fa95bd13814b4d95535527e62475"
+    }
+  },
+  "license_observation": "No explicit software-license header was found in the supplied public module. Public availability is not represented as an open-source license grant. Attribution and the exact source snapshot are retained.",
+  "adaptation_scope": [
+    "Retain original Bayer matrices, glyph masks, procedural sine field, ordered multi-level draw, continuous max-stamp brush and diffuse/decay math.",
+    "Remove Framer property controls, metadata and editor/static-renderer dependency.",
+    "Add bounded viewport-resolution allocations, frame-rate cap, pointer input limits, reduced-motion/visibility/intersection guards and deterministic cleanup.",
+    "Use low-contrast light-blue defaults; effect is decorative and never observation/current/evidence data."
+  ],
+  "provider_calls": false,
+  "scientific_data_modified": false
+}

@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "purpose": "Public-domain small-scale land outlines for a decorative landing-page globe; not a coastline navigation, reef-boundary, flow, plastic, or tank dataset.",
+  "dataset": {
+    "name": "Natural Earth 1:110 million land",
+    "geometry": "Land polygons including major islands",
+    "maintainer_repository": "https://github.com/nvkelso/natural-earth-vector",
+    "maintainer_repository_verified_by": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "readme": "https://github.com/nvkelso/natural-earth-vector/blob/693f11422f4e08d2da4566b854dda53eb7c39fb3/README.md",
+    "source_commit": "693f11422f4e08d2da4566b854dda53eb7c39fb3",
+    "source_commit_utc": "2020-12-13T07:33:56Z",
+    "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/693f11422f4e08d2da4566b854dda53eb7c39fb3/geojson/ne_110m_land.geojson",
+    "catalogue_url": "https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/",
+    "catalogue_version_at_retrieval": "4.0.0",
+    "version_note": "The catalogue version is not asserted to identify this independently commit-pinned GeoJSON byte payload."
+  },
+  "license": {
+    "name": "Public domain",
+    "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+    "summary": "Natural Earth states that its raster and vector map data are public domain and may be used and modified for personal, educational, or commercial purposes without permission.",
+    "suggested_credit": "Made with Natural Earth."
+  },
+  "retrieved_utc": "2026-10-17T23:27:09.838121Z",
+  "asset": {
+    "path": "dashboard/public/geo/land-110m.geojson",
+    "bytes": 138160,
+    "sha256": "9e0729ee253ca7d7a5c4ae9395fb1902264c5377c52e224d13dd85010e2835d9",
+    "unmodified_source_bytes": true,
+    "type": "FeatureCollection",
+    "feature_count": 127,
+    "geometry_counts": {
+      "Polygon": 127
+    },
+    "ring_count": 128,
+    "coordinate_pair_count": 5143,
+    "polygon_with_holes_count": 1,
+    "all_rings_closed": true,
+    "declared_crs": {
+      "type": "name",
+      "properties": {
+        "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+      }
+    },
+    "coordinate_order": [
+      "longitude",
+      "latitude"
+    ],
+    "coordinate_units": "degrees",
+    "extent_west_south_east_north": [
+      -180,
+      -90,
+      180,
+      83.64513
+    ],
+    "antimeridian_note": "Use longitude/latitude on a sphere, respect each polygon/ring and holes, and handle the 180/-180 seam. The only ring segment with an absolute longitude difference above 180 degrees is Antarctica closure [180,-90] to [-180,-90], the same South Pole on a sphere; never render it as a straight line across a planar world map."
+  },
+  "fallback": {
+    "path": "dashboard/public/geo/earth-atlantic-fallback.png",
+    "bytes": 20289,
+    "sha256": "df40b80fc5abf0b3b8628d12a2022a0c4be747d4937b330422823e890d7e3264",
+    "width_px": 189,
+    "height_px": 189,
+    "format": "PNG RGBA; transparent outside sphere",
+    "projection": "Orthographic; inverse per-pixel visible-hemisphere sampling against the unchanged Natural Earth land polygons",
+    "center_longitude_deg": -15,
+    "center_latitude_deg": 15,
+    "sphere_radius_px": 90,
+    "supersampling": 4,
+    "land_fill": "Even-odd polygon/ring test, including holes",
+    "lighting": "Deterministic Lambert-style top-left diffuse illumination; navy water and off-white land; no generative imagery",
+    "reproduction_script_location": "parent work/render-natural-earth-globe-fallback.py",
+    "reproduction_script_sha256": "4708277bf99fd983dea8186b7c7aeec030b6d7f85e8eeee3c5989efb8fc736a2",
+    "command_from_repo": ".venv/bin/python ../work/render-natural-earth-globe-fallback.py",
+    "dependencies": [
+      "Python standard library",
+      "numpy"
+    ],
+    "runtime_observed_seconds": 0.751,
+    "limits": "A 1:110-million-scale visual backdrop, not validated site geometry or scientific experiment evidence."
+  }
+}

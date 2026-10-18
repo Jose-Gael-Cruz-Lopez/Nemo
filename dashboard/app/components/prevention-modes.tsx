@@ -7,10 +7,13 @@ import { OceanPrevention } from "./ocean-prevention";
 export function PreventionModes({ api, children, blocked = false }: { api: string; children: ReactNode; blocked?: boolean }) {
   const [mode, setMode] = useState<"ocean" | "tank">("ocean");
   return <>
+    <div className={mode === "ocean" ? "page-heading prevention-heading" : "page-heading"}>
+    {mode === "ocean" && <div><h1>Interception comparison</h1><p className="page-description">Compare two layouts under the same changing currents.</p></div>}
     <div className="action-bar" role="group" aria-label="Prevention environment">
       <button type="button" className={mode === "ocean" ? "primary-button" : "secondary-button"} aria-pressed={mode === "ocean"} disabled={blocked} onClick={() => setMode("ocean")}>Ocean · changing currents</button>
       <button type="button" className={mode === "tank" ? "primary-button" : "secondary-button"} aria-pressed={mode === "tank"} disabled={blocked} onClick={() => setMode("tank")}>Tank experiment &amp; trial ledger</button>
     </div>
-    {mode === "ocean" ? <><div className="page-heading"><div><p className="kicker">Ocean prevention</p><h1>Which layout keeps paths out?</h1><p className="page-description">Compare two interception layouts under the same changing currents.</p></div></div><OceanPrevention api={api} /></> : children}
+    </div>
+    {mode === "ocean" ? <OceanPrevention api={api} /> : children}
   </>;
 }

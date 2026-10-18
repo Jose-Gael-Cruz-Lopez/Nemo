@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "title": "User-supplied AtomicGlobe / MeridianGlobe local integration",
+  "retrieved_utc": "2026-10-17T23:46:57.241Z",
+  "requested_module": "https://framer.com/m/AtomicGlobe-SnDdPL.js@BpxtjRcprRbfudB8iUUS",
+  "resolved_module": "https://framerusercontent.com/modules/XyVMghtHL6KMTfaGxKNh/BpxtjRcprRbfudB8iUUS/AtomicGlobe.js",
+  "source_default_export": "MeridianGlobe",
+  "source_snapshot_unchanged": true,
+  "license": {
+    "component": "No explicit component license declaration was present in the supplied module or its wrapper. Source is preserved with original comments and URLs; this record does not assert a new license.",
+    "coastline": "Supplied source identifies its baked occupancy grid as derived from Natural Earth 110m land, public domain."
+  },
+  "runtime_dependencies": [
+    "three@0.186.1 (existing local dependency)"
+  ],
+  "removed_host_dependencies": [
+    "Framer addPropertyControls/ControlType editor controls",
+    "Framer RenderTarget editor detection",
+    "React marker/card UI (no places are configured)"
+  ],
+  "preserved_algorithms": [
+    "coast occupancy RLE and signed proximity field",
+    "deterministic equal-area land-dot scatter",
+    "all six source GLSL shaders",
+    "source Three geometry, projection, formation and rotation math"
+  ],
+  "adaptations": [
+    "Reproduce from the dashboard directory: node vendor/atomic-globe/adapt.mjs",
+    "Externally owned visibility/reduced-motion lifecycle and 30fps frame driver, virtual time excluding hidden/paused duration",
+    "Maximum pixel ratio 1.5, low-power renderer, maximum canvas layout size 512x512",
+    "Idempotent cleanup including partial initialization and WebGL context loss",
+    "Nemo theme: transparent surroundings, white dots, cyan accent, 8000 target dots (7996 actual), no places/routes/cursor capture",
+    "Static 189px PNG projected from the exact supplied dot lattice for reduced-motion/no-WebGL fallback"
+  ],
+  "runtime_remote_fetches": [],
+  "scientific_scope": "Decorative landing globe only. No trial, observation, source, model, provider, device or messaging state is used or changed.",
+  "files": [
+    {
+      "path": "dashboard/vendor/atomic-globe/AtomicGlobe.reference.js.txt",
+      "bytes": 307,
+      "sha256": "c7b8f32bc4017109e4ddbdd068b58920d2d0c152440533805828a60b64fd5deb"
+    },
+    {
+      "path": "dashboard/vendor/atomic-globe/AtomicGlobe.original.js.txt",
+      "bytes": 68999,
+      "sha256": "062a928e2d2244426ac8815a6b50ea455a5b6830aea03b4673902e40b2b696bb"
+    },
+    {
+      "path": "dashboard/app/components/atomic-globe-runtime.mjs",
+      "bytes": 51618,
+      "sha256": "7b32d75ad3f8e5d73746f68da165deb0518dc2dcdb3478652694593ca3e5f7d4"
+    },
+    {
+      "path": "dashboard/vendor/atomic-globe/adapt.mjs",
+      "bytes": 5311,
+      "sha256": "05919d8d3f85d91bb34de6f3d757805c07e9b4ef4e8ad55353d6277f5a0c845e"
+    },
+    {
+      "path": "dashboard/public/geo/atomic-globe-fallback.png",
+      "bytes": 18945,
+      "sha256": "fdcd91f2fbd499494be40df8c09acd2bf48ffe9b8c1b13c2699d1e97b6096678"
+    },
+    {
+      "path": "dashboard/vendor/atomic-globe/render-fallback.mjs",
+      "bytes": 1638,
+      "sha256": "993bbdf6ebf00a14591a1da046e98200e27898f70ad06a5390a6ebab81979bc9"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "kind": "original_illustrative_landing_media",
+  "date": "2026-10-17",
+  "tool": "Higgsfield MCP generate_video",
+  "job_id": "2ab2c598-4b55-4617-adfc-370eed1f9935",
+  "status": "completed",
+  "parameters": {
+    "model": "seedance_2_5",
+    "mode": "t2v",
+    "duration": 20,
+    "resolution": "1080p",
+    "aspect_ratio": "16:9",
+    "generate_audio": false,
+    "bitrate_mode": "standard",
+    "count": 1,
+    "prompt": "Create an original continuous immersive underwater journey for a marine science website. One uninterrupted 20-second shot with a very slow, controlled forward and downward camera glide through clear open ocean. The camera is already fully submerged at the beginning: no sky, horizon or above-water view at any time. Composition is mostly empty blue water, luminous cyan and soft broad sunbeams in the upper third, rich sapphire blue in the middle, gradual marine blue toward the bottom. Tiny suspended particles at different depths and a sparse distant school of small fish provide believable depth and gentle parallax. Very distant, low-contrast reef forms may enter only at the bottom edge late in the shot; keep the central and left three quarters open and uncluttered for readable white website text. Calm documentary realism with a restrained immersive 3D conservation-experience aesthetic. No whales or other large close-up animals crossing the text area. The camera motion is steady and subtle, no cuts, no fast action, no sudden exposure changes, no lens flashes or dramatic shaking. End with a composition and lighting close to the beginning for a gentle repeating website background. Absolutely no text, title, logo, globe, diagram, chart, interface, frame, buttons, technology, robot, diver or floating waste. The visual is illustrative, not a measured scientific experiment. Output silent."
+  },
+  "asset": "dashboard/public/nemo-ocean-depth.mp4",
+  "browser_decoding": {
+    "width": 1920,
+    "height": 1080,
+    "duration_seconds": 20.041667,
+    "ready_state": 4,
+    "media_error": null
+  },
+  "scientific_evidence": false,
+  "notes": [
+    "Original generated illustrative underwater background, not source-site footage or observed experiment.",
+    "Audio generation requested false; landing playback is always muted.",
+    "No xAI API calls or paid-billing changes."
+  ],
+  "local_files": [
+    {
+      "path": "dashboard/public/nemo-ocean-depth.mp4",
+      "bytes": 1570806,
+      "sha256": "c2376dcc0da812eaa6108d48d7b07d2893166abbc89f45b640d6ee31c5710b87"
+    },
+    {
+      "path": "dashboard/public/nemo-ocean-depth-poster.jpg",
+      "bytes": 67698,
+      "sha256": "4bf863f1b3a74da864e1971777e28f8461885be94be85ead7d815810bc8f1d8a"
+    }
+  ],
+  "poster_derivation": "First decoded MP4 frame, resized1280x720 with OpenCV INTER_AREA, JPEGquality90."
+}
