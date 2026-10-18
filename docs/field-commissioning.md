@@ -16,7 +16,7 @@ endpoint keeps its own gate:
 | # | Step | Existing endpoint | Gate (unchanged) |
 | - | ---- | ----------------- | ---------------- |
 | 1 | Operator-selected camera session | `POST /camera/start` | The operator opens it explicitly; the wizard never opens a camera |
-| 2 | Water-plane mapping | `POST /vision/calibrate` | ≥4 correspondences, ≥3 separate in-frame check points, error ≤ declared tolerance |
+| 2 | Water-plane mapping | `POST /vision/calibrate`, or local `POST /vision/calibrations/revalidate` for an exported saved mapping | New fit: ≥4 correspondences and ≥3 separate checks. Reuse: unchanged saved matrix/tolerance and ≥3 current independent surveyed checks; current session and image size must match |
 | 3 | Training and validation drift | `POST /camera/record` (with `calibration_id`) | Approved mapping, same session; gaps and second tokens split tracks |
 | 4 | Recorded flow | `POST /flow/fit-recordings` | Disjoint recording IDs and frames, one mapping and session |
 | 5 | Measured profile admission | `POST /profiles` | Exact immutable flow, ≥90% held-out coverage, frozen positive limits |

@@ -96,6 +96,9 @@ def test_factory_disables_both_dotenv_sources_and_retains_only_explicit_chalk(cl
     ("POST", "/api/v1/recordings/missing/case"), ("POST", "/api/v1/actions/propose"),
     ("POST", "/api/v1/actions/missing/approve"), ("POST", "/api/v1/actions/missing/outcome"),
     ("POST", "/api/v1/cases/missing/briefing/audio"),
+    ("GET", "/api/v1/vision/calibrations"),
+    ("GET", "/api/v1/vision/calibrations/cal-missing"),
+    ("POST", "/api/v1/vision/calibrations/revalidate"),
 ])
 def test_hardware_and_voice_routes_fail_before_body_auth_or_device_access(cloud_env, method, path):
     with TestClient(cloud.create_cloud_app()) as client:

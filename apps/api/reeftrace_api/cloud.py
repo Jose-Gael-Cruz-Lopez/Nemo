@@ -115,6 +115,8 @@ def _blocked_path(path, method):
     path = path.rstrip("/")
     if path == "/api/v1/camera" or path.startswith("/api/v1/camera/"):
         return True
+    if path == "/api/v1/vision/calibrations" or path.startswith("/api/v1/vision/calibrations/"):
+        return True
     if path.endswith("/briefing/audio"):
         return True
     if method not in {"GET", "HEAD", "OPTIONS"}:

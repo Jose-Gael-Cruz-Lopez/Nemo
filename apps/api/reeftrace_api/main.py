@@ -25,6 +25,7 @@ from .api.v1.endpoints.method_validation import create_method_validation_router
 from .api.v1.endpoints.ocean_prevention import create_ocean_prevention_router
 from .api.v1.endpoints.ocean_source import create_ocean_source_router
 from .api.v1.endpoints.origin_residual import create_origin_residual_router
+from .api.v1.endpoints.saved_calibrations import create_saved_calibrations_router
 from .core.settings import Settings
 from .schemas.contracts import (
     CalibrationInput,
@@ -126,6 +127,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(create_ocean_prevention_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_ocean_source_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_origin_residual_router(runtime, operator), prefix="/api/v1")
+    app.include_router(create_saved_calibrations_router(runtime, operator), prefix="/api/v1")
 
     @app.get("/")
     def root():

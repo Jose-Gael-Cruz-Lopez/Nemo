@@ -10,7 +10,7 @@ import {
   ATTESTATION_KEYS, DRAFT_KEY, addRecording, buildCalibrationRequest, buildFieldRequest, buildFlowRequest, buildProfile, canFreeze,
   decodeDraft, deriveSteps, encodeDraft, failureNotice, invalidateAfter, newDraft, parseCalibration, parseCameraStatus, parseCase,
   parseFlow, parseManifestDetail, parsePreflight, parseProfile, parseRecording, parseRigCheck, requestKey,
-  detectionFields, parseTokenReference, referenceCaptureBody, setTokenReference, withTokenSize,
+  detectionFields, parseTokenReference, referenceCaptureBody, setTokenReference, withTokenSize, applyLoggedTrayMeasurements,
   type AttestationKey, type TokenDetector, type CalibrationReport, type CameraStatus, type Draft, type LengthUnit, type ManifestDetail, type Preflight, type StepId, type StepView,
 } from "./field-workflow-state";
 import styles from "./field-workflow.module.css";
@@ -18,6 +18,7 @@ import { RecordedFlowVectors } from "./recorded-flow-vectors";
 import { RecordedFlowTrajectories } from "./recorded-flow-trajectories";
 import { CalibrationCameraPreview } from "./camera-plane";
 import type { Point } from "./camera-grid-state";
+import { SavedCalibration } from "./saved-calibration";
 
 type Request = <T>(path: string, body?: unknown, options?: { signal?: AbortSignal; independent?: boolean }) => Promise<T>;
 export type FieldWorkflowProps = {
@@ -77,10 +78,12 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const [preflightKey, setPreflightKey] = useState("");
   const [receipt, setReceipt] = useState<ManifestDetail | null>(null);
   const [busy, setBusy] = useState("");
+  const [reuseBusy, setReuseBusy] = useState(false);
+  const [reuseCheckPixels, setReuseCheckPixels] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [keepTokenSize, setKeepTokenSize] = useState(true);
-  const [pickTarget, setPickTarget] = useState<"mapping" | "check">("mapping");
+  const [pickTarget, setPickTarget] = useState<"mapping" | "check" | "reuse">("reuse");
   const [rigChecks, setRigChecks] = useState<Record<string, boolean>>({});
   const mounted = useRef(true);
   const running = useRef(false);
@@ -120,7 +123,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   useEffect(() => () => onBusyChange?.(false), [onBusyChange]);
 
   async function run(label: string, action: () => Promise<void>) {
-    if (running.current || blocked) return;
+    if (running.current || reuseBusy || blocked) return;
     if (!operatorConnected) { onRequireOperator(); return; }
     running.current = true;
     setBusy(label); onBusyChange?.(true); setError(""); setNotice("");
@@ -130,7 +133,8 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   }
   const update = (change: (current: Draft) => Draft) => setDraft(current => change(current));
   const field = <K extends keyof Draft>(key: K) => (value: Draft[K]) => update(current => ({ ...current, [key]: value }));
-  const locked = !!busy || blocked || !restored;
+  const locked = !!busy || reuseBusy || blocked || !restored;
+  const savedCalibrationBusy = useCallback((value: boolean) => { setReuseBusy(value); onBusyChange?.(value); }, [onBusyChange]);
   const steps = deriveSteps(draft, camera, preflight, preflightKey);
   const view = (id: StepId) => steps.find(step => step.id === id)!;
   const sessionCurrent = !!camera?.fresh && camera.session_id === draft.cameraSessionId;
@@ -145,6 +149,10 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   function pick([x, y]: Point) {
     if (locked || !sessionCurrent) return;
     if (!camera?.width || !camera.height) return;
+    if (pickTarget === "reuse") {
+      setReuseCheckPixels(current => `${current.trim() ? current.trimEnd() + "\n" : ""}${x.toFixed(1)}, ${y.toFixed(1)}`);
+      return;
+    }
     const key = pickTarget === "mapping" ? "mappingPixels" : "checkPixels";
     update(current => ({ ...current, [key]: `${current[key].trim() ? current[key].trimEnd() + "\n" : ""}${x.toFixed(1)}, ${y.toFixed(1)}` }));
   }
@@ -176,10 +184,22 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
 
       <Step item={view("water_plane_mapping")} n={2}>
         <div className={styles.form}>
+          <p className={styles.explain}>Megana recorded a 35.56 × 22.86 cm waterline. Origin: the bottom-right inside corner on the pump side; +x runs along the long wall to the left, +y along the right wall away from that corner. Reuse these measurements only for the same tray and waterline.</p>
+          <div className={styles.actions}><button className="secondary-button" disabled={locked} onClick={() => { update(applyLoggedTrayMeasurements); setNotice("Megana’s recorded tray bounds and green-cap class are loaded. Camera alignment, source regions and new drift are still checked separately; no physical check was marked as passed."); }}>Use Megana’s recorded tray measurements</button></div>
           {sessionCurrent && camera?.width && camera.height ? <div className={styles.preview}><CalibrationCameraPreview visible={previewActive} apiBase={apiBase} width={camera.width} height={camera.height} sessionId={camera.session_id} active={sessionCurrent} calibration={draft.calibration} onPick={pick} /></div> : <p className={styles.explain}>A preview appears when the selected session has fresh frames.</p>}
-          <p className={styles.explain}>Choose one fixed water-surface corner as (0, 0), +x to the right and +y away from you. Measure at the actual water level, not the tank bottom. Use at least four spread-out mapping marks and three separate check marks. The image pixel axes and your tank axes may point differently.</p>
+          <label>Clicking the preview adds to<select value={pickTarget} disabled={locked} onChange={event => setPickTarget(event.target.value as "mapping" | "check" | "reuse")}><option value="reuse">Saved mapping check pixels</option><option value="mapping">New mapping pixel points</option><option value="check">New mapping check pixel points</option></select></label>
+          <SavedCalibration request={request} camera={sessionCurrent ? camera : null} disabled={!!busy || blocked || !restored || !operatorConnected} onBusyChange={savedCalibrationBusy} checkPixels={reuseCheckPixels} onCheckPixelsChange={setReuseCheckPixels} onCheckStart={() => {
+            update(current => ({ ...invalidateAfter(current, "water_plane_mapping"), calibration: null }));
+            setPreflight(null); setReceipt(null);
+          }} onApply={calibration => {
+            if (!camera?.fresh || calibration.camera_session_id !== draft.cameraSessionId || calibration.image_size_px.join() !== [camera.width, camera.height].join()) return;
+            update(current => ({ ...invalidateAfter(current, "water_plane_mapping"), calibration, maxErrorCm: String(calibration.max_allowed_error_cm) }));
+            setPreflight(null); setReceipt(null);
+            setNotice("The unchanged saved mapping passed fresh alignment checks in this session. Its original tolerance is preserved. Next capture the current empty tank and measure the cap’s image area; no ruler measurement is required for that detector check.");
+          }} />
+          <details><summary>Fit a new mapping if the saved camera alignment does not pass</summary>
+          <p className={styles.explain}>Keep your existing surveyed world coordinates. Observe their current pixel positions at the actual water level. Use at least four spread-out mapping marks and three separate check marks. The image pixel axes and tank axes may point differently.</p>
           <div className={styles.grid2}>
-            <label>Clicking the preview adds to<select value={pickTarget} disabled={locked} onChange={event => setPickTarget(event.target.value as "mapping" | "check")}><option value="mapping">Mapping pixel points</option><option value="check">Check pixel points</option></select></label>
             <label>Measured unit<select value={draft.unit} disabled={locked} onChange={event => field("unit")(event.target.value as LengthUnit)}><option value="cm">Centimetres</option><option value="mm">Millimetres</option><option value="in">Inches</option></select></label>
           </div>
           <div className={styles.grid2}>
@@ -195,6 +215,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
             update(current => ({ ...invalidateAfter(current, "water_plane_mapping"), calibration }));
             if (!calibration.approved) setNotice("The mapping was saved but not approved. Recording stays blocked until a new mapping passes.");
           })}>Fit and validate mapping</button></div>
+          </details>
         </div>
       </Step>
 

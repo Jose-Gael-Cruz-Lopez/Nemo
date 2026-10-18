@@ -288,6 +288,16 @@ export function invalidateAfter(draft: Draft, step: StepId): Draft {
   return next;
 }
 
+/** Recorded ruler survey, not a camera mapping or a passed physical check. */
+export function applyLoggedTrayMeasurements(draft: Draft): Draft {
+  const factor = UNIT_TO_CM[draft.unit];
+  const display = (cm: number) => String(Math.round(cm / factor * 1e9) / 1e9);
+  return { ...invalidateAfter(draft, "drift_recordings"),
+    bounds: { xMin: "0", xMax: display(35.56), yMin: "0", yMax: display(22.86) },
+    tokenClass: "green-bottle-cap",
+  };
+}
+
 export type StepView = { id: StepId; state: "done" | "blocked" | "missing" | "server"; message: string; help: string };
 
 export function deriveSteps(draft: Draft, camera: CameraStatus | null, preflight: Preflight | null, preflightKey: string): StepView[] {
