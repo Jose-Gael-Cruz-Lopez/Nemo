@@ -145,6 +145,33 @@ evidence that the rig needs repair; they are never a reason to relax a gate.
 | Declared `max_validation_rmse_cm_s` / `revalidation_max_rmse_cm_s` | |
 | Profile ID and content hash | |
 
+Attempt 2 (excluded): `recording-c8f3f60b893a4b22`. Same outcome: every release ended under the black strap at the mesh edge within about one second, faster than the tracker's 20 cm/s association limit.
+
+### Estimated rig model (SYNTHETIC: not a measurement)
+
+Measured drift was not achievable on this rig (see attempts above), so the team
+chose an explicitly labelled **estimate** for the demo. `scripts/load_estimated_rig.py`
+builds it; `tests/unit/test_estimated_rig_model.py` checks its labels and path.
+
+- **Inputs, observed:** waterline 35.56 × 22.86 cm; outlet at the left wall (≈34.2, 1.4–10.9 cm);
+  mesh footprint ≈ x 8–24, y 11.5–22.86; ten cap positions along the mesh edge
+  (x 15.9–22.1, y 12.7–13.6) from the two excluded recordings; ≈1 s outlet-to-mesh transit (operator).
+  Positions carry the coarse mapping error (≈±1.5 cm typical, up to 3 cm).
+- **Inputs, assumed:** the path continues to ≈(4.5, 18.5) without the mesh; jet speed 15 cm/s
+  (range 8–25), jet half-width 1.5 cm; 2 cm/s return flow toward the pump; candidate sources
+  A (outlet), B (upper left wall), C (bottom wall); protected zone x 2–7, y 15.5–21.5.
+- **Gap filling:** a weighted least-squares quadratic y(x) = −0.0036x² − 0.2781x + 19.749
+  through the outlet, the edge points and the assumed continuation, sampled every 0.75 cm.
+- **Profiles:** `estimated-rig-baseline-v1` (no trap) and `estimated-rig-intervention-v1`
+  (mesh as an absorbing trap), both `data_origin: SYNTHETIC` with `estimate_provenance`.
+- **Offline result (simulated, not a trial):** the source estimate ranks A for an outlet-side
+  path. In the comparison the mesh stops 92–99% of zone entries from A and B in all three
+  dispersion scenarios. C never reaches the zone in either layout, so the engine reports
+  `NO_ROBUST_RECOMMENDATION` (`MIXED_OR_ZERO_EFFECT`): every source must benefit.
+
+These numbers come from the assumptions above. They are not tank accuracy and must not
+be described as measured drift, a validated profile or a field receipt.
+
 ### Layout: intervention (collector moved to its measured marks)
 
 Moving the collector changes the flow. Record the disturbance, then record new
