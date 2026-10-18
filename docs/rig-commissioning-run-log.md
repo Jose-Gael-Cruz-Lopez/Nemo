@@ -172,6 +172,18 @@ builds it; `tests/unit/test_estimated_rig_model.py` checks its labels and path.
 These numbers come from the assumptions above. They are not tank accuracy and must not
 be described as measured drift, a validated profile or a field receipt.
 
+**Loaded into the local app (17 Oct 2026):** case `case-2f7ffada1e704c0f` (SYNTHETIC, shown as
+"Demo"), comparison `prevention_comparison-3e16a619d2364420` ("Estimated rig model (not measured):
+mesh vs no mesh"). Checked in the dashboard: source map and ranking, 2D layout maps, and the 3D tank
+in both layouts. The dashboard draws x to the right and y downward, so the view is this frame
+rotated 180° (the outlet side and A/B are on the right, and the pump corner is top-left). The geometry
+is rotated, not mirrored.
+
+**Circular by construction:** the case's "observation" is four points sampled from the same
+estimated path that drives the model, so Source A's 100% support only shows that the pipeline runs
+end to end. It is not evidence about where a real cap entered. Narrate it as an estimated path,
+even though the dashboard's generic case title reads "Observed trajectory".
+
 ### Layout: intervention (collector moved to its measured marks)
 
 Moving the collector changes the flow. Record the disturbance, then record new
