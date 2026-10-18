@@ -399,7 +399,7 @@ export default function Workspace() {
         {busy && <div className="busy-notice" role="status"><span className="status-dot is-live" />{busy}…{taskCaseId && <button className="ghost-button" disabled={!token || stopping} onClick={() => void stopCase(taskCaseId)}>Stop task</button>}</div>}
 
         {view === "overview" && <>
-          <div className="page-heading"><div><h1>Experiment overview</h1><p className="page-description">Inspect an observation, compare layouts, and review the evidence.</p></div><button className="primary-button" disabled={!!busy || preventionBusy} onClick={loadDemo}><Icon name="play" />Start software demo</button></div>
+          <div className="page-heading"><div><h1>Experiment overview</h1><p className="page-description">Trace possible sources, compare interventions, and check the evidence.</p></div><button className="primary-button" disabled={!!busy || preventionBusy} onClick={loadDemo}><Icon name="play" />Start software demo</button></div>
           <DemoGuide disabled={!!busy || preventionBusy} onTrace={() => navigate("investigations")} onPrevention={() => navigate("prevention")} onChalk={() => { chalkFocusPending.current = true; navigate("investigations"); }} />
           <p className="settings-note">Software examples are synthetic. The source-tracing and prevention demos use separate saved examples; neither is a physical tank trial.</p>
           <details className="card"><summary>Setup and saved observations</summary><div className="card-body">

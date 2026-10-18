@@ -1,9 +1,12 @@
 # Nemo scientific workspace and concise demo
 
 This guide describes the current local UI. The newest presentation changes are
-not yet a verified hosted release. The project remains a prototype for comparing
-where pollution might enter and where an interception layout might reduce its
-arrival at a protected area, then testing that prediction against real trials.
+not yet a verified hosted release. The project starts with **where observed
+pollution could have come from**. Investigations compares declared candidate
+entry regions under a frozen flow model. Prevention extends that source-tracing
+question into a decision about interception; it does not replace it. Both still
+need independent real trials. See [the source-tracing scope and validation
+plan](source-tracing-mission.md).
 
 ## A quiet starting point
 
@@ -104,7 +107,11 @@ are available without forcing their full tables onto a first-time demonstration.
 
 The additional origin-residual diagnostic has a saved **48/48-cell** exploratory
 result on **12 already-viewed targets**. Its read-only API and bounded Chalk
-review exist; a dedicated Data Lab card is not yet connected at this checkpoint.
+review are available through **Data Lab → Research details and historical buoy
+validation → Load drift-offset study**. The dedicated card shows all four saved
+model rows, both groups, independent fixed-scale paths and explicit review status.
+Here ‘origin’ means forecast start, not the pollution source; Investigations
+retains source inference. See [the panel guide](origin-residual-datalab.md).
 It is not a learned model, untouched test or promoted operational method. See
 [the exact results and limits](origin-residual-results.md).
 

@@ -1,5 +1,16 @@
 # Nemo: initial observed-motion residual — exploratory result
 
+**Later Data Lab integration:** open **Data Lab → Research details and historical
+buoy validation → Load drift-offset study** for the saved four-model table,
+two-group plot, independent fixed-scale paths and bounded Chalk review. See
+[the panel guide](origin-residual-datalab.md). The reader and browser are not a
+new first score or live-provider verification. “Origin” in this model's name
+means forecast start, not pollution release; [source inference remains the core
+Investigations workflow](source-tracing-mission.md). Actual Grok web rounds
+thirteen and fourteen, their complete captures and rejected advice now extend
+the archive to **14 rounds / 28 captures**. No frozen scientific result changes.
+Earlier unconnected-card wording below describes its original capture time.
+
 **Current verification and review notice — 17 October 2026:** the twelfth actual
 Grok web round now reviews this saved result; the additive archive totals
 **12 rounds / 24 captures**. Separately, a local numerical replay reproduced all

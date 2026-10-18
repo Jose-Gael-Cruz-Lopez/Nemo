@@ -2,7 +2,7 @@
 export const JOURNEY_CHAPTERS = [
   {
     id: "welcome", label: "Welcome", heading: "Nemo",
-    detail: "Compare drifting-object observations, possible sources, and interception layouts using saved data and controlled tank experiments.",
+    detail: "Trace possible pollution sources from observed movement, then compare where to intercept it and test the outcome.",
     action: "Open the software demo", href: "/demo",
     secondaryAction: "Observe a track", secondaryHref: "#journey-observe",
     evidence: "Illustrative ocean, not a live observation.",

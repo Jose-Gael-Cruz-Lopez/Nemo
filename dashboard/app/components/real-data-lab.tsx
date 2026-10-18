@@ -13,6 +13,7 @@ import { KalmanDiagnostic } from "./kalman-diagnostic";
 import { FreshDrifterStudy } from "./fresh-drifter-study";
 import { OceanPrevention } from "./ocean-prevention";
 import { MatchedCurrentStudy } from "./matched-current-study";
+import { OriginResidualStudy } from "./origin-residual-study";
 
 type Position = { time_utc: string; latitude_deg: number; longitude_deg: number };
 type Prediction = Position & { horizon_hours: number; error_m: number };
@@ -82,10 +83,11 @@ export function RealDataLab({ api }: { api: string }) {
     finally { if (!pending.signal.aborted) { controller.current = null; setLoading(false); } }
   }
   return <>
-    <div className="page-heading"><div><h1>Data Lab</h1><p className="page-description">Compare current-driven paths, interception layouts, and recorded evidence.</p></div></div>
+    <div className="page-heading"><div><h1>Data Lab</h1><p className="page-description">Inspect motion forecasts and their limits. Source tracing is in Investigations.</p></div></div>
     <OceanPrevention api={api} />
     <details className="card"><summary>Research details and historical buoy validation</summary><div className="card-body data-lab-results">
     <MatchedCurrentStudy api={api} />
+    <OriginResidualStudy api={api} />
     <p className="settings-note">These historical NOAA benchmarks cover different places and dates from the ocean comparison. They test motion models separately; they are not additional trajectories for its map.</p>
     <FreshDrifterStudy api={api} />
     <button className="secondary-button" disabled={loading} onClick={() => void run()}><Icon name="play" />{loading ? "Running reference replay…" : "Run reference buoy replay"}</button>

@@ -1,0 +1,93 @@
+{
+  "automatic_model_promotion": false,
+  "base_commit": "4ec88d33919f3571018345a0f09ef298e24281ed",
+  "browser": {
+    "actual_pinned_result_loaded": true,
+    "adjacent_endpoint_arrows_labeled_not_currents": true,
+    "disabled_provider_stop_verified": true,
+    "group_switch_preserves_macro_table": true,
+    "groups_checked": 2,
+    "isolation": {
+      "camera_or_provider_or_photon_use": false,
+      "duration_s": 336.062,
+      "guards": {
+        "camera_open_attempts": 0,
+        "origin_residual_execution_attempts": 0,
+        "photon_poll_attempts": 0,
+        "photon_send_attempts": 0,
+        "provider_http_attempts": 0
+      },
+      "guards_clean": true,
+      "kind": "DISPOSABLE_ORIGIN_RESIDUAL_BROWSER_ISOLATION",
+      "live_api_restarted": false,
+      "owned_children_reaped": true,
+      "source_rewrite_changed": false,
+      "store_unchanged": true
+    },
+    "macro_rows": 4,
+    "new_live_chalk_or_xai_response": false,
+    "offset_toggle_removes_actual_series": true,
+    "operator_required": true,
+    "recording_or_physical_trial": false,
+    "source_first_overview_rendered": true,
+    "toggle_preserves_axes_and_scores": true,
+    "width390_document_scroll_width390": true
+  },
+  "copy_matches_current_frontend_sources": true,
+  "date_local": "2026-10-17",
+  "eslint_passed": true,
+  "focused_frontend_tests_passed": 33,
+  "focused_http_harness_tests_passed": 38,
+  "frontend_tests_passed": 299,
+  "geographic_pollution_origin_implemented": false,
+  "grok": {
+    "canonical_historical_pack_unchanged": true,
+    "captures": 28,
+    "continuation_bytes": 505645,
+    "continuation_sha256": "33cdc05fc9ab9f8bc66900a212d8859bb4eb960f05356d38542883fd48b410a7",
+    "old_prefix_unchanged": true,
+    "old_twelve_round_prefix_bytes": 475681,
+    "raw_captures": [
+      "docs/grok-evidence/grok-origin-residual-ui-review-prompt.txt",
+      "docs/grok-evidence/grok-origin-residual-ui-review-response.txt",
+      "docs/grok-evidence/grok-source-first-validation-review-prompt.txt",
+      "docs/grok-evidence/grok-source-first-validation-review-response.txt"
+    ],
+    "rounds": 14
+  },
+  "hosted_ci_for_resulting_commit": "SEPARATE_RELEASE_CHECK",
+  "isolated_production_build_passed": true,
+  "kind": "NEMO_SOURCE_FIRST_ORIGIN_UI_LOCAL_VERIFICATION",
+  "live_api_restarted": false,
+  "log_sha256": {
+    "nemo-origin-ui-eslint.log": "2a39a2b0088eab9372f9ae76e9bbb3badd872aae76be61464acc2a0fe3ac1e51",
+    "nemo-origin-ui-frontend.log": "29bf470393da44f34cd722337fc222f10e42a78ec05cfed006bbaa46849c1db6",
+    "nemo-origin-ui-production-build.log": "05b41812decaaddbfffdf41b7f0a0c5d374ec91b25935281fabd8808a64b709f",
+    "nemo-origin-ui-python.log": "f6a25e1fa01c760fc5eb81795c795d798d192400abf296fe8749dcc1d5148ae2"
+  },
+  "new_data_acquisition": false,
+  "new_first_score": false,
+  "offline_http": {
+    "expected_blocked": 6,
+    "failed": 0,
+    "passed": 207,
+    "receipt_sha256": "a38ec799f693f57cb06964235c1299d047dae65fe549869001dd68343d3ef889",
+    "schema422_cache_control": "framework_prehandler_unset_recorded_not_claimed_no_store"
+  },
+  "physical_source_accuracy_validated": false,
+  "python_tests_passed": 1914,
+  "ruff_passed": true,
+  "saved_origin_method_pins_verified": true,
+  "schema_version": 1,
+  "source_sha256": {
+    "dashboard/app/components/origin-residual-state.ts": "285e635633da67400d5cdec03a7b0ef43a90358669a3d72940620fa243f8b32f",
+    "dashboard/app/components/origin-residual-study.tsx": "21b0ce55237b869b4279f574cd3ff1d8e83282d95a1e0453a8e57f89424d2559",
+    "dashboard/app/components/real-data-lab.tsx": "6e30b88d5c64acc3d93a03b9d1d4ead9514937bc0172373b55aa334e4ce9db78",
+    "dashboard/app/landing-journey-state.ts": "91fa5c5da2c911dbedffc61644830cdbfc689f468f2a07bda49332a6f553fd11",
+    "dashboard/app/workspace/page.tsx": "bed44bfe60ce5e47b4e61edae9c9c899ebfa6938ec3479ba0f399bdc0d75a346",
+    "docs/source-tracing-mission.md": "55fd329add21b38358acf5c1c8721d2660caf57ff65a20149aad9e994a962267",
+    "scripts/e2e_offline.py": "2a4214fd05b01d3f4da801c10a3c2d2119414cacfb43d365775441e6b60ab9d1",
+    "tests/unit/test_origin_residual_http_audit.py": "3d70cc15fa4c7edb7ebbc019480cb20f0430fcdfd03da5c688e5b1839232ddb2"
+  },
+  "typescript_passed": true
+}

@@ -8126,3 +8126,301 @@ The result is a local replay with an external pin still required for publication
   "total_grok_rounds_in_continuation": 12
 }
 ```
+
+
+---
+
+## Actual Grok web round 13: Origin-residual Data Lab implementation contract
+
+This is an actual static Grok web exchange in the existing project, not code
+execution or new scientific evidence. It reviews the still-pending Data Lab
+integration of the saved forty-eight-cell exploratory result. The prompt supplies
+the exact backend schema and corrects the preceding review's claim that a code
+identity anchor is absent: that literal anchor already exists; independent
+scientific attestation remains absent.
+
+Accepted advice: a separate research panel, top-level forecast envelope, fixed
+axes across checkbox changes, gap-preserving series, exact selected-report pins
+and explicit disabled/live provider states. Two recommendations are narrowed:
+loading remains an explicit user action instead of an on-mount fetch, and valid
+partial coverage must preserve failures/denominators with primary results
+withheld rather than blindly require a complete result. Display validation is
+not independent byte or numerical verification. Local implementation, execution
+and hosted verification are separate subsequent records, not part of this reply.
+
+### Round 13 — prompt
+
+Source: `docs/grok-evidence/grok-origin-residual-ui-review-prompt.txt` · 8,174 UTF-8 bytes · SHA-256 `306d4601fbdd1689e942ab2a3471803500dc17eca3e12af84df486d26f0db898`.
+
+```text
+Continue the SAME Nemo/ReefTrace project and existing conversation. Repository: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace ; current committed source 4ec88d33919f3571018345a0f09ef298e24281ed. This is a STATIC implementation/research review through Grok web. Do not claim to execute, acquire data, train, call APIs, inspect secrets, send messages, spend credits or qualify a sponsor track. We will implement and test locally and archive your exact response plus our decisions separately.
+
+We are completing the previously missing Data Lab card for the frozen origin-residual diagnostic you reviewed. No mathematical model, frozen method source, first-score artifacts, forcing, outcomes or active model selection will change. The three immutable method files are origin_residual.py, evaluate_origin_residual_diagnostic.py and test_origin_residual.py; the saved method commit is 744832594c6327459d3003291e08685d9d483bb0.
+
+Correction to your last response: a separately committed literal identity anchor ALREADY exists in the public reader/backend. external_result_pin_verified=true means it checked that code trust anchor, not independent scientific attestation. Independent external attestation remains absent. numeric_replay_verified=false is the reader's saved-bytes/lineage scope; a separately recorded local numerical replay matched forecasts/scores without rewriting artifacts. Do not remove or reinterpret these flags as a live rerun.
+
+ACTUAL backend contract:
+GET /api/v1/research/origin-residual is public, no-store and read-only. It returns exactly {report, forecasts, artifact_identity}. Missing pinned result is404, integrity/snapshot failure409, reader unavailable503. It does not acquire, fit, generate forecasts, rescore or write state.
+POST /api/v1/research/origin-residual/investigate requires local operator auth and exactly {question, report_sha256, protocol_sha256, identity_sha256}; question1..2000 nonblank chars. Research agent gets one read-only get_study_evidence tool, at most2 model calls, REPORT or STOP. REPORT cites exactly origin-residual-report:<report hash> and origin-residual-protocol:<protocol hash>. Question is untrusted data. A successful answer must bind report/protocol/identity, provider-live flag and exact citations; snapshot is rechecked after the model. No case/trial/camera/pump/Photon/download/scoring capability. We will not run new live provider or messaging requests in this UI verification; test providers are disabled/mocked.
+
+Fixed artifact identity:
+study_id=origin-residual-gdp-hycom-15m-exploratory-v1
+identity_sha256=d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27
+report_sha256=801d7192ba138817f242401ae6706562f2b8c5c34306219ee37e04a2af2299c8
+protocol_sha256=e1073f84e83b2ea078d0890972659e778f87238c417287d8adf70e3649587163
+forecast_file_sha256=727e2ce329148c31194bd6fc7b17c39da8b83923439140b9eef5c378376cc0d1
+artifact_identity flags: integrity_verified=true, external_result_pin_verified=true, numeric_replay_verified=false, verification_scope=SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY.
+
+SCIENTIFIC DATA:
+Two fixed GDP groups:300234066836710 and300534061292930. Four models in fixed order:stationary,last_drift,current_only,origin_residual_current. Origin2022-06-01T00:00:00Z; six saved later hours. 48/48 model-hour cells reuse only12 already-viewed processed NOAA positions; POST_OUTCOME_EXPLORATORY. Proposed after v2 outcomes had been seen, not a new holdout. HYCOM15m retrospective model analysis, not surface-plastic truth. No coefficient fit, no decay, no clip, no mask fill, no automatic promotion.
+Equal-ID macro ADE/FDE metres:stationary3490.11883398436/6069.352856333436;last_drift1510.2315897151784/3240.5762017396933;current_only5063.020321784228/9151.645051235122;origin_residual_current1030.0494632017758/2355.9581696532323. Lower descriptive group-level ADE/FDE on both groups does not mean every hour improved or establish transfer.
+Model definition:r0=v_last-u(X0,t0), then u_corrected(X,t)=u(X,t)+r0. v_last is origin-tangent mean-sphere velocity of the last one-hour context interval. r0 stays constant in local east/north m/s. Existing bounded knot-aligned WGS84 RK4 resamples u at changing position/time. Offset bundles object/forcing/processing discrepancy; it is not identified windage. Numerical integration accuracy is distinct from physical forecasting accuracy.
+
+ACTUAL payload shape (do not copy matched-current validator unchanged):
+report:{schema_version,kind,study_id,analysis_scope,previously_viewed_target_outcomes:true,protocol_sha256,forecast_file_sha256,scores,...lineage}.
+report.scores:{planned_group_count:2,planned_cell_count:48,planned_distinct_target_count:12,scored_cell_count:48,primary_common_cohort_complete:true,models:[{model_id,metrics}],groups:[{group_id,target_issues,candidates:[{model_id,prediction_status,prediction_reason_code,metrics,cells}]}],primary_equal_id_macro_results,paired_comparisons,limitations,...false scientific-claim flags}.
+Score cell:{group_id,model_id,horizon_hours,elapsed_s,time_utc,latitude_deg,longitude_deg,forecast_status,forecast_reason_code,score_status,error_m,target_latitude_deg,target_longitude_deg}. Nulls/gaps must remain gaps; NO target_status field. metrics:{available_cell_mean_error_m,coverage_complete,endpoint_fde_m,full_horizon_ade_m,planned_count,scored_count}.
+TOP-LEVEL forecasts:{group_ids,model_ids,origin_time_utc,horizons_s,planned_cell_count:48,planned_distinct_target_count:12,groups:[{group_id,context_count,origin_position,candidates:[{model_id,cells,available_count,status,...residual and field lineage}]}],...scope flags}. Candidate forecast cells contain no evaluation target/error. No scores.forecast_report field. Macro is withheld unless complete all48.
+
+PRODUCT REQUIREMENTS:
+Data Lab already has a single ocean layout comparison at top, with historical research behind a collapsed disclosure. Put this new panel inside that research section, not as another default ocean/tank forecast. Clear heading and one-sentence explanation; concise four-model ADE/FDE table; visible48cells/12reusedtargets/two-group scope; choose either group; one combined equal-east/north-scale plot with recorded positions solid and four predictions dashed. Independent labeled checkboxes with hover/focus descriptions; fixed plot domain uses every available series even when hidden; gaps never bridged. Optional hourly displacement arrows must be labeled adjacent-endpoint displacement, not native water currents; no fake vector field. Group/hour/toggle changes never recalculate scores, select a new model or make provider requests. Plain-language method and full provenance can be collapsed. No best-model trophy/operational winner badge. A failed GET must show honest error with explicit retry, no fallback fixture. Abort stale load/review on unmount/report/token change. Chalk is explicit action, no automatic retry, bounded response read, exact snapshot/citations validation and provider failure distinguished from live answer. No physical accuracy or sponsor eligibility claim.
+
+Please return exactly FOUR sections:
+A. A concise implementation plan and specific TypeScript component/state-helper design that respects the ACTUAL envelope. Include separating display projection from great-circle scoring and no filtering of denominators.
+B. Precise frontend validation/review identity invariants, including nonfinite numbers, swapped group/model/hour, target disagreement between candidates, stale report/identity and forged scope flags. Distinguish display-level validation from byte hash verification performed on the backend. Do not propose pretending our browser is an independent verifier.
+C. Ten meaningful adversarial tests plus a browser click-by-click acceptance sequence, covering controls, fixed scale, both groups, gaps, stale async results, disabled provider and small viewport. No claim that you ran them.
+D. Two short sentences explaining RK4 and r0 for a beginner, followed by one concrete next cohort/protocol task that can be done without viewing outcomes. Do not retune this candidate, invent independent data, p-values, measurements, external executions, or a live xAI result.
+```
+
+### Round 13 — response
+
+Source: `docs/grok-evidence/grok-origin-residual-ui-review-response.txt` · 5,123 UTF-8 bytes · SHA-256 `bbf2be53568cf41cc7a4c0e55b517349fa57b2aa15c75571ec589349cf3bb077`.
+
+```text
+Grok
+Worked for 9s
+
+A. Implementation plan and component design.
+
+Add one panel inside the existing collapsed historical-research disclosure, not as a default ocean or tank view. A single OriginResidualPanel component owns the GET state (idle | loading | ready | error) and an optional review state (idle | pending | done | failed). On mount it fetches GET /api/v1/research/origin-residual with cache: 'no-store'; a missing result shows 404, integrity failure 409, and reader unavailable 503, each with an explicit retry and no fixture fallback. The component holds the raw {report, forecasts, artifact_identity} envelope and a pure display projection derived from it.
+
+State helpers:
+
+selectGroup(groupId) returns the matching forecast and score group without mutating the envelope.
+projectSeries(group, modelId) maps forecast cells to {hour, east_m, north_m} using an origin-anchored display frame; cells with null coordinates become gaps and are never interpolated.
+fixedDomain(allSeries) computes the plot bounds from every available point across all four models before any checkbox is applied, so hiding a series does not rescale.
+displacementArrows(series) emits adjacent-endpoint vectors labelled “endpoint displacement,” never “current.”
+validateEnvelope(payload) checks the invariants in B and returns a typed error; it does not recompute ADE/FDE.
+
+Scores and the four-model table are read only from report.scores. Group, hour and checkbox changes update local view state only. The Chalk action posts the exact {question, report_sha256, protocol_sha256, identity_sha256} and aborts on unmount or token change; a late response whose hashes no longer match is discarded.
+
+B. Frontend validation / review identity invariants.
+
+Display-level checks (not byte verification):
+
+artifact_identity.identity_sha256, report_sha256, protocol_sha256 and forecast_file_sha256 match the pinned literals; integrity_verified === true, external_result_pin_verified === true (code trust anchor only), numeric_replay_verified === false, verification_scope === "SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY".
+planned_cell_count === 48, planned_distinct_target_count === 12, scored_cell_count === 48, primary_common_cohort_complete === true, and the four model_ids appear in the fixed order.
+Every score cell has finite error_m when score_status === "SCORED"; null coordinates remain null; no target_status field is required or invented.
+Group IDs, model IDs and hours are not swapped: the candidate at index i matches model_ids[i] and its cells match horizons_s.
+For a given group and hour, target_latitude_deg / target_longitude_deg are identical across the four candidates or all null.
+analysis_scope === "POST_OUTCOME_EXPLORATORY" and previously_viewed_target_outcomes === true; any other flag is a forged-scope rejection.
+A review response is accepted only if its returned hashes equal the loaded snapshot; otherwise it is stale and discarded.
+
+These checks are display guards. Byte-hash verification remains the backend’s responsibility; the browser is not an independent verifier.
+
+C. Ten adversarial tests and acceptance sequence.
+
+Envelope with planned_cell_count: 47 is rejected and shows the integrity error.
+A cell with score_status: "SCORED" and error_m: NaN is rejected.
+Swapped model order (residual listed first) fails the fixed-order check.
+Two candidates for the same hour carry different target_latitude_deg values and are rejected.
+Hiding the residual series leaves the plot domain unchanged.
+A gap (null coordinate) is not bridged by a line segment.
+Changing group does not alter the four ADE/FDE numbers.
+A late GET response arriving after unmount or report-hash change is discarded.
+Chalk POST with a disabled/mocked provider shows the provider-failure state, not a live answer, and does not retry.
+At a 320 px viewport the table and plot remain readable and the research disclosure stays collapsed by default.
+
+Acceptance sequence: open Data Lab → expand historical research → confirm heading and one-sentence scope → verify the four-model table matches the saved macros → select the second group and confirm both series and the unchanged table → toggle each checkbox and confirm the domain is fixed and gaps stay open → hover an arrow and read “endpoint displacement” → trigger Chalk with the provider disabled and confirm the failure state → resize to mobile and confirm the panel remains inside the disclosure.
+
+D. Beginner sentences and next task.
+
+RK4 estimates the next position by sampling the current at the start, middle and end of a short step and combining those samples; it follows whatever field it is given.
+
+
+𝑟
+0
+r
+0
+	​
+
+ is the difference between the last hour’s observed drift and the HYCOM current at the origin, held constant in local east/north metres per second and added to a copy of the field.
+
+Next protocol task: freeze a metadata-only selection rule that draws a new cohort of whole GDP identities, excludes every previously viewed ID and known alias, and locks the same four candidates and six-hour horizon before any future coordinate is requested.
+```
+
+
+---
+
+## Actual Grok web round 14: Source tracing remains the original mission
+
+This actual static exchange responds to the user's clarification that estimating
+pollution origin remains the core question. The current estimator compares two
+to eight declared tank source regions; the ocean RK4 comparison and residual
+motion diagnostic do not constitute geographic pollution attribution.
+
+Accepted advice: preserve forward candidate transport, separate physical source
+labels from input features, freeze assumptions before outcomes, retain every
+planned release/Invalid/Unknown, and distinguish source-identification evidence
+from buoy position errors. The future geographic prototype is a proposal, not an
+implemented or validated feature. Primary BAKTRAK/OpenDrift references were
+checked separately; no package was installed.
+
+Important corrections to the raw response are retained here explicitly:
+* REJECT its definition of accepted slots as ranked OR Unknown with a leading
+  source. Only an accepted ranked result with a non-null ranked_source is an
+  accepted source identification. Unknown is abstention even if conditional bars
+  or leading_source exist. Counting it as accepted would corrupt the denominator.
+* The old NOAA identity-exposure inventory gap concerns a future buoy cohort; it
+  is not itself a flaw in the independent physical token-release plan. Both need
+  their own relevant leakage controls.
+* A same-generator source test is not guaranteed to rank correctly under every
+  seed/noise/prior setting; freeze a manufactured identifiable contract and
+  preserve Unknown. Overlapping regions alone are not a universal proof of
+  ambiguity without the rest of the model/priors/gates.
+* An unknown/misspecified geographic source must not be promised to always return
+  Unknown. That is a future design goal requiring explicit out-of-set and
+  misspecification tests; the present closed candidate engine can still make a
+  wrong accepted attribution. Quantify that risk in source-labelled validation.
+
+No outcome-driven tuning, acquisition, first score, physical trial, model
+promotion, new live Chalk/Photon/device call or xAI API/billing use occurred in
+these review exchanges. UI work and the guarded HTTP extension are in progress
+at this capture; their eventual tests are separate evidence.
+
+### Round 14 — prompt
+
+Source: `docs/grok-evidence/grok-source-first-validation-review-prompt.txt` · 6,380 UTF-8 bytes · SHA-256 `0ad24b43591b9e7413acce04a4abd7fd81d86e3f6b5998ef0e6fcc67411872b1`.
+
+```text
+Continue the same Nemo/ReefTrace project. This is a SECOND new static Grok web review in this continuation; the previous one concerned the origin-residual Data Lab panel. Current repository https://github.com/Jose-Gael-Cruz-Lopez/reeftrace at main4ec88d33919f3571018345a0f09ef298e24281ed plus the pending explicit-load UI. Do not claim execution, acquisition, training, deployment, provider/API calls, independent experiments or sponsor qualification.
+
+USER STEERING: the original project question is where pollution ORIGINATED. Prevention must remain a downstream extension, not replace source inference. We are correcting README and the short landing/Overview descriptions to lead with source tracing. Proposed mission: use observed floating-object movement to assess where it could have come from, then predict movement, compare interventions and test the outcome. Do not promise globally locating an exact polluter.
+
+ACTUAL CURRENT SOURCE ENGINE (read from estimator.py, no request to change it):
+It accepts a measured or explicitly synthetic tank profile, calibration identity, token class and an observation. It compares between2and8 declared candidate polygons in centimetres using forward Euler-Maruyama advection-diffusion in a supplied spatial flow field, reflecting rectangular walls and declared absorbing traps. A positive explicit source prior and discrete release-age prior are normalized; model likelihood evaluates observed trajectory or retained endpoint. Retained endpoint requires supported validated retention. It does not run the ocean RK4 engine backward or search an unrestricted coastline.
+Gates: calibration/currentidentity/stale/tokenclass; minimum trajectory points/duration; associationvalid and observationquality; observed-field coverage; minimum candidate path coverage; absolute fit; support separation and likelihood separation; predeclared variants changing diffusion,driftbias,ageprior,dt. Changed source/status across a sensitivity variant adds ASSUMPTION_SENSITIVE and withholds accepted rank. Result statuses ranked,unknown,invalid. A leading_source and conditional bars may exist while ranked_source is null/Unknown. Output assumption scope is declared_tank_candidates_only_not_geographic_origin; bars are relative_support_not_probability. Absolute fit is a length-normalized position kernel, not a p-value.
+The synthetic moving example ranks C, retained-endpoint example remains Unknown, invalidmapping returnsInvalid. No real tank source-recovery trial exists. Current hardware is USB camera and separately powered manual pump; OpenCV follows one red token, not generic debris. Pixel guide is not centimetre calibration. Source model parameters/fixtures/frozen method inputs will NOT be retuned in this review.
+
+RELATED OCEAN WORK:
+The separate WGS84 RK4 engine integrates dX/dt=u(X,t) with changing currents and support checks. A newer initial-residual diagnostic adds r0=v_last-u(X0,t0) to a copy of HYCOM15m forcing. It has48model-hour cells but12already-viewed processed positions; it is post-outcome exploratory, not independent skill, not a source-attribution test. NOAA buoy context/targets can assess movement error, but the first recorded fix is not a verified pollution-release label. Our new six-ID residual cohort is only proposed; an exposure audit found the older frozen inventory skips the subsequently scored fresh/research studies, so it cannot be reused as a complete exclusion set.
+
+PRIMARY REFERENCES root checked now:
+1. Breivik etal BAKTRAK, https://arxiv.org/abs/1111.0756 (journal DOI10.1007/s10236-011-0496-2). Abstract describes iterative forward seeding/selection against observations when nonlinear changes make naive reversal hard. Nemo does NOT implement BAKTRAK's adaptive iterative search; do not say it does.
+2. Official OpenDrift https://opendrift.github.io/ supports purpose-specific drift, currents/wind/waves and negative-time runs. It is not installed/commissioned in Nemo. Framework capability is not source-validation evidence.
+3. Previously shared Frontiers DOI10.3389/fmars.2017.00191 is the Aegean forward floating-litter/source-region study, not direct evidence that Nemo recovers a retained object's unique origin. Preserve this correction rather than repeat the earlier loose attribution.
+
+Please give exactly four sections:
+A) Explain in two plain sentences how source inference and downstream interception fit the SAME project. State current bounded tank scope versus the missing geographic source engine.
+B) Audit the following proposed next experiment WITHOUT choosing numerical gates or tuning to results: independently fit and validate drift, freeze candidate polygons/priors/release-age/noise/gates/windows/sensitivity, balanced known-source release plan, evaluator keeps actual source/time separate, estimator sees permitted measuredpositions/times but no labels in metadata/names, save report before unblinding, retain every planned slot/invalid/Unknown, no rerun-until-win, separate trajectory/retained modes. Identify leakage, model mismatch, physical-control and identifiability gaps we should resolve before freezing/collecting.
+C) Give a compact source-evaluation contract with exact denominators and at least six meaningful hostile synthetic tests. Distinguish correct accepted/planned, correct accepted/accepted, wrong accepted/accepted and accepted/planned; withhold fractions for zero denominators rather than make0or100. Synthetic same-generator checks are software contracts, not independent physical accuracy. Avoid calibrated posterior/coverage/p-value claims; identify useful abstention diagnostics and what a real source-labelled test supplies that buoy ADE does not.
+D) Give an incremental, separately named FUTURE geographic origin prototype using existing bounded forward RK4 as a building block, not a silent change to tank model: candidate regions and release-time assumptions, objectresponse/retention/flowuncertainty, observedtrack/endpoint, time-forward ensembles vs naivebackward, explicit prior/misspecified/unknown-source behavior, provenance and source-labelled validation. Explain what can be done with saved historical fields now and what still needs new evidence. No new package installation, model training or data acquisition requested here. No claim you read source files not included in this prompt, executed tests or achieved real source accuracy.
+```
+
+### Round 14 — response
+
+Source: `docs/grok-evidence/grok-source-first-validation-review-response.txt` · 4,161 UTF-8 bytes · SHA-256 `73f5bfd7af414e2844725b1f9755059baf2f299ce66cb495f545ea437276c0ec`.
+
+```text
+Grok
+Worked for 4s
+
+A. Source inference and interception in one project.
+
+Nemo uses observed floating-object movement to assess which of a declared set of candidate origins is better supported, then predicts later movement, compares interception layouts and checks the outcome against independent records.
+
+Today the source engine is a centimetre-scale tank model that scores between two and eight candidate polygons with forward Euler–Maruyama advection–diffusion, reflecting walls and absorbing traps; a geographic source engine that searches an unrestricted coastline or runs the ocean RK4 backward does not exist.
+
+B. Audit of the proposed next experiment.
+
+The plan is sound in outline—fit and validate drift independently, freeze polygons/priors/age/noise/gates/windows/sensitivity, keep the evaluator’s source/time separate from the estimator, save the report before unblinding, and retain every planned slot—but four gaps should be closed before freeze.
+
+Leakage: the exposure audit already shows the older frozen inventory omits later scored studies, so any “exclude all viewed IDs” rule must be rebuilt from the complete current set or it will admit previously scored trajectories.
+
+Model mismatch: the estimator’s Euler–Maruyama tank dynamics are not the WGS84 RK4 used for ocean forcing; a residual or flow field transferred from the ocean diagnostic is not a valid tank prior.
+
+Physical control: no real tank source-recovery trial exists; USB-camera tracking of one red token and a manually powered pump do not yet supply the balanced known-source releases the plan requires.
+
+Identifiability: with only relative support among declared polygons, two nearby sources can remain inseparable even when the trajectory is long; the freeze must state the minimum separation and path-coverage gates before any release is collected, without choosing those numbers from the eventual outcomes.
+
+C. Source-evaluation contract.
+
+Denominators are planned slots (every declared release × mode) and accepted slots (those that return ranked or unknown with a finite leading source). Report correct-accepted/planned, correct-accepted/accepted, wrong-accepted/accepted and accepted/planned; if a denominator is zero, withhold the fraction rather than emit 0 or 100. Absolute fit remains a length-normalized position kernel, not a p-value; bars stay relative support.
+
+Hostile synthetic tests:
+
+Identical generator and candidate set returns the true source as ranked when separation and coverage gates pass.
+Retained-endpoint mode with unsupported retention returns Unknown, not ranked.
+Invalid mapping or token-class mismatch returns Invalid and is counted in planned but not accepted.
+A sensitivity variant that changes the leading source adds ASSUMPTION_SENSITIVE and withholds the accepted rank.
+Two overlapping candidate polygons produce no ranked source even when the trajectory is perfect.
+Mutating the true-source label after the report hash is stored does not change the estimator output.
+
+These are software contracts. A real source-labelled tank trial supplies what buoy ADE cannot: an independent release identity that was never used to fit the flow or the likelihood, so an accepted rank can be scored as correct or wrong rather than merely close in position.
+
+D. Future geographic origin prototype.
+
+Name it separately (for example forward-ensemble-origin-v0). Candidate regions and release-time windows are declared in advance; each is seeded forward with the existing bounded RK4 under an explicit object-response and retention assumption and under flow-field uncertainty. Observed track or endpoint likelihoods are compared across the ensemble; no naive backward integration is performed. An unknown or misspecified source returns Unknown; provenance records the field hash, issue-time status and the exclusion set. With saved historical fields the prototype can be exercised on synthetic tracks or on already-viewed buoy segments labelled only as movement tests. A source-labelled validation still requires new evidence—controlled releases or independently documented debris origins—that does not exist in the current archive.
+```
+
+### Thirteenth and fourteenth round source manifest
+
+```json
+{
+  "actual_grok_rounds_added": 2,
+  "files": [
+    {
+      "bytes": 8174,
+      "path": "docs/grok-evidence/grok-origin-residual-ui-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 13,
+      "sha256": "306d4601fbdd1689e942ab2a3471803500dc17eca3e12af84df486d26f0db898"
+    },
+    {
+      "bytes": 5123,
+      "path": "docs/grok-evidence/grok-origin-residual-ui-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 13,
+      "sha256": "bbf2be53568cf41cc7a4c0e55b517349fa57b2aa15c75571ec589349cf3bb077"
+    },
+    {
+      "bytes": 6380,
+      "path": "docs/grok-evidence/grok-source-first-validation-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 14,
+      "sha256": "0ad24b43591b9e7413acce04a4abd7fd81d86e3f6b5998ef0e6fcc67411872b1"
+    },
+    {
+      "bytes": 4161,
+      "path": "docs/grok-evidence/grok-source-first-validation-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 14,
+      "sha256": "73f5bfd7af414e2844725b1f9755059baf2f299ce66cb495f545ea437276c0ec"
+    }
+  ],
+  "frozen_scientific_artifacts_changed": false,
+  "implementation_and_verification": "SEPARATE_SUBSEQUENT_RECORDS",
+  "independent_external_attestation": false,
+  "kind": "ADDITIVE_DATALAB_AND_SOURCE_FIRST_REVIEW_MANIFEST",
+  "live_xai_api_usage_proven": false,
+  "new_first_score": false,
+  "physical_validation": false,
+  "previous_prefix_bytes": 475681,
+  "previous_prefix_sha256": "7072acc34ccf64889468809b8f16ab5c1758f6f733d4f8fea4967344c5c8163d",
+  "schema_version": 1,
+  "sponsor_eligibility_proven": false,
+  "static_web_reviews_not_executions": true,
+  "total_grok_capture_files_in_continuation": 28,
+  "total_grok_rounds_in_continuation": 14
+}
+```

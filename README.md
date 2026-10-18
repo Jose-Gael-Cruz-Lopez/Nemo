@@ -1,8 +1,10 @@
 # Nemo · ReefTrace
 
-Nemo helps teams compare where to intercept floating pollution before it reaches a protected area, then inspect whether recorded outcomes support that choice. The default ocean view compares two hypothetical layouts using real changing PacIOOS model currents and a shared reef-area proxy. The separate tank workflow retains source tracing, frozen comparisons and trial ledgers; historical NOAA drifter studies remain research evidence.
+Nemo starts with **where floating pollution could have come from**: compare an observed path with declared candidate sources, preserve uncertainty, then use motion predictions to compare interception layouts and test the outcome. Source tracing remains the core question; prevention is the next decision, not a replacement for origin inference. The controlled tank workflow implements candidate-source support, frozen comparisons and trial ledgers. The separate ocean view compares two hypothetical layouts using real changing PacIOOS model currents; historical NOAA drifter studies evaluate motion models.
 
 **Nemo** is the product name. Repository names, Python packages, environment variables and API identifiers remain **ReefTrace**. The current product is a controlled prototype: its software works without a physical rig, while real tank performance and environmental benefit remain unmeasured.
+
+**Source-origin scope:** Investigations compares **two to eight declared tank entry regions** by simulating forward from each and matching the saved trajectory or supported retained endpoint. A valid result may be Ranked, Unknown or Invalid; source-support bars are conditional compatibility, not calibrated polluter probabilities. It does not yet search arbitrary ocean locations or validate a geographic pollution source. The ocean RK4 forecast answers where a modeled object might go, not where it originated. A better forward-motion error in Data Lab does not by itself demonstrate source-recovery accuracy. Read [source tracing and the original mission](docs/source-tracing-mission.md).
 
 Start with the [complete product handbook](docs/tideward-product-guide.md) for every feature and graph, and [Chalk in Nemo](docs/chalk-user-guide.md) for the AI integration's job, permissions, current model selection and failure behavior. Historical setup notes retain their original context; the current handbook explains which capabilities are local, public, verified or awaiting physical measurements.
 
@@ -51,9 +53,21 @@ The default ocean comparison uses only changing-current advection. The earlier s
 
 Loading the source demo already prepares example evidence; explicitly recomputing a case creates a new evidence identity/revision. Repeated loads reuse active demo cases. Loading after STOP creates an active replacement while preserving the stopped history. The full workspace retains the other diagnostics, Camera commissioning and Settings for deliberate advanced use.
 
-**New exploratory motion diagnostic:** a separately committed constant initial residual adds the final observed drift minus the origin HYCOM current to a copy of the current field, then uses the existing WGS84/RK4 integrator. Its saved first score retains **48/48 cells using twelve already-viewed processed positions**. Equal-ID average miss is **1,030.049 m** for the residual candidate versus **1,510.232 m** last drift and **5,063.020 m** current-only. Both groups improve descriptively, but the candidate was designed after viewing the earlier outcome; this is not an unseen-data or operational improvement claim. The pinned read-only `/api/v1/research/origin-residual` API and its operator-protected Chalk review are implemented separately. The new diagnostic's Data Lab card is not connected yet, and no operational model is automatically changed. Read [the saved result and exact identities](docs/origin-residual-results.md). A local explicit numerical replay reproduced the saved forecasts and scores without rewriting artifacts; that is separate from the API reader's saved-byte verification.
+**New exploratory motion diagnostic:** a separately committed constant initial residual adds the final observed drift minus the origin HYCOM current to a copy of the current field, then uses the existing WGS84/RK4 integrator. Its saved first score retains **48/48 cells using twelve already-viewed processed positions**. Equal-ID average miss is **1,030.049 m** for the residual candidate versus **1,510.232 m** last drift and **5,063.020 m** current-only. Both groups improve descriptively, but the candidate was designed after viewing the earlier outcome; this is not an unseen-data or operational improvement claim. The pinned read-only `/api/v1/research/origin-residual` API and its operator-protected Chalk review are implemented separately. The new diagnostic is available in **Data Lab → Research details and historical buoy validation → Load drift-offset study**, with all four saved model rows, both groups, fixed-scale path toggles and a separate bounded Chalk review. Here ‘origin’ means forecast start, not pollution source; source inference remains in Investigations. No operational model is automatically changed. See [the card guide](docs/origin-residual-datalab.md). Read [the saved result and exact identities](docs/origin-residual-results.md). A local explicit numerical replay reproduced the saved forecasts and scores without rewriting artifacts; that is separate from the API reader's saved-byte verification.
 
 ## What is working, and what the evidence proves
+
+The source-first/Data Lab integration checkpoint passed **1,914 Python tests,
+299 frontend tests and 207 isolated HTTP checks**, with zero HTTP failures and
+the same six expected external/physical blockers, plus Ruff, ESLint, TypeScript
+and an isolated production build. Browser checks loaded the pinned four-model
+result, inspected both groups, verified fixed scores/axes when toggling paths,
+and retained **STOP · No live model response** with providers disabled. All five
+device/provider/messaging/scientific-execution guard counters stayed zero and
+the disposable store was unchanged. The active API and Photon worker were not
+restarted; loading previously added routes there is a separate runtime step.
+The [local receipt](docs/research-evidence/nemo-source-first-origin-ui-verification-20261017.json)
+records exact sources and scope. Hosted CI for the resulting commit is separate.
 
 | Part | Current implementation and evidence | Remaining boundary |
 | --- | --- | --- |

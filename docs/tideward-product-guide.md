@@ -10,13 +10,24 @@ This is the current complete guide. It supersedes **Nemo — complete product ha
 
 The product and one-word landing hero are now **Nemo**. The hero uses the same **Rajdhani** headline typeface verified on the Blue Marine reference, self-hosted with its Open Font License. The opening slogan, landing narration/voice choices/captions and manual motion buttons have been removed. Automatic reduced-motion and hidden-tab suspension remain. Existing research/package/API/evidence identifiers are unchanged. See [the current landing guide](ocean-landing-journey.md).
 
-A separate [origin-residual development result](origin-residual-results.md) now preserves **48/48 model/hour cells on twelve already-viewed processed buoy positions**. Its initial-motion-plus-current candidate has descriptively lower error in both groups, with macro ADE **1,030.049 m**, versus last drift **1,510.232 m** and current-only **5,063.020 m**. This was developed after viewing the preceding result; it is not an untouched test, learned correction, identified physical cause or promoted operational model. The frozen v1/v2 studies stay unchanged. Its pinned public read-only API and authenticated bounded Chalk review are implemented; the new Data Lab card is not connected yet. A local exact numerical replay reproduced the saved forecasts/scores without rewriting them. API tests used a mocked provider, so a live Chalk round trip for this diagnostic is still unverified.
+A separate [origin-residual development result](origin-residual-results.md) now preserves **48/48 model/hour cells on twelve already-viewed processed buoy positions**. Its initial-motion-plus-current candidate has descriptively lower error in both groups, with macro ADE **1,030.049 m**, versus last drift **1,510.232 m** and current-only **5,063.020 m**. This was developed after viewing the preceding result; it is not an untouched test, learned correction, identified physical cause or promoted operational model. The frozen v1/v2 studies stay unchanged. Its pinned public read-only API and authenticated bounded Chalk review are implemented. Data Lab now includes an explicit **Load drift-offset study** card inside historical research, with four model rows, both groups, independent paths, fixed axes and disabled-provider handling. ‘Origin’ here means forecast start, not an inferred pollution source. See [the card guide](origin-residual-datalab.md). A local exact numerical replay reproduced the saved forecasts/scores without rewriting them. API tests used a mocked provider, so a live Chalk round trip for this diagnostic is still unverified.
 
 Historical checkpoint counts and pending-at-capture CI wording below retain their original scope. The latest release must be checked against its exact commit. Software checks do not establish physical tank or reef benefit.
 
 ## 1. What the product does
 
-Nemo helps a team ask where floating pollution could come from, compare where to intercept it before it reaches a protected area, and preserve evidence for checking whether the intervention actually worked. It combines a local camera experiment, numerical transport models, public ocean research and a bounded AI evidence interpreter.
+Nemo starts with **where observed floating pollution could have come from**.
+Investigations compares declared candidate entry regions with the observed path
+under a frozen drift model. Movement prediction and interception comparison
+extend that source question into a decision and a test; they do not replace it.
+The intended sequence is observe → assess possible origin → predict movement →
+compare interventions → record actual outcomes. See [source tracing and its
+validation limits](source-tracing-mission.md).
+
+The implemented origin estimator is scoped to two to eight declared tank entry
+regions. It does not yet search arbitrary ocean locations or identify a real
+polluter. The geographic RK4 forecast and NOAA error tables evaluate movement,
+not source recovery; real source accuracy needs new source-labelled trials.
 
 The software has three distinct evidence environments:
 

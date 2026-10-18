@@ -1,0 +1,39 @@
+Grok
+Worked for 4s
+
+A. Source inference and interception in one project.
+
+Nemo uses observed floating-object movement to assess which of a declared set of candidate origins is better supported, then predicts later movement, compares interception layouts and checks the outcome against independent records.
+
+Today the source engine is a centimetre-scale tank model that scores between two and eight candidate polygons with forward Euler–Maruyama advection–diffusion, reflecting walls and absorbing traps; a geographic source engine that searches an unrestricted coastline or runs the ocean RK4 backward does not exist.
+
+B. Audit of the proposed next experiment.
+
+The plan is sound in outline—fit and validate drift independently, freeze polygons/priors/age/noise/gates/windows/sensitivity, keep the evaluator’s source/time separate from the estimator, save the report before unblinding, and retain every planned slot—but four gaps should be closed before freeze.
+
+Leakage: the exposure audit already shows the older frozen inventory omits later scored studies, so any “exclude all viewed IDs” rule must be rebuilt from the complete current set or it will admit previously scored trajectories.
+
+Model mismatch: the estimator’s Euler–Maruyama tank dynamics are not the WGS84 RK4 used for ocean forcing; a residual or flow field transferred from the ocean diagnostic is not a valid tank prior.
+
+Physical control: no real tank source-recovery trial exists; USB-camera tracking of one red token and a manually powered pump do not yet supply the balanced known-source releases the plan requires.
+
+Identifiability: with only relative support among declared polygons, two nearby sources can remain inseparable even when the trajectory is long; the freeze must state the minimum separation and path-coverage gates before any release is collected, without choosing those numbers from the eventual outcomes.
+
+C. Source-evaluation contract.
+
+Denominators are planned slots (every declared release × mode) and accepted slots (those that return ranked or unknown with a finite leading source). Report correct-accepted/planned, correct-accepted/accepted, wrong-accepted/accepted and accepted/planned; if a denominator is zero, withhold the fraction rather than emit 0 or 100. Absolute fit remains a length-normalized position kernel, not a p-value; bars stay relative support.
+
+Hostile synthetic tests:
+
+Identical generator and candidate set returns the true source as ranked when separation and coverage gates pass.
+Retained-endpoint mode with unsupported retention returns Unknown, not ranked.
+Invalid mapping or token-class mismatch returns Invalid and is counted in planned but not accepted.
+A sensitivity variant that changes the leading source adds ASSUMPTION_SENSITIVE and withholds the accepted rank.
+Two overlapping candidate polygons produce no ranked source even when the trajectory is perfect.
+Mutating the true-source label after the report hash is stored does not change the estimator output.
+
+These are software contracts. A real source-labelled tank trial supplies what buoy ADE cannot: an independent release identity that was never used to fit the flow or the likelihood, so an accepted rank can be scored as correct or wrong rather than merely close in position.
+
+D. Future geographic origin prototype.
+
+Name it separately (for example forward-ensemble-origin-v0). Candidate regions and release-time windows are declared in advance; each is seeded forward with the existing bounded RK4 under an explicit object-response and retention assumption and under flow-field uncertainty. Observed track or endpoint likelihoods are compared across the ensemble; no naive backward integration is performed. An unknown or misspecified source returns Unknown; provenance records the field hash, issue-time status and the exclusion set. With saved historical fields the prototype can be exercised on synthetic tracks or on already-viewed buoy segments labelled only as movement tests. A source-labelled validation still requires new evidence—controlled releases or independently documented debris origins—that does not exist in the current archive.

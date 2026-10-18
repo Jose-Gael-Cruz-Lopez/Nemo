@@ -27,7 +27,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_RECEIPT_BYTES = 2_000_000
 MAX_TIMEOUT_SECONDS = 240
 GUARD_KEYS = {"camera_open_attempts", "provider_http_attempts",
-              "photon_send_attempts", "photon_poll_attempts"}
+              "photon_send_attempts", "photon_poll_attempts",
+              "origin_residual_execution_attempts"}
 EXPECTED_BLOCKERS = {"Chalk live model verification", "physical webcam/tank calibration",
                      "Photon device round trip", "xAI speech provider round trip",
                      "live Chalk prevention response", "live Chalk validation review"}
@@ -37,7 +38,8 @@ import atexit, hashlib, json, os
 from pathlib import Path
 import cv2, httpx, uvicorn
 counts = {"camera_open_attempts": 0, "provider_http_attempts": 0,
-          "photon_send_attempts": 0, "photon_poll_attempts": 0}
+          "photon_send_attempts": 0, "photon_poll_attempts": 0,
+          "origin_residual_execution_attempts": 0}
 guard_path = Path(os.environ["AUDIT_GUARD_RECEIPT"])
 guard_path.write_text(json.dumps(counts))
 def forbidden(name):
@@ -51,6 +53,12 @@ httpx.AsyncClient.request = forbidden("provider_http_attempts")
 from adapters.photon.transport import PhotonTransport
 PhotonTransport.send_saved = forbidden("photon_send_attempts")
 PhotonTransport.list_page = forbidden("photon_poll_attempts")
+# This result is a saved-artifact read, never a new forecast or first score.
+from apps.ocean.reeftrace_ocean import origin_residual as residual_model
+from scripts import evaluate_origin_residual_diagnostic as residual_script
+for name in ("build_forecasts", "score_forecasts", "corrected_field"):
+    setattr(residual_model, name, forbidden("origin_residual_execution_attempts"))
+residual_script.first_score = forbidden("origin_residual_execution_attempts")
 from apps.api.reeftrace_api.core.settings import Settings
 from apps.api.reeftrace_api.main import create_app
 app = create_app(Settings(_env_file=None, data_dir=Path(os.environ["AUDIT_STORE"]),
@@ -320,6 +328,111 @@ def matched_version_checks(req, check, *, v1_snapshot, store_digest, root=ROOT):
         "scored_cells": scores["scored_cell_count"], "store_unchanged": True}
 
 
+def origin_residual_checks(req, check, *, store_digest, root=ROOT):
+    """Exercise the fixed exploratory result over HTTP with providers disabled.
+
+    Expected numbers come only from the authoritative saved-artifact reader.
+    No fixture is rescored and no missing target is replaced with a success.
+    """
+    from apps.ocean.reeftrace_ocean.origin_residual_result_identity import IDENTITY_SHA256
+
+    # Direct `python scripts/e2e_offline.py` puts scripts/, not the repository,
+    # on sys.path. Keep the same reviewed import scope in CLI and pytest runs.
+    previous = sys.path[:]
+    try:
+        sys.path.insert(0, str(ROOT))
+        from scripts.evaluate_origin_residual_diagnostic import read_diagnostic
+    finally:
+        sys.path[:] = previous
+
+    directory = Path(root) / "data/research/origin-residual-v1"
+
+    def artifacts():
+        return {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+                for path in directory.iterdir() if path.is_file()}
+
+    before_files, before_store = artifacts(), store_digest()
+    authoritative = read_diagnostic(directory, expected_identity_sha256=IDENTITY_SHA256)
+    base = "/research/origin-residual"
+    selected = req(base, auth=False)
+    check("origin-residual HTTP envelope equals the authoritative pinned artifact reader",
+          selected == authoritative)
+    report, forecasts, identity = (selected[key] for key in (
+        "report", "forecasts", "artifact_identity"))
+    scores = report["scores"]
+    check("exploratory result retains two groups, four candidates and twelve reused targets",
+        report["study_id"] == identity["study_id"] == forecasts["study_id"]
+        == "origin-residual-gdp-hycom-15m-exploratory-v1"
+        and identity["identity_sha256"] == IDENTITY_SHA256
+        and identity["integrity_verified"] is identity["external_result_pin_verified"] is True
+        and identity["numeric_replay_verified"] is False
+        and identity["verification_scope"] == "SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY"
+        and scores["planned_group_count"] == len(scores["groups"]) == len(forecasts["groups"]) == 2
+        and scores["planned_cell_count"] == forecasts["planned_cell_count"] == 48
+        and scores["planned_distinct_target_count"] == forecasts["planned_distinct_target_count"] == 12
+        and len(scores["models"]) == len(forecasts["model_ids"]) == 4
+        and sum(len(candidate["cells"]) for group in scores["groups"]
+                for candidate in group["candidates"]) == 48
+        and all(len(group["candidates"]) == 4 for group in scores["groups"])
+        and report["analysis_scope"] == scores["analysis_scope"]
+        == forecasts["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+        and report["previously_viewed_target_outcomes"] is True
+        and scores["previously_viewed_target_outcomes"] is True
+        and forecasts["previously_viewed_target_outcomes"] is True
+        and all(scores[key] is False for key in (
+            "statistical_independence", "automatic_winner_selected", "automatic_model_promotion",
+            "operational_forecast_skill_verified", "physical_validation", "heldout_tuning", "global_training")))
+    check("exploratory coverage and primary table equal saved outcomes without numerical replay",
+        scores == authoritative["report"]["scores"]
+        and scores["scored_cell_count"] == sum(
+            row["metrics"]["scored_count"] for row in scores["models"])
+        and scores["primary_common_cohort_complete"]
+            is (scores["scored_cell_count"] == scores["planned_cell_count"])
+        and ((scores["primary_equal_id_macro_results"] is not None)
+             is scores["primary_common_cohort_complete"]))
+    pins = {key: identity[key] for key in (
+        "report_sha256", "protocol_sha256", "identity_sha256")}
+    question = {"question": "Explain this exploratory result and the next independent measurement.",
+                **pins}
+    req(base + "/investigate", question, expected=401, auth=False)
+    invalid = [{**question, "question": " "}, {**question, "question": True},
+               {**question, "question": "x" * 2001}, {**question, "study_version": "v2"}]
+    for key in pins:
+        missing = dict(question)
+        del missing[key]
+        invalid.extend((missing, {**question, key: "not-a-sha256"}))
+    for body in invalid:
+        req(base + "/investigate", body, expected=422)
+    for key in pins:
+        req(base + "/investigate", {**question, key: "0" * 64}, expected=409)
+    review = req(base + "/investigate", question)
+    check("disabled origin-residual Chalk retains exact report and no fabricated live answer",
+        review["schema_version"] == 1
+        and review["kind"] == "ORIGIN_RESIDUAL_RESEARCH_INVESTIGATION"
+        and review["scope"] == "READ_ONLY_POST_OUTCOME_EXPLORATORY_DIAGNOSTIC"
+        and review["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+        and review["previously_viewed_target_outcomes"] is True
+        and review["provider"] == "chalk" and review["action"] == "STOP"
+        and review["failure_code"] == "NOT_CONFIGURED"
+        and review["live_model_response"] is False
+        and review["research_report"] == report and review["artifact_identity"] == identity
+        and all(review[key] == value for key, value in pins.items())
+        and review["evidence_ids"] == review["trace"] == []
+        and all(review[key] is False for key in (
+            "numeric_replay_verified", "store_written", "hardware_actuation",
+            "physical_validation", "automatic_model_promotion")))
+    check("origin-residual research leaves full store and all saved artifacts unchanged",
+        req(base, auth=False) == selected and store_digest() == before_store
+        and artifacts() == before_files)
+    return {"status": "PINNED_EXPLORATORY_RESULT_READ_ONLY_VERIFIED", **pins,
+        "analysis_scope": "POST_OUTCOME_EXPLORATORY", "previously_viewed_target_outcomes": True,
+        "planned_cells": scores["planned_cell_count"], "scored_cells": scores["scored_cell_count"],
+        "planned_distinct_targets": scores["planned_distinct_target_count"],
+        "primary_equal_id_macro_results": scores["primary_equal_id_macro_results"],
+        "numeric_replay_verified": False, "store_unchanged": True, "artifacts_unchanged": True,
+        "cache_control_scope": "Data/route responses are no-store; pre-handler 422 schema headers are recorded separately, not guaranteed"}
+
+
 def extra(result, api, token):
     checks = result["extra_checks"]
 
@@ -333,6 +446,16 @@ def extra(result, api, token):
             response = client.request("GET" if body is None else "POST", api + "/api/v1" + path,
                 headers={"Authorization": "Bearer " + token} if auth else {}, json=body)
             check(f"HTTP {response.request.method} {path.split('?')[0]} → {expected}", response.status_code == expected)
+            # Pydantic rejects 422 requests before the route's Response exists;
+            # its generic validation response is distinct from a result read.
+            if path.startswith("/research/origin-residual"):
+                if expected == 422:
+                    result["evidence"].setdefault("origin_residual_schema_response_headers", []).append({
+                        "status": response.status_code,
+                        "cache_control": response.headers.get("cache-control")})
+                else:
+                    check("origin-residual result or route-error response is explicitly no-store",
+                          response.headers.get("cache-control") == "no-store")
             return response.json()
 
         def store_digest():
@@ -459,6 +582,8 @@ def extra(result, api, token):
             and matched_review["hardware_actuation"] is False)
         result["evidence"]["matched_current_v2"] = matched_version_checks(
             req, check, v1_snapshot=matched, store_digest=store_digest)
+        result["evidence"]["origin_residual"] = origin_residual_checks(
+            req, check, store_digest=store_digest)
         fresh_coverage = fresh["coverage"]
         check("fresh study keeps the frozen requested cohort and all missing or failed outcomes",
             fresh["kind"] == "FRESH_NOAA_DRIFTER_STUDY"

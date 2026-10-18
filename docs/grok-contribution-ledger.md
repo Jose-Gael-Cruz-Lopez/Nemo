@@ -1,4 +1,21 @@
-# Tideward: Grok contribution and evidence ledger
+# Nemo: Grok contribution and evidence ledger
+
+**Source-first continuation — 17 October local / 18 October UTC:** the additive
+archive now contains **14 actual web rounds / 28 complete prompt and response
+captures**. Rounds thirteen and fourteen review the origin-residual Data Lab
+contract and source-recovery validation respectively. The entire preceding
+475,681-byte twelve-round archive remains an exact unchanged prefix. Original
+canonical bundle/43-file manifest and all frozen scientific method/data artifacts
+remain unchanged. See Stages O–P below. The thirteenth review's UI advice is now
+implemented in a separate explicit-load Data Lab card; **1,914 Python tests,
+299 frontend tests and 207 guarded HTTP checks** passed locally, alongside
+lint/types/isolated build and browser checks. The [sanitized verification
+receipt](research-evidence/nemo-source-first-origin-ui-verification-20261017.json)
+separates actual execution from these static exchanges, which do not execute code
+or create new empirical results. Exact resulting-commit hosted CI is a separate
+release check. Source tracing remains the core question:
+[its bounded current scope and next validation work](source-tracing-mission.md)
+are distinct from downstream interception and ocean forward-motion research.
 
 **Current research checkpoint — 17 October 2026:** Nemo's separate [origin-residual result](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/origin-residual-results.md) retains **48/48 planned cells using twelve already-viewed processed GDP targets**, with equal-ID macro ADE/FDE **1,030.0495 m / 2,355.9582 m**, descriptively lower than the other three candidates in both groups' aggregates. A separately recorded **local exact forecast/score replay passed without changing any saved artifact bytes**; the API reader's own `numeric_replay_verified:false` remains its narrower saved-byte/lineage scope. The [additive continuation](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-continuation.md) now preserves **twelve actual Grok web review rounds / twenty-four captures**, including the new result interpretation. Stage M's unscored capture remains historical. The latest response's claim that publication still needs a software external pin is corrected: the separately literal-anchored read-only API/Chalk integration is implemented, while independent external attestation is absent; the Data Lab diagnostic card is not connected at this review checkpoint. A suggested six-new-group metadata-only cohort is **not frozen, selected or acquired**. No learned model, untouched-test/causal/independence/physical claim, promotion or tuning follows. The original v2 **36/36**, v1 **0/36** and earlier six-group **180/180** remain unchanged. **40 synthetic contracts, 49 new API tests and 98 adjacent regressions** are separate/subset checks, not a new full-suite total. Historical main [`33280da7`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/33280da7c348930ca7e63cf16b6a98c4cdf9987d) passed [hosted CI 39075407005](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39075407005), **1,809 Python / 225 frontend / 174 HTTP / zero HTTP failures / six blocked scopes**; current release verification remains separate. No acquisition, xAI API/credits/billing, new Photon message, camera or physical trial was used for this review/documentation.
 
@@ -585,6 +602,46 @@ The older archived Grok records do **not** establish that Grok authored the orig
 RK4 implementation. Stages H–J above record the actual knot/fractional-clock implementation reviews, local
 corrections and separately identified executed regressions without retrofitting that earlier authorship.
 
+## Stage O — actual origin-residual Data Lab contract review
+
+The complete submitted [prompt](grok-evidence/grok-origin-residual-ui-review-prompt.txt)
+and [response](grok-evidence/grok-origin-residual-ui-review-response.txt) were
+captured from the existing Grok project. The exchange supplies the actual
+top-level forecast envelope and literal result pins, four candidates/two groups,
+48 cells/twelve already-viewed targets, and bounded Chalk contracts. Accepted
+advice covers fixed-scale/gap-preserving plots, retained denominators, snapshot
+validation and explicit failure states. Two points are corrected in the archive:
+use an explicit Load action rather than mount-time acquisition, and do not
+require completeness by deleting incomplete outcomes; preserve partial records
+and withhold the primary comparison instead. Browser display guards do not
+replace backend saved-byte verification or independent scientific attestation.
+Implementation/tests are separate records; no candidate is retuned or promoted.
+
+## Stage P — actual source-first mission and validation review
+
+The complete [source review prompt](grok-evidence/grok-source-first-validation-review-prompt.txt)
+and [response](grok-evidence/grok-source-first-validation-review-response.txt)
+respond to the user's original origin question. The source estimator compares
+two to eight declared tank entry regions, not arbitrary global pollution sources.
+The current ocean RK4 and NOAA motion errors do not validate source recovery.
+
+**A substantive mistake is retained and rejected:** Grok defined accepted slots
+to include Unknown results with a finite leading candidate. The implementation
+has a separate `ranked_source`; only a ranked accepted source identification may
+enter the accepted denominator. Unknown is abstention even if conditional scores
+and `leading_source` are available. The proposed validation reports all planned,
+Invalid, Unknown, ranked, correct and wrong counts without changing that rule.
+
+Further corrections retain the difference between a future NOAA exposure
+inventory and physical-release leakage controls, avoid guaranteeing that every
+same-generator synthetic track is identifiable, and reject a promise that every
+unknown/misspecified geographic source will automatically return Unknown. That
+requires explicitly tested future out-of-set/model-mismatch behavior. The new
+[mission and validation guide](source-tracing-mission.md) remains an unexecuted
+physical/geographic plan; no source labels, trajectories or numerical scores were
+invented. Primary BAKTRAK and official OpenDrift references were checked outside
+Grok; Nemo does not claim to implement or have validated their complete methods.
+
 ## 5. What is visible in the application
 
 | Product surface | Evidence-backed functionality | Contribution boundary |
@@ -593,6 +650,7 @@ corrections and separately identified executed regressions without retrofitting 
 | Ocean Prevention and combined graph | Changing-current RK4 paths; A/B/common trajectories; layer checkboxes; equal axes; supported/unresolved outcomes; tie and conditional recommendation | Existing local implementation; no blanket Grok authorship claim |
 | New numerical-quality disclosure | Local solver-step and same-path contact-chord sensitivity, missing/partial coverage retained, compact evidence available to Chalk | Post-guard local suites and live Chalk passed as Stage J records; final commit/CI/hosted verification pending; not physical accuracy |
 | Matched-current v1/v2 Data Lab | Version-bound saved reports, real NOAA tracks, fixed models and full 36-cell primary v2 comparison; v1 remains 0/36 | Twelve-round additive review history; current-only negative result preserved, no automatic promotion or physical skill |
+| Initial drift-offset Data Lab | Explicit pinned result load, four saved model rows, both buoy groups, fixed-axis path toggles and bounded Chalk review | Round thirteen static implementation review; 48 cells reuse twelve already-viewed positions; zero fitted parameters and no source-accuracy or transfer claim |
 | Chalk research explanations | Reads immutable numerical evidence and explains limits with exact hashes/citations | Chalk is a separate gateway/provider integration; Grok assistance does not make it the physics engine |
 | Evidence briefing | Frozen source text plus separately labelled satellite heat context; explicit disabled xAI speech path | Real space-data artifact and implemented adapter; no live Voice claim |
 | Camera/tank | Native USB preview, pixel grid; separately gated measured homography, empirical drift and real trial ledger | Not validated by historical buoy or ocean API results; zero physical tank commissioning claimed at this checkpoint |
