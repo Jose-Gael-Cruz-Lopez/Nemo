@@ -97,11 +97,11 @@ Nothing opens it automatically.
 | Field | Value |
 | --- | --- |
 | Device index and backend shown in Status | C270 at USB device index 1 on this laptop (built-in and iPhone cameras are 0 and 2), AVFOUNDATION, 1280 × 720 |
-| Camera session ID | `usb-392fa98384924312` (the camera dropped out twice earlier; each restart is a new session) |
+| Camera session ID | `usb-71fc876dd8b54b73`. The app was restarted to load the sparkle fix, so the camera got a new session. Phase correlation showed the camera within about 3.4 px of the placement pose (earlier readings 3.2–5.1 px), so the same cap-placement points were resubmitted. |
 | Frame size (px) | 1280 × 720 |
 | Mapping marks used (count) and check marks (count, all different) | **Cap-placement method, no tape marks.** One green cap pushed against a straight wall, and its centre found by the empty-tank detector (pump off). Centre = cap radius (assumed 1.45 cm, typical 26/22 closure) from the wall, and the ruler distance along the wall. Fit (4): left wall 7 in, top wall 2 in from the top-right corner, right wall 4 in, bottom wall 7 in. Checks (3): left wall 4 in, right wall 7 in, top wall 2 in from the top-left corner. Small camera shifts (up to about 5 px) were measured by phase correlation and removed before locating the cap. |
 | Declared check-point tolerance (cm, set before fitting) | **3.0 cm, set after seeing the placement data (disclosed).** It is the 95% bound from the 7-point fit's residual standard error. The team's original 0.5 cm cannot be met with this method. |
-| Calibration ID | `cal-5f6b56f3ce6cae80` |
+| Calibration ID | `cal-0145710e311bac07`, the current session's mapping (supersedes `cal-5f6b56f3ce6cae80` from the previous session; same placement data) |
 | Approved? Max / mean check error (cm) | Approved under the 3.0 cm declared bound. Independent check errors 1.91, 2.24, 2.77 cm (mean 2.30, max 2.77). |
 
 If the mapping is not approved, re-measure the marks. Do not raise the tolerance.
@@ -113,6 +113,15 @@ If the mapping is not approved, re-measure the marks. Do not raise the tolerance
 - leave-one-out errors 0.8–3.3 cm, except the only bottom-wall point (6.4 cm, an extrapolation), so accuracy is weakest near the bottom wall.
 
 Treat positions as **±1.5 cm typical, up to ±3 cm**. Source regions or zones closer together than about 3 cm cannot be distinguished reliably. This is a coarse mapping: good enough for the software demo, not precise metrology.
+
+### Token detection (colour-independent, pump on)
+
+| Field | Value |
+| --- | --- |
+| Detector | `foreground_reference_v1` (empty-tank reference; green bottle caps) |
+| Empty-tank reference (pump on, lowest setting) | `ref-807c157d75211178-d8b54b73` |
+| One-token size | 3219 px; recordings accept 1127–9656 px |
+| Notes | Ripple sparkles with the pump on: median about 50 px, at most about 700 px; the cap is 4.5–7× larger. Stand back from the bin during captures and recordings: a body shadow once changed brightness by +24% and was refused. |
 
 ## 4. Drift recordings and profiles: one block per layout
 
@@ -169,7 +178,7 @@ capture origin is `SYNTHETIC_FAKE_CAPTURE` is never physical evidence.
 
 ## 6. Current blockers
 
-1. **Token detection: wired in, not yet tried on the real camera.** Green caps are found by
+1. **Token detection: working on the real C270** (reference and token size recorded above). Green caps are found by
    the colour-independent detector (`docs/foreground-token-detection.md`), now selectable
    in recording and in the field wizard (Jose approved the shared-file change, relayed by
    Megana). Still to do on the rig: put a plain light sheet under the clear bin, start the
