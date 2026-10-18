@@ -10,6 +10,8 @@ export type WaterMapping = {
   homography_image_to_cm?: number[][]; plane?: string; units?: string;
   /** Frozen fitting-mark hull, retained by the UI from the submitted correspondences. */
   mapping_polygon_px?: number[][];
+  /** An operator-authorized visual estimate; never a calibrated measurement. */
+  estimated?: boolean;
 };
 
 export function invertMatrix(value: unknown): Matrix3 | null {
@@ -59,8 +61,10 @@ export function nativePixel(offsetX: number, offsetY: number, shownWidth: number
 }
 
 export type GridLine = { axis: "x" | "y"; value: number; start: Point; end: Point };
-export function metricGrid(mapping: WaterMapping | null | undefined, sessionId: string | null, width: number, height: number): { hull: Point[]; lines: GridLine[]; spacingCm: number; matrix: number[][] } | null {
-  if (!mapping?.approved || mapping.camera_session_id !== sessionId || mapping.image_size_px[0] !== width || mapping.image_size_px[1] !== height || mapping.plane !== "measured_water_surface" || mapping.units !== "cm") return null;
+export function metricGrid(mapping: WaterMapping | null | undefined, sessionId: string | null, width: number, height: number): { hull: Point[]; lines: GridLine[]; spacingCm: number; matrix: number[][]; estimated: boolean } | null {
+  const estimated = mapping?.estimated === true && mapping.approved === false && mapping.plane === "estimated_water_surface";
+  const measured = mapping?.approved === true && !mapping.estimated && mapping.plane === "measured_water_surface";
+  if ((!estimated && !measured) || !mapping || mapping.camera_session_id !== sessionId || mapping.image_size_px[0] !== width || mapping.image_size_px[1] !== height || mapping.units !== "cm") return null;
   const matrix = mapping.homography_image_to_cm, inverse = invertMatrix(matrix);
   const hull = convexHull(mapping.mapping_polygon_px);
   if (!matrix || !inverse || !hull.length || hull.some(([x,y]) => x < 0 || y < 0 || x > width-1 || y > height-1)) return null;
@@ -93,5 +97,5 @@ export function metricGrid(mapping: WaterMapping | null | undefined, sessionId: 
       }
     }
   }
-  return { hull,lines,spacingCm,matrix };
+  return { hull,lines,spacingCm,matrix,estimated };
 }

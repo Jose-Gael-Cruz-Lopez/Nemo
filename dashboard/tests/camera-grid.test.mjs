@@ -33,6 +33,7 @@ test("a projective mapping round-trips points and refuses singular matrices or t
 test("centimetre grid is confined to the measured fitting-mark hull",()=>{
   const grid = metricGrid(mapping,"usb-test",1000,600);
   assert.ok(grid);assert.equal(grid.spacingCm,5);
+  assert.equal(grid.estimated,false);
   assert.deepEqual(grid.hull,fitPixels);
   assert.ok(grid.lines.length > 5);
   for(const line of grid.lines) {
@@ -55,6 +56,16 @@ test("projective grid obeys an oblique measured boundary rather than extrapolati
 test("missing, unapproved, stale, wrong-plane, wrong-size and horizon-crossing maps cannot produce a centimetre grid",()=>{
   for(const change of [{approved:false},{camera_session_id:"old"},{image_size_px:[1920,1080]},{units:"m"},{plane:"tank_bottom"},{homography_image_to_cm:undefined},{mapping_polygon_px:undefined},{mapping_polygon_px:[[0,0],[1,1],[2,2],[3,3]]},{homography_image_to_cm:[[1,0,0],[0,1,0],[1,0,-500]]}]) assert.equal(metricGrid({...mapping,...change},"usb-test",1000,600),null);
   assert.equal(metricGrid(null,"usb-test",1000,600),null);
+});
+test("an explicit estimated grid stays unapproved and requires the current camera geometry",()=>{
+  const estimated={...mapping,approved:false,estimated:true,plane:"estimated_water_surface"};
+  const grid=metricGrid(estimated,"usb-test",1000,600);
+  assert.ok(grid);assert.equal(grid.estimated,true);
+  assert.equal(estimated.approved,false);
+  assert.deepEqual(grid.matrix,mapping.homography_image_to_cm);
+  for(const change of [{approved:true},{estimated:false},{plane:"measured_water_surface"},{camera_session_id:"old"},{image_size_px:[1280,720]}]) {
+    assert.equal(metricGrid({...estimated,...change},"usb-test",1000,600),null);
+  }
 });
 test("calibration parsing freezes submitted fitting marks and preserves a legacy draft without inventing a matrix",()=>{
   const report = {...mapping,calibration_id:"cal-test",max_error_cm:0.2,max_allowed_error_cm:0.5,mean_error_cm:0.1,validation_count:3};
@@ -114,6 +125,26 @@ test("stream source is session-bound and inactive previews contain no image requ
   const shown=renderToStaticMarkup(React.createElement(render.Preview,{...props,visible:true}));
   assert.equal((shown.match(/src="[^"]*stream.mjpg/g)??[]).length,1);
   assert.doesNotMatch(renderToStaticMarkup(render({...props,active:false})),/src=/);
+});
+
+test("estimated overlay and cursor explicitly disclose unvalidated centimetres",()=>{
+  const previousWindow=globalThis.window;
+  const callbacks=[];
+  globalThis.window={requestAnimationFrame:callback=>{callbacks.push(callback);return callbacks.length;},cancelAnimationFrame:()=>{}};
+  try {
+    const render=controller(),props={apiBase:"",width:1000,height:600,sessionId:"usb-test",active:true,calibration:{...mapping,approved:false,estimated:true,plane:"estimated_water_surface"}};
+    let tree=render(props),html=renderToStaticMarkup(tree);
+    assert.match(html,/Estimated grid \(cm · unvalidated\)/);
+    assert.match(html,/Current alignment and centimetre accuracy are unvalidated/);
+    assert.match(html,/data-camera-layer="centimetres"/);
+    assert.doesNotMatch(html,/Measured grid \(cm\)|clipped to the fitting-mark hull/);
+    descendants(tree).find(e=>e.type==="img").props.onMouseMove({clientX:250,clientY:150,currentTarget:{getBoundingClientRect:()=>({left:0,top:0,width:500,height:300})}});
+    callbacks.shift()();
+    tree=render(props);html=renderToStaticMarkup(tree);
+    assert.match(html,/estimated tank x 20.00, y 10.00 cm/);
+    assert.equal(props.calibration.approved,false);
+    render.cleanup();
+  } finally {globalThis.window=previousWindow;}
 });
 
 test("cursor updates are coalesced, stream URL stays stable and pending animation work is cleaned up",()=>{

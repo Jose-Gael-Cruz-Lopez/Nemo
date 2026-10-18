@@ -1,0 +1,31 @@
+.panel { display:grid; gap:12px; padding:16px; border:1px solid #b8d6e6; border-radius:0; background:#f3faff; color:var(--ink); font-size:12px; min-width:0; }
+.panel :is(h4,h5,p,figure) { margin:0; }
+.panel h4 { font-size:14px; font-weight:600; }
+.panel h5 { font-size:13px; font-weight:600; }
+.heading { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+.heading span { padding:3px 7px; border:1px solid #d6b980; background:#fff5df; color:#795113; font-size:11px; }
+.help, .figure figcaption { color:#426276; line-height:1.6; }
+.actions { display:flex; align-items:end; flex-wrap:wrap; gap:10px; }
+.actions label { display:grid; gap:5px; color:#426276; }
+.panel input { max-width:100px; padding:8px; border:1px solid #b8d6e6; border-radius:0; background:white; color:var(--ink); font:inherit; }
+.panel button { padding:8px 12px; border:1px solid #8ebbd1; border-radius:0; background:#e0f2fa; color:#174a62; font:inherit; cursor:pointer; }
+.panel button:disabled { opacity:.55; cursor:default; }
+.panel :is(button,input,summary):focus-visible { outline:2px solid #176589; outline-offset:3px; }
+.result { display:grid; gap:12px; padding-top:14px; border-top:1px solid #b8d6e6; }
+.result dl { display:grid; grid-template-columns:max-content minmax(0,1fr); gap:5px 14px; margin:0; line-height:1.5; }
+.result dt { color:#426276; }
+.result dd { margin:0; overflow-wrap:anywhere; }
+.figure { display:grid; gap:8px; max-width:720px; }
+.figure svg { width:100%; height:auto; background:white; border:1px solid #cfdfeb; }
+.figure svg text { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; fill:#426276; }
+.tank { fill:#f3fbff; stroke:#83abc2; stroke-width:1; }
+.grid { stroke:#d9e8f0; stroke-width:1; }
+.path { fill:none; stroke:#267dab; stroke-width:1.7; }
+.point { fill:#174e75; stroke:white; stroke-width:.6; }
+.warning, .notice, .error { padding:10px; border:1px solid #cfdfeb; line-height:1.6; }
+.warning { background:#fff7e8; border-color:#e3cc9d; color:#795113; }
+.notice { background:#e8f5fb; color:#285a76; }
+.error { background:#fff2ef; border-color:#e8bfb6; color:#8c2a1c; }
+.result details { color:#426276; line-height:1.6; }
+.result summary { width:fit-content; cursor:pointer; }
+@media(max-width:650px) { .result dl { grid-template-columns:minmax(0,1fr); gap:2px; } .result dd { margin-bottom:6px; } }

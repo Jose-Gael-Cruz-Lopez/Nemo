@@ -20,7 +20,7 @@ import demoStyles from "../components/demo-guide.module.css";
 import { FieldWorkflow } from "../components/field-workflow";
 import { CameraPlane } from "../components/camera-plane";
 import { HostedCameraPreview } from "../components/hosted-camera-preview";
-import type { CalibrationReport } from "../components/field-workflow-state";
+import type { WaterMapping } from "../components/camera-grid-state";
 import { canReloadSourceEvidence, currentSourceEvidence } from "../components/evidence-state";
 
 const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
@@ -141,7 +141,7 @@ export default function Workspace() {
   const [taskCaseId, setTaskCaseId] = useState("");
   const [device, setDevice] = useState(0);
   const [clock, setClock] = useState(0);
-  const [cameraMapping, setCameraMapping] = useState<CalibrationReport | null>(null);
+  const [cameraMapping, setCameraMapping] = useState<WaterMapping | null>(null);
   const [cameraSetupOpen, setCameraSetupOpen] = useState(false);
   const [calibration, setCalibration] = useState("");
   const [profileJson, setProfileJson] = useState("");

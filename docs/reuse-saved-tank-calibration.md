@@ -1,9 +1,12 @@
-# Reuse Megana’s measurements and run the first measured trial
+# Reuse Megana’s measurements for a rehearsal or measured trial
 
-Nemo can reuse the saved water-surface mapping after checking its alignment in the
-current camera view. **Do not repeat the ruler survey merely because the app was
-restarted.** A saved homography maps image pixels to centimetres; it does not prove
-that a moved camera, changed water height or new lens view still has that mapping.
+Nemo supports an **estimated tank rehearsal** using the saved measurements and
+unchanged historical mapping when approximate alignment is sufficient for the
+demo. This captures a new cap path without repeating the calibration placements.
+For measured flow, source evidence and field receipts, the separate checked reuse
+path still verifies current alignment. **Do not repeat the ruler survey merely
+because the app was restarted.** A historical pixel-to-centimetre matrix does not
+prove the accuracy of a moved camera, changed water height or new lens view.
 
 The measurement record is [the commissioning run log](rig-commissioning-run-log.md):
 
@@ -63,8 +66,9 @@ historical check error. This is a historical replay, **not proof that today’s
 camera view passes**. The handoff’s original `reuse_mapping.py` translates both
 its old fitting and old check pixels by the same estimated shift. That preserves
 the old residuals but does not provide independent current-view validation.
-Nemo instead holds the reconstructed matrix fixed and requires fresh current
-check pixels at the already surveyed centimetre positions.
+For checked measured reuse, Nemo instead holds the reconstructed matrix fixed
+and requires fresh current check pixels at the already surveyed centimetre
+positions. The estimated rehearsal below makes no current-accuracy claim.
 
 No reference arrays or raw images enter the exported metadata files or the hosted
 app. Keep both outputs and the original handoff private.
@@ -129,7 +133,49 @@ the whole tray. The documented index was **1 on Megana’s laptop**; it is not a
 portable camera identity. Match the saved **1280 × 720** image size. Keep the
 camera fixed, the measured waterline unchanged and the view unmirrored.
 
-## 3. Check alignment using existing centimetre positions
+## 3. Run the estimated rehearsal without repeating placements
+
+This is the current demo path when the operator accepts approximate alignment.
+It keeps the saved homography **unchanged**; it does not shift or refit the matrix,
+detect new tray boundaries, or mark the current calibration approved.
+
+1. In the local Camera workflow, select **Use current session**. Under **Map the
+   water surface**, press **Use Megana’s recorded tray measurements** and load the
+   private mapping through **Open saved mapping JSON**, or **Find saved mappings
+   on this Mac → Load mapping** if it is already in the local store. Keep the
+   saved camera resolution and the entire tray in view.
+2. In **Estimated tank rehearsal**, press **Use estimated grid**. The grid is the
+   saved 35.56 × 22.86 cm tray projected through the historical matrix; its
+   centimetres are approximate in the current view. Historical 2.77 cm check error
+   does not establish today’s error.
+3. Under **How the camera finds the token**, use **Any colour: compare with the
+   empty tank**. If a current reference and token image-area check are not already
+   ready, press **Capture empty tank** with no cap or hands visible, then place one
+   green cap in open water and press **Measure one token**. This learns its pixel
+   size; it is not a ruler measurement or a repeat of the seven calibration poses.
+4. Return to **Estimated tank rehearsal**. Set **Capture duration (seconds)** to
+   **5**, keep one cap visible and free to move, remove hands from view, and press
+   **Record estimated rehearsal**. This is a new movement observation, not another
+   calibration-placement exercise. The pump and cap recovery remain manual.
+5. Read **Recorded rehearsal · unvalidated**. Dots are accepted camera detections;
+   lines join only consecutive detections in the same track. Missing detections,
+   occlusion and track breaks stay disconnected. Zero detections mean no path was
+   captured; one detection cannot show movement. Timing is host receipt timing,
+   not verified exposure timing.
+
+The local endpoint `POST /api/v1/camera/rehearsals` stores separate
+`estimated_rehearsal` / `estimated_rehearsal_frame` records with approximate
+`estimated_x_cm` / `estimated_y_cm`. They have no calibration, profile or case ID
+for inference and **cannot train measured flow, create source cases or freeze
+field receipts**. They contain real camera detections with estimated coordinates;
+the separate `load_estimated_rig.py` demo instead generates synthetic motion.
+Neither is a validated physical source trial.
+
+Frames stay on this Mac, and Photon replies remain off. To claim measured results
+later, continue with the alignment and independent drift checks below; the saved
+ruler distances can still be reused.
+
+## 4. Check alignment for measured work using existing centimetre positions
 
 1. Open **Calibrate a tank and record trials when ready → Map the water surface**.
 2. **Use Megana’s recorded tray measurements** fills the known tray bounds only.
@@ -160,7 +206,7 @@ Use **Export this mapping** to preserve the new report privately. The measured
 grid should appear only for an approved mapping matching this session and image
 size; a pixel guide alone is not a centimetre grid.
 
-## 4. Renew image references without remeasuring the cap
+## 5. Renew image references without remeasuring the cap
 
 An empty-tank background and token pixel area depend on the current camera pose,
 lighting, water and pump state. They are not the cap’s ruler dimensions.
@@ -178,7 +224,7 @@ lighting, water and pump state. They are not the cap’s ruler dimensions.
 The old pump-on reference `ref-7805b2034e319a02-2c674058` belongs to its original
 camera session. Merely typing its ID on another laptop cannot recreate it.
 
-## 5. Record a real drift trial, then a source observation
+## 6. Record a measured drift trial, then a source observation
 
 The previous recordings `recording-f7682c36f09048cc` and
 `recording-c8f3f60b893a4b22` were excluded: caps hit the mesh strap almost

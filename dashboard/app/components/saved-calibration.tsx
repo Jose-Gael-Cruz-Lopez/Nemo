@@ -15,6 +15,7 @@ export type SavedCalibrationProps = {
   camera: CameraStatus | null;
   disabled: boolean;
   onApply: (report: CalibrationReport) => void;
+  onSourceChange?: (source: SavedCalibrationBundle) => void;
   onCheckStart?: () => void;
   onBusyChange?: (busy: boolean) => void;
   checkPixels?: string;
@@ -22,7 +23,7 @@ export type SavedCalibrationProps = {
 };
 
 /** Mounted only in the local capture workspace; never uploads frames or reference images. */
-export function SavedCalibration({ request, camera, disabled, onApply, onCheckStart, onBusyChange, checkPixels, onCheckPixelsChange }: SavedCalibrationProps) {
+export function SavedCalibration({ request, camera, disabled, onApply, onSourceChange, onCheckStart, onBusyChange, checkPixels, onCheckPixelsChange }: SavedCalibrationProps) {
   const id = useId();
   const [bundle, setBundle] = useState<SavedCalibrationBundle | null>(null);
   const [saved, setSaved] = useState<SavedCalibrationSummary[]>([]);
@@ -65,7 +66,8 @@ export function SavedCalibration({ request, camera, disabled, onApply, onCheckSt
   function choose(next: SavedCalibrationBundle) {
     generation.current++;
     setBundle(next); setPixelText(""); setWorldText(""); setUnchanged(false); setError("");
-    setNotice("Saved measurements loaded. Check alignment before using this mapping.");
+    setNotice("Historical measurements loaded. Use the estimated rehearsal below, or verify alignment for measured work.");
+    onSourceChange?.(next);
   }
   async function run(label: string, task: (signal: AbortSignal, current: () => boolean) => Promise<void>) {
     if (active.current || disabled) return;
@@ -130,7 +132,7 @@ export function SavedCalibration({ request, camera, disabled, onApply, onCheckSt
   const locked = disabled || Boolean(busy), old = bundle?.calibration;
   return <section className={styles.panel} aria-labelledby={`${id}-title`}>
     <h4 id={`${id}-title`}>Reuse saved measurements</h4>
-    <p className={styles.help}>Load Megana’s saved mapping, then check its alignment against existing surveyed marks. Her recorded inside waterline is 35.56 × 22.86 cm; the saved mapping file is still required.</p>
+    <p className={styles.help}>Load Megana’s saved mapping for an estimated rehearsal. Measured work additionally needs verified camera alignment. Her recorded inside waterline is 35.56 × 22.86 cm.</p>
     <div className={styles.actions}>
       <button type="button" disabled={locked} onClick={loadList}>Find saved mappings on this Mac</button>
       <label className={styles.file}>Open saved mapping JSON<input type="file" accept=".json,application/json" disabled={locked} onChange={readFile} /></label>
@@ -151,6 +153,7 @@ export function SavedCalibration({ request, camera, disabled, onApply, onCheckSt
       </dl>
       <p className={styles.help}>Historical errors do not approve the current camera pose. This check keeps the saved matrix and tolerance unchanged; it does not refit them.</p>
       <button type="button" disabled={locked} onClick={download}>Export this mapping</button>
+      <details><summary>Verify current alignment for measured work</summary>
       <div className={styles.checks}>
         <label htmlFor={`${id}-pixels`}>Current pixels of three or more existing check marks<textarea id={`${id}-pixels`} rows={4} value={pixelText} disabled={locked} onChange={event => setPixelText(event.target.value)} placeholder="x, y — one point per line" /></label>
         <label htmlFor={`${id}-world`}>Their saved surveyed positions in cm, in the same order<textarea id={`${id}-world`} rows={4} value={worldText} disabled={locked} onChange={event => setWorldText(event.target.value)} placeholder="x, y — reuse the original measured coordinates" /></label>
@@ -158,6 +161,7 @@ export function SavedCalibration({ request, camera, disabled, onApply, onCheckSt
       <p className={styles.help}>Read current pixels from the camera view. Reuse the measured centimetre positions of those marks. Do not calculate the check positions from the saved mapping.</p>
       <label className={styles.confirm}><input type="checkbox" checked={unchanged} disabled={locked} onChange={event => setUnchanged(event.target.checked)} />The camera views the same surveyed water-surface plane and waterline.</label>
       <button type="button" disabled={locked || !old.approved || !camera?.running || !camera.fresh} onClick={revalidate}>Check alignment, then use mapping</button>
+      </details>
     </>}
     <p className={styles.privacy}>Mapping metadata stays with the local capture service. Frames, reference images, and tokens are not included in this file.</p>
     {busy && <p role="status">{busy}</p>}
