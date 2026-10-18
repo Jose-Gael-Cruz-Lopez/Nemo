@@ -395,6 +395,7 @@ export default function Workspace() {
     } catch (cause) { setError(`Stop was not confirmed. ${errorMessage(cause)}`); }
     finally { stoppingRef.current = false; setStopping(false); setBusy(""); setTaskCaseId(""); }
   }
+  const operationNotice = visibleNotice && <div className={`notice operation-notice ${noticeTone}`} role="status"><Icon name={noticeTone === "success" ? "check" : "help"} /><span>{visibleNotice}</span><button className="icon-button" aria-label="Dismiss notice" onClick={() => setNotice("")}><Icon name="close" /></button></div>;
 
   return <div className="app-shell">
     <div className="workspace-glyph-background" aria-hidden="true"><GlyphTrail /></div>
@@ -411,7 +412,7 @@ export default function Workspace() {
       <header className="topbar"><div className="breadcrumb"><span>Workspace</span><Icon name="chevron" /><strong>{currentView.label}</strong></div><div className="topbar-actions"><label className="search-field"><Icon name="search" /><span className="sr-only">Search observations</span><input ref={searchInput} type="search" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Enter") navigate("investigations"); }} placeholder="Find an observation…" /><kbd className="search-shortcut" aria-hidden="true">/</kbd></label><button className="icon-button" disabled={preventionBusy} title="Operator access" aria-label="Open operator access" onClick={openOperator}><Icon name="key" /></button></div></header>
       <main id="workspace-main" className="page-content" tabIndex={-1} aria-busy={!!busy || preventionBusy}>
         {connectionError && <div className="notice error" role="alert">Could not reach the API. {connectionError}</div>}
-        {visibleNotice && <div className={`notice operation-notice ${noticeTone}`} role="status"><Icon name={noticeTone === "success" ? "check" : "help"} /><span>{visibleNotice}</span><button className="icon-button" aria-label="Dismiss notice" onClick={() => setNotice("")}><Icon name="close" /></button></div>}
+        {!noticeScope && operationNotice}
         {error && <div className="notice error" role="alert">{error}<button className="icon-button" aria-label="Dismiss error" onClick={() => setError("")}><Icon name="close" /></button></div>}
         {busy && <div className="busy-notice" role="status"><span className="status-dot is-live" />{busy}…{taskCaseId && <button className="ghost-button" disabled={!token || stopping} onClick={() => void stopCase(taskCaseId)}>Stop task</button>}</div>}
 
@@ -431,6 +432,7 @@ export default function Workspace() {
         </>}
 
         {view === "investigations" && <SourceModes api={API} blocked={!!busy || stopping || preventionBusy}>
+          {noticeScope && operationNotice}
           <div className="page-heading"><div><h1 ref={investigationHeading} tabIndex={-1}>Investigations</h1><p className="page-description">Follow an observation. Compare where it could have entered.</p></div><button className="secondary-button" disabled={!!busy} onClick={loadDemo}><Icon name="plus" />Load demo</button></div>
           {!token && <div className="notice info"><Icon name="key" /><span>Connect operator access to compute source evidence or ask the investigator.</span><button className="card-link" onClick={openOperator}>Connect operator <Icon name="arrow" /></button></div>}
           <div className={demoStyles.investigations}><details className="card case-list"><summary>Choose a different observation ({filteredCases.length})</summary><section aria-label="Saved cases"><div className="card-header"><h2 className="card-title">Observations</h2><Pill>{filteredCases.length}</Pill></div>{filteredCases.length ? filteredCases.map(item => <button className="case-item" key={item.id} aria-current={item.id === selected ? "true" : undefined} disabled={!!busy} onClick={() => selectCase(item.id)}><span><strong>{caseKind(item)}</strong><span>{item.id.slice(-8)}</span></span><Pill tone={item.mode === "LIVE" ? "green" : "neutral"}>{item.mode === "SYNTHETIC" ? "Demo" : item.mode}</Pill></button>) : <div className="empty-state"><p>{query ? "No matches" : "No observations yet"}</p><span>{query ? "Try another search." : "Load a demo to get started."}</span></div>}</section></details>

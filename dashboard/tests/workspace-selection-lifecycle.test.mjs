@@ -31,7 +31,11 @@ function loadComponent(path, react) {
     if (name.endsWith("/brand")) return { BRAND_NAME: "Nemo" };
     if (name.endsWith(".module.css")) return { __esModule: true, default: new Proxy({}, { get: (_, key) => String(key) }) };
     if (name.startsWith(".")) return new Proxy({}, { get: (_, key) => {
-      if (!leaves.has(key)) leaves.set(key, function PresentationLeaf() { return null; });
+      if (!leaves.has(key)) {
+        const leaf = function PresentationLeaf() { return null; };
+        leaf.displayName = String(key);
+        leaves.set(key, leaf);
+      }
       return leaves.get(key);
     } });
     return require(name);
@@ -115,9 +119,15 @@ function find(h, predicate, description) {
 function button(h, label) { return find(h, node => node.type === "button" && text(node).trim() === label, `button ${label} exists`); }
 function click(element) { assert.ok(!element.props.disabled, "control is enabled"); return element.props.onClick(); }
 function row(h, className, id) { return find(h, node => node.type === "button" && node.props.className === className && node.key === id, `${className} row ${id} exists`); }
-function child(h, name) { return descendants(h.tree()).find(node => typeof node.type === "function" && node.type.name === name); }
+function child(h, name) { return descendants(h.tree()).find(node => typeof node.type === "function" && (node.type.displayName ?? node.type.name) === name); }
 function sourceReport(h) { return child(h, "SourceReport")?.props.evidence ?? null; }
 function comparisonReport(h) { return child(h, "ComparisonDetail")?.props.report ?? null; }
+function isOperationNotice(node) { return typeof node.props.className === "string" && node.props.className.split(" ").includes("operation-notice"); }
+function globalOperationNotices(h) {
+  const main = find(h, node => node.type === "main" && node.props.id === "workspace-main", "workspace main exists"), notices = [];
+  React.Children.forEach(main.props.children, node => { if (React.isValidElement(node) && isOperationNotice(node)) notices.push(node); });
+  return notices;
+}
 function deferred() {
   let resolve;
   const promise = new Promise(yes => { resolve = yes; });
@@ -178,6 +188,11 @@ async function withWorkspace(run, { readEvidence = id => evidence[id] } = {}) {
     else if (path.endsWith("/demo/load")) value = { cases: [{ case: cases[0], evidence: evidence[cases[0].id] }] };
     else if (/\/cases\/[^/]+\/actions$/.test(path)) value = [];
     else if (/\/cases\/[^/]+\/evidence$/.test(path)) value = await readEvidence(decodeURIComponent(path.split("/").at(-2)), options);
+    else if (/\/cases\/[^/]+\/investigate$/.test(path)) {
+      const id = decodeURIComponent(path.split("/").at(-2));
+      assert.equal(options.method, "POST");
+      value = { action: "REPORT", live_model_response: true, explanation: "Invented live Chalk explanation for the selection fixture.", evidence_ids: [evidence[id].id], source_report: evidence[id], trace: [] };
+    }
     else assert.fail(`unexpected workspace API request ${path}`);
     return new Response(JSON.stringify(value), { status: 200, headers: { "Content-Type": "application/json" } });
   });
@@ -218,8 +233,41 @@ test("repeated Load demo accepts the reused case and immutable evidence", async 
       click(button(h, "Load demo"));
       await h.settle();
       assertSourceReady(h, cases[0].id);
+      assert.equal(globalOperationNotices(h).length, 1, "generic demo completion stays global");
+      assert.equal(descendants(child(h, "SourceModes")).filter(isOperationNotice).length, 0);
     }
     assert.equal(calls.filter(call => call.path.endsWith("/demo/load")).length, 2);
+  });
+});
+
+test("case-bound Chalk completion follows its tank response when SourceModes switches environments", async () => {
+  await withWorkspace(async h => {
+    click(button(h, "Ask Chalk"));
+    await h.settle();
+    assertSourceReady(h, cases[0].id);
+    const boundary = child(h, "SourceModes");
+    assert.ok(boundary, "the real workspace supplies the SourceModes boundary");
+    assert.equal(globalOperationNotices(h).length, 0, "case-bound Chalk completion is not a global workspace notice");
+    const notices = descendants(boundary).filter(isOperationNotice);
+    assert.equal(notices.length, 1, "the case completion belongs to the tank children");
+    assert.ok(text(notices[0]).includes("Chalk returned a live model investigation"));
+
+    // Mount the actual mode switch with the workspace's actual tank children.
+    // This exercises its state and handlers, not a conditional copied into a test.
+    const modes = mount("app/components/source-modes.tsx", "SourceModes", boundary.props);
+    try {
+      assert.equal(descendants(modes.tree()).filter(isOperationNotice).length, 1);
+      assert.ok(text(modes.tree()).includes("Invented live Chalk explanation"));
+      click(button(modes, "Ocean source research"));
+      await modes.settle();
+      assert.ok(child(modes, "OceanSource"), "the ocean research component is selected");
+      assert.equal(descendants(modes.tree()).filter(isOperationNotice).length, 0, "ocean research does not claim a hidden tank response");
+      assert.equal(text(modes.tree()).includes("Invented live Chalk explanation"), false);
+      click(button(modes, "Tank source tracing"));
+      await modes.settle();
+      assert.equal(descendants(modes.tree()).filter(isOperationNotice).length, 1, "returning to tank restores the scoped completion");
+      assert.ok(text(modes.tree()).includes("Invented live Chalk explanation"));
+    } finally { modes.unmount(); }
   });
 });
 
