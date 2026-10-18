@@ -70,9 +70,9 @@ The ocean walkthrough makes a different calculation visible. It starts with thre
 
 ### Formula 1: update the motion estimate
 
-$$
+```math
 \boxed{\hat s_k=\hat s_k^-+K_k\left(z_k-H_K\hat s_k^-\right)}
-$$
+```
 
 **Updated estimate = predicted state + weighted measurement correction.**
 
@@ -82,17 +82,17 @@ The state contains position and velocity. $\hat s_k^-$ is the predicted state, $
 
 ### Formula 2: follow a changing current
 
-$$
+```math
 \boxed{\frac{d\mathbf X}{dt}=\mathbf u(\mathbf X,t)+\mathbf b}
-$$
+```
 
 **Particle motion = changing modeled current + fixed initial motion offset.**
 
 The current $\mathbf u$ changes with position and time. In this walkthrough the initial offset is
 
-$$
+```math
 \mathbf b=\hat{\mathbf v}(T)-\mathbf u\!\left(\hat{\mathbf X}(T),T\right).
-$$
+```
 
 It is computed at the final permitted filtered observation and held fixed afterward. RK4 integrates the resulting field in both directions. Purple explores earlier positions; teal projects later motion. The two branches are trajectory hypotheses; reversing transport does not undo mixing, beaching or capture or establish an object's release time.
 
@@ -267,56 +267,56 @@ The **current saved-rig live display** uses `saved_green_marker_preview_v2`: Ope
 
 For contour area $A$, perimeter $L$ and convex-hull area $A_h$:
 
-$$
+```math
 \mathrm{circularity}=\frac{4\pi A}{L^2},\qquad
 \mathrm{solidity}=\frac{A}{A_h},\qquad
 u_{px}=\frac{m_{10}}{m_{00}},\quad v_{px}=\frac{m_{01}}{m_{00}}.
-$$
+```
 
 The separate surface-v2 recording/replay detector adds foreground, green-marker, complete-component/tank-outline and compact-shape gates. Legacy `red_hsv` remains for the original red-marker pipeline and generated replay: hue $[0,10]\cup[170,179]$, $S\ge100$, $V\ge70$, 3×3 opening/closing and area 25 pixels²–5% of frame. Those red settings do not describe today's direct green display.
 
 For a valid water-plane mapping:
 
-$$
+```math
 \begin{bmatrix}\tilde x\\\tilde y\\w\end{bmatrix}
 =H_{\rm camera}\begin{bmatrix}u_{px}\\v_{px}\\1\end{bmatrix},
 \qquad x_{cm}=\tilde x/w,\quad y_{cm}=\tilde y/w.
-$$
+```
 
-Independent checks use $e_i=\|\hat p_i-p_i\|_2$ and $e_{\max}=\max_i e_i$. Measured approval requires the declared threshold (default **0.5 cm**) with at least **four fit pairs and three separate noncollinear check pairs**. This is a maximum point-error check, not an accuracy confidence interval.
+Independent checks use $e_i=\Vert \hat p_i-p_i\Vert _2$ and $e_{\max}=\max_i e_i$. Measured approval requires the declared threshold (default **0.5 cm**) with at least **four fit pairs and three separate noncollinear check pairs**. This is a maximum point-error check, not an accuracy confidence interval.
 
 The estimated live display can register historical/current images with ORB features and a bounded translation: at least 15 inliers, inlier fraction ≥0.5, residual ≤3 px and translation ≤64 px under the saved policy. This is **image alignment estimation**, not independent water-plane calibration. It cannot confer measured-flow/source/trial eligibility.
 
 The registration uses matched feature displacements and their componentwise median:
 
-$$
+```math
 d_i=p_{i,\mathrm{current}}-p_{i,\mathrm{reference}},\qquad
 \hat d=\mathrm{median}_i d_i,\qquad
-\mathrm{inlier}_i=\mathbf{1}\{\|d_i-\hat d\|_2\le3\ \mathrm{px}\}.
-$$
+\mathrm{inlier}_i=\mathbf{1}\{\Vert d_i-\hat d\Vert _2\le3\ \mathrm{px}\}.
+```
 
 After the two bounded median/inlier refinements, accepted translation is applied only above 0.5 px. Estimated centimetres normalize
 $H_{\rm camera}[u_{px}-\hat d_x,\ v_{px}-\hat d_y,\ 1]^T$; the grid shifts into the current view. A failed registration can leave green pixels visible while withholding centimetres/grid. Rotation, perspective and waterline changes are not calibrated by a translation.
 
-**Foreground/reference math.** For 5–60 empty-scene frames, let $B_{Lab}(p)$ be their componentwise median Lab color, and $r_j(p)=\|I_{j,Lab}(p)-B_{Lab}(p)\|_2$. The stored robust variation is
+**Foreground/reference math.** For 5–60 empty-scene frames, let $B_{Lab}(p)$ be their componentwise median Lab color, and $r_j(p)=\Vert I_{j,Lab}(p)-B_{Lab}(p)\Vert _2$. The stored robust variation is
 
-$$
+```math
 \sigma_{ref}(p)=\mathrm{GaussianBlur}_{5\times5}
 \left[1.4826\mathrm{median}_j r_j(p)\right].
-$$
+```
 
 For the phase-aligned current frame, the small global exposure adjustment is
 $g=\mathrm{median}(I_{gray})/\max(\mathrm{median}(B_{gray}),1)$.
 Using the separately stored median BGR image $B_{BGR}$, the foreground mask before morphology is
 
-$$
+```math
 \delta_{Lab}(p)=
-\|Lab(I_{aligned}(p))-Lab(\mathrm{clip}(gB_{BGR}(p),0,255))\|_2.
-$$
+\Vert Lab(I_{aligned}(p))-Lab(\mathrm{clip}(gB_{BGR}(p),0,255))\Vert _2.
+```
 
-$$
+```math
 F(p)=\mathbf{1}\left[\delta_{Lab}(p)>\max(18,6\sigma_{ref}(p))\right].
-$$
+```
 
 The ROI/border mask also applies. A global brightness change over 20%, confident translation over 8 px or more than 15% changed pixels refuses/gaps the current frame. Reference capture itself rejects confident drift over 1.5 px or excessive busy pixels. Surface-v2 intersects this unchanged foreground mask with green HSV **H 35–85 / S ≥80 / V ≥40**, then applies complete-component, shape and area gates. Zero or several admitted candidates remain gaps. The current direct green **display** instead permits V ≥20 without requiring background subtraction; that deliberate display path does not weaken measured-record admission. [Foreground implementation](apps/vision/reeftrace_vision/foreground.py).
 
@@ -326,11 +326,11 @@ A missed/ambiguous observation breaks a track. The original associated tracker a
 
 ### F2. Measure drift from the observed path
 
-$$
+```math
 v_x=\frac{x_2-x_1}{t_2-t_1},\qquad
 v_y=\frac{y_2-y_1}{t_2-t_1},\qquad
 c=\frac{p_1+p_2}{2},\qquad |v|=\sqrt{v_x^2+v_y^2}.
-$$
+```
 
 **Simple meaning:** distance divided by time estimates how fast and in which direction the token moved. Samples use non-overlapping associated pairs separated by 0.1–0.5 s. Gaps remain gaps; there is no invented observation between them.
 
@@ -340,40 +340,40 @@ $$
 
 Positions enter grid cells $c=\lfloor(p-p_{\min})/h\rfloor$. Each cell keeps median position and componentwise median velocity. Nearby cells contribute through inverse-distance weighting:
 
-$$
+```math
 \hat u(p)=\frac{\sum_{j\in K}w_jv_j}{\sum_{j\in K}w_j},
 \qquad
-w_j=\max(\|p-p_j\|^2,10^{-12})^{-\alpha/2}.
-$$
+w_j=\max(\Vert p-p_j\Vert ^2,10^{-12})^{-\alpha/2}.
+```
 
 Exact-node queries return that node's velocity. Defaults are eight neighbours and $\alpha=2$. Support is separate:
 
-$$
-S(p)=\mathbf{1}\{p\text{ inside tank bounds and }\min_j\|p-p_j\|\le r\}.
-$$
+```math
+S(p)=\mathbf{1}\{p\text{ inside tank bounds and }\min_j\Vert p-p_j\Vert \le r\}.
+```
 
-Node scatter and validation error use $\sqrt{\mathrm{mean}\|v_{pred}-v_{obs}\|^2}$. Validation RMSE includes supported validation samples only, so its coverage must also be shown. The reusable fitter defaults to **5 cm cells / 10 cm radius**; the recorded-flow API defaults to **1 cm / 3 cm**. These are different entry points, not competing measured estimates.
+Node scatter and validation error use $\sqrt{\mathrm{mean}\Vert v_{pred}-v_{obs}\Vert ^2}$. Validation RMSE includes supported validation samples only, so its coverage must also be shown. The reusable fitter defaults to **5 cm cells / 10 cm radius**; the recorded-flow API defaults to **1 cm / 3 cm**. These are different entry points, not competing measured estimates.
 
 **Connection to the tank:** each layout profile has distinct fitting and validation record identities. The measured tank model uses a frozen spatial field $u(x,y)$; changing pump conditions are not a commissioned time-varying tank model. A numerical velocity outside support is not usable measured evidence. [Flow model](apps/transport/reeftrace_transport/flow.py).
 
 ### F4. Simulate forward from each candidate source
 
-$$
+```math
 dX_t=[u(X_t)+b]dt+\sqrt{2D}\,dW_t,
-$$
+```
 
-$$
+```math
 X^*_{k+1}=X_k+[u(X_k)+b]\Delta t+
 \sqrt{2D\Delta t}\,\xi_k,\qquad \xi_k\sim N(0,I_2).
-$$
+```
 
 This Euler–Maruyama model combines measured drift, a declared bias $b$ and constant isotropic dispersion $D$. Particles start uniformly over each candidate polygon. Rectangle walls reflect movement; validated traps absorb on first contact, including crossings between saved nodes. Once absorbed, a particle remains absorbed.
 
 The resolution heuristic halves the step until
 
-$$
+```math
 V_{\max}\Delta t+3\sqrt{2D\Delta t}\le\ell_{\min}/2.
-$$
+```
 
 This is a numerical heuristic, not a guaranteed bound on a Gaussian jump.
 
@@ -383,29 +383,29 @@ This is a numerical heuristic, not a guaranteed bound on a Gaussian jump.
 
 For source $s$, particle $n$, possible age $a$ at the first observation and observed positions $z_i$:
 
-$$
+```math
 r_i=X_{sn}(a+t_i)-z_i,
 \qquad
 L_s=\sum_aw_a\frac1N\sum_n
 \exp\left[-\frac12\sum_{d=x,y}r_d^TC^{-1}r_d\right].
-$$
+```
 
 The shared temporal residual covariance is:
 
-$$
+```math
 C_{ij}=\frac{\sigma_z^2e^{-|t_i-t_j|/\tau}}{\sqrt{g_ig_j}}
 +\sigma_m^2+\mathbf{1}_{i=j}\frac{0.05\sigma_z^2}{g_i}.
-$$
+```
 
 Library defaults: position bandwidth $\sigma_z=0.7$ cm, shared model bandwidth $\sigma_m=0.3$ cm, correlation time $\tau=0.8$ s. Registered profiles retain their own frozen parameters; these defaults are not measurements of physical camera noise. The shared-offset term contributes to **every** covariance entry. Many adjacent observations cannot average it away. Gaussian factors common to sources are omitted; this is a compatibility kernel, not a calibrated density.
 
 For a first-seen-retained endpoint, only already-retained simulated particles contribute:
 
-$$
+```math
 L_s=\sum_aw_a\frac1N\sum_n\mathbf{1}_{\rm retained}
-\exp[-\|X_{sn}(a)-z\|^2/(2\sigma^2)],
+\exp[-\Vert X_{sn}(a)-z\Vert ^2/(2\sigma^2)],
 \qquad \sigma^2=\sigma_z^2/g+\sigma_m^2.
-$$
+```
 
 The denominator remains **all particles**, including ones that never arrive. Earlier observed history takes priority over an endpoint-only interpretation.
 
@@ -413,10 +413,10 @@ The denominator remains **all particles**, including ones that never arrive. Ear
 
 ### F6. Normalize source support and decide whether to abstain
 
-$$
+```math
 S_s=\frac{\pi_sL_s}{\sum_j\pi_jL_j},\qquad
 A=L_{\rm leader}^{1/m}.
-$$
+```
 
 The implementation uses log-sum-exp to avoid numerical underflow. $A$ is a length-normalized absolute-fit diagnostic for the leading source, with $m$ selected observations. It is not a p-value. If every likelihood is zero, no uniform posterior is fabricated.
 
@@ -439,35 +439,42 @@ The implementation uses log-sum-exp to avoid numerical underflow. $A$ is a lengt
 
 Ocean mode uses bilinear spatial and linear temporal interpolation:
 
-$$
+```math
 (u,v)(\phi,\lambda,t)=\sum_{ijk}w_i^tw_j^\phi w_k^\lambda(u,v)_{ijk}.
-$$
+```
 
 WGS84 converts current in m/s into geographic movement. With latitude/longitude in radians:
 
-$$
+```math
 N(\phi)=\frac a{\sqrt{1-e^2\sin^2\phi}},\quad
 M(\phi)=\frac{a(1-e^2)}{(1-e^2\sin^2\phi)^{3/2}},\quad
 \dot\phi=\frac v{M(\phi)},\quad
 \dot\lambda=\frac u{N(\phi)\cos\phi}.
-$$
+```
 
 Here $a=6378137$ m, $f=1/298.257223563$, $e^2=f(2-f)$. Code uses equivalent metre-per-degree derivatives. The separate position-only NOAA models use a spherical azimuthal-equidistant east/north map with radius **6,371,008.8 m** and a 50 km prediction-domain limit; this is not the WGS84 ellipsoid.
 
 For $\dot X=f(t,X)$, classical RK4 advances:
 
-$$
-\begin{aligned}
-k_1&=f(t,X),\\
-k_2&=f(t+h/2,X+hk_1/2),\\
-k_3&=f(t+h/2,X+hk_2/2),\\
-k_4&=f(t+h,X+hk_3).
-\end{aligned}
-$$
+```math
+k_1=f(t,X).
+```
 
-$$
+```math
+k_2=f(t+h/2,X+hk_1/2).
+```
+
+```math
+k_3=f(t+h/2,X+hk_2/2).
+```
+
+```math
+k_4=f(t+h,X+hk_3).
+```
+
+```math
 X_{next}=X+\tfrac h6(k_1+2k_2+2k_3+k_4).
-$$
+```
 
 **Simple meaning:** sample changing currents at the start, two estimated midpoints and end of each short step. Masked contributors and missing times stop support; no extrapolation is substituted. Steps align with forcing knots. A smaller step improves a numerical approximation, not the source data's coastal resolution.
 
@@ -489,14 +496,14 @@ The existing NOAA baseline implementations assume hourly cadence. They are not a
 
 Centre velocity samples by mean $\mu$ and divide by one scalar scale $s=\max(\sqrt{\mathrm{mean}((v-\mu)^2)},10^{-9})$. Earlier and next samples form $X,Y$:
 
-$$
+```math
 A=(X^TX+\alpha I)^{-1}X^TY,\quad\alpha=1,
-$$
+```
 
-$$
+```math
 \hat v_{k+1}=\mu+(\hat v_k-\mu)A,\qquad
 \hat p_{k+1}=\hat p_k+\Delta t\hat v_{k+1}.
-$$
+```
 
 Code solves the linear system rather than explicitly inverting it. If spectral radius $\rho(A)>0.98$, scale $A$ by $0.98/\rho(A)$. The row-vector convention matters. Own-prefix ridge estimates two mean components and four matrix entries from its permitted prefix only. The post-hoc pooled diagnostic estimates the shared matrix from three other groups' centred prefixes, retaining the held group's permitted mean/last velocity.
 
@@ -506,41 +513,41 @@ Code solves the linear system rather than explicitly inverting it. If spectral r
 
 The research state is $x=[p_x,p_y,v_x,v_y]^T$, in metres and m/s:
 
-$$
+```math
 F=\begin{bmatrix}I_2&\Delta tI_2\\0&I_2\end{bmatrix}.
-$$
+```
 
-$$
+```math
 Q=q\begin{bmatrix}\Delta t^3I_2/3&\Delta t^2I_2/2\\\Delta t^2I_2/2&\Delta tI_2\end{bmatrix}.
-$$
+```
 
-$$
+```math
 H_K=[I_2\ 0],\qquad R=\sigma_p^2I_2.
-$$
+```
 
 Fixed assumptions: $\sigma_p=100$ m, **$R=10000I_2$ m²**, $q=10^{-6}$ m²/s³. This is continuous white acceleration, not the alternative constant-acceleration-per-interval noise convention.
 
 Initialize at the second fix, separated by $\delta$:
 
-$$
+```math
 x_1=\begin{bmatrix}z_1\\(z_1-z_0)/\delta\end{bmatrix},\qquad
 P_1=\begin{bmatrix}R&R/\delta\\R/\delta&2R/\delta^2\end{bmatrix}.
-$$
+```
 
 Predict, then update using permitted context positions:
 
-$$
+```math
 x^-=Fx,\qquad P^-=FPF^T+Q.
-$$
+```
 
-$$
+```math
 S=H_KP^-H_K^T+R,\qquad K=P^-H_K^TS^{-1}.
-$$
+```
 
-$$
+```math
 x^+=x^-+K(z-H_Kx^-),\quad
 P^+=(I-KH_K)P^-(I-KH_K)^T+KRK^T.
-$$
+```
 
 The implementation uses a gain solve and the Joseph covariance update. Once forecasting begins, no held observation updates are allowed. The anchor is the filtered last context state, unlike raw-position baselines.
 
@@ -548,10 +555,10 @@ The implementation uses a gain solve and the Joseph covariance update. Once fore
 
 ### F11. Initial current residual: a separate exploratory diagnostic
 
-$$
+```math
 b=v_{last}-u_{HYCOM}(X_0,t_0),\qquad
 u_{corrected}(X,t)=u_{HYCOM}(X,t)+b.
-$$
+```
 
 The offset stays constant in local east/north components and the original RK4 follows the corrected copied field. There is no fitted coefficient, decay or clipping.
 
@@ -561,31 +568,31 @@ The offset stays constant in local east/north components and the original RK4 fo
 
 For position errors $e_h$ at $H$ prediction times:
 
-$$
+```math
 ADE=\frac1H\sum_he_h,\qquad FDE=e_H,\qquad
 RMSE_p=\sqrt{\frac1H\sum_he_h^2}.
-$$
+```
 
 ADE is the average miss; FDE is the final miss; RMSE emphasizes large misses. Tank errors use Euclidean centimetres. Geographic errors use a declared spherical great-circle distance:
 
-$$
+```math
 d=2R_E\arcsin\sqrt{\sin^2(\Delta\phi/2)+\cos\phi_1\cos\phi_2\sin^2(\Delta\lambda/2)},
 \qquad R_E=6371008.8\text{ m}.
-$$
+```
 
 Velocity differences use actual successive predicted positions, not future-observation resets:
 
-$$
-r_v=v_{pred}-v_{obs},\quad RMSE_v=\sqrt{\mathrm{mean}\|r_v\|^2},
-\quad b_{speed}=\|v_{pred}\|-\|v_{obs}\|,
+```math
+r_v=v_{pred}-v_{obs},\quad RMSE_v=\sqrt{\mathrm{mean}\Vert r_v\Vert ^2},
+\quad b_{speed}=\Vert v_{pred}\Vert -\Vert v_{obs}\Vert ,
 \quad MAE_{speed}=\mathrm{mean}|b_{speed}|.
-$$
+```
 
-Tank direction error is $\arccos[\mathrm{clip}((v_p\cdot v_o)/(\|v_p\|\|v_o\|),-1,1)]$. Ocean headings use $\mathrm{atan2}(v_E,v_N)\bmod360^\circ$ and the wrapped absolute heading difference. Direction is withheld below 0.01 cm/s in the tank diagnostic or 0.005 m/s in the ocean diagnostic.
+Tank direction error is $\arccos[\mathrm{clip}((v_p\cdot v_o)/(\Vert v_p\Vert \Vert v_o\Vert ),-1,1)]$. Ocean headings use $\mathrm{atan2}(v_E,v_N)\bmod360^\circ$ and the wrapped absolute heading difference. Direction is withheld below 0.01 cm/s in the tank diagnostic or 0.005 m/s in the ocean diagnostic.
 
-$$
+```math
 skill=1-\frac{\sum e_{model}}{\sum e_{baseline}}.
-$$
+```
 
 The zero-baseline denominator gives null skill. Positive skill is a descriptive reduction in miss, not significance. Equal-group summaries weight complete drifter groups equally; primary results are withheld when required coverage is incomplete.
 
@@ -595,10 +602,10 @@ The zero-baseline denominator gives null skill. Positive skill is a descriptive 
 
 Kalman observed-position checks add measurement noise to latent position spread:
 
-$$
+```math
 d_M^2=(\hat p-z)^T(P_{pp}+R)^{-1}(\hat p-z),\qquad
 d_M^2\le-2\ln(1-a).
-$$
+```
 
 The threshold is the nominal two-dimensional Gaussian level $a$. Other training diagnostics use the 90th percentile (`higher` quantile) of earlier expanding-origin errors. Overlapping errors and assumed noise do not establish calibrated 90% coverage.
 
@@ -606,24 +613,24 @@ The threshold is the nominal two-dimensional Gaussian level $a$. Other training 
 
 ### F14. Compare interception by the first event
 
-$$
+```math
 \tau_Z=\inf\{t:X_t\in Z\},\qquad
 \tau_T=\inf\{t:X_t\in T\}.
-$$
+```
 
 **Simple meaning:** did the token enter the protected zone before encountering an interceptor, within the declared horizon? In ocean mode reef entry wins simultaneous ties. Tank event timestamps are numerical-node upper bounds; ocean contacts are interpolated along supported output chords.
 
 Let $E$ be supported zone entries, $U$ paths unsupported/unresolved before an event or horizon, and $N$ all planned model particles/releases:
 
-$$
+```math
 p_{entry}\in[E/N,(E+U)/N].
-$$
+```
 
 For baseline bounds $[L_b,U_b]$ and intervention bounds $[L_i,U_i]$:
 
-$$
+```math
 B\in[L_b-U_i,\ U_b-L_i].
-$$
+```
 
 Tank recommendations check every declared source/scenario and are withheld if any particle's event-prefix nodes lack support. Ocean layout A is preferred only when its upper entry bound is strictly below B's lower bound; otherwise show a resolved tie or indeterminate result. Unknown paths never disappear from a favorable denominator. These are accounting bounds, not confidence intervals.
 
@@ -633,10 +640,10 @@ Tank recommendations check every declared source/scenario and are withheld if an
 
 For $P$ planned releases, $R$ logged releases, $E$ zone entries, $U$ unresolved outcomes and $M=P-R$ missing slots:
 
-$$
+```math
 p_{planned}\in[E/P,(E+U+M)/P],\qquad
 p_{logged}\in[E/R,(E+U)/R].
-$$
+```
 
 With no logged releases, observed bounds remain **[0,1] with denominator 0**, not a measured zero rate. Benefit subtracts opposite bound endpoints as above. Synthetic and operator-reported physical ledgers stay separate; an operator entry is not automatically camera-verified or a causal-effect estimate.
 
@@ -652,18 +659,18 @@ Nemo reads NOAA's already-produced Degree Heating Week series; it does not calcu
 
 The ocean-source prototype reverses a deterministic field using **both** the negative velocity and decreasing actual time:
 
-$$
+```math
 \frac{dY}{d\tau}=-u(Y,T-\tau),\qquad Y(0)=X_{observed}.
-$$
+```
 
 A copied field reverses time knots/arrays/masks and negates u/v, then the unchanged positive-time RK4 integrates increasing lookback age. Merely negating today's velocity while advancing through tomorrow's snapshots is incorrect. This local ODE reversal does not require a divergence-free field. Random diffusion, beaching and capture cannot simply be undone this way.
 
 The five-step walkthrough separately uses three permitted fixes at 01:00/02:00/03:00 UTC: scatter → connected observed path → causal Kalman-filtered estimates → explicit drift rule → both directions. Its three-fix filter is a separately declared teaching/research example; it does not change the frozen eight-or-more-fix benchmark. From the filtered 03:00 position/velocity:
 
-$$
+```math
 b_{03}=v_{filtered,03}-u_{HYCOM}(X_{filtered,03},03{:}00),
 \qquad \dot X=u_{HYCOM}(X,t)+b_{03}.
-$$
+```
 
 The same constant east/north offset is added to a copied field for both branches. The backward equation negates that **whole corrected field** at decreasing physical time; the forward branch advances normally. No earlier/later validation position updates either branch. A future endpoint is a conditional candidate interception rendezvous at a stated time, not guaranteed capture or an optimized physical collector location.
 
