@@ -196,7 +196,7 @@ def test_camera_bump_during_recording_discards_it(env):
     client, runtime, _ = env
     _, calibration_id, reference, _ = prepared(client, runtime.camera)
     runtime.camera.place(6, 10)
-    runtime.camera.shift_px = 6
+    runtime.camera.shift_px = 12
     detail = post(client, "/camera/record", {"calibration_id": calibration_id, "duration_s": 1,
                   "detector": "foreground_reference_v1", "reference_id": reference["reference_id"]}, 409)["detail"]
     assert detail.startswith("Recording discarded") and "moved" in detail
@@ -226,3 +226,27 @@ def test_mixed_detectors_cannot_form_one_field_receipt(env):
                      "validation_recording_ids": [red["id"]]})
     step = next(s for s in preflight["steps"] if s["step"] == "drift_recordings")
     assert (step["status"], step["code"]) == ("BLOCKED", "DETECTOR_MIXED")
+
+
+def test_small_camera_creep_and_a_passing_hand_do_not_discard_the_run(env):
+    client, runtime, _ = env
+    _, calibration_id, reference, _ = prepared(client, runtime.camera)
+    runtime.camera.place(6, 10, 3.0, 0.0)
+    runtime.camera.shift_px = 2                      # mount creep: measured and undone
+    original = runtime.camera.image
+    calls = {"n": 0}
+
+    def with_hand():
+        image, meta = original()
+        calls["n"] += 1
+        if calls["n"] <= 4:                          # a hand covers part of the view at the start
+            image = image.copy()
+            cv2.rectangle(image, (0, 0), (420, 300), (120, 150, 200), -1)
+        return image, meta
+
+    runtime.camera.image = with_hand
+    run = post(client, "/camera/record", {"calibration_id": calibration_id, "duration_s": 1,
+               "detector": "foreground_reference_v1", "reference_id": reference["reference_id"]})
+    reasons = [p.get("reason") for p in run["points"] if not p["observed"]]
+    assert "VIEW_OBSTRUCTED" in reasons
+    assert sum(p["observed"] for p in run["points"]) >= len(run["points"]) // 2

@@ -115,7 +115,7 @@ def test_small_lamp_change_including_saturated_glare_reports_nothing(reference, 
 def test_large_lamp_change_bumped_camera_or_resized_frame_require_new_reference(reference):
     with pytest.raises(SceneChanged, match="brightness"):
         detect_foreground(camera(np.clip(BASE * 1.4, 0, 255).astype(np.uint8), 15), reference)
-    shifted = cv2.warpAffine(BASE, np.float32([[1, 0, 5], [0, 1, 4]]), (W, H), borderMode=cv2.BORDER_REFLECT)
+    shifted = cv2.warpAffine(BASE, np.float32([[1, 0, 9], [0, 1, 7]]), (W, H), borderMode=cv2.BORDER_REFLECT)
     with pytest.raises(SceneChanged, match="moved"):
         detect_foreground(camera(shifted, 16), reference)
     with pytest.raises(SceneChanged, match="size"):
@@ -194,3 +194,13 @@ def test_token_measurement_refuses_sparkles_alone():
         cv2.circle(sparkly, (x, y), 4, (255, 255, 255), -1)
     with pytest.raises(ValueError, match="exactly one"):
         measure_token_area(camera(sparkly, 23), ref)
+
+
+@pytest.mark.parametrize("dx,dy", [(2, 1), (-3, 2), (5, -4)])
+def test_small_camera_creep_is_undone_and_positions_stay_in_the_reference_pose(reference, area_range, dx, dy):
+    moved = lambda img: cv2.warpAffine(img, np.float32([[1, 0, dx], [0, 1, dy]]), (W, H),
+                                      borderMode=cv2.BORDER_REFLECT)
+    assert detect_foreground(camera(moved(BASE), 40), reference, area_px_range=area_range) == []
+    found = detect_foreground(camera(moved(cap(BASE, 300, 220)), 41), reference, area_px_range=area_range)
+    assert len(found) == 1
+    assert abs(found[0]["pixel_x"] - 300) < 1.5 and abs(found[0]["pixel_y"] - 220) < 1.5

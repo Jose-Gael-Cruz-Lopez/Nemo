@@ -505,11 +505,18 @@ class Runtime:
                     if frame["received_mono_s"] < start:
                         await asyncio.sleep(1 / self.settings.camera_sample_hz)
                         continue
+                    from apps.vision.reeftrace_vision.foreground import ViewObstructed
                     try:
                         found = detect(image)
+                    except ViewObstructed:
+                        # A hand or other large object briefly covers the view: the token
+                        # cannot be located in this frame, so it is a gap, not a guess.
+                        found = None
                     except ValueError as error:
                         raise ValueError(f"Recording discarded: {error}") from None
-                    point = tracker.update(found, frame["received_mono_s"] - start, calibration)
+                    t_rel = frame["received_mono_s"] - start
+                    point = (tracker.update(found, t_rel, calibration) if found is not None
+                             else {**tracker.update([], t_rel, calibration), "reason": "VIEW_OBSTRUCTED"})
                     self.store.put("frame", {"profile_id": profile_id,
                         "camera_session_id": frame["session_id"], "path": str(path),
                         "sequence": frame["sequence"], "received_utc": frame["received_utc"],

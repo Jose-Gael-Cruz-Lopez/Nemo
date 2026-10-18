@@ -29,14 +29,26 @@ MAX_BUSY_FRACTION = 0.10
 # Global brightness may drift a little between reference and frame (lamp warm-up,
 # auto exposure). Larger changes are treated as a changed scene, not compensated.
 MAX_GAIN_CHANGE = 0.20
-# A fixed overhead camera must not move. A whole-image shift larger than this
-# (measured by phase correlation against the reference) invalidates the mapping.
+# The camera must be still while the reference is captured (shift above this refuses it).
 MAX_CAMERA_SHIFT_PX = 1.5
+# A real tabletop mount creeps a few pixels when people work at the table. During
+# detection, a whole-image shift up to this size is measured by phase correlation and
+# undone (translation only) before comparison; positions are then reported in the
+# reference camera pose. A larger move invalidates the mapping and is refused.
+MAX_ALIGN_SHIFT_PX = 8.0
 MIN_SHIFT_CONFIDENCE = 0.05
 
 
 class SceneChanged(ValueError):
     """The frame no longer matches the empty-tank reference; capture a new one."""
+
+
+class ViewObstructed(SceneChanged):
+    """A large part of the view changed in this frame only, such as a hand releasing a token.
+
+    The camera and lighting still match the reference, so a recording can treat the
+    frame as a gap instead of discarding the run.
+    """
 
 
 def _bgr(frame, label):
@@ -178,9 +190,18 @@ def detect_foreground(frame, reference, *, min_area_px=25, max_area_fraction=0.0
     frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY).astype(np.float32)
     # phaseCorrelate windows its inputs in place, so give it copies.
     (dx, dy), confidence = cv2.phaseCorrelate(reference.gray.copy(), frame_gray.copy(), reference._window)
-    if confidence >= MIN_SHIFT_CONFIDENCE and np.hypot(dx, dy) > MAX_CAMERA_SHIFT_PX:
-        raise SceneChanged(f"The camera view moved by about {np.hypot(dx, dy):.1f} px; "
+    shift = float(np.hypot(dx, dy)) if confidence >= MIN_SHIFT_CONFIDENCE else 0.0
+    if shift > MAX_ALIGN_SHIFT_PX:
+        raise SceneChanged(f"The camera view moved by about {shift:.1f} px; "
                            "fix the mount, then retake the mapping and the empty-tank reference")
+    border = 0
+    if shift > 0.5:
+        # Undo a small creep of the mount so the frame lines up with the reference.
+        h, w = frame.shape[:2]
+        frame = cv2.warpAffine(frame, np.float32([[1, 0, -dx], [0, 1, -dy]]), (w, h),
+                               flags=cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
+        frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY).astype(np.float32)
+        border = int(np.ceil(max(abs(dx), abs(dy)))) + 2
     gray = float(np.median(frame_gray[reference.roi]))
     gain = gray / max(reference.median_gray, 1.0)
     if abs(gain - 1) > MAX_GAIN_CHANGE:
@@ -191,9 +212,12 @@ def detect_foreground(frame, reference, *, min_area_px=25, max_area_fraction=0.0
     delta = np.sqrt(((_lab(frame) - expected) ** 2).sum(axis=2))
     threshold = np.maximum(min_delta, k_sigma * reference.noise)
     mask = ((delta > threshold) & reference.roi).astype(np.uint8) * 255
+    if border:
+        # The replicated edge strip left by the alignment is not an observation.
+        mask[:border], mask[-border:], mask[:, :border], mask[:, -border:] = 0, 0, 0, 0
     changed = float((mask[reference.roi] > 0).mean())
     if changed > max_changed_fraction:
-        raise SceneChanged(f"{changed:.0%} of the view changed; the camera, lamp or scene moved, "
+        raise ViewObstructed(f"{changed:.0%} of the view changed; the camera, lamp or scene moved, "
                            "or something large entered the frame. Retake the empty-tank reference")
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
