@@ -123,6 +123,15 @@ Treat positions as **±1.5 cm typical, up to ±3 cm**. Source regions or zones c
 | One-token size | 3219 px; recordings accept 1127–9656 px |
 | Notes | Ripple sparkles with the pump on: median about 50 px, at most about 700 px; the cap is 4.5–7× larger. Stand back from the bin during captures and recordings: a body shadow once changed brightness by +24% and was refused. |
 
+**Current camera session (after the restart for the estimated model, 17 Oct 2026):** `usb-fd9569862c674058`.
+- Mapping `cal-6b43410427d216c0`: phase correlation put the camera 3.9 px (dx −3.0, dy +2.5) from the
+  placement pose, so the same placement points were resubmitted, moved by that shift. Check errors are
+  unchanged: mean 2.30 cm, max 2.77 cm, under the declared 3.0 cm bound.
+- Pump-off reference `ref-4b8477de7ea34266-2c674058`: one cap measured 3405 px (accepts 1192–10215 px).
+  It was located at about (27.7, 6.5) cm, which the operator confirmed matched where it floated.
+- Pump-on reference `ref-7805b2034e319a02-2c674058`, keeping that size. The empty running tank gave
+  0 detections in 20 frames, with none refused.
+
 ## 4. Drift recordings and profiles: one block per layout
 
 Use one token per run. The training and validation runs must be separate
