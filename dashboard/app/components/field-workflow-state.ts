@@ -29,7 +29,7 @@ export type ManifestDetail = { manifest: { manifest_id: string; content_hash: st
 export type Bounds = { x_min_cm: number; x_max_cm: number; y_min_cm: number; y_max_cm: number };
 export type TokenDetector = "foreground_reference_v1" | "foreground_surface_v2" | "red_hsv";
 /** Empty-tank reference for colour-independent tracking, plus the measured size of one token. */
-export type TokenReference = { reference_id: string; camera_session_id: string; image_size_px: [number, number]; token_area_px: number | null; token_area_px_range: [number, number] | null; detector?: "foreground_reference_v1" | "foreground_surface_v2"; detection_polygon_px?: number[][]; policy_id?: "compact_cap_v1"; policy_sha256?: string; derived_from_reference_id?: string };
+export type TokenReference = { reference_id: string; camera_session_id: string; image_size_px: [number, number]; token_area_px: number | null; token_area_px_range: [number, number] | null; detector?: "foreground_reference_v1" | "foreground_surface_v2"; detection_polygon_px?: number[][]; policy_id?: "foreground_green_cap_v1"; policy_sha256?: string; derived_from_reference_id?: string };
 
 export type Draft = {
   version: 1;
@@ -311,7 +311,7 @@ export function deriveSteps(draft: Draft, camera: CameraStatus | null, preflight
   else if (!draft.calibration.approved) set("water_plane_mapping", "blocked", `Check-point error ${draft.calibration.max_error_cm.toFixed(2)} cm exceeds ${draft.calibration.max_allowed_error_cm} cm.`, "Re-measure in centimetres on the water surface. Do not raise the tolerance to pass.");
   else set("water_plane_mapping", "done", `Approved on ${draft.calibration.validation_count} check points; max error ${draft.calibration.max_error_cm.toFixed(2)} cm.`);
   const t = draft.trainingRecordingIds.length, v = draft.validationRecordingIds.length;
-  if (draft.detector === "foreground_surface_v2" && (draft.tokenReference?.detector !== "foreground_surface_v2" || !draft.tokenReference.token_area_px_range)) set("drift_recordings", "missing", "Surface detector not prepared for this session.", "Use the saved background and an explicitly declared tank outline to freeze the surface detector. Saved-footage replay does not require a new capture.");
+  if (draft.detector === "foreground_surface_v2" && (draft.tokenReference?.detector !== "foreground_surface_v2" || !draft.tokenReference.token_area_px_range)) set("drift_recordings", "missing", draft.tokenReference?.detector === "foreground_surface_v2" ? "Green-marker image-size check missing for later live capture." : "Green-cap surface detector not prepared for this session.", "Use the saved background and an explicitly declared tank outline for v2. Its image-area range must be checked under the green policy; the old detector's size is not carried over. Saved-footage replay does not require a new capture.");
   else if (draft.detector === "foreground_reference_v1" && !draft.tokenReference?.token_area_px_range) set("drift_recordings", "missing", draft.tokenReference ? "Measure one token before recording." : "Capture the empty tank before recording.", "With no token in the water, the pump on and hands out of view, capture the empty tank. Then place one cap and measure it.");
   else if (!t || !v) set("drift_recordings", "missing", `${t} training and ${v} validation runs.`, "Record at least one of each, as separate runs.");
   else set("drift_recordings", "done", `${t} training and ${v} validation runs.`);
@@ -362,6 +362,13 @@ export function decodeDraft(raw: string | null): Draft | null {
     if (merged.calibration) merged.calibration = parseCalibration(merged.calibration);
     if (merged.flow) merged.flow = parseFlow(merged.flow);
     if (merged.detector !== "red_hsv" && merged.detector !== "foreground_reference_v1" && merged.detector !== "foreground_surface_v2") return null;
+    // A retired development detector must not erase the existing ruler survey.
+    if (isObject(value.tokenReference) && value.tokenReference.detector === "foreground_surface_v2" && value.tokenReference.policy_id === "compact_cap_v1") {
+      const old = value.tokenReference;
+      const background = text(old.derived_from_reference_id) ? checkTokenReference({ reference_id: old.derived_from_reference_id,
+        camera_session_id: old.camera_session_id, image_size_px: old.image_size_px, token_area_px: null, token_area_px_range: null }) : null;
+      return { ...invalidateAfter(merged, "water_plane_mapping"), tokenReference: background };
+    }
     if (merged.tokenReference) merged.tokenReference = checkTokenReference(merged.tokenReference);
     return merged;
   } catch { return null; }
@@ -374,7 +381,7 @@ function checkTokenReference(value: unknown): TokenReference {
   if (value.detector === "foreground_surface_v2") {
     if (!Array.isArray(value.detection_polygon_px) || value.detection_polygon_px.length < 3 || value.detection_polygon_px.length > 100
       || !value.detection_polygon_px.every(point => Array.isArray(point) && point.length === 2 && point.every(finite))
-      || value.policy_id !== "compact_cap_v1" || typeof value.policy_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(value.policy_sha256)
+      || value.policy_id !== "foreground_green_cap_v1" || typeof value.policy_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(value.policy_sha256)
       || !text(value.derived_from_reference_id)) fail("Surface detector reference policy was incomplete");
   }
   return value as TokenReference;
@@ -413,10 +420,10 @@ export function setTokenReference(draft: Draft, reference: TokenReference | null
 export function detectionFields(draft: Draft): Record<string, string> {
   if (draft.detector === "red_hsv") return {};
   const reference = draft.tokenReference;
-  if (!reference?.token_area_px_range) throw new Error("Capture the empty tank and measure one token first.");
+  if (!reference?.token_area_px_range) throw new Error(draft.detector === "foreground_surface_v2" ? "Run the policy-specific green-marker image-size check before a live recording. Saved-footage replay needs no new capture." : "Capture the empty tank and measure one token first.");
   if (reference.camera_session_id !== draft.cameraSessionId) throw new Error("The empty-tank reference is from another camera session; capture it again.");
   if (draft.detector === "foreground_surface_v2") {
-    if (reference.detector !== "foreground_surface_v2" || !reference.detection_polygon_px || reference.policy_id !== "compact_cap_v1") throw new Error("Prepare the surface detector from the saved background and declared tank outline first.");
+    if (reference.detector !== "foreground_surface_v2" || !reference.detection_polygon_px || reference.policy_id !== "foreground_green_cap_v1") throw new Error("Prepare the surface detector from the saved background and declared tank outline first.");
     return { detector: "foreground_surface_v2", reference_id: reference.reference_id };
   }
   if (reference.detector === "foreground_surface_v2") throw new Error("Select the surface detector for this frozen surface reference, or restore the original background reference.");
@@ -435,7 +442,7 @@ export function previewPixel(offsetX: number, offsetY: number, shownWidth: numbe
 export function buildSurfaceReferenceRequest(draft: Draft, camera: CameraStatus | null, polygon: number[][] | undefined) {
   const reference = draft.tokenReference;
   if (!camera?.running || !camera.fresh || camera.session_id !== draft.cameraSessionId || !camera.width || !camera.height) throw new Error("Select the current fresh camera session before preparing its surface detector.");
-  if (!reference?.token_area_px_range || reference.camera_session_id !== camera.session_id || reference.image_size_px[0] !== camera.width || reference.image_size_px[1] !== camera.height) throw new Error("The current saved background must already include the token’s image-size range. Saved-footage replay does not need a new background.");
+  if (!reference || reference.camera_session_id !== camera.session_id || reference.image_size_px[0] !== camera.width || reference.image_size_px[1] !== camera.height) throw new Error("Use a saved background from the current camera session and resolution. The old token-size range is not needed for derivation; saved-footage replay needs no new background.");
   if (!Array.isArray(polygon) || polygon.length < 3 || polygon.length > 100 || !polygon.every(point => Array.isArray(point) && point.length === 2 && point.every(finite)
     && point[0] >= 0 && point[0] < camera.width! && point[1] >= 0 && point[1] < camera.height!)) throw new Error("Display a valid measured or estimated tank outline inside the current frame, then freeze that outline for detection.");
   const [x,y] = polygon[0];

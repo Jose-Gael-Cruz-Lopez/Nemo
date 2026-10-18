@@ -1,7 +1,8 @@
-"""Opt-in compact floating-cap admission after unchanged global foreground checks.
+"""Opt-in declared green-cap admission after unchanged global foreground checks.
 
-This policy is a frozen engineering heuristic, not plastic recognition or
-independent physical validation. Polygon and morphology failures remain gaps.
+This revised engineering hypothesis was informed by development footage; it is
+not plastic recognition or independent physical validation. It requires a green
+marker, not an arbitrary cap. Polygon and morphology failures remain gaps.
 """
 from __future__ import annotations
 
@@ -13,16 +14,21 @@ from types import MappingProxyType
 import cv2
 import numpy as np
 
-from .foreground import _roi_mask, foreground_change_mask
+from .foreground import _roi_mask, foreground_change_mask_and_frame
 
 SURFACE_DETECTOR_ID = "foreground_surface_v2"
-SURFACE_POLICY_ID = "compact_cap_v1"
+SURFACE_POLICY_ID = "foreground_green_cap_v1"
 _POLICY = MappingProxyType({
     "policy_id": SURFACE_POLICY_ID,
     "detector": SURFACE_DETECTOR_ID,
     "maximum_aspect_ratio": 2.0,
     "minimum_circularity": 0.45,
     "minimum_solidity": 0.75,
+    "green_hsv_lower": (35, 80, 40),
+    "green_hsv_upper": (85, 255, 255),
+    "green_mask_open_kernel_px": 3,
+    "green_mask_close_kernel_px": 5,
+    "segmentation": "aligned_green_hsv_intersect_unchanged_foreground_mask",
     "minimum_area_px": 25.0,
     "default_max_area_fraction": 0.02,
     "measurement_max_area_fraction": 0.2,
@@ -37,7 +43,8 @@ SURFACE_POLICY_SHA256 = hashlib.sha256(
 
 
 def surface_policy():
-    return {**dict(_POLICY), "policy_sha256": SURFACE_POLICY_SHA256}
+    return {**{key: list(value) if isinstance(value, tuple) else value
+               for key, value in _POLICY.items()}, "policy_sha256": SURFACE_POLICY_SHA256}
 
 
 def validate_detection_polygon(image_size_px, polygon):
@@ -68,8 +75,14 @@ def surface_token_diagnostic(frame, reference, detection_polygon_px, *, area_px_
         low, high = map(float, area_px_range)
         if not np.isfinite([low, high]).all() or not 0 < low < high:
             raise ValueError("Token area bounds must be increasing positive finite values")
-    # No polygon is applied before gain estimation, change fraction or morphology.
-    mask = foreground_change_mask(frame, reference)
+    # No polygon or colour mask changes gain estimation or the global scene gates.
+    mask, aligned = foreground_change_mask_and_frame(frame, reference)
+    green = cv2.inRange(cv2.cvtColor(aligned, cv2.COLOR_BGR2HSV),
+                        np.array(_POLICY["green_hsv_lower"], np.uint8),
+                        np.array(_POLICY["green_hsv_upper"], np.uint8))
+    mask = cv2.bitwise_and(mask, green)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
     domain = _roi_mask(reference.shape, polygon)
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     candidates, detections, reasons = [], [], Counter()
@@ -129,6 +142,6 @@ def measure_surface_token_area(frame, reference, detection_polygon_px, *, domina
         frame, reference, detection_polygon_px,
         max_area_fraction=_POLICY["measurement_max_area_fraction"])), reverse=True)
     if not found or (len(found) > 1 and found[0] < dominance * found[1]):
-        raise ValueError("Expected one dominant compact token inside the detection polygon; "
+        raise ValueError("Expected one dominant green compact token inside the detection polygon; "
                          f"found {len(found)} admitted components")
     return found[0]

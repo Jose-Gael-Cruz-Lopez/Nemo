@@ -401,9 +401,9 @@ def test_reference_eviction_keeps_durable_arrays_and_reloads_a_working_detector(
 SURFACE_POLYGON = [[20, 20], [WIDTH - 21, 20], [WIDTH - 21, HEIGHT - 21], [20, HEIGHT - 21]]
 
 
-def test_surface_reference_derivation_reuses_saved_arrays_and_size_without_camera_access(env, monkeypatch):
+def test_surface_reference_derivation_reuses_arrays_but_not_v1_area_without_camera_access(env, monkeypatch):
     client, runtime, tmp_path = env
-    session, _, original, size = prepared(client, runtime.camera)
+    session, _, original, _ = prepared(client, runtime.camera)
     before = copy.deepcopy(runtime.store.get("token_reference", original["reference_id"]))
     sequence = runtime.camera.sequence
 
@@ -427,12 +427,16 @@ def test_surface_reference_derivation_reuses_saved_arrays_and_size_without_camer
     assert surface["policy_id"] == SURFACE_POLICY_ID
     assert surface["policy_sha256"] == SURFACE_POLICY_SHA256
     assert surface["detection_polygon_px"] == SURFACE_POLYGON
-    assert surface["token_size"]["token_area_px"] == size["token_area_px"]
+    assert surface["token_size"] is None  # Generic foreground area is not green-only area.
     assert runtime.store.get("token_reference", original["reference_id"]) == before
     assert str(tmp_path) not in json.dumps(surface) and "npz" not in json.dumps(surface)
     cold = TokenDetectionService(runtime)
     record, reference = cold._reference(surface["reference_id"])
     assert reference.roi.all() and reference.fingerprint == original["content_id"]
+    with pytest.raises(ValueError, match="Measure one token"):
+        cold.detector(SURFACE_DETECTOR_ID, record["id"], session, [WIDTH, HEIGHT])
+    size = post(client, f"/camera/reference/{surface['reference_id']}/token-size")
+    assert size["policy_sha256"] == SURFACE_POLICY_SHA256
     detect, metadata = cold.detector(SURFACE_DETECTOR_ID, record["id"], session, [WIDTH, HEIGHT])
     assert len(detect(runtime.camera.image()[0])) == 1
     assert metadata == {"detector": SURFACE_DETECTOR_ID, "reference_id": record["id"],
@@ -522,6 +526,7 @@ def test_surface_and_v1_recordings_cannot_be_mixed_into_a_measured_field_receipt
     client, runtime, _ = env
     session, calibration_id, original, _ = prepared(client, runtime.camera)
     surface = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    post(client, f"/camera/reference/{surface['reference_id']}/token-size")
     recordings = []
     for detector, reference_id in (("foreground_reference_v1", original["reference_id"]),
                                    (SURFACE_DETECTOR_ID, surface["reference_id"])):
@@ -539,6 +544,7 @@ def test_surface_detector_rehearsal_keeps_versioned_provenance_and_unvalidated_c
     client, runtime, _ = env
     session, calibration_id, original, _ = prepared(client, runtime.camera)
     surface = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    post(client, f"/camera/reference/{surface['reference_id']}/token-size")
     calibration = runtime.store.get("calibration", calibration_id)
     runtime.camera.place(8, 10, 1, 0)
     result = post(client, "/camera/rehearsals", {
@@ -555,3 +561,46 @@ def test_surface_detector_rehearsal_keeps_versioned_provenance_and_unvalidated_c
     assert result["detection"]["detection_polygon_px"] == SURFACE_POLYGON
     assert all("x_cm" not in point and "y_cm" not in point for point in result["points"])
     assert runtime.store.list("recording") == runtime.store.cases() == []
+
+
+def test_surface_only_carries_area_measured_under_the_same_green_policy(env, monkeypatch):
+    client, runtime, _ = env
+    session, _, original, _ = prepared(client, runtime.camera)
+    first = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    size = post(client, f"/camera/reference/{first['reference_id']}/token-size")
+    smaller = [[30, 30], [WIDTH - 31, 30], [WIDTH - 31, HEIGHT - 31], [30, HEIGHT - 31]]
+
+    def forbidden():
+        raise AssertionError("Same-policy saved derivation must not read the camera")
+
+    with monkeypatch.context() as guard:
+        guard.setattr(runtime.camera, "image", forbidden)
+        second = runtime.token_detection.derive_surface_reference(first["reference_id"], smaller)
+    assert second["token_size"]["token_area_px"] == size["token_area_px"]
+    assert second["token_size"]["policy_sha256"] == SURFACE_POLICY_SHA256
+    assert second["token_size"]["carried_from_reference_id"] == first["reference_id"]
+    runtime.camera.cap = None
+    running = post(client, "/camera/reference", {"frame_count": 5,
+        "detector": SURFACE_DETECTOR_ID, "detection_polygon_px": SURFACE_POLYGON,
+        "token_size_from": first["reference_id"]})
+    assert running["token_size"]["policy_sha256"] == SURFACE_POLICY_SHA256
+    assert running["token_size"]["token_area_px"] == size["token_area_px"]
+    assert running["camera_session_id"] == session
+
+
+def test_surface_capture_cannot_carry_v1_area_or_expose_v2_area_as_v1(env):
+    client, runtime, _ = env
+    _, _, original, _ = prepared(client, runtime.camera)
+    before = runtime.camera.sequence
+    rejected = post(client, "/camera/reference", {"frame_count": 5,
+        "detector": SURFACE_DETECTOR_ID, "detection_polygon_px": SURFACE_POLYGON,
+        "token_size_from": original["reference_id"]}, 409)
+    assert "between detector policies" in rejected["detail"]
+    assert runtime.camera.sequence == before
+    surface = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    post(client, f"/camera/reference/{surface['reference_id']}/token-size")
+    before = runtime.camera.sequence
+    rejected = post(client, "/camera/reference", {"frame_count": 5,
+        "token_size_from": surface["reference_id"]}, 409)
+    assert "between detector policies" in rejected["detail"]
+    assert runtime.camera.sequence == before

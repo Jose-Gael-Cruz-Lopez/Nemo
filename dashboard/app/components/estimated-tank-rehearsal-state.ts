@@ -43,7 +43,7 @@ export function buildEstimatedRehearsalRequest(source: SavedCalibrationBundle | 
   if (!bundle.calibration.approved) invalid("The historical mapping did not pass its own checks; it cannot be used for this estimated rehearsal.");
   if (!reference || reference.camera_session_id !== live.session_id || reference.image_size_px[0] !== live.width || reference.image_size_px[1] !== live.height
     || !reference.reference_id || !Array.isArray(reference.token_area_px_range) || reference.token_area_px_range.length !== 2
-    || !reference.token_area_px_range.every(finite) || reference.token_area_px_range[0] <= 0 || reference.token_area_px_range[1] <= reference.token_area_px_range[0]) invalid("Capture a current empty-tank reference and use Measure one token to learn its pixel size. No ruler measurement is needed for that image-size step.");
+    || !reference.token_area_px_range.every(finite) || reference.token_area_px_range[0] <= 0 || reference.token_area_px_range[1] <= reference.token_area_px_range[0]) invalid(reference?.detector === "foreground_surface_v2" ? "The green-cap detector needs its own policy-specific image-size check before live capture. Saved-footage replay runs without this step." : "Capture a current empty-tank reference and use Measure one token to learn its pixel size. No ruler measurement is needed for that image-size step.");
   const duration = Number(durationText);
   if (!durationText.trim() || !Number.isFinite(duration) || duration < 1 || duration > 10) invalid("Use a rehearsal duration between 1 and 10 seconds.");
   return { source: bundle, camera_session_id: live.session_id!, image_size_px: [live.width!, live.height!] as [number, number], duration_s: duration,
@@ -82,7 +82,7 @@ export function parseEstimatedRehearsal(value: unknown, source: SavedCalibration
   keys(detection, ["detector", "reference_id", "token_area_px_range"], surface ? ["detection_polygon_px", "policy_id", "policy_sha256"] : []);
   if (surface && (!Array.isArray(detection.detection_polygon_px) || detection.detection_polygon_px.length < 3 || detection.detection_polygon_px.length > 100
     || !detection.detection_polygon_px.every(point => Array.isArray(point) && point.length === 2 && point.every(finite) && point[0] >= 0 && point[0] < live.width! && point[1] >= 0 && point[1] < live.height!)
-    || detection.policy_id !== "compact_cap_v1" || typeof detection.policy_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(detection.policy_sha256))) invalid("The frozen surface detector policy is invalid.");
+    || detection.policy_id !== "foreground_green_cap_v1" || typeof detection.policy_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(detection.policy_sha256))) invalid("The frozen surface detector policy is invalid.");
   if ((!surface && detection.detector !== "foreground_reference_v1") || !text(detection.reference_id) || !Array.isArray(detection.token_area_px_range)
     || detection.token_area_px_range.length !== 2 || !detection.token_area_px_range.every(finite) || detection.token_area_px_range[0] <= 0 || detection.token_area_px_range[1] <= detection.token_area_px_range[0]) invalid("The rehearsal detector metadata is invalid.");
   if (!Array.isArray(value.points) || !value.points.length || value.points.length > 1000 || !Array.isArray(value.evidence_frame_ids)

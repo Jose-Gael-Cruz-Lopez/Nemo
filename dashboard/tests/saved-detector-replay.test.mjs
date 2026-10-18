@@ -10,7 +10,7 @@ import { newDraft, parseTokenReference, detectionFields, buildSurfaceReferenceRe
 import { buildEstimatedRehearsalRequest } from "../app/components/estimated-tank-rehearsal-state.ts";
 
 function fixture() { return {
-  schema_version: "nemo_surface_replay_v1", report_id: "replay-one", data_origin: "LOCAL_SAVED_FOOTAGE_REPLAY", purpose: "DEVELOPMENT_REGRESSION", validation_status: "UNVALIDATED", measured_flow_eligible: false, camera_accessed: false, photon_messages_sent: false, evaluated_at: "2026-10-18T22:00:00Z", policy: { id: "compact_cap_v1", sha256: "a".repeat(64), parameters: { shape: "frozen" } }, manifest_sha256: "b".repeat(64), totals: { frames: 2, baseline_accepted_frames: 0, surface_accepted_frames: 1, baseline_ambiguous_frames: 2, surface_ambiguous_frames: 0, scene_gap_frames: 0, roi_rejected_candidates: 1, shape_rejected_candidates: 1 }, warnings: ["Development footage; no independent field accuracy."], clips: [{ id: "clip-one", label: "Saved cap and strap", source_kind: "estimated_rehearsal", source_id: "rehearsal-one", original_camera_session_id: "usb-old", image_size_px: [1280,720], frames: 2, baseline: { accepted_frames: 0, gap_frames: 2, multiple_frames: 2, scene_gap_frames: 0 }, surface: { accepted_frames: 1, gap_frames: 1, multiple_frames: 0, scene_gap_frames: 0 }, diagnostics: { rejection_counts: { OUTSIDE_ROI: 1, ELONGATED: 1 } }, points: [{ t_s: 0, observed: true, reason: null, pixel_x: 110, pixel_y: 110, track_id: "track-one", association_break: true }, { t_s: 0.1, observed: false, reason: "NO_DETECTION" }], example: { jpeg_data_url: "data:image/jpeg;base64,/9j/2Q==", sequence: 1, image_size_px: [1280,720], detection_polygon_px: [[50,50],[500,50],[500,500],[50,500]], baseline_boxes_px: [[100,100,20,20],[300,200,150,10]], accepted_boxes_px: [[100,100,20,20]], rejected_candidates: [{ bbox_px: [300,200,150,10], reason_codes: ["ELONGATED"] }] } }] }; }
+  schema_version: "nemo_surface_replay_v1", report_id: "replay-one", data_origin: "LOCAL_SAVED_FOOTAGE_REPLAY", purpose: "DEVELOPMENT_REGRESSION", validation_status: "UNVALIDATED", measured_flow_eligible: false, camera_accessed: false, photon_messages_sent: false, evaluated_at: "2026-10-18T22:00:00Z", policy: { id: "foreground_green_cap_v1", sha256: "a".repeat(64), parameters: { shape: "frozen" } }, manifest_sha256: "b".repeat(64), totals: { frames: 2, baseline_accepted_frames: 0, surface_accepted_frames: 1, baseline_ambiguous_frames: 2, surface_ambiguous_frames: 0, scene_gap_frames: 0, roi_rejected_candidates: 1, shape_rejected_candidates: 1 }, warnings: ["Development footage; no independent field accuracy."], clips: [{ id: "clip-one", label: "Saved cap and strap", source_kind: "estimated_rehearsal", source_id: "rehearsal-one", original_camera_session_id: "usb-old", image_size_px: [1280,720], frames: 2, baseline: { accepted_frames: 0, gap_frames: 2, multiple_frames: 2, scene_gap_frames: 0 }, surface: { accepted_frames: 1, gap_frames: 1, multiple_frames: 0, scene_gap_frames: 0 }, diagnostics: { rejection_counts: { OUTSIDE_ROI: 1, ELONGATED: 1 } }, points: [{ t_s: 0, observed: true, reason: null, pixel_x: 110, pixel_y: 110, track_id: "track-one", association_break: true }, { t_s: 0.1, observed: false, reason: "NO_DETECTION" }], example: { jpeg_data_url: "data:image/jpeg;base64,/9j/2Q==", sequence: 1, image_size_px: [1280,720], detection_polygon_px: [[50,50],[500,50],[500,500],[50,500]], baseline_boxes_px: [[100,100,20,20],[300,200,150,10]], accepted_boxes_px: [[100,100,20,20]], rejected_candidates: [{ bbox_px: [300,200,150,10], reason_codes: ["ELONGATED"] }] } }] }; }
 
 test("saved replay retains detector decisions and authentic local JPEG metadata without granting validation",()=>{
   const result=replay.parseDetectorReplay(fixture()); assert.equal(result.measured_flow_eligible,false); assert.equal(result.camera_accessed,false); assert.equal(result.photon_messages_sent,false);
@@ -22,6 +22,7 @@ test("parser rejects promoted evidence, external images, invalid bounds, gap coo
   for(const candidate of [[-1,0,5,5],[1270,0,20,20],[0,0,0,5],[0,0,NaN,5]]){const bad=fixture();bad.clips[0].example.accepted_boxes_px=[candidate];assert.throws(()=>replay.parseDetectorReplay(bad));}
   const gap=fixture();gap.clips[0].points[1].pixel_x=120;assert.throws(()=>replay.parseDetectorReplay(gap));
   const fake=fixture();fake.clips[0].surface.accepted_frames=2;fake.clips[0].surface.gap_frames=0;assert.throws(()=>replay.parseDetectorReplay(fake));
+  const oldPolicy=fixture();oldPolicy.policy.id="compact_cap_v1";assert.throws(()=>replay.parseDetectorReplay(oldPolicy),/older detector policy/);
   const wrongTotal=fixture();wrongTotal.totals.frames=3;assert.throws(()=>replay.parseDetectorReplay(wrongTotal));
 });
 
@@ -48,16 +49,17 @@ test("late replay results are discarded after disable or unmount",async()=>{
   for(const action of["disable","unmount"]){const pending=deferred(),options=[],h=harness(async(_path,_body,opts)=>{options.push(opts);return pending.promise;});h.button("Replay saved camera footage").props.onClick();if(action==="disable")h.render({disabled:true});else h.unmount();assert.equal(options[0].signal.aborted,true);pending.resolve(fixture());await settle();if(action==="disable"){h.render();assert.doesNotMatch(renderToStaticMarkup(h.tree()),/Saved cap and strap/);h.unmount();}}
 });
 test("overlay labels expose original, accepted, rejected and frozen ROI layers",()=>{
-  const{ReplayFrame}=componentExports(),clip=replay.parseDetectorReplay(fixture()).clips[0];const html=renderToStaticMarkup(React.createElement(ReplayFrame,{clip}));assert.match(html,/Surface v2 accepted/);assert.match(html,/Rejected objects/);assert.match(html,/Original v1 candidates/);assert.match(html,/Frozen tank outline/);assert.equal((html.match(/<rect/g)||[]).length,2);assert.equal((html.match(/<polygon/g)||[]).length,1);assert.match(html,/ELONGATED/);assert.doesNotMatch(html,/accuracy 100|confidence/);
+  const{ReplayFrame}=componentExports(),clip=replay.parseDetectorReplay(fixture()).clips[0];const html=renderToStaticMarkup(React.createElement(ReplayFrame,{clip}));assert.match(html,/Green-cap v2 accepted/);assert.match(html,/Rejected objects/);assert.match(html,/Original v1 candidates/);assert.match(html,/Frozen tank outline/);assert.equal((html.match(/<rect/g)||[]).length,2);assert.equal((html.match(/<polygon/g)||[]).length,1);assert.match(html,/ELONGATED/);assert.doesNotMatch(html,/accuracy 100|confidence/);
 });
 
 const camera={running:true,fresh:true,session_id:"usb-current",width:1280,height:720,backend:"AVFOUNDATION",device_index:0};
 const polygon=[[10,10],[500,10],[500,500],[10,500]];
-const v2={reference_id:"ref-v2",camera_session_id:camera.session_id,image_size_px:[1280,720],detector:"foreground_surface_v2",detection_polygon_px:polygon,policy_id:"compact_cap_v1",policy_sha256:"c".repeat(64),derived_from_reference_id:"ref-v1",token_size:{reference_id:"ref-v2",token_area_px:3000,token_area_px_range:[1000,9000]}};
+const v2={reference_id:"ref-v2",camera_session_id:camera.session_id,image_size_px:[1280,720],detector:"foreground_surface_v2",detection_polygon_px:polygon,policy_id:"foreground_green_cap_v1",policy_sha256:"c".repeat(64),derived_from_reference_id:"ref-v1",token_size:{reference_id:"ref-v2",token_area_px:3000,token_area_px_range:[1000,9000]}};
 test("surface reference is explicit, versioned and round trips while legacy bodies remain unchanged",()=>{
   const reference=parseTokenReference(v2),draft={...newDraft(),cameraSessionId:camera.session_id,detector:"foreground_surface_v2",tokenReference:reference};
   assert.deepEqual(detectionFields(draft),{detector:"foreground_surface_v2",reference_id:"ref-v2"});assert.deepEqual(decodeDraft(encodeDraft(draft)).tokenReference,reference);
   assert.deepEqual(buildSurfaceReferenceRequest(draft,camera,polygon),{detection_polygon_px:polygon});assert.equal(draft.calibration,null);
+  assert.deepEqual(buildSurfaceReferenceRequest({...draft,tokenReference:{...reference,token_area_px:null,token_area_px_range:null}},camera,polygon),{detection_polygon_px:polygon},"deriving v2 does not require or inherit a v1 image-area range");
   assert.deepEqual(detectionFields({...draft,detector:"red_hsv"}),{});
   const legacy=parseTokenReference({...v2,reference_id:"ref-v1",detector:"foreground_reference_v1",token_size:{...v2.token_size,reference_id:"ref-v1"}});
   assert.deepEqual(detectionFields({...draft,detector:"foreground_reference_v1",tokenReference:legacy}),{detector:"foreground_reference_v1",reference_id:"ref-v1"});
@@ -69,6 +71,7 @@ test("estimated capture opts into v2 only when its reference carries frozen v2 p
   const calibration={id:"cal-aaaaaaaaaaaaaaaa",calibration_id:"cal-aaaaaaaaaaaaaaaa",camera_session_id:"usb-old",homography_image_to_cm:[[0.1,0,0],[0,0.1,0],[0,0,1]],mean_error_cm:0.2,max_error_cm:0.3,max_allowed_error_cm:3,approved:true,validation_count:3,image_size_px:[1280,720],plane:"measured_water_surface",units:"cm"};
   const source={schema_version:"nemo_saved_calibration_v1",calibration,calibration_json:JSON.stringify(calibration)};
   const body=buildEstimatedRehearsalRequest(source,camera,parseTokenReference(v2),"5");assert.equal(body.detector,"foreground_surface_v2");assert.equal(body.reference_id,"ref-v2");assert.equal(body.acknowledge_estimated_mapping,true);
+  assert.throws(()=>buildEstimatedRehearsalRequest(source,camera,{...parseTokenReference(v2),token_area_px:null,token_area_px_range:null},"5"),/own policy-specific image-size/);
 });
 
 
@@ -84,4 +87,10 @@ test("each overlay checkbox changes only its own drawn boxes or outline",()=>{
   toggles()[1].props.onChange({target:{checked:false}});render();assert.equal(count("rect"),0);
   toggles()[2].props.onChange({target:{checked:true}});render();assert.equal(count("rect"),2);
   toggles()[3].props.onChange({target:{checked:false}});render();assert.equal(count("rect"),2);assert.equal(count("polygon"),0);
+});
+
+
+test("retiring the old shape-only policy preserves the survey but invalidates its derived evidence",()=>{
+  const draft={...newDraft(),mappingWorld:"0,0;35.56,0;35.56,22.86;0,22.86",bounds:{xMin:"0",xMax:"35.56",yMin:"0",yMax:"22.86"},cameraSessionId:camera.session_id,detector:"foreground_surface_v2",tokenReference:{...parseTokenReference(v2),policy_id:"compact_cap_v1"},trainingRecordingIds:["old-training"],validationRecordingIds:["old-validation"],profileId:"old-profile",manifestId:"old-receipt"};
+  const restored=decodeDraft(encodeDraft(draft));assert.ok(restored);assert.equal(restored.mappingWorld,draft.mappingWorld);assert.deepEqual(restored.bounds,draft.bounds);assert.equal(restored.tokenReference.reference_id,"ref-v1");assert.equal(restored.tokenReference.token_area_px_range,null);assert.equal(restored.tokenReference.token_area_px,null);assert.deepEqual(restored.trainingRecordingIds,[]);assert.equal(restored.profileId,null);assert.equal(restored.manifestId,null);
 });

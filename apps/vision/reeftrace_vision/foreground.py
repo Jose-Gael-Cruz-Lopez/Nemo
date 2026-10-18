@@ -214,6 +214,20 @@ def foreground_change_mask(frame, reference, *, k_sigma=6.0, min_delta=18.0,
     Candidate polygons must never be installed as ``reference.roi`` merely to
     change gain estimation. V2 filters these complete components afterwards.
     """
+    mask, _ = foreground_change_mask_and_frame(
+        frame, reference, k_sigma=k_sigma, min_delta=min_delta,
+        max_changed_fraction=max_changed_fraction)
+    return mask
+
+
+def foreground_change_mask_and_frame(frame, reference, *, k_sigma=6.0, min_delta=18.0,
+                                     max_changed_fraction=0.15):
+    """Return the v1 mask and its aligned image in the same reference-pixel pose.
+
+    Colour admission must use this image rather than the original moving frame,
+    or a permitted small translation would misalign colour and foreground masks.
+    All global scene checks and the v1 mask remain identical.
+    """
     frame = _bgr(frame, "Frame")
     if frame.shape[:2] != reference.shape:
         raise SceneChanged("Frame size differs from the empty-tank reference; retake it")
@@ -254,4 +268,4 @@ def foreground_change_mask(frame, reference, *, k_sigma=6.0, min_delta=18.0,
                            "or something large entered the frame. Retake the empty-tank reference")
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
-    return mask
+    return mask, frame

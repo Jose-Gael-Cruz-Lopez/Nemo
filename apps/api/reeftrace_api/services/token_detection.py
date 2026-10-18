@@ -88,10 +88,10 @@ class TokenDetectionService:
                                 *, detector=DETECTOR_ID, detection_polygon_px=None):
         """Capture the empty tank; optionally carry a token size measured with an earlier reference.
 
-        A token's apparent size depends on the camera, not on whether the water is moving,
-        so a size measured with a calm (pump off) reference may be reused for a running
-        (pump on) one: same camera session, same image size, and the two references must
-        show the camera within the allowed creep of each other.
+        Within the same detector policy, a calm-water pixel size may be reused for
+        a running-water reference: same camera session, image size and allowed
+        camera creep. Generic foreground area and green-only area are different
+        measurements and cannot be transferred between policies.
         """
         if self.runtime.record_lock.locked():
             raise ValueError("A camera capture is active; finish it before capturing a reference")
@@ -108,20 +108,30 @@ class TokenDetectionService:
         # asyncio.Lock acquires immediately while free: with no intervening await
         # after the check, another capture is rejected rather than queued.
         async with self.runtime.record_lock:
-            result = await self._capture_reference(frame_count, roi_polygon_px, token_size_from)
+            result = await self._capture_reference(frame_count, roi_polygon_px, token_size_from,
+                                                   source_detector=detector)
             if detector == SURFACE_DETECTOR_ID:
-                return self.derive_surface_reference(result["reference_id"], detection_polygon_px)
+                surface = self.derive_surface_reference(result["reference_id"], detection_polygon_px)
+                if token_size_from and self._token_size(surface["reference_id"]) is None:
+                    self._carry_size(surface["reference_id"], surface["camera_session_id"],
+                                     token_size_from, self._token_size(token_size_from), surface=True)
+                return {**surface, "token_size": self._token_size(surface["reference_id"])}
             return result
 
-    async def _capture_reference(self, frame_count, roi_polygon_px, token_size_from):
+    async def _capture_reference(self, frame_count, roi_polygon_px, token_size_from,
+                                 *, source_detector=DETECTOR_ID):
         status = self._fresh_session()
         source = source_size = None
         if token_size_from:
             source, source_reference = self._reference(token_size_from)
+            if source.get("detector", DETECTOR_ID) != source_detector:
+                raise ValueError("Token pixel area cannot be carried between detector policies")
             self._check_current(source, status["session_id"])
             source_size = self._token_size(token_size_from)
             if source_size is None:
                 raise ValueError("Measure one token with the earlier reference before carrying its size over")
+            if source_detector == SURFACE_DETECTOR_ID:
+                self._check_surface_size(source_size)
         frames = await self._frames(frame_count, status["session_id"])
         reference = EmptyTankReference(frames, roi_polygon_px=roi_polygon_px)
         if source is not None:
@@ -142,12 +152,9 @@ class TokenDetectionService:
             saved = self.runtime.store.put(REFERENCE_KIND, record, reference_id)
         except ValueError:  # Identical content from the same session: reuse the saved record.
             saved = self.runtime.store.get(REFERENCE_KIND, reference_id)
-        if source_size is not None and self._token_size(reference_id) is None:
-            self.runtime.store.put(TOKEN_SIZE_KIND, {
-                "reference_id": reference_id, "camera_session_id": status["session_id"],
-                "token_area_px": source_size["token_area_px"],
-                "token_area_px_range": source_size["token_area_px_range"],
-                "measured_at": source_size["measured_at"], "carried_from_reference_id": token_size_from})
+        if (source_size is not None and source_detector == DETECTOR_ID
+                and self._token_size(reference_id) is None):
+            self._carry_size(reference_id, status["session_id"], token_size_from, source_size)
         size = self._token_size(reference_id)
         return {**saved, "token_size": size}
 
@@ -213,12 +220,27 @@ class TokenDetectionService:
         self._remember_reference(new_id, reference)
         saved = self.runtime.store.put(REFERENCE_KIND, record, new_id)
         size = self._token_size(reference_id)
-        if size is not None:
-            self.runtime.store.put(TOKEN_SIZE_KIND, {
-                "reference_id": new_id, "camera_session_id": source["camera_session_id"],
-                "token_area_px": size["token_area_px"], "token_area_px_range": size["token_area_px_range"],
-                "measured_at": size["measured_at"], "carried_from_reference_id": reference_id})
+        # Green-only segmented area and generic foreground area are different
+        # measurements. A v1 size must never approve the new colour policy.
+        if size is not None and source.get("detector") == SURFACE_DETECTOR_ID:
+            self._check_surface_size(size)
+            self._carry_size(new_id, source["camera_session_id"], reference_id, size, surface=True)
         return {**saved, "token_size": self._token_size(new_id)}
+
+    @staticmethod
+    def _check_surface_size(size):
+        if (size.get("policy_id") != SURFACE_POLICY_ID
+                or size.get("policy_sha256") != SURFACE_POLICY_SHA256):
+            raise ValueError("Green-cap pixel area belongs to another detector policy; measure it again")
+
+    def _carry_size(self, reference_id, session_id, source_id, size, *, surface=False):
+        record = {"reference_id": reference_id, "camera_session_id": session_id,
+                  "token_area_px": size["token_area_px"],
+                  "token_area_px_range": size["token_area_px_range"],
+                  "measured_at": size["measured_at"], "carried_from_reference_id": source_id}
+        if surface:
+            record.update(policy_id=SURFACE_POLICY_ID, policy_sha256=SURFACE_POLICY_SHA256)
+        return self.runtime.store.put(TOKEN_SIZE_KIND, record)
 
     def _check_current(self, record, session_id):
         if record["camera_session_id"] != session_id:
@@ -242,10 +264,13 @@ class TokenDetectionService:
                 if record.get("detector") == SURFACE_DETECTOR_ID
                 else measure_token_area(frame, reference))
         low, high = token_area_range(area)
-        return self.runtime.store.put(TOKEN_SIZE_KIND, {
+        size = {
             "reference_id": reference_id, "camera_session_id": status["session_id"],
             "token_area_px": round(float(area), 1),
-            "token_area_px_range": [round(low, 1), round(high, 1)], "measured_at": time.time()})
+            "token_area_px_range": [round(low, 1), round(high, 1)], "measured_at": time.time()}
+        if record.get("detector") == SURFACE_DETECTOR_ID:
+            size.update(policy_id=SURFACE_POLICY_ID, policy_sha256=SURFACE_POLICY_SHA256)
+        return self.runtime.store.put(TOKEN_SIZE_KIND, size)
 
     def _token_size(self, reference_id):
         for item in self.runtime.store.list(TOKEN_SIZE_KIND, 100):
@@ -291,6 +316,7 @@ class TokenDetectionService:
             raise ValueError("Measure one token with this reference before recording")
         area_range = tuple(size["token_area_px_range"])
         if name == SURFACE_DETECTOR_ID:
+            self._check_surface_size(size)
             metadata = {"detector": SURFACE_DETECTOR_ID, "reference_id": reference_id,
                         "token_area_px_range": list(area_range),
                         "detection_polygon_px": record["detection_polygon_px"],

@@ -1,4 +1,4 @@
-"""Frozen compact-cap policy on synthetic images; no saved physical footage or devices."""
+"""Declared green-cap policy on synthetic images; no saved physical footage or devices."""
 from __future__ import annotations
 
 import cv2
@@ -62,6 +62,55 @@ def test_polygon_does_not_crop_or_modify_background_gain_or_component_shape(scen
     cropped_reference = EmptyTankReference([empty.copy() for _ in range(5)], roi_polygon_px=DOMAIN)
     with pytest.raises(ValueError, match="full-frame background"):
         detect_surface_token(frame, cropped_reference, DOMAIN)
+
+
+def test_non_green_fleck_is_not_a_cap_and_green_separates_merged_white_reflection(scene):
+    empty, reference = scene
+    frame = empty.copy()
+    cv2.circle(frame, (140, 110), 14, GREEN, -1)
+    # A touching bright reflection merges with the generic foreground object.
+    cv2.rectangle(frame, (151, 99), (198, 121), (245, 245, 245), -1)
+    # This unrelated compact tray fleck must not be substituted for the green cap.
+    cv2.rectangle(frame, (75, 50), (92, 63), (230, 230, 230), -1)
+    generic = detect_foreground(frame, reference, max_area_fraction=0.2)
+    found = detect_surface_token(frame, reference, DOMAIN, max_area_fraction=0.2)
+    assert len(generic) == 2
+    assert len(found) == 1
+    assert found[0]["pixel_x"] == pytest.approx(140, abs=1)
+    assert found[0]["pixel_y"] == pytest.approx(110, abs=1)
+    assert found[0]["bbox_px"][2] < 32  # The attached white reflection was separated.
+
+
+def test_static_green_mesh_in_background_does_not_count_as_moving_cap(scene):
+    empty, _ = scene
+    cv2.rectangle(empty, (40, 30), (240, 36), GREEN, -1)
+    reference = EmptyTankReference([empty.copy() for _ in range(5)])
+    assert detect_surface_token(empty.copy(), reference, DOMAIN) == []
+    frame = empty.copy()
+    cv2.circle(frame, (140, 110), 14, GREEN, -1)
+    found = detect_surface_token(frame, reference, DOMAIN)
+    assert len(found) == 1
+    assert found[0]["pixel_x"] == pytest.approx(140, abs=1)
+
+
+def test_green_mask_uses_same_reference_pose_after_permitted_camera_alignment(scene):
+    empty, reference = scene
+    frame = empty.copy()
+    cv2.circle(frame, (140, 110), 14, GREEN, -1)
+    shifted = cv2.warpAffine(frame, np.float32([[1, 0, 4], [0, 1, 2]]), (WIDTH, HEIGHT),
+                             borderMode=cv2.BORDER_REFLECT)
+    found = detect_surface_token(shifted, reference, DOMAIN)
+    assert len(found) == 1
+    assert found[0]["pixel_x"] == pytest.approx(140, abs=1)
+    assert found[0]["pixel_y"] == pytest.approx(110, abs=1)
+
+
+@pytest.mark.parametrize("color", [(20, 20, 230), (220, 30, 20), (230, 230, 230)])
+def test_declared_green_policy_does_not_claim_other_colours(scene, color):
+    empty, reference = scene
+    frame = empty.copy()
+    cv2.circle(frame, (140, 110), 14, color, -1)
+    assert detect_surface_token(frame, reference, DOMAIN) == []
 
 
 def test_zero_and_two_similar_caps_remain_missing_or_ambiguous(scene):
@@ -134,6 +183,10 @@ def test_policy_is_versioned_and_callers_cannot_change_shape_or_dominance(scene)
     assert original["maximum_aspect_ratio"] == 2.0
     assert original["minimum_circularity"] == 0.45
     assert original["minimum_solidity"] == 0.75
+    assert original["green_hsv_lower"] == [35, 80, 40]
+    assert original["green_hsv_upper"] == [85, 255, 255]
+    changed["green_hsv_lower"][0] = 0
+    assert surface_policy()["green_hsv_lower"] == [35, 80, 40]
     assert original["measurement_dominance"] == 4.0
     with pytest.raises(ValueError, match="fixed fourfold"):
         measure_surface_token_area(np.zeros((HEIGHT, WIDTH, 3), np.uint8), reference, DOMAIN,

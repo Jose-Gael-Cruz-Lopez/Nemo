@@ -34,6 +34,7 @@ export function parseDetectorReplay(value: unknown): DetectorReplayReport {
     || value.measured_flow_eligible !== false || value.camera_accessed !== false || value.photon_messages_sent !== false || !text(value.evaluated_at) || !Number.isFinite(Date.parse(value.evaluated_at))
     || !hash(value.manifest_sha256) || !object(value.policy) || !text(value.policy.id) || !hash(value.policy.sha256) || !object(value.policy.parameters)
     || !Array.isArray(value.clips) || !value.clips.length || value.clips.length > 20 || !Array.isArray(value.warnings) || value.warnings.length > 20 || !value.warnings.every(item => text(item,3000))) bad();
+  if (value.policy.id !== "foreground_green_cap_v1") throw new Error("This saved replay uses an older detector policy. Replay the saved footage again to see the green-marker surface detector.");
   const clips = value.clips.map(clip => {
     if (!object(clip) || !text(clip.id) || !text(clip.label,300) || (clip.source_kind !== "estimated_rehearsal" && clip.source_kind !== "diagnostic_frame")
       || !text(clip.source_id) || !text(clip.original_camera_session_id,100) || !count(clip.frames,10000) || clip.frames < 1 || !object(clip.example) || !object(clip.diagnostics) || !object(clip.diagnostics.rejection_counts)) bad();

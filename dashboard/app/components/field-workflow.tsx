@@ -243,19 +243,27 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
             <legend>How the camera finds the token</legend>
             <label>Token detector<select value={draft.detector} disabled={locked} onChange={event => update(current => ({ ...setTokenReference(current, current.tokenReference), detector: event.target.value as TokenDetector }))}>
               <option value="foreground_reference_v1">Original v1: compare with the empty tank</option>
-              <option value="foreground_surface_v2">Surface v2: frozen tank outline and compact cap shape</option>
+              <option value="foreground_surface_v2">Surface v2: green marker only, with frozen tank outline</option>
               <option value="red_hsv">Red marker only</option>
             </select></label>
             {draft.detector === "foreground_surface_v2" && <>
-              <p className={styles.explain}>Surface v2 limits foreground detection to the displayed tank outline and a frozen compact-cap shape policy. Preparing it reuses the stored background and token image-size range; it does not open the camera, alter the saved mapping, or approve centimetre accuracy.</p>
+              <p className={styles.explain}>Surface v2 detects green markers only: it combines foreground change, the displayed tank outline, and a frozen green-colour and compact-cap shape policy. Other colours are not supported by this detector. Preparing it reuses only the stored full-frame background; the old token-size range is not transferred. It does not open the camera, alter the saved mapping, or approve centimetre accuracy.</p>
               <p className={styles.explain}>Declared pixel outline: {(estimatedMapping ?? draft.calibration)?.mapping_polygon_px?.map(point => point.map(value => value.toFixed(1)).join(", ")).join(" ; ") || "No tank outline displayed. Select the saved estimated grid or a validated mapping first."}</p>
-              <button className="secondary-button" disabled={locked || !sessionCurrent || !draft.tokenReference?.token_area_px_range || !(estimatedMapping ?? draft.calibration)?.mapping_polygon_px} onClick={() => void run("Freezing the surface detector from the saved background", async () => {
+              <button className="secondary-button" disabled={locked || !sessionCurrent || !draft.tokenReference || !(estimatedMapping ?? draft.calibration)?.mapping_polygon_px} onClick={() => void run("Freezing the surface detector from the saved background", async () => {
                 const body = buildSurfaceReferenceRequest(draft, camera, (estimatedMapping ?? draft.calibration)?.mapping_polygon_px);
                 const reference = parseTokenReference(await request<unknown>(`/camera/reference/${encodeURIComponent(draft.tokenReference!.reference_id)}/surface`, body));
                 update(current => ({ ...setTokenReference(current, reference), detector: "foreground_surface_v2" }));
-                setNotice(`Surface detector prepared as ${reference.reference_id}. Its pixel outline and compact-cap policy are frozen; the old background and calibration are unchanged. Saved-footage replay remains development evidence.`);
-              })}>Prepare surface detector from saved background</button>
-              {draft.tokenReference?.detector === "foreground_surface_v2" && <p className={styles.explain}>Surface reference <code>{draft.tokenReference.reference_id}</code> · frozen policy <code>{draft.tokenReference.policy_id}</code>. This does not validate source or flow accuracy.</p>}
+                setNotice(`Green-cap surface detector prepared as ${reference.reference_id}. Its pixel outline, green-marker colour gate and cap-shape policy are frozen; the old background and calibration are unchanged. The v1 image-size range was not carried over. Saved-footage replay remains development evidence.`);
+              })}>Prepare green-cap detector from saved background</button>
+              {draft.tokenReference?.detector === "foreground_surface_v2" && <>
+                <p className={styles.explain}>Green-cap surface reference <code>{draft.tokenReference.reference_id}</code> · frozen policy <code>{draft.tokenReference.policy_id}</code>. This does not validate source or flow accuracy. {draft.tokenReference.token_area_px_range ? `Green-policy image area: ${Math.round(draft.tokenReference.token_area_px_range[0])}–${Math.round(draft.tokenReference.token_area_px_range[1])} px.` : "A later live capture needs its own green-policy image-size check; saved-footage replay runs independently without a new capture."}</p>
+                <button className="secondary-button" disabled={locked || !sessionCurrent} onClick={() => void run("Checking green-marker image size for later live capture", async () => {
+                  const reference = draft.tokenReference!;
+                  const measured = withTokenSize(reference, await request<unknown>(`/camera/reference/${encodeURIComponent(reference.reference_id)}/token-size`, {}));
+                  update(current => setTokenReference(current, measured));
+                  setNotice(`Green-policy token image area checked for ${reference.reference_id}. This only prepares later live detection; it does not validate the tank coordinates or source model.`);
+                })}>Later live capture: check green-marker image size</button>
+              </>}
             </>}
             {draft.detector === "foreground_reference_v1" && <>
               <p className={styles.explain}>This finds whatever new object floats in the tank, so green caps work. It does not recognise plastic. First remove every token, turn the pump on, and keep hands out of view; then capture the empty tank. Next, place one cap in open water and measure it.</p>

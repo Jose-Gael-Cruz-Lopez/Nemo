@@ -79,6 +79,8 @@ class DetectorReplayService:
         records = self.runtime.store.list(KIND, 1)
         if not records:
             raise KeyError("No local saved-footage replay exists")
+        if records[0].get("policy", {}).get("sha256") != surface_policy()["policy_sha256"]:
+            raise ValueError("The last replay predates the current detector policy; replay saved footage")
         return records[0]
 
     def run(self):

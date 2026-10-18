@@ -1,8 +1,11 @@
 """Saved-footage HTTP regression with synthetic files only; no devices or providers."""
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from types import SimpleNamespace
 
 import cv2
@@ -14,7 +17,7 @@ from fastapi.responses import JSONResponse
 from fastapi.testclient import TestClient
 
 from apps.api.reeftrace_api.api.v1.endpoints.detector_replay import create_detector_replay_router
-from apps.api.reeftrace_api.services.detector_replay import MANIFEST_SCHEMA
+from apps.api.reeftrace_api.services.detector_replay import MANIFEST_SCHEMA, DetectorReplayService
 from apps.api.reeftrace_api.services.store import Store
 from apps.vision.reeftrace_vision.calibration import fit_homography
 from apps.vision.reeftrace_vision.foreground import EmptyTankReference
@@ -47,9 +50,9 @@ def env(tmp_path, monkeypatch):
         if index != 3:
             cv2.circle(image, (70 + index, 50), 7, (0, 255, 0), -1)
         if index == 1:
-            cv2.rectangle(image, (5, 35), (15, 70), (250, 250, 250), -1)
+            cv2.rectangle(image, (5, 35), (15, 70), (0, 255, 0), -1)
         if index == 2:
-            cv2.rectangle(image, (105, 60), (135, 65), (250, 250, 250), -1)
+            cv2.rectangle(image, (105, 60), (135, 65), (0, 255, 0), -1)
         success, encoded = cv2.imencode(".jpg", image)
         assert success
         path = folder / f"frame-{index}.jpg"
@@ -143,6 +146,7 @@ def test_replay_compares_actual_detectors_over_synthetic_saved_frames_without_ad
     assert result["photon_messages_sent"] is False
     assert result["manifest_sha256"] == hashlib.sha256(env.manifest_path.read_bytes()).hexdigest()
     assert result["policy"]["sha256"] == result["policy"]["parameters"]["policy_sha256"]
+    assert result["policy"]["id"] == "foreground_green_cap_v1"
     assert result["totals"]["frames"] == 5
     assert result["totals"]["surface_accepted_frames"] == 4
     assert result["totals"]["baseline_ambiguous_frames"] >= 1
@@ -160,6 +164,79 @@ def test_replay_compares_actual_detectors_over_synthetic_saved_frames_without_ad
     latest = env.client.get(BASE, headers=AUTH)
     assert latest.status_code == 200 and latest.json() == result
     assert latest.headers["Cache-Control"] == "no-store"
+
+
+def test_replay_rejects_red_and_pale_compact_objects_then_accepts_green_return(env):
+    clip = env.manifest["clips"][0]
+    for index, color in ((1, (0, 0, 255)), (2, (235, 235, 235))):
+        image = env.floor.copy()
+        cv2.circle(image, (70 + index, 50), 7, color, -1)
+        ok, encoded = cv2.imencode(".jpg", image)
+        assert ok
+        path = env.root / clip["frames"][index]["path"]
+        path.write_bytes(encoded.tobytes())
+        clip["frames"][index]["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    save_manifest(env)
+    result = post(env).json()
+    points = result["clips"][0]["points"]
+    assert [point["observed"] for point in points] == [True, False, False, False, True]
+    assert points[-1]["association_break"] is True
+    assert points[-1]["track_id"] != points[0]["track_id"]
+    assert result["totals"]["baseline_accepted_frames"] == 4
+    assert result["totals"]["surface_accepted_frames"] == 2
+    assert result["policy"]["id"] == "foreground_green_cap_v1"
+    assert_no_admission(env)
+
+
+def test_large_saved_jpeg_gets_a_bounded_preview_without_resizing_coordinates(env):
+    first = env.manifest["clips"][0]["frames"][0]
+    path = env.root / first["path"]
+    jpeg = path.read_bytes()
+    # Valid JPEGs may carry trailing application data. Exercise the actual
+    # re-encoding path without requiring a large-resolution calibration fixture.
+    padded = jpeg + b"\0" * (1_500_000 - len(jpeg))
+    path.write_bytes(padded)
+    first["sha256"] = hashlib.sha256(padded).hexdigest()
+    save_manifest(env)
+    result = post(env).json()
+    preview = result["clips"][0]["example"]
+    payload = base64.b64decode(preview["jpeg_data_url"].split(",", 1)[1], validate=True)
+    assert len(payload) <= 1_400_000 and len(preview["jpeg_data_url"]) < 2_000_000
+    image = cv2.imdecode(np.frombuffer(payload, np.uint8), cv2.IMREAD_COLOR)
+    assert image.shape == (HEIGHT, WIDTH, 3)
+    assert preview["image_size_px"] == [WIDTH, HEIGHT]
+    assert preview["detection_polygon_px"] == env.manifest["detection_polygon_px"]
+    assert path.read_bytes() == padded
+    assert_no_admission(env)
+
+
+def test_concurrent_replay_posts_are_rejected_without_starting_another_reader(env, monkeypatch):
+    entered, release = threading.Event(), threading.Event()
+    original = DetectorReplayService.run
+    readers = []
+
+    def wait_then_run(service):
+        readers.append(service)
+        entered.set()
+        assert release.wait(5), "Synthetic replay test did not release its own worker"
+        return original(service)
+
+    monkeypatch.setattr(DetectorReplayService, "run", wait_then_run)
+    with ThreadPoolExecutor(max_workers=1) as pool:
+        first = pool.submit(env.client.post, BASE, headers=AUTH, json={})
+        try:
+            assert entered.wait(3)
+            second = env.client.post(BASE, headers=AUTH, json={})
+            assert second.status_code == 409
+            assert second.headers.get("Cache-Control") == "no-store"
+            assert len(readers) == 1
+        finally:
+            release.set()
+        assert first.result(timeout=5).status_code == 200
+    assert len(env.runtime.store.list("detector_replay")) == 1
+    assert post(env).status_code == 200  # The completed worker releases the lock.
+    assert len(readers) == 2
+    assert_no_admission(env)
 
 
 def test_replay_requires_local_operator_and_get_does_not_run_a_replay(env):
