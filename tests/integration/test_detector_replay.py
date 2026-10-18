@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import copy
 import hashlib
 import json
 import threading
@@ -188,6 +189,32 @@ def test_replay_rejects_red_and_pale_compact_objects_then_accepts_green_return(e
     assert_no_admission(env)
 
 
+@pytest.mark.parametrize("leading_frame", ["empty", "red", "scene_gap"])
+def test_replay_learns_size_at_first_valid_green_frame_after_leading_gaps(env, leading_frame):
+    """Development replay waits for a dominant cap; leading gaps cannot learn its size."""
+    first = env.manifest["clips"][0]["frames"][0]
+    image = env.floor.copy()
+    if leading_frame == "red":
+        cv2.circle(image, (70, 50), 7, (0, 0, 255), -1)
+    elif leading_frame == "scene_gap":
+        image = np.clip(image.astype(float) * 1.6, 0, 255).astype(np.uint8)
+    ok, encoded = cv2.imencode(".jpg", image)
+    assert ok
+    path = env.root / first["path"]
+    path.write_bytes(encoded.tobytes())
+    first["sha256"] = hashlib.sha256(path.read_bytes()).hexdigest()
+    save_manifest(env)
+    result = post(env).json()
+    points = result["clips"][0]["points"]
+    assert [point["observed"] for point in points] == [False, True, True, False, True]
+    assert points[0]["reason"] == ("SCENE_CHANGED" if leading_frame == "scene_gap"
+                                    else "TOKEN_SIZE_AMBIGUOUS")
+    assert result["totals"]["surface_accepted_frames"] == 3
+    assert result["validation_status"] == "UNVALIDATED"
+    assert result["measured_flow_eligible"] is False
+    assert_no_admission(env)
+
+
 def test_large_saved_jpeg_gets_a_bounded_preview_without_resizing_coordinates(env):
     first = env.manifest["clips"][0]["frames"][0]
     path = env.root / first["path"]
@@ -244,6 +271,35 @@ def test_replay_requires_local_operator_and_get_does_not_run_a_replay(env):
     assert env.client.post(BASE, json={}).status_code == 401
     assert env.client.get(BASE, headers=AUTH).status_code == 404
     assert env.runtime.store.list("detector_replay") == []
+    assert_no_admission(env)
+
+
+def test_latest_rejects_retired_policy_without_rewriting_archive_and_accepts_fresh_replay(env):
+    current = post(env).json()
+    retired = copy.deepcopy(current)
+    retired_id = "surface-replay-" + "a" * 16
+    parameters = {key: value for key, value in current["policy"]["parameters"].items()
+                  if key not in {"green_hsv_lower", "green_hsv_upper", "green_mask_open_kernel_px",
+                                 "green_mask_close_kernel_px", "segmentation", "policy_sha256"}}
+    parameters["policy_id"] = "compact_cap_v1"
+    old_sha = hashlib.sha256(json.dumps(
+        parameters, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
+    retired.update(id=retired_id, report_id=retired_id,
+                   policy={"id": "compact_cap_v1", "sha256": old_sha,
+                           "parameters": {**parameters, "policy_sha256": old_sha}})
+    archive = env.runtime.store.put("detector_replay", retired, retired_id)
+    before = env.runtime.store.list("detector_replay")
+    response = env.client.get(BASE, headers=AUTH)
+    assert response.status_code == 409
+    assert "predates the current detector policy" in response.json()["detail"]
+    assert env.runtime.store.list("detector_replay") == before
+    assert env.runtime.store.get("detector_replay", retired_id) == archive
+
+    fresh = post(env).json()
+    latest = env.client.get(BASE, headers=AUTH)
+    assert latest.status_code == 200 and latest.json() == fresh
+    assert fresh["policy"] == current["policy"]
+    assert env.runtime.store.get("detector_replay", retired_id) == archive
     assert_no_admission(env)
 
 

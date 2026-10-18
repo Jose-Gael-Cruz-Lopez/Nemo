@@ -172,11 +172,11 @@ class DetectorReplayService:
             for index in (0, 1):
                 try:
                     if not size_checked[index]:
-                        size_checked[index] = True
                         try:
                             area = (measure_token_area(image, reference) if index == 0 else
                                     measure_surface_token_area(image, reference, polygon))
                             bounds[index] = token_area_range(area)
+                            size_checked[index] = True
                         except ValueError:
                             bounds[index] = None
                     if index == 0:
