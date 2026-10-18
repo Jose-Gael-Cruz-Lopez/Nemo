@@ -1,0 +1,8 @@
+/*
+ * Glyph_Trail
+ *
+ * Learn More: https://www.framer.com/asset-urls
+ */
+
+export * from "https://framerusercontent.com/modules/W7GVKeL0PHO5Y7ihQdhb/mcfjQvnnHs7ZBfjTsYps/Glyph_Trail.js"
+export { default } from "https://framerusercontent.com/modules/W7GVKeL0PHO5Y7ihQdhb/mcfjQvnnHs7ZBfjTsYps/Glyph_Trail.js"

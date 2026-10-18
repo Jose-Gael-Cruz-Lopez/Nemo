@@ -1,0 +1,14 @@
+**Conditional GO for the software contract.** No result exists, no score is invented, and no physical behavior is approved. The shown files implement the reviewed exploratory design: constant local east/north residual, copy-on-write field, no clip/fill/mask expansion, origin-tangent mean-sphere \(v_{\text{last}}\) versus WGS84 RK4, exact 3600 s cadence, 48-cell plan with primary withheld unless all score, duplicate-UTC invalidation, forecast hash and read-back before numeric target decode, exclusive first-score directory, and committed-method guard. The original v2 evaluator and data pins are untouched.
+
+**Concrete failure paths that are present and correct.**  
+- Non-3600 s or >50 km penultimate fix → `CONTEXT_CADENCE_MISMATCH` / `LOCAL_GEOMETRY_BUDGET_EXCEEDED` on the residual candidate only.  
+- Masked origin or all-masked field → `UNSUPPORTED` / `CURRENT_FIELD_ALL_MASKED`.  
+- Corrected grid speed >10 m/s → `CORRECTED_FIELD_SPEED_BUDGET_EXCEEDED`, no clip.  
+- Domain exit or missing hourly output → `PARTIAL` with null coordinates after the last supported hour.  
+- Duplicate target UTC → that UTC dropped even if one copy is invalid; primary remains null.  
+- Failed forecast read-back → no score, directory retained, retry refused.
+
+**Untested assumptions.**  
+The real HYCOM residual candidate has not been run. The DOP853 check is synthetic and east-only analytic; no test confirms that a residual valid at the origin but singular at an intermediate stage is rejected solely by the existing sampler. Constant local-ENU addition is not tested against any parallel-transport alternative; the code simply does not implement one.
+
+**Distinction.** This GO approves the software contract for a post-outcome exploratory diagnostic on the two already-viewed groups. It is not a new independent scientific protocol, not a confirmatory test, and not authorization to promote the residual or to treat a later lower error as skill. A later metadata-selected cohort that excludes these IDs remains required before any transfer claim.

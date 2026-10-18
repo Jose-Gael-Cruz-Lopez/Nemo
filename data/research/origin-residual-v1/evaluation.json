@@ -1,0 +1,1480 @@
+{
+  "all_four_forecasts_saved_before_this_diagnostic_target_decode": true,
+  "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+  "forecast_file_sha256": "727e2ce329148c31194bd6fc7b17c39da8b83923439140b9eef5c378376cc0d1",
+  "forecast_frozen_at_utc": "2026-10-17T23:10:44.298723+00:00",
+  "frozen_source_study_changed": false,
+  "kind": "ORIGIN_RESIDUAL_EXPLORATORY_DIAGNOSTIC",
+  "method_source_sha256": {
+    "apps/ocean/reeftrace_ocean/origin_residual.py": "37b84b13bb085651ae2b5b1140b6bc43d8ad5897719eb34b7b525cd8709fa02e",
+    "scripts/evaluate_origin_residual_diagnostic.py": "961a5f75b0dcbec7287f7815260c010ef53a0a0f9ad26447d2265e80881a84d9",
+    "tests/unit/test_origin_residual.py": "d0ff8188f9d17c89700968cd4e40a951f5980aacf73351aa5f7bce2c9d9b0de1"
+  },
+  "new_data_acquisition": false,
+  "physical_validation": false,
+  "previously_viewed_target_outcomes": true,
+  "protocol_sha256": "e1073f84e83b2ea078d0890972659e778f87238c417287d8adf70e3649587163",
+  "provider_calls": false,
+  "schema_version": 1,
+  "scored_at_utc": "2026-10-17T23:10:44.300622+00:00",
+  "scores": {
+    "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+    "automatic_model_promotion": false,
+    "automatic_winner_selected": false,
+    "global_training": false,
+    "groups": [
+      {
+        "candidates": [
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 1738.9573139976044,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 1,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.8867,
+                "target_longitude_deg": -74.381294,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 3266.549125404664,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 2,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.894236,
+                "target_longitude_deg": -74.36801,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 4650.806288904074,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 3,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.900463,
+                "target_longitude_deg": -74.355515,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 5902.139254193995,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 4,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.90552,
+                "target_longitude_deg": -74.34382,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 7045.780980282139,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 5,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.909607,
+                "target_longitude_deg": -74.33279,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 8121.756574761635,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 6,
+                "latitude_deg": 29.877075,
+                "longitude_deg": -74.39551,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.91361,
+                "target_longitude_deg": -74.322556,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 5120.998256257352,
+              "coverage_complete": true,
+              "endpoint_fde_m": 8121.756574761635,
+              "full_horizon_ade_m": 5120.998256257352,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "stationary",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 233.80426970437546,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 1,
+                "latitude_deg": 29.888696309272405,
+                "longitude_deg": -74.38053250966306,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.8867,
+                "target_longitude_deg": -74.381294,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 716.392800183059,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 2,
+                "latitude_deg": 29.900315926628828,
+                "longitude_deg": -74.36555152704416,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.894236,
+                "target_longitude_deg": -74.36801,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 1361.7505102541509,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 3,
+                "latitude_deg": 29.911933850880224,
+                "longitude_deg": -74.35056705019805,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.900463,
+                "target_longitude_deg": -74.355515,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 2156.456722346094,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 4,
+                "latitude_deg": 29.923550080836915,
+                "longitude_deg": -74.33557907717915,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.90552,
+                "target_longitude_deg": -74.34382,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 3075.58446528571,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 5,
+                "latitude_deg": 29.935164615308526,
+                "longitude_deg": -74.32058760604158,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.909607,
+                "target_longitude_deg": -74.33279,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 4034.0989009671275,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 6,
+                "latitude_deg": 29.94677745310405,
+                "longitude_deg": -74.3055926348392,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.91361,
+                "target_longitude_deg": -74.322556,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 1929.6812781234194,
+              "coverage_complete": true,
+              "endpoint_fde_m": 4034.0989009671275,
+              "full_horizon_ade_m": 1929.6812781234194,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "last_drift",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 1170.2878584481653,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 1,
+                "latitude_deg": 29.8958786530853,
+                "longitude_deg": -74.3872339663111,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.8867,
+                "target_longitude_deg": -74.381294,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 2463.897164560101,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 2,
+                "latitude_deg": 29.914233430861536,
+                "longitude_deg": -74.3790202376204,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.894236,
+                "target_longitude_deg": -74.36801,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 3841.4921481028246,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 3,
+                "latitude_deg": 29.932396530764944,
+                "longitude_deg": -74.3707235545176,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.900463,
+                "target_longitude_deg": -74.355515,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 5291.921741953975,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 4,
+                "latitude_deg": 29.950382403722738,
+                "longitude_deg": -74.36214789816191,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.90552,
+                "target_longitude_deg": -74.34382,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 6803.041797411212,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 5,
+                "latitude_deg": 29.968188893270074,
+                "longitude_deg": -74.3531504562342,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.909607,
+                "target_longitude_deg": -74.33279,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 8270.53113245185,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 6,
+                "latitude_deg": 29.9857318677499,
+                "longitude_deg": -74.3435408589431,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.91361,
+                "target_longitude_deg": -74.322556,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 4640.195307154688,
+              "coverage_complete": true,
+              "endpoint_fde_m": 8270.53113245185,
+              "full_horizon_ade_m": 4640.195307154688,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "current_only",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 192.12992649994962,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 1,
+                "latitude_deg": 29.888290876165897,
+                "longitude_deg": -74.38051631266589,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.8867,
+                "target_longitude_deg": -74.381294,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 573.2175278919586,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 2,
+                "latitude_deg": 29.89883288257046,
+                "longitude_deg": -74.36531877486658,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.894236,
+                "target_longitude_deg": -74.36801,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 1089.2124321474726,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 3,
+                "latitude_deg": 29.90893090799287,
+                "longitude_deg": -74.34983461278685,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.900463,
+                "target_longitude_deg": -74.355515,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 1737.3142233615577,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 4,
+                "latitude_deg": 29.918673089830545,
+                "longitude_deg": -74.33409164870864,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.90552,
+                "target_longitude_deg": -74.34382,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 2503.1916409785335,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 5,
+                "latitude_deg": 29.928090492854963,
+                "longitude_deg": -74.31796352530375,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.909607,
+                "target_longitude_deg": -74.33279,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 3327.6312288398913,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300234066836710",
+                "horizon_hours": 6,
+                "latitude_deg": 29.937109136405653,
+                "longitude_deg": -74.30117549034736,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 29.91361,
+                "target_longitude_deg": -74.322556,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 1570.4494966198938,
+              "coverage_complete": true,
+              "endpoint_fde_m": 3327.6312288398913,
+              "full_horizon_ade_m": 1570.4494966198938,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "origin_residual_current",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          }
+        ],
+        "group_id": "300234066836710",
+        "target_issues": []
+      },
+      {
+        "candidates": [
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 296.28620235811593,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 1,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.013218,
+                "target_longitude_deg": -74.23657,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 674.9452971041985,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 2,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.01112,
+                "target_longitude_deg": -74.23989,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 1226.0178581009197,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 3,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.008474,
+                "target_longitude_deg": -74.24468,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 1991.3936942241155,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 4,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.00571,
+                "target_longitude_deg": -74.25183,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 2949.844280575625,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 5,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.003464,
+                "target_longitude_deg": -74.26138,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 4016.9491379052365,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 6,
+                "latitude_deg": 28.01351,
+                "longitude_deg": -74.23357,
+                "model_id": "stationary",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.001741,
+                "target_longitude_deg": -74.272255,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 1859.2394117113683,
+              "coverage_complete": true,
+              "endpoint_fde_m": 4016.9491379052365,
+              "full_horizon_ade_m": 1859.2394117113683,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "stationary",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 87.20288927517319,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 1,
+                "latitude_deg": 28.01395292070985,
+                "longitude_deg": -74.2368800272285,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.013218,
+                "target_longitude_deg": -74.23657,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 365.4379034278637,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 2,
+                "latitude_deg": 28.014395762127428,
+                "longitude_deg": -74.24019008168132,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.01112,
+                "target_longitude_deg": -74.23989,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 717.1189929773229,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 3,
+                "latitude_deg": 28.014838524250596,
+                "longitude_deg": -74.24350016335433,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.008474,
+                "target_longitude_deg": -74.24468,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 1172.8218490430777,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 4,
+                "latitude_deg": 28.015281207077226,
+                "longitude_deg": -74.24681027224341,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.00571,
+                "target_longitude_deg": -74.25183,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 1755.0562706059286,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 5,
+                "latitude_deg": 28.01572381060519,
+                "longitude_deg": -74.25012040834437,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.003464,
+                "target_longitude_deg": -74.26138,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 2447.053502512259,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 6,
+                "latitude_deg": 28.016166334832366,
+                "longitude_deg": -74.2534305716531,
+                "model_id": "last_drift",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.001741,
+                "target_longitude_deg": -74.272255,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 1090.7819013069375,
+              "coverage_complete": true,
+              "endpoint_fde_m": 2447.053502512259,
+              "full_horizon_ade_m": 1090.7819013069375,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "last_drift",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 1457.9258496206487,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 1,
+                "latitude_deg": 28.00086024850328,
+                "longitude_deg": -74.23160759457502,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.013218,
+                "target_longitude_deg": -74.23657,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 2869.5558680720287,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 2,
+                "latitude_deg": 27.98690625218611,
+                "longitude_deg": -74.22978100075036,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.01112,
+                "target_longitude_deg": -74.23989,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 4417.888978192801,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 3,
+                "latitude_deg": 27.97155544625662,
+                "longitude_deg": -74.22805277396064,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.008474,
+                "target_longitude_deg": -74.24468,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 6127.265859616213,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 4,
+                "latitude_deg": 27.955197648340373,
+                "longitude_deg": -74.22689416648451,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.00571,
+                "target_longitude_deg": -74.25183,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 8009.676492962519,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 5,
+                "latitude_deg": 27.93819885995194,
+                "longitude_deg": -74.22686610950076,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.003464,
+                "target_longitude_deg": -74.26138,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 10032.758970018393,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 6,
+                "latitude_deg": 27.920431302603593,
+                "longitude_deg": -74.22797632632863,
+                "model_id": "current_only",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.001741,
+                "target_longitude_deg": -74.272255,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 5485.845336413768,
+              "coverage_complete": true,
+              "endpoint_fde_m": 10032.758970018393,
+              "full_horizon_ade_m": 5485.845336413768,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "current_only",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          },
+          {
+            "cells": [
+              {
+                "elapsed_s": 3600,
+                "error_m": 34.90912772248207,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 1,
+                "latitude_deg": 28.013352552615952,
+                "longitude_deg": -74.23689129245187,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.013218,
+                "target_longitude_deg": -74.23657,
+                "time_utc": "2022-06-01T01:00:00Z"
+              },
+              {
+                "elapsed_s": 7200,
+                "error_m": 102.38333896530764,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 2,
+                "latitude_deg": 28.011981378785094,
+                "longitude_deg": -74.2402584555324,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.01112,
+                "target_longitude_deg": -74.23989,
+                "time_utc": "2022-06-01T02:00:00Z"
+              },
+              {
+                "elapsed_s": 10800,
+                "error_m": 139.74457741291351,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 3,
+                "latitude_deg": 28.009377378554507,
+                "longitude_deg": -74.24369040473329,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.008474,
+                "target_longitude_deg": -74.24468,
+                "time_utc": "2022-06-01T03:00:00Z"
+              },
+              {
+                "elapsed_s": 14400,
+                "error_m": 410.8123824559645,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 4,
+                "latitude_deg": 28.0060340234029,
+                "longitude_deg": -74.24766159459377,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.00571,
+                "target_longitude_deg": -74.25183,
+                "time_utc": "2022-06-01T04:00:00Z"
+              },
+              {
+                "elapsed_s": 18000,
+                "error_m": 865.7620416787069,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 5,
+                "latitude_deg": 28.002441584752074,
+                "longitude_deg": -74.25263795824533,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.003464,
+                "target_longitude_deg": -74.26138,
+                "time_utc": "2022-06-01T05:00:00Z"
+              },
+              {
+                "elapsed_s": 21600,
+                "error_m": 1384.2851104665729,
+                "forecast_reason_code": null,
+                "forecast_status": "AVAILABLE",
+                "group_id": "300534061292930",
+                "horizon_hours": 6,
+                "latitude_deg": 27.998578471624175,
+                "longitude_deg": -74.25861797349118,
+                "model_id": "origin_residual_current",
+                "score_status": "SCORED",
+                "target_latitude_deg": 28.001741,
+                "target_longitude_deg": -74.272255,
+                "time_utc": "2022-06-01T06:00:00Z"
+              }
+            ],
+            "metrics": {
+              "available_cell_mean_error_m": 489.6494297836579,
+              "coverage_complete": true,
+              "endpoint_fde_m": 1384.2851104665729,
+              "full_horizon_ade_m": 489.6494297836579,
+              "planned_count": 6,
+              "scored_count": 6
+            },
+            "model_id": "origin_residual_current",
+            "prediction_reason_code": null,
+            "prediction_status": "COMPLETED"
+          }
+        ],
+        "group_id": "300534061292930",
+        "target_issues": []
+      }
+    ],
+    "heldout_tuning": false,
+    "kind": "ORIGIN_RESIDUAL_EXPLORATORY_SCORES",
+    "limitations": [
+      "These 48 model/hour cells reuse only 12 already-viewed processed GDP targets.",
+      "The residual is constant local east/north discrepancy, not an identified physical coefficient.",
+      "Mean-sphere context velocity and WGS84 RK4 are distinct coordinate constructions.",
+      "Lower descriptive error is not confirmatory skill, statistical significance or model promotion.",
+      "Issue-time availability, assimilation independence, plastic, tank and reef accuracy remain unverified."
+    ],
+    "models": [
+      {
+        "metrics": {
+          "available_cell_mean_error_m": 3490.1188339843607,
+          "coverage_complete": true,
+          "full_horizon_ade_m": 3490.1188339843607,
+          "planned_count": 12,
+          "scored_count": 12
+        },
+        "model_id": "stationary"
+      },
+      {
+        "metrics": {
+          "available_cell_mean_error_m": 1510.2315897151784,
+          "coverage_complete": true,
+          "full_horizon_ade_m": 1510.2315897151784,
+          "planned_count": 12,
+          "scored_count": 12
+        },
+        "model_id": "last_drift"
+      },
+      {
+        "metrics": {
+          "available_cell_mean_error_m": 5063.020321784227,
+          "coverage_complete": true,
+          "full_horizon_ade_m": 5063.020321784227,
+          "planned_count": 12,
+          "scored_count": 12
+        },
+        "model_id": "current_only"
+      },
+      {
+        "metrics": {
+          "available_cell_mean_error_m": 1030.049463201776,
+          "coverage_complete": true,
+          "full_horizon_ade_m": 1030.049463201776,
+          "planned_count": 12,
+          "scored_count": 12
+        },
+        "model_id": "origin_residual_current"
+      }
+    ],
+    "operational_forecast_skill_verified": false,
+    "paired_comparisons": [
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT",
+        "cells": [
+          {
+            "error_a_m": 1738.9573139976044,
+            "error_b_m": 233.80426970437546,
+            "group_id": "300234066836710",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 3266.549125404664,
+            "error_b_m": 716.392800183059,
+            "group_id": "300234066836710",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 4650.806288904074,
+            "error_b_m": 1361.7505102541509,
+            "group_id": "300234066836710",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 5902.139254193995,
+            "error_b_m": 2156.456722346094,
+            "group_id": "300234066836710",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 7045.780980282139,
+            "error_b_m": 3075.58446528571,
+            "group_id": "300234066836710",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 8121.756574761635,
+            "error_b_m": 4034.0989009671275,
+            "group_id": "300234066836710",
+            "horizon_hours": 6
+          },
+          {
+            "error_a_m": 296.28620235811593,
+            "error_b_m": 87.20288927517319,
+            "group_id": "300534061292930",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 674.9452971041985,
+            "error_b_m": 365.4379034278637,
+            "group_id": "300534061292930",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 1226.0178581009197,
+            "error_b_m": 717.1189929773229,
+            "group_id": "300534061292930",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 1991.3936942241155,
+            "error_b_m": 1172.8218490430777,
+            "group_id": "300534061292930",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 2949.844280575625,
+            "error_b_m": 1755.0562706059286,
+            "group_id": "300534061292930",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 4016.9491379052365,
+            "error_b_m": 2447.053502512259,
+            "group_id": "300534061292930",
+            "horizon_hours": 6
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": 1979.8872442691818,
+        "model_a": "stationary",
+        "model_b": "last_drift",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT",
+        "cells": [
+          {
+            "error_a_m": 1738.9573139976044,
+            "error_b_m": 1170.2878584481653,
+            "group_id": "300234066836710",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 3266.549125404664,
+            "error_b_m": 2463.897164560101,
+            "group_id": "300234066836710",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 4650.806288904074,
+            "error_b_m": 3841.4921481028246,
+            "group_id": "300234066836710",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 5902.139254193995,
+            "error_b_m": 5291.921741953975,
+            "group_id": "300234066836710",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 7045.780980282139,
+            "error_b_m": 6803.041797411212,
+            "group_id": "300234066836710",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 8121.756574761635,
+            "error_b_m": 8270.53113245185,
+            "group_id": "300234066836710",
+            "horizon_hours": 6
+          },
+          {
+            "error_a_m": 296.28620235811593,
+            "error_b_m": 1457.9258496206487,
+            "group_id": "300534061292930",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 674.9452971041985,
+            "error_b_m": 2869.5558680720287,
+            "group_id": "300534061292930",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 1226.0178581009197,
+            "error_b_m": 4417.888978192801,
+            "group_id": "300534061292930",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 1991.3936942241155,
+            "error_b_m": 6127.265859616213,
+            "group_id": "300534061292930",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 2949.844280575625,
+            "error_b_m": 8009.676492962519,
+            "group_id": "300534061292930",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 4016.9491379052365,
+            "error_b_m": 10032.758970018393,
+            "group_id": "300534061292930",
+            "horizon_hours": 6
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": -1572.9014877998673,
+        "model_a": "stationary",
+        "model_b": "current_only",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT",
+        "cells": [
+          {
+            "error_a_m": 1738.9573139976044,
+            "error_b_m": 192.12992649994962,
+            "group_id": "300234066836710",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 3266.549125404664,
+            "error_b_m": 573.2175278919586,
+            "group_id": "300234066836710",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 4650.806288904074,
+            "error_b_m": 1089.2124321474726,
+            "group_id": "300234066836710",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 5902.139254193995,
+            "error_b_m": 1737.3142233615577,
+            "group_id": "300234066836710",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 7045.780980282139,
+            "error_b_m": 2503.1916409785335,
+            "group_id": "300234066836710",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 8121.756574761635,
+            "error_b_m": 3327.6312288398913,
+            "group_id": "300234066836710",
+            "horizon_hours": 6
+          },
+          {
+            "error_a_m": 296.28620235811593,
+            "error_b_m": 34.90912772248207,
+            "group_id": "300534061292930",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 674.9452971041985,
+            "error_b_m": 102.38333896530764,
+            "group_id": "300534061292930",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 1226.0178581009197,
+            "error_b_m": 139.74457741291351,
+            "group_id": "300534061292930",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 1991.3936942241155,
+            "error_b_m": 410.8123824559645,
+            "group_id": "300534061292930",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 2949.844280575625,
+            "error_b_m": 865.7620416787069,
+            "group_id": "300534061292930",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 4016.9491379052365,
+            "error_b_m": 1384.2851104665729,
+            "group_id": "300534061292930",
+            "horizon_hours": 6
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": 2460.0693707825844,
+        "model_a": "stationary",
+        "model_b": "origin_residual_current",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT",
+        "cells": [
+          {
+            "error_a_m": 233.80426970437546,
+            "error_b_m": 1170.2878584481653,
+            "group_id": "300234066836710",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 716.392800183059,
+            "error_b_m": 2463.897164560101,
+            "group_id": "300234066836710",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 1361.7505102541509,
+            "error_b_m": 3841.4921481028246,
+            "group_id": "300234066836710",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 2156.456722346094,
+            "error_b_m": 5291.921741953975,
+            "group_id": "300234066836710",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 3075.58446528571,
+            "error_b_m": 6803.041797411212,
+            "group_id": "300234066836710",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 4034.0989009671275,
+            "error_b_m": 8270.53113245185,
+            "group_id": "300234066836710",
+            "horizon_hours": 6
+          },
+          {
+            "error_a_m": 87.20288927517319,
+            "error_b_m": 1457.9258496206487,
+            "group_id": "300534061292930",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 365.4379034278637,
+            "error_b_m": 2869.5558680720287,
+            "group_id": "300534061292930",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 717.1189929773229,
+            "error_b_m": 4417.888978192801,
+            "group_id": "300534061292930",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 1172.8218490430777,
+            "error_b_m": 6127.265859616213,
+            "group_id": "300534061292930",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 1755.0562706059286,
+            "error_b_m": 8009.676492962519,
+            "group_id": "300534061292930",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 2447.053502512259,
+            "error_b_m": 10032.758970018393,
+            "group_id": "300534061292930",
+            "horizon_hours": 6
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": -3552.7887320690493,
+        "model_a": "last_drift",
+        "model_b": "current_only",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT",
+        "cells": [
+          {
+            "error_a_m": 233.80426970437546,
+            "error_b_m": 192.12992649994962,
+            "group_id": "300234066836710",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 716.392800183059,
+            "error_b_m": 573.2175278919586,
+            "group_id": "300234066836710",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 1361.7505102541509,
+            "error_b_m": 1089.2124321474726,
+            "group_id": "300234066836710",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 2156.456722346094,
+            "error_b_m": 1737.3142233615577,
+            "group_id": "300234066836710",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 3075.58446528571,
+            "error_b_m": 2503.1916409785335,
+            "group_id": "300234066836710",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 4034.0989009671275,
+            "error_b_m": 3327.6312288398913,
+            "group_id": "300234066836710",
+            "horizon_hours": 6
+          },
+          {
+            "error_a_m": 87.20288927517319,
+            "error_b_m": 34.90912772248207,
+            "group_id": "300534061292930",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 365.4379034278637,
+            "error_b_m": 102.38333896530764,
+            "group_id": "300534061292930",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 717.1189929773229,
+            "error_b_m": 139.74457741291351,
+            "group_id": "300534061292930",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 1172.8218490430777,
+            "error_b_m": 410.8123824559645,
+            "group_id": "300534061292930",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 1755.0562706059286,
+            "error_b_m": 865.7620416787069,
+            "group_id": "300534061292930",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 2447.053502512259,
+            "error_b_m": 1384.2851104665729,
+            "group_id": "300534061292930",
+            "horizon_hours": 6
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": 480.1821265134026,
+        "model_a": "last_drift",
+        "model_b": "origin_residual_current",
+        "planned_common_cell_count": 12
+      },
+      {
+        "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT",
+        "cells": [
+          {
+            "error_a_m": 1170.2878584481653,
+            "error_b_m": 192.12992649994962,
+            "group_id": "300234066836710",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 2463.897164560101,
+            "error_b_m": 573.2175278919586,
+            "group_id": "300234066836710",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 3841.4921481028246,
+            "error_b_m": 1089.2124321474726,
+            "group_id": "300234066836710",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 5291.921741953975,
+            "error_b_m": 1737.3142233615577,
+            "group_id": "300234066836710",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 6803.041797411212,
+            "error_b_m": 2503.1916409785335,
+            "group_id": "300234066836710",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 8270.53113245185,
+            "error_b_m": 3327.6312288398913,
+            "group_id": "300234066836710",
+            "horizon_hours": 6
+          },
+          {
+            "error_a_m": 1457.9258496206487,
+            "error_b_m": 34.90912772248207,
+            "group_id": "300534061292930",
+            "horizon_hours": 1
+          },
+          {
+            "error_a_m": 2869.5558680720287,
+            "error_b_m": 102.38333896530764,
+            "group_id": "300534061292930",
+            "horizon_hours": 2
+          },
+          {
+            "error_a_m": 4417.888978192801,
+            "error_b_m": 139.74457741291351,
+            "group_id": "300534061292930",
+            "horizon_hours": 3
+          },
+          {
+            "error_a_m": 6127.265859616213,
+            "error_b_m": 410.8123824559645,
+            "group_id": "300534061292930",
+            "horizon_hours": 4
+          },
+          {
+            "error_a_m": 8009.676492962519,
+            "error_b_m": 865.7620416787069,
+            "group_id": "300534061292930",
+            "horizon_hours": 5
+          },
+          {
+            "error_a_m": 10032.758970018393,
+            "error_b_m": 1384.2851104665729,
+            "group_id": "300534061292930",
+            "horizon_hours": 6
+          }
+        ],
+        "common_scored_count": 12,
+        "coverage_complete": true,
+        "mean_delta_a_minus_b_m": 4032.9708585824515,
+        "model_a": "current_only",
+        "model_b": "origin_residual_current",
+        "planned_common_cell_count": 12
+      }
+    ],
+    "physical_validation": false,
+    "planned_cell_count": 48,
+    "planned_distinct_target_count": 12,
+    "planned_group_count": 2,
+    "previously_viewed_target_outcomes": true,
+    "primary_common_cohort_complete": true,
+    "primary_equal_id_macro_results": [
+      {
+        "equal_id_macro_ade_m": 3490.11883398436,
+        "equal_id_macro_fde_m": 6069.352856333436,
+        "group_count": 2,
+        "model_id": "stationary"
+      },
+      {
+        "equal_id_macro_ade_m": 1510.2315897151784,
+        "equal_id_macro_fde_m": 3240.5762017396933,
+        "group_count": 2,
+        "model_id": "last_drift"
+      },
+      {
+        "equal_id_macro_ade_m": 5063.020321784228,
+        "equal_id_macro_fde_m": 9151.645051235122,
+        "group_count": 2,
+        "model_id": "current_only"
+      },
+      {
+        "equal_id_macro_ade_m": 1030.0494632017758,
+        "equal_id_macro_fde_m": 2355.9581696532323,
+        "group_count": 2,
+        "model_id": "origin_residual_current"
+      }
+    ],
+    "schema_version": 1,
+    "scored_cell_count": 48,
+    "statistical_independence": false,
+    "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1"
+  },
+  "source_acquisition_lineage": {
+    "acquisition_start_sha256": "779cd40cf7ded603256f2012b478fd5fb056e7c87dfd58c189d80da73d9d06df",
+    "manifest_sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0",
+    "protocol_sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793",
+    "trusted_identity_sha256": "c7a883cc5a2f938809839d9785fa8477146c5bb26a21d68c1d730afda4543f07"
+  },
+  "source_artifact_pins": {
+    "evaluation.json": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347",
+    "forecasts.json": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf",
+    "manifest.json": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0"
+  },
+  "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1"
+}

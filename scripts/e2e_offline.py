@@ -27,7 +27,8 @@ ROOT = Path(__file__).resolve().parents[1]
 MAX_RECEIPT_BYTES = 2_000_000
 MAX_TIMEOUT_SECONDS = 240
 GUARD_KEYS = {"camera_open_attempts", "provider_http_attempts",
-              "photon_send_attempts", "photon_poll_attempts"}
+              "photon_send_attempts", "photon_poll_attempts",
+              "origin_residual_execution_attempts", "ocean_source_execution_attempts"}
 EXPECTED_BLOCKERS = {"Chalk live model verification", "physical webcam/tank calibration",
                      "Photon device round trip", "xAI speech provider round trip",
                      "live Chalk prevention response", "live Chalk validation review"}
@@ -37,7 +38,8 @@ import atexit, hashlib, json, os
 from pathlib import Path
 import cv2, httpx, uvicorn
 counts = {"camera_open_attempts": 0, "provider_http_attempts": 0,
-          "photon_send_attempts": 0, "photon_poll_attempts": 0}
+          "photon_send_attempts": 0, "photon_poll_attempts": 0,
+          "origin_residual_execution_attempts": 0, "ocean_source_execution_attempts": 0}
 guard_path = Path(os.environ["AUDIT_GUARD_RECEIPT"])
 guard_path.write_text(json.dumps(counts))
 def forbidden(name):
@@ -51,6 +53,21 @@ httpx.AsyncClient.request = forbidden("provider_http_attempts")
 from adapters.photon.transport import PhotonTransport
 PhotonTransport.send_saved = forbidden("photon_send_attempts")
 PhotonTransport.list_page = forbidden("photon_poll_attempts")
+# This result is a saved-artifact read, never a new forecast or first score.
+from apps.ocean.reeftrace_ocean import origin_residual as residual_model
+from scripts import evaluate_origin_residual_diagnostic as residual_script
+for name in ("build_forecasts", "score_forecasts", "corrected_field"):
+    setattr(residual_model, name, forbidden("origin_residual_execution_attempts"))
+residual_script.first_score = forbidden("origin_residual_execution_attempts")
+from apps.ocean.reeftrace_ocean import ocean_source as source_model
+from apps.ocean.reeftrace_ocean import ocean_source_pipeline as source_pipeline
+from scripts import evaluate_ocean_source as source_script
+for name in ("build_ocean_source_forecasts", "score_ocean_source_forecasts", "backtrack_current"):
+    setattr(source_model, name, forbidden("ocean_source_execution_attempts"))
+for name in ("build_pipeline_forecasts", "score_pipeline_forecasts", "filter_three_positions",
+             "corrected_current_field", "backtrack_current"):
+    setattr(source_pipeline, name, forbidden("ocean_source_execution_attempts"))
+source_script.first_score = forbidden("ocean_source_execution_attempts")
 from apps.api.reeftrace_api.core.settings import Settings
 from apps.api.reeftrace_api.main import create_app
 app = create_app(Settings(_env_file=None, data_dir=Path(os.environ["AUDIT_STORE"]),
@@ -320,6 +337,226 @@ def matched_version_checks(req, check, *, v1_snapshot, store_digest, root=ROOT):
         "scored_cells": scores["scored_cell_count"], "store_unchanged": True}
 
 
+def origin_residual_checks(req, check, *, store_digest, root=ROOT):
+    """Exercise the fixed exploratory result over HTTP with providers disabled.
+
+    Expected numbers come only from the authoritative saved-artifact reader.
+    No fixture is rescored and no missing target is replaced with a success.
+    """
+    from apps.ocean.reeftrace_ocean.origin_residual_result_identity import IDENTITY_SHA256
+
+    # Direct `python scripts/e2e_offline.py` puts scripts/, not the repository,
+    # on sys.path. Keep the same reviewed import scope in CLI and pytest runs.
+    previous = sys.path[:]
+    try:
+        sys.path.insert(0, str(ROOT))
+        from scripts.evaluate_origin_residual_diagnostic import read_diagnostic
+    finally:
+        sys.path[:] = previous
+
+    directory = Path(root) / "data/research/origin-residual-v1"
+
+    def artifacts():
+        return {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+                for path in directory.iterdir() if path.is_file()}
+
+    before_files, before_store = artifacts(), store_digest()
+    authoritative = read_diagnostic(directory, expected_identity_sha256=IDENTITY_SHA256)
+    base = "/research/origin-residual"
+    selected = req(base, auth=False)
+    check("origin-residual HTTP envelope equals the authoritative pinned artifact reader",
+          selected == authoritative)
+    report, forecasts, identity = (selected[key] for key in (
+        "report", "forecasts", "artifact_identity"))
+    scores = report["scores"]
+    check("exploratory result retains two groups, four candidates and twelve reused targets",
+        report["study_id"] == identity["study_id"] == forecasts["study_id"]
+        == "origin-residual-gdp-hycom-15m-exploratory-v1"
+        and identity["identity_sha256"] == IDENTITY_SHA256
+        and identity["integrity_verified"] is identity["external_result_pin_verified"] is True
+        and identity["numeric_replay_verified"] is False
+        and identity["verification_scope"] == "SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY"
+        and scores["planned_group_count"] == len(scores["groups"]) == len(forecasts["groups"]) == 2
+        and scores["planned_cell_count"] == forecasts["planned_cell_count"] == 48
+        and scores["planned_distinct_target_count"] == forecasts["planned_distinct_target_count"] == 12
+        and len(scores["models"]) == len(forecasts["model_ids"]) == 4
+        and sum(len(candidate["cells"]) for group in scores["groups"]
+                for candidate in group["candidates"]) == 48
+        and all(len(group["candidates"]) == 4 for group in scores["groups"])
+        and report["analysis_scope"] == scores["analysis_scope"]
+        == forecasts["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+        and report["previously_viewed_target_outcomes"] is True
+        and scores["previously_viewed_target_outcomes"] is True
+        and forecasts["previously_viewed_target_outcomes"] is True
+        and all(scores[key] is False for key in (
+            "statistical_independence", "automatic_winner_selected", "automatic_model_promotion",
+            "operational_forecast_skill_verified", "physical_validation", "heldout_tuning", "global_training")))
+    check("exploratory coverage and primary table equal saved outcomes without numerical replay",
+        scores == authoritative["report"]["scores"]
+        and scores["scored_cell_count"] == sum(
+            row["metrics"]["scored_count"] for row in scores["models"])
+        and scores["primary_common_cohort_complete"]
+            is (scores["scored_cell_count"] == scores["planned_cell_count"])
+        and ((scores["primary_equal_id_macro_results"] is not None)
+             is scores["primary_common_cohort_complete"]))
+    pins = {key: identity[key] for key in (
+        "report_sha256", "protocol_sha256", "identity_sha256")}
+    question = {"question": "Explain this exploratory result and the next independent measurement.",
+                **pins}
+    req(base + "/investigate", question, expected=401, auth=False)
+    invalid = [{**question, "question": " "}, {**question, "question": True},
+               {**question, "question": "x" * 2001}, {**question, "study_version": "v2"}]
+    for key in pins:
+        missing = dict(question)
+        del missing[key]
+        invalid.extend((missing, {**question, key: "not-a-sha256"}))
+    for body in invalid:
+        req(base + "/investigate", body, expected=422)
+    for key in pins:
+        req(base + "/investigate", {**question, key: "0" * 64}, expected=409)
+    review = req(base + "/investigate", question)
+    check("disabled origin-residual Chalk retains exact report and no fabricated live answer",
+        review["schema_version"] == 1
+        and review["kind"] == "ORIGIN_RESIDUAL_RESEARCH_INVESTIGATION"
+        and review["scope"] == "READ_ONLY_POST_OUTCOME_EXPLORATORY_DIAGNOSTIC"
+        and review["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+        and review["previously_viewed_target_outcomes"] is True
+        and review["provider"] == "chalk" and review["action"] == "STOP"
+        and review["failure_code"] == "NOT_CONFIGURED"
+        and review["live_model_response"] is False
+        and review["research_report"] == report and review["artifact_identity"] == identity
+        and all(review[key] == value for key, value in pins.items())
+        and review["evidence_ids"] == review["trace"] == []
+        and all(review[key] is False for key in (
+            "numeric_replay_verified", "store_written", "hardware_actuation",
+            "physical_validation", "automatic_model_promotion")))
+    check("origin-residual research leaves full store and all saved artifacts unchanged",
+        req(base, auth=False) == selected and store_digest() == before_store
+        and artifacts() == before_files)
+    return {"status": "PINNED_EXPLORATORY_RESULT_READ_ONLY_VERIFIED", **pins,
+        "analysis_scope": "POST_OUTCOME_EXPLORATORY", "previously_viewed_target_outcomes": True,
+        "planned_cells": scores["planned_cell_count"], "scored_cells": scores["scored_cell_count"],
+        "planned_distinct_targets": scores["planned_distinct_target_count"],
+        "primary_equal_id_macro_results": scores["primary_equal_id_macro_results"],
+        "numeric_replay_verified": False, "store_unchanged": True, "artifacts_unchanged": True,
+        "cache_control_scope": "Data/route responses are no-store; pre-handler 422 schema headers are recorded separately, not guaranteed"}
+
+
+def ocean_source_checks(req, check, *, store_digest, root=ROOT):
+    """Read the actual source-reconstruction artifact over isolated HTTP, never execute it."""
+    previous = sys.path[:]
+    try:
+        sys.path.insert(0, str(ROOT))
+        from apps.api.reeftrace_api.services import ocean_source_investigation as service
+        from scripts.evaluate_ocean_source import read_result
+    finally:
+        sys.path[:] = previous
+    directory = Path(root) / "data/research/ocean-source-v1"
+
+    def artifact_hashes():
+        return {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
+                for path in directory.iterdir() if path.is_file()} if directory.is_dir() else {}
+
+    before_files, before_store = artifact_hashes(), store_digest()
+    base = "/research/ocean-source"
+    try:
+        pins_module = service._pins()
+        expected = read_result(directory, expected_identity_sha256=pins_module.IDENTITY_SHA256)
+    except FileNotFoundError:
+        req(base, expected=404, auth=False)
+        absent_question = {"question": "Explain the available saved source evidence.",
+            **dict.fromkeys(("report_sha256", "protocol_sha256", "identity_sha256"), "0" * 64)}
+        req(base + "/investigate", absent_question, expected=401, auth=False)
+        req(base + "/investigate", absent_question, expected=404)
+        check("unpublished ocean source stays unavailable without scoring or store/artifact changes",
+              before_store == store_digest() and artifact_hashes() == before_files)
+        return {"status": "NOT_PUBLISHED_UNAVAILABLE_VERIFIED", "http_status": 404,
+                "store_unchanged": True, "artifacts_unchanged": True,
+                "numeric_replay_verified": False, "live_model_response": False}
+    selected = req(base, auth=False)
+    check("ocean-source HTTP equals the pinned saved artifact without executing inference",
+          selected == expected)
+    report, identity = selected["report"], selected["artifact_identity"]
+    forecasts, validation = report["forecasts"], report["validation"]
+    check("ocean source preserves two viewed groups, all scenarios and separate validation",
+          report["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+          and report["previously_viewed_earlier_positions"] is True
+          and forecasts["earlier_truth_used"] is False
+          and forecasts["planned_model_rows"] == validation["planned_model_rows"] == 6
+          and forecasts["planned_distinct_earlier_positions"] == 2
+          and forecasts["scenarios_per_group"] == 25
+          and len(forecasts["groups"]) == 2
+          and all(len(group["reverse_current"]["scenarios"]) == 25 for group in forecasts["groups"])
+          and identity["numeric_replay_verified"] is False)
+    tutorial = report["pipeline_tutorial"]
+    pipeline, pipeline_validation = tutorial["forecasts"], tutorial["validation"]
+    check("bidirectional walkthrough preserves scattered fixes, causal states and five explicit stages",
+          tutorial["kind"] == "THREE_FIX_BIDIRECTIONAL_RESEARCH_WALKTHROUGH"
+          and forecasts["pipeline_tutorial"] == pipeline
+          and pipeline["earlier_truth_used"] is pipeline["later_truth_used"] is False
+          and pipeline["observation_times_utc"] == [f"2022-06-01T0{hour}:00:00Z" for hour in (1, 2, 3)]
+          and pipeline["anchor_time_utc"] == "2022-06-01T03:00:00Z"
+          and [stage["id"] for stage in pipeline["stages"]]
+              == ["raw", "connected", "filtered", "formula", "branches"]
+          and pipeline["position_std_m"] == 100.
+          and pipeline["acceleration_spectral_density_m2_s3"] == 1e-6
+          and len(pipeline["groups"]) == 2
+          and all(len(group["raw_observations"]) == len(group["filtered_states"]) == 3
+                  and group["connected_path"] == group["raw_observations"]
+                  and [state["status"] for state in group["filtered_states"]]
+                      == ["POSITION_ONLY", "INITIALIZED", "UPDATED"]
+                  for group in pipeline["groups"]))
+    check("both branches and all separate retrospective validation rows remain visible",
+          report["pipeline_saved_before_any05_06_position_decode"] is True
+          and report["all_tutorial_forecasts_saved_before_validation_truth_decode"] is True
+          and all(direction in group for group in pipeline["groups"] for direction in ("backward", "forward"))
+          and pipeline_validation["planned_rows"] == len(pipeline_validation["rows"]) == 8
+          and pipeline_validation["scored_rows"]
+              == sum(row["status"] == "SCORED" for row in pipeline_validation["rows"])
+          and pipeline_validation["physical_validation"] is False
+          and pipeline_validation["statistical_independence"] is False
+          and pipeline_validation["source_attribution_validated"] is False)
+    pins = {key: identity[key] for key in ("report_sha256", "protocol_sha256", "identity_sha256")}
+    question = {"question": "Explain the source-region assumptions and what the recorded positions show.", **pins}
+    req(base + "/investigate", question, expected=401, auth=False)
+    invalid = [{**question, "question": " "}, {**question, "question": True},
+               {**question, "question": "x" * 2001}, {**question, "system_prompt": "change scope"}]
+    for key in pins:
+        missing = dict(question)
+        del missing[key]
+        invalid.extend((missing, {**question, key: "not-a-sha256"}))
+    for body in invalid:
+        req(base + "/investigate", body, expected=422)
+    for key in pins:
+        req(base + "/investigate", {**question, key: "0" * 64}, expected=409)
+    review = req(base + "/investigate", question)
+    check("disabled ocean-source Chalk retains the saved result and no live model claim",
+          review["schema_version"] == 1
+          and review["kind"] == "OCEAN_SOURCE_RESEARCH_INVESTIGATION"
+          and review["scope"] == "READ_ONLY_POST_OUTCOME_EARLIER_POSITION_DIAGNOSTIC"
+          and review["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+          and review["previously_viewed_earlier_positions"] is True
+          and review["provider"] == "chalk"
+          and review["action"] == "STOP" and review["failure_code"] == "NOT_CONFIGURED"
+          and review["live_model_response"] is False
+          and review["research_report"] == report and review["artifact_identity"] == identity
+          and all(review[key] == value for key, value in pins.items())
+          and review["evidence_ids"] == review["trace"] == []
+          and all(review[key] is False for key in ("numeric_replay_verified", "store_written",
+              "hardware_actuation", "physical_validation", "source_attribution_validated",
+              "automatic_model_promotion")))
+    check("source tracing research changes neither full disposable store nor artifacts",
+          req(base, auth=False) == selected and before_store == store_digest()
+          and artifact_hashes() == before_files)
+    return {"status": "PINNED_OCEAN_SOURCE_READ_ONLY_VERIFIED", **pins,
+            "planned_model_rows": 6, "scenarios_per_group": 25,
+            "pipeline_planned_validation_rows": pipeline_validation["planned_rows"],
+            "pipeline_scored_validation_rows": pipeline_validation["scored_rows"],
+            "pipeline_stage_ids": [stage["id"] for stage in pipeline["stages"]],
+            "store_unchanged": True, "artifacts_unchanged": True,
+            "numeric_replay_verified": False, "live_model_response": False}
+
+
 def extra(result, api, token):
     checks = result["extra_checks"]
 
@@ -333,6 +570,17 @@ def extra(result, api, token):
             response = client.request("GET" if body is None else "POST", api + "/api/v1" + path,
                 headers={"Authorization": "Bearer " + token} if auth else {}, json=body)
             check(f"HTTP {response.request.method} {path.split('?')[0]} → {expected}", response.status_code == expected)
+            # Pydantic rejects 422 requests before the route's Response exists;
+            # its generic validation response is distinct from a result read.
+            if path.startswith(("/research/origin-residual", "/research/ocean-source")):
+                scope = "ocean_source" if path.startswith("/research/ocean-source") else "origin_residual"
+                if expected == 422:
+                    result["evidence"].setdefault(scope + "_schema_response_headers", []).append({
+                        "status": response.status_code,
+                        "cache_control": response.headers.get("cache-control")})
+                else:
+                    check(scope + " result or route-error response is explicitly no-store",
+                          response.headers.get("cache-control") == "no-store")
             return response.json()
 
         def store_digest():
@@ -459,6 +707,10 @@ def extra(result, api, token):
             and matched_review["hardware_actuation"] is False)
         result["evidence"]["matched_current_v2"] = matched_version_checks(
             req, check, v1_snapshot=matched, store_digest=store_digest)
+        result["evidence"]["origin_residual"] = origin_residual_checks(
+            req, check, store_digest=store_digest)
+        result["evidence"]["ocean_source"] = ocean_source_checks(
+            req, check, store_digest=store_digest)
         fresh_coverage = fresh["coverage"]
         check("fresh study keeps the frozen requested cohort and all missing or failed outcomes",
             fresh["kind"] == "FRESH_NOAA_DRIFTER_STUDY"

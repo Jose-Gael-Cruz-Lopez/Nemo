@@ -5,9 +5,11 @@ import type { ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { useOperator } from "../components/operator-provider";
 import { BrandMark } from "../components/brand-mark";
-import { BRAND_NAME, BRAND_INITIALS } from "../components/brand";
+import { BRAND_NAME } from "../components/brand";
+import { GlyphTrail } from "../components/glyph-trail";
 import { Icon, type IconName } from "../components/icons";
 import { SourceMap, type SourceProfile } from "../components/source-map";
+import { SourceModes } from "../components/source-modes";
 import { RealDataLab } from "../components/real-data-lab";
 import { ReefBriefing } from "../components/reef-briefing";
 import { PreventionWorkspace } from "../components/prevention-workspace";
@@ -379,16 +381,15 @@ export default function Workspace() {
   }
 
   return <div className="app-shell">
+    <div className="workspace-glyph-background" aria-hidden="true"><GlyphTrail /></div>
     <a className="sr-only skip-link" href="#workspace-main">Skip to workspace</a>
     <aside className="sidebar" aria-label="Workspace navigation">
       <button className="brand" disabled={preventionBusy} onClick={() => navigate("overview")} aria-label={`${BRAND_NAME} overview`}><span className="brand-symbol"><BrandMark /></span>{BRAND_NAME}</button>
-      <div className="workspace-switch"><span className="workspace-avatar">{BRAND_INITIALS}</span><div className="workspace-name"><strong>{BRAND_NAME} team</strong><span>Tank experiment</span></div></div>
       <div className="sidebar-section">Workspace</div>
       <nav>{VIEWS.filter(item => item.id !== "settings").map(item => <button className="nav-item" key={item.id} disabled={preventionBusy} aria-current={view === item.id ? "page" : undefined} onClick={() => navigate(item.id)}><Icon name={item.icon} /><span className="nav-label">{item.label}</span>{item.id === "investigations" && status && <span className="nav-count">{cases.length}</span>}</button>)}</nav>
       <div className="sidebar-section">Manage</div>
       <button className="nav-item" disabled={preventionBusy} aria-current={view === "settings" ? "page" : undefined} onClick={() => navigate("settings")}><Icon name="settings" /><span>Settings</span></button>
-      <button className="nav-item" disabled={preventionBusy} onClick={openOperator}><Icon name="key" /><span>Operator access</span></button>
-      <div className="sidebar-bottom"><button className="nav-item" disabled={!!busy || preventionBusy || stopping} onClick={() => router.push("/")}><BrandMark /><span>{BRAND_NAME} home</span></button><div className="local-indicator"><span className={`status-dot ${connected ? "is-live" : "is-off"}`} />{connectionError ? "Local API unavailable" : connected ? "Local API connected" : "Connecting to API"}</div><div className="team-profile"><span className="team-avatar">{BRAND_INITIALS}</span><div className="team-meta"><strong>{BRAND_NAME} workspace</strong><span>4 builders · local prototype</span></div></div></div>
+      <div className="sidebar-bottom"><button className="nav-item" disabled={!!busy || preventionBusy || stopping} onClick={() => router.push("/")}><BrandMark /><span>{BRAND_NAME} home</span></button><div className="local-indicator"><span className={`status-dot ${connected ? "is-live" : "is-off"}`} />{connectionError ? "Local API unavailable" : connected ? "Local API connected" : "Connecting to API"}</div></div>
     </aside>
     <div className="main-column">
       <header className="topbar"><div className="breadcrumb"><span>Workspace</span><Icon name="chevron" /><strong>{currentView.label}</strong></div><div className="topbar-actions"><label className="search-field"><Icon name="search" /><span className="sr-only">Search observations</span><input ref={searchInput} type="search" value={query} onChange={event => setQuery(event.target.value)} onKeyDown={event => { if (event.key === "Enter") navigate("investigations"); }} placeholder="Find an observation…" /><kbd className="search-shortcut" aria-hidden="true">/</kbd></label><button className="icon-button" disabled={preventionBusy} title="Operator access" aria-label="Open operator access" onClick={openOperator}><Icon name="key" /></button></div></header>
@@ -399,7 +400,7 @@ export default function Workspace() {
         {busy && <div className="busy-notice" role="status"><span className="status-dot is-live" />{busy}…{taskCaseId && <button className="ghost-button" disabled={!token || stopping} onClick={() => void stopCase(taskCaseId)}>Stop task</button>}</div>}
 
         {view === "overview" && <>
-          <div className="page-heading"><div><p className="kicker">Follow the evidence</p><h1>Trace it. Intercept it. Check it.</h1><p className="page-description">See where pollution may have entered, compare protection layouts, and explain the evidence.</p></div><button className="primary-button" disabled={!!busy || preventionBusy} onClick={loadDemo}><Icon name="play" />Start software demo</button></div>
+          <div className="page-heading"><div><h1>Experiment overview</h1><p className="page-description">Trace possible sources, compare interventions, and check the evidence.</p></div><button className="primary-button" disabled={!!busy || preventionBusy} onClick={loadDemo}><Icon name="play" />Start software demo</button></div>
           <DemoGuide disabled={!!busy || preventionBusy} onTrace={() => navigate("investigations")} onPrevention={() => navigate("prevention")} onChalk={() => { chalkFocusPending.current = true; navigate("investigations"); }} />
           <p className="settings-note">Software examples are synthetic. The source-tracing and prevention demos use separate saved examples; neither is a physical tank trial.</p>
           <details className="card"><summary>Setup and saved observations</summary><div className="card-body">
@@ -413,7 +414,7 @@ export default function Workspace() {
           </div></details>
         </>}
 
-        {view === "investigations" && <>
+        {view === "investigations" && <SourceModes api={API} blocked={!!busy || stopping || preventionBusy}>
           <div className="page-heading"><div><h1 ref={investigationHeading} tabIndex={-1}>Investigations</h1><p className="page-description">Follow an observation. Compare where it could have entered.</p></div><button className="secondary-button" disabled={!!busy} onClick={loadDemo}><Icon name="plus" />Load demo</button></div>
           {!token && <div className="notice info"><Icon name="key" /><span>Connect operator access to compute source evidence or ask the investigator.</span><button className="card-link" onClick={openOperator}>Connect operator <Icon name="arrow" /></button></div>}
           <div className={demoStyles.investigations}><details className="card case-list"><summary>Choose a different observation ({filteredCases.length})</summary><section aria-label="Saved cases"><div className="card-header"><h2 className="card-title">Observations</h2><Pill>{filteredCases.length}</Pill></div>{filteredCases.length ? filteredCases.map(item => <button className="case-item" key={item.id} aria-current={item.id === selected ? "true" : undefined} disabled={!!busy} onClick={() => selectCase(item.id)}><span><strong>{caseKind(item)}</strong><span>{item.id.slice(-8)}</span></span><Pill tone={item.mode === "LIVE" ? "green" : "neutral"}>{item.mode === "SYNTHETIC" ? "Demo" : item.mode}</Pill></button>) : <div className="empty-state"><p>{query ? "No matches" : "No observations yet"}</p><span>{query ? "Try another search." : "Load a demo to get started."}</span></div>}</section></details>
@@ -435,7 +436,7 @@ export default function Workspace() {
               </div></section></details>}
             </> : <section className="card empty-state investigation-empty"><Icon name="cases" width={30} height={30} /><h2>Choose an observation</h2><p>Its path, source comparison, and investigator will appear here.</p><button className="secondary-button" disabled={!!busy} onClick={loadDemo}>Load a demo</button></section>}</div>
           </div>
-        </>}
+        </SourceModes>}
 
         {view === "camera" && <>
           <div className="page-heading"><div><h1>Camera</h1><p className="page-description">Live USB preview first. Calibrate coordinates when your tank is ready.</p></div><Pill tone={status?.camera.fresh ? "green" : "neutral"}><span className={`status-dot ${status?.camera.fresh ? "is-live" : "is-off"}`} />{cameraLabel}</Pill></div>
@@ -456,7 +457,7 @@ export default function Workspace() {
           <div className="settings-grid">{(["chalk", "photon"] as const).map(provider => <section className="card integration-card" key={provider}><div className="card-header"><div className="integration-heading"><span className={`tool-logo ${provider}`}>{provider === "chalk" ? "c" : <Icon name="agent" />}</span><h2 className="card-title">{provider === "chalk" ? "Chalk" : "Photon"}</h2></div><Pill tone={status?.[provider].ready ? "purple" : "neutral"}>{configurationLabel(provider, status?.[provider])}</Pill></div><div className="card-body"><p>{provider === "chalk" ? "A bounded investigator that reads source reports, tests sensitivity, and explains the evidence." : "A prepared messaging channel for the same case-bound investigator. Reply state is shown below."}</p><div className="integration-state"><span>Configuration check</span><strong>{configurationLabel(provider, status?.[provider])}</strong></div><div className="integration-reasons">{status?.[provider].reasons?.map(reason => <Pill key={reason}>{readableReason(reason)}</Pill>)}</div><p className="settings-note">{provider === "chalk" ? "This checks configuration only. A completed investigation's live model response and tool trace are the evidence for that request. Credentials stay in the server's .env." : "This checks configuration only; it does not test phone pairing or message delivery. Disabled means automatic replies are off. Keys and routes stay on the server."}</p></div></section>)}</div>
           <section className="card"><div className="card-header"><h2 className="card-title">About this workspace</h2><Pill>Local prototype</Pill></div><div className="card-body"><div className="setting-row"><span>Collection method</span><strong>Manual recovery</strong></div><div className="setting-row"><span>Hardware actuation</span><strong>None</strong></div><p className="settings-note">Synthetic cases test the software. Real source attribution requires calibrated tank measurements and held-out physical trials.</p></div></section>
         </>}
-        <footer className="workspace-footer"><span>{BRAND_NAME} · Source tracing first</span><span>Demo data is not physical validation.</span></footer>
+        <footer className="workspace-footer"><span>{BRAND_NAME} · Research workspace</span><span>Simulated results are separate from measured tank trials.</span></footer>
       </main>
     </div>
     <dialog ref={operatorDialog} className="operator-dialog" aria-labelledby="operator-title" onCancel={event => { if (accessPending) event.preventDefault(); }} onClick={event => { if (!accessPending && event.target === event.currentTarget) operatorDialog.current?.close(); }}><div className="dialog-header"><h2 id="operator-title">Connect operator</h2><button className="icon-button" aria-label="Close operator access" disabled={accessPending} onClick={() => operatorDialog.current?.close()}><Icon name="close" /></button></div><p className="dialog-help">Find <code>REEFTRACE_LOCAL_TOKEN</code> in your local <code>reeftrace/.env</code>. Enter it here to run workspace actions.</p><form onSubmit={async event => {

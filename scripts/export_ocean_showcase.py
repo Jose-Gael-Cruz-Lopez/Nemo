@@ -16,6 +16,9 @@ from apps.ocean.reeftrace_ocean.ocean_prevention import SUPPORTED_SCENARIOS, run
 ROOT = Path(__file__).resolve().parents[1]
 DESTINATION = ROOT / "dashboard/showcase/ocean-reports.json"
 MODES = ("forecast_snapshot", "archived_forecast_snapshot")
+ARCHIVAL_LIMITATION = (
+    "The valid-time window has ended; this is an archived forecast snapshot, not live conditions."
+)
 
 
 def canonical(value: dict) -> str:
@@ -30,6 +33,14 @@ def mode_variant(report: dict, mode: str) -> dict:
     variant = copy.deepcopy(report)
     variant.pop("report_sha256", None)
     variant["mode"] = mode
+    # The source factory labels expiry using its execution clock. Derive that
+    # presentation-only sentence from the selected representation instead, so
+    # exporting before or after expiry produces the same two verified variants.
+    variant["limitations"] = [
+        item for item in variant["limitations"] if item != ARCHIVAL_LIMITATION
+    ]
+    if mode == "archived_forecast_snapshot":
+        variant["limitations"].append(ARCHIVAL_LIMITATION)
     variant["report_sha256"] = hashlib.sha256(canonical(variant).encode()).hexdigest()
     snapshot_identity(variant)
     raw = canonical(variant)

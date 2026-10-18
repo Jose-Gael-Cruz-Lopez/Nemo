@@ -81,7 +81,8 @@ def verified_service(name: str) -> bool:
         return (
             "text/html" in content_type
             and re.search(
-                r"<title\b[^>]*>\s*(?:Reeftrace \| Source intelligence|Tideward \| Coastal intelligence)\s*</title>",
+                r"<title\b[^>]*>\s*(?:Reeftrace \| Source intelligence|"
+                r"(?:Tideward|Nemo) \| Coastal intelligence)\s*</title>",
                 html, re.IGNORECASE,
             ) is not None
             and "/_next/" in html

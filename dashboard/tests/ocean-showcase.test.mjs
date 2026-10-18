@@ -42,7 +42,10 @@ test("UTC expiry chooses a separately hashed archived representation without cha
     const archived = api.readShowcaseReport(id, boundary + 1).report;
     assert.equal(forecast.mode, "forecast_snapshot"); assert.equal(archived.mode, "archived_forecast_snapshot");
     assert.notEqual(forecast.report_sha256, archived.report_sha256);
-    const strip = report => { const rest = structuredClone(report); delete rest.mode; delete rest.report_sha256; return rest; };
+    const archivalNote = "The valid-time window has ended; this is an archived forecast snapshot, not live conditions.";
+    assert.ok(!forecast.limitations.includes(archivalNote));
+    assert.deepEqual(archived.limitations, [...forecast.limitations, archivalNote]);
+    const strip = report => { const rest = structuredClone(report); delete rest.mode; delete rest.report_sha256; rest.limitations = rest.limitations.filter(item => item !== archivalNote); return rest; };
     assert.deepEqual(strip(forecast), strip(archived));
     assert.throws(() => api.readShowcaseReport(id, NaN));
   }

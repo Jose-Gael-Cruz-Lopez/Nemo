@@ -1,0 +1,31 @@
+**A. GO for a separately identified exploratory build, with corrections.**  
+The proposal is acceptable only as a post-outcome diagnostic in new files. Do not amend the frozen 36-cell v2 result, do not call the residual pre-declared, and do not treat a lower error on these two already-viewed groups as confirmatory. Hold \(r_0\) constant in the local east/north frame; do not decay, clip or retune it after seeing the new errors. If the corrected field exceeds 10 m/s anywhere on the supported grid, fail that candidate closed rather than clip. Persist all four forecast outputs and their hash before any future coordinate is decoded. Primary macro only when all 48 cells score.
+
+**Correction of prior wording.** RK4 approximates the interpolated field; knot splitting keeps each stage inside one linear time piece but does not make the integral or every stage exact.
+
+**B. Equation, units and caveats.**  
+From the final two context fixes exactly 3600 s apart, the existing last-drift mean-sphere log map at the origin supplies  
+\[
+\mathbf{v}_{\text{last}}=\frac{-\operatorname{Log}_{\text{origin}}(\mathbf{p}_{\text{prev}})}{3600}\quad(\mathrm{m/s,\ east/north}).
+\]  
+Sample \(\mathbf{u}_0=\) HYCOM east/north at the origin and origin time. Define  
+\[
+\mathbf{r}_0=\mathbf{v}_{\text{last}}-\mathbf{u}_0,\qquad\mathbf{u}_{\text{corrected}}(\mathbf{X},t)=\mathbf{u}_{\text{HYCOM}}(\mathbf{X},t)+\mathbf{r}_0.
+\]  
+\(\mathbf{r}_0\) is held constant in the local east/north convention across this bounded tile; it is not a parallel-transported global vector and not an identified wind or bias coefficient. Units remain m/s. A constant local-ENU residual is legitimate as an explicitly labelled local model. It bundles object response, forcing error, sampling and processing discrepancy; a lower error would not identify the physical cause. Because last-drift uses the mean-sphere exponential while RK4 uses WGS84 metric derivatives, \(\mathbf{r}_0=0\) must reproduce the existing current-only track, but a nonzero constant residual need not reproduce the pure last-drift track.
+
+**C. Hostile tests.**  
+1. Zero residual: \(\mathbf{r}_0=\mathbf{0}\) reproduces the existing current-only track positions (provenance may differ).  
+2. Field immutability: the original HYCOM arrays and masks are unchanged after the derived field is built.  
+3. Mask/domain: a masked cell or an out-of-support sample on the corrected field stops with the existing reason and retains the last supported point; no zero-fill.  
+4. Speed bound: a manufactured residual that pushes any supported cell above 10 m/s fails the candidate; no clip.  
+5. Manufactured turning-flow oracle: a spatially uniform but time-varying analytic current whose exact integral is known; the corrected RK4 matches that integral within the declared float tolerance when \(\mathbf{r}_0\) is the constant difference at the origin.  
+6. Target isolation: mutating any future lat/lon string after the four forecast hashes are stored does not change those hashes; the model helper accepts no future argument.
+
+**D. Data Lab / Chalk.**  
+If the residual candidate has lower descriptive error: “On this already-viewed two-group exploratory diagnostic a constant local residual reduced error relative to current-only; this is not a pre-declared test, not an identified physical cause, and not a promoted model.”  
+If it worsens: “The constant local residual increased error on this cohort; the negative exploratory result is retained.”  
+In both cases show 48 planned cells, the 12-target reuse, and the flags retrospective / not operational / not independent / not plastic. No winner is selected from unequal support, and primary macro appears only when all 48 score.
+
+**E. Next confirmatory-data gate.**  
+A later cohort of whole GDP IDs, metadata-selected and frozen after this code is reviewed, excluding every previously viewed ID and known alias, with forecasts saved before any new future coordinate is decoded. Until that cohort exists, the residual remains an exploratory diagnostic on already-viewed data.

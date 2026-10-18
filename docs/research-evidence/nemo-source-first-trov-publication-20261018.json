@@ -1,0 +1,80 @@
+{
+  "archived_grok_captures": 36,
+  "archived_grok_rounds": 18,
+  "createdAt": "2026-10-18T01:49:36.391Z",
+  "formulas": 17,
+  "kind": "NEMO_SOURCE_FIRST_TROV_PUBLICATION",
+  "payload_manifest": [
+    {
+      "bytes": 283637,
+      "characters": 283089,
+      "file": "tideward-trov-product-handbook.md",
+      "sha256": "8d1768336a55450000afa09c7342007dc4778ee0bd20635f6db0d1c1d231ad05"
+    },
+    {
+      "bytes": 7245,
+      "characters": 7227,
+      "file": "tideward-trov-start-here.md",
+      "sha256": "9588b2f94bafb914fb0a77d821ff493dda7aa557f298eb2cce1807eefb5ae3fc"
+    },
+    {
+      "bytes": 547123,
+      "characters": 546320,
+      "file": "tideward-trov-grok-continuation-current.md",
+      "sha256": "d6f916ce6c46e556b801c88674e0cffe7a5f20b12a114ecc89779a2901660f65"
+    },
+    {
+      "bytes": 83700,
+      "characters": 83595,
+      "file": "tideward-trov-grok-ledger-current.md",
+      "sha256": "f78d21e5cb446da0b9366bcc56eafa7024065dd19fab5bbcaff70b93b6b6aee7"
+    }
+  ],
+  "publications": [
+    {
+      "alreadyCurrent": true,
+      "characters": 283089,
+      "exactAfterReload": true,
+      "published": true,
+      "repository": "Jose-Gael-Cruz-Lopez/reeftrace",
+      "url": "https://trov.dev/nemo/#artifacts/tideward-complete-product-handbook",
+      "version": 11
+    },
+    {
+      "alreadyCurrent": true,
+      "characters": 7227,
+      "exactAfterReload": true,
+      "published": true,
+      "repository": "Jose-Gael-Cruz-Lopez/reeftrace",
+      "url": "https://trov.dev/nemo/#artifacts/tideward-start-here-features-and-documentation",
+      "version": 14
+    },
+    {
+      "alreadyCurrent": true,
+      "characters": 546386,
+      "exactAfterReload": true,
+      "published": true,
+      "repository": "Jose-Gael-Cruz-Lopez/reeftrace",
+      "url": "https://trov.dev/nemo/#artifacts/tideward-grok-evidence-continuation-matched-current-and-3d-r",
+      "version": 7
+    },
+    {
+      "characters": 83595,
+      "exactAfterReload": true,
+      "published": true,
+      "repository": "Jose-Gael-Cruz-Lopez/reeftrace",
+      "url": "https://trov.dev/nemo/#artifacts/tideward-grok-contribution-and-evidence-ledger",
+      "version": 9
+    }
+  ],
+  "scope": "Native organization artifacts; exact full content checked after reload. Teammate account visibility not independently tested.",
+  "source_commit": "c9d791340ed5d68df53967d08d5e9357b39c3dd5",
+  "task": {
+    "assignee": "Aarush Mane",
+    "priority": "High",
+    "repository": "Jose-Gael-Cruz-Lopez/reeftrace",
+    "sprint": "Backlog",
+    "status": "Triage",
+    "url": "https://trov.dev/nemo/#tickets/3"
+  }
+}

@@ -1,6 +1,44 @@
-# Tideward: Grok contribution and evidence ledger
+# Nemo: Grok contribution and evidence ledger
 
-**Latest matched-current checkpoint — 17 October 2026:** [v2 results](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-v2-results.md) preserve **36/36 scored cells**, while the distinct [v1 record](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-results.md) remains **0/36**. Current-only had larger errors than last drift on the two-group sample; no automatic promotion or general skill follows. Four actual v2 Grok prompt/response rounds bring the [additive continuation](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-continuation.md) to **nine rounds / eighteen Grok files**, separate from local execution receipts. The original 43-record manifest and canonical earlier bundle remain unchanged. Pre-acquisition checks passed **1,770 Python / 331 focused subset / 225 frontend**; the later isolated HTTP run passed **174 / 0 failures / 6 expected blocked**. Actual browser version/group/layer/hour controls and a separate live Chalk REPORT with exact v2 citations were verified. The final post-acquisition full suite passed **1,779 Python tests** with one upstream dependency warning; frontend remains **225 passed** and HTTP **174 / 0 / 6 blocked**, with lint/types/build passed. Exact-head CI remains pending. Earlier stages retain their historical counts/gates; Grok web did not execute these jobs, and no camera, new Photon message, xAI API or billing change was used.
+**Current source-first checkpoint — 17 October local / 18 October UTC:** the additive continuation now embeds **18 archived Grok web review rounds / 36 complete prompt and response captures**. The four new archived reviews cover deterministic backward tracing, the fixed 25-case earlier-location contract, the five-step bidirectional/Kalman walkthrough and a final trajectory/API/display review. Their exact text and mistaken advice remain preserved, with corrections recorded separately. The preceding 505,645-byte / 14-round prefix remains unchanged. This is Grok web research and static review, not xAI API use, scientific execution or proof of Voice/Imagine eligibility.
+
+The saved ocean-source prototype is now shown in Investigations and has a public saved-result reader plus operator-protected, read-only Chalk review. Its two already-viewed GDP groups use HYCOM at15m. Actual six-hour current-only backtracking is worse than last drift (**8,696.82m vs2,197.73m mean earlier-position miss**); numerical closure does not establish source accuracy. The separate three-hour tutorial must not be compared as a matched model improvement. Local verification: **2,017 Python / 320 frontend / 241 HTTP PASS / zero HTTP failures / six blocked scopes**, plus lint/types/isolated build and browser checks. [Exact scope](research-evidence/nemo-source-first-pipeline-verification-20261018.json) and [method/results](ocean-source-research.md). This verification used a separate API; its checks made no new provider call, message, camera or physical trial.
+
+
+**Latest additive checkpoint — 17 October local / 18 October UTC:** the
+[continuation archive](grok-evidence-continuation.md) now preserves **18 actual
+Grok web review rounds / 36 complete prompt-response capture files**. Rounds
+15–18 cover deterministic historical-time reversal, the fixed 25-case sensitivity
+contract, the three-fix causal Kalman/bidirectional walkthrough and final
+mathematical/API/display review. The earlier 14-round captures and original
+canonical archive remain untouched. Stages Q–T below distinguish the recorded
+advice, accepted implementation and corrections. Grok did not execute the
+numerical study or establish physical/source accuracy. The separately saved
+[local result](ocean-source-research.md#saved-first-score-results) now contains
+the bounded earlier-buoy-position reconstruction and forward tutorial; it does
+not validate pollution origins or guaranteed interception. No new full-suite
+total, live Chalk response, xAI API/credits/billing, Photon message or physical
+trial is claimed by this documentation update. Earlier checkpoint blocks below
+retain their historical capture scope, even where they say “current.”
+
+**Source-first continuation — 17 October local / 18 October UTC:** the additive
+archive now contains **14 actual web rounds / 28 complete prompt and response
+captures**. Rounds thirteen and fourteen review the origin-residual Data Lab
+contract and source-recovery validation respectively. The entire preceding
+475,681-byte twelve-round archive remains an exact unchanged prefix. Original
+canonical bundle/43-file manifest and all frozen scientific method/data artifacts
+remain unchanged. See Stages O–P below. The thirteenth review's UI advice is now
+implemented in a separate explicit-load Data Lab card; **1,914 Python tests,
+299 frontend tests and 207 guarded HTTP checks** passed locally, alongside
+lint/types/isolated build and browser checks. The [sanitized verification
+receipt](research-evidence/nemo-source-first-origin-ui-verification-20261017.json)
+separates actual execution from these static exchanges, which do not execute code
+or create new empirical results. Exact resulting-commit hosted CI is a separate
+release check. Source tracing remains the core question:
+[its bounded current scope and next validation work](source-tracing-mission.md)
+are distinct from downstream interception and ocean forward-motion research.
+
+**Current research checkpoint — 17 October 2026:** Nemo's separate [origin-residual result](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/origin-residual-results.md) retains **48/48 planned cells using twelve already-viewed processed GDP targets**, with equal-ID macro ADE/FDE **1,030.0495 m / 2,355.9582 m**, descriptively lower than the other three candidates in both groups' aggregates. A separately recorded **local exact forecast/score replay passed without changing any saved artifact bytes**; the API reader's own `numeric_replay_verified:false` remains its narrower saved-byte/lineage scope. The [additive continuation](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-continuation.md) now preserves **twelve actual Grok web review rounds / twenty-four captures**, including the new result interpretation. Stage M's unscored capture remains historical. The latest response's claim that publication still needs a software external pin is corrected: the separately literal-anchored read-only API/Chalk integration is implemented, while independent external attestation is absent; the Data Lab diagnostic card is not connected at this review checkpoint. A suggested six-new-group metadata-only cohort is **not frozen, selected or acquired**. No learned model, untouched-test/causal/independence/physical claim, promotion or tuning follows. The original v2 **36/36**, v1 **0/36** and earlier six-group **180/180** remain unchanged. **40 synthetic contracts, 49 new API tests and 98 adjacent regressions** are separate/subset checks, not a new full-suite total. Historical main [`33280da7`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/33280da7c348930ca7e63cf16b6a98c4cdf9987d) passed [hosted CI 39075407005](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39075407005), **1,809 Python / 225 frontend / 174 HTTP / zero HTTP failures / six blocked scopes**; current release verification remains separate. No acquisition, xAI API/credits/billing, new Photon message, camera or physical trial was used for this review/documentation.
 
 Inventory checkpoint: **17 October 2026**, source baseline
 [`662d1ac583b5c6e04aa43e74fdd2340218371934`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/662d1ac583b5c6e04aa43e74fdd2340218371934).
@@ -21,7 +59,7 @@ claimed by those local receipts.
 
 ### Later continuation: contracts, 3D, failed v1 and completed v2
 
-The [separate continuation](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-continuation.md) preserves **nine actual web prompt/response rounds, eighteen Grok text files**, plus separately labeled local receipts and decision records. Its earliest three rounds covered matched-current contracts and the schematic 3D tank view; two later rounds covered v1 review/failure diagnosis; four v2 rounds covered criteria, code, final delta and result interpretation. The earlier canonical bundle remains an unchanged capture, not an incomplete replacement for these additive records.
+The [separate continuation](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence-continuation.md) preserves **twelve actual web prompt/response rounds, twenty-four Grok capture files**, plus separately labeled local receipts and decision records. Its earliest three rounds covered matched-current contracts and the schematic 3D tank view; two later rounds covered v1 review/failure diagnosis; four v2 rounds covered criteria, code, final delta and result interpretation; two more cover the then-unscored exploratory origin-residual design and complete three-file static implementation review; the twelfth reviews the actual saved result and a still-unexecuted next-cohort proposal. The earlier canonical bundle remains an unchanged capture, not an incomplete replacement for these additive records.
 
 The 3D receipt's **1,549 Python / 208 frontend / 142 HTTP** counts and DRAFT study status describe that earlier capture. Later committed v1 acquisition retained 0/36; the separately frozen v2 compatibility attempt retained 36/36, with negative current-only-versus-last-drift results and no model promotion. Section L below and the current result guide supersede old pre-freeze/no-identity/no-result narrative for present functionality. Incorrect advice remains in raw history with its rejection; local code, data and executed verification remain authoritative.
 
@@ -510,6 +548,34 @@ Local Python acquired six successful source bodies, built all forecasts before n
 
 Pre-acquisition execution passed **1,770 full Python / 331 focused subset / 225 frontend** checks; later provider-disabled HTTP passed **174 / 0 failures / 6 expected external/physical blockers**, including authoritative v2 reader equality and unchanged full disposable store. Actual browser checks showed both groups, layer/hour arrows and invariant scales/metrics, retained v1 zero results when selected, then restored v2. Separate live Chalk returned REPORT citing the exact selected v2 report/protocol. The final post-acquisition full suite passed **1,779 Python tests** with one upstream dependency warning, alongside **225 frontend** and **174 / 0 failures / 6 blocked HTTP**; lint/types/build passed. Exact-head CI remains pending; no camera, new Photon messages, xAI API or billing were used. See [the complete v2 result/replay guide](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-v2-results.md).
 
+### M. Origin-residual design and code review — implementation unscored
+
+Two new actual exchanges are preserved byte-for-byte: [design prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-design-prompt.txt) / [response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-design-response.txt), and [complete-source code-review prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-code-review-prompt.txt) / [response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-code-review-response.txt). The additive continuation embeds all four exact captures, their byte/hash manifest, the unchanged earlier prefix and the separately identified local disposition. The current continuation total is **eleven rounds / twenty-two Grok files**; these are static web reviews, not repository execution or proof of separate Grok Bot/Voice/Imagine use.
+
+The new local candidate subtracts the supported origin current from the final two fixes' one-hour origin-tangent mean-sphere velocity, then adds that fixed local east/north residual to copied field arrays. Actual axes/masks and existing WGS84 RK4/support/speed/time/budget rules remain unchanged. It does not fit a decay/coefficient, identify physical windage, mutate source bytes or retune the completed v2 models. The planned new report keeps the original three candidates and adds a fourth: **48 planned cells reuse twelve already-viewed processed positions**. All candidates must exist before this diagnostic's target-number decoding; first scoring requires committed methods, exclusive new artifacts and forecast readback. A public result would additionally need a separately reviewed external identity pin.
+
+Grok's initial general turning-flow exact-integral suggestion needed a coordinate qualification. The actual local tests use an exact fixed-latitude eastward geographic oracle and a separate high-accuracy SciPy DOP853 reference for synthetic turning flow. A constant local ENU model is explicitly different from global vector parallel transport; no alternative-transport or real-water accuracy claim is made. Raw advice, including its compressed or incomplete test descriptions, is retained unchanged. Conditional static GO does not authorize execution or establish physical validity.
+
+**Local status:** **40 focused synthetic tests passed; Ruff passed; implementation unscored and under review.** The actual `data/research/origin-residual-v1` directory does not exist at this capture. No new real forecast, score, dataset, trained model, automatic winner, operational skill, untouched evaluation or tank result is reported. The original source/result/code pins are unchanged. These focused checks are not a new complete-suite or hosted count.
+
+The preceding software release at [`33280da7`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/33280da7c348930ca7e63cf16b6a98c4cdf9987d) passed [hosted run 39075407005](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39075407005): all three jobs, **1,809 Python / 225 frontend / 174 HTTP / zero HTTP failures / six expected blocked scopes**, including the explicitly bounded portability check. This supersedes earlier pending-CI narrative for that historical release; it does not verify the later origin-residual sources or rewrite the failed exact Linux replay. Further integration/commit/push/hosted proof remains separate. No provider, Photon, camera, hardware, xAI-credit or billing action was performed.
+
+A later metadata-selected, newly frozen whole-ID cohort excluding all previously viewed IDs and known aliases is needed to test transfer. The already-viewed v2 forcing exposure, retrospective/as-of and assimilation limitations must remain disclosed even if new trajectory targets are reserved. A descriptive improvement on the present development cohort cannot substitute for that confirmation.
+
+### N. Actual exploratory result review and separate local replay
+
+The twelfth actual exchange is preserved as the full [result-review prompt](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-result-review-prompt.txt) and [response](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-result-review-response.txt). Both exact texts, byte counts and hashes are appended to the continuation while preserving its complete prior 456,934-byte prefix. The current continuation total is **twelve rounds / twenty-four captures**. No historical unscored statement or raw mistaken advice is rewritten.
+
+The review correctly retains **48/48 model/hour cells, twelve already-viewed processed targets, two groups, post-outcome design and no learned coefficient or promotion**. Residual macro ADE/FDE are **1,030.0495 m / 2,355.9582 m**, lower than the other three candidates in both groups' ADE/FDE. This is descriptive development evidence rather than an unseen test, significance, assimilation independence, identified wind/current-bias mechanism or plastic/tank/reef validation. Original v1/v2 and earlier six-group results remain unchanged.
+
+**Local correction:** response D's statement that an external publication pin is still required is outdated. The public result identity and separate literal software anchor are already implemented, with read-only GET and authenticated bounded Chalk REPORT contracts. A software trust anchor is not independent external attestation. The new Data Lab card is not connected at this capture, and endpoint tests are not proof of a browser/live-model/deployment demonstration.
+
+**Separate executed evidence, not Grok output:** the local `LOCAL_EXACT_NUMERICAL_REPLAY_NOT_NEW_FIRST_SCORE` receipt records exact rebuilt forecasts and scores and unchanged bytes for every saved diagnostic artifact. It is a local replay of the one first result, not another first-score attempt or independent replication. The default reader remains a saved-byte/lineage check and correctly retains `numeric_replay_verified:false`; it does not inherit that other process's numerical claim. The 40 synthetic contracts, 49 new API tests/98 adjacent regressions and older exact-commit CI remain separately scoped; no new full-suite or hosted success is fabricated.
+
+The model proposes a **six-new-group metadata-selected cohort** with whole-ID/alias exclusions, fixed four-candidate/horizon/failure rules, forecasts persisted before future-number decoding, and complete-cell primary summaries. This is **not yet frozen, selected or acquired**. New logical IDs cannot by themselves establish physical independence, historical issue-time availability or absence from current-model assimilation. No new coefficient, decay, clipping, mode switch or outcome-based cohort selection is adopted.
+
+No xAI API, credit spending, billing/provider change, Photon message, camera, hardware or new scientific acquisition was performed by this review or packaging. Local execution, model advice, public trust anchors, hosted checks and physical validation remain distinct.
+
 ## 4. RK4: the existing numerical engine and its evidence boundary
 
 RK4 is already implemented in
@@ -557,6 +623,130 @@ The older archived Grok records do **not** establish that Grok authored the orig
 RK4 implementation. Stages H–J above record the actual knot/fractional-clock implementation reviews, local
 corrections and separately identified executed regressions without retrofitting that earlier authorship.
 
+## Stage O — actual origin-residual Data Lab contract review
+
+The complete submitted [prompt](grok-evidence/grok-origin-residual-ui-review-prompt.txt)
+and [response](grok-evidence/grok-origin-residual-ui-review-response.txt) were
+captured from the existing Grok project. The exchange supplies the actual
+top-level forecast envelope and literal result pins, four candidates/two groups,
+48 cells/twelve already-viewed targets, and bounded Chalk contracts. Accepted
+advice covers fixed-scale/gap-preserving plots, retained denominators, snapshot
+validation and explicit failure states. Two points are corrected in the archive:
+use an explicit Load action rather than mount-time acquisition, and do not
+require completeness by deleting incomplete outcomes; preserve partial records
+and withhold the primary comparison instead. Browser display guards do not
+replace backend saved-byte verification or independent scientific attestation.
+Implementation/tests are separate records; no candidate is retuned or promoted.
+
+## Stage P — actual source-first mission and validation review
+
+The complete [source review prompt](grok-evidence/grok-source-first-validation-review-prompt.txt)
+and [response](grok-evidence/grok-source-first-validation-review-response.txt)
+respond to the user's original origin question. The source estimator compares
+two to eight declared tank entry regions, not arbitrary global pollution sources.
+The current ocean RK4 and NOAA motion errors do not validate source recovery.
+
+**A substantive mistake is retained and rejected:** Grok defined accepted slots
+to include Unknown results with a finite leading candidate. The implementation
+has a separate `ranked_source`; only a ranked accepted source identification may
+enter the accepted denominator. Unknown is abstention even if conditional scores
+and `leading_source` are available. The proposed validation reports all planned,
+Invalid, Unknown, ranked, correct and wrong counts without changing that rule.
+
+Further corrections retain the difference between a future NOAA exposure
+inventory and physical-release leakage controls, avoid guaranteeing that every
+same-generator synthetic track is identifiable, and reject a promise that every
+unknown/misspecified geographic source will automatically return Unknown. That
+requires explicitly tested future out-of-set/model-mismatch behavior. The new
+[mission and validation guide](source-tracing-mission.md) remains an unexecuted
+physical/geographic plan; no source labels, trajectories or numerical scores were
+invented. Primary BAKTRAK and official OpenDrift references were checked outside
+Grok; Nemo does not claim to implement or have validated their complete methods.
+
+## Stage Q — round 15: deterministic reversal and the source-attribution boundary
+
+The actual web [method prompt](grok-evidence/grok-ocean-source-method-prompt.txt)
+and [response](grok-evidence/grok-ocean-source-method-response.txt) reviewed
+negative-time advection, fixed perturbations and retrospective evaluation on the
+two previously viewed GDP groups. Accepted advice samples historical time
+`T−lookback` and negates velocity, keeps all planned unsupported paths, and
+separates numerical closure from observed earlier-position miss.
+
+**Correction retained:** the response initially qualified reversal as a
+“divergence-free-in-the-interpolant setting.” Deterministic ODE reversal does
+not require a divergence-free field, and no such property of Nemo's interpolant
+is established. Round 16 explicitly corrects it. Diffusion, beaching and capture
+also cannot be recovered by simply reversing this deterministic field. Suggested
+forward-seeded release-cell/age search remains a next-method proposal, not an
+implemented BAKTRAK search or validated global polluter finder.
+
+## Stage R — round 16: the fixed 25-case earlier-position contract
+
+The actual web [contract prompt](grok-evidence/grok-ocean-source-contract-prompt.txt)
+and [response](grok-evidence/grok-ocean-source-contract-response.txt) reviewed the
+five endpoint offsets crossed with five current biases, separate stationary and
+last-drift backward baselines, truth persistence/readback and mask failures.
+Only the current endpoint enters current-only reverse advection; the last-drift
+baseline may additionally use its immediately preceding 05:00 fix. A residual
+computed at withheld 00:00 would leak evaluation truth and is prohibited.
+
+The local saved six-hour result now retains **6/6 model/group rows on two earlier
+positions**. Current-only mean error **8,696.822 m** is worse than last drift
+**2,197.726 m** and stationary **6,069.353 m**. All **25/25 sensitivity paths per
+group** completed; this does not calibrate a confidence region. Near-zero
+forward closure coexists with those large actual misses. These outcomes were
+computed locally after committed reviewed methods; the static web response did
+not run or validate them. No negative outcome was discarded or retuned away.
+
+## Stage S — round 17: the five-stage three-fix bidirectional walkthrough
+
+The actual web [pipeline prompt](grok-evidence/grok-bidirectional-pipeline-prompt.txt)
+and [response](grok-evidence/grok-bidirectional-pipeline-response.txt) reviewed
+scatter → connection → causal Kalman estimate → explicit current-plus-offset
+rule → backward/forward branches. Only 01:00/02:00/03:00 positions enter this
+separate demonstration. 01:00 is position-only; 02:00 initializes velocity and
+correlated covariance; 03:00 receives one Joseph-form correction. No RTS
+backward smoothing or neural training is performed, and the older minimum-eight-
+fix benchmark is unchanged.
+
+The same filtered 03:00 anchor supplies one constant east/north offset for both
+branches. Earlier/later truth is kept evaluator-only until both groups' tutorial
+forecasts are saved, hashed and read back, including before numeric decoding of
+05:00/06:00 for the separate endpoint study. The saved tutorial scores **8/8
+planned cells**, with backward errors **403.531 / 389.248 m** and final forward
+errors **860.020 / 1,023.657 m**. It is retrospective post-outcome development on
+already-viewed processed positions, not eight independent releases or a matched
+baseline improvement experiment. A possible earlier point is not a source label;
+a forward rendezvous is not an optimized or guaranteed capture location.
+
+## Stage T — round 18: final trajectory, API and display review
+
+The actual web [final prompt](grok-evidence/grok-trajectory-final-review-prompt.txt)
+and [response](grok-evidence/grok-trajectory-final-review-response.txt) reviewed
+time-order guards, branch-local failures, causal filtering, explicit validation
+reveal, fixed-scale display controls and the read-only GET boundary. The prompt
+was submitted before the first local score and correctly says no result existed
+at that capture. The later local result does not retroactively change that raw
+text or make it a model-executed experiment.
+
+Accepted checks include preserving a supported branch if the other raises,
+never resetting predictions from later truth, rejecting mutated report anchors/
+statuses/reasons, stopping playback on hidden/unmounted views and keeping stage/
+layer/time controls separate from scientific values. Local review implemented
+branch-local exception isolation and independent numerical oracles; the web
+response is static review rather than a full-suite/browser/live-provider receipt.
+The built **Investigations → Ocean source research** feature reads the saved
+literal-pinned study through `GET /api/v1/research/ocean-source`. Its separate
+operator-protected Chalk POST has one bounded read-only evidence tool, exact
+report/protocol/identity binding and `REPORT`/`STOP`; it cannot run science,
+acquire data, write trials, actuate devices or message Photon.
+
+Read [the method, saved results and identity contract](ocean-source-research.md)
+and [README formulas/datasets/tank connection](../README.md#scientific-formulas-explained-through-the-tank-experiment).
+New source-labelled tank trials or independently designed geographic tests remain
+necessary. These four added web exchanges do not establish Voice/Imagine API use,
+Grok Bot eligibility, physical validation or a calibrated source-probability map.
+
 ## 5. What is visible in the application
 
 | Product surface | Evidence-backed functionality | Contribution boundary |
@@ -564,7 +754,9 @@ corrections and separately identified executed regressions without retrofitting 
 | Data Lab research details | Original 18/6 fixture; training diagnostic; paired ablation; four-group study; post-hoc transfer; Kalman; fresh six-group study; motion vectors and denominators | Grok reviewed named research stages; Python computes and verifies reports |
 | Ocean Prevention and combined graph | Changing-current RK4 paths; A/B/common trajectories; layer checkboxes; equal axes; supported/unresolved outcomes; tie and conditional recommendation | Existing local implementation; no blanket Grok authorship claim |
 | New numerical-quality disclosure | Local solver-step and same-path contact-chord sensitivity, missing/partial coverage retained, compact evidence available to Chalk | Post-guard local suites and live Chalk passed as Stage J records; final commit/CI/hosted verification pending; not physical accuracy |
-| Matched-current v1/v2 Data Lab | Version-bound saved reports, real NOAA tracks, fixed models and full 36-cell primary v2 comparison; v1 remains 0/36 | Nine-round additive review history; current-only negative result preserved, no automatic promotion or physical skill |
+| Matched-current v1/v2 Data Lab | Version-bound saved reports, real NOAA tracks, fixed models and full 36-cell primary v2 comparison; v1 remains 0/36 | Twelve-round additive review history; current-only negative result preserved, no automatic promotion or physical skill |
+| Initial drift-offset Data Lab | Explicit pinned result load, four saved model rows, both buoy groups, fixed-axis path toggles and bounded Chalk review | Round thirteen static implementation review; 48 cells reuse twelve already-viewed positions; zero fitted parameters and no source-accuracy or transfer claim |
+| Ocean source research in Investigations | Explicit saved load; five-stage NOAA causal-filter walkthrough; backward/forward paths, validation reveal, 25-case sensitivity and separate bounded Chalk endpoint | Rounds15–18 static web review; local saved8/8 tutorial and6/6 baseline cells; previously viewed buoy positions, not verified pollution releases or guaranteed capture |
 | Chalk research explanations | Reads immutable numerical evidence and explains limits with exact hashes/citations | Chalk is a separate gateway/provider integration; Grok assistance does not make it the physics engine |
 | Evidence briefing | Frozen source text plus separately labelled satellite heat context; explicit disabled xAI speech path | Real space-data artifact and implemented adapter; no live Voice claim |
 | Camera/tank | Native USB preview, pixel grid; separately gated measured homography, empirical drift and real trial ledger | Not validated by historical buoy or ocean API results; zero physical tank commissioning claimed at this checkpoint |

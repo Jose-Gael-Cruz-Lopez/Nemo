@@ -5,9 +5,9 @@ type Props = { disabled?: boolean; onTrace: () => void; onPrevention: () => void
 
 export function DemoGuide({ disabled = false, onTrace, onPrevention, onChalk }: Props) {
   const steps = [
-    { title: "Trace a source", detail: "Open a source-tracing example. A saved path can support a candidate; an endpoint alone may stay unknown.", action: "Open source trace", onClick: onTrace, icon: "cases" as const },
-    { title: "Compare two layouts", detail: "Open a separate synthetic prevention example. Compare how many simulated tokens enter the protected area.", action: "Compare layouts", onClick: onPrevention, icon: "wave" as const },
-    { title: "Explain the evidence", detail: "Ask Chalk about the selected source report. It explains what the evidence supports and what is still uncertain.", action: "Ask Chalk", onClick: onChalk, icon: "agent" as const },
+    { title: "Source tracing", detail: "Inspect an observed path and its candidate source support.", action: "Open source trace", onClick: onTrace, icon: "cases" as const },
+    { title: "Layout comparison", detail: "Compare two layouts under identical simulated conditions.", action: "Compare layouts", onClick: onPrevention, icon: "wave" as const },
+    { title: "Evidence review", detail: "Ask Chalk to explain the saved report and its uncertainty.", action: "Ask Chalk", onClick: onChalk, icon: "agent" as const },
   ];
   return <section className={styles.guide} aria-label="Follow the evidence">
     {steps.map((step, i) => <article className={`card ${styles.step}`} key={step.title}>

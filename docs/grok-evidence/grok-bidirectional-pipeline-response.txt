@@ -1,0 +1,158 @@
+Grok
+
+A. Truth firewall and time order.
+
+Permitted observations are only the three fixes at 01/02/03Z. The 00Z position and the 04/05/06Z positions stay evaluator-only until both groups’ forecasts are persisted and read back. Local projection and all filter/bias calculations start at the 01Z fix; no offset is computed from 00Z. Past and future truth markers appear only under the explicit validation disclosure and never reset a predicted path. Both groups remain in every planned denominator.
+
+B. Three-fix filter initialization.
+
+State is 
+[
+𝑝
+𝑥
+,
+𝑝
+𝑦
+,
+𝑣
+𝑥
+,
+𝑣
+𝑦
+]
+[p
+x
+	​
+
+,p
+y
+	​
+
+,v
+x
+	​
+
+,v
+y
+	​
+
+]. Initialize at 02Z with 
+𝑝
+=
+𝑧
+2
+p=z
+2
+	​
+
+, 
+𝑣
+=
+(
+𝑧
+2
+−
+𝑧
+1
+)
+/
+Δ
+𝑡
+v=(z
+2
+	​
+
+−z
+1
+	​
+
+)/Δt, and the correlated covariance that follows from two independent isotropic position errors (the same construction already used for longer prefixes). Predict/correct only the 03Z measurement. The stored states are causal: each update uses only data up to that time. An RTS smoother would run a backward pass that incorporates the 03Z (and any later) information into the 02Z state; that is not done here. With only three fixes the filter is an algebraic illustration, not evidence that three observations suffice or that 
+𝜎
+=
+100
+ 
+m
+σ=100m, 
+𝑞
+=
+10
+−
+6
+q=10
+−6
+ are calibrated.
+
+C. Same bias for forward and reverse.
+
+Compute 
+𝑏
+03
+b
+03
+	​
+
+ once, at the filtered 03Z position:
+
+𝑏
+03
+=
+𝑣
+filtered
+(
+03
+𝑍
+)
+−
+𝑢
+HYCOM
+(
+𝑋
+filtered
+,
+03
+𝑍
+)
+.
+b
+03
+	​
+
+=v
+filtered
+	​
+
+(03Z)−u
+HYCOM
+	​
+
+(X
+filtered
+	​
+
+,03Z).
+
+Add this constant local east/north vector to a copied field before either integration. The backward branch then applies the existing time-reversal (sample at 
+𝑡
+obs
+−
+𝜏
+t
+obs
+	​
+
+−τ, negate velocity); the forward branch integrates the same biased field without negation. No second bias is estimated from 00Z or from any future fix. Masks are preserved; an unsupported step retains a gap and its reason.
+
+D. Eight tests.
+
+Mutating the 00Z or 04–06Z coordinates after forecast read-back leaves the forecast hash unchanged.
+Removing the 00Z forcing knot yields an unavailable backward age with a null coordinate and the path retained in the denominator.
+Masking the forward current after 03Z stops the forward branch at the last supported hour and leaves later cells null.
+Both groups appear in the planned cell counts even when one group’s field is unavailable.
+Changing stage or toggling a layer does not alter any stored coordinate or score.
+Initializing the filter with a future measurement (simulating an accidental RTS step) changes the 02Z state and is rejected by the causal-state assertion.
+A bias computed from the 00Z position instead of the filtered 03Z position fails the firewall check.
+An all-masked field returns Unknown for both branches and zero available endpoints.
+
+E. Plain-language statement.
+
+The walkthrough shows one possible earlier location consistent with reversing the recorded current plus a constant local bias from the last permitted fix, and one possible later rendezvous consistent with continuing that same biased current; neither is a unique release point nor a guaranteed interception.

@@ -6468,3 +6468,2559 @@ Kind: **FROZEN_V2_PROTOCOL_NOT_GROK_RESPONSE**. Original bytes: **14096**. SHA-2
   ]
 }
 ```
+
+
+## Additive origin-residual checkpoint — two actual reviews, no candidate result
+
+Checkpoint: **17 October 2026**. This section appends to, rather than rewrites,
+the complete **377,243-byte** preceding continuation. Its prior SHA-256 is
+`0f82064391b61e6b9fc240a83ed6acb2d60f9f28dc66860ba216ef1dd5793909`.
+The continuation now contains **eleven actual Grok web prompt/response rounds,
+twenty-two Grok capture files**, alongside separately labeled local records.
+The earlier canonical bundle and its 43-record manifest remain unchanged.
+
+### Current release versus the new development candidate
+
+The existing matched-current v2 result remains **36/36**, with current-only RK4
+performing worse than last drift on the two-group descriptive comparison. The
+preserved v1 attempt remains **0/36**, and the earlier fresh six-group study
+remains **180/180**. None is overwritten or newly evaluated by this addition.
+
+The prior software release at
+[`33280da7c348930ca7e63cf16b6a98c4cdf9987d`](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/commit/33280da7c348930ca7e63cf16b6a98c4cdf9987d)
+passed all three jobs in
+[hosted CI 39075407005](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39075407005):
+**1,809 Python tests, 225 frontend tests and 174 guarded HTTP checks**, zero HTTP
+failures and six explicitly blocked external/physical scopes, with the distinct
+portable v2 verification and fixture-preservation checks passing. This is a
+named historical release check, not hosted verification of the new uncommitted
+origin-residual implementation. The earlier failed byte-exact Linux replay
+remains recorded; the separate post-outcome portability check preserves exact
+frozen inputs and reports bounded computed-float differences without changing
+that first score.
+
+### What Grok reviewed and what local execution actually established
+
+The two exact new exchanges cover the design and the complete three-file
+implementation of a **separate post-outcome exploratory origin-residual
+candidate**. The final two context fixes, exactly one hour apart, supply the
+existing origin-tangent mean-sphere displacement velocity. The origin current
+is subtracted to obtain a constant local east/north residual in m/s. A copied
+field adds that residual while retaining the actual axes and masks; the existing
+WGS84 RK4/support/speed/budget rules remain authoritative. There is no fitted
+decay, clipping, coefficient search or mutation of the source field.
+
+Accepted constraints include four candidates, **48 planned model/hour cells**,
+only **12 already-viewed target positions**, candidate-specific failures,
+complete-cell primary summaries only when all 48 score, duplicate-UTC rejection,
+a forecast content hash and persisted readback before this diagnostic's target
+number decoding, exclusive first-score artifacts, and a committed-method guard.
+A colocated detached hash does not become a public trust anchor: the planned
+public reader requires a separately reviewed external result identity.
+
+**Local disposition:** the implementation is **unscored and under review**.
+**40 focused synthetic contract tests passed**, and the three new files passed
+Ruff. These tests are separate from the earlier 1,809-test hosted release; they
+must not be added together as a new full-suite or hosted count. The real
+`data/research/origin-residual-v1` directory is absent at this checkpoint. No real
+candidate forecast/score, new outcome, new acquired dataset, trained model,
+operational winner, improved skill or physical validation is asserted. Static
+Grok agreement does not execute the repository, authorize first scoring or
+supply new scientific evidence. The original frozen evaluator/source/data
+identities remain unchanged.
+
+**Correction retained alongside the raw advice:** Grok's design review proposed
+a turning-flow exact-integral oracle without fully qualifying changing WGS84
+metrics. The local tests instead use an exact geographic integral only for
+fixed-latitude eastward flow, and a separate independent high-accuracy SciPy
+DOP853 reference for synthetic turning geographic flow. The later response's
+compressed wording about that check is not evidence of a real-ocean experiment
+or a test of parallel transport. No parallel-transport alternative is implemented
+or validated; the residual explicitly retains constant local east/north
+components. Masked origin/all-masked fields, domain exit, invalid cadence,
+corrected-grid speed excess and failed readback have synthetic regression
+coverage. This does not imply every possible intermediate-stage failure or
+physical assumption has been independently validated.
+
+The residual combines object, forcing, sampling and processing discrepancy; it
+does not identify a windage coefficient or diagnose current-model bias. Even a
+later lower score on these two viewed groups would be **exploratory**, not an
+untouched test. A later metadata-selected and separately frozen whole-GDP-ID
+cohort, with all prior identities/known aliases excluded and forcing-exposure,
+as-of and assimilation limitations disclosed, is needed before a transfer claim.
+
+This documentation makes no xAI API call, spends no credits, changes no billing
+or provider configuration, sends no Photon message, starts no camera and operates
+no pump. No private credentials, contacts, camera frames, database or shared-chat
+transcript appears in these captures. GitHub push/PR checks remain the only
+requested recurring automation; publication and merge status are separate.
+
+### Exact new saved Grok records
+
+#### grok-origin-residual-design-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-design-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Bytes: **4,747**; SHA-256: `3919780b4f411745b8728e481495c4915ed8e69f246395503714932ab2731337`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+Tideward next physics development: static research/design review in the SAME existing project. No API calls, execution or new data acquisition is requested. Frozen v1/v2 results and all pinned numerical sources must remain unchanged.
+
+Current evidence: the completed retrospective v2 compares stationary, last-observed drift and current-only RK4 on TWO GDP groups, SIX hourly future positions per group. All36 candidate/hour cells scored, reusing only12 later QC/interpolated position estimates. Equal-ID macro ADE: stationary3490.119m,last-drift1510.232m,current-only5063.020m. No model promotion. These outcomes have ALREADY BEEN VIEWED; any new candidate evaluated here is post-outcome EXPLORATORY development, never an untouched test. HYCOM is a15m retrospective analysis with00/03/06Z knots; no issue-time or assimilation independence claim. This does not validate plastic/tank/reef forecasting.
+
+Proposed finite next build, in NEW files only: observed-origin-residual current advection. From the final TWO context positions exactly1hour apart, compute the unchanged last-drift model's backward mean-sphere log displacement expressed in origin-local east/north m/s, v_last. Sample u0=HYCOM east/north at origin/time. Define r0=v_last-u0 and a new derived velocity field u_corrected(X,t)=u_HYCOM(X,t)+r0. r0 east/north components are held constant in the LOCAL EAST/NORTH convention across this bounded domain; they are not a globally parallel-transported vector or an identified wind/current-bias coefficient. Copy arrays, retain all original times/actual coordinate axes/masks, never overwrite forcing, never fill missing cells, never tune decay/clipping/coefficient after these outcomes. Original knot-aligned WGS84 RK4 samples corrected m/s at all4stages and uses existing support, speed<=10m/s, horizon<=6h, step/sample budgets. Derived field may legitimately fail if its grid speeds exceed the unchanged bound; do not clip to rescue a candidate. r0=0 should reproduce the existing current-only TRACK (provenance can differ).
+
+The context last-drift velocity is a one-hour mean-sphere origin-tangent estimate, not an instantaneous current measurement. Original last-drift extrapolation uses mean-sphere exp, RK4 uses WGS84 differential metrics; constant corrected flow need not exactly reproduce the global last-drift track. r0 bundles object, forcing, sampling and processing discrepancy; improvement would not identify its physical cause.
+
+New report: keep original3candidates unchanged, add this4thcandidate in a separately identified EXPLORATORY report. Full48plannedcells=2groups*4models*6h, still12distinct targets. Persist all4forecast outputs/hash before decoding target numeric coordinates for this diagnostic; no future positions in candidate API. Complete-case primary only when ALL48score. Preserve unsupported/missing cells, paired common-support counts and per-group ADE/FDE. No learned parameters/no training/neural-model claim. Do not amend the existing36-cell result or retroactively call this predeclared. A later new metadata-selected GDP cohort, frozen after code review and excluding prior IDs/known aliases, is necessary to test transfer; old HYCOM forcing is already exposed.
+
+Primary sources checked today (please verify claims against original documents, do not invent sources):
+https://opendrift.github.io/choosing_a_model.html (OceanDrift separates current, optional wind factor and Stokes; Leeway object coefficients are empirical, not coefficients established for our tokens)
+https://docs.oceanparcels.org/en/latest/reference/parcels/kernels/index.html (distinct RK4, adaptiveRK45 and stochastic advection/diffusion kernels)
+https://www.aoml.noaa.gov/global-drifter-program/ (hourly GDP is QC/interpolated, drogue centered15m; buoy motion is not surface-plastic truth)
+
+Correct your earlier result-review phrase 'every RK4 stage ... exact': RK4 only approximates the interpolated field; knot splitting does NOT make every stage/integral exact. Proposed wind/wave/depth/assimilation explanations remain hypotheses, not diagnosed causes from2buoys.
+
+Please provide: A) GO/NO-GO with concrete corrections for this bounded exploratory build; B) exact equation/units/coordinate caveats and whether constantENU residual is legitimate as an explicitly stated local model; C) at least6 hostile scientific tests including manufactured time-varying/turning-flow oracles, zero residual, field immutability, mask/domain failures and target-isolation; D) what DataLab/Chalk can honestly say if it helps OR worsens; E) next confirmatory-data gate. Do not execute code, invent scores or choose a residual decay time. We will implement/review locally and preserve your exact advice separately from actual software execution.
+
+``````
+
+#### grok-origin-residual-design-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-design-response.txt
+
+Role: `ACTUAL_GROK_WEB_RESPONSE`. Bytes: **4,070**; SHA-256: `f184d40911816b9af47f2dcb48da3212122e79deabd6a31a63ddd5abcccc9cc6`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+**A. GO for a separately identified exploratory build, with corrections.**  
+The proposal is acceptable only as a post-outcome diagnostic in new files. Do not amend the frozen 36-cell v2 result, do not call the residual pre-declared, and do not treat a lower error on these two already-viewed groups as confirmatory. Hold \(r_0\) constant in the local east/north frame; do not decay, clip or retune it after seeing the new errors. If the corrected field exceeds 10 m/s anywhere on the supported grid, fail that candidate closed rather than clip. Persist all four forecast outputs and their hash before any future coordinate is decoded. Primary macro only when all 48 cells score.
+
+**Correction of prior wording.** RK4 approximates the interpolated field; knot splitting keeps each stage inside one linear time piece but does not make the integral or every stage exact.
+
+**B. Equation, units and caveats.**  
+From the final two context fixes exactly 3600 s apart, the existing last-drift mean-sphere log map at the origin supplies  
+\[
+\mathbf{v}_{\text{last}}=\frac{-\operatorname{Log}_{\text{origin}}(\mathbf{p}_{\text{prev}})}{3600}\quad(\mathrm{m/s,\ east/north}).
+\]  
+Sample \(\mathbf{u}_0=\) HYCOM east/north at the origin and origin time. Define  
+\[
+\mathbf{r}_0=\mathbf{v}_{\text{last}}-\mathbf{u}_0,\qquad\mathbf{u}_{\text{corrected}}(\mathbf{X},t)=\mathbf{u}_{\text{HYCOM}}(\mathbf{X},t)+\mathbf{r}_0.
+\]  
+\(\mathbf{r}_0\) is held constant in the local east/north convention across this bounded tile; it is not a parallel-transported global vector and not an identified wind or bias coefficient. Units remain m/s. A constant local-ENU residual is legitimate as an explicitly labelled local model. It bundles object response, forcing error, sampling and processing discrepancy; a lower error would not identify the physical cause. Because last-drift uses the mean-sphere exponential while RK4 uses WGS84 metric derivatives, \(\mathbf{r}_0=0\) must reproduce the existing current-only track, but a nonzero constant residual need not reproduce the pure last-drift track.
+
+**C. Hostile tests.**  
+1. Zero residual: \(\mathbf{r}_0=\mathbf{0}\) reproduces the existing current-only track positions (provenance may differ).  
+2. Field immutability: the original HYCOM arrays and masks are unchanged after the derived field is built.  
+3. Mask/domain: a masked cell or an out-of-support sample on the corrected field stops with the existing reason and retains the last supported point; no zero-fill.  
+4. Speed bound: a manufactured residual that pushes any supported cell above 10 m/s fails the candidate; no clip.  
+5. Manufactured turning-flow oracle: a spatially uniform but time-varying analytic current whose exact integral is known; the corrected RK4 matches that integral within the declared float tolerance when \(\mathbf{r}_0\) is the constant difference at the origin.  
+6. Target isolation: mutating any future lat/lon string after the four forecast hashes are stored does not change those hashes; the model helper accepts no future argument.
+
+**D. Data Lab / Chalk.**  
+If the residual candidate has lower descriptive error: “On this already-viewed two-group exploratory diagnostic a constant local residual reduced error relative to current-only; this is not a pre-declared test, not an identified physical cause, and not a promoted model.”  
+If it worsens: “The constant local residual increased error on this cohort; the negative exploratory result is retained.”  
+In both cases show 48 planned cells, the 12-target reuse, and the flags retrospective / not operational / not independent / not plastic. No winner is selected from unequal support, and primary macro appears only when all 48 score.
+
+**E. Next confirmatory-data gate.**  
+A later cohort of whole GDP IDs, metadata-selected and frozen after this code is reviewed, excluding every previously viewed ID and known alias, with forecasts saved before any new future coordinate is decoded. Until that cohort exists, the residual remains an exploratory diagnostic on already-viewed data.
+``````
+
+#### grok-origin-residual-code-review-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-code-review-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Bytes: **59,373**; SHA-256: `17cc4963a246d9c4ec38218cfea1c661d07f8449f9dba3225951d200916d3605`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+Static adversarial CODE review of the new origin-residual diagnostic you approved as exploratory. No real candidate outcome has been computed; its result directory does not exist. All old frozen science remains unchanged. Local synthetic tests currently40PASS, RuffPASS. Those are separately executed tests, not your execution. Root will commit exact reviewed methods before any first-score action. User currently asked for BlueMarine-inspired UI too; that unrelated UI work must not turn this candidate into an app recommendation or a performance claim.
+
+Review the exact THREE source files below. Need conditional GO/NO-GO with concrete failure paths, not praise. Check: constantENU coordinate convention; no mutation/clipping/fill/mask expansion; source and derived field provenance; origin-tangent mean-sphere context velocity vs WGS84 RK4;2fixes/1hour; speed/domain/time/budget stops; all48cells plus12already-viewedtargets; primary withheld if incomplete; missing/duplicate target treatment; exact future isolation; source/method hashes + committed-method guard; exclusive first-score writes and forecast readback before numeric target decode; bounded read-only default and separate external result identity requirement. No network/provider/hardware/automaticpromotion. No tuning residual decay/coefficient/newIDs.
+
+We corrected the turning-flow test: only east-only fixed-latitude forcing has an analytic geographic integral; turning geographic forcing is compared with independent high-accuracy DOP853, not by adding velocity integrals directly to degrees. Zero-residual track equality and immutable arrays/masks/metadata tested. Helpers reject bool/string residuals. Missingcontext preserves transportreason. Duplicate target UTC invalidates thatUTC even if one duplicate has invalidcoordinates. Public app integration will be separate: no endpoint is installed until a real immutable result and separately trusted identity exist. The strict originalv2evaluator and data pins remain unchanged; latestmain33280da hostedCI nowgreen1809Python/225frontend/174HTTP+6blocked.
+
+No new result/skill score is provided and you must NOT invent one, claim code execution or approve unseen physical behavior. Return exact necessary corrections or conditionalGO, identify untested assumptions, and clearly distinguish approved software contract from a new independent scientific protocol.
+
+EXACT SOURCE apps/ocean/reeftrace_ocean/origin_residual.py
+BYTES 21619
+SHA256 37b84b13bb085651ae2b5b1140b6bc43d8ad5897719eb34b7b525cd8709fa02e
+```python
+"""Post-outcome, unfitted origin-residual development diagnostic.
+
+The original matched-current experiment is immutable. This distinct candidate
+adds a constant local east/north discrepancy to a copied, supported current
+field. The two already-viewed GDP groups are development data, not a new test.
+Candidate construction has no reserved-target argument or future access.
+"""
+
+from __future__ import annotations
+
+import copy
+import hashlib
+import itertools
+import json
+import math
+from collections.abc import Mapping, Sequence
+from datetime import UTC, datetime, timedelta
+from numbers import Real
+
+import numpy as np
+
+from . import matched_current as original
+from .advection import CurrentSampler, advect_current
+from .benchmark import SphericalLocalFrame, great_circle_distance_m
+from .field import OceanField
+
+GROUP_IDS = original.GROUP_IDS
+MODEL_IDS = (*original.MODEL_IDS, "origin_residual_current")
+HORIZONS_S = original.HORIZONS_S
+ORIGIN = original.ORIGIN
+ORIGIN_TIME_UTC = original.ORIGIN_TIME_UTC
+STUDY_ID = "origin-residual-gdp-hycom-15m-exploratory-v1"
+PLANNED_CELLS = len(GROUP_IDS) * len(MODEL_IDS) * len(HORIZONS_S)
+PLANNED_DISTINCT_TARGETS = len(GROUP_IDS) * len(HORIZONS_S)
+
+
+class _PositionInputError(ValueError):
+    """Scientific input type failures remain explicit candidate/target failures."""
+
+
+def canonical_sha256(value: dict) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
+                                    allow_nan=False).encode()).hexdigest()
+
+
+def forecast_sha256(value: dict) -> str:
+    return canonical_sha256({key: item for key, item in value.items()
+                             if key != "forecast_sha256"})
+
+
+def _fix(row, group_id):
+    if not isinstance(row, Mapping):
+        raise _PositionInputError("INVALID_POSITION_ROW")
+    if row.get("drifter_id", group_id) != group_id:
+        raise ValueError("ID_MISMATCH")
+    when = row.get("time_utc")
+    try:
+        when = datetime.fromisoformat(when) if isinstance(when, str) else when
+    except ValueError:
+        raise ValueError("INVALID_TIME") from None
+    if (not isinstance(when, datetime) or when.utcoffset() != timedelta(0)):
+        raise ValueError("INVALID_TIME")
+    coordinates = []
+    for key, lower, upper in (("latitude_deg", -90, 90), ("longitude_deg", -180, 180)):
+        value = row.get(key)
+        if isinstance(value, (bool, np.bool_)) or not isinstance(value, (Real, str)):
+            raise _PositionInputError("INVALID_COORDINATE")
+        try:
+            number = float(value)
+        except (ValueError, TypeError, OverflowError):
+            raise ValueError("INVALID_COORDINATE") from None
+        if not math.isfinite(number) or not lower <= number <= upper:
+            raise ValueError("INVALID_COORDINATE")
+        coordinates.append(number)
+    return when.astimezone(UTC), *coordinates
+
+
+def _blank_candidate():
+    return {"model_id": MODEL_IDS[-1], "status": "UNSUPPORTED", "reason_code": None,
+        "requested_horizon_s": HORIZONS_S[-1], "completed_horizon_s": 0.0,
+        "planned_count": len(HORIZONS_S), "available_count": 0, "context_rows_used": 2,
+        "learned_parameters": 0, "future_positions_used": False,
+        "residual_definition": "last_observed_origin_tangent_velocity_minus_origin_current",
+        "residual_units": "m/s", "residual_transport": "constant_local_east_north_components",
+        "residual_east_north_m_s": None, "last_observed_velocity_m_s": None,
+        "origin_current_east_north_m_s": None,
+        "cells": [{"horizon_hours": h // 3600, "elapsed_s": h,
+            "time_utc": (ORIGIN + timedelta(seconds=h)).isoformat().replace("+00:00", "Z"),
+            "forecast_status": "UNAVAILABLE", "forecast_reason_code": None,
+            "latitude_deg": None, "longitude_deg": None} for h in HORIZONS_S]}
+
+
+def _failure(candidate, reason):
+    candidate["reason_code"] = reason
+    for cell in candidate["cells"]:
+        if cell["forecast_status"] != "AVAILABLE":
+            cell["forecast_reason_code"] = reason
+    return candidate
+
+
+def corrected_field(field: OceanField, residual_east_north_m_s) -> OceanField:
+    """Copy actual axes/masks and add the declared local residual without clipping.
+
+    This is a derived model field, not a change to the source NetCDF. Existing
+    CurrentSampler/advect_current validate the corrected whole supported grid,
+    including its unchanged 10 m/s bound. Missing cells remain missing.
+    """
+    if not isinstance(field, OceanField):
+        raise TypeError("An OceanField is required")
+    raw_residual = np.asarray(residual_east_north_m_s, dtype=object)
+    if (raw_residual.shape != (2,)
+            or any(isinstance(value, (bool, np.bool_)) or not isinstance(value, Real)
+                   for value in raw_residual)):
+        raise ValueError("A finite numeric east/north residual pair in m/s is required")
+    residual = raw_residual.astype(float)
+    if not np.isfinite(residual).all():
+        raise ValueError("A finite east/north residual pair in m/s is required")
+    arrays = {key: np.array(getattr(field, key), copy=True) for key in (
+        "time_utc", "longitude_deg", "latitude_deg", "eastward_m_s",
+        "northward_m_s", "valid_mask")}
+    arrays["eastward_m_s"] = arrays["eastward_m_s"].astype(float) + residual[0]
+    arrays["northward_m_s"] = arrays["northward_m_s"].astype(float) + residual[1]
+    metadata = copy.deepcopy(field.metadata)
+    source = copy.deepcopy(metadata)
+    digest = hashlib.sha256()
+    for key in ("time_utc", "longitude_deg", "latitude_deg", "eastward_m_s",
+                "northward_m_s", "valid_mask"):
+        value = arrays[key]
+        raw = (value.astype("datetime64[us]").astype("<i8") if key == "time_utc"
+               else value.astype("u1") if key == "valid_mask" else value.astype("<f8"))
+        digest.update(key.encode() + str(raw.shape).encode() + raw.tobytes(order="C"))
+    digest.update(json.dumps({"source": source, "residual_m_s": residual.tolist()},
+                             sort_keys=True, allow_nan=False).encode())
+    metadata.update({"sha256": digest.hexdigest(), "data_kind": "DERIVED_EXPLORATORY_FIELD",
+        "source_field_provenance": source, "residual_east_north_m_s": residual.tolist(),
+        "velocity_units": "m/s", "source_bytes_modified": False,
+        "residual_transport": "constant_local_east_north_components"})
+    return OceanField(**arrays, selected_depth_m=field.selected_depth_m, metadata=metadata)
+
+
+def build_origin_residual_candidate(context, field, *, group_id: str, failure: str | None = None,
+                                    context_failure: str | None = None):
+    """Use only a permitted prefix, never a future position or fitted coefficient."""
+    if group_id not in GROUP_IDS:
+        raise ValueError("Only the two fixed development groups are accepted")
+    candidate = _blank_candidate()
+    if (not isinstance(context, Sequence) or isinstance(context, (str, bytes))
+            or len(context) != original.CONTEXT_COUNT):
+        return _failure(candidate, context_failure or "CONTEXT_COUNT_INVALID")
+    try:
+        now, latitude, longitude = _fix(context[-1], group_id)
+        if now != ORIGIN:
+            raise ValueError("ORIGIN_TIME_MISMATCH")
+        before, previous_latitude, previous_longitude = _fix(context[-2], group_id)
+        if (now - before).total_seconds() != original.CONTEXT_STEP_S:
+            raise ValueError("CONTEXT_CADENCE_MISMATCH")
+        frame = SphericalLocalFrame(latitude, longitude)
+        velocity = -frame.to_xy(previous_latitude, previous_longitude) / original.CONTEXT_STEP_S
+    except ValueError as error:
+        return _failure(candidate, "LOCAL_GEOMETRY_BUDGET_EXCEEDED" if "50 km" in str(error)
+                        else str(error))
+    candidate["last_observed_velocity_m_s"] = velocity.tolist()
+    if field is None:
+        return _failure(candidate, failure or "CURRENT_FIELD_UNAVAILABLE")
+    try:
+        sampler = CurrentSampler(field, time_origin=np.datetime64(ORIGIN.replace(tzinfo=None), "us"))
+        initial = np.asarray(sampler.sample(latitude, longitude, 0.0))
+        residual = velocity - initial
+        candidate["origin_current_east_north_m_s"] = initial.tolist()
+        candidate["residual_east_north_m_s"] = residual.tolist()
+        derived = corrected_field(field, residual)
+        result = advect_current(derived, latitude_deg=latitude, longitude_deg=longitude,
+            start_time_utc=ORIGIN, horizon_s=HORIZONS_S[-1], step_s=300, output_step_s=3600)
+    except (ValueError, TypeError, OverflowError) as error:
+        reason = getattr(error, "reason", None)
+        if reason is None:
+            if isinstance(field, OceanField) and np.asarray(field.valid_mask).dtype == np.dtype(bool) and not np.asarray(field.valid_mask).any():
+                reason = "CURRENT_FIELD_ALL_MASKED"
+            else:
+                reason = ("CORRECTED_FIELD_SPEED_BUDGET_EXCEEDED" if "speed exceeds" in str(error)
+                          else "CURRENT_CONFIGURATION_INVALID")
+        return _failure(candidate, reason)
+    candidate.update({"advection": result, "derived_field_sha256": derived.metadata["sha256"],
+        "source_field_sha256": field.metadata.get("sha256"), "status": result["status"],
+        "reason_code": result["reason_code"], "completed_horizon_s": result["completed_horizon_s"]})
+    accepted = {point["elapsed_s"]: point for point in result["track"]}
+    for cell in candidate["cells"]:
+        point = accepted.get(cell["elapsed_s"])
+        if point is None:
+            cell["forecast_reason_code"] = result["reason_code"] or "HOURLY_OUTPUT_UNAVAILABLE"
+        else:
+            cell.update({"latitude_deg": point["latitude_deg"], "longitude_deg": point["longitude_deg"],
+                         "forecast_status": "AVAILABLE", "forecast_reason_code": None})
+            candidate["available_count"] += 1
+    return candidate
+
+
+def build_forecasts(context_by_group, fields_by_group=None, *, failures_by_group=None,
+                    current_failures_by_group=None) -> dict:
+    """Allocate all 48 cells and build all four candidates before target access."""
+    fields_by_group = {} if fields_by_group is None else fields_by_group
+    for values in (context_by_group, fields_by_group, failures_by_group or {},
+                   current_failures_by_group or {}):
+        if not isinstance(values, Mapping) or set(values) - set(GROUP_IDS):
+            raise ValueError("Only the two fixed development groups are accepted")
+    groups = [{"group_id": group, "context_count": 0, "origin_position": None,
+               "candidates": [None, None, None, _blank_candidate()]} for group in GROUP_IDS]
+    baseline = original.build_matched_current_forecasts(context_by_group, fields_by_group,
+        failures_by_group=failures_by_group, current_failures_by_group=current_failures_by_group)
+    for group, old in zip(groups, baseline["groups"], strict=True):
+        group.update({"context_count": old["context_count"],
+                      "origin_position": copy.deepcopy(old["origin_position"])})
+        group["candidates"][:3] = copy.deepcopy(old["candidates"])
+        group["candidates"][3] = build_origin_residual_candidate(
+            context_by_group.get(group["group_id"]), fields_by_group.get(group["group_id"]),
+            group_id=group["group_id"],
+            failure=(current_failures_by_group or {}).get(group["group_id"]),
+            context_failure=(failures_by_group or {}).get(group["group_id"]))
+    report = {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_EXPLORATORY_FORECASTS",
+        "study_id": STUDY_ID, "group_ids": list(GROUP_IDS), "model_ids": list(MODEL_IDS),
+        "origin_time_utc": ORIGIN_TIME_UTC, "horizons_s": list(HORIZONS_S),
+        "planned_group_count": len(GROUP_IDS), "planned_cell_count": PLANNED_CELLS,
+        "planned_distinct_target_count": PLANNED_DISTINCT_TARGETS,
+        "all_forecasts_built_before_target_decode": True, "future_positions_used": False,
+        "previously_viewed_target_outcomes": True, "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+        "learned_parameters": 0, "automatic_model_promotion": False,
+        "groups": groups}
+    report["forecast_sha256"] = forecast_sha256(report)
+    return report
+
+
+def _validate_forecasts(report):
+    if (not isinstance(report, dict) or report.get("forecast_sha256") != forecast_sha256(report)
+            or type(report.get("schema_version")) is not int or report.get("schema_version") != 1
+            or report.get("kind") != "ORIGIN_RESIDUAL_EXPLORATORY_FORECASTS"
+            or report.get("study_id") != STUDY_ID or report.get("model_ids") != list(MODEL_IDS)
+            or report.get("group_ids") != list(GROUP_IDS)
+            or report.get("horizons_s") != list(HORIZONS_S)
+            or report.get("planned_cell_count") != PLANNED_CELLS
+            or report.get("all_forecasts_built_before_target_decode") is not True
+            or report.get("future_positions_used") is not False
+            or report.get("previously_viewed_target_outcomes") is not True
+            or report.get("analysis_scope") != "POST_OUTCOME_EXPLORATORY"
+            or report.get("automatic_model_promotion") is not False):
+        raise ValueError("Complete frozen four-candidate forecasts are required before target decoding")
+    if len(report["groups"]) != len(GROUP_IDS):
+        raise ValueError("Every fixed development group is required")
+    for group, identity in zip(report["groups"], GROUP_IDS, strict=True):
+        if group["group_id"] != identity or len(group["candidates"]) != len(MODEL_IDS):
+            raise ValueError("Fixed forecast groups/candidates changed")
+        for candidate, model in zip(group["candidates"], MODEL_IDS, strict=True):
+            if (candidate["model_id"] != model or len(candidate["cells"]) != len(HORIZONS_S)
+                    or candidate["future_positions_used"] is not False
+                    or type(candidate["learned_parameters"]) is not int
+                    or candidate["learned_parameters"] != 0):
+                raise ValueError("Every planned candidate/hour cell is required")
+            for cell, h in zip(candidate["cells"], HORIZONS_S, strict=True):
+                if (cell["elapsed_s"] != h or cell["horizon_hours"] != h // 3600
+                        or cell["time_utc"] != (ORIGIN + timedelta(seconds=h)).isoformat().replace("+00:00", "Z")):
+                    raise ValueError("Fixed forecast times changed")
+                if cell["forecast_status"] == "AVAILABLE":
+                    _fix(cell, identity)
+                elif (cell["forecast_status"] != "UNAVAILABLE" or cell["latitude_deg"] is not None
+                      or cell["longitude_deg"] is not None):
+                    raise ValueError("Unavailable forecast must retain null coordinates")
+
+
+def _targets(rows, identity):
+    values, issues, seen, duplicates = {}, [], set(), set()
+    if not isinstance(rows, Sequence) or isinstance(rows, (str, bytes)):
+        return values, ["TARGETS_UNAVAILABLE"]
+    if len(rows) > 64:
+        return values, ["TARGET_ROW_BUDGET_EXCEEDED"]
+    allowed = {ORIGIN + timedelta(seconds=h) for h in HORIZONS_S}
+    for row in rows:
+        try:
+            if not isinstance(row, Mapping):
+                raise _PositionInputError("INVALID_POSITION_ROW")
+            raw_time = row.get("time_utc")
+            when = datetime.fromisoformat(raw_time) if isinstance(raw_time, str) else raw_time
+            if (not isinstance(when, datetime) or when.utcoffset() != timedelta(0)):
+                raise ValueError("INVALID_TIME")
+            if when in seen:
+                values.pop(when, None)
+                duplicates.add(when)
+                issues.append("DUPLICATE_TARGET_TIME")
+                continue
+            seen.add(when)
+            when, latitude, longitude = _fix(row, identity)
+            if when not in allowed:
+                raise ValueError("UNPLANNED_TARGET_TIME")
+            values[when] = latitude, longitude
+        except ValueError as error:
+            issues.append(str(error))
+    return {when: value for when, value in values.items() if when not in duplicates}, sorted(set(issues))
+
+
+def _metrics(cells, planned):
+    errors = [cell["error_m"] for cell in cells if cell["score_status"] == "SCORED"]
+    return {"planned_count": planned, "scored_count": len(errors),
+        "coverage_complete": len(errors) == planned,
+        "available_cell_mean_error_m": math.fsum(errors) / len(errors) if errors else None,
+        "full_horizon_ade_m": math.fsum(errors) / planned if len(errors) == planned else None}
+
+
+def score_forecasts(forecasts: dict, reserved_targets_by_group: Mapping) -> dict:
+    """Score only after all four forecast candidates have a valid content digest."""
+    _validate_forecasts(forecasts)
+    if not isinstance(reserved_targets_by_group, Mapping) or set(reserved_targets_by_group) - set(GROUP_IDS):
+        raise ValueError("Reserved targets must use the two fixed development identities")
+    groups, all_cells = [], {model: [] for model in MODEL_IDS}
+    for group in forecasts["groups"]:
+        identity = group["group_id"]
+        targets, issues = _targets(reserved_targets_by_group.get(identity), identity)
+        candidates = []
+        for candidate in group["candidates"]:
+            cells = []
+            for prediction in candidate["cells"]:
+                cell = copy.deepcopy(prediction)
+                target = targets.get(ORIGIN + timedelta(seconds=cell["elapsed_s"]))
+                status = ("FORECAST_UNAVAILABLE" if cell["forecast_status"] != "AVAILABLE" else
+                          "TARGET_UNAVAILABLE" if target is None else "SCORED")
+                cell.update({"group_id": identity, "model_id": candidate["model_id"],
+                    "target_latitude_deg": target[0] if target else None,
+                    "target_longitude_deg": target[1] if target else None,
+                    "score_status": status, "error_m": great_circle_distance_m(
+                        (cell["latitude_deg"], cell["longitude_deg"]), target) if status == "SCORED" else None})
+                cells.append(cell)
+            metrics = _metrics(cells, len(HORIZONS_S))
+            metrics["endpoint_fde_m"] = cells[-1]["error_m"]
+            candidates.append({"model_id": candidate["model_id"], "prediction_status": candidate["status"],
+                "prediction_reason_code": candidate["reason_code"], "metrics": metrics, "cells": cells})
+            all_cells[candidate["model_id"]].extend(cells)
+        groups.append({"group_id": identity, "target_issues": issues, "candidates": candidates})
+    models = [{"model_id": model, "metrics": _metrics(cells, PLANNED_DISTINCT_TARGETS)}
+              for model, cells in all_cells.items()]
+    complete = sum(row["metrics"]["scored_count"] for row in models) == PLANNED_CELLS
+    primary = None
+    if complete:
+        primary = [{"model_id": model, "group_count": len(GROUP_IDS),
+            "equal_id_macro_ade_m": math.fsum(group["candidates"][i]["metrics"]["full_horizon_ade_m"]
+                for group in groups) / len(GROUP_IDS),
+            "equal_id_macro_fde_m": math.fsum(group["candidates"][i]["metrics"]["endpoint_fde_m"]
+                for group in groups) / len(GROUP_IDS)} for i, model in enumerate(MODEL_IDS)]
+    paired = []
+    for a, b in itertools.combinations(MODEL_IDS, 2):
+        common = [{"group_id": x["group_id"], "horizon_hours": x["horizon_hours"],
+                   "error_a_m": x["error_m"], "error_b_m": y["error_m"]}
+                  for x, y in zip(all_cells[a], all_cells[b], strict=True)
+                  if x["score_status"] == y["score_status"] == "SCORED"]
+        paired.append({"model_a": a, "model_b": b, "planned_common_cell_count": PLANNED_DISTINCT_TARGETS,
+            "common_scored_count": len(common), "coverage_complete": len(common) == PLANNED_DISTINCT_TARGETS,
+            "analysis_scope": "PRIMARY_COMPLETE_DEVELOPMENT_COHORT" if complete else "SECONDARY_COMMON_AVAILABLE_CELLS",
+            "mean_delta_a_minus_b_m": math.fsum(row["error_a_m"] - row["error_b_m"]
+                for row in common) / len(common) if common else None, "cells": common})
+    return {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_EXPLORATORY_SCORES",
+        "study_id": STUDY_ID, "planned_group_count": len(GROUP_IDS),
+        "planned_cell_count": PLANNED_CELLS, "planned_distinct_target_count": PLANNED_DISTINCT_TARGETS,
+        "scored_cell_count": sum(row["metrics"]["scored_count"] for row in models),
+        "groups": groups, "models": models, "paired_comparisons": paired,
+        "primary_common_cohort_complete": complete, "primary_equal_id_macro_results": primary,
+        "analysis_scope": "POST_OUTCOME_EXPLORATORY", "previously_viewed_target_outcomes": True,
+        "statistical_independence": False, "automatic_winner_selected": False,
+        "automatic_model_promotion": False, "operational_forecast_skill_verified": False,
+        "physical_validation": False, "heldout_tuning": False, "global_training": False,
+        "limitations": ["These 48 model/hour cells reuse only 12 already-viewed processed GDP targets.",
+            "The residual is constant local east/north discrepancy, not an identified physical coefficient.",
+            "Mean-sphere context velocity and WGS84 RK4 are distinct coordinate constructions.",
+            "Lower descriptive error is not confirmatory skill, statistical significance or model promotion.",
+            "Issue-time availability, assimilation independence, plastic, tank and reef accuracy remain unverified."]}
+
+```
+
+EXACT SOURCE scripts/evaluate_origin_residual_diagnostic.py
+BYTES 14696
+SHA256 961a5f75b0dcbec7287f7815260c010ef53a0a0f9ad26447d2265e80881a84d9
+```python
+"""Read a saved exploratory diagnostic; first scoring requires --first-score.
+
+The completed v2 source study is immutable. This script never downloads, repairs
+or re-scores that source experiment. Its separate first-score mode requires all
+method sources committed, writes new exclusive artifacts, then reads every
+forecast back before decoding this diagnostic's already-viewed target numbers.
+The default is a read-only integrity check, not a new numerical replay.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import subprocess
+from datetime import UTC, datetime
+from pathlib import Path
+
+from apps.ocean.reeftrace_ocean import origin_residual as model
+from apps.ocean.reeftrace_ocean.matched_current_v2_protocol import load_acquisition
+from apps.ocean.reeftrace_ocean.matched_current_v2_result_identity import (
+    FORECAST_SHA256,
+    MANIFEST_SHA256,
+    REPORT_SHA256,
+)
+from scripts import evaluate_matched_current_v2_study as source
+
+ROOT = Path(__file__).resolve().parents[1]
+DIRECTORY = ROOT / "data/research/origin-residual-v1"
+SOURCE_DIRECTORY = source.DIRECTORY
+METHOD_FILES = (
+    "apps/ocean/reeftrace_ocean/origin_residual.py",
+    "scripts/evaluate_origin_residual_diagnostic.py",
+    "tests/unit/test_origin_residual.py",
+)
+MAX_FILE_BYTES = 4_194_304
+
+
+def _raw(path):
+    path = Path(path)
+    if path.is_symlink():
+        raise ValueError("Diagnostic artifacts must not be symlinks")
+    with path.open("rb") as stream:
+        raw = stream.read(MAX_FILE_BYTES + 1)
+    if len(raw) > MAX_FILE_BYTES:
+        raise ValueError("Diagnostic artifact exceeds its bounded byte budget")
+    return raw
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _canonical(value):
+    return (json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + "\n").encode()
+
+
+def _save(path, value):
+    raw = _canonical(value)
+    if len(raw) > MAX_FILE_BYTES:
+        raise ValueError("Diagnostic artifact exceeds its bounded byte budget")
+    with path.open("xb") as stream:
+        stream.write(raw)
+    with path.with_suffix(".sha256").open("x") as stream:
+        stream.write(_sha(raw) + "\n")
+    return _sha(raw)
+
+
+def _load(path):
+    raw = _raw(path)
+    detached = _raw(path.with_suffix(".sha256"))
+    if len(detached) != 65 or detached != (_sha(raw) + "\n").encode():
+        raise ValueError("Diagnostic artifact detached hash changed")
+    value = json.loads(raw)
+    if not isinstance(value, dict):
+        raise TypeError("Diagnostic artifact must be an object")
+    return value, _sha(raw)
+
+
+def _method_hashes():
+    return {relative: _sha(_raw(ROOT / relative)) for relative in METHOD_FILES}
+
+
+def _committed_method():
+    """Require the exact reviewed source bytes in HEAD before an actual first score."""
+    try:
+        head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, check=True,
+                              capture_output=True, timeout=10).stdout.decode().strip()
+        for relative in METHOD_FILES:
+            committed = subprocess.run(["git", "show", f"HEAD:{relative}"], cwd=ROOT,
+                check=True, capture_output=True, timeout=10).stdout
+            if committed != _raw(ROOT / relative):
+                raise ValueError("Commit the exact reviewed diagnostic sources before first scoring")
+    except (subprocess.SubprocessError, UnicodeError):
+        raise ValueError("Committed reviewed diagnostic sources are required before first scoring") from None
+    return head
+
+
+def _source_pins():
+    """Hash original outcomes without decoding any target number for this run."""
+    pins = {"forecasts.json": FORECAST_SHA256, "evaluation.json": REPORT_SHA256,
+            "manifest.json": MANIFEST_SHA256}
+    for name, expected in pins.items():
+        if _sha(_raw(SOURCE_DIRECTORY / name)) != expected:
+            raise ValueError("The trusted immutable v2 source artifact changed")
+    return pins
+
+
+def _clock(value):
+    try:
+        when = datetime.fromisoformat(value)
+    except (TypeError, ValueError):
+        raise ValueError("Diagnostic requires a timezone-aware UTC clock") from None
+    if when.utcoffset() is None or when.utcoffset().total_seconds() != 0:
+        raise ValueError("Diagnostic requires a timezone-aware UTC clock")
+    return when
+
+
+def _contract(hashes, source_pins, head):
+    return {"schema_version": 1, "kind": "POST_OUTCOME_EXPLORATORY_METHOD_CONTRACT",
+        "study_id": model.STUDY_ID, "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+        "previously_viewed_target_outcomes": True, "confirmatory": False,
+        "models": list(model.MODEL_IDS), "groups": list(model.GROUP_IDS),
+        "origin_time_utc": model.ORIGIN_TIME_UTC, "horizons_s": list(model.HORIZONS_S),
+        "planned_cell_count": model.PLANNED_CELLS,
+        "planned_distinct_target_count": model.PLANNED_DISTINCT_TARGETS,
+        "residual": "v_last_origin_mean_sphere_minus_current_at_origin",
+        "residual_transport": "constant_local_east_north_m_s",
+        "coefficient_fitting": False, "decay_or_clipping": False,
+        "source_study_id": "matched-current-gdp-hycom-15m-v2",
+        "source_artifact_pins": source_pins, "source_acquisition_lineage": hashes,
+        "method_source_sha256": _method_hashes(), "reviewed_code_commit": head,
+        "maximum_speed_m_s": 10, "maximum_horizon_s": 21600,
+        "requested_step_s": 300, "hourly_output_s": 3600,
+        "primary_requires_all_cells": True,
+        "forecast_and_score_clock_kind": "local_execution_receipt_not_external_attestation",
+        "physical_validation": False, "automatic_model_promotion": False}
+
+
+def first_score(directory: Path = DIRECTORY) -> dict:
+    """Create one new diagnostic; refuse any existing attempt and never repair it."""
+    directory = Path(directory)
+    if directory.exists() or directory.is_symlink():
+        raise ValueError("A diagnostic attempt already exists; never overwrite its artifacts")
+    pins = _source_pins()
+    head = _committed_method()
+    (_protocol, _manifest, hashes, contexts, targets, _original_forecasts,
+     forcing, current_failure) = source._inputs(SOURCE_DIRECTORY)
+    contract = _contract(hashes, pins, head)
+    # The directory is itself an exclusive attempt sentinel. Any failed attempt
+    # stays visible and cannot silently be retried into the same identity.
+    directory.mkdir(parents=True, exist_ok=False)
+    contract["frozen_at_utc"] = datetime.now(UTC).isoformat()
+    contract_sha = _save(directory / "protocol.json", contract)
+    fields = dict.fromkeys(model.GROUP_IDS, forcing) if forcing is not None else {}
+    failures = dict.fromkeys(model.GROUP_IDS, current_failure) if current_failure else {}
+    forecasts = model.build_forecasts(contexts, fields, current_failures_by_group=failures)
+    document = {"schema_version": 1, "kind": "FROZEN_ORIGIN_RESIDUAL_EXPLORATORY_FORECASTS",
+        "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+        "source_artifact_pins": pins, "future_coordinates_decoded_in_this_diagnostic": False,
+        "previously_viewed_target_outcomes": True, "forecasts": forecasts,
+        "frozen_at_utc": datetime.now(UTC).isoformat()}
+    if _clock(document["frozen_at_utc"]) < _clock(contract["frozen_at_utc"]):
+        raise ValueError("Forecast receipt predates the exploratory method receipt")
+    forecast_file_sha = _save(directory / "forecasts.json", document)
+    saved, readback_sha = _load(directory / "forecasts.json")
+    if (saved != document or forecast_file_sha != readback_sha
+            or saved["forecasts"]["forecast_sha256"] != model.forecast_sha256(forecasts)):
+        raise ValueError("All four prior forecast candidates must be persisted and read back before scoring")
+    # This is the first numeric target decode in this diagnostic. These targets
+    # were viewed in the prior v2 study; this ordering does not make them unseen.
+    scores = model.score_forecasts(forecasts, targets)
+    result = {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_EXPLORATORY_DIAGNOSTIC",
+        "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+        "forecast_file_sha256": forecast_file_sha,
+        "forecast_frozen_at_utc": document["frozen_at_utc"],
+        "source_artifact_pins": pins, "method_source_sha256": contract["method_source_sha256"],
+        "source_acquisition_lineage": hashes, "scores": scores,
+        "all_four_forecasts_saved_before_this_diagnostic_target_decode": True,
+        "previously_viewed_target_outcomes": True, "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+        "new_data_acquisition": False, "frozen_source_study_changed": False,
+        "provider_calls": False, "physical_validation": False,
+        "scored_at_utc": datetime.now(UTC).isoformat()}
+    if _clock(result["scored_at_utc"]) < _clock(document["frozen_at_utc"]):
+        raise ValueError("Score receipt predates the forecast receipt")
+    if _source_pins() != pins or _method_hashes() != contract["method_source_sha256"]:
+        raise ValueError("Source inputs or method changed during the diagnostic")
+    result_sha = _save(directory / "evaluation.json", result)
+    identity = {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_LOCAL_RESULT_IDENTITY",
+        "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+        "forecast_file_sha256": forecast_file_sha, "report_sha256": result_sha,
+        "externally_trusted_pin_required_for_publication": True}
+    _save(directory / "identity.json", identity)
+    return result
+
+
+def read_diagnostic(directory: Path = DIRECTORY, *, expected_identity_sha256: str | None = None):
+    """Verify saved bytes/lineage, without forecasts, fitting or score execution.
+
+    A colocated hash is not an external trust anchor. Public integrations must
+    supply the separately reviewed identity digest after an actual result exists.
+    """
+    directory = Path(directory)
+    if directory.is_symlink():
+        raise ValueError("A symlinked diagnostic directory is not accepted")
+    identity, identity_sha = _load(directory / "identity.json")
+    if expected_identity_sha256 is not None and identity_sha != expected_identity_sha256:
+        raise ValueError("The external diagnostic result identity changed")
+    contract, contract_sha = _load(directory / "protocol.json")
+    forecasts, forecast_sha = _load(directory / "forecasts.json")
+    result, report_sha = _load(directory / "evaluation.json")
+    if identity != {"schema_version": 1, "kind": "ORIGIN_RESIDUAL_LOCAL_RESULT_IDENTITY",
+            "study_id": model.STUDY_ID, "protocol_sha256": contract_sha,
+            "forecast_file_sha256": forecast_sha, "report_sha256": report_sha,
+            "externally_trusted_pin_required_for_publication": True}:
+        raise ValueError("The diagnostic result identity does not bind its exact artifacts")
+    pins = _source_pins()
+    _, manifest, source_hashes, _ = load_acquisition(SOURCE_DIRECTORY)
+    expected_contract = _contract(source_hashes, pins, contract["reviewed_code_commit"])
+    expected_contract["frozen_at_utc"] = contract["frozen_at_utc"]
+    if (contract["study_id"] != model.STUDY_ID or result["study_id"] != model.STUDY_ID
+            or forecasts["study_id"] != model.STUDY_ID
+            or contract != expected_contract
+            or contract["source_artifact_pins"] != pins
+            or result["source_artifact_pins"] != pins or forecasts["source_artifact_pins"] != pins
+            or contract["method_source_sha256"] != _method_hashes()
+            or result["method_source_sha256"] != contract["method_source_sha256"]
+            or manifest is None or contract["source_acquisition_lineage"] != source_hashes
+            or result["source_acquisition_lineage"] != source_hashes
+            or result["protocol_sha256"] != contract_sha
+            or forecasts["protocol_sha256"] != contract_sha
+            or result["forecast_file_sha256"] != forecast_sha
+            or result["forecast_frozen_at_utc"] != forecasts["frozen_at_utc"]
+            or not _clock(contract["frozen_at_utc"]) <= _clock(forecasts["frozen_at_utc"])
+            <= _clock(result["scored_at_utc"])):
+        raise ValueError("Diagnostic method, source lineage or chronology changed")
+    model._validate_forecasts(forecasts["forecasts"])
+    if (not contract["analysis_scope"] == result["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+            or result["previously_viewed_target_outcomes"] is not True
+            or forecasts["future_coordinates_decoded_in_this_diagnostic"] is not False
+            or result["all_four_forecasts_saved_before_this_diagnostic_target_decode"] is not True
+            or result["new_data_acquisition"] is not False
+            or result["frozen_source_study_changed"] is not False
+            or result["provider_calls"] is not False or result["physical_validation"] is not False):
+        raise ValueError("Exploratory diagnostic claim boundaries changed")
+    # Read each exact artifact once more so a concurrent overwrite cannot return
+    # a mixed generation. No numerical replay is implied by this byte check.
+    for name, expected in (("identity", identity_sha), ("protocol", contract_sha),
+                           ("forecasts", forecast_sha), ("evaluation", report_sha)):
+        if _load(directory / f"{name}.json")[1] != expected:
+            raise ValueError("Diagnostic artifacts changed during verification")
+    if (_source_pins() != pins or load_acquisition(SOURCE_DIRECTORY)[2] != source_hashes
+            or _method_hashes() != contract["method_source_sha256"]):
+        raise ValueError("Diagnostic source inputs or method changed during verification")
+    return {"report": result, "forecasts": forecasts["forecasts"],
+        "artifact_identity": {**identity, "identity_sha256": identity_sha,
+            "integrity_verified": True, "numeric_replay_verified": False,
+            "external_result_pin_verified": expected_identity_sha256 is not None,
+            "verification_scope": "SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY"}}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--directory", type=Path, default=DIRECTORY)
+    parser.add_argument("--first-score", action="store_true")
+    parser.add_argument("--expected-identity-sha256")
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+    value = first_score(args.directory) if args.first_score else read_diagnostic(
+        args.directory, expected_identity_sha256=args.expected_identity_sha256)
+    raw = _canonical(value)
+    if args.output:
+        with args.output.open("xb") as stream:
+            stream.write(raw)
+    else:
+        print(raw.decode(), end="")
+
+
+if __name__ == "__main__":
+    main()
+
+```
+
+EXACT SOURCE tests/unit/test_origin_residual.py
+BYTES 20207
+SHA256 d0ff8188f9d17c89700968cd4e40a951f5980aacf73351aa5f7bce2c9d9b0de1
+```python
+"""Synthetic development contracts; never score the already-viewed real cohort."""
+
+import copy
+import math
+from datetime import timedelta
+
+import numpy as np
+import pytest
+from scipy.integrate import solve_ivp
+
+from apps.ocean.reeftrace_ocean import matched_current as original
+from apps.ocean.reeftrace_ocean import origin_residual as model
+from apps.ocean.reeftrace_ocean.advection import advect_current
+from apps.ocean.reeftrace_ocean.benchmark import SphericalLocalFrame
+from apps.ocean.reeftrace_ocean.field import OceanField
+from scripts import evaluate_origin_residual_diagnostic as runner
+
+LATITUDE, LONGITUDE = 30.0, -79.5
+
+
+def context(identity, *, east=0.5, north=0.0):
+    frame = SphericalLocalFrame(LATITUDE, LONGITUDE)
+    previous = frame.to_latlon(np.array([-east, -north]) * 3600)
+    rows = [{"drifter_id": identity,
+        "time_utc": (model.ORIGIN - timedelta(hours=24 - index)).isoformat(),
+        "latitude_deg": str(LATITUDE), "longitude_deg": str(LONGITUDE)} for index in range(25)]
+    rows[-2].update({"latitude_deg": str(previous[0]), "longitude_deg": str(previous[1])})
+    return rows
+
+
+def contexts(**kwargs):
+    return {identity: context(identity, **kwargs) for identity in model.GROUP_IDS}
+
+
+def field(*, east=(0.2, 0.7, 0.1), north=(0.0, 0.0, 0.0), mask=None,
+          longitude=(-80.0, -78.0)):
+    shape = (3, 2, 2)
+    return OceanField(
+        time_utc=np.array(["2022-06-01T00:00:00", "2022-06-01T03:00:00", "2022-06-01T06:00:00"],
+                          dtype="datetime64[us]"),
+        longitude_deg=np.array(longitude), latitude_deg=np.array([29.0, 31.0]),
+        eastward_m_s=np.broadcast_to(np.asarray(east)[:, None, None], shape).copy(),
+        northward_m_s=np.broadcast_to(np.asarray(north)[:, None, None], shape).copy(),
+        valid_mask=np.ones(shape, dtype=bool) if mask is None else np.array(mask, copy=True),
+        selected_depth_m=15.0,
+        metadata={"velocity_units": "m/s", "data_kind": "SYNTHETIC_TEST",
+                  "sha256": "a" * 64, "nested": {"untouched": [1, 2]}})
+
+
+def fields(value=None):
+    return dict.fromkeys(model.GROUP_IDS, field() if value is None else value)
+
+
+def targets():
+    return {identity: [{"drifter_id": identity,
+        "time_utc": (model.ORIGIN + timedelta(seconds=h)).isoformat(),
+        "latitude_deg": str(LATITUDE), "longitude_deg": str(LONGITUDE)}
+        for h in model.HORIZONS_S] for identity in model.GROUP_IDS}
+
+
+def test_plan_allocates_four_candidates_and_keeps_original_three_outputs_exact():
+    ctx, forcing = contexts(), fields()
+    before = original.build_matched_current_forecasts(ctx, forcing)
+    result = model.build_forecasts(ctx, forcing)
+    assert result["planned_cell_count"] == 48 and result["planned_distinct_target_count"] == 12
+    assert len(result["groups"]) == 2
+    for old, group in zip(before["groups"], result["groups"], strict=True):
+        assert group["candidates"][:3] == old["candidates"]
+        assert len(group["candidates"]) == 4
+        assert all(item["learned_parameters"] == 0 for item in group["candidates"])
+        assert all(item["future_positions_used"] is False for item in group["candidates"])
+    assert sum(len(c["cells"]) for g in result["groups"] for c in g["candidates"]) == 48
+    assert result["analysis_scope"] == "POST_OUTCOME_EXPLORATORY"
+    assert result["previously_viewed_target_outcomes"] is True
+    assert result["forecast_sha256"] == model.forecast_sha256(result)
+
+
+def test_zero_residual_reproduces_current_track_with_separate_derived_provenance():
+    ctx = context(model.GROUP_IDS[0])
+    frame = SphericalLocalFrame(LATITUDE, LONGITUDE)
+    velocity = -frame.to_xy(float(ctx[-2]["latitude_deg"]), float(ctx[-2]["longitude_deg"])) / 3600
+    forcing = field(east=(velocity[0],) * 3, north=(velocity[1],) * 3)
+    candidate = model.build_origin_residual_candidate(ctx, forcing, group_id=model.GROUP_IDS[0])
+    original_track = advect_current(forcing, latitude_deg=LATITUDE, longitude_deg=LONGITUDE,
+        start_time_utc=model.ORIGIN, horizon_s=21600, step_s=300, output_step_s=3600)
+    assert candidate["residual_east_north_m_s"] == [0.0, 0.0]
+    assert candidate["advection"]["track"] == original_track["track"]
+    assert candidate["advection"]["status"] == original_track["status"] == "COMPLETED"
+    assert candidate["derived_field_sha256"] != candidate["source_field_sha256"]
+
+
+def test_copy_has_actual_axes_masks_and_immutable_original_arrays_and_metadata():
+    forcing = field()
+    before = copy.deepcopy(forcing)
+    result = model.corrected_field(forcing, [0.3, -0.2])
+    for name in ("time_utc", "longitude_deg", "latitude_deg", "valid_mask"):
+        assert np.array_equal(getattr(result, name), getattr(forcing, name))
+        assert not np.shares_memory(getattr(result, name), getattr(forcing, name))
+    assert np.array_equal(result.eastward_m_s, forcing.eastward_m_s + 0.3)
+    result.metadata["source_field_provenance"]["nested"]["untouched"].append(3)
+    for name in ("time_utc", "longitude_deg", "latitude_deg", "valid_mask",
+                 "eastward_m_s", "northward_m_s"):
+        assert np.array_equal(getattr(forcing, name), getattr(before, name))
+    assert forcing.metadata == before.metadata
+
+
+@pytest.mark.parametrize("residual", [[True, 0.0], ["0.3", "0.0"], [0.0, "1"],
+                                     [0.0], [0.0, 0.0, 0.0], [float("nan"), 0.0]])
+def test_residual_rejects_boolean_strings_nonfinite_and_wrong_shape(residual):
+    with pytest.raises(ValueError):
+        model.corrected_field(field(), residual)
+
+
+def test_missing_context_preserves_upstream_failure_in_48_cell_plan():
+    result = model.build_forecasts({}, {}, failures_by_group={model.GROUP_IDS[0]: "HTTP_TIMEOUT"})
+    assert result["groups"][0]["candidates"][3]["reason_code"] == "HTTP_TIMEOUT"
+    assert sum(len(c["cells"]) for g in result["groups"] for c in g["candidates"]) == 48
+
+
+def test_corrected_east_only_piecewise_linear_flow_has_independent_exact_integral():
+    forcing = model.corrected_field(field(), [0.3, 0.0])
+    result = advect_current(forcing, latitude_deg=LATITUDE, longitude_deg=LONGITUDE,
+        start_time_utc=model.ORIGIN, horizon_s=21600, step_s=300, output_step_s=3600)
+    # Latitude is constant, so WGS84 metres per longitude degree is constant.
+    # This exact oracle is valid for east-only flow, not general turning flow.
+    f, a = 1 / 298.257223563, 6378137.0
+    e2 = f * (2 - f)
+    phi = math.radians(LATITUDE)
+    metres_per_degree = math.pi / 180 * a * math.cos(phi) / math.sqrt(1 - e2 * math.sin(phi) ** 2)
+    east_metres = ((0.5 + 1.0) / 2 + (1.0 + 0.4) / 2) * 10800
+    assert result["track"][-1]["latitude_deg"] == LATITUDE
+    assert result["track"][-1]["longitude_deg"] == pytest.approx(
+        LONGITUDE + east_metres / metres_per_degree, abs=2e-12)
+
+
+def test_turning_geographic_flow_matches_independent_dop853_reference_not_cartesian_integral():
+    east, north, residual = np.array([0.2, 0.8, -0.1]), np.array([0.0, 0.6, -0.2]), [0.3, -0.1]
+    forcing = model.corrected_field(field(east=east, north=north), residual)
+    result = advect_current(forcing, latitude_deg=LATITUDE, longitude_deg=LONGITUDE,
+        start_time_utc=model.ORIGIN, horizon_s=21600, step_s=300, output_step_s=3600)
+
+    def derivative(t, position):
+        phi = math.radians(position[0])
+        a, f = 6378137.0, 1 / 298.257223563
+        e2 = f * (2 - f)
+        factor = 1 - e2 * math.sin(phi) ** 2
+        east_scale = math.pi / 180 * a * math.cos(phi) / math.sqrt(factor)
+        north_scale = math.pi / 180 * a * (1 - e2) / factor ** 1.5
+        u = np.interp(t, [0, 10800, 21600], east) + residual[0]
+        v = np.interp(t, [0, 10800, 21600], north) + residual[1]
+        return [v / north_scale, u / east_scale]
+
+    state = [LATITUDE, LONGITUDE]
+    for begin, end in ((0, 10800), (10800, 21600)):
+        reference = solve_ivp(derivative, (begin, end), state, method="DOP853",
+                              rtol=2e-13, atol=2e-13, max_step=60)
+        assert reference.success
+        state = reference.y[:, -1]
+    assert [result["track"][-1][key] for key in ("latitude_deg", "longitude_deg")] == pytest.approx(state, abs=2e-11)
+
+
+@pytest.mark.parametrize("delta", [0, -3600, 1800, 3601, 7200])
+def test_bad_context_cadence_fails_residual_only(delta):
+    ctx = contexts()
+    ctx[model.GROUP_IDS[0]][-2]["time_utc"] = (model.ORIGIN - timedelta(seconds=delta)).isoformat()
+    result = model.build_forecasts(ctx, fields())
+    assert result["groups"][0]["candidates"][3]["reason_code"] == "CONTEXT_CADENCE_MISMATCH"
+    assert result["groups"][0]["candidates"][0]["status"] == "COMPLETED"
+    assert result["groups"][0]["candidates"][2]["status"] == "COMPLETED"
+
+
+@pytest.mark.parametrize(("change", "reason"), [
+    ("origin_time", "ORIGIN_TIME_MISMATCH"), ("origin_nan", "INVALID_COORDINATE"),
+    ("previous_nan", "INVALID_COORDINATE"), ("previous_id", "ID_MISMATCH"),
+    ("far_previous", "LOCAL_GEOMETRY_BUDGET_EXCEEDED"),
+])
+def test_bad_fix_contract_is_explicit(change, reason):
+    ctx = context(model.GROUP_IDS[0])
+    if change == "origin_time":
+        ctx[-1]["time_utc"] = (model.ORIGIN + timedelta(seconds=1)).isoformat()
+    elif change == "previous_id":
+        ctx[-2]["drifter_id"] = "wrong"
+    elif change == "far_previous":
+        ctx[-2]["longitude_deg"] = "-70"
+    else:
+        ctx[-1 if change == "origin_nan" else -2]["latitude_deg"] = "NaN"
+    candidate = model.build_origin_residual_candidate(ctx, field(), group_id=model.GROUP_IDS[0])
+    assert candidate["reason_code"] == reason
+    assert candidate["available_count"] == 0 and len(candidate["cells"]) == 6
+
+
+def test_masked_origin_and_future_gap_never_become_zero_filled_current():
+    mask = np.ones((3, 2, 2), dtype=bool)
+    mask[0] = False
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]), field(mask=mask), group_id=model.GROUP_IDS[0])
+    assert result["status"] == "UNSUPPORTED" and result["reason_code"] == "MASKED_CURRENT_CELL"
+    mask[:] = True
+    mask[2] = False
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]), field(mask=mask), group_id=model.GROUP_IDS[0])
+    assert result["status"] == "PARTIAL" and result["completed_horizon_s"] == 10800
+    assert result["available_count"] == 3
+    assert all(row["latitude_deg"] is None for row in result["cells"][3:])
+
+
+def test_all_masked_field_is_explicitly_unavailable():
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]),
+        field(mask=np.zeros((3, 2, 2), dtype=bool)), group_id=model.GROUP_IDS[0])
+    assert result["reason_code"] == "CURRENT_FIELD_ALL_MASKED" and result["available_count"] == 0
+
+
+def test_first23_context_values_are_not_new_residual_inputs():
+    ctx = contexts()
+    before = model.build_forecasts(ctx, fields())
+    for rows in ctx.values():
+        for row in rows[:23]:
+            row["latitude_deg"], row["longitude_deg"] = "not read", "not read"
+    assert model.build_forecasts(ctx, fields()) == before
+
+
+def test_corrected_whole_grid_speed_excess_fails_without_clipping():
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]),
+        field(east=(0, 9.9, 0)), group_id=model.GROUP_IDS[0])
+    assert result["reason_code"] == "CORRECTED_FIELD_SPEED_BUDGET_EXCEEDED"
+    assert result["available_count"] == 0
+
+
+def test_domain_exit_retains_only_supported_prefix_and_no_artificial_hourly_tail():
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]),
+        field(longitude=(-80, -79.45)), group_id=model.GROUP_IDS[0])
+    assert result["status"] == "PARTIAL"
+    assert result["reason_code"] == "OUTSIDE_CURRENT_DOMAIN"
+    assert result["available_count"] < 6
+    assert result["advection"]["track"][-1]["elapsed_s"] == result["completed_horizon_s"]
+    assert all(cell["latitude_deg"] is None for cell in result["cells"] if cell["elapsed_s"] > result["completed_horizon_s"])
+
+
+@pytest.mark.parametrize("supplied", [None, "invalid", 17])
+def test_missing_or_invalid_field_has_no_silent_fallback(supplied):
+    result = model.build_origin_residual_candidate(context(model.GROUP_IDS[0]), supplied, group_id=model.GROUP_IDS[0])
+    assert result["available_count"] == 0
+    assert result["reason_code"] == ("CURRENT_FIELD_UNAVAILABLE" if supplied is None else "CURRENT_CONFIGURATION_INVALID")
+
+
+def test_all48_cells_and_missing_targets_are_retained_with_primary_withheld():
+    forecasts = model.build_forecasts(contexts(), {})
+    scored = model.score_forecasts(forecasts, targets())
+    assert scored["planned_cell_count"] == 48 and scored["planned_distinct_target_count"] == 12
+    assert scored["scored_cell_count"] == 24
+    assert scored["primary_common_cohort_complete"] is False
+    assert scored["primary_equal_id_macro_results"] is None
+    assert all(row["analysis_scope"] == "SECONDARY_COMMON_AVAILABLE_CELLS" for row in scored["paired_comparisons"])
+    assert sum(len(c["cells"]) for g in scored["groups"] for c in g["candidates"]) == 48
+    absent = model.score_forecasts(model.build_forecasts({}, {}), {})
+    assert absent["scored_cell_count"] == 0 and len(absent["models"]) == 4
+
+
+def test_complete48_scores_have_equal_id_macros_and_common_pair_denominators():
+    forecasts = model.build_forecasts(contexts(), fields())
+    before = copy.deepcopy(forecasts)
+    scored = model.score_forecasts(forecasts, targets())
+    assert forecasts == before
+    assert scored["scored_cell_count"] == 48 and scored["primary_common_cohort_complete"] is True
+    assert len(scored["primary_equal_id_macro_results"]) == 4
+    assert len(scored["paired_comparisons"]) == 6
+    assert all(row["common_scored_count"] == 12 for row in scored["paired_comparisons"])
+    assert scored["automatic_winner_selected"] is False
+    assert scored["physical_validation"] is False
+
+
+def test_no_target_number_is_read_until_every_forecast_and_hash_exists():
+    state = {"built": False}
+
+    class Future(str):
+        def __float__(self):
+            assert state["built"]
+            return float(str(self))
+
+    held = targets()
+    for rows in held.values():
+        for row in rows:
+            row["latitude_deg"] = Future(row["latitude_deg"])
+    forecasts = model.build_forecasts(contexts(), fields())
+    assert forecasts["forecast_sha256"] == model.forecast_sha256(forecasts)
+    assert all(len(g["candidates"]) == 4 for g in forecasts["groups"])
+    state["built"] = True
+    assert model.score_forecasts(forecasts, held)["scored_cell_count"] == 48
+
+
+def test_invalid_forecast_hash_or_rehashed_coordinates_fail_before_target_access():
+    forecasts = model.build_forecasts(contexts(), fields())
+    forecasts["groups"][0]["candidates"][3]["cells"][0]["latitude_deg"] = float("nan")
+    with pytest.raises(ValueError):
+        model.score_forecasts(forecasts, {})
+    forecasts = model.build_forecasts(contexts(), fields())
+    forecasts["groups"][0]["candidates"][3]["cells"][0]["latitude_deg"] = 100.0
+    forecasts["forecast_sha256"] = model.forecast_sha256(forecasts)
+    with pytest.raises(ValueError, match="INVALID_COORDINATE"):
+        model.score_forecasts(forecasts, {})
+
+
+def test_missing_bad_and_duplicate_targets_remain_unknown_in_planned_denominator():
+    forecasts = model.build_forecasts(contexts(), fields())
+    held = targets()
+    held[model.GROUP_IDS[0]][2]["latitude_deg"] = "NaN"
+    held[model.GROUP_IDS[1]].append(copy.deepcopy(held[model.GROUP_IDS[1]][0]))
+    held[model.GROUP_IDS[1]][-1]["latitude_deg"] = "invalid"
+    scored = model.score_forecasts(forecasts, held)
+    assert scored["scored_cell_count"] == 40
+    assert scored["primary_equal_id_macro_results"] is None
+    assert "DUPLICATE_TARGET_TIME" in scored["groups"][1]["target_issues"]
+
+
+@pytest.fixture
+def synthetic_runner(monkeypatch):
+    hashes = {"protocol_sha256": "b" * 64, "manifest_sha256": "c" * 64}
+    pins = {"forecasts.json": "d" * 64, "evaluation.json": "e" * 64, "manifest.json": "f" * 64}
+    held = targets()
+    forcing = field()
+    monkeypatch.setattr(runner, "_source_pins", lambda: pins)
+    monkeypatch.setattr(runner, "_committed_method", lambda: "1" * 40)
+    monkeypatch.setattr(runner.source, "_inputs", lambda directory: (
+        {}, {}, hashes, contexts(), held, None, forcing, None))
+    monkeypatch.setattr(runner, "load_acquisition", lambda directory: ({}, {}, hashes, {}))
+    return held
+
+
+def test_default_read_never_scores_or_creates_a_missing_diagnostic(tmp_path, monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Read-only default must not build or score")
+
+    monkeypatch.setattr(model, "build_forecasts", forbidden)
+    monkeypatch.setattr(model, "score_forecasts", forbidden)
+    target = tmp_path / "absent"
+    with pytest.raises(FileNotFoundError):
+        runner.read_diagnostic(target)
+    assert not target.exists()
+
+
+def test_first_score_persists_all_four_and_reads_back_before_numeric_target_decode(
+        tmp_path, synthetic_runner, monkeypatch):
+    directory = tmp_path / "synthetic"
+    numeric_reads = []
+
+    class Future(str):
+        def __float__(self):
+            document, digest = runner._load(directory / "forecasts.json")
+            assert document["forecasts"]["forecast_sha256"] == model.forecast_sha256(document["forecasts"])
+            assert sum(len(c["cells"]) for g in document["forecasts"]["groups"] for c in g["candidates"]) == 48
+            assert len(digest) == 64
+            numeric_reads.append(True)
+            return float(str(self))
+
+    for rows in synthetic_runner.values():
+        for row in rows:
+            row["latitude_deg"] = Future(row["latitude_deg"])
+    report = runner.first_score(directory)
+    assert len(numeric_reads) == 12 and report["scores"]["scored_cell_count"] == 48
+    before = {p.name: p.read_bytes() for p in directory.iterdir()}
+    monkeypatch.setattr(model, "build_forecasts", lambda *a, **kw: pytest.fail("reader built forecasts"))
+    monkeypatch.setattr(model, "score_forecasts", lambda *a, **kw: pytest.fail("reader scored targets"))
+    view = runner.read_diagnostic(directory)
+    assert view["report"] == report
+    assert view["artifact_identity"]["external_result_pin_verified"] is False
+    identity_sha = runner._load(directory / "identity.json")[1]
+    assert runner.read_diagnostic(directory, expected_identity_sha256=identity_sha)["artifact_identity"]["external_result_pin_verified"] is True
+    assert {p.name: p.read_bytes() for p in directory.iterdir()} == before
+    with pytest.raises(ValueError, match="never overwrite"):
+        runner.first_score(directory)
+
+
+def test_failed_readback_never_decodes_or_scores_targets_and_attempt_is_not_retried(
+        tmp_path, synthetic_runner, monkeypatch):
+    directory = tmp_path / "synthetic"
+    monkeypatch.setattr(runner, "_load", lambda path: ({}, "0" * 64))
+    monkeypatch.setattr(model, "score_forecasts", lambda *a, **kw: pytest.fail("scored after failed readback"))
+    with pytest.raises(ValueError, match="persisted and read back"):
+        runner.first_score(directory)
+    assert (directory / "forecasts.json").exists()
+    assert not (directory / "evaluation.json").exists()
+    with pytest.raises(ValueError, match="never overwrite"):
+        runner.first_score(directory)
+
+
+def test_saved_artifact_tampering_and_external_pin_mismatch_are_rejected(tmp_path, synthetic_runner):
+    directory = tmp_path / "synthetic"
+    runner.first_score(directory)
+    with pytest.raises(ValueError, match="external diagnostic result identity"):
+        runner.read_diagnostic(directory, expected_identity_sha256="0" * 64)
+    path = directory / "forecasts.json"
+    path.write_bytes(path.read_bytes() + b" ")
+    with pytest.raises(ValueError, match="detached hash"):
+        runner.read_diagnostic(directory)
+
+
+def test_method_must_be_committed_before_any_new_diagnostic_attempt(tmp_path, synthetic_runner, monkeypatch):
+    directory = tmp_path / "synthetic"
+
+    def uncommitted():
+        raise ValueError("Commit reviewed sources first")
+
+    monkeypatch.setattr(runner, "_committed_method", uncommitted)
+    with pytest.raises(ValueError, match="Commit reviewed"):
+        runner.first_score(directory)
+    assert not directory.exists()
+
+```
+
+``````
+
+#### grok-origin-residual-code-review-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-code-review-response.txt
+
+Role: `ACTUAL_GROK_WEB_RESPONSE`. Bytes: **2,056**; SHA-256: `ff30a0cd820d4515dcb919d9219951047eb270cb965c8ab7237a11514940ff59`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+**Conditional GO for the software contract.** No result exists, no score is invented, and no physical behavior is approved. The shown files implement the reviewed exploratory design: constant local east/north residual, copy-on-write field, no clip/fill/mask expansion, origin-tangent mean-sphere \(v_{\text{last}}\) versus WGS84 RK4, exact 3600 s cadence, 48-cell plan with primary withheld unless all score, duplicate-UTC invalidation, forecast hash and read-back before numeric target decode, exclusive first-score directory, and committed-method guard. The original v2 evaluator and data pins are untouched.
+
+**Concrete failure paths that are present and correct.**  
+- Non-3600 s or >50 km penultimate fix → `CONTEXT_CADENCE_MISMATCH` / `LOCAL_GEOMETRY_BUDGET_EXCEEDED` on the residual candidate only.  
+- Masked origin or all-masked field → `UNSUPPORTED` / `CURRENT_FIELD_ALL_MASKED`.  
+- Corrected grid speed >10 m/s → `CORRECTED_FIELD_SPEED_BUDGET_EXCEEDED`, no clip.  
+- Domain exit or missing hourly output → `PARTIAL` with null coordinates after the last supported hour.  
+- Duplicate target UTC → that UTC dropped even if one copy is invalid; primary remains null.  
+- Failed forecast read-back → no score, directory retained, retry refused.
+
+**Untested assumptions.**  
+The real HYCOM residual candidate has not been run. The DOP853 check is synthetic and east-only analytic; no test confirms that a residual valid at the origin but singular at an intermediate stage is rejected solely by the existing sampler. Constant local-ENU addition is not tested against any parallel-transport alternative; the code simply does not implement one.
+
+**Distinction.** This GO approves the software contract for a post-outcome exploratory diagnostic on the two already-viewed groups. It is not a new independent scientific protocol, not a confirmatory test, and not authorization to promote the residual or to treat a later lower error as skill. A later metadata-selected cohort that excludes these IDs remains required before any transfer claim.
+``````
+
+### Origin-residual additive source manifest
+
+```json
+{
+  "actual_grok_rounds_added": 2,
+  "files": [
+    {
+      "bytes": 4747,
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "path": "docs/grok-evidence/grok-origin-residual-design-prompt.txt",
+      "sha256": "3919780b4f411745b8728e481495c4915ed8e69f246395503714932ab2731337"
+    },
+    {
+      "bytes": 4070,
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "path": "docs/grok-evidence/grok-origin-residual-design-response.txt",
+      "sha256": "f184d40911816b9af47f2dcb48da3212122e79deabd6a31a63ddd5abcccc9cc6"
+    },
+    {
+      "bytes": 59373,
+      "kind": "ACTUAL_GROK_WEB_PROMPT",
+      "path": "docs/grok-evidence/grok-origin-residual-code-review-prompt.txt",
+      "sha256": "17cc4963a246d9c4ec38218cfea1c661d07f8449f9dba3225951d200916d3605"
+    },
+    {
+      "bytes": 2056,
+      "kind": "ACTUAL_GROK_WEB_RESPONSE",
+      "path": "docs/grok-evidence/grok-origin-residual-code-review-response.txt",
+      "sha256": "ff30a0cd820d4515dcb919d9219951047eb270cb965c8ab7237a11514940ff59"
+    }
+  ],
+  "implementation_source_hashes_at_synthetic_review": [
+    {
+      "bytes": 21619,
+      "path": "apps/ocean/reeftrace_ocean/origin_residual.py",
+      "sha256": "37b84b13bb085651ae2b5b1140b6bc43d8ad5897719eb34b7b525cd8709fa02e"
+    },
+    {
+      "bytes": 14696,
+      "path": "scripts/evaluate_origin_residual_diagnostic.py",
+      "sha256": "961a5f75b0dcbec7287f7815260c010ef53a0a0f9ad26447d2265e80881a84d9"
+    },
+    {
+      "bytes": 20207,
+      "path": "tests/unit/test_origin_residual.py",
+      "sha256": "d0ff8188f9d17c89700968cd4e40a951f5980aacf73351aa5f7bce2c9d9b0de1"
+    }
+  ],
+  "kind": "ADDITIVE_ORIGIN_RESIDUAL_REVIEW_CAPTURE_MANIFEST",
+  "local_execution_scope": "40_FOCUSED_SYNTHETIC_TESTS_AND_RUFF_NOT_GROK_EXECUTION",
+  "new_full_suite_or_hosted_run_claimed": false,
+  "previous_prefix_bytes": 377243,
+  "previous_prefix_sha256": "0f82064391b61e6b9fc240a83ed6acb2d60f9f28dc66860ba216ef1dd5793909",
+  "real_candidate_outcomes_computed": false,
+  "real_diagnostic_directory_exists": false,
+  "schema_version": 1,
+  "total_grok_capture_files_in_continuation": 22,
+  "total_grok_rounds_in_continuation": 11
+}
+```
+
+
+## Additive origin-residual result review — twelfth actual Grok round
+
+Checkpoint: **17 October 2026**. The public product is now **Nemo**; original
+ReefTrace/Tideward package, repository and evidence identifiers remain stable.
+This addition preserves the complete preceding **456,934-byte** continuation,
+SHA-256 `a160166c510934052bacce375a92ab0819d00eee91229933f99b03f597f599df`.
+The current continuation contains **twelve actual Grok web review rounds /
+twenty-four capture files**. Earlier prompts, responses, Stage M's unscored
+checkpoint and the original canonical bundle remain unchanged.
+
+### Current result and local disposition
+
+The separately saved [origin-residual result](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/origin-residual-results.md)
+has **48/48** model/hour cells on **twelve already-viewed processed GDP targets**.
+Its equal-ID macro ADE/FDE are **1,030.0495 m / 2,355.9582 m**, compared with
+last drift **1,510.2316 m / 3,240.5762 m**, stationary **3,490.1188 m / 6,069.3529 m**,
+and current-only **5,063.0203 m / 9,151.6451 m**. Residual group ADE/FDE are
+**1,570.4495 m / 3,327.6312 m** and **489.6494 m / 1,384.2851 m**, lower than the
+other candidates on both group aggregates. The original three candidates' results
+are retained. This does not assert that every individual hour improves.
+
+Accepted interpretation from the actual result review preserves twelve-target
+reuse, the two-group scope, previously viewed outcomes, unfitted constant local
+ENU discrepancy and the distinction between descriptive error and general skill.
+This is **post-outcome exploratory development**, not a learned model, untouched
+confirmation, significance result, independence claim, diagnosed physical cause,
+automatic promotion or tank/plastic/reef validation. The first score and all
+frozen source artifacts remain unchanged; no new parameter or model mode is chosen
+from this review.
+
+**Correction to raw response D:** its phrase that an external pin is “still
+required for publication” is outdated relative to the submitted source context.
+The implementation already has a separately committed literal result identity
+and an anchored read-only API/Chalk integration. That software trust anchor is
+**not independent external attestation** of execution or scientific validity.
+The result identity is
+`d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27`;
+report/protocol pins remain separately identified. The raw response is retained
+exactly; this correction must accompany its interpretation.
+
+The response correctly identifies that the new **Data Lab diagnostic card is not
+connected at this review checkpoint**. Implemented endpoint contracts do not prove
+browser integration, live Chalk success or deployment. Subsequent work needs its
+own verification and release evidence. The existing default reader continues to
+report `numeric_replay_verified:false` because its own scope is saved-byte and
+lineage verification; it must not inherit another process's numerical claim.
+
+### Separate local execution — not Grok output
+
+Root's saved `LOCAL_EXACT_NUMERICAL_REPLAY_NOT_NEW_FIRST_SCORE` receipt records
+one independent local rebuild of all four forecast candidates and their scores:
+**forecast equality true, score equality true and all saved artifact bytes
+unchanged**. It retains 48/48 cells, twelve previously viewed targets, no new
+acquisition/provider calls and no physical validation. This is a local numerical
+replay of the one saved diagnostic, not a second first score, overwritten result,
+independent dataset, external attestation or new Grok execution. The receipt's
+artifact hashes were read and matched the current eight saved files while this
+addendum was prepared. The default reader's narrower verification flag remains
+unchanged.
+
+The local receipt is a separate execution record rather than an added Grok turn.
+Its exact captured file identity is listed in the additive manifest below. The
+**40 focused synthetic contracts**, **49 new API tests** and **98 adjacent API
+regressions** are different/subset verification scopes and are not summed into a
+new full-suite or hosted count. Existing historical CI at `33280da7` remains a
+separate exact-commit checkpoint. No full-suite/hosted success for the current
+changes is invented here.
+
+### Proposed next cohort — not frozen, selected or acquired
+
+The review proposes a metadata-only whole-GDP-ID cohort, for example **six new
+groups**, with all previously viewed identities and known aliases excluded.
+The candidate equations, four models, fixed horizon, origin/context rules,
+matched forcing, mask/cadence/failure policy and all planned slots would need a
+new protocol frozen before outcomes. All forecasts would be saved/read back
+before numeric future-coordinate decoding; complete primary summaries would
+require every planned cell, with available-support summaries explicitly secondary.
+
+This is a **proposal only**: no new protocol is frozen, no six identities are
+selected and no new trajectory/current acquisition has occurred. New-to-project
+logical IDs would still not establish physical independence, absence from
+upstream assimilation or historical issue-time availability. No cohort is
+chosen, replaced or tuned because the present residual result looks favorable.
+
+The documentation and review make no xAI API call, spend no credits, change no
+billing/provider settings, send no Photon message, start no camera and operate
+no hardware. Public raw captures contain no credentials, private contacts,
+camera frames, database or shared-chat transcript.
+
+### Exact twelfth-round saved captures
+
+#### grok-origin-residual-result-review-prompt.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-result-review-prompt.txt
+
+Role: `ACTUAL_GROK_WEB_PROMPT`. Bytes: **7,790**; SHA-256: `358c98f3c5708f7cbddf9b726695d9e08da3c710c2e04330d264703362fb5a5f`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+Continue the same ReefTrace research project. The public product is now named Nemo; stable repository/package/evidence IDs remain unchanged. This is a STATIC interpretation and next-study contract review, not a request to execute code, access credentials, acquire data or use the xAI API. The source repository is https://github.com/Jose-Gael-Cruz-Lopez/reeftrace .
+
+Your reviewed constant local-ENU residual candidate was frozen in committed sources before one actual first score. Its result now EXISTS. The first three candidates reproduce the original v2 descriptive scores. All four forecasts were written and read back before numeric target decoding in this new diagnostic. The two groups and twelve processed future positions had already been viewed in the preceding v2 study; the method was proposed after seeing that result. There is no coefficient fit, decay tuning, clipping, learned model or automatic promotion. Source v1/v2 artifacts and all14 frozen v2 sources are unchanged. Root independently rebuilt the four forecasts and scores once locally: exact equality and unchanged saved artifact bytes. This is local replay, not external attestation, physical validation or independent forecasting. Other local checks:40 synthetic contract tests,49 new API tests/98 adjacent regressions; none establishes scientific skill. A separate externally pinned public GET and authenticated bounded read-only Chalk REPORT endpoint are implemented. Data Lab's new diagnostic card is not yet connected. Do not claim it is.
+
+Actual saved result summary follows:
+{
+  "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1",
+  "scope": "POST_OUTCOME_EXPLORATORY",
+  "previously_viewed_targets": 12,
+  "coverage": {
+    "planned": 48,
+    "scored": 48
+  },
+  "macro": [
+    {
+      "equal_id_macro_ade_m": 3490.11883398436,
+      "equal_id_macro_fde_m": 6069.352856333436,
+      "group_count": 2,
+      "model_id": "stationary"
+    },
+    {
+      "equal_id_macro_ade_m": 1510.2315897151784,
+      "equal_id_macro_fde_m": 3240.5762017396933,
+      "group_count": 2,
+      "model_id": "last_drift"
+    },
+    {
+      "equal_id_macro_ade_m": 5063.020321784228,
+      "equal_id_macro_fde_m": 9151.645051235122,
+      "group_count": 2,
+      "model_id": "current_only"
+    },
+    {
+      "equal_id_macro_ade_m": 1030.0494632017758,
+      "equal_id_macro_fde_m": 2355.9581696532323,
+      "group_count": 2,
+      "model_id": "origin_residual_current"
+    }
+  ],
+  "groups": [
+    {
+      "id": "300234066836710",
+      "candidates": [
+        {
+          "model": "stationary",
+          "metrics": {
+            "available_cell_mean_error_m": 5120.998256257352,
+            "coverage_complete": true,
+            "endpoint_fde_m": 8121.756574761635,
+            "full_horizon_ade_m": 5120.998256257352,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "last_drift",
+          "metrics": {
+            "available_cell_mean_error_m": 1929.6812781234194,
+            "coverage_complete": true,
+            "endpoint_fde_m": 4034.0989009671275,
+            "full_horizon_ade_m": 1929.6812781234194,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "current_only",
+          "metrics": {
+            "available_cell_mean_error_m": 4640.195307154688,
+            "coverage_complete": true,
+            "endpoint_fde_m": 8270.53113245185,
+            "full_horizon_ade_m": 4640.195307154688,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "origin_residual_current",
+          "metrics": {
+            "available_cell_mean_error_m": 1570.4494966198938,
+            "coverage_complete": true,
+            "endpoint_fde_m": 3327.6312288398913,
+            "full_horizon_ade_m": 1570.4494966198938,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": "300534061292930",
+      "candidates": [
+        {
+          "model": "stationary",
+          "metrics": {
+            "available_cell_mean_error_m": 1859.2394117113683,
+            "coverage_complete": true,
+            "endpoint_fde_m": 4016.9491379052365,
+            "full_horizon_ade_m": 1859.2394117113683,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "last_drift",
+          "metrics": {
+            "available_cell_mean_error_m": 1090.7819013069375,
+            "coverage_complete": true,
+            "endpoint_fde_m": 2447.053502512259,
+            "full_horizon_ade_m": 1090.7819013069375,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "current_only",
+          "metrics": {
+            "available_cell_mean_error_m": 5485.845336413768,
+            "coverage_complete": true,
+            "endpoint_fde_m": 10032.758970018393,
+            "full_horizon_ade_m": 5485.845336413768,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        },
+        {
+          "model": "origin_residual_current",
+          "metrics": {
+            "available_cell_mean_error_m": 489.6494297836579,
+            "coverage_complete": true,
+            "endpoint_fde_m": 1384.2851104665729,
+            "full_horizon_ade_m": 489.6494297836579,
+            "planned_count": 6,
+            "scored_count": 6
+          }
+        }
+      ]
+    }
+  ],
+  "method_commit": "744832594c6327459d3003291e08685d9d483bb0",
+  "clocks": {
+    "method": "2026-10-17T23:10:44.279528+00:00",
+    "forecasts": "2026-10-17T23:10:44.298723+00:00",
+    "score": "2026-10-17T23:10:44.300622+00:00"
+  },
+  "identity": {
+    "externally_trusted_pin_required_for_publication": true,
+    "forecast_file_sha256": "727e2ce329148c31194bd6fc7b17c39da8b83923439140b9eef5c378376cc0d1",
+    "kind": "ORIGIN_RESIDUAL_LOCAL_RESULT_IDENTITY",
+    "protocol_sha256": "e1073f84e83b2ea078d0890972659e778f87238c417287d8adf70e3649587163",
+    "report_sha256": "801d7192ba138817f242401ae6706562f2b8c5c34306219ee37e04a2af2299c8",
+    "schema_version": 1,
+    "study_id": "origin-residual-gdp-hycom-15m-exploratory-v1"
+  },
+  "identity_sha256": "d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27"
+}
+
+Please return a concise adversarial review with exactly these sections:
+A) What can be said about the actual numerical result, and what cannot be claimed. Include the per-group consistency, twelve-target reuse and post-outcome limitations without treating48 cells as48 independent samples.
+B) Give one plain-language Data Lab sentence and one bounded Chalk explanation that explain what the initial residual contributes while naming its assumptions. Do not call it a learned correction, identified windage/current bias, operational forecast or a tank/reef outcome.
+C) Specify a concrete next external-data protocol BEFORE any new outcome values are viewed: whole GDP identities/alias exclusions, metadata-only selection, minimum cohort/common forcing support, one origin/context/horizon, fixed four candidates, retained failure cells, prior forecast/readback, all-result denominators and a primary comparison. Do not pick a favorable geographic subset or tune using these two outcomes. Distinguish a new-to-project cohort from upstream retrospective/assimilation independence that cannot be established.
+D) Identify actual blockers or missing evidence in this result package rather than speculate that you executed tests. Do not invent measurements, data access, p-values, error bars, keys, wins, sponsor qualification, external runs or live Voice/Imagine usage. Do not change the current model after this outcome; propose any new variation as a separately named future study.
+
+``````
+
+#### grok-origin-residual-result-review-response.txt
+
+Source: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/grok-evidence/grok-origin-residual-result-review-response.txt
+
+Role: `ACTUAL_GROK_WEB_RESPONSE`. Bytes: **3,004**; SHA-256: `b5fee7b16f53c5ddd34092c724e3d25b874da3beed909ad0b821368e17cb50b6`. Exact source body follows; the separating newline before the closing fence is not part of the byte count.
+
+``````text
+**A. What the result supports, and what it does not.**  
+On the two already-viewed groups the equal-ID macro ADE/FDE are origin-residual 1030 m / 2356 m, last-drift 1510 m / 3241 m, stationary 3490 m / 6069 m, and current-only 5063 m / 9152 m. The residual is lower on both groups (1570 m / 3328 m and 490 m / 1384 m). The first three candidates match the frozen v2 scores. All 48 cells scored, but they reuse only the same 12 processed future positions that were already seen; they are not 48 independent samples. The method was specified after the v2 outcome, uses a constant local east/north residual with no fit, decay or clip, and remains a post-outcome exploratory diagnostic. It does not establish operational skill, assimilation independence, statistical significance, or any plastic/tank/reef effect.
+
+**B. Display language.**  
+Data Lab: “On this already-viewed two-group diagnostic a constant local residual of last-drift velocity minus the origin HYCOM current reduced descriptive error relative to the other three candidates; the residual is not a learned correction and the targets were previously scored.”  
+Chalk: “The origin-residual candidate adds a single constant east/north offset, computed only from the final two context fixes and the HYCOM value at the origin, to a copy of the 15 m field and integrates it with the existing knot-aligned RK4. On these two groups its descriptive error was lower; the offset bundles object, forcing and processing discrepancy, is not an identified wind or bias coefficient, and the 48 cells reuse 12 already-viewed positions.”
+
+**C. Next external-data protocol (before any new outcomes are viewed).**  
+Freeze a new protocol that selects whole GDP identities by metadata only, excludes every previously viewed ID and known alias, and requires a minimum cohort (for example six groups) with common forcing support at the origin and the three knots. Use one origin, the final two context fixes, and a six-hour horizon. Keep the same four candidates, no coefficient, no decay, no clip. Retain every planned cell on transport, mask or cadence failure. Save and read back all forecasts before any future coordinate is decoded. Primary equal-ID macro only when every planned cell scores; otherwise withhold it and label any common-support summary secondary. Do not choose a geographic subset or alter the residual using the present two outcomes. A new-to-project logical-ID cohort is not the same as upstream assimilation or issue-time independence, which this design cannot establish.
+
+**D. Blockers and missing evidence in this package.**  
+The result is a local replay with an external pin still required for publication; no independent external attestation is present. Data Lab’s diagnostic card is not connected. No new trajectories, issue-time archive, or assimilation-input audit exist. No error bars, p-values or confirmatory cohort are available. The current model is not changed; any variation must be a separately named future study.
+``````
+
+### Twelfth-round additive source manifest
+
+```json
+{
+  "actual_grok_rounds_added": 1,
+  "files": [
+    {
+      "bytes": 7790,
+      "path": "docs/grok-evidence/grok-origin-residual-result-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "sha256": "358c98f3c5708f7cbddf9b726695d9e08da3c710c2e04330d264703362fb5a5f"
+    },
+    {
+      "bytes": 3004,
+      "path": "docs/grok-evidence/grok-origin-residual-result-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "sha256": "b5fee7b16f53c5ddd34092c724e3d25b874da3beed909ad0b821368e17cb50b6"
+    }
+  ],
+  "independent_external_attestation": false,
+  "kind": "ADDITIVE_ORIGIN_RESIDUAL_RESULT_REVIEW_MANIFEST",
+  "new_full_suite_or_hosted_run_claimed": false,
+  "next_six_group_cohort_status": "PROPOSED_NOT_FROZEN_SELECTED_OR_ACQUIRED",
+  "previous_prefix_bytes": 456934,
+  "previous_prefix_sha256": "a160166c510934052bacce375a92ab0819d00eee91229933f99b03f597f599df",
+  "schema_version": 1,
+  "separate_local_execution_receipt": {
+    "artifact_bytes_unchanged": true,
+    "bytes": 1879,
+    "forecast_exact": true,
+    "kind": "LOCAL_EXACT_NUMERICAL_REPLAY_NOT_NEW_FIRST_SCORE",
+    "new_first_score": false,
+    "not_grok_response": true,
+    "scores_exact": true,
+    "sha256": "41ff2f8e13e07b70c520bd45ea726cdd53effe433ce4118fec6e466c93478417"
+  },
+  "total_grok_capture_files_in_continuation": 24,
+  "total_grok_rounds_in_continuation": 12
+}
+```
+
+
+---
+
+## Actual Grok web round 13: Origin-residual Data Lab implementation contract
+
+This is an actual static Grok web exchange in the existing project, not code
+execution or new scientific evidence. It reviews the still-pending Data Lab
+integration of the saved forty-eight-cell exploratory result. The prompt supplies
+the exact backend schema and corrects the preceding review's claim that a code
+identity anchor is absent: that literal anchor already exists; independent
+scientific attestation remains absent.
+
+Accepted advice: a separate research panel, top-level forecast envelope, fixed
+axes across checkbox changes, gap-preserving series, exact selected-report pins
+and explicit disabled/live provider states. Two recommendations are narrowed:
+loading remains an explicit user action instead of an on-mount fetch, and valid
+partial coverage must preserve failures/denominators with primary results
+withheld rather than blindly require a complete result. Display validation is
+not independent byte or numerical verification. Local implementation, execution
+and hosted verification are separate subsequent records, not part of this reply.
+
+### Round 13 — prompt
+
+Source: `docs/grok-evidence/grok-origin-residual-ui-review-prompt.txt` · 8,174 UTF-8 bytes · SHA-256 `306d4601fbdd1689e942ab2a3471803500dc17eca3e12af84df486d26f0db898`.
+
+```text
+Continue the SAME Nemo/ReefTrace project and existing conversation. Repository: https://github.com/Jose-Gael-Cruz-Lopez/reeftrace ; current committed source 4ec88d33919f3571018345a0f09ef298e24281ed. This is a STATIC implementation/research review through Grok web. Do not claim to execute, acquire data, train, call APIs, inspect secrets, send messages, spend credits or qualify a sponsor track. We will implement and test locally and archive your exact response plus our decisions separately.
+
+We are completing the previously missing Data Lab card for the frozen origin-residual diagnostic you reviewed. No mathematical model, frozen method source, first-score artifacts, forcing, outcomes or active model selection will change. The three immutable method files are origin_residual.py, evaluate_origin_residual_diagnostic.py and test_origin_residual.py; the saved method commit is 744832594c6327459d3003291e08685d9d483bb0.
+
+Correction to your last response: a separately committed literal identity anchor ALREADY exists in the public reader/backend. external_result_pin_verified=true means it checked that code trust anchor, not independent scientific attestation. Independent external attestation remains absent. numeric_replay_verified=false is the reader's saved-bytes/lineage scope; a separately recorded local numerical replay matched forecasts/scores without rewriting artifacts. Do not remove or reinterpret these flags as a live rerun.
+
+ACTUAL backend contract:
+GET /api/v1/research/origin-residual is public, no-store and read-only. It returns exactly {report, forecasts, artifact_identity}. Missing pinned result is404, integrity/snapshot failure409, reader unavailable503. It does not acquire, fit, generate forecasts, rescore or write state.
+POST /api/v1/research/origin-residual/investigate requires local operator auth and exactly {question, report_sha256, protocol_sha256, identity_sha256}; question1..2000 nonblank chars. Research agent gets one read-only get_study_evidence tool, at most2 model calls, REPORT or STOP. REPORT cites exactly origin-residual-report:<report hash> and origin-residual-protocol:<protocol hash>. Question is untrusted data. A successful answer must bind report/protocol/identity, provider-live flag and exact citations; snapshot is rechecked after the model. No case/trial/camera/pump/Photon/download/scoring capability. We will not run new live provider or messaging requests in this UI verification; test providers are disabled/mocked.
+
+Fixed artifact identity:
+study_id=origin-residual-gdp-hycom-15m-exploratory-v1
+identity_sha256=d36bb0dcfb47db4c668215fa4f9f59db0ceea01917a360f14a04e1e5feda3f27
+report_sha256=801d7192ba138817f242401ae6706562f2b8c5c34306219ee37e04a2af2299c8
+protocol_sha256=e1073f84e83b2ea078d0890972659e778f87238c417287d8adf70e3649587163
+forecast_file_sha256=727e2ce329148c31194bd6fc7b17c39da8b83923439140b9eef5c378376cc0d1
+artifact_identity flags: integrity_verified=true, external_result_pin_verified=true, numeric_replay_verified=false, verification_scope=SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY.
+
+SCIENTIFIC DATA:
+Two fixed GDP groups:300234066836710 and300534061292930. Four models in fixed order:stationary,last_drift,current_only,origin_residual_current. Origin2022-06-01T00:00:00Z; six saved later hours. 48/48 model-hour cells reuse only12 already-viewed processed NOAA positions; POST_OUTCOME_EXPLORATORY. Proposed after v2 outcomes had been seen, not a new holdout. HYCOM15m retrospective model analysis, not surface-plastic truth. No coefficient fit, no decay, no clip, no mask fill, no automatic promotion.
+Equal-ID macro ADE/FDE metres:stationary3490.11883398436/6069.352856333436;last_drift1510.2315897151784/3240.5762017396933;current_only5063.020321784228/9151.645051235122;origin_residual_current1030.0494632017758/2355.9581696532323. Lower descriptive group-level ADE/FDE on both groups does not mean every hour improved or establish transfer.
+Model definition:r0=v_last-u(X0,t0), then u_corrected(X,t)=u(X,t)+r0. v_last is origin-tangent mean-sphere velocity of the last one-hour context interval. r0 stays constant in local east/north m/s. Existing bounded knot-aligned WGS84 RK4 resamples u at changing position/time. Offset bundles object/forcing/processing discrepancy; it is not identified windage. Numerical integration accuracy is distinct from physical forecasting accuracy.
+
+ACTUAL payload shape (do not copy matched-current validator unchanged):
+report:{schema_version,kind,study_id,analysis_scope,previously_viewed_target_outcomes:true,protocol_sha256,forecast_file_sha256,scores,...lineage}.
+report.scores:{planned_group_count:2,planned_cell_count:48,planned_distinct_target_count:12,scored_cell_count:48,primary_common_cohort_complete:true,models:[{model_id,metrics}],groups:[{group_id,target_issues,candidates:[{model_id,prediction_status,prediction_reason_code,metrics,cells}]}],primary_equal_id_macro_results,paired_comparisons,limitations,...false scientific-claim flags}.
+Score cell:{group_id,model_id,horizon_hours,elapsed_s,time_utc,latitude_deg,longitude_deg,forecast_status,forecast_reason_code,score_status,error_m,target_latitude_deg,target_longitude_deg}. Nulls/gaps must remain gaps; NO target_status field. metrics:{available_cell_mean_error_m,coverage_complete,endpoint_fde_m,full_horizon_ade_m,planned_count,scored_count}.
+TOP-LEVEL forecasts:{group_ids,model_ids,origin_time_utc,horizons_s,planned_cell_count:48,planned_distinct_target_count:12,groups:[{group_id,context_count,origin_position,candidates:[{model_id,cells,available_count,status,...residual and field lineage}]}],...scope flags}. Candidate forecast cells contain no evaluation target/error. No scores.forecast_report field. Macro is withheld unless complete all48.
+
+PRODUCT REQUIREMENTS:
+Data Lab already has a single ocean layout comparison at top, with historical research behind a collapsed disclosure. Put this new panel inside that research section, not as another default ocean/tank forecast. Clear heading and one-sentence explanation; concise four-model ADE/FDE table; visible48cells/12reusedtargets/two-group scope; choose either group; one combined equal-east/north-scale plot with recorded positions solid and four predictions dashed. Independent labeled checkboxes with hover/focus descriptions; fixed plot domain uses every available series even when hidden; gaps never bridged. Optional hourly displacement arrows must be labeled adjacent-endpoint displacement, not native water currents; no fake vector field. Group/hour/toggle changes never recalculate scores, select a new model or make provider requests. Plain-language method and full provenance can be collapsed. No best-model trophy/operational winner badge. A failed GET must show honest error with explicit retry, no fallback fixture. Abort stale load/review on unmount/report/token change. Chalk is explicit action, no automatic retry, bounded response read, exact snapshot/citations validation and provider failure distinguished from live answer. No physical accuracy or sponsor eligibility claim.
+
+Please return exactly FOUR sections:
+A. A concise implementation plan and specific TypeScript component/state-helper design that respects the ACTUAL envelope. Include separating display projection from great-circle scoring and no filtering of denominators.
+B. Precise frontend validation/review identity invariants, including nonfinite numbers, swapped group/model/hour, target disagreement between candidates, stale report/identity and forged scope flags. Distinguish display-level validation from byte hash verification performed on the backend. Do not propose pretending our browser is an independent verifier.
+C. Ten meaningful adversarial tests plus a browser click-by-click acceptance sequence, covering controls, fixed scale, both groups, gaps, stale async results, disabled provider and small viewport. No claim that you ran them.
+D. Two short sentences explaining RK4 and r0 for a beginner, followed by one concrete next cohort/protocol task that can be done without viewing outcomes. Do not retune this candidate, invent independent data, p-values, measurements, external executions, or a live xAI result.
+```
+
+### Round 13 — response
+
+Source: `docs/grok-evidence/grok-origin-residual-ui-review-response.txt` · 5,123 UTF-8 bytes · SHA-256 `bbf2be53568cf41cc7a4c0e55b517349fa57b2aa15c75571ec589349cf3bb077`.
+
+```text
+Grok
+Worked for 9s
+
+A. Implementation plan and component design.
+
+Add one panel inside the existing collapsed historical-research disclosure, not as a default ocean or tank view. A single OriginResidualPanel component owns the GET state (idle | loading | ready | error) and an optional review state (idle | pending | done | failed). On mount it fetches GET /api/v1/research/origin-residual with cache: 'no-store'; a missing result shows 404, integrity failure 409, and reader unavailable 503, each with an explicit retry and no fixture fallback. The component holds the raw {report, forecasts, artifact_identity} envelope and a pure display projection derived from it.
+
+State helpers:
+
+selectGroup(groupId) returns the matching forecast and score group without mutating the envelope.
+projectSeries(group, modelId) maps forecast cells to {hour, east_m, north_m} using an origin-anchored display frame; cells with null coordinates become gaps and are never interpolated.
+fixedDomain(allSeries) computes the plot bounds from every available point across all four models before any checkbox is applied, so hiding a series does not rescale.
+displacementArrows(series) emits adjacent-endpoint vectors labelled “endpoint displacement,” never “current.”
+validateEnvelope(payload) checks the invariants in B and returns a typed error; it does not recompute ADE/FDE.
+
+Scores and the four-model table are read only from report.scores. Group, hour and checkbox changes update local view state only. The Chalk action posts the exact {question, report_sha256, protocol_sha256, identity_sha256} and aborts on unmount or token change; a late response whose hashes no longer match is discarded.
+
+B. Frontend validation / review identity invariants.
+
+Display-level checks (not byte verification):
+
+artifact_identity.identity_sha256, report_sha256, protocol_sha256 and forecast_file_sha256 match the pinned literals; integrity_verified === true, external_result_pin_verified === true (code trust anchor only), numeric_replay_verified === false, verification_scope === "SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY".
+planned_cell_count === 48, planned_distinct_target_count === 12, scored_cell_count === 48, primary_common_cohort_complete === true, and the four model_ids appear in the fixed order.
+Every score cell has finite error_m when score_status === "SCORED"; null coordinates remain null; no target_status field is required or invented.
+Group IDs, model IDs and hours are not swapped: the candidate at index i matches model_ids[i] and its cells match horizons_s.
+For a given group and hour, target_latitude_deg / target_longitude_deg are identical across the four candidates or all null.
+analysis_scope === "POST_OUTCOME_EXPLORATORY" and previously_viewed_target_outcomes === true; any other flag is a forged-scope rejection.
+A review response is accepted only if its returned hashes equal the loaded snapshot; otherwise it is stale and discarded.
+
+These checks are display guards. Byte-hash verification remains the backend’s responsibility; the browser is not an independent verifier.
+
+C. Ten adversarial tests and acceptance sequence.
+
+Envelope with planned_cell_count: 47 is rejected and shows the integrity error.
+A cell with score_status: "SCORED" and error_m: NaN is rejected.
+Swapped model order (residual listed first) fails the fixed-order check.
+Two candidates for the same hour carry different target_latitude_deg values and are rejected.
+Hiding the residual series leaves the plot domain unchanged.
+A gap (null coordinate) is not bridged by a line segment.
+Changing group does not alter the four ADE/FDE numbers.
+A late GET response arriving after unmount or report-hash change is discarded.
+Chalk POST with a disabled/mocked provider shows the provider-failure state, not a live answer, and does not retry.
+At a 320 px viewport the table and plot remain readable and the research disclosure stays collapsed by default.
+
+Acceptance sequence: open Data Lab → expand historical research → confirm heading and one-sentence scope → verify the four-model table matches the saved macros → select the second group and confirm both series and the unchanged table → toggle each checkbox and confirm the domain is fixed and gaps stay open → hover an arrow and read “endpoint displacement” → trigger Chalk with the provider disabled and confirm the failure state → resize to mobile and confirm the panel remains inside the disclosure.
+
+D. Beginner sentences and next task.
+
+RK4 estimates the next position by sampling the current at the start, middle and end of a short step and combining those samples; it follows whatever field it is given.
+
+
+𝑟
+0
+r
+0
+	​
+
+ is the difference between the last hour’s observed drift and the HYCOM current at the origin, held constant in local east/north metres per second and added to a copy of the field.
+
+Next protocol task: freeze a metadata-only selection rule that draws a new cohort of whole GDP identities, excludes every previously viewed ID and known alias, and locks the same four candidates and six-hour horizon before any future coordinate is requested.
+```
+
+
+---
+
+## Actual Grok web round 14: Source tracing remains the original mission
+
+This actual static exchange responds to the user's clarification that estimating
+pollution origin remains the core question. The current estimator compares two
+to eight declared tank source regions; the ocean RK4 comparison and residual
+motion diagnostic do not constitute geographic pollution attribution.
+
+Accepted advice: preserve forward candidate transport, separate physical source
+labels from input features, freeze assumptions before outcomes, retain every
+planned release/Invalid/Unknown, and distinguish source-identification evidence
+from buoy position errors. The future geographic prototype is a proposal, not an
+implemented or validated feature. Primary BAKTRAK/OpenDrift references were
+checked separately; no package was installed.
+
+Important corrections to the raw response are retained here explicitly:
+* REJECT its definition of accepted slots as ranked OR Unknown with a leading
+  source. Only an accepted ranked result with a non-null ranked_source is an
+  accepted source identification. Unknown is abstention even if conditional bars
+  or leading_source exist. Counting it as accepted would corrupt the denominator.
+* The old NOAA identity-exposure inventory gap concerns a future buoy cohort; it
+  is not itself a flaw in the independent physical token-release plan. Both need
+  their own relevant leakage controls.
+* A same-generator source test is not guaranteed to rank correctly under every
+  seed/noise/prior setting; freeze a manufactured identifiable contract and
+  preserve Unknown. Overlapping regions alone are not a universal proof of
+  ambiguity without the rest of the model/priors/gates.
+* An unknown/misspecified geographic source must not be promised to always return
+  Unknown. That is a future design goal requiring explicit out-of-set and
+  misspecification tests; the present closed candidate engine can still make a
+  wrong accepted attribution. Quantify that risk in source-labelled validation.
+
+No outcome-driven tuning, acquisition, first score, physical trial, model
+promotion, new live Chalk/Photon/device call or xAI API/billing use occurred in
+these review exchanges. UI work and the guarded HTTP extension are in progress
+at this capture; their eventual tests are separate evidence.
+
+### Round 14 — prompt
+
+Source: `docs/grok-evidence/grok-source-first-validation-review-prompt.txt` · 6,380 UTF-8 bytes · SHA-256 `0ad24b43591b9e7413acce04a4abd7fd81d86e3f6b5998ef0e6fcc67411872b1`.
+
+```text
+Continue the same Nemo/ReefTrace project. This is a SECOND new static Grok web review in this continuation; the previous one concerned the origin-residual Data Lab panel. Current repository https://github.com/Jose-Gael-Cruz-Lopez/reeftrace at main4ec88d33919f3571018345a0f09ef298e24281ed plus the pending explicit-load UI. Do not claim execution, acquisition, training, deployment, provider/API calls, independent experiments or sponsor qualification.
+
+USER STEERING: the original project question is where pollution ORIGINATED. Prevention must remain a downstream extension, not replace source inference. We are correcting README and the short landing/Overview descriptions to lead with source tracing. Proposed mission: use observed floating-object movement to assess where it could have come from, then predict movement, compare interventions and test the outcome. Do not promise globally locating an exact polluter.
+
+ACTUAL CURRENT SOURCE ENGINE (read from estimator.py, no request to change it):
+It accepts a measured or explicitly synthetic tank profile, calibration identity, token class and an observation. It compares between2and8 declared candidate polygons in centimetres using forward Euler-Maruyama advection-diffusion in a supplied spatial flow field, reflecting rectangular walls and declared absorbing traps. A positive explicit source prior and discrete release-age prior are normalized; model likelihood evaluates observed trajectory or retained endpoint. Retained endpoint requires supported validated retention. It does not run the ocean RK4 engine backward or search an unrestricted coastline.
+Gates: calibration/currentidentity/stale/tokenclass; minimum trajectory points/duration; associationvalid and observationquality; observed-field coverage; minimum candidate path coverage; absolute fit; support separation and likelihood separation; predeclared variants changing diffusion,driftbias,ageprior,dt. Changed source/status across a sensitivity variant adds ASSUMPTION_SENSITIVE and withholds accepted rank. Result statuses ranked,unknown,invalid. A leading_source and conditional bars may exist while ranked_source is null/Unknown. Output assumption scope is declared_tank_candidates_only_not_geographic_origin; bars are relative_support_not_probability. Absolute fit is a length-normalized position kernel, not a p-value.
+The synthetic moving example ranks C, retained-endpoint example remains Unknown, invalidmapping returnsInvalid. No real tank source-recovery trial exists. Current hardware is USB camera and separately powered manual pump; OpenCV follows one red token, not generic debris. Pixel guide is not centimetre calibration. Source model parameters/fixtures/frozen method inputs will NOT be retuned in this review.
+
+RELATED OCEAN WORK:
+The separate WGS84 RK4 engine integrates dX/dt=u(X,t) with changing currents and support checks. A newer initial-residual diagnostic adds r0=v_last-u(X0,t0) to a copy of HYCOM15m forcing. It has48model-hour cells but12already-viewed processed positions; it is post-outcome exploratory, not independent skill, not a source-attribution test. NOAA buoy context/targets can assess movement error, but the first recorded fix is not a verified pollution-release label. Our new six-ID residual cohort is only proposed; an exposure audit found the older frozen inventory skips the subsequently scored fresh/research studies, so it cannot be reused as a complete exclusion set.
+
+PRIMARY REFERENCES root checked now:
+1. Breivik etal BAKTRAK, https://arxiv.org/abs/1111.0756 (journal DOI10.1007/s10236-011-0496-2). Abstract describes iterative forward seeding/selection against observations when nonlinear changes make naive reversal hard. Nemo does NOT implement BAKTRAK's adaptive iterative search; do not say it does.
+2. Official OpenDrift https://opendrift.github.io/ supports purpose-specific drift, currents/wind/waves and negative-time runs. It is not installed/commissioned in Nemo. Framework capability is not source-validation evidence.
+3. Previously shared Frontiers DOI10.3389/fmars.2017.00191 is the Aegean forward floating-litter/source-region study, not direct evidence that Nemo recovers a retained object's unique origin. Preserve this correction rather than repeat the earlier loose attribution.
+
+Please give exactly four sections:
+A) Explain in two plain sentences how source inference and downstream interception fit the SAME project. State current bounded tank scope versus the missing geographic source engine.
+B) Audit the following proposed next experiment WITHOUT choosing numerical gates or tuning to results: independently fit and validate drift, freeze candidate polygons/priors/release-age/noise/gates/windows/sensitivity, balanced known-source release plan, evaluator keeps actual source/time separate, estimator sees permitted measuredpositions/times but no labels in metadata/names, save report before unblinding, retain every planned slot/invalid/Unknown, no rerun-until-win, separate trajectory/retained modes. Identify leakage, model mismatch, physical-control and identifiability gaps we should resolve before freezing/collecting.
+C) Give a compact source-evaluation contract with exact denominators and at least six meaningful hostile synthetic tests. Distinguish correct accepted/planned, correct accepted/accepted, wrong accepted/accepted and accepted/planned; withhold fractions for zero denominators rather than make0or100. Synthetic same-generator checks are software contracts, not independent physical accuracy. Avoid calibrated posterior/coverage/p-value claims; identify useful abstention diagnostics and what a real source-labelled test supplies that buoy ADE does not.
+D) Give an incremental, separately named FUTURE geographic origin prototype using existing bounded forward RK4 as a building block, not a silent change to tank model: candidate regions and release-time assumptions, objectresponse/retention/flowuncertainty, observedtrack/endpoint, time-forward ensembles vs naivebackward, explicit prior/misspecified/unknown-source behavior, provenance and source-labelled validation. Explain what can be done with saved historical fields now and what still needs new evidence. No new package installation, model training or data acquisition requested here. No claim you read source files not included in this prompt, executed tests or achieved real source accuracy.
+```
+
+### Round 14 — response
+
+Source: `docs/grok-evidence/grok-source-first-validation-review-response.txt` · 4,161 UTF-8 bytes · SHA-256 `73f5bfd7af414e2844725b1f9755059baf2f299ce66cb495f545ea437276c0ec`.
+
+```text
+Grok
+Worked for 4s
+
+A. Source inference and interception in one project.
+
+Nemo uses observed floating-object movement to assess which of a declared set of candidate origins is better supported, then predicts later movement, compares interception layouts and checks the outcome against independent records.
+
+Today the source engine is a centimetre-scale tank model that scores between two and eight candidate polygons with forward Euler–Maruyama advection–diffusion, reflecting walls and absorbing traps; a geographic source engine that searches an unrestricted coastline or runs the ocean RK4 backward does not exist.
+
+B. Audit of the proposed next experiment.
+
+The plan is sound in outline—fit and validate drift independently, freeze polygons/priors/age/noise/gates/windows/sensitivity, keep the evaluator’s source/time separate from the estimator, save the report before unblinding, and retain every planned slot—but four gaps should be closed before freeze.
+
+Leakage: the exposure audit already shows the older frozen inventory omits later scored studies, so any “exclude all viewed IDs” rule must be rebuilt from the complete current set or it will admit previously scored trajectories.
+
+Model mismatch: the estimator’s Euler–Maruyama tank dynamics are not the WGS84 RK4 used for ocean forcing; a residual or flow field transferred from the ocean diagnostic is not a valid tank prior.
+
+Physical control: no real tank source-recovery trial exists; USB-camera tracking of one red token and a manually powered pump do not yet supply the balanced known-source releases the plan requires.
+
+Identifiability: with only relative support among declared polygons, two nearby sources can remain inseparable even when the trajectory is long; the freeze must state the minimum separation and path-coverage gates before any release is collected, without choosing those numbers from the eventual outcomes.
+
+C. Source-evaluation contract.
+
+Denominators are planned slots (every declared release × mode) and accepted slots (those that return ranked or unknown with a finite leading source). Report correct-accepted/planned, correct-accepted/accepted, wrong-accepted/accepted and accepted/planned; if a denominator is zero, withhold the fraction rather than emit 0 or 100. Absolute fit remains a length-normalized position kernel, not a p-value; bars stay relative support.
+
+Hostile synthetic tests:
+
+Identical generator and candidate set returns the true source as ranked when separation and coverage gates pass.
+Retained-endpoint mode with unsupported retention returns Unknown, not ranked.
+Invalid mapping or token-class mismatch returns Invalid and is counted in planned but not accepted.
+A sensitivity variant that changes the leading source adds ASSUMPTION_SENSITIVE and withholds the accepted rank.
+Two overlapping candidate polygons produce no ranked source even when the trajectory is perfect.
+Mutating the true-source label after the report hash is stored does not change the estimator output.
+
+These are software contracts. A real source-labelled tank trial supplies what buoy ADE cannot: an independent release identity that was never used to fit the flow or the likelihood, so an accepted rank can be scored as correct or wrong rather than merely close in position.
+
+D. Future geographic origin prototype.
+
+Name it separately (for example forward-ensemble-origin-v0). Candidate regions and release-time windows are declared in advance; each is seeded forward with the existing bounded RK4 under an explicit object-response and retention assumption and under flow-field uncertainty. Observed track or endpoint likelihoods are compared across the ensemble; no naive backward integration is performed. An unknown or misspecified source returns Unknown; provenance records the field hash, issue-time status and the exclusion set. With saved historical fields the prototype can be exercised on synthetic tracks or on already-viewed buoy segments labelled only as movement tests. A source-labelled validation still requires new evidence—controlled releases or independently documented debris origins—that does not exist in the current archive.
+```
+
+### Thirteenth and fourteenth round source manifest
+
+```json
+{
+  "actual_grok_rounds_added": 2,
+  "files": [
+    {
+      "bytes": 8174,
+      "path": "docs/grok-evidence/grok-origin-residual-ui-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 13,
+      "sha256": "306d4601fbdd1689e942ab2a3471803500dc17eca3e12af84df486d26f0db898"
+    },
+    {
+      "bytes": 5123,
+      "path": "docs/grok-evidence/grok-origin-residual-ui-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 13,
+      "sha256": "bbf2be53568cf41cc7a4c0e55b517349fa57b2aa15c75571ec589349cf3bb077"
+    },
+    {
+      "bytes": 6380,
+      "path": "docs/grok-evidence/grok-source-first-validation-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 14,
+      "sha256": "0ad24b43591b9e7413acce04a4abd7fd81d86e3f6b5998ef0e6fcc67411872b1"
+    },
+    {
+      "bytes": 4161,
+      "path": "docs/grok-evidence/grok-source-first-validation-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 14,
+      "sha256": "73f5bfd7af414e2844725b1f9755059baf2f299ce66cb495f545ea437276c0ec"
+    }
+  ],
+  "frozen_scientific_artifacts_changed": false,
+  "implementation_and_verification": "SEPARATE_SUBSEQUENT_RECORDS",
+  "independent_external_attestation": false,
+  "kind": "ADDITIVE_DATALAB_AND_SOURCE_FIRST_REVIEW_MANIFEST",
+  "live_xai_api_usage_proven": false,
+  "new_first_score": false,
+  "physical_validation": false,
+  "previous_prefix_bytes": 475681,
+  "previous_prefix_sha256": "7072acc34ccf64889468809b8f16ab5c1758f6f733d4f8fea4967344c5c8163d",
+  "schema_version": 1,
+  "sponsor_eligibility_proven": false,
+  "static_web_reviews_not_executions": true,
+  "total_grok_capture_files_in_continuation": 28,
+  "total_grok_rounds_in_continuation": 14
+}
+```
+
+
+---
+
+## Actual Grok web round 15: Deterministic backward tracing and the limits of source attribution
+
+Accepted: reverse the velocity AND actual time, preserve missing support, use a bounded sensitivity envelope and distinguish numerical closure from observed earlier-position error. Corrections: the response incorrectly calls the interpolant divergence-free; no such property is established, and deterministic ODE reversal does not require it. The last-drift baseline requires the permitted penultimate05Z fix, so “hide every position before the final observation” is too broad. The first recorded buoy position is not verified pollution-release truth. This review is static advice before the new method's score, not code execution or validation.
+
+### Round 15 — prompt
+
+Source: `docs/grok-evidence/grok-ocean-source-method-prompt.txt`; 5,510 bytes; SHA-256 `e2efea005adfd2e3e3fc98ddfe0f844cd7ded6ce340abd2f28fb6ae42ef9d73d`.
+
+```text
+Continue ONLY this existing Nemo/ReefTrace project and conversation. Repository https://github.com/Jose-Gael-Cruz-Lopez/reeftrace current main af168001b844be0843f29ea160db7dc8a5b24a27. This is an actual STATIC Grok web design review, not execution or API usage. Do not claim you ran code, read files not pasted, acquired data, validated a pollutant origin or qualified a sponsor track.
+
+User keeps SOURCE TRACING as the core and asks whether we can reverse the existing forward movement forecast to infer geographic origins, show source regions and uncertainty, and validate. We will implement a small additive ocean-source research prototype, not promise an anywhere-in-the-ocean exact-origin system. The existing tank source estimator and pinned forward RK4/method files must remain byte unchanged.
+
+Existing geographic forward solver: dX/dt = u(X,t), WGS84 metre/degree derivatives, bilinear spatial/linear temporal interpolation, knot-aligned classical RK4, max300s step and6h horizon, support/mask/time stops, no extrapolation. No explicit diffusion/objectwindage/beaching/retention/barrierhydrodynamics. Real acquired fields: PacIOOS Hawaii 0.25m,3knots Oct17 2026 18/21Z-Oct18 00Z, nominal4km; HYCOM GOFS3.1 expt93.0 at15m June1 2022 00/03/06Z. Two matched GDP groups have31rows May31 00Z-Jun1 06Z. Their previous forward/residual outcomes are already viewed. A new earlier-position reconstruction using final observation at06Z and evaluator-only position at00Z would be retrospective/previously-viewed buoy-location recovery, NOT independent pollutant-release attribution. Truth must remain outside inference inputs.
+
+Core proposed method to critique BEFORE we implement:
+1. Negative-time deterministic backtrack correctly samples the historical field at t_obs-tau AND negates velocity in the increasing-tau equation; merely negating today's velocity is wrong. Can wrap the immutable solver with a new OceanField whose times are increasing pseudo-times, original u/v reversed in time and negated, preserving masks; map output back to descending actual UTC.
+2. Use bounded observation perturbations and declared constant current-bias scenarios to generate an earlier-position sensitivity envelope at declared lookback ages. Fixed perturbations are method assumptions, not calibrated stochastic probabilities. Missing paths remain missing in denominator; no convex hull bridge across unsupported masks. Show individual candidate points/path bounds and exact coverage, no claiming a90% confidence region.
+3. Forward-check selected earlier hypotheses under the SAME scenario using unchanged RK4. Small return residual proves numerical consistency only, not physical/source accuracy. We must label it separately from actual observed earlier-position error.
+4. For source-region inference beyond a path, a separately declared grid of candidate release cells/ages can be simulated FORWARD, scored against available observed positions using fixed positional bandwidth/prior, then normalized as conditional compatibility. A backward path is a proposal mechanism, not a unique identified polluter. Endpoint-only same-model roundtrips cannot establish superiority of the centered candidate or universally distinguish sources.
+5. Initial release-age window is an explicit assumption, not inferred from the first observed buoy fix. Current data/time/depth limits make 'anywhere' unsupported, not a reason to fabricate a location.
+
+We want a simple feature in Investigations: Tank source / Ocean source research. Load one saved retrospective study; choose two GDP examples; one equal-metre plot with observed endpoint, earlier candidate regions/path ensemble and withheld earlier truth revealed separately for validation; toggles; concise source region/time assumption, support coverage, numerical roundtrip and REAL prior-position miss. Public read-only fixed artifact route; operator-only bounded Chalk explanation with exact identities; no hardware/messaging/scientific execution on GET. Preserve existing results. API keys/credit use remain off.
+
+Please return exactly five concise sections:
+A. Is exact time reversal mathematically legitimate here? Show the equation with proper time arguments, and list irreversibilities that would invalidate a naive extension.
+B. Choose the smallest honest implementable v1: backward sensitivity envelope alone, forward candidate grid, or both. Specify source-region meaning, observation/current perturbations, release-time assumptions, support/denominator and Unknown/unsupported behavior. No invented empirically justified bandwidth or guaranteed uncertainty coverage.
+C. Define a retrospective evaluation that hides earlier buoy positions from inference, uses all2 predeclared groups without replacement, compares stationary/last-drift-backward/current-backward, preserves failures and separates numerical roundtrip from actual reconstruction error. It cannot claim new-to-project/independent or pollutant-source ground truth.
+D. Ten adversarial mathematical/software tests plus an end-to-end browser/API/Chalk acceptance sequence. Include a time-varying analytic field that catches negating without reversing time, mask/time/domain failures, truth mutation invariance and stale report identities.
+E. Give a clear incremental next step toward forward-ensemble geographic attribution and real known-source validation. Correct any overclaim in this proposal. Do not silently tune after results, invent p-values/confidence/sourceaccuracy or call frameworks installed if not.
+```
+
+### Round 15 — response
+
+Source: `docs/grok-evidence/grok-ocean-source-method-response.txt`; 4,132 bytes; SHA-256 `d734c18c6f4e3977ecbc3186ec18ef6ed763d85ba8449b028d614684633f2c41`.
+
+```text
+Grok
+Worked for 12s
+
+A. Time reversal.
+
+Yes, for this deterministic, divergence-free-in-the-interpolant setting: if the forward equation is 
+𝑑
+𝑋
+/
+𝑑
+𝑡
+=
+𝑢
+(
+𝑋
+,
+𝑡
+)
+dX/dt=u(X,t), the backward equation in increasing look-back age 
+𝜏
+τ is
+
+𝑑
+𝑋
+𝑑
+𝜏
+=
+−
+𝑢
+(
+𝑋
+,
+𝑡
+obs
+−
+𝜏
+)
+.
+dτ
+dX
+	​
+
+=−u(X,t
+obs
+	​
+
+−τ).
+
+The field must be sampled at the earlier time and the velocity negated. Negating only the velocity at 
+𝑡
+obs
+t
+obs
+	​
+
+ is incorrect whenever 
+𝑢
+u changes with time. Irreversibilities that invalidate a naive extension include: masked or out-of-support cells (the path simply stops), any unmodelled diffusion or windage, beaching/retention, and the fact that the interpolant is not the true ocean. Numerical round-trip error is not physical reversibility.
+
+B. Smallest honest v1.
+
+Implement the backward sensitivity envelope alone. Source-region meaning: the set of earlier positions reached by the negated, time-reversed field under a fixed list of observation perturbations and constant local current-bias scenarios, at declared look-back ages. Perturbations and biases are method assumptions, not calibrated probabilities. Release-time window is an explicit assumption, not inferred from the first buoy fix. Every planned path stays in the denominator; missing or masked paths remain missing and are never bridged by a convex hull. If no supported path reaches a declared age, the result is Unknown/unsupported. No bandwidth is fitted and no coverage percentage is claimed.
+
+C. Retrospective evaluation.
+
+Hide all positions before the final observation from the inference inputs. Use both pre-declared GDP groups with no replacement. Compare three backward candidates—stationary, last-drift reversed, and current-field reversed—on the same look-back ages. Retain every planned cell on mask, domain or time failure. Report numerical round-trip residual (forward re-integration of the recovered point) separately from the actual distance to the withheld earlier buoy position. Label the exercise previously-viewed buoy-location recovery, not independent pollutant-source attribution.
+
+D. Tests and acceptance sequence.
+
+Analytic time-varying field: negating velocity without reversing time fails the exact integral; the wrapped field passes.
+Zero residual bias reproduces the pure reversed track.
+Masked cell at an intermediate age stops with the existing reason and leaves later ages null.
+Out-of-support sample returns OUTSIDE_CURRENT_DOMAIN and retains the last supported point.
+All-masked field yields UNSUPPORTED and zero available ages.
+Mutating the withheld earlier truth after the forecast hash is stored does not change the hash.
+Duplicate or non-monotonic observation times are rejected before any integration.
+A late GET response whose report hash no longer matches the loaded snapshot is discarded.
+Chalk POST with a disabled provider returns the provider-failure state and does not retry.
+At 320 px the plot and coverage counts remain readable and no truth marker appears until the explicit reveal control is used.
+
+Acceptance: open Investigations → Ocean source research → load the saved study → select both GDP examples → confirm the envelope and coverage counts with truth hidden → reveal truth and confirm the miss distance appears separately from the round-trip residual → toggle scenarios and confirm the denominator is unchanged → trigger Chalk with the provider off and confirm failure.
+
+E. Next step and corrections.
+
+Next incremental step: a separately named forward-ensemble prototype that seeds a pre-declared grid of candidate release cells and ages with the existing RK4, scores them against the observed track under a fixed positional kernel, and normalizes only as conditional compatibility; Unknown remains the result when support is insufficient.
+
+Corrections: the proposal does not implement BAKTRAK’s iterative search, does not install OpenDrift, and cannot claim a unique polluter or calibrated uncertainty from the backward envelope alone. Do not tune perturbations after seeing the withheld positions.
+```
+
+
+---
+
+## Actual Grok web round 16: Fixed twenty-five-case earlier-location contract
+
+The follow-up explicitly corrects divergence-free and context claims, locks five endpoint offsets crossed with five constant current biases, separates six planned nominal model/group rows from twenty-five sensitivity paths per group, and retains every failure. Earlier00Z truth is outside base inference. The response is an external model's static assessment; its statement that the firewall is intact remains a condition to verify locally. No full forward candidate-region likelihood search or globally validated pollutant attribution is implemented by this envelope.
+
+### Round 16 — prompt
+
+Source: `docs/grok-evidence/grok-ocean-source-contract-prompt.txt`; 3,299 bytes; SHA-256 `995d5829ef712774dedaad00a608a63d3603fa7bf1f8f516386a25bc6ce60edb`.
+
+```text
+Continue same Nemo project. Static follow-up before the implementation's real-data score. Your previous response is saved verbatim. Two corrections: deterministic local ODE reversal does NOT require a divergence-free interpolant. We have not established that our interpolated currents are divergence free; do not repeat that claim. Also a last-drift backward baseline needs the final TWO permitted observations at05/06Z; hide all earlier targets from inference, not the permitted05Z context. No origin residual from00Z is allowed: that would leak the unknown earlier position.
+
+Selected minimal v1 is BACKWARD SENSITIVITY ENVELOPE ONLY plus nominal forward closure. New files additive, pinned tank/forward RK4 files unchanged. Endpoint06Z and final05Zcontext only, two fixed already-viewedGDPgroups. Hard6hlookback00Z and displayedcandidateages1/3/6h.25methodcases = fiveendpointoffsets(center,+/-100mEast,+/-100mNorth) × fiveconstantcurrentbiases(zero,+/-.05m/sEast,+/-.05m/sNorth). These are predeclared sensitivity settings, not calibrated distributions or confidence coverage. Nominalcase is center+zerobias. Reverse both physicaltime andvelocity througha derivedcopiedOceanField; preserve source arrays/masks. Partialpaths retainall25denominator, unavailableagesnull, noextrapolation/hull. Candidatepoints withsmalltileregionsforvisualization mustnotbeinterpretedasnormalizedsourceprobability or guaranteedphysicalorigin. If allscenariosearlierpointsunsupported, showunsupported/Unknown. Successfulbackwardpaths areconditionalearlierpositions, notuniqueidentifiedrelease.
+
+Forecast bothgroups first, persist canonicalforecastJSON+hash, readback; onlythen decodeevaluator-only00Zearlierpositions andscorestationary,lastdriftbackward,currentbackward. Planned2groups×3nominalmethods=6errorcells; scenario25paths are sensitivityreuses, notindependenttrials. Equal-ID meanearlierpositionerroronlyifallrequiredcellscomplete. Realrecordedearlierpositions areprocessedbuoypositionsalreadyviewed inpreviousstudies, notsourcegroundtruth. Forward nominal00Zrecoveredposition throughSAMEcurrent00→06Z to computeclosure; compareobserved00Ztruthseparately. A tinyclosurealongwithlargeoriginmissisavalidnegativeoutcome, notafailuretohide. No uncertaintycalibration orpollutantaccuracyclaim, no automaticmodelpromotion.
+
+Investigations gets Tank source / Ocean source research tabs. PublicsavedGETonly, explicitLoad, two-group selector, fixedequal-metrescales, scenario/path/candidatecheckboxes, truthmarkerandactualerrortablehiddenuntilShow validation evidence. BoundedoperatorChalkpost exactreport/protocol/identitypins, REPORT/STOPonly, readonlysavedtool, noactuation/acquisition/messages. Disabledproviders/testfailuremustnotlooklikealiveanswer. MainAPI/Photonworkerleftalone; end-to-endtestsusefreshisolatedAPI/storedisabledproviders.
+
+Please give (1) corrected reversal mathematics with no divergence-free requirement, (2) any actual flaw in scenario transformation, release-time meaning, truth firewall or comparisons; (3) six precise hostile testcases; (4) a short beginner explanation, and one next forward-candidate inference task requiring anewdeclaredprotocol. No code execution claims or invented results. All real outcome numbers are still uncomputed for this new method; do not invent them.
+```
+
+### Round 16 — response
+
+Source: `docs/grok-evidence/grok-ocean-source-contract-response.txt`; 2,688 bytes; SHA-256 `dc35b2dc794ff6e66b2713c46cd42a2b519e1dff815b21a52fdc8b9861cd6735`.
+
+```text
+Grok
+Worked for 10s
+
+1. Corrected reversal mathematics.
+
+The forward equation is 
+𝑑
+𝑋
+/
+𝑑
+𝑡
+=
+𝑢
+(
+𝑋
+,
+𝑡
+)
+dX/dt=u(X,t). In increasing look-back age 
+𝜏
+τ the deterministic reversal is
+
+𝑑
+𝑋
+𝑑
+𝜏
+=
+−
+𝑢
+(
+𝑋
+,
+𝑡
+obs
+−
+𝜏
+)
+.
+dτ
+dX
+	​
+
+=−u(X,t
+obs
+	​
+
+−τ).
+
+The derived field stores times in increasing pseudo-time, reverses the original time order, and negates both velocity components; masks and axes are copied, not altered. No divergence-free assumption is required or claimed. Output elapsed ages map back to descending actual UTC by 
+𝑡
+=
+𝑡
+obs
+−
+𝜏
+t=t
+obs
+	​
+
+−τ.
+
+2. Flaws and firewall checks.
+
+No material flaw in the 25-scenario transformation: the five endpoint offsets and five constant biases are fixed method assumptions, not a distribution, and every scenario remains in the denominator. Release-time meaning is correctly limited to declared look-back ages; the first buoy fix is not treated as a release label. The truth firewall is intact provided the 05Z fix is the only earlier context admitted and the 00Z position is decoded only after the forecast hash is read back; an origin residual computed from 00Z would leak and is correctly forbidden. The comparison set (stationary, last-drift backward from 05/06Z, current backward) is consistent. One residual caution: a small forward-closure residual with a large miss to the withheld 00Z position is a valid negative outcome and must not be re-labelled as a hiding failure.
+
+3. Six hostile tests.
+
+Analytic time-varying field: negating velocity without reversing time fails the exact integral; the wrapped field passes.
+Last-drift backward uses only the 05Z and 06Z fixes; mutating any earlier context row does not change the forecast hash.
+A masked intermediate age stops that scenario with null later ages and retains all 25 paths in the denominator.
+An all-unsupported envelope returns Unknown and zero available ages.
+Mutating the withheld 00Z coordinates after forecast read-back does not alter the stored hash.
+A nominal path with sub-metre closure but multi-kilometre 00Z miss is scored as a large reconstruction error, not discarded.
+
+4. Beginner explanation and next task.
+
+Backward integration asks “where could the object have been earlier if it simply followed the recorded current in reverse,” by sampling the field at the earlier time and flipping the velocity; it does not prove that place was the release.
+
+Next task: freeze a separately named forward-candidate protocol that declares a grid of release cells and ages, excludes every previously viewed ID, and locks the scoring kernel before any new earlier position is requested.
+```
+
+
+---
+
+## Actual Grok web round 17: Scattered observations through Kalman filtering to both trajectory directions
+
+This actual review follows new user steering: visualize raw points, a connected observed path, a causal Kalman-filtered estimate, the explicit current-plus-offset formula, then backward and forward branches. The new three-fix tutorial uses01/02/03Z and is separate from the frozen longer-prefix Kalman benchmark. It does not train a neural detector or calibrate noise. A03Z offset must be computed once from permitted filtered state and applied to a copied field before both signed-time branches; no00Z truth or future resets. The same05/06 positions are inputs to the separate06Z diagnostic and tutorial validation targets, so root/independent code review requires a separate tutorial forecast persistence/read-back BEFORE base numeric05/06 decoding. A function boundary alone cannot justify a global decoder-order claim. The final implementation and actual tests/results are recorded separately, not attributed to Grok. A possible later rendezvous is not guaranteed capture.
+
+### Round 17 — prompt
+
+Source: `docs/grok-evidence/grok-bidirectional-pipeline-prompt.txt`; 3,047 bytes; SHA-256 `e15315239da17f3060cfc5fbde6aba39454e29f4c21eff01e072dfbc8c047667`.
+
+```text
+Same Nemo/ReefTrace project, actual STATIC review only. New user asks to VISUALIZE each step: rawscatteredpoints→estimatedconnectedtrajectory→Kalmanfilteredtrajectory→mathematicalrule→bothbackwardpossibleorigin andforwardpossibleinterceptionpoint. We are adding this as a separate teaching/research walkthrough alongside the preserved06Z→00Z25scenario diagnostic, not silently changing frozen models.
+
+Proposed new walkthrough uses SAMEtwoalready-viewedGDPgroups+realHYCOM15m. Permittedobservations ONLY June1 2022 01/02/03Z (threeactualhourlyfixes). 00Zearlierposition and04/05/06Zlaterpositions evaluator-only untilbothgroups'forecasts persistandreadback. Localprojectionstarts01Z permittedfix (never00truth). Stage1 draws3actualpoints. Stage2 connectsobservations fordisplay only, no newobservations invented. Stage3 a SEPARATE3fixconstantvelocityKalmanfilter using same[px,py,vx,vy], F/Q/H/R Josephmath, sigma100m/q1e-6; existingfrozenkalmanstudyrequiresmin8 anditsfilemustnotchange. New3fixexample is algebraic research, not proof enough observations or calibratednoise. Filterinitializesatsecondfix02Z using correlatedposition/velocity covariance fromtwofixes, then predicts/corrects03Z; storedfilteredstates arecausal, notRTS smoothing/futureinformation. Stage4 shows dX/dt=u_HYCOM(X,t)+b03, where b03=filtered03velocity - current_at_filtered03position; no learnedcoefficient or neuraltraining. Bias staysconstantlocalEast/North; copyfieldmaskpreserved. Stage5 uses SAMEboundedsigned-timeRK4branches fromfiltered03position:03→00backward and03→06forward, applying b03beforesign/time transformation. Nooffsetcomputedfrom00truth. Past andfuturetruthneverresetpredictedpaths. Anyunsupportedstep retainsgap/reason; noextrapolatepastforcing00..06. Display03anchor,backwardpath,forwardpathand+3hfutureendpoint as conditionalcandidateinterceptionrendezvous (notplannedboomplacementorrealcaptureguarantee). LinkexistingPreventionlayoutfeatureforactualgeometrycomparison, noinventedcollectororreef.
+
+We will render5stepperbuttons and boundedplayback/Next withfixedplotaxes,layers,actualUTC, units, formulas andclearlymeasured/filtered/simulatedlegend. NoCalmannarrowconfidenceclaim, no syntheticdatafallback. Earlier00andfuture04..06truthmarkers/errorsonlyunderexplicitvalidationdisclosure. Bothgroupsalwaysinplanneddenominators, failurecellsretained. Existing06→00benchmarkseparate; usercancomparebidirerrorswithoutpoolingthemwithsourceaccuracy.
+
+Pleaseadversariallyreview: (A) truthfirewallandtime-order, (B) mathematicalfilterinitialization withthreefixes andwhy tosayfilterednotRTSsmoother, (C) exactsamebias handlingforforwardandreverse, (D) eightmeaningfultestsincludingtruthmutationsnoforecastchange,00unavailable,forwardcurrentmasked,twogroupsretained,stage/toggleinvariance, and (E) oneplainlanguageexplanationofwhatcanbesaidaboutpossibleoriginandcandidateinterceptionlocation. Do notinventresults/executions/trainingdata/uncertaintycoverage. Anynewmethodhereispost-outcomeexploratory withno empiricalparameterjustification.
+```
+
+### Round 17 — response
+
+Source: `docs/grok-evidence/grok-bidirectional-pipeline-response.txt`; 3,258 bytes; SHA-256 `3488a52031c82269cf413cfe35c0fc8abb31087f9cb120be3508600b1743eb13`.
+
+```text
+Grok
+
+A. Truth firewall and time order.
+
+Permitted observations are only the three fixes at 01/02/03Z. The 00Z position and the 04/05/06Z positions stay evaluator-only until both groups’ forecasts are persisted and read back. Local projection and all filter/bias calculations start at the 01Z fix; no offset is computed from 00Z. Past and future truth markers appear only under the explicit validation disclosure and never reset a predicted path. Both groups remain in every planned denominator.
+
+B. Three-fix filter initialization.
+
+State is 
+[
+𝑝
+𝑥
+,
+𝑝
+𝑦
+,
+𝑣
+𝑥
+,
+𝑣
+𝑦
+]
+[p
+x
+	​
+
+,p
+y
+	​
+
+,v
+x
+	​
+
+,v
+y
+	​
+
+]. Initialize at 02Z with 
+𝑝
+=
+𝑧
+2
+p=z
+2
+	​
+
+, 
+𝑣
+=
+(
+𝑧
+2
+−
+𝑧
+1
+)
+/
+Δ
+𝑡
+v=(z
+2
+	​
+
+−z
+1
+	​
+
+)/Δt, and the correlated covariance that follows from two independent isotropic position errors (the same construction already used for longer prefixes). Predict/correct only the 03Z measurement. The stored states are causal: each update uses only data up to that time. An RTS smoother would run a backward pass that incorporates the 03Z (and any later) information into the 02Z state; that is not done here. With only three fixes the filter is an algebraic illustration, not evidence that three observations suffice or that 
+𝜎
+=
+100
+ 
+m
+σ=100m, 
+𝑞
+=
+10
+−
+6
+q=10
+−6
+ are calibrated.
+
+C. Same bias for forward and reverse.
+
+Compute 
+𝑏
+03
+b
+03
+	​
+
+ once, at the filtered 03Z position:
+
+𝑏
+03
+=
+𝑣
+filtered
+(
+03
+𝑍
+)
+−
+𝑢
+HYCOM
+(
+𝑋
+filtered
+,
+03
+𝑍
+)
+.
+b
+03
+	​
+
+=v
+filtered
+	​
+
+(03Z)−u
+HYCOM
+	​
+
+(X
+filtered
+	​
+
+,03Z).
+
+Add this constant local east/north vector to a copied field before either integration. The backward branch then applies the existing time-reversal (sample at 
+𝑡
+obs
+−
+𝜏
+t
+obs
+	​
+
+−τ, negate velocity); the forward branch integrates the same biased field without negation. No second bias is estimated from 00Z or from any future fix. Masks are preserved; an unsupported step retains a gap and its reason.
+
+D. Eight tests.
+
+Mutating the 00Z or 04–06Z coordinates after forecast read-back leaves the forecast hash unchanged.
+Removing the 00Z forcing knot yields an unavailable backward age with a null coordinate and the path retained in the denominator.
+Masking the forward current after 03Z stops the forward branch at the last supported hour and leaves later cells null.
+Both groups appear in the planned cell counts even when one group’s field is unavailable.
+Changing stage or toggling a layer does not alter any stored coordinate or score.
+Initializing the filter with a future measurement (simulating an accidental RTS step) changes the 02Z state and is rejected by the causal-state assertion.
+A bias computed from the 00Z position instead of the filtered 03Z position fails the firewall check.
+An all-masked field returns Unknown for both branches and zero available endpoints.
+
+E. Plain-language statement.
+
+The walkthrough shows one possible earlier location consistent with reversing the recorded current plus a constant local bias from the last permitted fix, and one possible later rendezvous consistent with continuing that same biased current; neither is a unique release point nor a guaranteed interception.
+```
+
+### Ocean source review manifest
+
+```json
+{
+  "files": [
+    {
+      "bytes": 5510,
+      "path": "docs/grok-evidence/grok-ocean-source-method-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 15,
+      "sha256": "e2efea005adfd2e3e3fc98ddfe0f844cd7ded6ce340abd2f28fb6ae42ef9d73d"
+    },
+    {
+      "bytes": 4132,
+      "path": "docs/grok-evidence/grok-ocean-source-method-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 15,
+      "sha256": "d734c18c6f4e3977ecbc3186ec18ef6ed763d85ba8449b028d614684633f2c41"
+    },
+    {
+      "bytes": 3299,
+      "path": "docs/grok-evidence/grok-ocean-source-contract-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 16,
+      "sha256": "995d5829ef712774dedaad00a608a63d3603fa7bf1f8f516386a25bc6ce60edb"
+    },
+    {
+      "bytes": 2688,
+      "path": "docs/grok-evidence/grok-ocean-source-contract-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 16,
+      "sha256": "dc35b2dc794ff6e66b2713c46cd42a2b519e1dff815b21a52fdc8b9861cd6735"
+    },
+    {
+      "bytes": 3047,
+      "path": "docs/grok-evidence/grok-bidirectional-pipeline-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 17,
+      "sha256": "e15315239da17f3060cfc5fbde6aba39454e29f4c21eff01e072dfbc8c047667"
+    },
+    {
+      "bytes": 3258,
+      "path": "docs/grok-evidence/grok-bidirectional-pipeline-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 17,
+      "sha256": "3488a52031c82269cf413cfe35c0fc8abb31087f9cb120be3508600b1743eb13"
+    }
+  ],
+  "kind": "ADDITIVE_OCEAN_SOURCE_RESEARCH_GROK_MANIFEST",
+  "live_xai_api_usage": false,
+  "physical_validation": false,
+  "previous_prefix_bytes": 505645,
+  "previous_prefix_sha256": "33cdc05fc9ab9f8bc66900a212d8859bb4eb960f05356d38542883fd48b410a7",
+  "rounds_added": 3,
+  "schema_version": 1,
+  "sponsor_qualification_proven": false,
+  "static_review_not_execution": true,
+  "total_continuation_rounds": 17,
+  "total_full_capture_files": 34
+}
+```
+
+
+## Actual Grok web round 18: Final three-fix trajectory, API and display review
+
+This actual static review was prompted in the same existing Grok web project before the first local score of the new bidirectional walkthrough. It reviews the draft contract, not observed results. The original prompt and response are preserved in full below; their then-current statements about artifacts and unscored results remain historical. Archiving the exchange after implementation does not turn that review into a Grok execution receipt. Exact calculations, tests, browser interaction, commit and CI results require their separate local or hosted evidence.
+
+Accepted review guidance: compute the offset only at the permitted filtered 03:00 state; reverse physical time as well as the sign of the complete biased current; retain causal 02:00 initialization; isolate failures between branches; preserve unsupported/missing outputs and full planned denominators; keep stage, clock and layer controls pure display; stop playback when hidden or unmounted and reset it on group changes; and ensure the read-only GET never builds, scores, acquires data or invokes a provider. The proposed mobile checks are acceptance criteria until supported by a separate browser receipt. The frontend displays four validation rows for the selected group, with eight planned rows across the two groups; the response's wording must not imply eight rows per selected group.
+
+The earlier-position and future-rendezvous labels are accepted only as conditional motion hypotheses. A backward path is not a unique release, a future endpoint is not a collector placement or guaranteed capture, and small forward/reverse closure checks numerical consistency rather than agreement with observed motion. The filter uses earlier/current permitted fixes only; it does not perform an RTS backward smoothing pass or train a neural model.
+
+**Correction to the final validation recommendation:** a new GDP cohort selected without inspecting trajectory outcomes, excluding all previously viewed IDs and known aliases, could evaluate **earlier buoy-position reconstruction** when predictions are frozen before decoding the reserved earlier positions. It would not validate pollution-source attribution. Demonstrating a pollution release source requires source-labelled known-release observations and independent physical evaluation with release identity withheld from the estimator. A tank trial establishes its own tested tank scope; it does not by itself establish geographic ocean-source accuracy. Retention, coastline interaction, uncertain release time and object-specific transport remain relevant missing processes. No unsupported case becomes an accepted source.
+
+No xAI API was used for this round; no credits were spent or paid billing enabled. The exchange does not show that Grok ran code, fetched trajectories, performed a physical experiment, calibrated a probability region or established sponsor qualification. No Chalk request, Photon message, camera capture or actuator action is implied by this documentation addition.
+
+### Round 18 — prompt
+
+```text
+Continue SAME Nemo/ReefTrace project at https://github.com/Jose-Gael-Cruz-Lopez/reeftrace. Actual static Grok WEB review; no API, billing, execution, acquisition, physical experiment or sponsor qualification implied. We are finishing the previously reviewed three-fix bidirectional pipeline before its first local score. Do not invent results.
+
+Existing draft implements: two fixed already-viewed GDP IDs300234066836710 and300534061292930; only June1 2022 01/02/03Z positions admitted to tutorial inference.00/04/05/06Z remain evaluator-only until both group's tutorial forecasts saved+hashed+readback. Source HYCOM GOFS3.1 at15m00/03/06Z. Original source/forward/oldKalman/fresh studies remain untouched.
+
+Stage1 scatter exact3processedobservations, Stage2 connection display(notadditionalmeasurement), Stage3 separate causal Kalman demonstration:01position-only;02twofixcorrelatedcovinit;03predict/correctwithJoseph. No RTS, no neuraltraining, declaredsigma100m andcontinuousaccelerationq1e-6. Stage4 explicitb03=filteredvelocity03-current_at_filteredposition03, copiedfieldu'=u+b03 withpreservedmasks. Stage5 both3hbranchesfromsamefiltered03anchor:forwardu'(X,t);backwarddY/dtau=-u'(Y,03-tau). AllconstantENUassumptionsandupstreamQC/assimilationlimitsdisclosed. Laterobservationsneverresetpaths.
+
+UI has explicitload, twogroupselector, fiveclickablestages, onepassboundedplayback+Next/Previous, fixedequalmetricaxes computedfromallavailablelayers, layercheckboxes, actualUTCbranch-timescrub, formulasandpointstatuses, conditionalpossibleearlierposition andfuture'rendezvous'notguaranteedcollector. Validationmarkers/errorshiddenuntilexplicitreveal. No fallbackdata/noautomaticprovider. ResearchChalk uses exactreport/protocol/identity andoneallowlistedevidence tool; noactuator/messaging/acquisition.
+
+Separate06Zto00Zdiagnosticretains25fixedsensitivitycases/group(endpointoffsetcenter/100mE/W/N/S x currentbias0/0.05m/sE/W/N/S), three6h-earlierpositionbaselinesstationary/lastdriftreverse/currentreverse, completefailuredenominators. No calibratedprobability/regionclaim. Tutorialhas8validationrowsacross2groupsand4dates. Thisispost-outcomeexploratory usingpreviouslyviewedprocessedpositions, notindependentpollutionsourceevidence.
+
+Auditorsarechecking: exceptiononebranchmustnoteraseotherbranch; masks/timeunsupportedpartialmustremain; frontendreportmutations/reason/status/anchorsrejected; stage/time/layerschangesarepuredisplay; replaymuststopontabhidden/unmount andresetongroupchange; backendGETneverexecutesbuilder/scorer/firstscore/provider. ActualresultdoesNOTexistyet; firstscorewillrequirecommittedmethod/protocolandexclusiveartifacts, then literalpinpublishedafterresult. UIwaitingstateuntilthatpinexists.
+
+Return FOUR concise sections:1) concrete mathematical and time-order mistakes to guard against, correcting anybadassumptionabove;2) six high-value numerical/API/frontend checks plus precise mobile/playback acceptance;3) honest one-sentence labelsforpossibleoriginandfutureinterceptioncheckpoint andwhyfilteringisnotRTSsmoothing;4) what would still be necessary for physical or independentgeographicsourcevalidation. Do not request newmodelselection/tune parametersafteroutcome; do not treat small closure error as actualaccuracy; do not falselycallNoSupportedData a fabricated acceptedsource. No claims you executed anything.
+```
+
+### Round 18 — response
+
+```text
+Grok
+
+1. Mathematical and time-order guards.
+
+Do not compute 
+𝑏
+03
+b
+03
+	​
+
+ from any position other than the filtered 03Z state; an offset that touches 00Z or 04–06Z leaks.
+Backward integration must sample the biased field at 
+03
+𝑍
+−
+𝜏
+03Z−τ and negate; negating only the 03Z velocity is wrong on a time-varying field.
+The 02Z state is initialized from the 01Z–02Z pair only; a later correction that rewrites 02Z is an accidental RTS step and must be rejected.
+An exception or mask on one branch leaves the other branch’s already-accepted points intact; do not clear both.
+Partial paths keep null ages in the denominator; do not extrapolate past the 00–06Z forcing window or bridge gaps.
+
+2. Six checks and mobile/playback acceptance.
+
+Mutating 00/04/05/06Z after forecast read-back leaves the hash unchanged.
+Masking the forward field after 03Z stops only the forward branch; the backward branch remains.
+Frontend rejection of a mutated reason, status or anchor.
+Stage, time-scrub and layer toggles do not alter stored coordinates.
+Replay stops on tab hide or unmount and resets on group change.
+Backend GET never calls the builder, scorer or first-score path.
+
+Acceptance: at 320 px, load the study, select each group, step through all five stages with Next/Previous, scrub the branch clock, toggle layers (domain stays fixed), hide the tab and confirm playback stops, then reveal validation and confirm the eight rows appear only then.
+
+3. Labels and filter distinction.
+
+Possible origin: “Earlier position consistent with reversing the biased current from the last permitted fix—not a unique release.”
+
+Future interception checkpoint: “Later rendezvous consistent with continuing the same biased current—not a guaranteed collector placement.”
+
+Filtering is not RTS smoothing because each stored state uses only measurements up to that time; no backward pass incorporates 03Z information into 02Z.
+
+4. Still required for physical or independent geographic validation.
+
+A source-labelled tank trial with known release identity withheld from the estimator, or a new GDP cohort selected by metadata only and excluded from all previously viewed IDs, with forecasts frozen before any earlier position is decoded. Small closure error is not actual accuracy, and “No supported data” is not an accepted source.
+```
+
+### Final trajectory review manifest
+
+```json
+{
+  "files": [
+    {
+      "bytes": 3347,
+      "path": "docs/grok-evidence/grok-trajectory-final-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 18,
+      "sha256": "a640b95d81ee3d0a771fcca570c393c2c5ef9db0efcb610314861aeb5326b70a"
+    },
+    {
+      "bytes": 2347,
+      "path": "docs/grok-evidence/grok-trajectory-final-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 18,
+      "sha256": "f90fc797c28f562a7271b1d18e0dbacb5439653c11972fdf6f4216f52d8dc86b"
+    }
+  ],
+  "kind": "ADDITIVE_TRAJECTORY_FINAL_REVIEW_GROK_MANIFEST",
+  "live_xai_api_usage": false,
+  "physical_validation": false,
+  "previous_prefix_bytes": 533292,
+  "previous_prefix_sha256": "4ad8d4a3deb498ee08019d34f55393d9568056b8cd2b54e83cd629110d8487c7",
+  "rounds_added": 1,
+  "schema_version": 1,
+  "sponsor_qualification_proven": false,
+  "static_review_not_execution": true,
+  "total_continuation_rounds": 18,
+  "total_full_capture_files": 36
+}
+```

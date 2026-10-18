@@ -1,0 +1,198 @@
+{
+  "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+  "automatic_model_promotion": false,
+  "closure": "nominal_00Z_estimate_advected_forward_on_unmodified_field_to06Z;not_real_accuracy",
+  "confirmatory": false,
+  "current_biases_east_north_m_s": [
+    [
+      "zero",
+      0.0,
+      0.0
+    ],
+    [
+      "east",
+      0.05,
+      0.0
+    ],
+    [
+      "west",
+      -0.05,
+      0.0
+    ],
+    [
+      "north",
+      0.0,
+      0.05
+    ],
+    [
+      "south",
+      0.0,
+      -0.05
+    ]
+  ],
+  "current_depth_m": 15,
+  "earlier_time_utc": "2022-06-01T00:00:00Z",
+  "earlier_truth_scope": "00Z_evaluator_only_after_all_inference_outputs_persisted_and_readback",
+  "endpoint_offsets_east_north_m": [
+    [
+      "center",
+      0.0,
+      0.0
+    ],
+    [
+      "east",
+      100.0,
+      0.0
+    ],
+    [
+      "west",
+      -100.0,
+      0.0
+    ],
+    [
+      "north",
+      0.0,
+      100.0
+    ],
+    [
+      "south",
+      0.0,
+      -100.0
+    ]
+  ],
+  "group_ids": [
+    "300234066836710",
+    "300534061292930"
+  ],
+  "inference_inputs": "final06Z_and_penultimate05Z_only; penultimate used by last-drift baseline only",
+  "kind": "OCEAN_SOURCE_EXPLORATORY_PROTOCOL",
+  "last_drift_geometry": "endpoint_anchored_mean_sphere_final_hour_displacement_times_six;50km_budget",
+  "limitations": [
+    "Retrospective post-outcome development on two already-viewed processed GDP groups, not a new blind test.",
+    "A computed earlier position is not a verified pollution release, unique origin or polluter identity.",
+    "The twenty-five fixed endpoint/current perturbations are a sensitivity grid, not probabilities or calibrated uncertainty.",
+    "HYCOM fifteen-metre model analysis does not establish surface-plastic behavior or issue-time availability.",
+    "No diffusion reversal, windage, waves, beaching, retention, object change or coastline source search is modeled.",
+    "Numerical forward closure is solver consistency, not observed earlier-position accuracy.",
+    "Missing masks, times and geography stop supported integration; no hull bridges unsupported regions.",
+    "Ocean geography is separate from tank centimetres; no physical tank or reef benefit is validated."
+  ],
+  "lookback_hours": [
+    1,
+    3,
+    6
+  ],
+  "maximum_lookback_s": 21600,
+  "maximum_speed_m_s": 10,
+  "method_source_sha256": {
+    "apps/ocean/reeftrace_ocean/ocean_source.py": "78e87afb81e49c2d78dd79edb73cf69a242c6542f893d131d70a3286f9b12425",
+    "apps/ocean/reeftrace_ocean/ocean_source_pipeline.py": "7842afdc5a0ea9f3715ae34185ef6ec03318c82ce4a530fb9ee2dcf7a24f9b89",
+    "scripts/evaluate_ocean_source.py": "10f35545d21070ac1abcff5471a3d6c1a34e9e5eaa0dfe7f64935f537ac93bc0",
+    "tests/unit/test_ocean_source.py": "5738989630ee870f60cf41e74a68c8227fc345f2053368a4d0e86747602a4510",
+    "tests/unit/test_ocean_source_pipeline.py": "a44d31c43d4420b47af9551bf19888839a91f0ca58ff0c51b3eb48150344ba07"
+  },
+  "model_ids": [
+    "stationary",
+    "last_drift",
+    "reverse_current"
+  ],
+  "network_acquisition": false,
+  "nominal_scenario_id": "center|zero",
+  "observation_time_utc": "2022-06-01T06:00:00Z",
+  "offset_geometry": "origin_anchored_mean_sphere_log_exp",
+  "output_step_s": 300,
+  "penultimate_time_utc": "2022-06-01T05:00:00Z",
+  "physical_validation": false,
+  "pinned_numerical_dependencies": {
+    "apps/ocean/reeftrace_ocean/advection.py": "95a7c53f0ca8787cd743639248dace9d45c2eee6d894b12e882632bd6b22fd5d",
+    "apps/ocean/reeftrace_ocean/benchmark.py": "da070dd9dcb63efdedef20731964a9242d8ad6b4171f5cd267739f418495dfde",
+    "apps/ocean/reeftrace_ocean/field.py": "4cec7e6f8a50a6fd45d67d738e883880f5cb02e208ee907403f4255f11b5bb83",
+    "apps/ocean/reeftrace_ocean/hycom.py": "cc6cc61b6024ffa02cf9a86debb38730b43dddd238199ad351f951ddb87ccd38",
+    "apps/ocean/reeftrace_ocean/kalman.py": "c5a2f170353fa86c54bb013a8e60240496f00bbfc030e989dbb092d65f254a89",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_protocol.py": "1acee1a93a0c78437313bdba0b7f05dba3006a8fc33507896902470c8d90ea1c",
+    "apps/ocean/reeftrace_ocean/matched_current_v2_result_identity.py": "001b0f533b21550df22978abf1370a9d39a05b8929789b5be698ba93fb979caf",
+    "scripts/evaluate_matched_current_v2_study.py": "c44213fedf68bfbea441d59dd93ee4ed9b4214bbdf5858277729c3d8a6ac4282"
+  },
+  "pipeline_tutorial": {
+    "acceleration_spectral_density_m2_s3": 1e-06,
+    "anchor_time_utc": "2022-06-01T03:00:00Z",
+    "branches_horizon_s": 10800,
+    "covariance_update": "Joseph; gain=solve(S,H@P).T",
+    "equations": [
+      {
+        "formula": "z_k = [east_k, north_k] metres; k=01,02,03 UTC",
+        "id": "raw",
+        "title": "Three recorded positions"
+      },
+      {
+        "formula": "join z_01 -> z_02 -> z_03; no additional measurements",
+        "id": "connected",
+        "title": "Connect the observations"
+      },
+      {
+        "formula": "x=[E,N,vE,vN]; F=[[I,dt I],[0,I]]; Q=q[[dt^3/3 I,dt^2/2 I],[dt^2/2 I,dt I]]; H=[I,0]; R=100^2 I; Joseph covariance update",
+        "id": "filtered",
+        "title": "Causal Kalman filter"
+      },
+      {
+        "formula": "b = v_filtered(03Z) - u(X_filtered(03Z),03Z); dX/dt = u(X,t) + b",
+        "id": "formula",
+        "title": "Combine movement and changing currents"
+      },
+      {
+        "formula": "forward: dX/dt=u(X,t)+b; backward: dY/dtau=-(u(Y,03Z-tau)+b); 0<=tau<=3h",
+        "id": "branches",
+        "title": "Look backward and forward"
+      }
+    ],
+    "execution_order": "build_both_tutorial_groups01_02_03_save_readback_then_decode05_06_for_separate_base_then_save_readback_combined_then_score00_and04_05_06",
+    "filter": "causal01position_only_02twofix_initialization_03measurement_update;no_RTS",
+    "frame": "mean_sphere_log_exp_anchored_at_first_allowed01Z_fix",
+    "inference_times_utc": [
+      "2022-06-01T01:00:00Z",
+      "2022-06-01T02:00:00Z",
+      "2022-06-01T03:00:00Z"
+    ],
+    "kind": "THREE_FIX_BIDIRECTIONAL_RESEARCH_WALKTHROUGH",
+    "limitations": [
+      "Separate three-fix research walkthrough; not the frozen eight-or-more-fix Kalman benchmark.",
+      "100 m position error and q=1e-6 m^2/s^3 are declared assumptions, not fitted or calibrated uncertainties.",
+      "01Z is position-only; 02Z initializes velocity; only 03Z receives a causal measurement update. No RTS smoothing.",
+      "ENU state is in an 01Z-anchored mean-sphere frame; its velocity components approximate local east/north forcing.",
+      "One constant residual bias persists on each three-hour branch; no windage, retention or coastline process is learned.",
+      "All recorded validation positions have been viewed previously; this is retrospective, not independent source validation.",
+      "A possible earlier position is not a confirmed release; a forward path is not an interception or reef-protection result."
+    ],
+    "observed_truth_used_by_inference": false,
+    "planned_validation_rows": 8,
+    "position_std_m": 100.0,
+    "probabilities_or_calibrated_region": false,
+    "residual": "constant local ENU b=filtered_velocity03-current(filtered_position03,03)",
+    "state_units": "[east_m,north_m,eastward_m_s,northward_m_s]",
+    "validation_times_utc": [
+      "2022-06-01T00:00:00Z",
+      "2022-06-01T04:00:00Z",
+      "2022-06-01T05:00:00Z",
+      "2022-06-01T06:00:00Z"
+    ]
+  },
+  "planned_distinct_earlier_positions": 2,
+  "planned_model_rows": 6,
+  "previously_viewed_earlier_positions": true,
+  "probabilities_or_calibrated_region": false,
+  "provider_calls": false,
+  "reverse_equation": "dY/dtau=-(u(Y,t_observed-tau)+constant_forward_current_bias)",
+  "scenarios_per_group": 25,
+  "schema_version": 1,
+  "score": "great_circle_distance_to_recorded00Z; mean per model only if all six rows scored",
+  "solver": "unchanged bounded WGS84 RK4; reversed actual axes/mask/time; no fill or clipping",
+  "solver_step_s": 300,
+  "source_artifact_pins": {
+    "evaluation.json": "e330a9b25183b545288d35702ef1686329bd910116285827707947e7614e0347",
+    "forecasts.json": "41b1b0f154a78f02e6c971a0b8233f3c938138628d22d69c83547e358faecfbf",
+    "manifest.json": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0"
+  },
+  "source_attribution_validated": false,
+  "study_id": "ocean-source-gdp-hycom-15m-v1",
+  "time_transform": "pseudo_UTC=t_observed+tau; actual_UTC=t_observed-tau"
+}

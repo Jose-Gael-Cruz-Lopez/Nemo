@@ -1,0 +1,158 @@
+{
+  "kind": "NEMO_PRESENTATION_LOCAL_VERIFICATION",
+  "date": "2026-10-17",
+  "frontend_tests": {
+    "passed": 283,
+    "failed": 0,
+    "log": "work/nemo-release-final-frontend-tests.log"
+  },
+  "full_eslint": {
+    "exit_code": 0,
+    "log": "work/nemo-release-final-eslint.log"
+  },
+  "typescript_and_isolated_production_build": {
+    "exit_code": 0,
+    "log": "work/nemo-release-final-production-build.log"
+  },
+  "prior_backend_checkpoint": {
+    "commit": "f3353e0a0e5ec7cb27d131b8f80ec9e3e98d8dcb",
+    "hosted_run": 39079486572,
+    "conclusion": "success",
+    "scope": "Historical exact-commit backend/scientific,HTTP and dashboard checks, not hosted verification of this later UI commit."
+  },
+  "browser_checks": [
+    {
+      "name": "AtomicGlobe live rendering",
+      "result": "WebGL; 231 \u00d7 231 backing canvas for a 154 px HUD; actual supplied point cloud visible."
+    },
+    {
+      "name": "Removed landing elements",
+      "result": "No narration controls,Pause motion,eyebrow slogans,Scroll to explore or bottom disclaimer in rendered page"
+    },
+    {
+      "name": "Direct chapter navigation and reload",
+      "result": "#journey-prevent restored actual 75% scroll and chapter 3; BODY retained focus; fresh browser errors were empty."
+    },
+    {
+      "name": "Glyph Trail blue background",
+      "result": "Canvas; rgb(237, 247, 254); bounded 1001 \u00d7 583 backing canvas at desktop size."
+    },
+    {
+      "name": "Shared ocean comparison over actual saved API response",
+      "result": "Layout A: 2 of 6; layout B: 4 of 6 simulated entries; no interception: 6 of 6. No new scoring or acquisition."
+    },
+    {
+      "name": "Layer and release filtering",
+      "result": "Layout A paths: 6 to 0; layout B: 6 to 1 when filtered to R1; 9 current vectors. ViewBox 132 0 456 484 and full 2-of-6 / 4-of-6 scores stayed unchanged; defaults restored."
+    },
+    {
+      "name": "Desktop comparison fit",
+      "result": "1280 \u00d7 720: complete 360 px SVG from y=352.59 to 712.59; both layout cards visible; no horizontal overflow."
+    },
+    {
+      "name": "Mobile workspace",
+      "result": "390 \u00d7 844: no horizontal overflow; relative-positioned z-index 20 navigation; 317,520 Glyph backing pixels; viewport override reset."
+    },
+    {
+      "name": "Browser errors",
+      "result": "Fresh isolated page logs empty"
+    }
+  ],
+  "source_component_verification": {
+    "atomic_globe": "Original 68,999-byte source retained; six GLSL shader strings and 7,996 generated dot records proven equal in tests; auditable local adapter.",
+    "glyph_trail": "Original 15,078-byte source retained; Bayer matrices, masks, procedural field, ordered draw and decay compared directly in tests."
+  },
+  "scope_limits": [
+    "Presentation changes do not alter frozen scientific outcomes or establish physical tank accuracy.",
+    "No new live Chalk or Photon call, message, camera activation, pump action, xAI API use or billing change.",
+    "No claim of pixel-identical reproduction or every-frame inspection of the reference.",
+    "Keyboard focus may precede native smooth scrolling briefly; settled targets were checked."
+  ],
+  "files": [
+    {
+      "path": "dashboard/app/page.tsx",
+      "bytes": 13344,
+      "sha256": "c24cf82dcd4277a5c22f17061904b79f057be191a1389b5ab8721a4418e536e5"
+    },
+    {
+      "path": "dashboard/app/landing.module.css",
+      "bytes": 11026,
+      "sha256": "278a1b66de6a22debd570141a51e7a7d4c78c8b8ddccb1d656b1c65b87e85503"
+    },
+    {
+      "path": "dashboard/app/landing-journey-state.ts",
+      "bytes": 8349,
+      "sha256": "944818c3ec5ada3a4d0c088b06582062655371c2fcc5b2a6a71f816e31ee0c25"
+    },
+    {
+      "path": "dashboard/app/workspace/page.tsx",
+      "bytes": 60346,
+      "sha256": "f5abcae9e4ad19f1a30315d905c0c3255d2a1ce14d6c81f7fd5adfa22a13ee8d"
+    },
+    {
+      "path": "dashboard/app/globals.css",
+      "bytes": 56551,
+      "sha256": "45acafee1276430e161a29efb6cd4c587f63a474bb0dd0fedd2f8ff307fb0c0c"
+    },
+    {
+      "path": "dashboard/app/components/landing-globe.tsx",
+      "bytes": 6665,
+      "sha256": "02b46499df5f371591705108f9672929d15679dbbcf22c9b06acdd2d023f7dc3"
+    },
+    {
+      "path": "dashboard/app/components/globe-state.ts",
+      "bytes": 8979,
+      "sha256": "0eec3034f2e3b350172a3f56f989850bcf8a9053b2aa828aae52328e524ee67a"
+    },
+    {
+      "path": "dashboard/app/components/atomic-globe-runtime.mjs",
+      "bytes": 51618,
+      "sha256": "7b32d75ad3f8e5d73746f68da165deb0518dc2dcdb3478652694593ca3e5f7d4"
+    },
+    {
+      "path": "dashboard/app/components/glyph-trail.tsx",
+      "bytes": 8942,
+      "sha256": "77aa819fc5557d1e051e910e96fd77763cadcc5577e69526bd18ab2c527e2ab2"
+    },
+    {
+      "path": "dashboard/app/components/glyph-trail-state.ts",
+      "bytes": 11725,
+      "sha256": "78b44d8b00dade89da8bc96e99049d1a6734cc3506de8d1a854a8c0493942db8"
+    },
+    {
+      "path": "dashboard/app/components/ocean-prevention.tsx",
+      "bytes": 25621,
+      "sha256": "c5afc5eaa5ae87cd2cb10ea96a3090019dcf5f57e758e8d70a4d7e458b7954cd"
+    },
+    {
+      "path": "dashboard/app/components/ocean-prevention.module.css",
+      "bytes": 5226,
+      "sha256": "4f3b85c99d3c2c8d57f05f889eb0cddea08898c85c8c0fb67a70eb4a8fd1b1f4"
+    },
+    {
+      "path": "dashboard/app/components/prevention-modes.tsx",
+      "bytes": 1282,
+      "sha256": "23b40ab6f28f4ae52ef2b6ab2ba4dbee5253032cbef86d9bf49d5efecaa7349d"
+    },
+    {
+      "path": "dashboard/app/components/demo-guide.tsx",
+      "bytes": 1498,
+      "sha256": "47c9ce13b812b193d5a4a88a94e268c02cea0d464688367b9d7a255cfbb5a24f"
+    },
+    {
+      "path": "dashboard/app/components/real-data-lab.tsx",
+      "bytes": 11527,
+      "sha256": "1b8bc68de691c16f6be676f70044bf57541a092152398bbe2296ccaa67e47485"
+    },
+    {
+      "path": "dashboard/public/nemo-ocean-depth.mp4",
+      "bytes": 1570806,
+      "sha256": "c2376dcc0da812eaa6108d48d7b07d2893166abbc89f45b640d6ee31c5710b87"
+    },
+    {
+      "path": "dashboard/public/nemo-ocean-depth-poster.jpg",
+      "bytes": 67698,
+      "sha256": "4bf863f1b3a74da864e1971777e28f8461885be94be85ead7d815810bc8f1d8a"
+    }
+  ]
+}

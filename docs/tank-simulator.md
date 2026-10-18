@@ -316,11 +316,15 @@ released/recovered/outcome accounting. True paired trajectory errors additionall
 require a validated release anchor and reliable identity through the observation.
 No 3D rendering can replace those measurements.
 
-The separate matched-current NOAA/HYCOM research infrastructure does not validate
-this tank scene. Its
-[matched-current study](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/blob/main/docs/matched-current-study-plan.md)
-remains DRAFT, not a frozen/acquired/scored experiment. Synthetic reader/evaluator
-tests are software-contract checks, not new scientific outcomes.
+The separate matched-current NOAA/HYCOM research does not validate this tank
+scene. Its [original design](matched-current-study-plan.md) is historical;
+the preserved [v1 attempt](matched-current-results.md) scored **0/36** cells after
+compatibility failures. The separately frozen [v2 study](matched-current-v2-results.md)
+acquired its planned inputs and scored **36/36** cells across two buoy groups.
+Current-only RK4 had larger mean errors than last observed drift on that small
+retrospective sample. Those are processed ocean-buoy results, not observed tank
+paths, plastic forecast skill or measured interception benefit. Synthetic
+reader/evaluator tests remain software-contract checks.
 
 This guide contains no shared-chat transcript, private contribution quotations,
 credentials, contacts, camera frames or raw physical recordings. Provider,

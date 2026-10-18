@@ -1,0 +1,79 @@
+{
+  "kind": "local_landing_presentation_verification",
+  "date": "2026-10-17",
+  "released_commit": null,
+  "hosted_ci_for_this_change": null,
+  "frontend_tests": {
+    "passed": 237,
+    "failed": 0,
+    "log": "work/tideward-ocean-landing-frontend.log"
+  },
+  "isolated_production_build": {
+    "exit_code": 0,
+    "log": "work/tideward-ocean-landing-build.log"
+  },
+  "browser_checks": [
+    "desktop 1274x748 and narrow 335x647 visual layouts",
+    "explicit keyboard Start journey focuses the revealed /demo anchor",
+    "chapter 2/3/4/5 anchors and current-step/progress updates",
+    "muted generated video decoded 1920x1080 duration10.041667,readyState4,no media error",
+    "Pause motion pauses the native video; Resume available",
+    "native narration start confirmed by browser onstart state in in-app browser",
+    "chapter navigation cancels narration",
+    "captions expand/collapse with full script",
+    "landing Open workspace navigates to existing Overview; workspace home returns to landing"
+  ],
+  "limitations": [
+    "No assertion that all twelve reference sections or every frame were inspected",
+    "Chrome background voice was not consistently active; voice availability remains browser dependent",
+    "No new real-data model score, physical tank test, provider or Photon test follows from presentation checks"
+  ],
+  "scientific_data_changed": false,
+  "source_files": [
+    {
+      "path": "dashboard/app/page.tsx",
+      "bytes": 13513,
+      "sha256": "f260b5a4319132006cd3fa134a124586369ed863be2f09061ae2d90b1eab0152"
+    },
+    {
+      "path": "dashboard/app/landing.module.css",
+      "bytes": 19156,
+      "sha256": "fa54c2fd3bdc3967a393fbfc6d2a182ecfee2dc163f3aa8f2a20a7a47eb4806c"
+    },
+    {
+      "path": "dashboard/app/landing-journey-state.ts",
+      "bytes": 6956,
+      "sha256": "9c7a59be9dcfb93b778da8d720970b3f7e14fb0f5e9c5f8651e8f74097c3e021"
+    },
+    {
+      "path": "dashboard/tests/landing-journey.test.mjs",
+      "bytes": 12617,
+      "sha256": "b7168ef0636cb90a4c7cc8234903db4fc4b92399d85c5c9d2a29fa71002c9cd8"
+    },
+    {
+      "path": "dashboard/public/tideward-ocean-journey.mp4",
+      "bytes": 5790083,
+      "sha256": "174b5f73cbc734d52b17b3d2ce103a60ee7f4bdc1f807cf870f95849ee3c28b5"
+    }
+  ],
+  "trov_publications": [
+    {
+      "artifact": "tideward-start-here-features-and-documentation",
+      "version": 9,
+      "characters_verified": 24216,
+      "readback_exact": true
+    },
+    {
+      "artifact": "tideward-grok-evidence-continuation-matched-current-and-3d-r",
+      "version": 4,
+      "characters_verified": 458143,
+      "readback_exact": true
+    },
+    {
+      "artifact": "tideward-grok-contribution-and-evidence-ledger",
+      "version": 6,
+      "characters_verified": 61775,
+      "readback_exact": true
+    }
+  ]
+}

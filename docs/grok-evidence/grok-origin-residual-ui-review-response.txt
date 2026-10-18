@@ -1,0 +1,60 @@
+Grok
+Worked for 9s
+
+A. Implementation plan and component design.
+
+Add one panel inside the existing collapsed historical-research disclosure, not as a default ocean or tank view. A single OriginResidualPanel component owns the GET state (idle | loading | ready | error) and an optional review state (idle | pending | done | failed). On mount it fetches GET /api/v1/research/origin-residual with cache: 'no-store'; a missing result shows 404, integrity failure 409, and reader unavailable 503, each with an explicit retry and no fixture fallback. The component holds the raw {report, forecasts, artifact_identity} envelope and a pure display projection derived from it.
+
+State helpers:
+
+selectGroup(groupId) returns the matching forecast and score group without mutating the envelope.
+projectSeries(group, modelId) maps forecast cells to {hour, east_m, north_m} using an origin-anchored display frame; cells with null coordinates become gaps and are never interpolated.
+fixedDomain(allSeries) computes the plot bounds from every available point across all four models before any checkbox is applied, so hiding a series does not rescale.
+displacementArrows(series) emits adjacent-endpoint vectors labelled “endpoint displacement,” never “current.”
+validateEnvelope(payload) checks the invariants in B and returns a typed error; it does not recompute ADE/FDE.
+
+Scores and the four-model table are read only from report.scores. Group, hour and checkbox changes update local view state only. The Chalk action posts the exact {question, report_sha256, protocol_sha256, identity_sha256} and aborts on unmount or token change; a late response whose hashes no longer match is discarded.
+
+B. Frontend validation / review identity invariants.
+
+Display-level checks (not byte verification):
+
+artifact_identity.identity_sha256, report_sha256, protocol_sha256 and forecast_file_sha256 match the pinned literals; integrity_verified === true, external_result_pin_verified === true (code trust anchor only), numeric_replay_verified === false, verification_scope === "SAVED_BYTES_AND_LINEAGE_NOT_NUMERIC_REPLAY".
+planned_cell_count === 48, planned_distinct_target_count === 12, scored_cell_count === 48, primary_common_cohort_complete === true, and the four model_ids appear in the fixed order.
+Every score cell has finite error_m when score_status === "SCORED"; null coordinates remain null; no target_status field is required or invented.
+Group IDs, model IDs and hours are not swapped: the candidate at index i matches model_ids[i] and its cells match horizons_s.
+For a given group and hour, target_latitude_deg / target_longitude_deg are identical across the four candidates or all null.
+analysis_scope === "POST_OUTCOME_EXPLORATORY" and previously_viewed_target_outcomes === true; any other flag is a forged-scope rejection.
+A review response is accepted only if its returned hashes equal the loaded snapshot; otherwise it is stale and discarded.
+
+These checks are display guards. Byte-hash verification remains the backend’s responsibility; the browser is not an independent verifier.
+
+C. Ten adversarial tests and acceptance sequence.
+
+Envelope with planned_cell_count: 47 is rejected and shows the integrity error.
+A cell with score_status: "SCORED" and error_m: NaN is rejected.
+Swapped model order (residual listed first) fails the fixed-order check.
+Two candidates for the same hour carry different target_latitude_deg values and are rejected.
+Hiding the residual series leaves the plot domain unchanged.
+A gap (null coordinate) is not bridged by a line segment.
+Changing group does not alter the four ADE/FDE numbers.
+A late GET response arriving after unmount or report-hash change is discarded.
+Chalk POST with a disabled/mocked provider shows the provider-failure state, not a live answer, and does not retry.
+At a 320 px viewport the table and plot remain readable and the research disclosure stays collapsed by default.
+
+Acceptance sequence: open Data Lab → expand historical research → confirm heading and one-sentence scope → verify the four-model table matches the saved macros → select the second group and confirm both series and the unchanged table → toggle each checkbox and confirm the domain is fixed and gaps stay open → hover an arrow and read “endpoint displacement” → trigger Chalk with the provider disabled and confirm the failure state → resize to mobile and confirm the panel remains inside the disclosure.
+
+D. Beginner sentences and next task.
+
+RK4 estimates the next position by sampling the current at the start, middle and end of a short step and combining those samples; it follows whatever field it is given.
+
+
+𝑟
+0
+r
+0
+	​
+
+ is the difference between the last hour’s observed drift and the HYCOM current at the origin, held constant in local east/north metres per second and added to a copy of the field.
+
+Next protocol task: freeze a metadata-only selection rule that draws a new cohort of whole GDP identities, excludes every previously viewed ID and known alias, and locks the same four candidates and six-hour horizon before any future coordinate is requested.

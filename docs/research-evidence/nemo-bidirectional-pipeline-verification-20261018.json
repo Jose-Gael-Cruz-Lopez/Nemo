@@ -1,0 +1,158 @@
+{
+  "kind": "NEMO_BIDIRECTIONAL_PIPELINE_LOCAL_VERIFICATION",
+  "created_at_utc": "2026-10-18T01:44:21.096935+00:00",
+  "source_base_commit": "f239213ea128ef29f74539cae1abb70ea5adfab9",
+  "tested_source_sha256": {
+    "apps/api/reeftrace_api/api/v1/endpoints/ocean_source.py": "03e2c5e14b0496a249a867489d163dad366af551d401d424ad15f4aafd34db49",
+    "apps/api/reeftrace_api/services/ocean_source_investigation.py": "6b69ceab9aa27fd3eda6b4ec6e5093a013e7075be198acb4dfb0662ad714f435",
+    "apps/ocean/reeftrace_ocean/ocean_source_result_identity.py": "280a413a5aea9cded8faabb350bb0929fdd41da6de05267de63ba75c7c14ec5c",
+    "dashboard/app/components/ocean-source.tsx": "bea7d8e3200661aa68cb3c52f2f469d3983c5cff6d38cc66ff337bbd710a8665",
+    "dashboard/app/components/ocean-source-state.ts": "05f4aed7e8b1f622885764d76bfb394196712cfc3818086de195c6f3e5f4d9bf",
+    "dashboard/app/components/ocean-source.module.css": "4de9db4e63b6eb7bcdadfaa50bbbafdbd55a3c7d763c22a98db7528109bb0b66",
+    "dashboard/app/components/source-modes.tsx": "cc0cf145c10d8894384411a10bd27a06435617641a7e81416e232a22f5ae93b6",
+    "dashboard/app/workspace/page.tsx": "b1999f78c678201de71ac89480cf40632309cab5d50e912598734b3bcd760f11",
+    "dashboard/tests/ocean-source.test.mjs": "86fb93f9cafc3d5b085139078aea701c289cb0bd961f5b6f39755b7e096bf064",
+    "tests/integration/test_ocean_source_api.py": "4f53247a3fa9a9389922174726b8c42c187e2717c319410756d9c1836b698517",
+    "tests/unit/test_ocean_source_http_audit.py": "adba2f8712412c33b2b9904a327eba77361f85d1369794cfc9eaac6736adc271",
+    "scripts/e2e_offline.py": "399fbb95db12c66af902af719abbca59d73bd162366fb5a0f40453bcf903a88e"
+  },
+  "checks": {
+    "python": {
+      "passed": 2016,
+      "failed": 0,
+      "scope": "Full strict offline suite in a separate source copy with real shallow Git metadata and no private .env"
+    },
+    "frontend": {
+      "passed": 320,
+      "failed": 0,
+      "skipped": 0
+    },
+    "offline_http": {
+      "summary": {
+        "PASS": 241,
+        "FAIL": 0,
+        "BLOCKED": 6,
+        "software_workflow_passed": true,
+        "expected_external_scopes_blocked": true,
+        "complete_live_product_verified": false,
+        "physical_validation": false,
+        "live_provider_round_trip_verified": false
+      },
+      "side_effect_guards": {
+        "camera_open_attempts": 0,
+        "provider_http_attempts": 0,
+        "photon_send_attempts": 0,
+        "photon_poll_attempts": 0,
+        "origin_residual_execution_attempts": 0,
+        "ocean_source_execution_attempts": 0
+      },
+      "ocean_source_evidence": {
+        "status": "PINNED_OCEAN_SOURCE_READ_ONLY_VERIFIED",
+        "report_sha256": "3d9f0faed305a41b7fa0c85bf3c7c82a3a525b742799fae90e1e6f00906fa474",
+        "protocol_sha256": "1fd45e36997481c2943c3e632952a29cefe0e0b7aea018294071423b7f874831",
+        "identity_sha256": "947ce44bb75f3e52c3f9ec5d59d5efc5303325c316f6924cb230a3c74048eb20",
+        "planned_model_rows": 6,
+        "scenarios_per_group": 25,
+        "pipeline_planned_validation_rows": 8,
+        "pipeline_scored_validation_rows": 8,
+        "pipeline_stage_ids": [
+          "raw",
+          "connected",
+          "filtered",
+          "formula",
+          "branches"
+        ],
+        "store_unchanged": true,
+        "artifacts_unchanged": true,
+        "numeric_replay_verified": false,
+        "live_model_response": false
+      }
+    },
+    "ruff": "PASS",
+    "eslint": "PASS",
+    "typescript": "PASS",
+    "isolated_production_build": "PASS",
+    "additional_guard_file_after_full_suite": {
+      "passed": 11,
+      "failed": 0,
+      "scope": "Includes the newly added fail-fast callable wiring regression; overlaps ten full-suite tests and is not eleven additional independent tests."
+    }
+  },
+  "browser": {
+    "actual_cua_interactions": true,
+    "both_gdp_groups": true,
+    "five_manual_stages": true,
+    "one_pass_playback_completed": true,
+    "group_change_resets_stage_and_hides_validation": true,
+    "saved_time_scrubber_home_end_and_five_minute_keyboard_step": true,
+    "layer_toggle_preserves_domain": true,
+    "separate_validation_reveal": true,
+    "mobile_width_px": 320,
+    "mobile_horizontal_overflow": false,
+    "operator_gating": true,
+    "disabled_chalk_result": "STOP_NOT_CONFIGURED",
+    "browser_console_errors_or_warnings": 0,
+    "isolation": {
+      "kind": "DISPOSABLE_BIDIRECTIONAL_PIPELINE_BROWSER_ISOLATION",
+      "guards": {
+        "camera_open_attempts": 0,
+        "provider_http_attempts": 0,
+        "photon_send_attempts": 0,
+        "photon_poll_attempts": 0,
+        "origin_residual_execution_attempts": 0,
+        "ocean_source_execution_attempts": 0
+      },
+      "guards_clean": true,
+      "store_unchanged": true,
+      "owned_children_reaped": true,
+      "duration_s": 335.966,
+      "live_api_restarted": false,
+      "source_rewrite_changed": false,
+      "camera_or_provider_or_photon_use": false
+    }
+  },
+  "live_runtime": {
+    "api_refreshed_to_load_new_route": true,
+    "normal_dashboard_port": 3000,
+    "new_route_loaded_in_browser": true,
+    "private_settings_unchanged": true,
+    "existing_photon_setting_preserved": true,
+    "explicit_test_messages_initiated": 0,
+    "new_live_chalk_test_requests": 0,
+    "xai_api_calls": 0,
+    "billing_changes": 0
+  },
+  "prior_verification_environment_issue": {
+    "first_python_attempt_passed": 2015,
+    "first_python_attempt_failed": 1,
+    "cause": "Disposable source copy omitted Git metadata; an existing pinned reader requires git rev-parse HEAD.",
+    "resolution": "Added a shallow copy of the real local Git HEAD; no frozen method, fixture or score changed. Reran full suite and HTTP."
+  },
+  "saved_scientific_result": {
+    "study_id": "ocean-source-gdp-hycom-15m-v1",
+    "analysis_scope": "POST_OUTCOME_EXPLORATORY",
+    "tutorial_validation_scored": 8,
+    "tutorial_validation_planned": 8,
+    "base_reconstruction_scored": 6,
+    "base_reconstruction_planned": 6,
+    "scenarios_per_group": 25,
+    "physical_trials": 0,
+    "source_attribution_validated": false,
+    "numeric_replay_claimed_by_default_reader": false
+  },
+  "grok": {
+    "mode": "Existing project web conversation",
+    "additive_archive_rounds": 18,
+    "full_captures": 36,
+    "api_calls": 0,
+    "static_review_is_execution": false
+  },
+  "log_sha256": {
+    "nemo-pipeline-python-tests.log": "ff96c3b628aa549fddd8a284301e5e4778f5035fc5e5545ff23d03366d65e350",
+    "nemo-pipeline-frontend-tests.log": "6ed5417bdbce2f91e2e17c642a43b69fc12eb01d5c2a1282ef689012120d955e",
+    "nemo-pipeline-production-build.log": "379c58e095fc4c71e79b08d028049a108fe66a584ebd7028431b408a36b4dc32",
+    "nemo-pipeline-offline-http.json": "c720fb84c30492a5f19cbf0ad13b4e94b44a7b52372c522ee212c928d3383c92"
+  },
+  "hosted_ci_scope": "Check the exact resulting commit separately; local checks do not imply hosted success.",
+  "raw_grok_whitespace": "Full captures preserve original whitespace; implementation documentation passes whitespace checks with that verbatim archive excluded."
+}

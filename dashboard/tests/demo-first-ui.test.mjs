@@ -95,7 +95,7 @@ test("Camera puts the live preview before collapsed tank commissioning and advan
 test("Data Lab defaults to one changing-current comparison and keeps historical benchmarks closed", () => {
   const html = render(React.createElement(RealDataLab, { api: "" }));
   const visible = defaultVisible(html);
-  assert.match(visible, /Follow the flow. Compare protection/);
+  assert.match(visible, /<h1>Data Lab<\/h1>/);
   assert.match(visible, /Compare ocean layouts/);
   assert.match(html, /<details class="card"><summary>Research details and historical buoy validation/);
   assert.doesNotMatch(visible, /Load buoy comparison|Load current-driven prediction|Run reference buoy replay|Load fixed Kalman study|Load motion-vector diagnostic/);
