@@ -89,7 +89,7 @@
     "apps/ocean/reeftrace_ocean/ocean_source_pipeline.py": "7842afdc5a0ea9f3715ae34185ef6ec03318c82ce4a530fb9ee2dcf7a24f9b89",
     "scripts/evaluate_ocean_source.py": "10f35545d21070ac1abcff5471a3d6c1a34e9e5eaa0dfe7f64935f537ac93bc0",
     "tests/unit/test_ocean_source.py": "5738989630ee870f60cf41e74a68c8227fc345f2053368a4d0e86747602a4510",
-    "tests/unit/test_ocean_source_pipeline.py": "0f062feadc3315b1ea9a82db69daeb42abe779045aa10c42701eb7183b5b2ebd"
+    "tests/unit/test_ocean_source_pipeline.py": "a44d31c43d4420b47af9551bf19888839a91f0ca58ff0c51b3eb48150344ba07"
   },
   "model_ids": [
     "stationary",
