@@ -41,6 +41,10 @@ Open **Camera** in the local workspace. The live preview and controls appear fir
 
 The [public ocean showcase deployment plan](docs/public-ocean-showcase.md) is a separate read-only view with checked numerical snapshots. It does not expose the local camera, experiment store or provider credentials; deployment status and its public URL must be verified separately.
 
+**Full software-demo hosting:** the [native deployment package](deploy/README.md) runs production Next.js and one private Python API behind the same origin, with a separate demo store and runtime-only Chalk configuration. Its cloud profile disables camera capture, physical rig actions, Photon replies and xAI voice; it does not change the local application's configuration. Durable trials require a persistent local/block volume. Cloudflare Containers require a paid plan and have ephemeral disk by default, so this package alone is not a durable Cloudflare deployment. A temporary Cloudflare Tunnel depends on its host staying running. No hosting URL or completed deployment is implied by these configuration files.
+
+**Live browser checkpoint — 18 October UTC:** the normal local app completed the five observation/filter/model/backward/forward stages on both saved NOAA groups, trajectory toggles and the reserved-position comparison. One explicitly requested bounded Chalk investigation returned `REPORT` with a live-model response and citations matching the frozen ocean-source report and protocol. This adds a live explanation check to the earlier disabled-provider tests; it does not add new drifter data, independent source accuracy, physical tank validation or a hosted-platform test. No additional Photon message or xAI API call was made.
+
 ## Three-part software demo
 
 Start in **Overview**, choose **Start software demo**, and follow **Follow the evidence**. The [click-by-click runbook](docs/integrated-team-demo.txt) covers the longer presentation.

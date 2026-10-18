@@ -1,0 +1,27 @@
+# Free software demo only. Render Free disk resets on sleep/restart/redeploy.
+# No paid disk, database, worker, preview or provider resource is provisioned.
+services:
+  - type: web
+    name: nemo-software-demo
+    runtime: docker
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health
+    autoDeployTrigger: "off"
+    envVars:
+      - key: REEFTRACE_LOCAL_TOKEN
+        generateValue: true
+      - key: REEFTRACE_DATA_DIR
+        value: /data/nemo
+      - key: CHALK_ENABLED
+        value: "false"
+      - key: PHOTON_ENABLED
+        value: "false"
+      - key: GROK_VOICE_ENABLED
+        value: "false"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
+      - key: OMP_NUM_THREADS
+        value: "1"

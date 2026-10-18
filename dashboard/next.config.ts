@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const publicShowcase = process.env.TIDEWARD_PUBLIC_SHOWCASE === "true";
 
 const nextConfig: NextConfig = {
+  // Emit the minimal production server; runtime does not compile this TS config.
+  output: "standalone",
   // The local UI talks to one origin. Operator authorization still belongs to
   // FastAPI, and provider keys are never made available to the Next client.
   experimental: { proxyTimeout: 120_000 },

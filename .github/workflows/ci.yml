@@ -52,7 +52,9 @@ jobs:
       - name: Require optional test SDKs and local NetCDF support
         run: python -c "import chalkcompute, netCDF4, photon_api, pyarrow, xarray"
       - name: Lint Python
-        run: python -m ruff check apps adapters scripts tests
+        run: python -m ruff check apps adapters scripts tests deploy
+      - name: Verify deployment isolation and process shutdown
+        run: python -m unittest discover -s deploy -p 'test_*.py' -v
       - name: Run the full offline Python suite
         env:
           REEFTRACE_DATA_DIR: ${{ runner.temp }}/reeftrace-ci-data
