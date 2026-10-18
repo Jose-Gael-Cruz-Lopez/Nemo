@@ -1,0 +1,138 @@
+{
+  "active_api_and_photon_worker_restarted": false,
+  "api_http_focused_subset": {
+    "passed": 74,
+    "skipped": 0
+  },
+  "browser": {
+    "chalkDisabledStop": true,
+    "console": [],
+    "finishedAt": "2026-10-18T01:42:30.809Z",
+    "fixedAxesOnToggle": true,
+    "mobile": {
+      "scrollWidth": 390,
+      "width": 390
+    },
+    "scrubStart": "0",
+    "secondGroupResetsStage": true,
+    "sensitivity": {
+      "firstGroupTable": "Selected group \u00b7 stored six-hour earlier-position error\nFixed reconstruction\tStatus\t\nEarlier-position miss\n?\n\nStationary endpoint\tSCORED\t8,121.8 m\nLast observed drift reversed\tSCORED\t1,782.2 m\nChanging-current reverse trajectory\tSCORED\t7,548.1 m",
+      "lookbackDoesNotChangeScore": true,
+      "secondGroupTable": "Selected group \u00b7 stored six-hour earlier-position error\nFixed reconstruction\tStatus\t\nEarlier-position miss\n?\n\nStationary endpoint\tSCORED\t4,016.9 m\nLast observed drift reversed\tSCORED\t2,613.3 m\nChanging-current reverse trajectory\tSCORED\t9,845.6 m"
+    },
+    "startedAt": "2026-10-18T01:41:19.984Z",
+    "steps": [
+      {
+        "label": "1 Plot the observations",
+        "status": true,
+        "step": 1
+      },
+      {
+        "label": "2 Connect the positions",
+        "status": true,
+        "step": 2
+      },
+      {
+        "label": "3 Filter the motion",
+        "status": true,
+        "step": 3
+      },
+      {
+        "label": "4 Apply the model",
+        "status": true,
+        "step": 4
+      },
+      {
+        "label": "5 Trace back and project ahead",
+        "status": true,
+        "step": 5
+      }
+    ],
+    "url": "http://127.0.0.1:38218/workspace#investigations"
+  },
+  "browser_guard_counters": {
+    "camera_open_attempts": 0,
+    "ocean_source_execution_attempts": 0,
+    "origin_residual_execution_attempts": 0,
+    "photon_poll_attempts": 0,
+    "photon_send_attempts": 0,
+    "provider_http_attempts": 0
+  },
+  "camera_opened": false,
+  "created_at_utc": "2026-10-18T01:43:37.022624+00:00",
+  "eslint": "PASS",
+  "frontend": {
+    "failed": 0,
+    "ocean_source_subset": 21,
+    "passed": 320,
+    "skipped": 0
+  },
+  "hosted_ci": "not claimed by this local receipt; inspect the final pushed commit separately",
+  "live_provider_calls": 0,
+  "new_photon_messages": 0,
+  "no_new_first_score_or_artifact_rewrite_in_verification": true,
+  "offline_http": {
+    "blocked": 6,
+    "failed": 0,
+    "guard_counters": {
+      "camera_open_attempts": 0,
+      "ocean_source_execution_attempts": 0,
+      "origin_residual_execution_attempts": 0,
+      "photon_poll_attempts": 0,
+      "photon_send_attempts": 0,
+      "provider_http_attempts": 0
+    },
+    "passed": 241
+  },
+  "physical_trials": 0,
+  "pip_check": "PASS",
+  "production_build": {
+    "active_dev_build_untouched": true,
+    "isolated_copy": true,
+    "status": "PASS",
+    "test_only_config_changes": [
+      "loopback API proxy port",
+      "Turbopack common root for linked installed dependencies"
+    ]
+  },
+  "python": {
+    "failed": 0,
+    "passed": 2017,
+    "seconds": 232.21,
+    "warning": "existing Starlette/httpx TestClient deprecation",
+    "warnings": 1
+  },
+  "ruff": "PASS",
+  "saved_artifact_identity": {
+    "externally_trusted_pin_required_for_publication": true,
+    "forecast_file_sha256": "a5ec302012b9d2b1f5c5772162c215334134ec75b75558ef39d5e3f6b1326993",
+    "kind": "OCEAN_SOURCE_RESULT_IDENTITY",
+    "pipeline_forecast_file_sha256": "357426821c85280616cec738f08e8a6b9f52088936c358f863a2c6e5f5ae04b8",
+    "protocol_sha256": "1fd45e36997481c2943c3e632952a29cefe0e0b7aea018294071423b7f874831",
+    "report_sha256": "3d9f0faed305a41b7fa0c85bf3c7c82a3a525b742799fae90e1e6f00906fa474",
+    "schema_version": 1,
+    "study_id": "ocean-source-gdp-hycom-15m-v1"
+  },
+  "schema_version": 1,
+  "scientific_distance_check": {
+    "maximum_absolute_difference_m": 1.14e-09,
+    "rows": 14,
+    "scope": "independent scalar haversine check of saved predicted/observed coordinates, not trajectory replay"
+  },
+  "scope": "Local software verification of saved ocean-source and bidirectional walkthrough results; no new scoring or physical validation",
+  "source_checkpoint": "f239213",
+  "tested_source_sha256": {
+    "apps/api/reeftrace_api/api/v1/endpoints/ocean_source.py": "03e2c5e14b0496a249a867489d163dad366af551d401d424ad15f4aafd34db49",
+    "apps/api/reeftrace_api/services/ocean_source_investigation.py": "6b69ceab9aa27fd3eda6b4ec6e5093a013e7075be198acb4dfb0662ad714f435",
+    "apps/ocean/reeftrace_ocean/ocean_source.py": "78e87afb81e49c2d78dd79edb73cf69a242c6542f893d131d70a3286f9b12425",
+    "apps/ocean/reeftrace_ocean/ocean_source_pipeline.py": "7842afdc5a0ea9f3715ae34185ef6ec03318c82ce4a530fb9ee2dcf7a24f9b89",
+    "dashboard/app/components/ocean-source-state.ts": "05f4aed7e8b1f622885764d76bfb394196712cfc3818086de195c6f3e5f4d9bf",
+    "dashboard/app/components/ocean-source.tsx": "bea7d8e3200661aa68cb3c52f2f469d3983c5cff6d38cc66ff337bbd710a8665",
+    "dashboard/app/components/source-modes.tsx": "cc0cf145c10d8894384411a10bd27a06435617641a7e81416e232a22f5ae93b6",
+    "dashboard/app/workspace/page.tsx": "b1999f78c678201de71ac89480cf40632309cab5d50e912598734b3bcd760f11",
+    "scripts/e2e_offline.py": "399fbb95db12c66af902af719abbca59d73bd162366fb5a0f40453bcf903a88e",
+    "scripts/evaluate_ocean_source.py": "10f35545d21070ac1abcff5471a3d6c1a34e9e5eaa0dfe7f64935f537ac93bc0",
+    "tests/unit/test_ocean_source_http_audit.py": "adba2f8712412c33b2b9904a327eba77361f85d1369794cfc9eaac6736adc271"
+  },
+  "typescript": "PASS"
+}

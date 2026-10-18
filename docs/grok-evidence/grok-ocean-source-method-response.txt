@@ -1,0 +1,87 @@
+Grok
+Worked for 12s
+
+A. Time reversal.
+
+Yes, for this deterministic, divergence-free-in-the-interpolant setting: if the forward equation is 
+𝑑
+𝑋
+/
+𝑑
+𝑡
+=
+𝑢
+(
+𝑋
+,
+𝑡
+)
+dX/dt=u(X,t), the backward equation in increasing look-back age 
+𝜏
+τ is
+
+𝑑
+𝑋
+𝑑
+𝜏
+=
+−
+𝑢
+(
+𝑋
+,
+𝑡
+obs
+−
+𝜏
+)
+.
+dτ
+dX
+	​
+
+=−u(X,t
+obs
+	​
+
+−τ).
+
+The field must be sampled at the earlier time and the velocity negated. Negating only the velocity at 
+𝑡
+obs
+t
+obs
+	​
+
+ is incorrect whenever 
+𝑢
+u changes with time. Irreversibilities that invalidate a naive extension include: masked or out-of-support cells (the path simply stops), any unmodelled diffusion or windage, beaching/retention, and the fact that the interpolant is not the true ocean. Numerical round-trip error is not physical reversibility.
+
+B. Smallest honest v1.
+
+Implement the backward sensitivity envelope alone. Source-region meaning: the set of earlier positions reached by the negated, time-reversed field under a fixed list of observation perturbations and constant local current-bias scenarios, at declared look-back ages. Perturbations and biases are method assumptions, not calibrated probabilities. Release-time window is an explicit assumption, not inferred from the first buoy fix. Every planned path stays in the denominator; missing or masked paths remain missing and are never bridged by a convex hull. If no supported path reaches a declared age, the result is Unknown/unsupported. No bandwidth is fitted and no coverage percentage is claimed.
+
+C. Retrospective evaluation.
+
+Hide all positions before the final observation from the inference inputs. Use both pre-declared GDP groups with no replacement. Compare three backward candidates—stationary, last-drift reversed, and current-field reversed—on the same look-back ages. Retain every planned cell on mask, domain or time failure. Report numerical round-trip residual (forward re-integration of the recovered point) separately from the actual distance to the withheld earlier buoy position. Label the exercise previously-viewed buoy-location recovery, not independent pollutant-source attribution.
+
+D. Tests and acceptance sequence.
+
+Analytic time-varying field: negating velocity without reversing time fails the exact integral; the wrapped field passes.
+Zero residual bias reproduces the pure reversed track.
+Masked cell at an intermediate age stops with the existing reason and leaves later ages null.
+Out-of-support sample returns OUTSIDE_CURRENT_DOMAIN and retains the last supported point.
+All-masked field yields UNSUPPORTED and zero available ages.
+Mutating the withheld earlier truth after the forecast hash is stored does not change the hash.
+Duplicate or non-monotonic observation times are rejected before any integration.
+A late GET response whose report hash no longer matches the loaded snapshot is discarded.
+Chalk POST with a disabled provider returns the provider-failure state and does not retry.
+At 320 px the plot and coverage counts remain readable and no truth marker appears until the explicit reveal control is used.
+
+Acceptance: open Investigations → Ocean source research → load the saved study → select both GDP examples → confirm the envelope and coverage counts with truth hidden → reveal truth and confirm the miss distance appears separately from the round-trip residual → toggle scenarios and confirm the denominator is unchanged → trigger Chalk with the provider off and confirm failure.
+
+E. Next step and corrections.
+
+Next incremental step: a separately named forward-ensemble prototype that seeds a pre-declared grid of candidate release cells and ages with the existing RK4, scores them against the observed track under a fixed positional kernel, and normalizes only as conditional compatibility; Unknown remains the result when support is insufficient.
+
+Corrections: the proposal does not implement BAKTRAK’s iterative search, does not install OpenDrift, and cannot claim a unique polluter or calibrated uncertainty from the backward envelope alone. Do not tune perturbations after seeing the withheld positions.

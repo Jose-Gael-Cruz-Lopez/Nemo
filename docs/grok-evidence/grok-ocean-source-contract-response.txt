@@ -1,0 +1,79 @@
+Grok
+Worked for 10s
+
+1. Corrected reversal mathematics.
+
+The forward equation is 
+𝑑
+𝑋
+/
+𝑑
+𝑡
+=
+𝑢
+(
+𝑋
+,
+𝑡
+)
+dX/dt=u(X,t). In increasing look-back age 
+𝜏
+τ the deterministic reversal is
+
+𝑑
+𝑋
+𝑑
+𝜏
+=
+−
+𝑢
+(
+𝑋
+,
+𝑡
+obs
+−
+𝜏
+)
+.
+dτ
+dX
+	​
+
+=−u(X,t
+obs
+	​
+
+−τ).
+
+The derived field stores times in increasing pseudo-time, reverses the original time order, and negates both velocity components; masks and axes are copied, not altered. No divergence-free assumption is required or claimed. Output elapsed ages map back to descending actual UTC by 
+𝑡
+=
+𝑡
+obs
+−
+𝜏
+t=t
+obs
+	​
+
+−τ.
+
+2. Flaws and firewall checks.
+
+No material flaw in the 25-scenario transformation: the five endpoint offsets and five constant biases are fixed method assumptions, not a distribution, and every scenario remains in the denominator. Release-time meaning is correctly limited to declared look-back ages; the first buoy fix is not treated as a release label. The truth firewall is intact provided the 05Z fix is the only earlier context admitted and the 00Z position is decoded only after the forecast hash is read back; an origin residual computed from 00Z would leak and is correctly forbidden. The comparison set (stationary, last-drift backward from 05/06Z, current backward) is consistent. One residual caution: a small forward-closure residual with a large miss to the withheld 00Z position is a valid negative outcome and must not be re-labelled as a hiding failure.
+
+3. Six hostile tests.
+
+Analytic time-varying field: negating velocity without reversing time fails the exact integral; the wrapped field passes.
+Last-drift backward uses only the 05Z and 06Z fixes; mutating any earlier context row does not change the forecast hash.
+A masked intermediate age stops that scenario with null later ages and retains all 25 paths in the denominator.
+An all-unsupported envelope returns Unknown and zero available ages.
+Mutating the withheld 00Z coordinates after forecast read-back does not alter the stored hash.
+A nominal path with sub-metre closure but multi-kilometre 00Z miss is scored as a large reconstruction error, not discarded.
+
+4. Beginner explanation and next task.
+
+Backward integration asks “where could the object have been earlier if it simply followed the recorded current in reverse,” by sampling the field at the earlier time and flipping the velocity; it does not prove that place was the release.
+
+Next task: freeze a separately named forward-candidate protocol that declares a grid of release cells and ages, excludes every previously viewed ID, and locks the scoring kernel before any new earlier position is requested.

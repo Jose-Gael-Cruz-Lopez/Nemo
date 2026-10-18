@@ -8424,3 +8424,603 @@ Name it separately (for example forward-ensemble-origin-v0). Candidate regions a
   "total_grok_rounds_in_continuation": 14
 }
 ```
+
+
+---
+
+## Actual Grok web round 15: Deterministic backward tracing and the limits of source attribution
+
+Accepted: reverse the velocity AND actual time, preserve missing support, use a bounded sensitivity envelope and distinguish numerical closure from observed earlier-position error. Corrections: the response incorrectly calls the interpolant divergence-free; no such property is established, and deterministic ODE reversal does not require it. The last-drift baseline requires the permitted penultimate05Z fix, so “hide every position before the final observation” is too broad. The first recorded buoy position is not verified pollution-release truth. This review is static advice before the new method's score, not code execution or validation.
+
+### Round 15 — prompt
+
+Source: `docs/grok-evidence/grok-ocean-source-method-prompt.txt`; 5,510 bytes; SHA-256 `e2efea005adfd2e3e3fc98ddfe0f844cd7ded6ce340abd2f28fb6ae42ef9d73d`.
+
+```text
+Continue ONLY this existing Nemo/ReefTrace project and conversation. Repository https://github.com/Jose-Gael-Cruz-Lopez/reeftrace current main af168001b844be0843f29ea160db7dc8a5b24a27. This is an actual STATIC Grok web design review, not execution or API usage. Do not claim you ran code, read files not pasted, acquired data, validated a pollutant origin or qualified a sponsor track.
+
+User keeps SOURCE TRACING as the core and asks whether we can reverse the existing forward movement forecast to infer geographic origins, show source regions and uncertainty, and validate. We will implement a small additive ocean-source research prototype, not promise an anywhere-in-the-ocean exact-origin system. The existing tank source estimator and pinned forward RK4/method files must remain byte unchanged.
+
+Existing geographic forward solver: dX/dt = u(X,t), WGS84 metre/degree derivatives, bilinear spatial/linear temporal interpolation, knot-aligned classical RK4, max300s step and6h horizon, support/mask/time stops, no extrapolation. No explicit diffusion/objectwindage/beaching/retention/barrierhydrodynamics. Real acquired fields: PacIOOS Hawaii 0.25m,3knots Oct17 2026 18/21Z-Oct18 00Z, nominal4km; HYCOM GOFS3.1 expt93.0 at15m June1 2022 00/03/06Z. Two matched GDP groups have31rows May31 00Z-Jun1 06Z. Their previous forward/residual outcomes are already viewed. A new earlier-position reconstruction using final observation at06Z and evaluator-only position at00Z would be retrospective/previously-viewed buoy-location recovery, NOT independent pollutant-release attribution. Truth must remain outside inference inputs.
+
+Core proposed method to critique BEFORE we implement:
+1. Negative-time deterministic backtrack correctly samples the historical field at t_obs-tau AND negates velocity in the increasing-tau equation; merely negating today's velocity is wrong. Can wrap the immutable solver with a new OceanField whose times are increasing pseudo-times, original u/v reversed in time and negated, preserving masks; map output back to descending actual UTC.
+2. Use bounded observation perturbations and declared constant current-bias scenarios to generate an earlier-position sensitivity envelope at declared lookback ages. Fixed perturbations are method assumptions, not calibrated stochastic probabilities. Missing paths remain missing in denominator; no convex hull bridge across unsupported masks. Show individual candidate points/path bounds and exact coverage, no claiming a90% confidence region.
+3. Forward-check selected earlier hypotheses under the SAME scenario using unchanged RK4. Small return residual proves numerical consistency only, not physical/source accuracy. We must label it separately from actual observed earlier-position error.
+4. For source-region inference beyond a path, a separately declared grid of candidate release cells/ages can be simulated FORWARD, scored against available observed positions using fixed positional bandwidth/prior, then normalized as conditional compatibility. A backward path is a proposal mechanism, not a unique identified polluter. Endpoint-only same-model roundtrips cannot establish superiority of the centered candidate or universally distinguish sources.
+5. Initial release-age window is an explicit assumption, not inferred from the first observed buoy fix. Current data/time/depth limits make 'anywhere' unsupported, not a reason to fabricate a location.
+
+We want a simple feature in Investigations: Tank source / Ocean source research. Load one saved retrospective study; choose two GDP examples; one equal-metre plot with observed endpoint, earlier candidate regions/path ensemble and withheld earlier truth revealed separately for validation; toggles; concise source region/time assumption, support coverage, numerical roundtrip and REAL prior-position miss. Public read-only fixed artifact route; operator-only bounded Chalk explanation with exact identities; no hardware/messaging/scientific execution on GET. Preserve existing results. API keys/credit use remain off.
+
+Please return exactly five concise sections:
+A. Is exact time reversal mathematically legitimate here? Show the equation with proper time arguments, and list irreversibilities that would invalidate a naive extension.
+B. Choose the smallest honest implementable v1: backward sensitivity envelope alone, forward candidate grid, or both. Specify source-region meaning, observation/current perturbations, release-time assumptions, support/denominator and Unknown/unsupported behavior. No invented empirically justified bandwidth or guaranteed uncertainty coverage.
+C. Define a retrospective evaluation that hides earlier buoy positions from inference, uses all2 predeclared groups without replacement, compares stationary/last-drift-backward/current-backward, preserves failures and separates numerical roundtrip from actual reconstruction error. It cannot claim new-to-project/independent or pollutant-source ground truth.
+D. Ten adversarial mathematical/software tests plus an end-to-end browser/API/Chalk acceptance sequence. Include a time-varying analytic field that catches negating without reversing time, mask/time/domain failures, truth mutation invariance and stale report identities.
+E. Give a clear incremental next step toward forward-ensemble geographic attribution and real known-source validation. Correct any overclaim in this proposal. Do not silently tune after results, invent p-values/confidence/sourceaccuracy or call frameworks installed if not.
+```
+
+### Round 15 — response
+
+Source: `docs/grok-evidence/grok-ocean-source-method-response.txt`; 4,132 bytes; SHA-256 `d734c18c6f4e3977ecbc3186ec18ef6ed763d85ba8449b028d614684633f2c41`.
+
+```text
+Grok
+Worked for 12s
+
+A. Time reversal.
+
+Yes, for this deterministic, divergence-free-in-the-interpolant setting: if the forward equation is 
+𝑑
+𝑋
+/
+𝑑
+𝑡
+=
+𝑢
+(
+𝑋
+,
+𝑡
+)
+dX/dt=u(X,t), the backward equation in increasing look-back age 
+𝜏
+τ is
+
+𝑑
+𝑋
+𝑑
+𝜏
+=
+−
+𝑢
+(
+𝑋
+,
+𝑡
+obs
+−
+𝜏
+)
+.
+dτ
+dX
+	​
+
+=−u(X,t
+obs
+	​
+
+−τ).
+
+The field must be sampled at the earlier time and the velocity negated. Negating only the velocity at 
+𝑡
+obs
+t
+obs
+	​
+
+ is incorrect whenever 
+𝑢
+u changes with time. Irreversibilities that invalidate a naive extension include: masked or out-of-support cells (the path simply stops), any unmodelled diffusion or windage, beaching/retention, and the fact that the interpolant is not the true ocean. Numerical round-trip error is not physical reversibility.
+
+B. Smallest honest v1.
+
+Implement the backward sensitivity envelope alone. Source-region meaning: the set of earlier positions reached by the negated, time-reversed field under a fixed list of observation perturbations and constant local current-bias scenarios, at declared look-back ages. Perturbations and biases are method assumptions, not calibrated probabilities. Release-time window is an explicit assumption, not inferred from the first buoy fix. Every planned path stays in the denominator; missing or masked paths remain missing and are never bridged by a convex hull. If no supported path reaches a declared age, the result is Unknown/unsupported. No bandwidth is fitted and no coverage percentage is claimed.
+
+C. Retrospective evaluation.
+
+Hide all positions before the final observation from the inference inputs. Use both pre-declared GDP groups with no replacement. Compare three backward candidates—stationary, last-drift reversed, and current-field reversed—on the same look-back ages. Retain every planned cell on mask, domain or time failure. Report numerical round-trip residual (forward re-integration of the recovered point) separately from the actual distance to the withheld earlier buoy position. Label the exercise previously-viewed buoy-location recovery, not independent pollutant-source attribution.
+
+D. Tests and acceptance sequence.
+
+Analytic time-varying field: negating velocity without reversing time fails the exact integral; the wrapped field passes.
+Zero residual bias reproduces the pure reversed track.
+Masked cell at an intermediate age stops with the existing reason and leaves later ages null.
+Out-of-support sample returns OUTSIDE_CURRENT_DOMAIN and retains the last supported point.
+All-masked field yields UNSUPPORTED and zero available ages.
+Mutating the withheld earlier truth after the forecast hash is stored does not change the hash.
+Duplicate or non-monotonic observation times are rejected before any integration.
+A late GET response whose report hash no longer matches the loaded snapshot is discarded.
+Chalk POST with a disabled provider returns the provider-failure state and does not retry.
+At 320 px the plot and coverage counts remain readable and no truth marker appears until the explicit reveal control is used.
+
+Acceptance: open Investigations → Ocean source research → load the saved study → select both GDP examples → confirm the envelope and coverage counts with truth hidden → reveal truth and confirm the miss distance appears separately from the round-trip residual → toggle scenarios and confirm the denominator is unchanged → trigger Chalk with the provider off and confirm failure.
+
+E. Next step and corrections.
+
+Next incremental step: a separately named forward-ensemble prototype that seeds a pre-declared grid of candidate release cells and ages with the existing RK4, scores them against the observed track under a fixed positional kernel, and normalizes only as conditional compatibility; Unknown remains the result when support is insufficient.
+
+Corrections: the proposal does not implement BAKTRAK’s iterative search, does not install OpenDrift, and cannot claim a unique polluter or calibrated uncertainty from the backward envelope alone. Do not tune perturbations after seeing the withheld positions.
+```
+
+
+---
+
+## Actual Grok web round 16: Fixed twenty-five-case earlier-location contract
+
+The follow-up explicitly corrects divergence-free and context claims, locks five endpoint offsets crossed with five constant current biases, separates six planned nominal model/group rows from twenty-five sensitivity paths per group, and retains every failure. Earlier00Z truth is outside base inference. The response is an external model's static assessment; its statement that the firewall is intact remains a condition to verify locally. No full forward candidate-region likelihood search or globally validated pollutant attribution is implemented by this envelope.
+
+### Round 16 — prompt
+
+Source: `docs/grok-evidence/grok-ocean-source-contract-prompt.txt`; 3,299 bytes; SHA-256 `995d5829ef712774dedaad00a608a63d3603fa7bf1f8f516386a25bc6ce60edb`.
+
+```text
+Continue same Nemo project. Static follow-up before the implementation's real-data score. Your previous response is saved verbatim. Two corrections: deterministic local ODE reversal does NOT require a divergence-free interpolant. We have not established that our interpolated currents are divergence free; do not repeat that claim. Also a last-drift backward baseline needs the final TWO permitted observations at05/06Z; hide all earlier targets from inference, not the permitted05Z context. No origin residual from00Z is allowed: that would leak the unknown earlier position.
+
+Selected minimal v1 is BACKWARD SENSITIVITY ENVELOPE ONLY plus nominal forward closure. New files additive, pinned tank/forward RK4 files unchanged. Endpoint06Z and final05Zcontext only, two fixed already-viewedGDPgroups. Hard6hlookback00Z and displayedcandidateages1/3/6h.25methodcases = fiveendpointoffsets(center,+/-100mEast,+/-100mNorth) × fiveconstantcurrentbiases(zero,+/-.05m/sEast,+/-.05m/sNorth). These are predeclared sensitivity settings, not calibrated distributions or confidence coverage. Nominalcase is center+zerobias. Reverse both physicaltime andvelocity througha derivedcopiedOceanField; preserve source arrays/masks. Partialpaths retainall25denominator, unavailableagesnull, noextrapolation/hull. Candidatepoints withsmalltileregionsforvisualization mustnotbeinterpretedasnormalizedsourceprobability or guaranteedphysicalorigin. If allscenariosearlierpointsunsupported, showunsupported/Unknown. Successfulbackwardpaths areconditionalearlierpositions, notuniqueidentifiedrelease.
+
+Forecast bothgroups first, persist canonicalforecastJSON+hash, readback; onlythen decodeevaluator-only00Zearlierpositions andscorestationary,lastdriftbackward,currentbackward. Planned2groups×3nominalmethods=6errorcells; scenario25paths are sensitivityreuses, notindependenttrials. Equal-ID meanearlierpositionerroronlyifallrequiredcellscomplete. Realrecordedearlierpositions areprocessedbuoypositionsalreadyviewed inpreviousstudies, notsourcegroundtruth. Forward nominal00Zrecoveredposition throughSAMEcurrent00→06Z to computeclosure; compareobserved00Ztruthseparately. A tinyclosurealongwithlargeoriginmissisavalidnegativeoutcome, notafailuretohide. No uncertaintycalibration orpollutantaccuracyclaim, no automaticmodelpromotion.
+
+Investigations gets Tank source / Ocean source research tabs. PublicsavedGETonly, explicitLoad, two-group selector, fixedequal-metrescales, scenario/path/candidatecheckboxes, truthmarkerandactualerrortablehiddenuntilShow validation evidence. BoundedoperatorChalkpost exactreport/protocol/identitypins, REPORT/STOPonly, readonlysavedtool, noactuation/acquisition/messages. Disabledproviders/testfailuremustnotlooklikealiveanswer. MainAPI/Photonworkerleftalone; end-to-endtestsusefreshisolatedAPI/storedisabledproviders.
+
+Please give (1) corrected reversal mathematics with no divergence-free requirement, (2) any actual flaw in scenario transformation, release-time meaning, truth firewall or comparisons; (3) six precise hostile testcases; (4) a short beginner explanation, and one next forward-candidate inference task requiring anewdeclaredprotocol. No code execution claims or invented results. All real outcome numbers are still uncomputed for this new method; do not invent them.
+```
+
+### Round 16 — response
+
+Source: `docs/grok-evidence/grok-ocean-source-contract-response.txt`; 2,688 bytes; SHA-256 `dc35b2dc794ff6e66b2713c46cd42a2b519e1dff815b21a52fdc8b9861cd6735`.
+
+```text
+Grok
+Worked for 10s
+
+1. Corrected reversal mathematics.
+
+The forward equation is 
+𝑑
+𝑋
+/
+𝑑
+𝑡
+=
+𝑢
+(
+𝑋
+,
+𝑡
+)
+dX/dt=u(X,t). In increasing look-back age 
+𝜏
+τ the deterministic reversal is
+
+𝑑
+𝑋
+𝑑
+𝜏
+=
+−
+𝑢
+(
+𝑋
+,
+𝑡
+obs
+−
+𝜏
+)
+.
+dτ
+dX
+	​
+
+=−u(X,t
+obs
+	​
+
+−τ).
+
+The derived field stores times in increasing pseudo-time, reverses the original time order, and negates both velocity components; masks and axes are copied, not altered. No divergence-free assumption is required or claimed. Output elapsed ages map back to descending actual UTC by 
+𝑡
+=
+𝑡
+obs
+−
+𝜏
+t=t
+obs
+	​
+
+−τ.
+
+2. Flaws and firewall checks.
+
+No material flaw in the 25-scenario transformation: the five endpoint offsets and five constant biases are fixed method assumptions, not a distribution, and every scenario remains in the denominator. Release-time meaning is correctly limited to declared look-back ages; the first buoy fix is not treated as a release label. The truth firewall is intact provided the 05Z fix is the only earlier context admitted and the 00Z position is decoded only after the forecast hash is read back; an origin residual computed from 00Z would leak and is correctly forbidden. The comparison set (stationary, last-drift backward from 05/06Z, current backward) is consistent. One residual caution: a small forward-closure residual with a large miss to the withheld 00Z position is a valid negative outcome and must not be re-labelled as a hiding failure.
+
+3. Six hostile tests.
+
+Analytic time-varying field: negating velocity without reversing time fails the exact integral; the wrapped field passes.
+Last-drift backward uses only the 05Z and 06Z fixes; mutating any earlier context row does not change the forecast hash.
+A masked intermediate age stops that scenario with null later ages and retains all 25 paths in the denominator.
+An all-unsupported envelope returns Unknown and zero available ages.
+Mutating the withheld 00Z coordinates after forecast read-back does not alter the stored hash.
+A nominal path with sub-metre closure but multi-kilometre 00Z miss is scored as a large reconstruction error, not discarded.
+
+4. Beginner explanation and next task.
+
+Backward integration asks “where could the object have been earlier if it simply followed the recorded current in reverse,” by sampling the field at the earlier time and flipping the velocity; it does not prove that place was the release.
+
+Next task: freeze a separately named forward-candidate protocol that declares a grid of release cells and ages, excludes every previously viewed ID, and locks the scoring kernel before any new earlier position is requested.
+```
+
+
+---
+
+## Actual Grok web round 17: Scattered observations through Kalman filtering to both trajectory directions
+
+This actual review follows new user steering: visualize raw points, a connected observed path, a causal Kalman-filtered estimate, the explicit current-plus-offset formula, then backward and forward branches. The new three-fix tutorial uses01/02/03Z and is separate from the frozen longer-prefix Kalman benchmark. It does not train a neural detector or calibrate noise. A03Z offset must be computed once from permitted filtered state and applied to a copied field before both signed-time branches; no00Z truth or future resets. The same05/06 positions are inputs to the separate06Z diagnostic and tutorial validation targets, so root/independent code review requires a separate tutorial forecast persistence/read-back BEFORE base numeric05/06 decoding. A function boundary alone cannot justify a global decoder-order claim. The final implementation and actual tests/results are recorded separately, not attributed to Grok. A possible later rendezvous is not guaranteed capture.
+
+### Round 17 — prompt
+
+Source: `docs/grok-evidence/grok-bidirectional-pipeline-prompt.txt`; 3,047 bytes; SHA-256 `e15315239da17f3060cfc5fbde6aba39454e29f4c21eff01e072dfbc8c047667`.
+
+```text
+Same Nemo/ReefTrace project, actual STATIC review only. New user asks to VISUALIZE each step: rawscatteredpoints→estimatedconnectedtrajectory→Kalmanfilteredtrajectory→mathematicalrule→bothbackwardpossibleorigin andforwardpossibleinterceptionpoint. We are adding this as a separate teaching/research walkthrough alongside the preserved06Z→00Z25scenario diagnostic, not silently changing frozen models.
+
+Proposed new walkthrough uses SAMEtwoalready-viewedGDPgroups+realHYCOM15m. Permittedobservations ONLY June1 2022 01/02/03Z (threeactualhourlyfixes). 00Zearlierposition and04/05/06Zlaterpositions evaluator-only untilbothgroups'forecasts persistandreadback. Localprojectionstarts01Z permittedfix (never00truth). Stage1 draws3actualpoints. Stage2 connectsobservations fordisplay only, no newobservations invented. Stage3 a SEPARATE3fixconstantvelocityKalmanfilter using same[px,py,vx,vy], F/Q/H/R Josephmath, sigma100m/q1e-6; existingfrozenkalmanstudyrequiresmin8 anditsfilemustnotchange. New3fixexample is algebraic research, not proof enough observations or calibratednoise. Filterinitializesatsecondfix02Z using correlatedposition/velocity covariance fromtwofixes, then predicts/corrects03Z; storedfilteredstates arecausal, notRTS smoothing/futureinformation. Stage4 shows dX/dt=u_HYCOM(X,t)+b03, where b03=filtered03velocity - current_at_filtered03position; no learnedcoefficient or neuraltraining. Bias staysconstantlocalEast/North; copyfieldmaskpreserved. Stage5 uses SAMEboundedsigned-timeRK4branches fromfiltered03position:03→00backward and03→06forward, applying b03beforesign/time transformation. Nooffsetcomputedfrom00truth. Past andfuturetruthneverresetpredictedpaths. Anyunsupportedstep retainsgap/reason; noextrapolatepastforcing00..06. Display03anchor,backwardpath,forwardpathand+3hfutureendpoint as conditionalcandidateinterceptionrendezvous (notplannedboomplacementorrealcaptureguarantee). LinkexistingPreventionlayoutfeatureforactualgeometrycomparison, noinventedcollectororreef.
+
+We will render5stepperbuttons and boundedplayback/Next withfixedplotaxes,layers,actualUTC, units, formulas andclearlymeasured/filtered/simulatedlegend. NoCalmannarrowconfidenceclaim, no syntheticdatafallback. Earlier00andfuture04..06truthmarkers/errorsonlyunderexplicitvalidationdisclosure. Bothgroupsalwaysinplanneddenominators, failurecellsretained. Existing06→00benchmarkseparate; usercancomparebidirerrorswithoutpoolingthemwithsourceaccuracy.
+
+Pleaseadversariallyreview: (A) truthfirewallandtime-order, (B) mathematicalfilterinitialization withthreefixes andwhy tosayfilterednotRTSsmoother, (C) exactsamebias handlingforforwardandreverse, (D) eightmeaningfultestsincludingtruthmutationsnoforecastchange,00unavailable,forwardcurrentmasked,twogroupsretained,stage/toggleinvariance, and (E) oneplainlanguageexplanationofwhatcanbesaidaboutpossibleoriginandcandidateinterceptionlocation. Do notinventresults/executions/trainingdata/uncertaintycoverage. Anynewmethodhereispost-outcomeexploratory withno empiricalparameterjustification.
+```
+
+### Round 17 — response
+
+Source: `docs/grok-evidence/grok-bidirectional-pipeline-response.txt`; 3,258 bytes; SHA-256 `3488a52031c82269cf413cfe35c0fc8abb31087f9cb120be3508600b1743eb13`.
+
+```text
+Grok
+
+A. Truth firewall and time order.
+
+Permitted observations are only the three fixes at 01/02/03Z. The 00Z position and the 04/05/06Z positions stay evaluator-only until both groups’ forecasts are persisted and read back. Local projection and all filter/bias calculations start at the 01Z fix; no offset is computed from 00Z. Past and future truth markers appear only under the explicit validation disclosure and never reset a predicted path. Both groups remain in every planned denominator.
+
+B. Three-fix filter initialization.
+
+State is 
+[
+𝑝
+𝑥
+,
+𝑝
+𝑦
+,
+𝑣
+𝑥
+,
+𝑣
+𝑦
+]
+[p
+x
+	​
+
+,p
+y
+	​
+
+,v
+x
+	​
+
+,v
+y
+	​
+
+]. Initialize at 02Z with 
+𝑝
+=
+𝑧
+2
+p=z
+2
+	​
+
+, 
+𝑣
+=
+(
+𝑧
+2
+−
+𝑧
+1
+)
+/
+Δ
+𝑡
+v=(z
+2
+	​
+
+−z
+1
+	​
+
+)/Δt, and the correlated covariance that follows from two independent isotropic position errors (the same construction already used for longer prefixes). Predict/correct only the 03Z measurement. The stored states are causal: each update uses only data up to that time. An RTS smoother would run a backward pass that incorporates the 03Z (and any later) information into the 02Z state; that is not done here. With only three fixes the filter is an algebraic illustration, not evidence that three observations suffice or that 
+𝜎
+=
+100
+ 
+m
+σ=100m, 
+𝑞
+=
+10
+−
+6
+q=10
+−6
+ are calibrated.
+
+C. Same bias for forward and reverse.
+
+Compute 
+𝑏
+03
+b
+03
+	​
+
+ once, at the filtered 03Z position:
+
+𝑏
+03
+=
+𝑣
+filtered
+(
+03
+𝑍
+)
+−
+𝑢
+HYCOM
+(
+𝑋
+filtered
+,
+03
+𝑍
+)
+.
+b
+03
+	​
+
+=v
+filtered
+	​
+
+(03Z)−u
+HYCOM
+	​
+
+(X
+filtered
+	​
+
+,03Z).
+
+Add this constant local east/north vector to a copied field before either integration. The backward branch then applies the existing time-reversal (sample at 
+𝑡
+obs
+−
+𝜏
+t
+obs
+	​
+
+−τ, negate velocity); the forward branch integrates the same biased field without negation. No second bias is estimated from 00Z or from any future fix. Masks are preserved; an unsupported step retains a gap and its reason.
+
+D. Eight tests.
+
+Mutating the 00Z or 04–06Z coordinates after forecast read-back leaves the forecast hash unchanged.
+Removing the 00Z forcing knot yields an unavailable backward age with a null coordinate and the path retained in the denominator.
+Masking the forward current after 03Z stops the forward branch at the last supported hour and leaves later cells null.
+Both groups appear in the planned cell counts even when one group’s field is unavailable.
+Changing stage or toggling a layer does not alter any stored coordinate or score.
+Initializing the filter with a future measurement (simulating an accidental RTS step) changes the 02Z state and is rejected by the causal-state assertion.
+A bias computed from the 00Z position instead of the filtered 03Z position fails the firewall check.
+An all-masked field returns Unknown for both branches and zero available endpoints.
+
+E. Plain-language statement.
+
+The walkthrough shows one possible earlier location consistent with reversing the recorded current plus a constant local bias from the last permitted fix, and one possible later rendezvous consistent with continuing that same biased current; neither is a unique release point nor a guaranteed interception.
+```
+
+### Ocean source review manifest
+
+```json
+{
+  "files": [
+    {
+      "bytes": 5510,
+      "path": "docs/grok-evidence/grok-ocean-source-method-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 15,
+      "sha256": "e2efea005adfd2e3e3fc98ddfe0f844cd7ded6ce340abd2f28fb6ae42ef9d73d"
+    },
+    {
+      "bytes": 4132,
+      "path": "docs/grok-evidence/grok-ocean-source-method-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 15,
+      "sha256": "d734c18c6f4e3977ecbc3186ec18ef6ed763d85ba8449b028d614684633f2c41"
+    },
+    {
+      "bytes": 3299,
+      "path": "docs/grok-evidence/grok-ocean-source-contract-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 16,
+      "sha256": "995d5829ef712774dedaad00a608a63d3603fa7bf1f8f516386a25bc6ce60edb"
+    },
+    {
+      "bytes": 2688,
+      "path": "docs/grok-evidence/grok-ocean-source-contract-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 16,
+      "sha256": "dc35b2dc794ff6e66b2713c46cd42a2b519e1dff815b21a52fdc8b9861cd6735"
+    },
+    {
+      "bytes": 3047,
+      "path": "docs/grok-evidence/grok-bidirectional-pipeline-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 17,
+      "sha256": "e15315239da17f3060cfc5fbde6aba39454e29f4c21eff01e072dfbc8c047667"
+    },
+    {
+      "bytes": 3258,
+      "path": "docs/grok-evidence/grok-bidirectional-pipeline-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 17,
+      "sha256": "3488a52031c82269cf413cfe35c0fc8abb31087f9cb120be3508600b1743eb13"
+    }
+  ],
+  "kind": "ADDITIVE_OCEAN_SOURCE_RESEARCH_GROK_MANIFEST",
+  "live_xai_api_usage": false,
+  "physical_validation": false,
+  "previous_prefix_bytes": 505645,
+  "previous_prefix_sha256": "33cdc05fc9ab9f8bc66900a212d8859bb4eb960f05356d38542883fd48b410a7",
+  "rounds_added": 3,
+  "schema_version": 1,
+  "sponsor_qualification_proven": false,
+  "static_review_not_execution": true,
+  "total_continuation_rounds": 17,
+  "total_full_capture_files": 34
+}
+```
+
+
+## Actual Grok web round 18: Final three-fix trajectory, API and display review
+
+This actual static review was prompted in the same existing Grok web project before the first local score of the new bidirectional walkthrough. It reviews the draft contract, not observed results. The original prompt and response are preserved in full below; their then-current statements about artifacts and unscored results remain historical. Archiving the exchange after implementation does not turn that review into a Grok execution receipt. Exact calculations, tests, browser interaction, commit and CI results require their separate local or hosted evidence.
+
+Accepted review guidance: compute the offset only at the permitted filtered 03:00 state; reverse physical time as well as the sign of the complete biased current; retain causal 02:00 initialization; isolate failures between branches; preserve unsupported/missing outputs and full planned denominators; keep stage, clock and layer controls pure display; stop playback when hidden or unmounted and reset it on group changes; and ensure the read-only GET never builds, scores, acquires data or invokes a provider. The proposed mobile checks are acceptance criteria until supported by a separate browser receipt. The frontend displays four validation rows for the selected group, with eight planned rows across the two groups; the response's wording must not imply eight rows per selected group.
+
+The earlier-position and future-rendezvous labels are accepted only as conditional motion hypotheses. A backward path is not a unique release, a future endpoint is not a collector placement or guaranteed capture, and small forward/reverse closure checks numerical consistency rather than agreement with observed motion. The filter uses earlier/current permitted fixes only; it does not perform an RTS backward smoothing pass or train a neural model.
+
+**Correction to the final validation recommendation:** a new GDP cohort selected without inspecting trajectory outcomes, excluding all previously viewed IDs and known aliases, could evaluate **earlier buoy-position reconstruction** when predictions are frozen before decoding the reserved earlier positions. It would not validate pollution-source attribution. Demonstrating a pollution release source requires source-labelled known-release observations and independent physical evaluation with release identity withheld from the estimator. A tank trial establishes its own tested tank scope; it does not by itself establish geographic ocean-source accuracy. Retention, coastline interaction, uncertain release time and object-specific transport remain relevant missing processes. No unsupported case becomes an accepted source.
+
+No xAI API was used for this round; no credits were spent or paid billing enabled. The exchange does not show that Grok ran code, fetched trajectories, performed a physical experiment, calibrated a probability region or established sponsor qualification. No Chalk request, Photon message, camera capture or actuator action is implied by this documentation addition.
+
+### Round 18 — prompt
+
+```text
+Continue SAME Nemo/ReefTrace project at https://github.com/Jose-Gael-Cruz-Lopez/reeftrace. Actual static Grok WEB review; no API, billing, execution, acquisition, physical experiment or sponsor qualification implied. We are finishing the previously reviewed three-fix bidirectional pipeline before its first local score. Do not invent results.
+
+Existing draft implements: two fixed already-viewed GDP IDs300234066836710 and300534061292930; only June1 2022 01/02/03Z positions admitted to tutorial inference.00/04/05/06Z remain evaluator-only until both group's tutorial forecasts saved+hashed+readback. Source HYCOM GOFS3.1 at15m00/03/06Z. Original source/forward/oldKalman/fresh studies remain untouched.
+
+Stage1 scatter exact3processedobservations, Stage2 connection display(notadditionalmeasurement), Stage3 separate causal Kalman demonstration:01position-only;02twofixcorrelatedcovinit;03predict/correctwithJoseph. No RTS, no neuraltraining, declaredsigma100m andcontinuousaccelerationq1e-6. Stage4 explicitb03=filteredvelocity03-current_at_filteredposition03, copiedfieldu'=u+b03 withpreservedmasks. Stage5 both3hbranchesfromsamefiltered03anchor:forwardu'(X,t);backwarddY/dtau=-u'(Y,03-tau). AllconstantENUassumptionsandupstreamQC/assimilationlimitsdisclosed. Laterobservationsneverresetpaths.
+
+UI has explicitload, twogroupselector, fiveclickablestages, onepassboundedplayback+Next/Previous, fixedequalmetricaxes computedfromallavailablelayers, layercheckboxes, actualUTCbranch-timescrub, formulasandpointstatuses, conditionalpossibleearlierposition andfuture'rendezvous'notguaranteedcollector. Validationmarkers/errorshiddenuntilexplicitreveal. No fallbackdata/noautomaticprovider. ResearchChalk uses exactreport/protocol/identity andoneallowlistedevidence tool; noactuator/messaging/acquisition.
+
+Separate06Zto00Zdiagnosticretains25fixedsensitivitycases/group(endpointoffsetcenter/100mE/W/N/S x currentbias0/0.05m/sE/W/N/S), three6h-earlierpositionbaselinesstationary/lastdriftreverse/currentreverse, completefailuredenominators. No calibratedprobability/regionclaim. Tutorialhas8validationrowsacross2groupsand4dates. Thisispost-outcomeexploratory usingpreviouslyviewedprocessedpositions, notindependentpollutionsourceevidence.
+
+Auditorsarechecking: exceptiononebranchmustnoteraseotherbranch; masks/timeunsupportedpartialmustremain; frontendreportmutations/reason/status/anchorsrejected; stage/time/layerschangesarepuredisplay; replaymuststopontabhidden/unmount andresetongroupchange; backendGETneverexecutesbuilder/scorer/firstscore/provider. ActualresultdoesNOTexistyet; firstscorewillrequirecommittedmethod/protocolandexclusiveartifacts, then literalpinpublishedafterresult. UIwaitingstateuntilthatpinexists.
+
+Return FOUR concise sections:1) concrete mathematical and time-order mistakes to guard against, correcting anybadassumptionabove;2) six high-value numerical/API/frontend checks plus precise mobile/playback acceptance;3) honest one-sentence labelsforpossibleoriginandfutureinterceptioncheckpoint andwhyfilteringisnotRTSsmoothing;4) what would still be necessary for physical or independentgeographicsourcevalidation. Do not request newmodelselection/tune parametersafteroutcome; do not treat small closure error as actualaccuracy; do not falselycallNoSupportedData a fabricated acceptedsource. No claims you executed anything.
+```
+
+### Round 18 — response
+
+```text
+Grok
+
+1. Mathematical and time-order guards.
+
+Do not compute 
+𝑏
+03
+b
+03
+	​
+
+ from any position other than the filtered 03Z state; an offset that touches 00Z or 04–06Z leaks.
+Backward integration must sample the biased field at 
+03
+𝑍
+−
+𝜏
+03Z−τ and negate; negating only the 03Z velocity is wrong on a time-varying field.
+The 02Z state is initialized from the 01Z–02Z pair only; a later correction that rewrites 02Z is an accidental RTS step and must be rejected.
+An exception or mask on one branch leaves the other branch’s already-accepted points intact; do not clear both.
+Partial paths keep null ages in the denominator; do not extrapolate past the 00–06Z forcing window or bridge gaps.
+
+2. Six checks and mobile/playback acceptance.
+
+Mutating 00/04/05/06Z after forecast read-back leaves the hash unchanged.
+Masking the forward field after 03Z stops only the forward branch; the backward branch remains.
+Frontend rejection of a mutated reason, status or anchor.
+Stage, time-scrub and layer toggles do not alter stored coordinates.
+Replay stops on tab hide or unmount and resets on group change.
+Backend GET never calls the builder, scorer or first-score path.
+
+Acceptance: at 320 px, load the study, select each group, step through all five stages with Next/Previous, scrub the branch clock, toggle layers (domain stays fixed), hide the tab and confirm playback stops, then reveal validation and confirm the eight rows appear only then.
+
+3. Labels and filter distinction.
+
+Possible origin: “Earlier position consistent with reversing the biased current from the last permitted fix—not a unique release.”
+
+Future interception checkpoint: “Later rendezvous consistent with continuing the same biased current—not a guaranteed collector placement.”
+
+Filtering is not RTS smoothing because each stored state uses only measurements up to that time; no backward pass incorporates 03Z information into 02Z.
+
+4. Still required for physical or independent geographic validation.
+
+A source-labelled tank trial with known release identity withheld from the estimator, or a new GDP cohort selected by metadata only and excluded from all previously viewed IDs, with forecasts frozen before any earlier position is decoded. Small closure error is not actual accuracy, and “No supported data” is not an accepted source.
+```
+
+### Final trajectory review manifest
+
+```json
+{
+  "files": [
+    {
+      "bytes": 3347,
+      "path": "docs/grok-evidence/grok-trajectory-final-review-prompt.txt",
+      "role": "ACTUAL_GROK_WEB_PROMPT",
+      "round": 18,
+      "sha256": "a640b95d81ee3d0a771fcca570c393c2c5ef9db0efcb610314861aeb5326b70a"
+    },
+    {
+      "bytes": 2347,
+      "path": "docs/grok-evidence/grok-trajectory-final-review-response.txt",
+      "role": "ACTUAL_GROK_WEB_RESPONSE",
+      "round": 18,
+      "sha256": "f90fc797c28f562a7271b1d18e0dbacb5439653c11972fdf6f4216f52d8dc86b"
+    }
+  ],
+  "kind": "ADDITIVE_TRAJECTORY_FINAL_REVIEW_GROK_MANIFEST",
+  "live_xai_api_usage": false,
+  "physical_validation": false,
+  "previous_prefix_bytes": 533292,
+  "previous_prefix_sha256": "4ad8d4a3deb498ee08019d34f55393d9568056b8cd2b54e83cd629110d8487c7",
+  "rounds_added": 1,
+  "schema_version": 1,
+  "sponsor_qualification_proven": false,
+  "static_review_not_execution": true,
+  "total_continuation_rounds": 18,
+  "total_full_capture_files": 36
+}
+```

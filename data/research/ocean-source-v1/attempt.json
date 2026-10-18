@@ -1,0 +1,13 @@
+{
+  "kind": "EXCLUSIVE_OCEAN_SOURCE_ATTEMPT",
+  "protocol_sha256": "1fd45e36997481c2943c3e632952a29cefe0e0b7aea018294071423b7f874831",
+  "reviewed_code_commit": "f239213ea128ef29f74539cae1abb70ea5adfab9",
+  "schema_version": 1,
+  "source_acquisition_lineage": {
+    "acquisition_start_sha256": "779cd40cf7ded603256f2012b478fd5fb056e7c87dfd58c189d80da73d9d06df",
+    "manifest_sha256": "352a25d9c6b10db51592d2595fa2f556c5f8813281e4e673c4d7c2b5c21e3fc0",
+    "protocol_sha256": "fe19dd6f6979d40ccfc1821af218aa5c2494db04c3af53ae31f4ae4ed989e793",
+    "trusted_identity_sha256": "c7a883cc5a2f938809839d9785fa8477146c5bb26a21d68c1d730afda4543f07"
+  },
+  "started_at_utc": "2026-10-18T01:33:09.459319+00:00"
+}

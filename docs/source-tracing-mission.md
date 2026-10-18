@@ -5,6 +5,15 @@ come from, then predict its movement, compare interventions and test the result.
 Source tracing is the starting question. Prevention extends it into a decision;
 it does not replace origin inference.
 
+**Current geographic addition — 17 October 2026:** a bounded retrospective
+NOAA/HYCOM earlier-buoy-position prototype now exists in **Investigations →
+Ocean source research**. Its saved reader, five-stage visualization and separate
+operator-protected Chalk endpoint are implemented. This is a source-first
+research aid, not a validated worldwide pollution-release/polluter finder. The
+[ocean-source guide](ocean-source-research.md) records actual results and limits;
+the [README](../README.md#scientific-formulas-explained-through-the-tank-experiment)
+explains the formulas and their connection to the still-uncommissioned tank.
+
 ## What is implemented
 
 Open **Overview → Start software demo → Open source trace**, or use
@@ -30,9 +39,11 @@ polluter-identity probability.
 
 The current tank model uses a supplied spatial drift field and bounded
 advection–diffusion simulation. The separate geographic RK4 engine samples
-changing ocean currents. An ocean forecast is not automatically an ocean
-source-inference engine, and no RK4 ocean field has been silently substituted
-for measured tank centimetres.
+changing ocean currents. Its new bounded earlier-position reconstruction reverses
+both current direction and actual time; the five-stage tutorial also uses a
+causal three-fix Kalman estimate and the same fixed initial motion offset for
+both trajectory directions. An ocean forecast alone is not source validation,
+and no RK4 ocean field has been substituted for measured tank centimetres.
 
 ## What the other features contribute
 
@@ -41,6 +52,7 @@ for measured tank centimetres.
 | Camera and calibration | Measure a controlled token's surface positions and drift | General plastic recognition or a source label |
 | Source investigation | Compare candidate release histories with an observation | An arbitrary worldwide source search |
 | NOAA / current-model research | Check how motion models describe historical buoy movement | Where the pollution was released or who caused it |
+| Ocean source research | Display scattered NOAA fixes, a connected path, causal Kalman estimates, the explicit current-plus-offset equation, and conditional earlier/later paths | A verified release, unique source probability, guaranteed capture or worldwide operational skill |
 | Prevention | Compare possible interventions after movement/source assumptions are declared | Proof that the source estimate is correct |
 | Trial ledger and 3D replay | Preserve predicted and separately recorded outcomes | New measurements created by animation |
 | Chalk | Explain the exact saved evidence and uncertainty | An independent scientific measurement or authority to force a source ranking |
@@ -95,15 +107,27 @@ the identical model that performs inference is an internally consistent software
 exercise; it is not independent evidence of physical accuracy. New measured
 releases and validated drift remain the missing bridge.
 
-## A later ocean source feature
+## Implemented ocean reconstruction and the remaining attribution step
 
-Ocean-scale attribution would require an explicitly different method and scope:
+The current ocean source research feature uses two previously viewed GDP groups
+and real saved fifteen-metre HYCOM currents. Only 01:00/02:00/03:00 positions
+enter the three-fix tutorial. Separate earlier/later positions are revealed for
+evaluation only after forecast persistence/readback. Its earlier-position errors
+were approximately **404 m and 389 m**, while its final forward misses were
+**860 m and 1,024 m**. A distinct six-hour current-only backward comparison had
+mean error **8,697 m**, worse than last drift **2,198 m**. Those are bounded
+retrospective reconstruction results, not source-identification success rates.
+
+Ocean-scale pollution attribution still requires an explicitly different scope:
 declared geographic candidate regions and release-time distributions, observation
 uncertainty, appropriate object/current/retention behavior, sensitivity checks,
 and source-labelled validation. Reverse advection alone cannot supply those.
-This feature is **not implemented or validated** by the current ocean layout
-comparison or origin-residual forecast diagnostic. A future version must keep
-unknown regions and model mismatch visible rather than assert an exact polluter.
+That validated attribution system is **not implemented** by the present
+reconstruction, ocean layout comparison or origin-residual forecast diagnostic.
+The present sensitivity dots are fixed perturbation cases, not a calibrated
+probability region. A future source search must keep unknown regions and model
+mismatch visible rather than assert an exact polluter. See the
+[implemented method, saved results, API and next design](ocean-source-research.md).
 
 The current product sequence remains:
 

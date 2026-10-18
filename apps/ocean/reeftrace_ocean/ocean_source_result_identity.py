@@ -1,0 +1,7 @@
+"""Literal saved-result publication anchor, not independent scientific attestation."""
+
+STUDY_ID = 'ocean-source-gdp-hycom-15m-v1'
+REPORT_SHA256 = '3d9f0faed305a41b7fa0c85bf3c7c82a3a525b742799fae90e1e6f00906fa474'
+PROTOCOL_SHA256 = '1fd45e36997481c2943c3e632952a29cefe0e0b7aea018294071423b7f874831'
+FORECAST_SHA256 = 'a5ec302012b9d2b1f5c5772162c215334134ec75b75558ef39d5e3f6b1326993'
+IDENTITY_SHA256 = '947ce44bb75f3e52c3f9ec5d59d5efc5303325c316f6924cb230a3c74048eb20'

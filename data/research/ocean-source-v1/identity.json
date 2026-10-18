@@ -1,0 +1,10 @@
+{
+  "externally_trusted_pin_required_for_publication": true,
+  "forecast_file_sha256": "a5ec302012b9d2b1f5c5772162c215334134ec75b75558ef39d5e3f6b1326993",
+  "kind": "OCEAN_SOURCE_RESULT_IDENTITY",
+  "pipeline_forecast_file_sha256": "357426821c85280616cec738f08e8a6b9f52088936c358f863a2c6e5f5ae04b8",
+  "protocol_sha256": "1fd45e36997481c2943c3e632952a29cefe0e0b7aea018294071423b7f874831",
+  "report_sha256": "3d9f0faed305a41b7fa0c85bf3c7c82a3a525b742799fae90e1e6f00906fa474",
+  "schema_version": 1,
+  "study_id": "ocean-source-gdp-hycom-15m-v1"
+}

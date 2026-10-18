@@ -1,5 +1,26 @@
 # Nemo: Grok contribution and evidence ledger
 
+**Current source-first checkpoint — 17 October local / 18 October UTC:** the additive continuation now embeds **18 archived Grok web review rounds / 36 complete prompt and response captures**. The four new archived reviews cover deterministic backward tracing, the fixed 25-case earlier-location contract, the five-step bidirectional/Kalman walkthrough and a final trajectory/API/display review. Their exact text and mistaken advice remain preserved, with corrections recorded separately. The preceding 505,645-byte / 14-round prefix remains unchanged. This is Grok web research and static review, not xAI API use, scientific execution or proof of Voice/Imagine eligibility.
+
+The saved ocean-source prototype is now shown in Investigations and has a public saved-result reader plus operator-protected, read-only Chalk review. Its two already-viewed GDP groups use HYCOM at15m. Actual six-hour current-only backtracking is worse than last drift (**8,696.82m vs2,197.73m mean earlier-position miss**); numerical closure does not establish source accuracy. The separate three-hour tutorial must not be compared as a matched model improvement. Local verification: **2,017 Python / 320 frontend / 241 HTTP PASS / zero HTTP failures / six blocked scopes**, plus lint/types/isolated build and browser checks. [Exact scope](research-evidence/nemo-source-first-pipeline-verification-20261018.json) and [method/results](ocean-source-research.md). This verification used a separate API; its checks made no new provider call, message, camera or physical trial.
+
+
+**Latest additive checkpoint — 17 October local / 18 October UTC:** the
+[continuation archive](grok-evidence-continuation.md) now preserves **18 actual
+Grok web review rounds / 36 complete prompt-response capture files**. Rounds
+15–18 cover deterministic historical-time reversal, the fixed 25-case sensitivity
+contract, the three-fix causal Kalman/bidirectional walkthrough and final
+mathematical/API/display review. The earlier 14-round captures and original
+canonical archive remain untouched. Stages Q–T below distinguish the recorded
+advice, accepted implementation and corrections. Grok did not execute the
+numerical study or establish physical/source accuracy. The separately saved
+[local result](ocean-source-research.md#saved-first-score-results) now contains
+the bounded earlier-buoy-position reconstruction and forward tutorial; it does
+not validate pollution origins or guaranteed interception. No new full-suite
+total, live Chalk response, xAI API/credits/billing, Photon message or physical
+trial is claimed by this documentation update. Earlier checkpoint blocks below
+retain their historical capture scope, even where they say “current.”
+
 **Source-first continuation — 17 October local / 18 October UTC:** the additive
 archive now contains **14 actual web rounds / 28 complete prompt and response
 captures**. Rounds thirteen and fourteen review the origin-residual Data Lab
@@ -642,6 +663,90 @@ physical/geographic plan; no source labels, trajectories or numerical scores wer
 invented. Primary BAKTRAK and official OpenDrift references were checked outside
 Grok; Nemo does not claim to implement or have validated their complete methods.
 
+## Stage Q — round 15: deterministic reversal and the source-attribution boundary
+
+The actual web [method prompt](grok-evidence/grok-ocean-source-method-prompt.txt)
+and [response](grok-evidence/grok-ocean-source-method-response.txt) reviewed
+negative-time advection, fixed perturbations and retrospective evaluation on the
+two previously viewed GDP groups. Accepted advice samples historical time
+`T−lookback` and negates velocity, keeps all planned unsupported paths, and
+separates numerical closure from observed earlier-position miss.
+
+**Correction retained:** the response initially qualified reversal as a
+“divergence-free-in-the-interpolant setting.” Deterministic ODE reversal does
+not require a divergence-free field, and no such property of Nemo's interpolant
+is established. Round 16 explicitly corrects it. Diffusion, beaching and capture
+also cannot be recovered by simply reversing this deterministic field. Suggested
+forward-seeded release-cell/age search remains a next-method proposal, not an
+implemented BAKTRAK search or validated global polluter finder.
+
+## Stage R — round 16: the fixed 25-case earlier-position contract
+
+The actual web [contract prompt](grok-evidence/grok-ocean-source-contract-prompt.txt)
+and [response](grok-evidence/grok-ocean-source-contract-response.txt) reviewed the
+five endpoint offsets crossed with five current biases, separate stationary and
+last-drift backward baselines, truth persistence/readback and mask failures.
+Only the current endpoint enters current-only reverse advection; the last-drift
+baseline may additionally use its immediately preceding 05:00 fix. A residual
+computed at withheld 00:00 would leak evaluation truth and is prohibited.
+
+The local saved six-hour result now retains **6/6 model/group rows on two earlier
+positions**. Current-only mean error **8,696.822 m** is worse than last drift
+**2,197.726 m** and stationary **6,069.353 m**. All **25/25 sensitivity paths per
+group** completed; this does not calibrate a confidence region. Near-zero
+forward closure coexists with those large actual misses. These outcomes were
+computed locally after committed reviewed methods; the static web response did
+not run or validate them. No negative outcome was discarded or retuned away.
+
+## Stage S — round 17: the five-stage three-fix bidirectional walkthrough
+
+The actual web [pipeline prompt](grok-evidence/grok-bidirectional-pipeline-prompt.txt)
+and [response](grok-evidence/grok-bidirectional-pipeline-response.txt) reviewed
+scatter → connection → causal Kalman estimate → explicit current-plus-offset
+rule → backward/forward branches. Only 01:00/02:00/03:00 positions enter this
+separate demonstration. 01:00 is position-only; 02:00 initializes velocity and
+correlated covariance; 03:00 receives one Joseph-form correction. No RTS
+backward smoothing or neural training is performed, and the older minimum-eight-
+fix benchmark is unchanged.
+
+The same filtered 03:00 anchor supplies one constant east/north offset for both
+branches. Earlier/later truth is kept evaluator-only until both groups' tutorial
+forecasts are saved, hashed and read back, including before numeric decoding of
+05:00/06:00 for the separate endpoint study. The saved tutorial scores **8/8
+planned cells**, with backward errors **403.531 / 389.248 m** and final forward
+errors **860.020 / 1,023.657 m**. It is retrospective post-outcome development on
+already-viewed processed positions, not eight independent releases or a matched
+baseline improvement experiment. A possible earlier point is not a source label;
+a forward rendezvous is not an optimized or guaranteed capture location.
+
+## Stage T — round 18: final trajectory, API and display review
+
+The actual web [final prompt](grok-evidence/grok-trajectory-final-review-prompt.txt)
+and [response](grok-evidence/grok-trajectory-final-review-response.txt) reviewed
+time-order guards, branch-local failures, causal filtering, explicit validation
+reveal, fixed-scale display controls and the read-only GET boundary. The prompt
+was submitted before the first local score and correctly says no result existed
+at that capture. The later local result does not retroactively change that raw
+text or make it a model-executed experiment.
+
+Accepted checks include preserving a supported branch if the other raises,
+never resetting predictions from later truth, rejecting mutated report anchors/
+statuses/reasons, stopping playback on hidden/unmounted views and keeping stage/
+layer/time controls separate from scientific values. Local review implemented
+branch-local exception isolation and independent numerical oracles; the web
+response is static review rather than a full-suite/browser/live-provider receipt.
+The built **Investigations → Ocean source research** feature reads the saved
+literal-pinned study through `GET /api/v1/research/ocean-source`. Its separate
+operator-protected Chalk POST has one bounded read-only evidence tool, exact
+report/protocol/identity binding and `REPORT`/`STOP`; it cannot run science,
+acquire data, write trials, actuate devices or message Photon.
+
+Read [the method, saved results and identity contract](ocean-source-research.md)
+and [README formulas/datasets/tank connection](../README.md#scientific-formulas-explained-through-the-tank-experiment).
+New source-labelled tank trials or independently designed geographic tests remain
+necessary. These four added web exchanges do not establish Voice/Imagine API use,
+Grok Bot eligibility, physical validation or a calibrated source-probability map.
+
 ## 5. What is visible in the application
 
 | Product surface | Evidence-backed functionality | Contribution boundary |
@@ -651,6 +756,7 @@ Grok; Nemo does not claim to implement or have validated their complete methods.
 | New numerical-quality disclosure | Local solver-step and same-path contact-chord sensitivity, missing/partial coverage retained, compact evidence available to Chalk | Post-guard local suites and live Chalk passed as Stage J records; final commit/CI/hosted verification pending; not physical accuracy |
 | Matched-current v1/v2 Data Lab | Version-bound saved reports, real NOAA tracks, fixed models and full 36-cell primary v2 comparison; v1 remains 0/36 | Twelve-round additive review history; current-only negative result preserved, no automatic promotion or physical skill |
 | Initial drift-offset Data Lab | Explicit pinned result load, four saved model rows, both buoy groups, fixed-axis path toggles and bounded Chalk review | Round thirteen static implementation review; 48 cells reuse twelve already-viewed positions; zero fitted parameters and no source-accuracy or transfer claim |
+| Ocean source research in Investigations | Explicit saved load; five-stage NOAA causal-filter walkthrough; backward/forward paths, validation reveal, 25-case sensitivity and separate bounded Chalk endpoint | Rounds15–18 static web review; local saved8/8 tutorial and6/6 baseline cells; previously viewed buoy positions, not verified pollution releases or guaranteed capture |
 | Chalk research explanations | Reads immutable numerical evidence and explains limits with exact hashes/citations | Chalk is a separate gateway/provider integration; Grok assistance does not make it the physics engine |
 | Evidence briefing | Frozen source text plus separately labelled satellite heat context; explicit disabled xAI speech path | Real space-data artifact and implemented adapter; no live Voice claim |
 | Camera/tank | Native USB preview, pixel grid; separately gated measured homography, empirical drift and real trial ledger | Not validated by historical buoy or ocean API results; zero physical tank commissioning claimed at this checkpoint |

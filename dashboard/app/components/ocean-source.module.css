@@ -1,0 +1,38 @@
+.stack { display: grid; gap: 16px; min-width: 0; }
+.header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; }
+.note { margin: 0; color: #526f83; font-size: 12px; line-height: 1.75; }
+.summary { padding: 16px; border: 1px solid #cce2ed; background: #edf7fd; color: #315d77; font-size: 13px; line-height: 1.7; }
+.summary p { margin: 7px 0 0; }
+.controls { display: flex; flex-wrap: wrap; align-items: end; gap: 14px; }
+.label { display: grid; flex: 1; gap: 7px; min-width: 170px; color: #42657b; font-size: 12px; }
+.label select, .label textarea { width: 100%; min-width: 0; border: 1px solid #c6dfed; border-radius: 0; padding: 11px; background: white; color: #254f68; font: inherit; }
+.checkbox { display: flex; align-items: center; gap: 9px; min-height: 44px; color: #42657b; font-size: 12px; }
+.checkbox input { accent-color: #087fac; width: 16px; height: 16px; }
+.figure { margin: 0; border: 1px solid #cfe3ee; background: #f8fcff; min-width: 0; }
+.plot { display: block; width: 100%; height: auto; max-height: 510px; }
+.caption { padding: 0 16px 16px; }
+.validation { display: grid; gap: 12px; padding: 16px; background: #fff; border: 1px solid #cfdfeb; }
+.validation h3, .review h3 { margin: 0; color: #315d77; font-size: 15px; font-weight: 550; }
+.review { display: grid; gap: 12px; padding: 17px; border: 1px solid #cce3ef; background: #f3faff; }
+.answer { padding: 15px; border: 1px solid #d0e5ef; background: white; color: #315d77; font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.identity { overflow-wrap: anywhere; color: #526f83; font-size: 11px; }
+.steps { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); padding: 0; margin: 0; list-style: none; gap: 6px; }
+.steps button { width: 100%; min-height: 74px; border: 1px solid #c9dfec; padding: 10px; background: #f5fafe; color: #486b80; text-align: left; font: inherit; font-size: 12px; cursor: pointer; }
+.steps button[aria-current="step"] { background: #e0f1fb; border-color: #73aecb; color: #1d536e; }
+.steps span { display: block; font-size: 15px; font-weight: 650; margin-bottom: 5px; }
+.steps button:focus-visible { outline: 2px solid #087fac; outline-offset: 2px; }
+.formula { padding: 16px; border: 1px solid #cde2ed; background: #f2f9fd; display: grid; gap: 12px; color: #315d77; }
+.formula h3 { font-size: 15px; margin: 0; font-weight: 550; }
+.formula code { padding: 10px; border: 1px solid #d1e4ef; background: white; font-size: 13px; overflow-wrap: anywhere; }
+.formula dl { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); margin: 0; gap: 12px; }
+.formula dt { font-size: 11px; color: #526f83; margin-bottom: 6px; }
+.formula dd { margin: 0; font-size: 13px; overflow-wrap: anywhere; }
+.formula summary { font-size: 12px; cursor: pointer; min-height: 32px; }
+.equation { display: block; white-space: pre-wrap; }
+.scrubber { display: grid; gap: 10px; min-width: 0; padding: 14px 16px; border: 1px solid #cde2ed; background: #f2f9fd; color: #315d77; font-size: 12px; line-height: 1.6; }
+.scrubber input { width: 100%; min-width: 0; margin: 0; accent-color: #087fac; }
+.scrubber input:focus-visible { outline: 2px solid #087fac; outline-offset: 4px; }
+.scrubber span { color: #526f83; font-size: 11px; }
+.empty { padding: 20px; color: #42657b; background: #f1f8fc; border: 1px solid #cfe3ee; font-size: 12px; line-height: 1.8; }
+@media (max-width: 650px) { .header { align-items: flex-start; } .label { min-width: 100%; } .controls { align-items: stretch; } .summary, .validation, .review { padding: 13px; } }
+@media (max-width: 650px) { .steps { grid-template-columns: 1fr; } .steps button { min-height: 44px; } .steps span { display: inline-block; margin: 0 10px 0 0; } .formula dl { grid-template-columns: 1fr; } }

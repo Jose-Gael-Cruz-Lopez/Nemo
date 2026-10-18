@@ -9,6 +9,7 @@ import { BRAND_NAME } from "../components/brand";
 import { GlyphTrail } from "../components/glyph-trail";
 import { Icon, type IconName } from "../components/icons";
 import { SourceMap, type SourceProfile } from "../components/source-map";
+import { SourceModes } from "../components/source-modes";
 import { RealDataLab } from "../components/real-data-lab";
 import { ReefBriefing } from "../components/reef-briefing";
 import { PreventionWorkspace } from "../components/prevention-workspace";
@@ -413,7 +414,7 @@ export default function Workspace() {
           </div></details>
         </>}
 
-        {view === "investigations" && <>
+        {view === "investigations" && <SourceModes api={API} blocked={!!busy || stopping || preventionBusy}>
           <div className="page-heading"><div><h1 ref={investigationHeading} tabIndex={-1}>Investigations</h1><p className="page-description">Follow an observation. Compare where it could have entered.</p></div><button className="secondary-button" disabled={!!busy} onClick={loadDemo}><Icon name="plus" />Load demo</button></div>
           {!token && <div className="notice info"><Icon name="key" /><span>Connect operator access to compute source evidence or ask the investigator.</span><button className="card-link" onClick={openOperator}>Connect operator <Icon name="arrow" /></button></div>}
           <div className={demoStyles.investigations}><details className="card case-list"><summary>Choose a different observation ({filteredCases.length})</summary><section aria-label="Saved cases"><div className="card-header"><h2 className="card-title">Observations</h2><Pill>{filteredCases.length}</Pill></div>{filteredCases.length ? filteredCases.map(item => <button className="case-item" key={item.id} aria-current={item.id === selected ? "true" : undefined} disabled={!!busy} onClick={() => selectCase(item.id)}><span><strong>{caseKind(item)}</strong><span>{item.id.slice(-8)}</span></span><Pill tone={item.mode === "LIVE" ? "green" : "neutral"}>{item.mode === "SYNTHETIC" ? "Demo" : item.mode}</Pill></button>) : <div className="empty-state"><p>{query ? "No matches" : "No observations yet"}</p><span>{query ? "Try another search." : "Load a demo to get started."}</span></div>}</section></details>
@@ -435,7 +436,7 @@ export default function Workspace() {
               </div></section></details>}
             </> : <section className="card empty-state investigation-empty"><Icon name="cases" width={30} height={30} /><h2>Choose an observation</h2><p>Its path, source comparison, and investigator will appear here.</p><button className="secondary-button" disabled={!!busy} onClick={loadDemo}>Load a demo</button></section>}</div>
           </div>
-        </>}
+        </SourceModes>}
 
         {view === "camera" && <>
           <div className="page-heading"><div><h1>Camera</h1><p className="page-description">Live USB preview first. Calibrate coordinates when your tank is ready.</p></div><Pill tone={status?.camera.fresh ? "green" : "neutral"}><span className={`status-dot ${status?.camera.fresh ? "is-live" : "is-off"}`} />{cameraLabel}</Pill></div>

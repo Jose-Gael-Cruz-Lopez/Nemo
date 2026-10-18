@@ -1,0 +1,44 @@
+Grok
+
+1. Mathematical and time-order guards.
+
+Do not compute 
+𝑏
+03
+b
+03
+	​
+
+ from any position other than the filtered 03Z state; an offset that touches 00Z or 04–06Z leaks.
+Backward integration must sample the biased field at 
+03
+𝑍
+−
+𝜏
+03Z−τ and negate; negating only the 03Z velocity is wrong on a time-varying field.
+The 02Z state is initialized from the 01Z–02Z pair only; a later correction that rewrites 02Z is an accidental RTS step and must be rejected.
+An exception or mask on one branch leaves the other branch’s already-accepted points intact; do not clear both.
+Partial paths keep null ages in the denominator; do not extrapolate past the 00–06Z forcing window or bridge gaps.
+
+2. Six checks and mobile/playback acceptance.
+
+Mutating 00/04/05/06Z after forecast read-back leaves the hash unchanged.
+Masking the forward field after 03Z stops only the forward branch; the backward branch remains.
+Frontend rejection of a mutated reason, status or anchor.
+Stage, time-scrub and layer toggles do not alter stored coordinates.
+Replay stops on tab hide or unmount and resets on group change.
+Backend GET never calls the builder, scorer or first-score path.
+
+Acceptance: at 320 px, load the study, select each group, step through all five stages with Next/Previous, scrub the branch clock, toggle layers (domain stays fixed), hide the tab and confirm playback stops, then reveal validation and confirm the eight rows appear only then.
+
+3. Labels and filter distinction.
+
+Possible origin: “Earlier position consistent with reversing the biased current from the last permitted fix—not a unique release.”
+
+Future interception checkpoint: “Later rendezvous consistent with continuing the same biased current—not a guaranteed collector placement.”
+
+Filtering is not RTS smoothing because each stored state uses only measurements up to that time; no backward pass incorporates 03Z information into 02Z.
+
+4. Still required for physical or independent geographic validation.
+
+A source-labelled tank trial with known release identity withheld from the estimator, or a new GDP cohort selected by metadata only and excluded from all previously viewed IDs, with forecasts frozen before any earlier position is decoded. Small closure error is not actual accuracy, and “No supported data” is not an accepted source.
