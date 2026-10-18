@@ -17,6 +17,7 @@ from apps.vision.reeftrace_vision.calibration import fit_homography
 from apps.vision.reeftrace_vision.tracking import flow_samples
 
 from .api.v1.endpoints.current_forecast import create_current_forecast_router
+from .api.v1.endpoints.detector_preview import create_detector_preview_router
 from .api.v1.endpoints.detector_replay import create_detector_replay_router
 from .api.v1.endpoints.estimated_rehearsal import create_estimated_rehearsal_router
 from .api.v1.endpoints.field_sessions import create_field_sessions_router
@@ -133,6 +134,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(create_saved_calibrations_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_estimated_rehearsal_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_detector_replay_router(runtime, operator), prefix="/api/v1")
+    app.include_router(create_detector_preview_router(runtime, operator), prefix="/api/v1")
 
     @app.get("/")
     def root():
