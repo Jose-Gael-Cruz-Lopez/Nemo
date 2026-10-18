@@ -22,6 +22,7 @@ from apps.api.reeftrace_api.core.settings import Settings
 from apps.api.reeftrace_api.main import create_app
 from apps.api.reeftrace_api.services.estimated_rehearsal import EstimatedRehearsalService
 from apps.vision.reeftrace_vision.calibration import fit_homography
+from apps.vision.reeftrace_vision.foreground import SceneChanged
 
 TOKEN = "estimated-rehearsal-synthetic-only"
 AUTH = {"Authorization": "Bearer " + TOKEN}
@@ -39,6 +40,8 @@ class SyntheticCamera:
         self.cap = (0, 0, 255)
         self.gap_sequences = {4, 5, 6}
         self.restart_at = self.resize_at = None
+        self.gain_by_sequence = {}
+        self.gain = 1.0
         self.floor = np.random.default_rng(5).integers(80, 160, (HEIGHT, WIDTH, 3), np.uint8)
 
     def status(self):
@@ -59,6 +62,8 @@ class SyntheticCamera:
         image = self.floor.copy()
         if self.cap and self.sequence not in self.gap_sequences:
             cv2.circle(image, (50 + self.sequence // 4, 55), 7, self.cap, -1)
+        gain = self.gain_by_sequence.get(self.sequence, self.gain)
+        image = np.clip(image.astype(float) * gain, 0, 255).astype(np.uint8)
         ok, jpeg = cv2.imencode(".jpg", image)
         assert ok
         return image, {"session_id": self.session_id, "sequence": self.sequence,
@@ -273,7 +278,7 @@ def test_historical_source_must_be_intact_and_previously_approved(env, change):
     assert runtime.store.list("estimated_rehearsal") == []
 
 
-def test_detector_scene_change_discards_capture_instead_of_inventing_coordinates(env, monkeypatch):
+def test_unknown_detector_error_discards_capture_instead_of_inventing_coordinates(env, monkeypatch):
     client, runtime, source, _ = env
 
     def changed_scene(_image):
@@ -285,3 +290,86 @@ def test_detector_scene_change_discards_capture_instead_of_inventing_coordinates
     assert runtime.store.list("estimated_rehearsal") == []
     assert runtime.store.list("estimated_rehearsal_frame") == []
     assert list((runtime.settings.data_dir / "estimated_rehearsals").iterdir()) == []
+
+
+def foreground_ready(env):
+    client, runtime, source, _ = env
+    runtime.camera.cap = None
+    runtime.camera.gap_sequences = set()
+    reference = client.post("/api/v1/camera/reference", headers=AUTH,
+                            json={"frame_count": 5})
+    assert reference.status_code == 200, reference.text
+    reference = reference.json()
+    runtime.camera.cap = (20, 180, 20)
+    measurement = client.post("/api/v1/camera/reference/" + reference["reference_id"] + "/token-size",
+                              headers=AUTH, json={})
+    assert measurement.status_code == 200, measurement.text
+    return {**body(source), "detector": "foreground_reference_v1",
+            "reference_id": reference["reference_id"]}
+
+
+def test_transient_real_lighting_change_is_gap_then_recovers_as_new_track(env):
+    client, runtime, _, _ = env
+    payload = foreground_ready(env)
+    start_sequence = runtime.camera.sequence
+    runtime.camera.gain_by_sequence = {start_sequence + 3: 0.7, start_sequence + 4: 0.7}
+    result = post(client, payload)
+    rejected = [i for i, point in enumerate(result["points"])
+                if point.get("reason") == "SCENE_CHANGED"]
+    assert len(rejected) == 2
+    assert all(set(result["points"][i]) == {"observed", "t_s", "reason", "frame_id"}
+               for i in rejected)
+    before = [p for p in result["points"][:rejected[0]] if p["observed"]]
+    after = [p for p in result["points"][rejected[-1] + 1:] if p["observed"]]
+    assert before and after
+    assert after[0]["association_break"] is True
+    assert {p["track_id"] for p in before}.isdisjoint(p["track_id"] for p in after)
+    assert any(warning.startswith("2 frames were rejected") for warning in result["warnings"])
+    assert result["validation_status"] == "UNVALIDATED"
+    assert runtime.store.list("recording") == runtime.store.list("flow") == []
+
+
+def test_persistent_real_lighting_change_produces_only_explicit_gaps(env):
+    client, runtime, _, _ = env
+    payload = foreground_ready(env)
+    runtime.camera.gain = 0.7
+    result = post(client, payload)
+    assert result["frames"] > 1 and result["observed"] == 0
+    assert all(p["observed"] is False and p["reason"] == "SCENE_CHANGED"
+               and set(p) == {"observed", "t_s", "reason", "frame_id"} for p in result["points"])
+    assert any(warning.startswith(f"{result['frames']} frames were rejected")
+               for warning in result["warnings"])
+    assert result["calibration_id"] is result["profile_id"] is result["case_id"] is None
+    assert runtime.store.list("recording") == runtime.store.list("flow") == []
+
+
+def test_explicit_scene_changed_is_not_confused_with_unknown_detector_errors(env, monkeypatch):
+    client, runtime, source, _ = env
+
+    def moved_scene(_image):
+        raise SceneChanged("Camera move exceeds the unchanged detector limit")
+
+    monkeypatch.setattr(runtime.token_detection, "detector",
+                        lambda *_args: (moved_scene, {"detector": "red_hsv"}))
+    result = post(client, body(source))
+    assert result["observed"] == 0
+    assert {p["reason"] for p in result["points"]} == {"SCENE_CHANGED"}
+
+
+def test_measured_recording_still_discards_same_real_lighting_change(env):
+    client, runtime, _, _ = env
+    payload = foreground_ready(env)
+    fit = [[0, 0], [159, 0], [159, 119], [0, 119]]
+    check = [[20, 20], [130, 30], [70, 100]]
+    cm = lambda points: [[x / 10, y / 10] for x, y in points]
+    report = fit_homography(fit, cm(fit), check, cm(check), max_error_cm=0.5,
+                            image_size_px=[WIDTH, HEIGHT],
+                            camera_session_id=runtime.camera.session_id)
+    current = runtime.store.put("calibration", report, report["calibration_id"])
+    runtime.camera.gain = 0.7
+    response = client.post("/api/v1/camera/record", headers=AUTH, json={
+        "calibration_id": current["id"], "duration_s": 1,
+        "detector": payload["detector"], "reference_id": payload["reference_id"]})
+    assert response.status_code == 409
+    assert response.json()["detail"].startswith("Recording discarded: Overall brightness changed")
+    assert runtime.store.list("recording") == []

@@ -251,3 +251,26 @@ measurement log, not the private `data/local` SQLite database, reference NPZs or
 raw recordings. Render's software demo contains public fixtures and synthetic
 examples. Use the capture laptop for the physical pipeline; a hosted browser
 preview is not a transfer or validation of its stored calibration.
+
+## 7. Local estimated rehearsal, 18 October 2026
+
+The operator accepted approximate camera alignment and kept the existing camera
+and tray positions. The supplied private handoff reconstructed historical mapping
+`cal-5ea2958aeca0c7df`; its matrix and original 3 cm tolerance were unchanged.
+The current view was **not** approved as a measured calibration.
+
+- **Pump-off visibility check:** local rehearsal `rehearsal-b00cd60149e34c1f`
+  captured 36 frames over a 5-second window: 33 accepted cap detections and three
+  ambiguous `MULTIPLE_TOKENS` gap frames, producing two track segments. Inspected
+  saved first/last frames show the real green cap at the detector location.
+- The points cluster near estimated (9, 5) cm. Current centimetre accuracy is
+  unknown; the small spread does not measure water flow, velocity accuracy or
+  source-identification accuracy. Pump state is operator-reported, and timestamps
+  are host receipt times rather than verified camera exposure times.
+- The cap's foreground image area was learned at about 4,279 pixels. A fresh
+  pump-on empty background carried this size forward in the same camera session.
+  An initial pump-on release attempt stopped on a reported 21% brightness change;
+  that stopped attempt did not create a saved trajectory or accepted drift run.
+- Frames and references remain private on the capture Mac. These separate
+  `estimated_rehearsal` records cannot train measured flow, create source cases
+  or freeze a field receipt. The measured-flow blockers above remain unresolved.

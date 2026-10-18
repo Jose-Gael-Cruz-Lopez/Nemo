@@ -6,7 +6,7 @@ import math
 import shutil
 import time
 
-from apps.vision.reeftrace_vision.foreground import ViewObstructed
+from apps.vision.reeftrace_vision.foreground import SceneChanged, ViewObstructed
 from apps.vision.reeftrace_vision.tracking import SingleTokenTracker
 
 from .field_sessions import digest
@@ -53,6 +53,7 @@ class EstimatedRehearsalService:
             folder = self.runtime.settings.data_dir / "estimated_rehearsals" / rehearsal_id
             folder.mkdir(parents=True)
             points, frames, frame_ids = [], [], []
+            scene_rejected = 0
             start, previous, previous_time = time.monotonic(), None, None
             saved = False
             try:
@@ -75,18 +76,26 @@ class EstimatedRehearsalService:
                         if previous_time is not None and received <= previous_time:
                             raise ValueError("Camera timestamps are not increasing; capture discarded")
                         previous_time = received
+                        gap_reason = None
                         try:
                             found = detect(image)
                         except ViewObstructed:
                             found = None
-                        # SceneChanged and other detector errors discard this rehearsal;
-                        # hands/occlusions remain explicit gaps instead of invented points.
+                            gap_reason = "VIEW_OBSTRUCTED"
+                        except SceneChanged:
+                            # This estimated-only route keeps a rejected frame as a
+                            # gap. Every later frame must independently pass the
+                            # unchanged detector; no position is guessed or carried.
+                            found = None
+                            gap_reason = "SCENE_CHANGED"
+                            scene_rejected += 1
+                        # Unknown detector errors still discard the entire rehearsal.
                         # Rename only the output copy: tracker.previous retains its
                         # internal centimetre fields for unchanged association logic.
                         tracked = dict(tracker.update(found if found is not None else [],
                                                       received - start, source))
                         if found is None:
-                            tracked["reason"] = "VIEW_OBSTRUCTED"
+                            tracked["reason"] = gap_reason
                         estimated_x = tracked.pop("x_cm", None)
                         estimated_y = tracked.pop("y_cm", None)
                         frame_id = uid("rehearsal-frame")
@@ -106,11 +115,18 @@ class EstimatedRehearsalService:
                 self._current_camera(body)
                 if not frames:
                     raise ValueError("Camera produced no new timestamped rehearsal frames")
+                warnings = [WARNING]
+                if scene_rejected:
+                    warnings.append(
+                        f"{scene_rejected} frames were rejected by the unchanged detector scene "
+                        "checks (SCENE_CHANGED). They contain no positions. Persistent scene "
+                        "changes require a fresh empty-tank reference before a usable trajectory."
+                    )
                 result = {
                     "id": rehearsal_id, "schema_version": "nemo_estimated_rehearsal_v1",
                     "data_origin": "LOCAL_CAPTURE_ESTIMATED_COORDINATES",
                     "validation_status": "UNVALIDATED", "validation_warning": WARNING,
-                    "warnings": [WARNING],
+                    "warnings": warnings,
                     "calibration_id": None, "profile_id": None, "case_id": None,
                     "source_calibration_id": source["calibration_id"],
                     "source_content_sha256": digest(source),

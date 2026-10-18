@@ -121,7 +121,7 @@ test("zero detections remain a missing trajectory, never a simulated success", a
   const point = { observed: false, t_s: 0.1, frame_id: "only-gap", reason: "NO_DETECTION" };
   const h = harness(async () => fixture({ points: [point], frames: 1, observed: 0, evidence_frame_ids: [point.frame_id] })); await settle();
   await h.button("Record estimated rehearsal").props.onClick(); h.render();
-  assert.match(renderToStaticMarkup(h.tree()), /No cap was detected. This capture contains no trajectory/); h.unmount();
+  assert.match(renderToStaticMarkup(h.tree()), /No cap position was accepted. This capture contains no trajectory/); h.unmount();
 });
 
 test("plot shows actual captured scatter, joins only accepted tracks, and labels estimates", () => {

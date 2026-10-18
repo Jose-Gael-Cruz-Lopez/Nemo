@@ -102,7 +102,7 @@ export function EstimatedTankRehearsal({ request, camera, source, reference, bou
     {result && <div className={styles.result}>
       <h5>Recorded rehearsal · unvalidated</h5>
       <dl><dt>Local record</dt><dd><code>{result.id}</code></dd><dt>Detection accounting</dt><dd>{result.observed} accepted detections · {result.frames-result.observed} gap frames · {result.frames} frames</dd><dt>Capture window</dt><dd>{result.duration_s} s · {new Date(result.recorded_at*1000).toLocaleString()}</dd><dt>Timing</dt><dd>Host receipt timestamps; exposure timing is unknown.</dd></dl>
-      {result.observed > 1 ? <RehearsalPlot result={result} bounds={bounds} /> : <p className={styles.notice}>{result.observed === 0 ? "No cap was detected. This capture contains no trajectory." : "Only one cap position was detected; no movement can be shown."}</p>}
+      {result.observed > 1 ? <RehearsalPlot result={result} bounds={bounds} /> : <p className={styles.notice}>{result.observed === 0 ? "No cap position was accepted. This capture contains no trajectory." : "Only one cap position was detected; no movement can be shown."}</p>}
       <p className={styles.warning}>This is an estimated rehearsal, not an accepted tank trial. It cannot train measured flow, identify a validated source, or create a live case. Independent alignment and drift checks are still needed for those claims.</p>
       <details><summary>Capture warnings</summary><ul>{result.warnings.map((warning,index) => <li key={index}>{warning}</li>)}</ul></details>
     </div>}

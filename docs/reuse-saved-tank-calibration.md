@@ -159,9 +159,16 @@ detect new tray boundaries, or mark the current calibration approved.
    calibration-placement exercise. The pump and cap recovery remain manual.
 5. Read **Recorded rehearsal · unvalidated**. Dots are accepted camera detections;
    lines join only consecutive detections in the same track. Missing detections,
-   occlusion and track breaks stay disconnected. Zero detections mean no path was
-   captured; one detection cannot show movement. Timing is host receipt timing,
-   not verified exposure timing.
+   occlusion, lighting/scene rejections and track breaks stay disconnected.
+   Rejected frames have no coordinates. A persistently changed scene produces
+   gaps, not an inferred path. Zero detections mean no path was captured; one
+   detection cannot show movement. Timing is host receipt timing, not verified
+   exposure timing. Camera-session or image-size changes still stop the capture.
+
+For a pump-on rehearsal, remove the cap, establish steady circulation, and capture
+a new empty background with **Keep the measured token size** checked. Use a
+10-second capture and release the cap after recording starts. Keep the camera and
+lighting fixed. The earlier pump-off background does not represent moving water.
 
 The local endpoint `POST /api/v1/camera/rehearsals` stores separate
 `estimated_rehearsal` / `estimated_rehearsal_frame` records with approximate
