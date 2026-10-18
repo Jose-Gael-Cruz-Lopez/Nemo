@@ -119,6 +119,12 @@ def test_inert_camera_and_frozen_disabled_provider_settings_also_protect_tools(c
             getattr(runtime.camera, name)()
     assert runtime.camera.snapshot() is None
     assert runtime.camera.stop() is None
+    assert runtime.camera.session_id is None
+    runtime.store.put("token_reference", {"reference_id": "ref-inert-camera-check",
+        "camera_session_id": "usb-ended-session", "captured_at": 0})
+    token_status = runtime.token_detection.status()
+    assert token_status["is_current"] is False
+    assert "another camera session" in token_status["reason"]
     with TestClient(app) as client:
         assert client.get("/api/v1/status").json()["photon"]["worker_running"] is False
     assert runtime.photon_worker is runtime.photon_task is None

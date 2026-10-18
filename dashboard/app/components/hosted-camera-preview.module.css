@@ -1,0 +1,25 @@
+.preview { display:grid; gap:1rem; min-width:0; color:var(--ink,#233e4b); }
+.heading { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+.heading h2 { margin:0; font-size:1.25rem; }
+.heading p { margin:.45rem 0 0; font-size:.92rem; }
+.status { font-size:.82rem; line-height:1.5; border:1px solid var(--line,#c8dce7); padding:.35rem .65rem; }
+.view { width:100%; min-width:0; background:#10232e; border:1px solid var(--line,#c8dce7); }
+.view video { display:block; width:100%; height:auto; max-width:100%; object-fit:contain; transform:none; }
+.placeholder { min-height:18rem; aspect-ratio:16/9; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:.7rem; padding:1.5rem; color:#e6f3fb; text-align:center; }
+.placeholder strong { font-size:clamp(1.1rem,2.5vw,1.6rem); }
+.placeholder p { max-width:40rem; margin:0; color:#bed9e8; line-height:1.6; }
+.controls { display:flex; flex-wrap:wrap; align-items:flex-end; gap:.7rem; min-width:0; }
+.controls button { flex:0 0 auto; padding:.7rem 1rem; min-height:2.75rem; border:1px solid var(--line,#c8dce7); border-radius:0; color:inherit; background:var(--surface,#f5fbff); font:inherit; cursor:pointer; }
+.controls button:first-child { background:var(--accent,#2b6c8e); color:#fff; }
+.controls button:disabled { opacity:.6; cursor:default; }
+.picker { display:grid; gap:.35rem; flex:1 1 19rem; min-width:0; }
+.picker label { font-size:.85rem; }
+.picker select { width:100%; min-width:0; min-height:2.75rem; padding:.65rem; border:1px solid var(--line,#c8dce7); border-radius:0; color:inherit; background:var(--surface,#f5fbff); font:inherit; text-overflow:ellipsis; }
+.controls button:focus-visible,.picker select:focus-visible,.companion a:focus-visible { outline:3px solid #9bd8f4; outline-offset:3px; }
+.note { margin:0; font-size:.88rem; line-height:1.6; color:var(--muted,#527384); overflow-wrap:anywhere; }
+.error { margin:0; padding:.8rem 1rem; font-size:.92rem; line-height:1.6; border-left:3px solid #a84a45; background:#fff5f2; color:#71352f; overflow-wrap:anywhere; }
+.companion { display:grid; gap:.65rem; padding:1rem; border:1px solid var(--line,#c8dce7); }
+.companion p { margin:.4rem 0 0; line-height:1.6; }
+.companion a { width:fit-content; max-width:100%; padding:.65rem .8rem; border:1px solid var(--line,#c8dce7); color:inherit; font-size:.92rem; line-height:1.5; text-decoration:none; overflow-wrap:anywhere; }
+.companion a:hover { background:var(--surface,#f5fbff); text-decoration:underline; }
+@media(max-width:480px) { .placeholder { min-height:12rem; padding:1rem; } .controls button { flex:1 1 8rem; } .picker { flex-basis:100%; } }

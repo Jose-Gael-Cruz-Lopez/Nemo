@@ -6,6 +6,7 @@ physical measurement. The red detector stays the default and is checked for regr
 """
 from __future__ import annotations
 
+import asyncio
 import time
 import uuid
 from datetime import UTC, datetime
@@ -17,6 +18,7 @@ from fastapi.testclient import TestClient
 
 from apps.api.reeftrace_api.core.settings import Settings
 from apps.api.reeftrace_api.main import create_app
+from apps.api.reeftrace_api.services.token_detection import TokenDetectionService
 
 TOKEN = "token-detection-test-only"
 AUTH = {"Authorization": "Bearer " + TOKEN}
@@ -272,3 +274,118 @@ def test_token_size_measured_calm_can_carry_to_a_running_reference(env):
     runtime.camera.shift_px = 0
     detail = post(client, "/camera/reference", {"frame_count": 6, "token_size_from": unmeasured["reference_id"]}, 409)["detail"]
     assert "Measure one token" in detail
+
+
+@pytest.mark.parametrize("owner", ["reference", "measurement", "recording"])
+@pytest.mark.parametrize("contender", ["reference", "measurement", "recording"])
+def test_camera_operations_reject_competing_capture_without_queuing_and_release_on_cancel(
+        env, monkeypatch, owner, contender):
+    client, runtime, _ = env
+    _, calibration_id, reference, _ = prepared(client, runtime.camera)
+    service = runtime.token_detection
+
+    async def run():
+        entered = asyncio.Event()
+        original_frames = service._frames
+        original_image = runtime.camera.image
+
+        async def hold_frames(count, session_id):
+            entered.set()
+            await asyncio.Event().wait()
+
+        def mark_recording_frame():
+            image = original_image()
+            entered.set()
+            return image
+
+        if owner == "recording":
+            monkeypatch.setattr(runtime.camera, "image", mark_recording_frame)
+        else:
+            monkeypatch.setattr(service, "_frames", hold_frames)
+
+        async def operation(kind):
+            if kind == "reference":
+                return await service.capture_reference(frame_count=5)
+            if kind == "measurement":
+                return await service.measure_token(reference["reference_id"])
+            # Cancel this owned recording after the overlap check; a long allowed
+            # horizon keeps a slow test host from finishing it before cancellation.
+            return await runtime.record(None, 20, calibration_id)
+
+        task = asyncio.create_task(operation(owner))
+        try:
+            await asyncio.wait_for(entered.wait(), timeout=2)
+            sequence = runtime.camera.sequence
+            counts = {kind: len(runtime.store.list(kind))
+                      for kind in ("token_reference", "token_size", "recording")}
+            # An overlap must fail now; silently waiting until the owner finishes
+            # could capture the wrong physical scene after a button click.
+            with pytest.raises(ValueError, match="active"):
+                await asyncio.wait_for(operation(contender), timeout=0.2)
+            assert runtime.camera.sequence == sequence
+            assert {kind: len(runtime.store.list(kind)) for kind in counts} == counts
+            assert runtime.record_lock.locked()
+        finally:
+            task.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await task
+        assert not runtime.record_lock.locked()
+        monkeypatch.setattr(service, "_frames", original_frames)
+        monkeypatch.setattr(runtime.camera, "image", original_image)
+        # Cancellation frees the shared resource for an actual subsequent
+        # measurement through the unchanged detector and private store.
+        measured = await service.measure_token(reference["reference_id"])
+        assert measured["reference_id"] == reference["reference_id"]
+        assert measured["token_area_px"] > 25
+
+    asyncio.run(run())
+
+
+def test_reference_eviction_keeps_durable_arrays_and_reloads_a_working_detector(env):
+    client, runtime, tmp_path = env
+    session = post(client, "/camera/start", {"device_index": 1})["session_id"]
+    service = runtime.token_detection
+    references = []
+    for left in (0, 20):
+        references.append(post(client, "/camera/reference", {"frame_count": 5,
+            "roi_polygon_px": [[left, 0], [WIDTH - 1, 0], [WIDTH - 1, HEIGHT - 1], [left, HEIGHT - 1]]}))
+    second_id = references[1]["reference_id"]
+    original_second = service._reference(second_id)[1]
+    service._reference(references[0]["reference_id"])  # First reference is most recently used.
+    references.append(post(client, "/camera/reference", {"frame_count": 5,
+        "roi_polygon_px": [[40, 0], [WIDTH - 1, 0], [WIDTH - 1, HEIGHT - 1], [40, HEIGHT - 1]]}))
+    assert len(service._cache) == 2
+    assert references[0]["reference_id"] in service._cache
+    assert second_id not in service._cache
+    assert all((tmp_path / "token_references" / f"{ref['reference_id']}.npz").is_file()
+               for ref in references)
+    assert len(runtime.store.list("token_reference")) == 3
+
+    record, reloaded = service._reference(second_id)
+    assert record["reference_id"] == second_id
+    assert reloaded.fingerprint == record["content_id"]
+    np.testing.assert_array_equal(reloaded.median, original_second.median)
+    assert len(service._cache) == 2
+    runtime.camera.place(16, 12)
+    post(client, f"/camera/reference/{second_id}/token-size")
+
+    # A cold service rebuilds the reference from the durable NPZ, retaining
+    # its measured-token provenance and real detection behavior after eviction.
+    cold = TokenDetectionService(runtime)
+    detect, provenance = cold.detector("foreground_reference_v1", second_id,
+                                       session, [WIDTH, HEIGHT])
+    found = detect(runtime.camera.image()[0])
+    assert len(found) == 1
+    assert found[0]["pixel_x"] == pytest.approx(16 * PX_PER_CM, abs=1)
+    assert provenance["reference_id"] == second_id
+    assert len(cold._cache) == 1
+
+    # Eviction cannot turn a tampered disk reference into valid camera evidence.
+    path = tmp_path / "token_references" / f"{second_id}.npz"
+    with np.load(path) as saved:
+        altered = {key: saved[key].copy() for key in saved.files}
+    altered["median"][0, 0, 0] += 10
+    np.savez_compressed(path, **altered)
+    with pytest.raises(ValueError, match="does not match its ID"):
+        TokenDetectionService(runtime).detector("foreground_reference_v1", second_id,
+                                                session, [WIDTH, HEIGHT])

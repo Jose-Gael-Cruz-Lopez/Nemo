@@ -16,6 +16,14 @@ Local verification passed **2,017 Python tests, 320 frontend tests and 241 isola
 
 **Next camera task:** [Trove #3, assigned to Aarush](https://trov.dev/nemo/#tickets/3), proposes OpenCV reference-marker registration, a projected centimetre grid, black tray/green filter boundary layers and stale-mapping detection. This is planned work; automatic registration is not shipped or physically validated. Known scale and separate check points remain necessary.
 
+## Hosted camera and Megana’s rig measurements
+
+The hosted **Camera** page offers a browser-owned preview: explicit permission, a camera picker, no audio and no frame uploads. **Open local camera workspace** closes that preview and opens the local companion for Megana’s OpenCV detector, calibration and recording. Render cannot access a laptop’s USB device. Its physical capture routes remain disabled; Photon stays off in the cloud profile.
+
+Megana’s merged [PR #9](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/9) records the **35.56 × 22.86 cm** inside waterline, coarse cap-placement mapping, real green-cap measurements and excluded drift attempts in [the commissioning log](docs/rig-commissioning-run-log.md). Those dimensions should be reused for that unchanged tray. The actual mapping/reference images, SQLite records and recordings remain private on the capture laptop, not in Git or the Render image. Recorded IDs alone do not transfer those artifacts or authorize a mapping for another camera session. Her `scripts/load_estimated_rig.py` builds an explicitly **SYNTHETIC estimate**, not a measured flow or completed physical source trial.
+
+Reference capture, token measurement and recording now share one capture lock, so they cannot overlap. At most two decoded background references remain in memory; evicted references retain their private files and integrity checks. See [camera setup and the hosted/local boundary](docs/camera-preview.md).
+
 ## Start locally
 
 Use Python 3.12 and Node 20.9+; the verified development environment uses Python 3.12 and Node 24. From the repository root:

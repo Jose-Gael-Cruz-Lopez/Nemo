@@ -129,6 +129,8 @@ def _blocked_path(path, method):
 class CloudCamera:
     """Inert capability, also protecting non-HTTP agent/tool call paths."""
 
+    session_id = None
+
     def status(self):
         return {"running": False, "fresh": False, "session_id": None,
                 "device_index": None, "age_s": None, "sequence": None,

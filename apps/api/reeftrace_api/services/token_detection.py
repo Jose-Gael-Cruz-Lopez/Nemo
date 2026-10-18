@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import asyncio
 import time
+from collections import OrderedDict
 
 import cv2
 import numpy as np
@@ -28,12 +29,19 @@ REFERENCE_KIND = "token_reference"
 TOKEN_SIZE_KIND = "token_size"
 RED_DETECTOR = "red_hsv"
 DETECTORS = (RED_DETECTOR, DETECTOR_ID)
+REFERENCE_CACHE_SIZE = 2
 
 
 class TokenDetectionService:
     def __init__(self, runtime):
         self.runtime = runtime
-        self._cache = {}
+        self._cache = OrderedDict()
+
+    def _remember_reference(self, reference_id, reference):
+        self._cache[reference_id] = reference
+        self._cache.move_to_end(reference_id)
+        while len(self._cache) > REFERENCE_CACHE_SIZE:
+            self._cache.popitem(last=False)
 
     @property
     def _folder(self):
@@ -75,7 +83,13 @@ class TokenDetectionService:
         show the camera within the allowed creep of each other.
         """
         if self.runtime.record_lock.locked():
-            raise ValueError("A recording is active; capture the reference before recording")
+            raise ValueError("A camera capture is active; finish it before capturing a reference")
+        # asyncio.Lock acquires immediately while free: with no intervening await
+        # after the check, another capture is rejected rather than queued.
+        async with self.runtime.record_lock:
+            return await self._capture_reference(frame_count, roi_polygon_px, token_size_from)
+
+    async def _capture_reference(self, frame_count, roi_polygon_px, token_size_from):
         status = self._fresh_session()
         source = source_size = None
         if token_size_from:
@@ -96,7 +110,7 @@ class TokenDetectionService:
         reference_id = reference.fingerprint + "-" + status["session_id"][-8:]
         path = self._folder / f"{reference_id}.npz"
         np.savez_compressed(path, **reference.to_arrays())
-        self._cache[reference_id] = reference
+        self._remember_reference(reference_id, reference)
         record = {**reference.describe(), "reference_id": reference_id,
                   "content_id": reference.fingerprint, "camera_session_id": status["session_id"],
                   "captured_at": time.time(), "rig_change_at_capture": self._latest_rig_change()}
@@ -120,8 +134,10 @@ class TokenDetectionService:
             if not path.exists():
                 raise ValueError("Saved empty-tank reference data is missing; capture a new one")
             with np.load(path) as arrays:
-                self._cache[reference_id] = EmptyTankReference.from_arrays(
-                    arrays, expected_id=record["content_id"])
+                self._remember_reference(reference_id, EmptyTankReference.from_arrays(
+                    arrays, expected_id=record["content_id"]))
+        else:
+            self._cache.move_to_end(reference_id)
         return record, self._cache[reference_id]
 
     def _check_current(self, record, session_id):
@@ -132,6 +148,12 @@ class TokenDetectionService:
             raise ValueError("The rig changed after the empty-tank reference; capture a new one")
 
     async def measure_token(self, reference_id):
+        if self.runtime.record_lock.locked():
+            raise ValueError("A camera capture is active; finish it before measuring a token")
+        async with self.runtime.record_lock:
+            return await self._measure_token(reference_id)
+
+    async def _measure_token(self, reference_id):
         status = self._fresh_session()
         record, reference = self._reference(reference_id)
         self._check_current(record, status["session_id"])

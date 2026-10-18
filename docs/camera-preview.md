@@ -20,6 +20,18 @@ Actual start/stop/restart checks on 17 October 2026 produced fresh native frames
 
 The preview is available in the local application. The [public ocean showcase](public-ocean-showcase.md) has no connection to this computer's webcam, local experiment store or operator credential.
 
+## Hosted app with private local frames
+
+On the Render software demo, Camera uses the browser’s own preview rather than asking the remote server to open USB device 0. Select **Start preview**, allow camera access, and choose the external webcam. The full frame is unmirrored and uncropped. It requests no microphone, uploads no frames, and cannot create a calibration, reference or recording. **Close preview**, leaving Camera, or closing the page releases its tracks. A late permission response is also stopped after closure.
+
+For the full pipeline, start the local companion with `PHOTON_ENABLED=false .venv/bin/python scripts/dev.py`, then choose **Open local camera workspace**. The link closes browser capture first and opens `http://127.0.0.1:3000/workspace#camera` without a token in the URL. Enter that laptop’s local operator token privately. Camera, OpenCV, background references, frame timing and recordings stay on that laptop. Hosted and local operator tokens/stores are separate; the link does not synchronize private evidence or configure network access. Stop any older Photon-enabled local server before starting the disabled one; the launcher reuses already-running services.
+
+The cloud API continues to reject physical capture/calibration routes. Preview is distinct from token detection: it cannot establish a distance, flow or source. Reference capture, token-size measurement and recording are mutually exclusive. The two-reference memory cache reloads older private NPZ references with the existing integrity check rather than deleting their evidence.
+
+### Reuse the measurements already taken
+
+Megana’s [commissioning log](rig-commissioning-run-log.md) contains an actual 14 × 9 inch inside waterline (35.56 × 22.86 cm), real cap-size captures, camera-session/calibration/reference IDs and the coarse mapping error. Do not remeasure that unchanged container merely to show the software. However, its camera mapping and background references belong to the recorded camera pose/session and private laptop store. Do not copy their IDs into another laptop’s draft as if the underlying records, pixels and camera pose had transferred. The current log also records excluded drift attempts and an estimated SYNTHETIC rig model; it does not establish an admitted measured flow or physical source-identification accuracy.
+
 ## Coordinates when the tank is ready
 
 Expand **Calibrate a tank and record trials when ready** below the live preview. The draft and selected camera session remain available while that section is collapsed. The separate raw JSON setup tools remain below it for advanced use.

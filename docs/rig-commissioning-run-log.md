@@ -4,9 +4,12 @@ This is the working record for the first physical ReefTrace / Tideward rig. Each
 entry says what was actually checked, measured or recorded, and by whom. An
 unticked line means **not checked**, not "probably fine".
 
-**Overall status: BLOCKED.** The first physical tank has not run. No calibration,
-recording, profile or field receipt in this document comes from synthetic
-fixtures or the 23 demo cases.
+**Overall status: BLOCKED for a validated physical trial.** The rig has been
+measured, the C270 has captured real frames, a coarse session-specific mapping and
+token references are documented, and two wet recording attempts were excluded.
+No accepted measured drift profile, held-out flow validation or frozen field
+receipt is documented. The estimated rig demo below is explicitly SYNTHETIC and
+does not validate physical performance.
 
 | Field | Value |
 | --- | --- |
@@ -226,14 +229,25 @@ capture origin is `SYNTHETIC_FAKE_CAPTURE` is never physical evidence.
 
 ## 6. Current blockers
 
-1. **Token detection: working on the real C270** (reference and token size recorded above). Green caps are found by
-   the colour-independent detector (`docs/foreground-token-detection.md`), now selectable
-   in recording and in the field wizard (Jose approved the shared-file change, relayed by
-   Megana). Still to do on the rig: put a plain light sheet under the clear bin, start the
-   app, capture the empty tank with the pump running, and measure one cap.
-2. **Inventory rows 12–14 not yet checked.**
-3. **No measurements yet** (section 2). Mapping, drift, profiles and receipts depend on them.
-4. **Second layout:** the intervention collector position must be declared and marked
-   before its drift is recorded.
-5. **Clamps not used** (operator decision): leak check at the barb and a fixed outlet
-   position are still required.
+1. **Token detection works on the real C270.** The session-specific references and
+   cap sizes above are saved on the capture laptop. Reuse them only while the
+   corresponding camera session/pose and private artifacts remain valid. A new
+   session needs its own checked mapping/reference, not merely the old IDs.
+2. **Inventory rows 12–14 remain unchecked in this log.** The later cap-placement
+   method and measured waterline are recorded above; the remaining physical setup
+   checks still need explicit operator confirmation.
+3. **Geometry and mapping exist; accepted measured flow does not.** Retain the
+   35.56 × 22.86 cm waterline and the disclosed coarse mapping error. Both recorded
+   drift attempts were excluded. Separate usable training and validation tracks,
+   declared acceptance limits and an admitted measured profile are still needed.
+4. **Second layout:** its collector position must be declared and marked, then
+   its own drift must be recorded. The estimated mesh/no-mesh scenario is not a
+   replacement for those measurements.
+5. **Clamps not used** (operator decision): the leak check and fixed outlet
+   position still require confirmation. No field receipt is frozen.
+
+**Hosted/local artifact boundary (18 October UTC):** PR #9 commits code and this
+measurement log, not the private `data/local` SQLite database, reference NPZs or
+raw recordings. Render's software demo contains public fixtures and synthetic
+examples. Use the capture laptop for the physical pipeline; a hosted browser
+preview is not a transfer or validation of its stored calibration.
