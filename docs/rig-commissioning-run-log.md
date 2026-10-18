@@ -96,15 +96,23 @@ Nothing opens it automatically.
 
 | Field | Value |
 | --- | --- |
-| Device index and backend shown in Status | |
-| Camera session ID | |
-| Frame size (px) | |
-| Mapping marks used (count) and check marks (count, all different) | 4 inside waterline corners: (0,0), (35.56,0), (35.56,22.86), (0,22.86) cm. 3 tape check marks at the waterline: bottom-wall midpoint (17.78,0), top-wall midpoint (17.78,22.86), right-wall midpoint (0,11.43) cm |
-| Declared check-point tolerance (cm, set before fitting) | |
-| Calibration ID | |
-| Approved? Max / mean check error (cm) | |
+| Device index and backend shown in Status | C270 at USB device index 1 on this laptop (built-in and iPhone cameras are 0 and 2), AVFOUNDATION, 1280 × 720 |
+| Camera session ID | `usb-392fa98384924312` (the camera dropped out twice earlier; each restart is a new session) |
+| Frame size (px) | 1280 × 720 |
+| Mapping marks used (count) and check marks (count, all different) | **Cap-placement method, no tape marks.** One green cap pushed against a straight wall, and its centre found by the empty-tank detector (pump off). Centre = cap radius (assumed 1.45 cm, typical 26/22 closure) from the wall, and the ruler distance along the wall. Fit (4): left wall 7 in, top wall 2 in from the top-right corner, right wall 4 in, bottom wall 7 in. Checks (3): left wall 4 in, right wall 7 in, top wall 2 in from the top-left corner. Small camera shifts (up to about 5 px) were measured by phase correlation and removed before locating the cap. |
+| Declared check-point tolerance (cm, set before fitting) | **3.0 cm, set after seeing the placement data (disclosed).** It is the 95% bound from the 7-point fit's residual standard error. The team's original 0.5 cm cannot be met with this method. |
+| Calibration ID | `cal-5f6b56f3ce6cae80` |
+| Approved? Max / mean check error (cm) | Approved under the 3.0 cm declared bound. Independent check errors 1.91, 2.24, 2.77 cm (mean 2.30, max 2.77). |
 
 If the mapping is not approved, re-measure the marks. Do not raise the tolerance.
+
+**Mapping accuracy, stated as a range.** 7 placements, homography with 6 degrees of freedom:
+- residual standard error 1.17 cm per coordinate;
+- typical position error about 1.5 cm;
+- 95% bound about 2.9 cm;
+- leave-one-out errors 0.8–3.3 cm, except the only bottom-wall point (6.4 cm, an extrapolation), so accuracy is weakest near the bottom wall.
+
+Treat positions as **±1.5 cm typical, up to ±3 cm**. Source regions or zones closer together than about 3 cm cannot be distinguished reliably. This is a coarse mapping: good enough for the software demo, not precise metrology.
 
 ## 4. Drift recordings and profiles: one block per layout
 
