@@ -135,7 +135,7 @@ evidence that the rig needs repair; they are never a reason to relax a gate.
 
 | Field | Value |
 | --- | --- |
-| Training recording IDs (≥2) | |
+| Training recording IDs (≥2) | Attempt 1 (excluded): `recording-f7682c36f09048cc`, 15 s, pump at its lowest setting. The cap reached the mesh's lower edge within about 2.5 s and stayed there; 29/99 frames observed (gaps from occlusion by the mesh frame and black strap). Its 12 "drift" samples are positional jitter of a retained cap, so it was left out of training. A first attempt was discarded by the app because a hand was in view. |
 | Validation recording IDs (≥1, separate) | |
 | Declared coverage radius / cell size (cm) | |
 | Flow ID and content hash | |
