@@ -17,7 +17,6 @@ from .benchmark import SphericalLocalFrame, great_circle_distance_m
 from .field import OceanField
 from .kalman import (
     ACCELERATION_SPECTRAL_DENSITY_M2_S3,
-    MAX_LOCAL_M,
     POSITION_STD_M,
     _check_cov,
     _check_state,
@@ -59,8 +58,6 @@ def filter_three_positions(observations, group_id):
         raise ValueError("THREE_FIX_CADENCE_OR_TIME_MISMATCH")
     frame = SphericalLocalFrame(raw[0]["latitude_deg"], raw[0]["longitude_deg"])
     xy = np.asarray([frame.to_xy(row["latitude_deg"], row["longitude_deg"]) for row in raw])
-    if (not np.isfinite(xy).all() or np.max(np.linalg.norm(xy, axis=1)) > MAX_LOCAL_M):
-        raise ValueError("THREE_FIX_POSITION_OUTSIDE_LOCAL_DOMAIN")
     variance = POSITION_STD_M**2
     states = [{**raw[0], "east_m": float(xy[0, 0]), "north_m": float(xy[0, 1]),
                "eastward_m_s": None, "northward_m_s": None, "status": "POSITION_ONLY", "covariance": None}]

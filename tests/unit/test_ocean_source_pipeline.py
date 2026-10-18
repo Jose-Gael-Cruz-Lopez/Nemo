@@ -245,9 +245,9 @@ def test_single_causal_measurement_update_matches_declared_covariance_oracle():
 def test_raw_fix_outside_local_domain_cannot_be_hidden_by_filter_correction():
     group = model.GROUP_IDS[0]
     frame = SphericalLocalFrame(LAT, LON)
-    fixes = [position(group, hour, *frame.to_latlon(np.array([east, 0.])))
-             for hour, east in ((1, 0.), (2, 10000.), (3, 50100.))]
-    # Without the raw-fix guard, the measurement correction pulls the last fix
-    # inside 50km and produces a <10m/s state, concealing an unsupported input.
-    with pytest.raises(ValueError, match="POSITION_OUTSIDE_LOCAL_DOMAIN"):
+    fixes = [position(group, 1), position(group, 2, *frame.to_latlon(np.array([10000., 0.]))),
+             position(group, 3, lon=LON + .53)]
+    # The shared geometry guard rejects the >50km measurement before a filter
+    # correction could pull its state back inside the permitted local frame.
+    with pytest.raises(ValueError, match="50 km local-geometry budget"):
         model.filter_three_positions(fixes, group)
