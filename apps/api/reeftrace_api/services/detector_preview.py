@@ -39,11 +39,11 @@ WARNING = (
 MAX_PREVIEWS = 2
 PREVIEW_LIFETIME_S = 1800
 MAX_JPEG_BYTES = 640_000
-MARKER_MODE = "saved_green_marker_preview_v1"
+MARKER_MODE = "saved_green_marker_preview_v2"
 _MARKER_POLICY = {
     "policy_id": MARKER_MODE, "detector": MARKER_MODE,
     "segmentation": "direct_green_hsv_without_background_subtraction",
-    "green_hsv_lower": [35, 80, 40], "green_hsv_upper": [85, 255, 255],
+    "green_hsv_lower": [35, 80, 20], "green_hsv_upper": [85, 255, 255],
     "maximum_aspect_ratio": 2.0, "minimum_circularity": 0.45, "minimum_solidity": 0.75,
     "open_kernel_px": 3, "close_kernel_px": 5,
     "area_lower_multiplier": 0.35, "area_upper_multiplier": 3.0,
@@ -146,10 +146,13 @@ class DetectorPreviewService:
 
     def _marker_area_source(self, dimensions):
         report = DetectorReplayService(self.runtime).latest()
+        current_policy = surface_policy()
         if (report.get("data_origin") != "LOCAL_SAVED_FOOTAGE_REPLAY"
                 or report.get("purpose") != "DEVELOPMENT_REGRESSION"
                 or report.get("validation_status") != "UNVALIDATED"
-                or report.get("measured_flow_eligible") is not False):
+                or report.get("measured_flow_eligible") is not False
+                or report.get("policy", {}).get("id") != current_policy["policy_id"]
+                or report.get("policy", {}).get("sha256") != current_policy["policy_sha256"]):
             raise ValueError("Marker preview requires a current-policy saved development replay")
         for clip in report.get("clips", [])[:10]:
             if clip.get("image_size_px") != dimensions:
@@ -324,7 +327,8 @@ class DetectorPreviewService:
         from collections import Counter
 
         green = cv2.inRange(cv2.cvtColor(image, cv2.COLOR_BGR2HSV),
-                           np.array([35, 80, 40], np.uint8), np.array([85, 255, 255], np.uint8))
+                           np.array(_MARKER_POLICY["green_hsv_lower"], np.uint8),
+                           np.array(_MARKER_POLICY["green_hsv_upper"], np.uint8))
         green = cv2.morphologyEx(green, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
         green = cv2.morphologyEx(green, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
         dx, dy = (alignment["dx_px"], alignment["dy_px"]) if alignment else (0.0, 0.0)

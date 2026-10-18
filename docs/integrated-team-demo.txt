@@ -144,6 +144,8 @@ The transport envelope is prevention_method_replay_v1. It deliberately leaves th
 5) A “Saved background changed” notice means the explicit green-marker display is operating independently of background subtraction. The measured detector still rejects that changed scene. “Live display · unvalidated” creates no recording, token-size approval, measured calibration, flow profile, source case or trial receipt. Frames stay on this Mac.
 6) Return to Investigations for the saved source-case story, Chalk and Photon. The cap box is not a newly inferred pollution origin. The current authorized Photon route still answers about its saved synthetic case; it does not follow this live cap or whichever dashboard case is selected.
 
+Display policy saved_green_marker_preview_v2 supports a dim green cap while preserving the same colour, shape and historical-size restrictions. It is separate from the unchanged measured foreground policy. If the webcam changes resolution, the overlay stops; restore its saved resolution with a software camera restart and enable the display again, without resurveying the tray. No blind scaling of saved centimetres is used.
+
 “Hide live detector” stops overlay polling. It does not disable Photon replies or change pump power. For checked measured work, use the separate workflow below and docs/reuse-saved-tank-calibration.md.
 
 4B. MEASURED FIELD COMMISSIONING: SEPARATE FROM THE LIVE DISPLAY

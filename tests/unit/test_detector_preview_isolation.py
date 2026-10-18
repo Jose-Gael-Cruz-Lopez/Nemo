@@ -102,7 +102,7 @@ def env(tmp_path, monkeypatch):
                                         measure_token=forbidden, capture_reference=forbidden,
                                         detector=forbidden))
     body = SimpleNamespace(source=bundle, reference_id=reference_id,
-                           detection_polygon_px=POLYGON, detector_mode="saved_green_marker_preview_v1")
+                           detection_polygon_px=POLYGON, detector_mode="saved_green_marker_preview_v2")
     service = DetectorPreviewService(runtime)
     return SimpleNamespace(service=service, runtime=runtime, body=body, source=source,
                            reference_record=record, reference=reference, path=tmp_path)
@@ -116,7 +116,7 @@ def assert_no_admission(env):
 def test_explicit_marker_preview_keeps_historical_map_and_never_mints_measured_artifacts(env):
     source_before, reference_before = copy.deepcopy(env.source), copy.deepcopy(env.reference_record)
     config = env.service.configure(env.body)
-    assert config["detector_mode"] == "saved_green_marker_preview_v1"
+    assert config["detector_mode"] == "saved_green_marker_preview_v2"
     assert config["validation_status"] == "UNVALIDATED"
     assert config["approved_for_inference"] is config["measured_flow_eligible"] is False
     assert config["current_alignment_verified"] is False
@@ -124,7 +124,7 @@ def test_explicit_marker_preview_keeps_historical_map_and_never_mints_measured_a
     assert config["homography_image_to_cm"] == source_before["homography_image_to_cm"]
     assert config["camera_session_id"] != config["source_camera_session_id"]
     result = env.service.get(config["preview_id"])
-    assert result["detector_mode"] == "saved_green_marker_preview_v1"
+    assert result["detector_mode"] == "saved_green_marker_preview_v2"
     assert result["validation_status"] == "UNVALIDATED"
     assert result["approved_for_inference"] is result["measured_flow_eligible"] is False
     assert result["calibration_id"] is result["profile_id"] is result["case_id"] is None

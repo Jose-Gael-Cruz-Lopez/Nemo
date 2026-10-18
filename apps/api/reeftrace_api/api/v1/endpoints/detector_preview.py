@@ -15,7 +15,7 @@ class DetectorPreviewInput(StrictModel):
     reference_id: Identifier
     source: SavedCalibrationBundle
     detection_polygon_px: Annotated[list[tuple[FiniteFloat, FiniteFloat]], Field(min_length=3, max_length=32)]
-    detector_mode: Literal["foreground_surface_v2", "saved_green_marker_preview_v1"] = "foreground_surface_v2"
+    detector_mode: Literal["foreground_surface_v2", "saved_green_marker_preview_v2"] = "foreground_surface_v2"
 
 
 def create_detector_preview_router(runtime, operator):

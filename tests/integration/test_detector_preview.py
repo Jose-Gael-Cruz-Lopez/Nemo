@@ -118,11 +118,12 @@ def configure_marker(env):
     env.runtime.store.put("detector_replay", {
         "report_id": "saved-green-development", "data_origin": "LOCAL_SAVED_FOOTAGE_REPLAY",
         "purpose": "DEVELOPMENT_REGRESSION", "validation_status": "UNVALIDATED",
-        "measured_flow_eligible": False, "policy": {"sha256": surface_policy()["policy_sha256"]},
+        "measured_flow_eligible": False, "policy": {"id": surface_policy()["policy_id"],
+                                                   "sha256": surface_policy()["policy_sha256"]},
         "clips": [{"id": "synthetic-development", "image_size_px": [WIDTH, HEIGHT],
                    "points": [{"observed": True, "area_px": 600.0}]}],
     }, "saved-green-development")
-    env.body["detector_mode"] = "saved_green_marker_preview_v1"
+    env.body["detector_mode"] = "saved_green_marker_preview_v2"
     return configure(env)
 
 
@@ -330,7 +331,7 @@ def test_preview_id_cannot_be_promoted_into_recording_or_source_evidence(env):
 
 def test_marker_mode_is_explicit_and_discloses_incompatible_foreground_without_approving_size(env):
     config = configure_marker(env)
-    assert config["detector_mode"] == "saved_green_marker_preview_v1"
+    assert config["detector_mode"] == "saved_green_marker_preview_v2"
     assert config["policy"]["segmentation"] == "direct_green_hsv_without_background_subtraction"
     assert config["marker_area_source"]["area_px_range"] == [210, 1800]
     image = (env.floor.astype(float) * .65).astype(np.uint8)
@@ -379,7 +380,7 @@ def test_marker_registration_failure_keeps_only_raw_pixels_and_never_invents_cm(
 
 
 def test_marker_mode_refuses_absent_or_retired_development_area_source(env):
-    env.body["detector_mode"] = "saved_green_marker_preview_v1"
+    env.body["detector_mode"] = "saved_green_marker_preview_v2"
     missing = env.client.post(BASE + "/config", headers=AUTH, json=env.body)
     assert missing.status_code == 404
     configure_marker(env)
@@ -389,4 +390,55 @@ def test_marker_mode_refuses_absent_or_retired_development_area_source(env):
     env.runtime.store.put("detector_replay", old, old["report_id"])
     rejected = env.client.post(BASE + "/config", headers=AUTH, json=env.body)
     assert rejected.status_code == 409 and "predates" in rejected.json()["detail"]
+    assert_no_admission(env)
+
+
+def test_marker_mode_refuses_retired_policy_id_even_when_hash_echoes_current_policy(env):
+    configure_marker(env)
+    old = env.runtime.store.get("detector_replay", "saved-green-development")
+    old["report_id"] = "obsolete-policy-name"
+    old["policy"]["id"] = "compact_cap_v1"
+    env.runtime.store.put("detector_replay", old, old["report_id"])
+    rejected = env.client.post(BASE + "/config", headers=AUTH, json=env.body)
+    assert rejected.status_code == 409 and "current-policy" in rejected.json()["detail"]
+    assert_no_admission(env)
+
+
+def test_marker_v2_keeps_dim_green_cap_but_rejects_dim_elongated_filter_and_tiny_fleck(env):
+    config = configure_marker(env)
+    assert config["policy"]["policy_id"] == "saved_green_marker_preview_v2"
+    assert config["policy"]["green_hsv_lower"] == [35, 80, 20]
+    assert surface_policy()["green_hsv_lower"] == [35, 80, 40]  # Strict detector stays unchanged.
+    image = env.floor.copy()
+    dim_green = (12, 35, 10)  # HSV value 35: below v1 display threshold, above v2's fixed 20.
+    cv2.circle(image, (140, 110), 14, dim_green, -1)
+    cv2.rectangle(image, (30, 170), (250, 177), dim_green, -1)
+    cv2.circle(image, (80, 80), 4, dim_green, -1)
+    env.camera.set_frame(image)
+    result = poll(env, config).json()
+    assert result["detector_mode"] == "saved_green_marker_preview_v2"
+    assert result["observed"] and result["point"]["pixel_x"] == pytest.approx(140, abs=1)
+    assert len(result["detections"]) == 1
+    assert result["diagnostics"]["rejection_counts"]["ELONGATED_COMPONENT"] >= 1
+    assert result["diagnostics"]["rejection_counts"]["AREA_OUT_OF_RANGE"] >= 1
+    assert result["validation_status"] == "UNVALIDATED"
+    assert result["approved_for_inference"] is False
+    assert_no_admission(env)
+
+
+def test_marker_v2_still_rejects_a_green_blob_below_fixed_value_twenty(env):
+    config = configure_marker(env)
+    image = env.floor.copy()
+    cv2.circle(image, (140, 110), 14, (3, 12, 3), -1)
+    env.camera.set_frame(image)
+    result = poll(env, config).json()
+    assert result["observed"] is False and result["reason"] == "NO_TOKEN"
+    assert result["point"] is None
+    assert_no_admission(env)
+
+
+def test_retired_marker_v1_cannot_be_requested_as_the_current_display_policy(env):
+    env.body["detector_mode"] = "saved_green_marker_preview_v1"
+    response = env.client.post(BASE + "/config", headers=AUTH, json=env.body)
+    assert response.status_code == 422
     assert_no_admission(env)
