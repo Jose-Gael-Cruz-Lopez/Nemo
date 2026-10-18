@@ -65,7 +65,7 @@ class RecordInput(StrictModel):
     duration_s: FiniteFloat = Field(ge=1, le=20)
     # red_hsv keeps the original red-marker behaviour; foreground_reference_v1 finds any
     # token against an empty-tank reference captured in the same camera session.
-    detector: Literal["red_hsv", "foreground_reference_v1"] = "red_hsv"
+    detector: Literal["red_hsv", "foreground_reference_v1", "foreground_surface_v2"] = "red_hsv"
     reference_id: str | None = Field(default=None, min_length=1, max_length=100)
 
 
@@ -74,6 +74,13 @@ class TokenReferenceInput(StrictModel):
     roi_polygon_px: list[tuple[FiniteFloat, FiniteFloat]] | None = Field(default=None, min_length=3, max_length=32)
     # Reuse the token size measured with an earlier reference from this camera session.
     token_size_from: str | None = Field(default=None, min_length=1, max_length=100)
+    detector: Literal["foreground_reference_v1", "foreground_surface_v2"] = "foreground_reference_v1"
+    detection_polygon_px: list[tuple[FiniteFloat, FiniteFloat]] | None = Field(
+        default=None, min_length=3, max_length=32)
+
+
+class SurfaceReferenceInput(StrictModel):
+    detection_polygon_px: list[tuple[FiniteFloat, FiniteFloat]] = Field(min_length=3, max_length=32)
 
 
 class RecordingCaseInput(StrictModel):

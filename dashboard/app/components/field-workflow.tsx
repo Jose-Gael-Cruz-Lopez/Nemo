@@ -10,7 +10,7 @@ import {
   ATTESTATION_KEYS, DRAFT_KEY, addRecording, buildCalibrationRequest, buildFieldRequest, buildFlowRequest, buildProfile, canFreeze,
   decodeDraft, deriveSteps, encodeDraft, failureNotice, invalidateAfter, newDraft, parseCalibration, parseCameraStatus, parseCase,
   parseFlow, parseManifestDetail, parsePreflight, parseProfile, parseRecording, parseRigCheck, requestKey,
-  detectionFields, parseTokenReference, referenceCaptureBody, setTokenReference, withTokenSize, applyLoggedTrayMeasurements, boundsCm,
+  detectionFields, parseTokenReference, referenceCaptureBody, setTokenReference, withTokenSize, applyLoggedTrayMeasurements, boundsCm, buildSurfaceReferenceRequest,
   type AttestationKey, type TokenDetector, type CameraStatus, type Draft, type LengthUnit, type ManifestDetail, type Preflight, type StepId, type StepView,
 } from "./field-workflow-state";
 import styles from "./field-workflow.module.css";
@@ -21,6 +21,7 @@ import type { Point, WaterMapping } from "./camera-grid-state";
 import { SavedCalibration } from "./saved-calibration";
 import type { SavedCalibrationBundle } from "./saved-calibration-state";
 import { EstimatedTankRehearsal } from "./estimated-tank-rehearsal";
+import { SavedDetectorReplay } from "./saved-detector-replay";
 
 type Request = <T>(path: string, body?: unknown, options?: { signal?: AbortSignal; independent?: boolean }) => Promise<T>;
 export type FieldWorkflowProps = {
@@ -36,6 +37,8 @@ export type FieldWorkflowProps = {
   /** Closed setup retains the draft without a second hidden camera connection. */
   previewActive?: boolean;
   onMappingChange?: (mapping: WaterMapping | null) => void;
+  /** The Camera route can show saved-footage replay above the collapsed setup. */
+  showSavedReplay?: boolean;
 };
 
 const TITLES: Record<StepId, string> = {
@@ -71,7 +74,7 @@ function Step({ item, n, children }: { item: StepView; n: number; children: Reac
   </section>;
 }
 
-export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOperator, onBusyChange, onOpenCase, blocked = false, onMappingChange, previewActive = true }: FieldWorkflowProps) {
+export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOperator, onBusyChange, onOpenCase, blocked = false, onMappingChange, previewActive = true, showSavedReplay = true }: FieldWorkflowProps) {
   // Restored after mount: the server render has no sessionStorage, so reading it during render would not hydrate.
   const [draft, setDraft] = useState<Draft>(newDraft);
   const [restored, setRestored] = useState(false);
@@ -85,6 +88,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const [savedSource, setSavedSource] = useState<SavedCalibrationBundle | null>(null);
   const [estimatedMapping, setEstimatedMapping] = useState<WaterMapping | null>(null);
   const [rehearsalBusy, setRehearsalBusy] = useState(false);
+  const [replayBusy, setReplayBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [keepTokenSize, setKeepTokenSize] = useState(true);
@@ -128,7 +132,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   useEffect(() => () => onBusyChange?.(false), [onBusyChange]);
 
   async function run(label: string, action: () => Promise<void>) {
-    if (running.current || reuseBusy || rehearsalBusy || blocked) return;
+    if (running.current || reuseBusy || rehearsalBusy || replayBusy || blocked) return;
     if (!operatorConnected) { onRequireOperator(); return; }
     running.current = true;
     setBusy(label); onBusyChange?.(true); setError(""); setNotice("");
@@ -138,9 +142,10 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   }
   const update = (change: (current: Draft) => Draft) => setDraft(current => change(current));
   const field = <K extends keyof Draft>(key: K) => (value: Draft[K]) => update(current => ({ ...current, [key]: value }));
-  const locked = !!busy || reuseBusy || rehearsalBusy || blocked || !restored;
+  const locked = !!busy || reuseBusy || rehearsalBusy || replayBusy || blocked || !restored;
   const savedCalibrationBusy = useCallback((value: boolean) => { setReuseBusy(value); onBusyChange?.(value); }, [onBusyChange]);
   const estimatedRehearsalBusy = useCallback((value: boolean) => { setRehearsalBusy(value); onBusyChange?.(value); }, [onBusyChange]);
+  const detectorReplayBusy = useCallback((value: boolean) => { setReplayBusy(value); onBusyChange?.(value); }, [onBusyChange]);
   const steps = deriveSteps(draft, camera, preflight, preflightKey);
   const view = (id: StepId) => steps.find(step => step.id === id)!;
   const sessionCurrent = !!camera?.fresh && camera.session_id === draft.cameraSessionId;
@@ -177,6 +182,8 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
       </div>
     </section>
 
+    {showSavedReplay && <SavedDetectorReplay request={request} disabled={!!busy || reuseBusy || rehearsalBusy || blocked || !operatorConnected} onBusyChange={detectorReplayBusy} />}
+
     <div className={styles.steps}>
       <Step item={view("camera_session")} n={1}>
         <div className={styles.form}><div className={styles.grid2}>
@@ -196,7 +203,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
           <div className={styles.actions}><button className="secondary-button" disabled={locked} onClick={() => { update(applyLoggedTrayMeasurements); setNotice("Megana’s recorded tray bounds and green-cap class are loaded. Camera alignment, source regions and new drift are still checked separately; no physical check was marked as passed."); }}>Use Megana’s recorded tray measurements</button></div>
           {sessionCurrent && camera?.width && camera.height ? <div className={styles.preview}><CalibrationCameraPreview visible={previewActive} apiBase={apiBase} width={camera.width} height={camera.height} sessionId={camera.session_id} active={sessionCurrent} calibration={estimatedMapping ?? draft.calibration} onPick={pick} /></div> : <p className={styles.explain}>A preview appears when the selected session has fresh frames.</p>}
           <label>Clicking the preview adds to<select value={pickTarget} disabled={locked} onChange={event => setPickTarget(event.target.value as "mapping" | "check" | "reuse")}><option value="reuse">Saved mapping check pixels</option><option value="mapping">New mapping pixel points</option><option value="check">New mapping check pixel points</option></select></label>
-          <SavedCalibration request={request} camera={sessionCurrent ? camera : null} disabled={!!busy || rehearsalBusy || blocked || !restored || !operatorConnected} onBusyChange={savedCalibrationBusy} checkPixels={reuseCheckPixels} onCheckPixelsChange={setReuseCheckPixels} onSourceChange={source => { setSavedSource(source); setEstimatedMapping(null); }} onCheckStart={() => {
+          <SavedCalibration request={request} camera={sessionCurrent ? camera : null} disabled={!!busy || rehearsalBusy || replayBusy || blocked || !restored || !operatorConnected} onBusyChange={savedCalibrationBusy} checkPixels={reuseCheckPixels} onCheckPixelsChange={setReuseCheckPixels} onSourceChange={source => { setSavedSource(source); setEstimatedMapping(null); }} onCheckStart={() => {
             update(current => ({ ...invalidateAfter(current, "water_plane_mapping"), calibration: null }));
             setPreflight(null); setReceipt(null);
           }} onApply={calibration => {
@@ -206,7 +213,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
             setPreflight(null); setReceipt(null);
             setNotice("The unchanged saved mapping passed fresh alignment checks in this session. Its original tolerance is preserved. Next capture the current empty tank and measure the cap’s image area; no ruler measurement is required for that detector check.");
           }} />
-          <EstimatedTankRehearsal request={request} camera={sessionCurrent ? camera : null} source={savedSource} reference={draft.tokenReference} bounds={rehearsalBounds} disabled={!!busy || reuseBusy || blocked || !restored || !operatorConnected} onBusyChange={estimatedRehearsalBusy} onEstimatedMapping={setEstimatedMapping} />
+          <EstimatedTankRehearsal request={request} camera={sessionCurrent ? camera : null} source={savedSource} reference={draft.detector === "foreground_surface_v2" && draft.tokenReference?.detector !== "foreground_surface_v2" ? null : draft.tokenReference} bounds={rehearsalBounds} disabled={!!busy || reuseBusy || replayBusy || blocked || !restored || !operatorConnected} onBusyChange={estimatedRehearsalBusy} onEstimatedMapping={setEstimatedMapping} />
           <details><summary>Fit a new mapping if the saved camera alignment does not pass</summary>
           <p className={styles.explain}>Keep your existing surveyed world coordinates. Observe their current pixel positions at the actual water level. Use at least four spread-out mapping marks and three separate check marks. The image pixel axes and tank axes may point differently.</p>
           <div className={styles.grid2}>
@@ -235,9 +242,21 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
           <fieldset className={styles.form}>
             <legend>How the camera finds the token</legend>
             <label>Token detector<select value={draft.detector} disabled={locked} onChange={event => update(current => ({ ...setTokenReference(current, current.tokenReference), detector: event.target.value as TokenDetector }))}>
-              <option value="foreground_reference_v1">Any colour: compare with the empty tank</option>
+              <option value="foreground_reference_v1">Original v1: compare with the empty tank</option>
+              <option value="foreground_surface_v2">Surface v2: frozen tank outline and compact cap shape</option>
               <option value="red_hsv">Red marker only</option>
             </select></label>
+            {draft.detector === "foreground_surface_v2" && <>
+              <p className={styles.explain}>Surface v2 limits foreground detection to the displayed tank outline and a frozen compact-cap shape policy. Preparing it reuses the stored background and token image-size range; it does not open the camera, alter the saved mapping, or approve centimetre accuracy.</p>
+              <p className={styles.explain}>Declared pixel outline: {(estimatedMapping ?? draft.calibration)?.mapping_polygon_px?.map(point => point.map(value => value.toFixed(1)).join(", ")).join(" ; ") || "No tank outline displayed. Select the saved estimated grid or a validated mapping first."}</p>
+              <button className="secondary-button" disabled={locked || !sessionCurrent || !draft.tokenReference?.token_area_px_range || !(estimatedMapping ?? draft.calibration)?.mapping_polygon_px} onClick={() => void run("Freezing the surface detector from the saved background", async () => {
+                const body = buildSurfaceReferenceRequest(draft, camera, (estimatedMapping ?? draft.calibration)?.mapping_polygon_px);
+                const reference = parseTokenReference(await request<unknown>(`/camera/reference/${encodeURIComponent(draft.tokenReference!.reference_id)}/surface`, body));
+                update(current => ({ ...setTokenReference(current, reference), detector: "foreground_surface_v2" }));
+                setNotice(`Surface detector prepared as ${reference.reference_id}. Its pixel outline and compact-cap policy are frozen; the old background and calibration are unchanged. Saved-footage replay remains development evidence.`);
+              })}>Prepare surface detector from saved background</button>
+              {draft.tokenReference?.detector === "foreground_surface_v2" && <p className={styles.explain}>Surface reference <code>{draft.tokenReference.reference_id}</code> · frozen policy <code>{draft.tokenReference.policy_id}</code>. This does not validate source or flow accuracy.</p>}
+            </>}
             {draft.detector === "foreground_reference_v1" && <>
               <p className={styles.explain}>This finds whatever new object floats in the tank, so green caps work. It does not recognise plastic. First remove every token, turn the pump on, and keep hands out of view; then capture the empty tank. Next, place one cap in open water and measure it.</p>
               <div className={styles.actions}>
@@ -263,7 +282,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
           <label>Recording length (1–20 s)<input inputMode="decimal" value={draft.durationS} disabled={locked} onChange={event => field("durationS")(event.target.value)} /></label>
           <p className={styles.explain}>Release one token per run and keep it in view. Gaps or a second token split the track; they are never joined.</p>
           <div className={styles.actions}>
-            {(["training", "validation"] as const).map(split => <button key={split} className="secondary-button" disabled={locked || !sessionCurrent || !draft.calibration?.approved || !durationValid || draft.detector === "foreground_reference_v1" && !draft.tokenReference?.token_area_px_range} onClick={() => void run(`Recording ${split} drift`, async () => {
+            {(["training", "validation"] as const).map(split => <button key={split} className="secondary-button" disabled={locked || !sessionCurrent || !draft.calibration?.approved || !durationValid || draft.detector !== "red_hsv" && (!draft.tokenReference?.token_area_px_range || draft.detector === "foreground_surface_v2" && draft.tokenReference.detector !== "foreground_surface_v2")} onClick={() => void run(`Recording ${split} drift`, async () => {
               const result = await record({ calibration_id: draft.calibration!.calibration_id });
               update(current => addRecording(current, split, result.id));
               setNotice(`${split === "training" ? "Training" : "Validation"} run ${result.id}: ${result.observed}/${result.frames} frames observed, ${result.gaps} gap${result.gaps === 1 ? "" : "s"}, ${result.tracks} track${result.tracks === 1 ? "" : "s"}.`);

@@ -32,6 +32,8 @@ For Megana’s portable `reeftrace-rig-handoff` folder, `scripts/prepare_tank_ha
 
 Reference capture, token measurement and recording now share one capture lock, so they cannot overlap. At most two decoded background references remain in memory; evicted references retain their private files and integrity checks. See [camera setup and the hosted/local boundary](docs/camera-preview.md).
 
+**Rim/reflection rejection and saved-footage replay:** local Camera now offers **Replay saved camera footage** without opening the webcam or moving the rig. It compares the original detector with opt-in `foreground_surface_v2`, overlays accepted/rejected objects and the declared tank outline, and preserves misses/ambiguity as gaps. V2 keeps the full-background lighting and camera-shift checks unchanged, then rejects complete components crossing the outline or failing the frozen compact-cap shape policy. It does not recognize plastic. A 37-frame local development replay accepted 33 frames with v1 and 37 with v2; these clips informed development and are not an independent accuracy test. The private JPEGs/backgrounds stay out of Git and Render. See [the versioned detector and replay contract](docs/surface-detector-replay.md).
+
 ## Start locally
 
 Use Python 3.12 and Node 20.9+; the verified development environment uses Python 3.12 and Node 24. From the repository root:

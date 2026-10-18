@@ -23,6 +23,7 @@ class Store(Protocol):
     def claim_inbound(self) -> Inbound | None: ...
     def claim_control_inbound(self) -> Inbound | None: ...
     def finish_inbound(self, inbound_id: str, outgoing: Outgoing) -> None: ...
+    def completed_inbound(self, inbound_id: str) -> Inbound | None: ...
     def fail_inbound(self, inbound_id: str, error: str) -> None: ...
     def claim_outgoing(self) -> Outgoing | None: ...
     def update_outgoing(
@@ -41,6 +42,10 @@ class Transport(Protocol):
     async def list_page(self, created_since: str, page_token: str | None = None): ...
     async def send_saved(self, row: Outgoing) -> tuple[int, str | None]: ...
     async def close(self) -> None: ...
+
+
+class ReplyAuthorizationError(ValueError):
+    """A durable reply must become terminal without crossing the transport boundary."""
 
 
 class PhotonWorker:
@@ -66,6 +71,27 @@ class PhotonWorker:
                 "reasons": [*result["reasons"], "authorization_failed_restart_required"],
             }
         return result
+
+    def _route_authorized(self, item: Inbound) -> bool:
+        route = next((route for route in self.settings.routes
+                      if route.human_handle == item.human_handle
+                      and route.agent_handle == item.agent_handle), None)
+        return (route is not None and route.role == item.role
+                and tuple(route.allowed_cases) == item.allowed_cases)
+
+    def _authorize_queued_reply(self, row: Outgoing) -> None:
+        """A saved reply keeps its body/key, but never bypasses current authorization."""
+        try:
+            item = self.store.completed_inbound(row.parent_message_id)
+        except (AttributeError, KeyError, TypeError, ValueError) as error:
+            raise ReplyAuthorizationError("Queued reply lacks a valid completed inbound") from error
+        if not isinstance(item, Inbound):
+            raise ReplyAuthorizationError("Queued reply lacks a valid completed inbound")
+        if (row.parent_message_id != item.id or row.key != "reeftrace:reply:" + item.id
+                or row.space_id != item.space_id or row.agent_id != item.agent_id):
+            raise ReplyAuthorizationError("Queued reply no longer matches its durable inbound")
+        if not self._route_authorized(item):
+            raise ReplyAuthorizationError("Queued reply route authorization changed")
 
     async def poll_once(self) -> int:
         if not self.readiness()["ready"]:
@@ -103,19 +129,7 @@ class PhotonWorker:
         item = self.store.claim_control_inbound() if control else self.store.claim_inbound()
         if item is None:
             return False
-        route = next(
-            (
-                r
-                for r in self.settings.routes
-                if r.human_handle == item.human_handle and r.agent_handle == item.agent_handle
-            ),
-            None,
-        )
-        if (
-            route is None
-            or route.role != item.role
-            or tuple(route.allowed_cases) != item.allowed_cases
-        ):
+        if not self._route_authorized(item):
             self.store.fail_inbound(item.id, "Route authorization changed")
             return True
         try:
@@ -139,6 +153,9 @@ class PhotonWorker:
         if row is None:
             return False
         try:
+            # A retry or restart may occur after this route's role/cases were
+            # revoked. Re-read completed durable input before every network send.
+            self._authorize_queued_reply(row)
             status, request_id = await self.transport.send_saved(row)
             if status != 202:
                 raise ValueError("Unexpected Photon acceptance status")

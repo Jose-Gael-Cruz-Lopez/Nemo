@@ -7,6 +7,8 @@ physical measurement. The red detector stays the default and is checked for regr
 from __future__ import annotations
 
 import asyncio
+import copy
+import json
 import time
 import uuid
 from datetime import UTC, datetime
@@ -19,6 +21,11 @@ from fastapi.testclient import TestClient
 from apps.api.reeftrace_api.core.settings import Settings
 from apps.api.reeftrace_api.main import create_app
 from apps.api.reeftrace_api.services.token_detection import TokenDetectionService
+from apps.vision.reeftrace_vision.surface_token import (
+    SURFACE_DETECTOR_ID,
+    SURFACE_POLICY_ID,
+    SURFACE_POLICY_SHA256,
+)
 
 TOKEN = "token-detection-test-only"
 AUTH = {"Authorization": "Bearer " + TOKEN}
@@ -389,3 +396,162 @@ def test_reference_eviction_keeps_durable_arrays_and_reloads_a_working_detector(
     with pytest.raises(ValueError, match="does not match its ID"):
         TokenDetectionService(runtime).detector("foreground_reference_v1", second_id,
                                                 session, [WIDTH, HEIGHT])
+
+
+SURFACE_POLYGON = [[20, 20], [WIDTH - 21, 20], [WIDTH - 21, HEIGHT - 21], [20, HEIGHT - 21]]
+
+
+def test_surface_reference_derivation_reuses_saved_arrays_and_size_without_camera_access(env, monkeypatch):
+    client, runtime, tmp_path = env
+    session, _, original, size = prepared(client, runtime.camera)
+    before = copy.deepcopy(runtime.store.get("token_reference", original["reference_id"]))
+    sequence = runtime.camera.sequence
+
+    def forbidden():
+        raise AssertionError("Deriving a saved surface reference must not read the camera")
+
+    with monkeypatch.context() as guard:
+        guard.setattr(runtime.camera, "image", forbidden)
+        response = client.post(f"/api/v1/camera/reference/{original['reference_id']}/surface",
+                               headers=AUTH, json={"detection_polygon_px": SURFACE_POLYGON})
+        assert response.status_code == 200, response.text
+        surface = response.json()
+        assert post(client, f"/camera/reference/{original['reference_id']}/surface",
+                    {"detection_polygon_px": SURFACE_POLYGON}) == surface
+    assert runtime.camera.sequence == sequence
+    assert surface["detector"] == SURFACE_DETECTOR_ID
+    assert surface["reference_id"].startswith("refsurf-")
+    assert surface["derived_from_reference_id"] == original["reference_id"]
+    assert surface["captured_at"] == original["captured_at"]
+    assert surface["camera_session_id"] == session
+    assert surface["policy_id"] == SURFACE_POLICY_ID
+    assert surface["policy_sha256"] == SURFACE_POLICY_SHA256
+    assert surface["detection_polygon_px"] == SURFACE_POLYGON
+    assert surface["token_size"]["token_area_px"] == size["token_area_px"]
+    assert runtime.store.get("token_reference", original["reference_id"]) == before
+    assert str(tmp_path) not in json.dumps(surface) and "npz" not in json.dumps(surface)
+    cold = TokenDetectionService(runtime)
+    record, reference = cold._reference(surface["reference_id"])
+    assert reference.roi.all() and reference.fingerprint == original["content_id"]
+    detect, metadata = cold.detector(SURFACE_DETECTOR_ID, record["id"], session, [WIDTH, HEIGHT])
+    assert len(detect(runtime.camera.image()[0])) == 1
+    assert metadata == {"detector": SURFACE_DETECTOR_ID, "reference_id": record["id"],
+        "token_area_px_range": size["token_area_px_range"], "detection_polygon_px": SURFACE_POLYGON,
+        "policy_id": SURFACE_POLICY_ID, "policy_sha256": SURFACE_POLICY_SHA256}
+
+
+def test_surface_capture_and_token_size_record_through_actual_api_keep_v1_opt_in(env):
+    client, runtime, _ = env
+    session = post(client, "/camera/start", {"device_index": 1})["session_id"]
+    calibration_id = calibrate(client, session)
+    runtime.camera.cap = None
+    surface = post(client, "/camera/reference", {"frame_count": 5,
+        "detector": SURFACE_DETECTOR_ID, "detection_polygon_px": SURFACE_POLYGON})
+    assert surface["detector"] == SURFACE_DETECTOR_ID
+    assert surface["token_size"] is None
+    runtime.camera.place(10, 10, 1, 0)
+    measured = post(client, f"/camera/reference/{surface['reference_id']}/token-size")
+    assert measured["token_area_px"] > 25
+    record = post(client, "/camera/record", {"calibration_id": calibration_id, "duration_s": 1,
+        "detector": SURFACE_DETECTOR_ID, "reference_id": surface["reference_id"]})
+    assert any(p["observed"] for p in record["points"])
+    assert record["detection"]["detector"] == SURFACE_DETECTOR_ID
+    assert record["detection"]["policy_sha256"] == SURFACE_POLICY_SHA256
+    assert "version" in post(client, "/camera/record", {"calibration_id": calibration_id,
+        "duration_s": 1, "detector": "foreground_reference_v1",
+        "reference_id": surface["reference_id"]}, 409)["detail"]
+
+
+def test_surface_derivation_rejects_cropped_background_and_requires_operator(env):
+    client, runtime, _ = env
+    post(client, "/camera/start", {"device_index": 1})
+    original = post(client, "/camera/reference", {"frame_count": 5,
+        "roi_polygon_px": SURFACE_POLYGON})
+    route = f"/api/v1/camera/reference/{original['reference_id']}/surface"
+    assert client.post(route, json={"detection_polygon_px": SURFACE_POLYGON}).status_code == 401
+    rejected = client.post(route, headers=AUTH, json={"detection_polygon_px": SURFACE_POLYGON})
+    assert rejected.status_code == 409 and "full-frame" in rejected.json()["detail"]
+    assert len(runtime.store.list("token_reference")) == 1
+
+
+def test_surface_provenance_does_not_waive_session_or_disturbance_checks(env):
+    client, runtime, _ = env
+    session, _, original, _ = prepared(client, runtime.camera)
+    surface = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    with pytest.raises(ValueError, match="version"):
+        runtime.token_detection.detector(SURFACE_DETECTOR_ID, original["reference_id"],
+                                         session, [WIDTH, HEIGHT])
+    with pytest.raises(ValueError, match="another camera session"):
+        runtime.token_detection.detector(SURFACE_DETECTOR_ID, surface["reference_id"],
+                                         "usb-other", [WIDTH, HEIGHT])
+    post(client, "/rig/disturbed")
+    with pytest.raises(ValueError, match="rig changed"):
+        runtime.token_detection.detector(SURFACE_DETECTOR_ID, surface["reference_id"],
+                                         session, [WIDTH, HEIGHT])
+
+
+def test_surface_polygon_and_policy_are_bound_to_reference_identity(env):
+    client, runtime, _ = env
+    _, _, original, _ = prepared(client, runtime.camera)
+    surface = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    corrupted = runtime.store.get("token_reference", surface["reference_id"])
+    corrupted["detection_polygon_px"][0][0] += 1
+    with runtime.store.connection() as db:
+        db.execute("UPDATE records SET payload=? WHERE kind=? AND id=?",
+                   (json.dumps(corrupted), "token_reference", surface["reference_id"]))
+    with pytest.raises(ValueError, match="frozen policy and polygon"):
+        TokenDetectionService(runtime)._reference(surface["reference_id"])
+
+
+@pytest.mark.parametrize("body", [
+    {"detector": SURFACE_DETECTOR_ID},
+    {"detector": SURFACE_DETECTOR_ID, "detection_polygon_px": SURFACE_POLYGON,
+     "roi_polygon_px": SURFACE_POLYGON},
+    {"detector": "foreground_reference_v1", "detection_polygon_px": SURFACE_POLYGON},
+])
+def test_surface_live_capture_invalid_domain_is_rejected_before_reading_frames(env, body):
+    client, runtime, _ = env
+    post(client, "/camera/start", {"device_index": 1})
+    sequence = runtime.camera.sequence
+    post(client, "/camera/reference", {"frame_count": 5, **body}, 409)
+    assert runtime.camera.sequence == sequence
+    assert runtime.store.list("token_reference") == []
+
+
+def test_surface_and_v1_recordings_cannot_be_mixed_into_a_measured_field_receipt(env):
+    client, runtime, _ = env
+    session, calibration_id, original, _ = prepared(client, runtime.camera)
+    surface = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    recordings = []
+    for detector, reference_id in (("foreground_reference_v1", original["reference_id"]),
+                                   (SURFACE_DETECTOR_ID, surface["reference_id"])):
+        runtime.camera.place(6, 10, 2, 0)
+        recordings.append(post(client, "/camera/record", {"calibration_id": calibration_id,
+            "duration_s": 1, "detector": detector, "reference_id": reference_id}))
+    preflight = post(client, "/field-sessions/preflight", {"camera_session_id": session,
+        "calibration_id": calibration_id, "training_recording_ids": [recordings[0]["id"]],
+        "validation_recording_ids": [recordings[1]["id"]]})
+    step = next(step for step in preflight["steps"] if step["step"] == "drift_recordings")
+    assert (step["status"], step["code"]) == ("BLOCKED", "DETECTOR_MIXED")
+
+
+def test_surface_detector_rehearsal_keeps_versioned_provenance_and_unvalidated_coordinates(env):
+    client, runtime, _ = env
+    session, calibration_id, original, _ = prepared(client, runtime.camera)
+    surface = runtime.token_detection.derive_surface_reference(original["reference_id"], SURFACE_POLYGON)
+    calibration = runtime.store.get("calibration", calibration_id)
+    runtime.camera.place(8, 10, 1, 0)
+    result = post(client, "/camera/rehearsals", {
+        "source": {"schema_version": "nemo_saved_calibration_v1", "calibration": calibration,
+                   "calibration_json": json.dumps(calibration, sort_keys=True, allow_nan=False)},
+        "camera_session_id": session, "image_size_px": [WIDTH, HEIGHT], "duration_s": 1,
+        "detector": SURFACE_DETECTOR_ID, "reference_id": surface["reference_id"],
+        "acknowledge_estimated_mapping": True})
+    assert result["observed"] > 0
+    assert result["data_origin"] == "LOCAL_CAPTURE_ESTIMATED_COORDINATES"
+    assert result["validation_status"] == "UNVALIDATED"
+    assert result["calibration_id"] is result["case_id"] is result["profile_id"] is None
+    assert result["detection"]["policy_sha256"] == SURFACE_POLICY_SHA256
+    assert result["detection"]["detection_polygon_px"] == SURFACE_POLYGON
+    assert all("x_cm" not in point and "y_cm" not in point for point in result["points"])
+    assert runtime.store.list("recording") == runtime.store.cases() == []

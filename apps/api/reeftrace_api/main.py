@@ -17,6 +17,7 @@ from apps.vision.reeftrace_vision.calibration import fit_homography
 from apps.vision.reeftrace_vision.tracking import flow_samples
 
 from .api.v1.endpoints.current_forecast import create_current_forecast_router
+from .api.v1.endpoints.detector_replay import create_detector_replay_router
 from .api.v1.endpoints.estimated_rehearsal import create_estimated_rehearsal_router
 from .api.v1.endpoints.field_sessions import create_field_sessions_router
 from .api.v1.endpoints.fresh_physics import create_fresh_physics_router
@@ -38,6 +39,7 @@ from .schemas.contracts import (
     RecordingCaseInput,
     RecordInput,
     SensitivityInput,
+    SurfaceReferenceInput,
     TokenReferenceInput,
 )
 from .schemas.prevention import ComparisonInput, TrialInput
@@ -130,6 +132,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(create_origin_residual_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_saved_calibrations_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_estimated_rehearsal_router(runtime, operator), prefix="/api/v1")
+    app.include_router(create_detector_replay_router(runtime, operator), prefix="/api/v1")
 
     @app.get("/")
     def root():
@@ -456,7 +459,13 @@ def create_app(settings: Settings | None = None):
         """Capture the empty tank (no token, pump on) from the current camera session."""
         polygon = [list(point) for point in body.roi_polygon_px] if body.roi_polygon_px else None
         return await runtime.token_detection.capture_reference(body.frame_count, polygon,
-                                                               body.token_size_from)
+            body.token_size_from, detector=body.detector,
+            detection_polygon_px=body.detection_polygon_px)
+
+    @app.post("/api/v1/camera/reference/{reference_id}/surface", dependencies=[Depends(operator)])
+    def derive_surface_reference(reference_id: str, body: SurfaceReferenceInput):
+        return runtime.token_detection.derive_surface_reference(
+            reference_id, [list(point) for point in body.detection_polygon_px])
 
     @app.post("/api/v1/camera/reference/{reference_id}/token-size", dependencies=[Depends(operator)])
     async def measure_token_size(reference_id: str):

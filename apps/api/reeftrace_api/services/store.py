@@ -396,6 +396,26 @@ class Store:
                 (error[:200], inbound_id),
             )
 
+    def completed_inbound(self, inbound_id: str):
+        """Read the immutable original for send authorization; never claim/revive it."""
+        from adapters.photon.transport import Inbound
+
+        with self.connection() as db:
+            row = db.execute(
+                "SELECT payload FROM inbox WHERE id=? AND state='done'", (inbound_id,)
+            ).fetchone()
+        if row is None:
+            return None
+        data = json.loads(row["payload"])
+        fields = set(Inbound.__dataclass_fields__)
+        if (not isinstance(data, dict) or set(data) != fields or data.get("id") != inbound_id
+                or any(not isinstance(data[key], str) for key in fields - {"allowed_cases"})
+                or not isinstance(data["allowed_cases"], list) or not data["allowed_cases"]
+                or any(not isinstance(case_id, str) or not case_id for case_id in data["allowed_cases"])):
+            raise ValueError("Invalid completed inbound record")
+        data["allowed_cases"] = tuple(data["allowed_cases"])
+        return Inbound(**data)
+
     def claim_outgoing(self):
         from adapters.photon.transport import Outgoing
 

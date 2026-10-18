@@ -3,6 +3,7 @@
 import asyncio
 import copy
 import json
+from dataclasses import asdict, replace
 from datetime import UTC, datetime
 from types import SimpleNamespace
 
@@ -93,6 +94,11 @@ class MemoryStore:
     def finish_inbound(self, ident, row):
         self.outbox.setdefault(row.key, row)
         self.finished.add(ident)
+
+    def completed_inbound(self, ident):
+        if ident not in self.finished or ident in self.failed:
+            return None
+        return self.inbox.get(ident)
 
     def fail_inbound(self, ident, error):
         self.failed[ident] = error
@@ -280,6 +286,254 @@ def test_persists_immutable_reply_before_send_and_reuses_key_on_uncertain_failur
     asyncio.run(run())
 
 
+@pytest.mark.parametrize("changed_route", [
+    replace(ROUTE, human_handle="+15550003333"),
+    replace(ROUTE, agent_handle="+15550004444"),
+    replace(ROUTE, role="viewer"),
+    replace(ROUTE, allowed_cases=("case-no-longer-authorized",)),
+])
+def test_queued_reply_rechecks_current_route_and_case_before_dispatch(changed_route):
+    pytest.importorskip("photon_api")
+    store = MemoryStore()
+    inbound = normalize(parsed_message(), (ROUTE,), START)
+    store.ingest_once(inbound)
+    row = Outgoing("reeftrace:reply:" + inbound.id, inbound.space_id, inbound.agent_id,
+                   inbound.id, "Saved immutable answer.")
+    store.finish_inbound(inbound.id, row)
+    calls = []
+
+    class Transport:
+        async def send_saved(self, outgoing):
+            calls.append(outgoing)
+            return 202, "not-expected"
+
+    async def unused(_):
+        raise AssertionError("No new answer may replace a queued body")
+
+    async def run():
+        settings = replace(SETTINGS, routes=(changed_route,))
+        worker = PhotonWorker(settings, store, unused, transport=Transport())
+        assert worker.readiness()["ready"]
+        assert await worker.send_once()
+        assert store.updates[-1][1] == "failed"
+        assert not await worker.send_once()
+
+    asyncio.run(run())
+    assert calls == []
+    assert store.inbox[inbound.id] == inbound and inbound.id in store.finished
+
+
+def test_uncertain_send_retry_reauthorizes_after_worker_restart_without_changing_body():
+    pytest.importorskip("photon_api")
+    store = MemoryStore()
+    inbound = normalize(parsed_message(), (ROUTE,), START)
+    store.ingest_once(inbound)
+    calls = []
+
+    class Transport:
+        async def send_saved(self, row):
+            calls.append(row)
+            raise httpx.ReadTimeout("uncertain response")
+
+    async def handler(_):
+        return "Saved immutable answer."
+
+    async def run():
+        worker = PhotonWorker(SETTINGS, store, handler, transport=Transport())
+        assert await worker.process_once()
+        saved = next(iter(store.outbox.values()))
+        assert await worker.send_once()
+        assert store.updates[-1][1] == "pending" and store.outbox[saved.key] == saved
+        changed = replace(SETTINGS, routes=(replace(ROUTE, allowed_cases=("different-case",)),))
+        restarted = PhotonWorker(changed, store, handler, transport=Transport())
+        assert await restarted.send_once()
+        assert store.updates[-1][1] == "failed"
+        assert calls == [saved]
+        assert calls[0].key == "reeftrace:reply:" + inbound.id
+        assert calls[0].text == "Saved immutable answer."
+
+    asyncio.run(run())
+
+
+@pytest.mark.parametrize("problem", ["missing", "not_completed", "failed"])
+def test_orphaned_or_unfinished_queued_reply_fails_closed(problem):
+    pytest.importorskip("photon_api")
+    store = MemoryStore()
+    inbound = normalize(parsed_message(), (ROUTE,), START)
+    if problem != "missing":
+        store.ingest_once(inbound)
+    if problem == "failed":
+        store.fail_inbound(inbound.id, "failed earlier")
+    row = Outgoing("reeftrace:reply:" + inbound.id, inbound.space_id, inbound.agent_id,
+                   inbound.id, "No dispatch is authorized.")
+    store.outbox[row.key] = row
+    calls = []
+
+    class Transport:
+        async def send_saved(self, outgoing):
+            calls.append(outgoing)
+            return 202, "not-expected"
+
+    async def unused(_):
+        raise AssertionError("Handler must not run")
+
+    async def run():
+        worker = PhotonWorker(SETTINGS, store, unused, transport=Transport())
+        assert await worker.send_once()
+        assert store.updates[-1][1] == "failed"
+
+    asyncio.run(run())
+    assert calls == []
+
+
+@pytest.mark.parametrize("change", [
+    {"space_id": "different-direct-space"}, {"agent_id": "different-agent"},
+    {"key": "reeftrace:reply:different-inbound"}, {"parent_message_id": "different-inbound"},
+])
+def test_queued_reply_cannot_escape_its_completed_durable_inbound(change):
+    pytest.importorskip("photon_api")
+    store = MemoryStore()
+    inbound = normalize(parsed_message(), (ROUTE,), START)
+    store.ingest_once(inbound)
+    row = Outgoing("reeftrace:reply:" + inbound.id, inbound.space_id, inbound.agent_id,
+                   inbound.id, "Saved answer.")
+    store.finish_inbound(inbound.id, row)
+    store.outbox.clear()
+    altered = replace(row, **change)
+    store.outbox[altered.key] = altered
+    calls = []
+
+    class Transport:
+        async def send_saved(self, outgoing):
+            calls.append(outgoing)
+            return 202, "not-expected"
+
+    async def unused(_):
+        raise AssertionError("Handler must not run")
+
+    async def run():
+        worker = PhotonWorker(SETTINGS, store, unused, transport=Transport())
+        assert await worker.send_once()
+        assert store.updates[-1][1] == "failed"
+
+    asyncio.run(run())
+    assert calls == []
+
+
+def test_sqlite_pending_reply_checks_durable_input_and_never_reactivates_terminal_rows(tmp_path):
+    pytest.importorskip("photon_api")
+    from apps.api.reeftrace_api.services.store import Store
+
+    store = Store(tmp_path)
+    inbound = normalize(parsed_message(), (ROUTE,), START)
+    assert store.ingest_once(inbound)
+    assert store.completed_inbound(inbound.id) is None
+    assert store.claim_inbound() == inbound
+    row = Outgoing("reeftrace:reply:" + inbound.id, inbound.space_id, inbound.agent_id,
+                   inbound.id, "Saved answer.")
+    store.finish_inbound(inbound.id, row)
+    assert store.completed_inbound(inbound.id) == inbound
+    with store.connection() as db:
+        saved_payload = db.execute("SELECT payload FROM outbox WHERE id=?", (row.key,)).fetchone()[0]
+    calls = []
+
+    class Transport:
+        async def send_saved(self, outgoing):
+            calls.append(outgoing)
+            return 202, "request-fixture"
+
+    async def unused(_):
+        raise AssertionError("Handler must not run")
+
+    async def run():
+        revoked = replace(SETTINGS, routes=(replace(ROUTE, role="viewer"),))
+        worker = PhotonWorker(revoked, store, unused, transport=Transport())
+        assert await worker.send_once()
+        restored = PhotonWorker(SETTINGS, store, unused, transport=Transport())
+        assert not await restored.send_once()  # Restoring a route does not revive failure.
+
+    asyncio.run(run())
+    with store.connection() as db:
+        saved = db.execute("SELECT state,payload FROM outbox WHERE id=?", (row.key,)).fetchone()
+    assert saved["state"] == "failed" and saved["payload"] == saved_payload
+    assert store.completed_inbound(inbound.id) == inbound and not store.ingest_once(inbound)
+    assert calls == []
+
+
+def test_sqlite_accepted_reply_is_not_replayed_after_a_worker_restart(tmp_path):
+    pytest.importorskip("photon_api")
+    from apps.api.reeftrace_api.services.store import Store
+
+    store = Store(tmp_path)
+    inbound = normalize(parsed_message(), (ROUTE,), START)
+    store.ingest_once(inbound)
+    store.claim_inbound()
+    row = Outgoing("reeftrace:reply:" + inbound.id, inbound.space_id, inbound.agent_id,
+                   inbound.id, "Same immutable answer.")
+    store.finish_inbound(inbound.id, row)
+    calls = []
+
+    class Transport:
+        async def send_saved(self, outgoing):
+            calls.append(outgoing)
+            return 202, "accepted-once"
+
+    async def unused(_):
+        raise AssertionError("Handler must not run")
+
+    async def run():
+        worker = PhotonWorker(SETTINGS, store, unused, transport=Transport())
+        assert await worker.send_once()
+        reopened = PhotonWorker(SETTINGS, Store(tmp_path), unused, transport=Transport())
+        assert not await reopened.send_once()
+
+    asyncio.run(run())
+    assert calls == [row]
+
+
+@pytest.mark.parametrize("corruption", ["invalid_json", "different_id", "cases_not_a_list"])
+def test_malformed_completed_sqlite_input_is_terminal_without_network(tmp_path, corruption):
+    pytest.importorskip("photon_api")
+    from apps.api.reeftrace_api.services.store import Store
+
+    store = Store(tmp_path)
+    inbound = normalize(parsed_message(), (ROUTE,), START)
+    store.ingest_once(inbound)
+    store.claim_inbound()
+    row = Outgoing("reeftrace:reply:" + inbound.id, inbound.space_id, inbound.agent_id,
+                   inbound.id, "Saved answer cannot authorize itself.")
+    store.finish_inbound(inbound.id, row)
+    data = asdict(inbound)
+    if corruption == "different_id":
+        data["id"] = "different-original-inbound"
+    elif corruption == "cases_not_a_list":
+        data["allowed_cases"] = "case-1"
+    raw = "not JSON" if corruption == "invalid_json" else json.dumps(data)
+    with store.connection() as db:
+        db.execute("UPDATE inbox SET payload=? WHERE id=?", (raw, inbound.id))
+    calls = []
+
+    class Transport:
+        async def send_saved(self, outgoing):
+            calls.append(outgoing)
+            return 202, "not-expected"
+
+    async def unused(_):
+        raise AssertionError("Handler must not run")
+
+    async def run():
+        worker = PhotonWorker(SETTINGS, store, unused, transport=Transport())
+        assert await worker.send_once()
+        assert not await worker.send_once()
+
+    asyncio.run(run())
+    assert calls == []
+    with store.connection() as db:
+        assert db.execute("SELECT state FROM outbox WHERE id=?", (row.key,)).fetchone()[0] == "failed"
+        assert db.execute("SELECT state,payload FROM inbox WHERE id=?", (inbound.id,)).fetchone()[:] == (
+            "done", raw)
+
+
 def test_revoked_route_and_disabled_configuration_cannot_dispatch():
     store = MemoryStore()
     item = Inbound(
@@ -385,7 +639,9 @@ def test_authentication_failure_blocks_worker_instead_of_repeated_sends():
     pytest.importorskip("photon_api")
     store = MemoryStore()
     row = Outgoing("reeftrace:reply:m", "s", "a", "m", "Unknown.")
-    store.outbox[row.key] = row
+    store.ingest_once(Inbound("m", TIME, "h", ROUTE.human_handle, "a", ROUTE.agent_handle,
+                              "s", ROUTE.role, ROUTE.allowed_cases, "Why source B?"))
+    store.finish_inbound("m", row)
 
     class Denied(Exception):
         status = 403

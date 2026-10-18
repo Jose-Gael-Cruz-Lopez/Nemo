@@ -17,7 +17,7 @@ class EstimatedRehearsalInput(StrictModel):
     camera_session_id: Identifier
     image_size_px: tuple[Dimension, Dimension]
     duration_s: Annotated[FiniteFloat, Field(ge=1, le=10)]
-    detector: Literal["foreground_reference_v1", "red_hsv"]
+    detector: Literal["foreground_reference_v1", "foreground_surface_v2", "red_hsv"]
     reference_id: Identifier | None = None
     acknowledge_estimated_mapping: StrictBool
 

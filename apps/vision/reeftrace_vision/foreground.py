@@ -180,12 +180,45 @@ def detect_foreground(frame, reference, *, min_area_px=25, max_area_fraction=0.0
     On the rig, pass ``token_area_range(measure_token_area(...))`` so only blobs about
     the size of one measured token count; a hand or a fragment then becomes a gap.
     """
-    frame = _bgr(frame, "Frame")
-    if frame.shape[:2] != reference.shape:
-        raise SceneChanged("Frame size differs from the empty-tank reference; retake it")
     if not (np.isfinite([k_sigma, min_delta, max_changed_fraction, max_area_fraction]).all()
             and k_sigma > 0 and min_delta > 0 and 0 < max_changed_fraction < 1
             and 0 < max_area_fraction < 1 and 0 < min_area_px):
+        raise ValueError("Detector thresholds must be finite and positive")
+    mask = foreground_change_mask(frame, reference, k_sigma=k_sigma, min_delta=min_delta,
+                                  max_changed_fraction=max_changed_fraction)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    max_area = frame.shape[0] * frame.shape[1] * max_area_fraction
+    if area_px_range is not None:
+        low, high = (float(v) for v in area_px_range)
+        if not (np.isfinite([low, high]).all() and 0 < low < high):
+            raise ValueError("area_px_range must be two increasing positive areas")
+        min_area_px, max_area = low, high
+    detections = []
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        if not min_area_px <= area <= max_area:
+            continue
+        moments = cv2.moments(contour)
+        if moments["m00"] <= 0:
+            continue
+        x, y = moments["m10"] / moments["m00"], moments["m01"] / moments["m00"]
+        detections.append({"pixel_x": float(x), "pixel_y": float(y), "area_px": float(area),
+                           "bbox_px": list(cv2.boundingRect(contour))})
+    return detections
+
+
+def foreground_change_mask(frame, reference, *, k_sigma=6.0, min_delta=18.0,
+                           max_changed_fraction=0.15):
+    """The unchanged v1 full-background checks/morphology, before candidate admission.
+
+    Candidate polygons must never be installed as ``reference.roi`` merely to
+    change gain estimation. V2 filters these complete components afterwards.
+    """
+    frame = _bgr(frame, "Frame")
+    if frame.shape[:2] != reference.shape:
+        raise SceneChanged("Frame size differs from the empty-tank reference; retake it")
+    if not (np.isfinite([k_sigma, min_delta, max_changed_fraction]).all()
+            and k_sigma > 0 and min_delta > 0 and 0 < max_changed_fraction < 1):
         raise ValueError("Detector thresholds must be finite and positive")
     frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY).astype(np.float32)
     # phaseCorrelate windows its inputs in place, so give it copies.
@@ -221,22 +254,4 @@ def detect_foreground(frame, reference, *, min_area_px=25, max_area_fraction=0.0
                            "or something large entered the frame. Retake the empty-tank reference")
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8))
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
-    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    max_area = frame.shape[0] * frame.shape[1] * max_area_fraction
-    if area_px_range is not None:
-        low, high = (float(v) for v in area_px_range)
-        if not (np.isfinite([low, high]).all() and 0 < low < high):
-            raise ValueError("area_px_range must be two increasing positive areas")
-        min_area_px, max_area = low, high
-    detections = []
-    for contour in contours:
-        area = cv2.contourArea(contour)
-        if not min_area_px <= area <= max_area:
-            continue
-        moments = cv2.moments(contour)
-        if moments["m00"] <= 0:
-            continue
-        x, y = moments["m10"] / moments["m00"], moments["m01"] / moments["m00"]
-        detections.append({"pixel_x": float(x), "pixel_y": float(y), "area_px": float(area),
-                           "bbox_px": list(cv2.boundingRect(contour))})
-    return detections
+    return mask

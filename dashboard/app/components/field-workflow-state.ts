@@ -27,9 +27,9 @@ export type ServerStep = { step: StepId; status: StepStatus; code: string; messa
 export type Preflight = { status: "READY" | "BLOCKED"; steps: ServerStep[]; content_hash: string | null; manifest_id: string | null };
 export type ManifestDetail = { manifest: { manifest_id: string; content_hash: string; status: "READY"; created_at: number | null; warnings: string[]; capture: { capture_origin: string; camera_session_id: string }; profile: { profile_id: string }; first_observation: { case_id: string }; rig_check_id: string | null }; is_current: boolean; stale_reasons: string[] };
 export type Bounds = { x_min_cm: number; x_max_cm: number; y_min_cm: number; y_max_cm: number };
-export type TokenDetector = "foreground_reference_v1" | "red_hsv";
+export type TokenDetector = "foreground_reference_v1" | "foreground_surface_v2" | "red_hsv";
 /** Empty-tank reference for colour-independent tracking, plus the measured size of one token. */
-export type TokenReference = { reference_id: string; camera_session_id: string; image_size_px: [number, number]; token_area_px: number | null; token_area_px_range: [number, number] | null };
+export type TokenReference = { reference_id: string; camera_session_id: string; image_size_px: [number, number]; token_area_px: number | null; token_area_px_range: [number, number] | null; detector?: "foreground_reference_v1" | "foreground_surface_v2"; detection_polygon_px?: number[][]; policy_id?: "compact_cap_v1"; policy_sha256?: string; derived_from_reference_id?: string };
 
 export type Draft = {
   version: 1;
@@ -311,7 +311,8 @@ export function deriveSteps(draft: Draft, camera: CameraStatus | null, preflight
   else if (!draft.calibration.approved) set("water_plane_mapping", "blocked", `Check-point error ${draft.calibration.max_error_cm.toFixed(2)} cm exceeds ${draft.calibration.max_allowed_error_cm} cm.`, "Re-measure in centimetres on the water surface. Do not raise the tolerance to pass.");
   else set("water_plane_mapping", "done", `Approved on ${draft.calibration.validation_count} check points; max error ${draft.calibration.max_error_cm.toFixed(2)} cm.`);
   const t = draft.trainingRecordingIds.length, v = draft.validationRecordingIds.length;
-  if (draft.detector === "foreground_reference_v1" && !draft.tokenReference?.token_area_px_range) set("drift_recordings", "missing", draft.tokenReference ? "Measure one token before recording." : "Capture the empty tank before recording.", "With no token in the water, the pump on and hands out of view, capture the empty tank. Then place one cap and measure it.");
+  if (draft.detector === "foreground_surface_v2" && (draft.tokenReference?.detector !== "foreground_surface_v2" || !draft.tokenReference.token_area_px_range)) set("drift_recordings", "missing", "Surface detector not prepared for this session.", "Use the saved background and an explicitly declared tank outline to freeze the surface detector. Saved-footage replay does not require a new capture.");
+  else if (draft.detector === "foreground_reference_v1" && !draft.tokenReference?.token_area_px_range) set("drift_recordings", "missing", draft.tokenReference ? "Measure one token before recording." : "Capture the empty tank before recording.", "With no token in the water, the pump on and hands out of view, capture the empty tank. Then place one cap and measure it.");
   else if (!t || !v) set("drift_recordings", "missing", `${t} training and ${v} validation runs.`, "Record at least one of each, as separate runs.");
   else set("drift_recordings", "done", `${t} training and ${v} validation runs.`);
   if (!draft.flow) set("recorded_flow", "missing", "No recorded flow fitted.");
@@ -360,7 +361,7 @@ export function decodeDraft(raw: string | null): Draft | null {
     merged.attestations = { ...emptyAttestations(), ...Object.fromEntries(ATTESTATION_KEYS.map(key => [key, (value.attestations as Record<string, unknown>)?.[key] === true])) };
     if (merged.calibration) merged.calibration = parseCalibration(merged.calibration);
     if (merged.flow) merged.flow = parseFlow(merged.flow);
-    if (merged.detector !== "red_hsv" && merged.detector !== "foreground_reference_v1") return null;
+    if (merged.detector !== "red_hsv" && merged.detector !== "foreground_reference_v1" && merged.detector !== "foreground_surface_v2") return null;
     if (merged.tokenReference) merged.tokenReference = checkTokenReference(merged.tokenReference);
     return merged;
   } catch { return null; }
@@ -369,15 +370,24 @@ export function decodeDraft(raw: string | null): Draft | null {
 function checkTokenReference(value: unknown): TokenReference {
   if (!isObject(value) || !text(value.reference_id) || !text(value.camera_session_id) || !Array.isArray(value.image_size_px) || value.image_size_px.length !== 2 || !value.image_size_px.every(finite)
     || !(value.token_area_px === null || finite(value.token_area_px)) || !(value.token_area_px_range === null || Array.isArray(value.token_area_px_range) && value.token_area_px_range.length === 2 && value.token_area_px_range.every(finite))) fail("Empty-tank reference was incomplete");
+  if (value.detector !== undefined && value.detector !== "foreground_reference_v1" && value.detector !== "foreground_surface_v2") fail("Token reference detector was invalid");
+  if (value.detector === "foreground_surface_v2") {
+    if (!Array.isArray(value.detection_polygon_px) || value.detection_polygon_px.length < 3 || value.detection_polygon_px.length > 100
+      || !value.detection_polygon_px.every(point => Array.isArray(point) && point.length === 2 && point.every(finite))
+      || value.policy_id !== "compact_cap_v1" || typeof value.policy_sha256 !== "string" || !/^[a-f0-9]{64}$/.test(value.policy_sha256)
+      || !text(value.derived_from_reference_id)) fail("Surface detector reference policy was incomplete");
+  }
   return value as TokenReference;
 }
 
 /** POST /camera/reference. A carried-over token size (same session, camera unmoved) is kept. */
 export function parseTokenReference(value: unknown): TokenReference {
-  if (!isObject(value) || value.detector !== "foreground_reference_v1") fail("Empty-tank reference was incomplete");
+  if (!isObject(value) || (value.detector !== "foreground_reference_v1" && value.detector !== "foreground_surface_v2")) fail("Empty-tank reference was incomplete");
   const size = isObject(value.token_size) && value.token_size.reference_id === value.reference_id ? value.token_size : null;
   return checkTokenReference({ reference_id: value.reference_id, camera_session_id: value.camera_session_id, image_size_px: value.image_size_px,
-    token_area_px: size ? size.token_area_px : null, token_area_px_range: size ? size.token_area_px_range : null });
+    token_area_px: size ? size.token_area_px : null, token_area_px_range: size ? size.token_area_px_range : null,
+    ...(value.detector === "foreground_surface_v2" ? { detector: value.detector, detection_polygon_px: value.detection_polygon_px, policy_id: value.policy_id,
+      policy_sha256: value.policy_sha256, derived_from_reference_id: value.derived_from_reference_id } : {}) });
 }
 
 /** Body for POST /camera/reference: reuse the measured size when asked and still valid. */
@@ -405,6 +415,11 @@ export function detectionFields(draft: Draft): Record<string, string> {
   const reference = draft.tokenReference;
   if (!reference?.token_area_px_range) throw new Error("Capture the empty tank and measure one token first.");
   if (reference.camera_session_id !== draft.cameraSessionId) throw new Error("The empty-tank reference is from another camera session; capture it again.");
+  if (draft.detector === "foreground_surface_v2") {
+    if (reference.detector !== "foreground_surface_v2" || !reference.detection_polygon_px || reference.policy_id !== "compact_cap_v1") throw new Error("Prepare the surface detector from the saved background and declared tank outline first.");
+    return { detector: "foreground_surface_v2", reference_id: reference.reference_id };
+  }
+  if (reference.detector === "foreground_surface_v2") throw new Error("Select the surface detector for this frozen surface reference, or restore the original background reference.");
   return { detector: "foreground_reference_v1", reference_id: reference.reference_id };
 }
 
@@ -414,4 +429,16 @@ export function previewPixel(offsetX: number, offsetY: number, shownWidth: numbe
   const x = Math.min(imageWidth - 1, Math.max(0, offsetX * imageWidth / shownWidth));
   const y = Math.min(imageHeight - 1, Math.max(0, offsetY * imageHeight / shownHeight));
   return [Math.round(x * 10) / 10, Math.round(y * 10) / 10];
+}
+
+/** Frozen pixel ROI for opt-in v2; reuses existing background/size without a new camera capture. */
+export function buildSurfaceReferenceRequest(draft: Draft, camera: CameraStatus | null, polygon: number[][] | undefined) {
+  const reference = draft.tokenReference;
+  if (!camera?.running || !camera.fresh || camera.session_id !== draft.cameraSessionId || !camera.width || !camera.height) throw new Error("Select the current fresh camera session before preparing its surface detector.");
+  if (!reference?.token_area_px_range || reference.camera_session_id !== camera.session_id || reference.image_size_px[0] !== camera.width || reference.image_size_px[1] !== camera.height) throw new Error("The current saved background must already include the token’s image-size range. Saved-footage replay does not need a new background.");
+  if (!Array.isArray(polygon) || polygon.length < 3 || polygon.length > 100 || !polygon.every(point => Array.isArray(point) && point.length === 2 && point.every(finite)
+    && point[0] >= 0 && point[0] < camera.width! && point[1] >= 0 && point[1] < camera.height!)) throw new Error("Display a valid measured or estimated tank outline inside the current frame, then freeze that outline for detection.");
+  const [x,y] = polygon[0];
+  if (new Set(polygon.map(point => point.join(","))).size !== polygon.length || !polygon.some(([ax,ay],i) => polygon.slice(i+1).some(([bx,by]) => Math.abs((ax-x)*(by-y)-(ay-y)*(bx-x)) > 1e-8))) throw new Error("The tank outline must contain distinct, non-collinear pixel points.");
+  return { detection_polygon_px: polygon.map(point => [...point]) };
 }

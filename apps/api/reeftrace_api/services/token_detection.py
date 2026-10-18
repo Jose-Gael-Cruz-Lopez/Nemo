@@ -9,6 +9,8 @@ A rig disturbance after capture makes the reference stale.
 from __future__ import annotations
 
 import asyncio
+import hashlib
+import json
 import time
 from collections import OrderedDict
 
@@ -24,11 +26,19 @@ from apps.vision.reeftrace_vision.foreground import (
     measure_token_area,
     token_area_range,
 )
+from apps.vision.reeftrace_vision.surface_token import (
+    SURFACE_DETECTOR_ID,
+    SURFACE_POLICY_ID,
+    SURFACE_POLICY_SHA256,
+    detect_surface_token,
+    measure_surface_token_area,
+    validate_detection_polygon,
+)
 
 REFERENCE_KIND = "token_reference"
 TOKEN_SIZE_KIND = "token_size"
 RED_DETECTOR = "red_hsv"
-DETECTORS = (RED_DETECTOR, DETECTOR_ID)
+DETECTORS = (RED_DETECTOR, DETECTOR_ID, SURFACE_DETECTOR_ID)
 REFERENCE_CACHE_SIZE = 2
 
 
@@ -74,7 +84,8 @@ class TokenDetectionService:
             await asyncio.sleep(1 / self.runtime.settings.camera_sample_hz)
         return frames
 
-    async def capture_reference(self, frame_count=10, roi_polygon_px=None, token_size_from=None):
+    async def capture_reference(self, frame_count=10, roi_polygon_px=None, token_size_from=None,
+                                *, detector=DETECTOR_ID, detection_polygon_px=None):
         """Capture the empty tank; optionally carry a token size measured with an earlier reference.
 
         A token's apparent size depends on the camera, not on whether the water is moving,
@@ -84,10 +95,23 @@ class TokenDetectionService:
         """
         if self.runtime.record_lock.locked():
             raise ValueError("A camera capture is active; finish it before capturing a reference")
+        if detector not in {DETECTOR_ID, SURFACE_DETECTOR_ID}:
+            raise ValueError("Unsupported empty-tank detector")
+        if detector == SURFACE_DETECTOR_ID:
+            if roi_polygon_px is not None:
+                raise ValueError("V2 uses a full-frame background and a separate detection polygon")
+            status = self._fresh_session()
+            validate_detection_polygon([status.get("width"), status.get("height")],
+                                       detection_polygon_px)
+        elif detection_polygon_px is not None:
+            raise ValueError("A detection polygon requires the explicit foreground_surface_v2 detector")
         # asyncio.Lock acquires immediately while free: with no intervening await
         # after the check, another capture is rejected rather than queued.
         async with self.runtime.record_lock:
-            return await self._capture_reference(frame_count, roi_polygon_px, token_size_from)
+            result = await self._capture_reference(frame_count, roi_polygon_px, token_size_from)
+            if detector == SURFACE_DETECTOR_ID:
+                return self.derive_surface_reference(result["reference_id"], detection_polygon_px)
+            return result
 
     async def _capture_reference(self, frame_count, roi_polygon_px, token_size_from):
         status = self._fresh_session()
@@ -138,7 +162,63 @@ class TokenDetectionService:
                     arrays, expected_id=record["content_id"]))
         else:
             self._cache.move_to_end(reference_id)
-        return record, self._cache[reference_id]
+        reference = self._cache[reference_id]
+        if record.get("detector") == SURFACE_DETECTOR_ID:
+            polygon = validate_detection_polygon(reference.shape[::-1], record.get("detection_polygon_px"))
+            if (record.get("policy_id") != SURFACE_POLICY_ID
+                    or record.get("policy_sha256") != SURFACE_POLICY_SHA256
+                    or reference.fingerprint != record.get("content_id")
+                    or not reference.roi.all()
+                    or record.get("image_size_px") != list(reference.shape[::-1])
+                    or self._surface_reference_id(record["content_id"], record["camera_session_id"],
+                                                 record.get("derived_from_reference_id"), polygon)
+                    != reference_id):
+                raise ValueError("Saved surface reference no longer matches its frozen policy and polygon")
+        return record, reference
+
+    @staticmethod
+    def _surface_reference_id(content_id, session_id, source_id, polygon):
+        body = {"content_id": content_id, "camera_session_id": session_id,
+                "derived_from_reference_id": source_id, "detection_polygon_px": polygon,
+                "policy_id": SURFACE_POLICY_ID, "policy_sha256": SURFACE_POLICY_SHA256}
+        return "refsurf-" + hashlib.sha256(json.dumps(
+            body, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()[:16]
+
+    def derive_surface_reference(self, reference_id, detection_polygon_px):
+        """Derive immutable candidate admission from SAVED arrays; no camera access.
+
+        Session, capture time and background stay historical. A later detector
+        call must independently pass normal current-session/reference gates.
+        """
+        source, reference = self._reference(reference_id)
+        if (reference.fingerprint != source.get("content_id")
+                or source.get("image_size_px") != list(reference.shape[::-1])):
+            raise ValueError("Saved background metadata does not match its immutable arrays")
+        polygon = validate_detection_polygon(reference.shape[::-1], detection_polygon_px)
+        if not reference.roi.all():
+            raise ValueError("V2 requires an existing full-frame background; its gain ROI cannot be changed")
+        new_id = self._surface_reference_id(source["content_id"], source["camera_session_id"],
+                                           reference_id, polygon)
+        try:
+            saved, _ = self._reference(new_id)
+            return {**saved, "token_size": self._token_size(new_id)}
+        except KeyError:
+            pass
+        record = {key: value for key, value in source.items() if key != "id"}
+        record.update(detector=SURFACE_DETECTOR_ID, reference_id=new_id,
+                      detection_polygon_px=polygon, policy_id=SURFACE_POLICY_ID,
+                      policy_sha256=SURFACE_POLICY_SHA256,
+                      derived_from_reference_id=reference_id, derived_at=time.time())
+        np.savez_compressed(self._folder / f"{new_id}.npz", **reference.to_arrays())
+        self._remember_reference(new_id, reference)
+        saved = self.runtime.store.put(REFERENCE_KIND, record, new_id)
+        size = self._token_size(reference_id)
+        if size is not None:
+            self.runtime.store.put(TOKEN_SIZE_KIND, {
+                "reference_id": new_id, "camera_session_id": source["camera_session_id"],
+                "token_area_px": size["token_area_px"], "token_area_px_range": size["token_area_px_range"],
+                "measured_at": size["measured_at"], "carried_from_reference_id": reference_id})
+        return {**saved, "token_size": self._token_size(new_id)}
 
     def _check_current(self, record, session_id):
         if record["camera_session_id"] != session_id:
@@ -158,7 +238,9 @@ class TokenDetectionService:
         record, reference = self._reference(reference_id)
         self._check_current(record, status["session_id"])
         frame = (await self._frames(1, status["session_id"]))[0]
-        area = measure_token_area(frame, reference)
+        area = (measure_surface_token_area(frame, reference, record["detection_polygon_px"])
+                if record.get("detector") == SURFACE_DETECTOR_ID
+                else measure_token_area(frame, reference))
         low, high = token_area_range(area)
         return self.runtime.store.put(TOKEN_SIZE_KIND, {
             "reference_id": reference_id, "camera_session_id": status["session_id"],
@@ -194,11 +276,13 @@ class TokenDetectionService:
                 raise ValueError("The red detector does not use an empty-tank reference")
             from apps.vision.reeftrace_vision.tracking import detect_red
             return detect_red, {"detector": RED_DETECTOR}
-        if name != DETECTOR_ID:
+        if name not in {DETECTOR_ID, SURFACE_DETECTOR_ID}:
             raise ValueError("Unsupported token detector")
         if not reference_id:
             raise ValueError("Capture an empty-tank reference and pass its reference_id")
         record, reference = self._reference(reference_id)
+        if record.get("detector", DETECTOR_ID) != name:
+            raise ValueError("Detector does not match the frozen reference version")
         self._check_current(record, session_id)
         if list(record["image_size_px"]) != list(image_size_px or []):
             raise ValueError("The empty-tank reference and the mapping use different image sizes")
@@ -206,6 +290,13 @@ class TokenDetectionService:
         if size is None:
             raise ValueError("Measure one token with this reference before recording")
         area_range = tuple(size["token_area_px_range"])
+        if name == SURFACE_DETECTOR_ID:
+            metadata = {"detector": SURFACE_DETECTOR_ID, "reference_id": reference_id,
+                        "token_area_px_range": list(area_range),
+                        "detection_polygon_px": record["detection_polygon_px"],
+                        "policy_id": SURFACE_POLICY_ID, "policy_sha256": SURFACE_POLICY_SHA256}
+            return (lambda image: detect_surface_token(
+                image, reference, record["detection_polygon_px"], area_px_range=area_range), metadata)
         return (lambda image: detect_foreground(image, reference, area_px_range=area_range),
                 {"detector": DETECTOR_ID, "reference_id": reference_id,
                  "token_area_px_range": list(area_range)})
