@@ -12,7 +12,15 @@ import httpx
 import pytest
 
 from apps.api.reeftrace_api.services.ocean_prevention_investigation import snapshot_identity
-from scripts.export_ocean_showcase import DESTINATION, MODES, build_export, canonical, mode_variant
+from apps.ocean.reeftrace_ocean import ocean_prevention
+from scripts.export_ocean_showcase import (
+    ARCHIVAL_LIMITATION,
+    DESTINATION,
+    MODES,
+    build_export,
+    canonical,
+    mode_variant,
+)
 
 
 @pytest.fixture(scope="module")
@@ -43,9 +51,13 @@ def test_mode_representations_change_only_freshness_and_its_verified_report_hash
         assert snapshot_identity(report)[3] == item["report_sha256"]
         assert report["mode"] == mode
         assert report["scenario"]["id"] == scenario
-        reports.append({key: value for key, value in report.items()
-                        if key not in {"mode", "report_sha256"}})
-    assert reports[0] == reports[1]
+        reports.append(report)
+    assert ARCHIVAL_LIMITATION not in reports[0]["limitations"]
+    assert reports[1]["limitations"] == [*reports[0]["limitations"], ARCHIVAL_LIMITATION]
+    scientific = [{key: value for key, value in report.items()
+                   if key not in {"mode", "report_sha256", "limitations"}}
+                  for report in reports]
+    assert scientific[0] == scientific[1]
     assert variants[MODES[0]]["report_sha256"] != variants[MODES[1]]["report_sha256"]
     report = json.loads(variants[MODES[0]]["report_json"])
     assert report["recommendation"]["status"] == (
@@ -65,6 +77,33 @@ def test_shipped_reports_match_current_verified_scientific_source(exported):
     shipped = json.loads(DESTINATION.read_text())
     assert shipped["reports"] == exported["reports"], (
         "Scientific bytes changed; explicitly regenerate and review the public showcase")
+
+
+def test_export_reports_stay_identical_across_actual_source_expiry(monkeypatch):
+    boundary = datetime.fromisoformat(ocean_prevention.END_UTC)
+    expected = None
+    # Reproduce the original failure through the real report factory, including
+    # its extra archival limitation; do not replace it with a report stub.
+    for offset in (-1, 0, 1):
+        instant = datetime.fromtimestamp(boundary.timestamp() + offset, UTC)
+
+        class Clock(datetime):
+            frozen = instant
+
+            @classmethod
+            def now(cls, tz=None):
+                return cls.frozen.astimezone(tz)
+
+        monkeypatch.setattr(ocean_prevention, "datetime", Clock)
+        result = build_export(generated_at=instant, source_commit="expiry-regression")
+        if expected is None:
+            expected = result["reports"]
+        assert result["reports"] == expected
+        for variants in result["reports"].values():
+            forecast = json.loads(variants[MODES[0]]["report_json"])
+            archived = json.loads(variants[MODES[1]]["report_json"])
+            assert ARCHIVAL_LIMITATION not in forecast["limitations"]
+            assert archived["limitations"] == [*forecast["limitations"], ARCHIVAL_LIMITATION]
 
 
 def test_export_runs_without_any_network_or_provider_requests(monkeypatch):
