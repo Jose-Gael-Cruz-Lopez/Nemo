@@ -6,7 +6,7 @@ const API = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 type OperatorAccess = { token: string; connect: (candidate: string, signal?: AbortSignal) => Promise<void>; disconnect: () => void };
 const OperatorContext = createContext<OperatorAccess | null>(null);
 
-// The existing local operator credential lives only in this tab's React tree.
+// The operator credential lives only in this tab's React tree.
 // It is never put in URLs, browser storage, cookies, or rendered markup.
 export function OperatorProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState("");
@@ -15,7 +15,7 @@ export function OperatorProvider({ children }: { children: ReactNode }) {
   const connect = useCallback(async (candidate: string, signal?: AbortSignal) => {
     const run = ++generation.current;
     const value = candidate.trim();
-    if (!value) throw new Error("Enter your local operator token.");
+    if (!value) throw new Error("Enter your operator token.");
     let response: Response;
     try {
       response = await fetch(`${API}/api/v1/operator/session`, {
@@ -24,10 +24,10 @@ export function OperatorProvider({ children }: { children: ReactNode }) {
       });
     } catch {
       signal?.throwIfAborted();
-      throw new Error("The local API could not be reached. Start ReefTrace, then try again.");
+      throw new Error("Nemo’s API could not be reached. Check this deployment and try again.");
     }
-    if (response.status === 401) throw new Error("That token was not accepted. Check your local ReefTrace .env file.");
-    if (response.status === 503) throw new Error("Operator access is not configured on the local API.");
+    if (response.status === 401) throw new Error("That token was not accepted. Use the operator token for this Nemo deployment.");
+    if (response.status === 503) throw new Error("Operator access is not configured on this Nemo deployment.");
     if (!response.ok) throw new Error(`Operator verification failed (${response.status}). Try again after checking the API.`);
     const result = await response.json() as { authenticated?: boolean; scope?: string };
     if (result.authenticated !== true || result.scope !== "local_operator") throw new Error("The API did not confirm operator access.");

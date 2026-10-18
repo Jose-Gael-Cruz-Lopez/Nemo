@@ -316,7 +316,7 @@ export function PreventionWorkspace({ request, operatorConnected, onRequireOpera
     catch (cause) { setError(errorText(cause)); }
   }
   function select(id: string) {
-    if (disabled) return;
+    if (disabled || id === selectedRef.current) return;
     ++readRun.current; readController.current?.abort(); selectedRef.current = id; setSelectedId(id); setReport(null); setLoading(true); setError(""); setReadError(""); setNotice("");
   }
   async function stopInvestigation() {

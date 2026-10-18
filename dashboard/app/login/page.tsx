@@ -34,17 +34,17 @@ export default function Login() {
       <div className={styles.loginGrid}>
         <section className={styles.loginStory}><div className={styles.eyebrow}><span />YOUR NEXT STEP STARTS HERE</div><h1>A clearer view.<br /><span>A stronger impact.</span></h1><p>Bring your observations, your questions,<br />and your next coastal intervention together.</p><CoastalTerrain phase={1} className={styles.loginTerrain} /><span className={styles.loginCaption}>OBSERVE. TRACE. PREVENT.</span></section>
         <section className={styles.loginPanel} aria-labelledby="login-title">
-          <div className={styles.loginPanelIcon}><Icon name="key" /></div><p className={styles.eyebrow}>{BRAND_NAME.toUpperCase()} WORKSPACE</p><h2 id="login-title">Welcome to the current.</h2><p className={styles.loginIntro}>Sign in with your team’s local operator token to run observations and investigations.</p>
+          <div className={styles.loginPanelIcon}><Icon name="key" /></div><p className={styles.eyebrow}>{BRAND_NAME.toUpperCase()} WORKSPACE</p><h2 id="login-title">Welcome to the current.</h2><p className={styles.loginIntro}>Sign in with your team’s operator token to run observations and investigations.</p>
           {token ? <div className={styles.connectedState}><span className={styles.connectedBadge}><Icon name="check" />Operator connected</span><p>You’re verified in this browser tab.</p><Link href="/workspace" className={styles.primary}>Continue to workspace <Icon name="arrow" /></Link><button className={styles.textButton} onClick={disconnect}>Disconnect operator</button></div> : <form onSubmit={signIn} className={styles.loginForm}>
-            <label htmlFor="operator-token">Operator token</label><div className={styles.tokenField}><Icon name="key" /><input id="operator-token" type={show ? "text" : "password"} autoComplete="off" autoCapitalize="none" spellCheck={false} required value={draft} onChange={event => { setDraft(event.target.value); setError(""); }} placeholder="Enter your local token" disabled={pending} aria-describedby="token-help" /><button type="button" onClick={() => setShow(!show)} disabled={pending} aria-label={show ? "Hide operator token" : "Show operator token"} aria-pressed={show}>{show ? "Hide" : "Show"}</button></div>
-            <p id="token-help" className={styles.tokenHelp}>Find <code>REEFTRACE_LOCAL_TOKEN</code> in your team’s local <code>reeftrace/.env</code> file.</p>
+            <label htmlFor="operator-token">Operator token</label><div className={styles.tokenField}><Icon name="key" /><input id="operator-token" type={show ? "text" : "password"} autoComplete="off" autoCapitalize="none" spellCheck={false} required value={draft} onChange={event => { setDraft(event.target.value); setError(""); }} placeholder="Enter your operator token" disabled={pending} aria-describedby="token-help" /><button type="button" onClick={() => setShow(!show)} disabled={pending} aria-label={show ? "Hide operator token" : "Show operator token"} aria-pressed={show}>{show ? "Hide" : "Show"}</button></div>
+            <p id="token-help" className={styles.tokenHelp}>Use the operator token for this Nemo deployment. Hosted and local workspaces use separate tokens.</p>
             {error && <p className={styles.loginError} role="alert">{error}</p>}
             <button type="submit" className={styles.primary} disabled={pending || !draft.trim()}>{pending ? "Verifying access…" : "Sign in to workspace"}<Icon name={pending ? "clock" : "arrow"} /></button>
           </form>}
           <div className={styles.loginDivider}><span />Or explore first<span /></div><Link href="/workspace#data" className={styles.exploreLink}>Explore NOAA research <Icon name="arrow" /></Link>
           <p className={styles.privacyNote}><Icon name="check" />Your operator token stays in this tab’s memory. Provider keys stay on the server. Reloading clears operator access.</p>
         </section>
-      </div><div className={styles.loginBottom}><span>BETTER DECISIONS BEGIN WITH EVIDENCE.</span><span>Local research workspace</span></div>
+      </div><div className={styles.loginBottom}><span>BETTER DECISIONS BEGIN WITH EVIDENCE.</span><span>Nemo research workspace</span></div>
     </div>
   </main>;
 }
