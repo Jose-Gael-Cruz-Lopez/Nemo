@@ -1,0 +1,66 @@
+{
+  "schema_version": "nemo_live_integration_checkpoint_v1",
+  "code_baseline": "c6365f74b0735c306f116c312adabc23c315d45a",
+  "hosted_ask_chalk": {
+    "checkedAt": "2026-10-18T08:39:32.709Z",
+    "url": "https://nemo-software-demo.onrender.com/workspace#investigations?case=case-b7ef835436274f9a",
+    "question": "Which starting region best explains this saved path, what evidence supports that ranking, and what remains uncertain? Explain the evidence only.",
+    "liveResponseVisible": true,
+    "reportAction": true,
+    "tools": [
+      "get_case",
+      "get_source_evidence"
+    ],
+    "caseId": "case-b7ef835436274f9a",
+    "evidenceId": "estimate-1c8ef28f8870445e",
+    "evidenceMode": "SYNTHETIC",
+    "source": "C",
+    "physicalValidation": false,
+    "photonSettingsChanged": false
+  },
+  "photon": {
+    "checked_date_utc": "2026-10-18",
+    "question": "Which starting region best explains this observed path, and how certain is that result?",
+    "investigation_id": "investigation-b6f76df2640940c1",
+    "evidence_id": "estimate-fe664aee116545cb",
+    "case_id": "case-2e6b75bbd7db4017",
+    "live_model_response": true,
+    "provider": "chalk",
+    "action": "REPORT",
+    "inbound_status": "DONE",
+    "outbox_status": "ACCEPTED",
+    "independent_observation": "Question marked Delivered and generated reply visibly received in Messages on paired Mac. ACCEPTED alone is not device-delivery proof.",
+    "local_worker_at_check": "enabled, ready, running",
+    "hosted_reply_worker": "disabled",
+    "evidence_mode": "SYNTHETIC",
+    "physical_validation": false
+  },
+  "ci_baseline": {
+    "head_sha": "c6365f74b0735c306f116c312adabc23c315d45a",
+    "run_id": 39104053232,
+    "url": "https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39104053232",
+    "conclusion": "success",
+    "jobs": [
+      "Python tests and scientific replay",
+      "Isolated offline HTTP workflow",
+      "Dashboard tests, lint, types and production build"
+    ],
+    "python": {
+      "passed": 2354,
+      "skipped": 1,
+      "warnings": 1
+    },
+    "frontend_passed": 394,
+    "offline_http": {
+      "passed": 241,
+      "failed": 0,
+      "expected_blocked": 6
+    },
+    "deployment_unit_tests": 12
+  },
+  "limits": [
+    "A one-time live integration success is not an uptime or latency guarantee.",
+    "All checked source evidence is synthetic; no physical source or interception accuracy is established.",
+    "No new camera operation, physical trial, Photon configuration, xAI call, paid billing or frozen scientific result was changed for this checkpoint."
+  ]
+}

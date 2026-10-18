@@ -1,194 +1,286 @@
 # Nemo · ReefTrace
 
-Nemo starts with **where floating pollution could have come from**: compare an observed path with declared candidate sources, preserve uncertainty, then use motion predictions to compare interception layouts and test the outcome. Source tracing remains the core question; prevention is the next decision, not a replacement for origin inference. The controlled tank workflow implements candidate-source support, frozen comparisons and trial ledgers. The separate ocean view compares two hypothetical layouts using real changing PacIOOS model currents; historical NOAA drifter studies evaluate motion models.
+**Investigate where floating pollution could have entered the water, predict where it may travel, and compare collection plans worth testing.**
 
-**Nemo** is the product name. Repository names, Python packages, environment variables and API identifiers remain **ReefTrace**. The current product is a controlled prototype: its software works without a physical rig, while real tank performance and environmental benefit remain unmeasured.
+Nemo connects camera observations, transparent transport models and an evidence-bound AI investigator. Source tracing is the main question; interception is the next decision. The project combines a small physical tank prototype, reproducible synthetic experiments and separate studies of historical ocean buoy movement.
 
-**Source-origin scope:** Investigations starts with tank source tracing: registered profiles compare **two to five declared entry regions** (the reusable estimator accepts two to eight) using forward particles and saved trajectory/retention evidence. Ranked, Unknown and Invalid remain distinct; support bars are conditional compatibility, not calibrated polluter probabilities. **Ocean source research** is a separate bounded retrospective prototype using saved real HYCOM currents: a five-step observed → connected → Kalman-filtered → explicit formula → backward/forward walkthrough, plus a 25-case earlier-position sensitivity diagnostic. It does not search arbitrary ocean locations or establish a pollution release/polluter identity. Better forward-motion error does not by itself demonstrate source accuracy. Read [the source-first mission](docs/source-tracing-mission.md) and [the new ocean source workflow](docs/ocean-source-research.md).
+**Nemo** is the product name. **ReefTrace** remains the repository, package and API name. A green bottle cap is our controlled stand-in for floating trash. **A, B and C are possible entry regions in the tank**, not detected chemicals, pollution categories or named polluters. The live detector recognizes that declared green marker; it is not a general plastic classifier.
 
-Start with the [complete product handbook](docs/tideward-product-guide.md) for every feature and graph, and [Chalk in Nemo](docs/chalk-user-guide.md) for the AI integration's job, permissions, current model selection and failure behavior. Historical setup notes retain their original context; the current handbook explains which capabilities are local, public, verified or awaiting physical measurements.
+[Open the hosted Nemo demo](https://nemo-software-demo.onrender.com/) · [Project story](https://devpost.com/software/nemo-i69rus) · [GitHub checks](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions) · [Product handbook](docs/tideward-product-guide.md) · [Scientific contract audit](docs/algorithm-contract-audit.md)
 
-**Read the science in plain language:** [all actual datasets and their tank relevance](#datasets-what-nemo-actually-uses) · [formulas F1–F17](#scientific-formulas-explained-through-the-tank-experiment) · [real-tank measurement sequence](#turn-the-formulas-into-the-real-tank-experiment). The inventory distinguishes acquired inputs, reused observations, synthetic fixtures and research-only candidates.
+This README describes the implementation at code baseline **`c6365f7`**, verified **18 October 2026**. Screenshots and live checks are dated observations. Historical protocols, results and implementation pins keep their original identities; a documentation update does not refit a model, refresh ocean conditions or create physical validation.
 
-**Latest ocean-source walkthrough checkpoint — 17 October local / 18 October UTC:** the five-stage display now uses the pinned real NOAA/HYCOM result, with separate backward and forward branches, layer controls and reserved-position validation. The six-hour current-only reverse model performed **worse** than last observed drift: mean earlier-position miss **8,696.82 m versus 2,197.73 m** (stationary: **6,069.35 m**). The separate three-hour filtered tutorial is a different task, not a demonstrated improvement over that six-hour comparison. Neither result identifies a verified pollution release.
+## Contents
 
-Local verification passed **2,017 Python tests, 320 frontend tests and 241 isolated HTTP checks**, with zero HTTP failures and six explicitly blocked live-provider/physical scopes. Ruff, ESLint, TypeScript, dependency consistency and an isolated production build passed. Browser checks exercised all five stages, both groups, fixed axes, time scrubbing, comparison disclosure, the disabled-Chalk STOP path and a 390 px layout. These are software checks, not tank validation or a new live Chalk/Photon test. See [the exact verification scope](docs/research-evidence/nemo-source-first-pipeline-verification-20261018.json).
+- [What works and what the evidence means](#what-works-and-what-the-evidence-means)
+- [Screenshots and the visible workflow](#screenshots-and-the-visible-workflow)
+- [Run the software demo](#three-part-software-demo)
+- [Install and start locally](#start-locally)
+- [Architecture and repository map](#architecture-and-repository-map)
+- [Camera, saved calibration and the real rig](#camera-saved-calibration-and-the-real-rig)
+- [Chalk, Photon and Grok](#chalk-photon-and-grok)
+- [Datasets and frozen results](#datasets-what-nemo-actually-uses)
+- [All implemented math and physics: F1–F17](#scientific-formulas-explained-through-the-tank-experiment)
+- [Real tank experiment sequence](#turn-the-formulas-into-the-real-tank-experiment)
+- [States, transitions, evidence and export contracts](#application-states-and-evidence-freshness)
+- [Deployment and private configuration](#deployment-and-private-configuration)
+- [Verification and reproducible checks](#verification-and-reproducible-checks)
+- [Team contributions and remaining work](#team-contributions-and-remaining-work)
+- [Full documentation map](#full-documentation-map)
 
-**Next camera task:** [Trove #3, assigned to Aarush](https://trov.dev/nemo/#tickets/3), proposes OpenCV reference-marker registration, a projected centimetre grid, black tray/green filter boundary layers and stale-mapping detection. This is planned work; automatic registration is not shipped or physically validated. Known scale and separate check points remain necessary.
+## What works and what the evidence means
 
-**Hosted integrations:** Chalk investigations use server-only gateway configuration and report whether a live response was obtained. Photon project authentication can be checked explicitly from Settings using a separate server-only verifier; a successful check does not enable replies or prove phone pairing/delivery. The cloud messaging worker remains disabled. See [the hosted integration configuration](deploy/README.md#optional-read-only-photon-project-connection).
+The project has **three separate evidence streams**. Keeping them separate is part of the implementation.
 
-## Hosted camera and Megana’s rig measurements
+| Stream | Implemented behavior | What it establishes | What remains unproven |
+| --- | --- | --- | --- |
+| Real camera / physical rig | Local C270 preview, green-marker detection, estimated grid, private saved-calibration import, checked-mapping and recording workflows, saved-footage detector replay | The cap is visible and its pixels can be tracked; measured tray dimensions and historical references exist | Current centimetre accuracy without independent alignment checks; measured flow, blind source accuracy and physical collection performance |
+| Synthetic tank experiments | Forward-particle candidate comparison, Ranked/Unknown/Invalid, sensitivity gates, two-layout prevention, trial accounting, exports and 3D replay | End-to-end numerical and application behavior for declared fixtures | Real cap source identification, real reef protection or a physically validated digital twin |
+| Historical ocean research | Archived NOAA positions; position baselines, ridge AR(1), causal Kalman filtering, PacIOOS/HYCOM advection, matched-current comparisons and backward/forward hypotheses | Reproducible motion errors on the stated historical cohorts and hypothetical interception outcomes | A validated system finding the release origin of pollution anywhere in the ocean |
 
-The hosted **Camera** page offers a browser-owned preview: explicit permission, a camera picker, no audio and no frame uploads. **Open local camera workspace** closes that preview and opens the local companion for Megana’s OpenCV detector, calibration and recording. Render cannot access a laptop’s USB device. Its physical capture routes remain disabled; Photon stays off in the cloud profile.
+**Results we preserve:** the fresh six-group study favors the simple last-drift baseline on average. The six-hour reverse-current experiment is worse than last-drift extrapolation. The ocean layout example favors A for its chosen scenario, but uses ideal capture and a hypothetical receiving area. No independently validated physical source or interception result has been established.
 
-Megana’s merged [PR #9](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/9) records the **35.56 × 22.86 cm** inside waterline, coarse cap-placement mapping, real green-cap measurements and excluded drift attempts in [the commissioning log](docs/rig-commissioning-run-log.md). Those dimensions should be reused for that unchanged tray. The actual mapping/reference images, SQLite records and recordings remain private on the capture laptop, not in Git or the Render image. Recorded IDs alone do not transfer those artifacts or authorize a mapping for another camera session. Her `scripts/load_estimated_rig.py` builds an explicitly **SYNTHETIC estimate**, not a measured flow or completed physical source trial.
+### Features at a glance
 
-**Reuse the saved mapping:** the local Camera workflow can load an image-free calibration JSON exported from the capture laptop, keep its homography and original tolerance unchanged, and check it against at least three current independent surveyed landmarks. A passing check creates a new immutable mapping for the current session; loading a file alone approves nothing. **Use Megana’s recorded tray measurements** fills the known bounds without marking physical checks as passed. The [saved-calibration transfer and real-trial guide](docs/reuse-saved-tank-calibration.md) includes an offline, read-only export command. A new camera pose still needs a current background and cap image-area check; these are detector checks, not repeat ruler measurements. Camera data and calibration reuse stay local; Render blocks these routes.
+| Workspace / capability | What a first-time user does | Main contract |
+| --- | --- | --- |
+| Landing / Overview | Enter the silent ocean journey or open the workspace; follow three demo steps | Nemo name, light-blue scientific interface, square components; decorative motion is not data |
+| Investigations — tank | Choose a saved observation, inspect A/B/C support, challenge assumptions, ask Chalk | Candidate support is conditional; Unknown and Invalid are preserved |
+| Investigations — ocean | Reveal scattered fixes → connected path → Kalman estimate → motion formula → both directions | Observed positions, filtered states and modeled hypotheses remain labeled separately |
+| Prevention — ocean | Compare both layouts on one graph; toggle paths, interceptors, current arrows and reef proxy | Same releases, forcing, scale and denominator across layouts |
+| Prevention — tank | Load a separate synthetic comparison, inspect the trial ledger, open 3D and export evidence | Synthetic, reported physical and missing outcomes remain distinct |
+| Camera | Start the local preview explicitly; inspect pixels or the estimated grid; use measured workflows when eligible | Frames remain on the capture laptop; a cloud server cannot open its USB device |
+| Data Lab | Inspect archived data, five-model scores, current studies, motion/error vectors and uncertainty | Read-only saved studies are not new acquisitions or retraining |
+| Chalk | Ask about the selected numerical report and inspect citations/tool trace | Python calculates; a live model explains permitted evidence |
+| Photon | Ask the same investigator through the authorized, pinned iMessage route | Local worker, exact allowlist and durable messaging; hosted verification is read-only |
+| Settings / operator access | Check readiness, enter the operator token privately, explicitly verify integrations | No sponsor key is entered into the browser; readiness is not a live-call success |
 
-For Megana’s portable `reeftrace-rig-handoff` folder, `scripts/prepare_tank_handoff.py` verifies its reference and rebuilds the historical mapping from the actual four fit and three check placements. It exports private historical metadata for the estimated rehearsal or checked reuse. Historical check errors stay historical; translating all seven old points by an image shift does not provide fresh independent alignment validation. Neither the private handoff nor its reference image belongs in Git or Render.
+## Screenshots and the visible workflow
 
-**Estimated tank rehearsal:** when approximate alignment is accepted for the demo, load that historical mapping in local Camera, select **Use estimated grid**, prepare a current empty-tank reference and cap pixel-size check, then press **Record estimated rehearsal** for a new 1–10 second cap path. This reuses the tray measurements and unchanged historical homography without repeating calibration placements. Dots are real local detections; centimetre positions are approximate and current alignment remains unvalidated. Separate `estimated_rehearsal` records cannot train measured flow, create source cases or freeze field receipts. They are distinct from the synthetic estimated-rig model and from a checked measured trial. Frames stay on the Mac. Rehearsal capture itself sends no Photon messages; automatic replies are configured separately. Follow [the short rehearsal walkthrough](docs/reuse-saved-tank-calibration.md#3-run-the-estimated-rehearsal-without-repeating-placements).
+These are **static captures of actual screens**, not a live feed. The [media manifest](docs/assets/nemo/manifest.json) records their bytes and evidence scope.
 
-Reference capture, token measurement and recording now share one capture lock, so they cannot overlap. At most two decoded background references remain in memory; evicted references retain their private files and integrity checks. See [camera setup and the hosted/local boundary](docs/camera-preview.md).
+### Fresh hosted Ask Chalk check
 
-**Rim/reflection rejection and saved-footage replay:** local Camera now offers **Replay saved camera footage** without opening the webcam or moving the rig. It compares the original detector with opt-in `foreground_surface_v2`, overlays accepted/rejected objects and the declared tank outline, and preserves misses/ambiguity as gaps. V2 keeps the full-background lighting and camera-shift checks unchanged, then rejects complete components crossing the outline or failing the frozen green-marker and compact-cap shape policy. It requires a green marker and does not recognize plastic. A 37-frame local development replay accepted 33 frames with v1 and 37 with v2; these clips informed development and are not an independent accuracy test. The private JPEGs/backgrounds stay out of Git and Render. See [the versioned detector and replay contract](docs/surface-detector-replay.md).
+On **18 October 2026**, a fresh question in the deployed app returned **REPORT / Live Chalk explanation** in about **7 seconds**. Its `get_case` and `get_source_evidence` trace cited `estimate-1c8ef28f8870445e`, matching the selected saved synthetic report. The result explained why C fit best and why that was not a proven geographic origin. This proves one real integration turn, not physical source accuracy or guaranteed response time. [Verification receipt](docs/research-evidence/nemo-live-integration-verification-20261018.json).
+
+![Actual hosted Ask Chalk response, natural question, live-response label and matching evidence trace. The selected case is synthetic.](docs/assets/nemo/ask-chalk-hosted-live.jpg)
+
+<details>
+<summary>Open the complete visual walkthrough: camera, source, NOAA, layouts, 3D and Photon</summary>
+
+**Real rig.** The tray, pump, tubing and mesh exist; this photograph is not a completed accuracy trial.
+
+![Real physical tray, pump, tubing and mesh collector.](docs/assets/nemo/real-hardware.png)
+
+**Real marker, estimated grid.** Green-cap pixels are observed. The displayed centimetres are approximate until present alignment is independently checked.
+
+![Local live green-marker display with explicitly estimated grid.](docs/assets/nemo/live-green-marker.jpg)
+
+**Separate synthetic source case.** A, B and C are declared entry regions. C best matches this saved path under the frozen model; its bar is not a geographic probability.
+
+![Saved synthetic path and conditional candidate-source support.](docs/assets/nemo/synthetic-source.jpg)
+
+**Historical NOAA observations.** The dots are processed buoy positions. Movement between them is not directly observed.
+
+![Three historical NOAA position fixes.](docs/assets/nemo/noaa-observations.jpg)
+
+**Causal Kalman filtering.** The filter combines a motion estimate with permitted position observations. It is not a newly trained neural model or a smoother using withheld future positions.
+
+![Kalman position-and-velocity estimate.](docs/assets/nemo/noaa-kalman.jpg)
+
+**Both directions.** Purple explores earlier locations; teal projects later motion through the current-plus-offset rule. Neither branch proves a pollution release.
+
+![Earlier-position hypothesis and later trajectory projection.](docs/assets/nemo/noaa-bidirectional.jpg)
+
+**Forecast versus observation.** This separate position-only benchmark shows a six-hour prediction miss; its models do not use the current forcing of the walkthrough.
+
+![Recorded historical buoy path and a free-running forecast.](docs/assets/nemo/noaa-forecast.jpg)
+
+**Compare models honestly.** The simpler last-drift baseline has the lowest mean miss in this six-group study.
+
+![Frozen five-model NOAA comparison table.](docs/assets/nemo/noaa-model-results.jpg)
+
+**Ocean prevention what-if.** Six modeled entries without interception, two with A and four with B; idealized interception and a hypothetical reef proxy.
+
+![Two interception layouts on one shared changing-current plot.](docs/assets/nemo/ocean-layouts.jpg)
+
+**3D tank rehearsal.** This stock synthetic scene is 40 × 30 cm. The actual measured tray is 35.56 × 22.86 cm. The viewer replays saved surface paths rather than solving 3D fluid flow.
+
+![Schematic 3D tank, candidate regions, collector and saved surface paths.](docs/assets/nemo/tank-3d.jpg)
+
+**Real Photon exchange.** A natural question received an actual automated, live-Chalk reply about the pinned saved synthetic case. Private contact headers are cropped; the message text is unchanged. Its numerical evidence ID belongs to that local case, not the hosted case above.
+
+![Genuine natural source-evidence question and automated Photon reply.](docs/assets/nemo/photon-source-question.png)
+
+</details>
+
+## Three-part software demo
+
+Open the [hosted workspace](https://nemo-software-demo.onrender.com/workspace) or the [local dashboard](http://127.0.0.1:3000). Public research is readable without operator access; state-changing actions and live model requests require the correct deployment's private operator token. The three core parts are source tracing, layout comparison and evidence explanation; the sequence below also shows the optional ocean and 3D inspection steps.
+
+1. **Trace a source.** In Overview choose **Open source trace**, connect operator access, then **Load demo** if needed. Select the ranked synthetic **Observed trajectory**. Inspect A/B/C and the report identity. **Recompute source support** deliberately creates a new evidence identity; **Test sensitivity** checks the declared variants. The retained-endpoint example is **Unknown**; the bad-mapping example is **Invalid**.
+2. **Inspect both directions.** In Investigations switch to **Ocean source research** and explicitly load the saved study. Reveal the five stages, select both GDP groups, toggle layers, and disclose reserved earlier/later positions only for evaluation. The axes and scores do not change when paths are hidden.
+3. **Compare prevention layouts.** Prevention defaults to **Ocean · changing currents**. Choose **Compare ocean layouts**, inspect the default downstream scenario, toggle A/B on one plot, and filter a release. Counts always use all six planned releases. The original no-entry control remains available; its zero-entry tie is preserved.
+4. **Ask Chalk.** Ask what the chosen report supports and what remains uncertain. Require **Live Chalk explanation**, inspect the action and expand **Evidence citations and tool trace**. A visible configuration flag or an older screenshot is not sufficient.
+5. **Inspect the physical experiment separately.** In **Tank experiment & trial ledger**, load its separate synthetic comparison and choose **Open 3D tank**. Orbit, switch layouts/sources, toggle layers and scrub time. Missing physical trials stay missing.
+
+The [full operating runbook](docs/integrated-team-demo.txt), [scientific UI guide](docs/nemo-scientific-demo.md) and [feature handbook](docs/tideward-product-guide.md) give longer walkthroughs. Loading saved studies does not download new NOAA data, train a model, open a camera or send a message.
 
 ## Start locally
 
-Use Python 3.12 and Node 20.9+; the verified development environment uses Python 3.12 and Node 24. From the repository root:
+Use **Python 3.12** and **Node.js 24** to match CI. Package metadata permits Python ≥3.11; Next.js requires Node ≥20.9. From the repository root:
 
 ```sh
 python3 -m venv .venv
-.venv/bin/python -m pip install -e '.[dev,sponsors]'
+.venv/bin/python -m pip install -e '.[dev,sponsors,ocean]'
 cd dashboard
 npm ci
 cd ..
 .venv/bin/python scripts/dev.py
 ```
 
-The launcher checks dependencies and local ports, bootstraps a private `.env` and a missing/blank `REEFTRACE_LOCAL_TOKEN`, then starts the single-worker API at **http://127.0.0.1:8000** and dashboard at **http://127.0.0.1:3000**. Existing nonblank settings are preserved. Verified running services are reused; unrelated listeners are reported rather than killed. Ctrl+C stops only services that invocation started. `.venv/bin/python scripts/dev.py --check` performs a read-only preflight.
+- Dashboard: **http://127.0.0.1:3000**. API: **http://127.0.0.1:8000**. Interactive request schemas: **http://127.0.0.1:8000/docs**.
+- After the first bootstrap, `.venv/bin/python scripts/dev.py --check` is an optional read-only preflight. On a fresh checkout with no token, run the normal launcher first.
+- The launcher checks dependencies/ports, creates a private `.env` and a missing/blank `REEFTRACE_LOCAL_TOKEN`, and preserves existing nonblank settings. The token is shared operator access, not an individual email account.
+- Enter the token privately through `/login` or **Operator access**. It remains only in that browser tab's memory and clears on reload. The hosted service has its own separate token; a local token does not authenticate to Render.
+- The launcher reuses verified running services, reports unrelated listeners and stops only services it started. It never silently changes sponsor enable flags.
+- Starting a **new** messaging-enabled API requires explicit `--allow-photon`. An already running authorized worker is left untouched. The software demo requires neither Photon nor the camera.
+- Base scientific/API dependencies are in `pyproject.toml`. `.[sponsors]` installs the Photon SDK; `.[ocean]` installs xarray/NetCDF/Copernicus readers; `.[evaluations]` adds explicit Chalk remote-evaluation tooling. Installing readers or SDKs does not acquire data or invoke a provider.
 
-The root page is the public introduction. Use `/login` or the workspace's operator-access control to enter the local `REEFTRACE_LOCAL_TOKEN` privately; `/workspace` also permits public research viewing. This is shared local operator access, not individual email accounts. The token lives in tab memory and clears on reload; provider keys stay on the server.
+## Architecture and repository map
 
-The launcher never changes sponsor enable flags. Starting a new API with `PHOTON_ENABLED=true` requires the explicit `--allow-photon` flag; an already running API and its authorized worker are left untouched. A software demo does not require changing any messaging setting or starting the Camera page.
+```mermaid
+flowchart TD
+    Obs["Local camera observations"] --> Vision["OpenCV, mapping and gapped tracks"]
+    Vision --> Store["Local evidence store"]
+    Profiles["Declared candidate regions and checked drift"] --> Model["Python transport and source comparison"]
+    Store --> Model
+    Ocean["Pinned NOAA and ocean-current studies"] --> Research["Saved motion and layout reports"]
+    Model --> UI["Nemo workspace"]
+    Research --> UI
+    UI --> Agent["Case-bound evidence investigator"]
+    Agent --> Chalk["Chalk Model Gateway"]
+    Agent --> Tools["Bounded evidence tools"]
+    Tools --> Store
+    Photon["Authorized Photon conversation"] --> Agent
+    Agent --> Reply["Durable, pinned-case reply"]
+    Reply --> Photon
+    classDef box fill:#f2f2f2,stroke:#777,color:#111;
+    class Obs,Vision,Store,Profiles,Model,Ocean,Research,UI,Agent,Chalk,Tools,Photon,Reply box;
+```
 
-### View the connected camera without a tank
+[Download the simple gray-box evidence diagram](docs/assets/nemo/workflow.png).
 
-Open **Camera** in the local workspace. The live preview and controls appear first; a tank is not required. The connected **C270 was verified as device 0 on this Mac at 1280 × 720**. The pixel grid has a checkbox and cursor coordinates; it does not claim centimetre calibration. A continuous, session-bound MJPEG connection displays the latest frames at up to 15 fps without per-frame React updates. Capture preserves the device's native mode (about 24 fps in a two-second C270 check), while recorded tracking defaults to 10 Hz. Tank commissioning is collapsed under **Calibrate a tank and record trials when ready**. See [camera preview and coordinate setup](docs/camera-preview.md).
+**Python owns scientific numbers and state.** The browser draws reports; the model explains them. The estimator accepts permitted observations and candidate geometry, never evaluator-only source truth. SQLite stores evidence, revisions, actions and messaging records. Camera acquisition uses a separate spawned process with a bounded latest-frame queue, so failed capture cannot block STOP or a conversation turn.
 
-The [public ocean showcase deployment plan](docs/public-ocean-showcase.md) is a separate read-only view with checked numerical snapshots. It does not expose the local camera, experiment store or provider credentials; deployment status and its public URL must be verified separately.
+| Location | Purpose |
+| --- | --- |
+| `dashboard/` | Next.js / React / TypeScript UI, scientific plots, state freshness, hosted browser preview and Three.js replay |
+| `apps/api/reeftrace_api/` | FastAPI routes, strict Pydantic contracts, authentication, cases, evidence, field admission, integrations and local/cloud boundaries |
+| `apps/vision/reeftrace_vision/` | Capture process, legacy red tracker, foreground/green detectors, planar mapping, drift and vector diagnostics |
+| `apps/transport/reeftrace_transport/` | Spatial drift/support, geometry and forward stochastic particles |
+| `apps/estimation/reeftrace_estimation/` | Candidate-source support, abstention gates, prevention and validation methods |
+| `apps/ocean/reeftrace_ocean/` | Pinned data readers, geographical interpolation/RK4, baselines, ridge, Kalman and frozen research results |
+| `adapters/chalk/` | Server-only gateway and bounded tool/action contract |
+| `adapters/photon/` | Official SDK transport, route allowlists, durable inbox/outbox and strict command lane |
+| `adapters/local_store/` / `apps/api/.../services/store.py` | SQLite evidence persistence and hashing/transaction behavior |
+| `data/public/`, `data/research/`, `data/current_fields/` | Committed scientific inputs, provenance, protocols and frozen outputs |
+| `data/sample_runs/` / `tests/fixtures/` | Explicit synthetic demonstrations and software fixtures |
+| `scripts/` | Local launcher, handoff/export tools, isolated HTTP checks and saved-study readers |
+| `deploy/`, `Dockerfile`, `render.yaml` | Same-origin production packaging, scrubbed child environments and cloud restrictions |
+| `tests/`, `dashboard/tests/`, `.github/workflows/ci.yml` | Scientific/API/transport/frontend/packaging regressions and three CI jobs |
+| `docs/` | Methods, operating guides, team work, research records and dated verification |
+| `firmware/`, `apps/hardware/` | Historical/unused hardware scaffolding; no active pump, serial or robot actuator |
 
-**Full software-demo hosting:** the [native deployment package](deploy/README.md) runs production Next.js and one private Python API behind the same origin, with a separate demo store and runtime-only Chalk configuration. Its cloud profile disables camera capture, physical rig actions, Photon replies and xAI voice; it does not change the local application's configuration. Durable trials require a persistent local/block volume. Cloudflare Containers require a paid plan and have ephemeral disk by default, so this package alone is not a durable Cloudflare deployment. A temporary Cloudflare Tunnel depends on its host staying running. No hosting URL or completed deployment is implied by these configuration files.
+**Tools and their jobs:** OpenCV processes images; NumPy/SciPy implement numerical methods; FastAPI/Pydantic validate and serve contracts; SQLite preserves local evidence; Next.js/React/TypeScript render the workspace; Three.js presents saved paths in 3D; xarray/NetCDF decode ocean files; GitHub Actions checks the source; Docker/Render package the demo. Butterbase is an optional adapter, not a required production database for the current local workflow.
 
-**Live browser checkpoint — 18 October UTC:** the normal local app completed the five observation/filter/model/backward/forward stages on both saved NOAA groups, trajectory toggles and the reserved-position comparison. One explicitly requested bounded Chalk investigation returned `REPORT` with a live-model response and citations matching the frozen ocean-source report and protocol. This adds a live explanation check to the earlier disabled-provider tests; it does not add new drifter data, independent source accuracy, physical tank validation or a hosted-platform test. No additional Photon message or xAI API call was made.
+### Interface and presentation
 
-## Three-part software demo
+The workspace uses square cards, thin rules, a light-blue palette, concise primary results and collapsed scientific details. Plot labels have short help for hover/focus/touch. Checkboxes control trajectories and overlays without changing the axis scale, saved model scores or denominator. Keyboard focus, mobile layouts and stale-result clearing are covered by regressions and dated browser checks.
 
-Start in **Overview**, choose **Start software demo**, and follow **Follow the evidence**. The [click-by-click runbook](docs/integrated-team-demo.txt) covers the longer presentation.
+The landing follows Welcome → Observe → Trace → Prevent → Verify with an original silent Higgsfield ocean video, self-hosted Rajdhani, the supplied AtomicGlobe/MeridianGlobe adaptation and a light-blue Glyph Trail background. Those globe/glyph effects are decorative, not current observations. Narration, “listen to chapter,” slogans, scroll prompt and manual pause-motion controls were removed. Reduced-motion, hidden-tab cleanup and frame/pixel budgets remain. [Landing provenance](docs/ocean-landing-journey.md) · [UI design](docs/interface-design.md).
 
-1. **Trace a source — Open source trace.** In Investigations, connect operator access, choose **Load demo**, then inspect the saved observed-trajectory report. The synthetic moving example already ranks candidate C; **Recompute source support** is an optional deliberate recomputation that changes its evidence identity. **Test sensitivity** reruns the declared assumption variants, not a new observation. Expand **Choose a different observation** to inspect the retained endpoint (**Unknown**) or invalid-mapping example (**Invalid**). Ask Chalk to explain the saved evidence and its limits.
-2. **Compare two layouts — Compare layouts.** Prevention defaults to **Ocean · changing currents**. Click **Compare ocean layouts** for one combined dynamic-current plot, independent layer checkboxes and a one-release filter. The downstream what-if predicts **6** reef-proxy entries without interception, **2** with central coverage and **4** with flanking coverage. This proxy was chosen after viewing the forecast; it is an illustrative scenario, not independent performance evidence. **Original proxy · no-entry model control** preserves the original zero-entry tie. For recorded outcomes, deliberately select **Tank experiment & trial ledger**, then **Load prevention demo**; its synthetic case and ledger remain separate. Physical trial count remains zero.
-3. **Explain the evidence — Ask Chalk.** In the ocean report, click **Ask Chalk about these layouts** for a read-only explanation bound to its exact forcing, method, scenario and report hashes. The source and tank investigators remain available in their own workflows. Inspect the live-response flag and evidence citations. Provider failure leaves the numerical evidence available; an explanation cannot alter counts or turn an Unknown source into an accepted ranking.
+## Camera, saved calibration and the real rig
 
-**Data lab** opens the same combined ocean comparison, rather than a second default trajectory graph. For the six-group/five-model NOAA study, expand **Research details and historical buoy validation**, then choose **Load buoy comparison** and **Explain this result** under **What does this result mean?**. These read-only replays do not acquire data, retrain models or change a tank source report.
+### Actual hardware and saved measurements
 
-**Watch both trajectory directions:** in **Investigations → Ocean source research**, explicitly load the saved study. Use the five stage buttons or one-pass playback to see real scattered observations, the connected path, the causal Kalman estimate, its current-plus-offset formula and backward/forward branches. Recorded earlier/later positions and reconstruction errors stay behind **Show reserved comparison positions**. Select both GDP examples, toggle layers without rescaling and inspect the separate 25-case lookback sensitivity. The [ocean-source guide](docs/ocean-source-research.md) separates possible earlier positions, future rendezvous, numerical closure and source-validation claims.
+| Item | Current role |
+| --- | --- |
+| Logitech **C270** USB webcam | Connected camera used for local preview; buying the older proposed C920s is not required |
+| Clear tray | Megana's recorded inside waterline: **35.56 × 22.86 cm**, or **14 × 9 inches** |
+| Pond Boss **80 GPH** pump | Manually powered on its original separate AC cord; its rating is volume throughput, not the local water velocity |
+| About 3 ft of **3/8-inch-ID** clear tubing | Return/outlet routing in the same tray; arrangement must be recorded with each experiment |
+| Mesh collection pocket | Physical collector; its capture efficiency and effect on flow are not assumed measured |
+| Identical green caps | Controlled floating markers; token behavior is not automatically pure water velocity or arbitrary plastic behavior |
+| Black reference marks / green collector borders | Visible geometry/reference aids; automatic scientific calibration is not established merely by seeing them |
+| Dry fixed overhead support | Keeps the image pose stable; altered waterline, camera or layout changes the measurement conditions |
 
-**Saved ocean-source result:** the five-stage walkthrough now reconstructs and predicts actual historical buoy positions. It uses only **01:00/02:00/03:00 UTC** observations, initializes velocity at 02:00 and causally updates at 03:00; it is not an RTS smoother. From that filtered anchor, the same changing HYCOM field plus one fixed motion offset runs backward to 00:00 and forward through 06:00. The withheld positions are decoded only after both groups' forecasts have been saved and read back. All **8/8 planned evaluation cells** were scored, representing **eight distinct earlier/later positions on two already-viewed GDP-ID groups**, not eight independent source experiments.
+Pixel coordinates start at the top left with +x right and +y down. Megana's saved tank coordinates use the bottom-right pump-side waterline corner, +x left and +y up the short wall; the homography supplies that change of frame. Her coarse historical checks were 1.91, 2.24 and 2.77 cm, with a 3 cm tolerance selected after viewing the placements. Those historical errors are not present-view accuracy or evidence that the default 0.5 cm criterion was met.
 
-| GDP group | Backward 00:00 position error | Forward final 06:00 position error |
-| --- | ---: | ---: |
-| `300234066836710` | **403.531 m** | **860.020 m** |
-| `300534061292930` | **389.248 m** | **1,023.657 m** |
+[PR #9](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/9) and the [commissioning log](docs/rig-commissioning-run-log.md) preserve actual placements, dimensions, exclusions and limits. The earlier [rig-guide PDF](docs/tideward-rig-guide.pdf) is a build reference with a proposed C920s and historical inventory; this table describes the C270 setup actually used. Arduino, ESP32, gantry, relays, decorative coral and 3D printing are not required by the selected software workflow.
 
-The separate six-hour **06:00→00:00 current-only** reconstruction scored **6/6 model/group rows** on two earlier positions. Its mean miss was **8,696.822 m**, worse than last-drift backward **2,197.726 m** and stationary **6,069.353 m**. All **25/25 sensitivity paths per group** completed, but their spread is not calibrated uncertainty. Tiny forward/backward numerical closure errors do not overturn these observed misses. This is a bounded, post-outcome geographic prototype; **pollution-release/source attribution remains unvalidated**, and physical tank trial count remains zero. The [saved result](data/research/ocean-source-v1/evaluation.json) and [method/results guide](docs/ocean-source-research.md#saved-first-score-results) retain both positive and negative findings without retuning.
+### Preview, calibration and physical evidence are different modes
 
-**3D tank replay:** in Prevention, select **Tank experiment & trial ledger**, load a saved comparison and choose **Open 3D tank**. Orbit the schematic, select a layout/source, toggle layers and scrub saved paths. Full-ensemble counts remain fixed when the drawing changes. Physical recordings use a separate capture clock; unmeasured depth/equipment are schematic, and absent real trials stay absent. See [the 3D guide](docs/tank-simulator.md).
-
-**Matched-current comparison:** Data Lab now defaults its **Study version** selector to **v2 · compatibility amendment**. Choose **Load matched-current study** to read the separately frozen HYCOM/GDP result: **36/36 cells scored** across two buoy groups, three fixed candidates and six later hours. Equal-ID macro ADE is stationary **3,490.119 m**, last observed drift **1,510.232 m**, and HYCOM current-only **5,063.020 m**. Current-only did not improve on last drift on this small retrospective sample; no automatic model promotion or operational winner follows. The selector retains **v1 · preserved original attempt**, with its immutable **0/36** compatibility-failure ledger. Read [v2 results, exact hashes and offline replay](docs/matched-current-v2-results.md), the [frozen amendment proposal](docs/matched-current-v2-amendment.md), and [v1 history](docs/matched-current-results.md). Both attempts remain separate; the shared numerical engine and all 14 v1-pinned source files are unchanged.
-
-The default ocean comparison uses only changing-current advection. The earlier single-release/frozen-current diagnostic remains a separate API and numerical baseline; its straight path is not the product's default forecast. The saved valid window is 17 October 2026 18:00 UTC–18 October 00:00 UTC and automatically becomes an archived model scenario afterward. See [ocean prevention](docs/ocean-prevention.md) for the current workflow and [current-driven prediction](docs/current-driven-prediction.md) for the underlying solver and earlier diagnostic.
-
-**Does a smaller time step change the result?** Open this disclosure beneath the ocean comparison in Prevention or Data Lab. It separates three RK4 integration-step runs from contact checks on one fine path, retaining all six releases and incomplete coverage. The solver lands on forcing timestamps and samples on a start-relative clock, avoiding fractional-timestamp false stops. The current numerical check retains central **2/6** versus flanking **4/6** and the control tie; agreement under these settings is numerical sensitivity, not physical accuracy or improved ML skill. See [the RK4 quality guide](docs/rk4-numerical-quality.md).
-
-Loading the source demo already prepares example evidence; explicitly recomputing a case creates a new evidence identity/revision. Repeated loads reuse active demo cases. Loading after STOP creates an active replacement while preserving the stopped history. The full workspace retains the other diagnostics, Camera commissioning and Settings for deliberate advanced use.
-
-**New exploratory motion diagnostic:** a separately committed constant initial residual adds the final observed drift minus the origin HYCOM current to a copy of the current field, then uses the existing WGS84/RK4 integrator. Its saved first score retains **48/48 cells using twelve already-viewed processed positions**. Equal-ID average miss is **1,030.049 m** for the residual candidate versus **1,510.232 m** last drift and **5,063.020 m** current-only. Both groups improve descriptively, but the candidate was designed after viewing the earlier outcome; this is not an unseen-data or operational improvement claim. The pinned read-only `/api/v1/research/origin-residual` API and its operator-protected Chalk review are implemented separately. The new diagnostic is available in **Data Lab → Research details and historical buoy validation → Load drift-offset study**, with all four saved model rows, both groups, fixed-scale path toggles and a separate bounded Chalk review. Here ‘origin’ means forecast start, not pollution source; source inference remains in Investigations. No operational model is automatically changed. See [the card guide](docs/origin-residual-datalab.md). Read [the saved result and exact identities](docs/origin-residual-results.md). A local explicit numerical replay reproduced the saved forecasts and scores without rewriting artifacts; that is separate from the API reader's saved-byte verification.
-
-## What is working, and what the evidence proves
-
-The latest normal local runtime was refreshed after isolated testing and now serves the ocean-source walkthrough on port3000. Existing private integration settings were preserved. A separate strict source-copy run passed **2,016 Python tests**, and an additional guard regression was then included in an **11-test focused pass** (ten overlap that full run); frontend **320/320** and guarded HTTP **241/241** passed. The [second scoped verification receipt](docs/research-evidence/nemo-bidirectional-pipeline-verification-20261018.json) records those distinct counts, both buoy examples, one-pass playback, fixed-domain toggles, validation reveal, the disabled-provider Chalk STOP, the320px responsive check, and the subsequent normal-runtime refresh. No new live Chalk test, explicit Photon demo message, camera action or xAI API call was initiated. Exact resulting-commit hosted CI is checked separately.
-
-The **five-stage NOAA ocean walkthrough** passed **2016 Python tests, 320 frontend tests and 241 guarded HTTP checks**, with zero failures and six explicit external/physical blockers. Ruff, ESLint, TypeScript and an isolated production build passed. Actual browser checks covered both groups, the five stages, one-pass playback, time scrubbing, fixed-domain layers, separate validation reveal, operator gating, disabled-Chalk STOP and a 320 px layout without horizontal overflow. The disposable browser store stayed unchanged and all six side-effect guards stayed zero. The normal local API was then refreshed to load the new route while preserving private integration settings; no new live Chalk test, explicit Photon test message, camera action or xAI API call was initiated. See [the exact local verification receipt](docs/research-evidence/nemo-bidirectional-pipeline-verification-20261018.json); hosted CI remains a separate exact-commit check.
-
-The historical source-first/Data Lab integration checkpoint passed **1,914 Python tests,
-299 frontend tests and 207 isolated HTTP checks**, with zero HTTP failures and
-the same six expected external/physical blockers, plus Ruff, ESLint, TypeScript
-and an isolated production build. Browser checks loaded the pinned four-model
-result, inspected both groups, verified fixed scores/axes when toggling paths,
-and retained **STOP · No live model response** with providers disabled. All five
-device/provider/messaging/scientific-execution guard counters stayed zero and
-the disposable store was unchanged. The active API and Photon worker were not
-restarted; loading previously added routes there is a separate runtime step.
-The [local receipt](docs/research-evidence/nemo-source-first-origin-ui-verification-20261017.json)
-records exact sources and scope. Hosted CI for the resulting commit is separate.
-
-| Part | Current implementation and evidence | Remaining boundary |
+| Mode | Inputs and behavior | Allowed scientific use |
 | --- | --- | --- |
-| Source tracing | Synthetic moving, retained-endpoint and invalid examples; forward simulation, sensitivity gates, saved reports and explanatory Chalk tools | No measured physical source-identification accuracy |
-| Geographic earlier-position research | Saved NOAA/HYCOM five-stage causal-filter walkthrough; **8/8** earlier/later cells, plus a separate **6/6** six-hour backward baseline comparison and **25-case** sensitivity per group | Two previously viewed buoy groups; conditional earlier positions are not verified pollution releases, calibrated source probabilities or a worldwide attribution system |
-| Ocean prevention | Two layouts with the same 2 km of ideal interception line, six shared changing-current paths, illustrative reef proxy, first-contact events, conservative entry bounds and snapshot-bound Chalk | Downstream geometry is a disclosed post-preview what-if; no mapped reef boundary, measured collector efficiency or ecological benefit |
-| Tank prevention | Protected zone, two frozen layouts, simulated first-entry outcomes, separate trial ledgers, retry safety, exports and validation receipts | No completed physical release or measured interception benefit |
-| 3D tank scene | Lazy-loaded interactive schematic of the exact saved comparison; layout/source/layer controls, playback and separate verified recording paths | Display interpolation and schematic equipment are not CFD; no physical release alignment or positional accuracy is invented |
-| Fresh NOAA study | Six acquired GDP-ID days, five fixed algorithms, **180/180 scored outcomes**, **36 unique later intervals**, verified raw/selection/forecast/report lineage | Historical buoy motion, not observed plastic, a water-tank validation or an independent reef experiment |
-| Matched-depth current study | Distinct frozen v2 amendment, six successful requests, two GDP payloads, **36/36 scored**, prior forecast receipts, exact replay and version-bound Data Lab/Chalk | v1 retains **0/36**; current-only errors exceed last drift on this sample; no independent forecast/plastic/tank/reef validation or automatic promotion |
-| Changing ocean currents | Real PacIOOS three-hourly surface u/v, bounded WGS84/RK4 particle transport and time-selectable arrows; dynamic advection drives ocean-mode layout comparisons | Hypothetical six-hour releases, coarse source support, no measured waste skill or transfer into tank physics |
-| Chalk | Live case-bound investigations and a live fresh-study **REPORT verified on 17 October 2026**; exact evidence citations and bounded read-only research tools | Configuration readiness alone is not a live response; timeouts/provider failures preserve deterministic results |
-| Photon | Durable inbox/outbox, scoped direct conversation and strict control commands; a previously authorized automatic round trip was independently observed Delivered | No messages are needed by this demo or the software handoffs; HTTP 202 acceptance alone is not delivery |
-| Camera/field commissioning | Connected C270 live preview verified at 1280 × 720 on this Mac; pixel guide, conditional water-plane grid, mapping, drift fitting, admission checks and immutable field receipts | Live preview is not calibration; the tank rig, measured mapping/drift and physical trials have not been commissioned here |
-| Grok/xAI | Grok-assisted design/code review, deterministic evidence briefing and server-side Voice API adapter | No funded live xAI Voice result or completed Voice API eligibility is claimed; voice remains disabled |
+| Hosted browser preview | Explicit camera permission, selected browser device, video only, no audio or frame uploads | View the camera. Render cannot run OpenCV against this Mac's USB device |
+| Local live USB preview | Explicit start, camera/session identity, latest-frame MJPEG, pixel guide and cursor coordinates | View and inspect pixels without a tank or calibration |
+| Saved-rig green display | Historical geometry/reference plus direct green color/shape detection and bounded image registration | Real marker pixels and **estimated** centimetres; no approved mapping, profile, source case, flow or trial created |
+| Estimated rehearsal | Historical homography plus current detector checks; explicit 1–10 s recording | Save approximate/gapped local tracks in a separate `estimated_rehearsal` record; cannot train measured flow or approve field receipts |
+| Measured calibration / recording | Session-bound mapping, independent current check points, references, token size and valid associations | Eligible evidence for separately checked flow fitting/validation and later admitted source trials |
+| Saved-footage replay | Previously recorded local frames and frozen detector policies | Development regression; opens no camera and establishes no independent physical accuracy |
 
-The final local software verification on 17 October 2026 passed **1,061 Python tests**, **122 frontend tests**, and **122 PASS / 0 FAIL / 6 expected BLOCKED** offline HTTP checks. Ruff, generated route types, TypeScript and the production build passed. Actual browser checks covered the revised guide, Ranked/Unknown/Invalid source states, separate prevention example, recorded-outcome disclosure and real NOAA results; the guide also had no horizontal overflow at 390 px. Live-provider failures were preserved and two discovered research-orchestration defects received regressions. The blocked offline scopes are not counted as successful physical or device tests. GitHub runs Python/scientific replay, isolated HTTP workflows, and dashboard lint/types/build on pushes and pull requests; inspect the exact commit's hosted result separately.
+The local C270 was observed at **1280 × 720**. The low-latency preview uses one session-bound MJPEG stream, latest frames up to 15 fps and no per-frame React state updates. Acquisition preserves the delivered camera mode; recorded tracking defaults to 10 Hz. The view spans the main content width, with capture controls underneath. Reference capture, token-size measurement and recording share a lock; decoded reference memory is bounded. [Camera contract](docs/camera-preview.md).
 
-The later merged-PR/interface checkpoint passed **1,091 Python tests**, **134 frontend tests**, and the same **122 PASS / 0 FAIL / 6 expected BLOCKED** isolated HTTP workflow. Ruff, dependency consistency, ESLint, route types, TypeScript and the production build passed. No frozen model or dataset changed. Hosted CI for the exact final commit must still be checked separately.
+### Reuse Megana's handoff without repeating existing dimensions
 
-The changing-current checkpoint passed **1,170 Python tests**, **144 frontend tests**, and **128 PASS / 0 FAIL / 6 expected BLOCKED** isolated HTTP checks. It adds a distinct PacIOOS snapshot and current-forced solver; original GDP study files remain unchanged. The browser verified the current-time slider, independent layer toggles, fixed plot scale, mobile help and safe disabled-Chalk behavior. The exact final hosted CI result is linked in the change report. Analytic tests and a real data replay do not establish waste-prediction skill.
+The private `reeftrace-rig-handoff` folder contains reference/calibration material that was not committed to Git. `scripts/prepare_tank_handoff.py` checks its reference and reconstructs the historical mapping from the four fit and three check placements. It does not turn old checks into fresh alignment evidence. The [reuse guide](docs/reuse-saved-tank-calibration.md) gives the preparation/import commands and measured versus estimated branches.
 
-The earlier complete local checkpoint passed **1,641 Python tests**, **223 frontend tests**, and **153 PASS / 0 FAIL / 6 expected BLOCKED** isolated HTTP checks, plus Ruff, ESLint, route types, TypeScript and the production build. A separate fresh-process reader/API/replay check passed 105 tests. The HTTP harness proves zero camera opens, provider requests, Photon sends or polls in its disposable process. The later matched-current archive was moved byte-for-byte outside the historical public-fixture inventory; all 18 file hashes and both old/new replay identities remain unchanged. Physical hardware and live-device scopes are not counted as passed. Exact hosted CI must still be checked for the pushed commit.
+- **For a visual rehearsal:** reuse the existing bounds and historical mapping, explicitly choose estimated mode, and keep the unvalidated label.
+- **For measured claims:** reuse the same dimensions and surveyed landmark positions, but verify the current image alignment independently. Loading the old JSON, shifting all old points together or matching image features does not establish current centimetre accuracy.
+- A fresh background or cap pixel-area check is a detector check; it is not a request to remeasure every physical dimension.
+- Private reference images, SQLite records, raw footage and contact routes stay on the capture Mac, outside Git and Render.
 
-The v2 pre-acquisition checkpoint passed **1,770 Python tests**, **331 focused subset checks** and **225 frontend tests**. After the actual result existed, the extended disposable HTTP run passed **174 / 0 FAIL / 6 expected BLOCKED**, including explicit v1/v2 identity selection, cross-version/stale-pin rejection and an unchanged full-store digest with providers disabled. Actual browser checks displayed **36/36**, both buoy groups, independent path checkboxes/hourly displacement arrows and invariant axes/metrics; switching to v1 showed **0/36**, then back to v2 restored the saved result. A separate live Chalk **REPORT** cited the exact v2 report/protocol. No camera, new Photon message, xAI API or billing change was used. The final post-acquisition full suite then passed **1,779 Python tests** with one upstream dependency warning; frontend remains **225 passed** and HTTP **174 / 0 / 6 blocked**. Lint/types/build passed. [Hosted run 39073934821](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39073934821) passed all 1,779 Python tests and both HTTP/dashboard jobs, but its separate byte-exact v2 replay failed on Linux rounding. A [post-outcome portability verifier](docs/matched-current-v2-portable-verification.md) now preserves exact frozen inputs and accepts only explicitly bounded computed-float differences; 30 additional regression tests passed on macOS and Linux. The original evaluator, data and scientific result are unchanged. Hosted verification of this follow-up is a separate release check.
+The current live green display tolerates camera auto-exposure changes by detecting the declared marker directly instead of requiring background subtraction for that display mode. The separate `foreground_surface_v2` recording/replay policy retains full-scene lighting/shift checks and rejects rim-crossing, non-green or implausibly shaped components. A 37-frame development replay accepted 33 with v1 and 37 with v2; those clips informed development and are **not an independent accuracy test**. [Detector policies](docs/surface-detector-replay.md) · [Foreground method](docs/foreground-token-detection.md).
 
-## Interface and first visit
+The broader automatic grid/boundary registration task remains [Trove #3 for Aarush](https://trov.dev/nemo/#tickets/3). Bounded display registration has shipped; automatic physical calibration, continuously validated boundaries and a measured ML pipeline have not.
 
-The current local workspace keeps the light-blue Nemo palette with a full-height scientific layout, square cards, thin rules and a **220 px** desktop sidebar. **Experiment overview** starts with **Start software demo** and three short steps: source tracing, layout comparison and evidence review. Setup and saved observations begin collapsed; duplicate team controls and the four-builder badge are removed. The actual supplied **Glyph Trail** core retains its Bayer/glyph/diffusion math as a pale-blue decorative background, with pointer events disabled, a **24 fps / 600,000-pixel / 192-stamp** budget and visibility/reduced-motion cleanup. It never represents current or observation data. See [the concise scientific workspace/demo guide](docs/nemo-scientific-demo.md).
+## Chalk, Photon and Grok
 
-The cinematic landing adapts Blue Marine's observed journey patterns into **Welcome → Observe → Trace → Prevent → Verify**, using an original silent **20-second 1080p Higgsfield ocean video**, self-hosted **Rajdhani**, smaller **32–52 px** chapter headings and actual native-scroll progress. The current globe uses the supplied **AtomicGlobe / MeridianGlobe** code: its baked Natural Earth point cloud produces **7,996 dots**, retains all six original shaders and uses the existing Three.js dependency without a Framer package. Source snapshots, exact hashes and adaptations are recorded in [the landing guide](docs/ocean-landing-journey.md). **Scroll to explore** and the bottom landing disclaimer are removed; scientific limits remain with feature results.
+### Chalk: turn a numerical report into an inspectable explanation
 
-**Start journey** waits for its actual **460 ms** entry animation, then scrolls to Observe and focuses its heading; the next Tab reaches **Open observations**. **Open workspace** skips the introduction. There is no eyebrow copy, narration, caption panel or manual motion control. Automatic reduced-motion/hidden-tab handling, a still fallback, **1.5** globe pixel-ratio and **30 fps** caps remain. [Hosted run 39079486572](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39079486572) passed all three jobs for historical **`f3353e0`**. The newer AtomicGlobe/Glyph Trail/scientific-workspace revision is **local and unreleased**, with final combined tests/build pending at this documentation checkpoint; earlier totals do not verify it. Protected actions and provider keys retain their existing gates.
+Chalk is the evidence investigator, not the trajectory calculator. A request follows this chain:
 
-Prevention and Data Lab begin with one ocean comparison graph. Checkboxes independently show the no-interception context, both layout paths, reef proxy, interceptors and current arrows. The release selector filters only the drawing; all six releases remain in every count, and common axis/arrow scales remain fixed. Historical NOAA paths and observed/predicted/error vectors retain their own checkbox controls inside **Research details and historical buoy validation**. The full five-model table is behind **Compare all five models**. Metric-label help works on hover, keyboard focus and touch; Escape dismisses it. See [the interface design notes](docs/interface-design.md).
+1. The user selects a case or research snapshot and asks a question.
+2. The API checks operator permission, case revision, report identity and allowed tools.
+3. A language model is called through **Chalk Model Gateway** with a bounded action/tool contract.
+4. Tools return the selected case, immutable source report or exact research result. Source calls include `get_case` and `get_source_evidence`; some eligible workflows also expose tightly scoped observation/sensitivity/manual-task tools.
+5. The returned action and cited evidence are checked. A stale revision, unsupported tool or invalid contract is rejected.
+6. The UI shows the explanation, action, evidence IDs, tool trace and whether there was a **live model response**.
 
-## Data roles, units and algorithms
+For example, Chalk can explain why C's simulated histories fit the saved path, whether the declared dispersion variants retain that ranking, and why those bars do not identify a real polluter. It can interpret the ocean-layout counts and state which assumptions need physical testing. It cannot change Python's source support, alter counts, relabel a synthetic record as measured or upgrade Unknown by wording alone. Citations provide traceability; users still need to review generated prose.
 
-The [algorithm and contract audit](docs/algorithm-contract-audit.md) gives the equations, actual code references, assumptions and failure rules. The following datasets have different jobs:
+**Live versus unavailable:** `live_model_response: true` means a live provider responded, not that every scientific claim is validated. An unavailable provider returns explicit `STOP` / `live_model_response: false`, a safe failure code and the unchanged numerical evidence. Readiness/configuration is not an authenticated call. Current request bounds are 25 seconds per call within a 60-second whole-turn deadline, with bounded tools and no hidden automatic provider retries. Research-specific investigators generally permit only `REPORT` / `STOP`.
 
-| Input or output | Role and units | What it must not be used as |
-| --- | --- | --- |
-| Synthetic token observations/profiles | Reproducible software development fixtures; tank positions in **cm**, elapsed time in **s** | Measured water behavior or an independent physical test |
-| Recorded token tracks, when available | Mapping starts in pixels; accepted water-plane positions are **cm**, token drift is **cm/s**. Separate recordings fit and validate a local field | NOAA ocean forcing or a measurement of pure water velocity independent of token behavior |
-| Known release labels and trial outcomes | Evaluator truth in the separate trial ledger; zone/capture times in **s** | Source-estimator features or proof that a model's guess was correct |
-| Fresh NOAA positions | Historical latitude/longitude mapped to local **m**; velocity errors in **m/s**; each GDP-ID day's first **18** positions are permitted context, final **6** are evaluation positions | Tank calibration, plastic-source labels or proof of operational real-time causality |
-| PacIOOS current forecast | Pinned geographic model u/v in **m/s**, at **0.25 m** depth; bilinear space/linear time interpolation for six-hour passive-tracer previews and ocean-layout comparisons | Observed waste motion, a score improvement, measured reef protection or centimetre tank forcing |
-| Satellite reef context | Pinned historical NOAA Coral Reef Watch heat stress in degree-heating weeks | Current tank conditions, confirmed bleaching, or input to source rankings |
+A live hosted check is shown above. Source, ocean-source, ocean prevention, tank prevention, fresh NOAA, matched-current and residual research reviews bind their own exact evidence/snapshot identities. [Chalk user guide](docs/chalk-user-guide.md) · [Gateway adapter](adapters/chalk/) · [Integration history](docs/integrations.md).
 
-The tank path uses OpenCV red HSV segmentation and gap-preserving single-token tracking, a checked planar homography, finite-difference drift samples, spatial cell medians and inverse-distance interpolation. A bounded forward advection–diffusion simulator compares declared candidate releases with the observed history or retained endpoint. It saves conditional relative support, then applies observation, fit, separation and sensitivity gates. It does not reconstruct a unique past by reversing a velocity arrow. Source percentages are **relative support under assumptions**, not calibrated polluter probabilities.
+### Photon: the saved-case investigator over iMessage
 
-Tank prevention compares the same protected polygon and declared sources across two registered layouts. It tracks first zone entry and retention events under frozen scenarios; unsupported paths remain unknown. Predicted particles, recorded synthetic releases and operator-reported physical releases keep separate denominators. The trial ledger's missing/unresolved bounds are accounting bounds, not statistical confidence intervals or demonstrated ecological benefit. A numerical report can be `SIMULATED_COMPARISON` or `WITHHELD_UNSUPPORTED_FLOW`; withholding is not a zero-effect result.
+The authorized direct conversation sends a question to the **same investigator**, with a private allowlist of handles, roles and case IDs. It is pinned to those cases; it does **not** silently follow the live green cap or whichever dashboard case is open.
 
-Ocean prevention integrates each of six hypothetical releases once through the same dynamic field, then evaluates no interception and two absorbing-line layouts with the same 2 km total length. First contact determines capture or reef-proxy entry; reef entry wins simultaneous ties. Unsupported paths remain unresolved in the full denominator: entry bounds are `[known entries, known entries + unresolved]`. A layout is preferred only when its upper entry bound is strictly below the other's lower bound; otherwise the result is `TIE` or `INDETERMINATE`. Five-minute output chords do not increase the source's roughly 4 km / three-hour resolution. Ideal capture does not model barrier-flow interaction, waves, object response or measured collection efficiency. See [the complete ocean method and limits](docs/ocean-prevention.md).
+The local worker persists inbound IDs, processing leases and immutable outbox bodies/idempotency keys before sending. Retries preserve the original route/body/key; a new body cannot overwrite an old send. Strict authorized `STOP`, `CANCEL` and `APPROVE` commands use a dedicated control lane instead of waiting on conversational generation. The source contract still applies to an answer delivered by phone.
 
-The fresh geographic study compares stationary persistence, last drift, mean drift, own-prefix ridge velocity AR(1), and a fixed constant-velocity Kalman estimator. Kalman assumes position standard deviation **100 m** (`R = 10000 I m²`) and continuous white-acceleration spectral density **1e-6 m²/s³**. Its forecast begins at the filtered last context state; other models begin at the raw last context observation. No future measurement updates are used. Observed ellipse diagnostics use `P_position + R`, not the latent position covariance alone; nominal hit counts remain uncalibrated.
+The screenshot records a genuine natural question, live Chalk investigation and automatic response visible in Messages. At that checkpoint, the local worker was enabled/ready/running. This is historical connection evidence, not a promise of ongoing availability. **HTTP 202 / outbox `accepted` alone is not device delivery.** The received Mac reply is the independent device observation.
 
-On these six new GDP-ID days, last drift has the lowest mean position error (**ADE 1,573.423 m**), compared with Kalman **1,655.662 m** and ridge **1,772.130 m**. That negative result for the more complex models is retained without retuning or automatic promotion. Different IDs and distinct selected WMOs do not prove physical or statistical independence: **10 old aliases remain unresolved**, and NOAA hourly positions are retrospectively QC/interpolated, potentially using later raw fixes upstream. The earlier blocked acquisition and pre-outcome parser/transport amendment are preserved. See the [fresh study guide](docs/fresh-noaa-study.md) for all metrics, identities, hashes and limitations.
+The hosted cloud profile is different: **Photon replies remain disabled there**. Its explicit read-only check authenticates the configured project and cannot send/list conversations or prove pairing. A read-only variable name does not reduce a provider key's actual privileges. [Photon adapter](adapters/photon/README.md) · [Hosted verifier](deploy/README.md#optional-read-only-photon-project-connection).
 
-Older reference-buoy, training-origin, four-drifter, transfer, Kalman and motion-vector panels remain inspectable research history. Their already-viewed outcomes must not be relabelled as new independent tests. No trained neural trash detector or matched ocean-current forcing has been added to the operational tank model.
+### Grok and the scope of “ML”
 
-The ocean solver uses `dX/dt = u(X,t)` with geographic metric derivatives, resampling the real forecast at the changing particle position and time. It can turn when the supplied flow turns. The original frozen buoy study remains unchanged; no cosmetic curve is added to its persistence or constant-velocity models. Future physical tank predictions need timestamped tank measurements, not rescaled ocean fields.
+Grok assisted physics research, candidate-model comparisons, causal Kalman/RK4 design, reverse-source limitations, test design and code review. Cursor also contributed to implementation. Prompts, reviews, draft corrections and actual local verification are retained in the [contribution ledger](docs/grok-contribution-ledger.md) and [evidence bundle](docs/grok-evidence-bundle.md). Suggestions were checked rather than treated as numerical evidence.
 
-The public, offline `GET /api/v1/research/ocean-prevention` accepts only the two fixed `scenario_id` presets. Operator-protected `POST /api/v1/research/ocean-prevention/investigate` requires `question`, `scenario_id`, `snapshot_sha256`, `method_sha256`, `scenario_sha256` and `report_sha256`. It rejects stale selections before provider access and rechecks the complete report afterward. Chalk has one read-only evidence tool, at most two bounded model calls, and only `REPORT`/`STOP`; a report cites exactly `ocean-comparison:<report hash>` and `ocean-method:<method hash>`. It cannot write cases/trials, acquire currents, actuate hardware or message Photon. Full contracts and request examples are in [ocean prevention](docs/ocean-prevention.md).
+The learned motion component is a small **ridge velocity AR(1)** model fitted to permitted prefixes, plus explicit diagnostic/transfer variants. Kalman is state estimation; RK4 is numerical integration; the green detector is declared image processing. They are not newly trained neural trash-recognition models. The backend executes the calculations; opening Grok or a chat subscription is not proof of xAI API use.
 
-### Replay the planned tank in 3D
-
-In **Prevention → Tank experiment & trial ledger**, select a saved comparison or load the synthetic prevention demo, then choose **Open 3D tank**. The large interactive scene shows the saved source regions, collector footprints, protected-zone proxy and representative surface paths. Choose a layout and source, orbit or inspect overhead, toggle layers, and play or scrub the saved paths. The Three.js viewer loads only after that explicit action, pauses outside view and preserves accessible 2D maps.
-
-The scene reads the **same frozen simulation and evaluation** as the numerical report; it does not generate cosmetic currents, run browser-side physics or count display lines as outcomes. The synthetic demo's 40 × 30 cm footprint is a declared example, not a measurement of the team's bin. Walls, depth, camera mount, pump, tubing and coral proxy are schematic. This is a 3D presentation of a water-surface model, not computational fluid dynamics or a validated digital twin. NOAA/HYCOM ocean coordinates remain separate from tank centimetres.
-
-**Predicted versus actual** means frozen full-ensemble counts beside separately reported physical outcomes. No real tank trial has been captured here. When a prospective, correctly calibrated recording is linked to an admitted measured trial, the scene can show its gapped centimetre samples on a separate capture clock. Capture start is not verified token release: the viewer does not align those clocks, choose the closest simulated particle or invent an RMSE. All missing/unresolved releases remain in the trial bounds. See [the tank simulator guide](docs/tank-simulator.md) for the exact endpoint, evidence checks, controls and physical validation steps. The public Vercel ocean showcase remains a separate read-only ocean demonstration.
-
-The 17 October 3D integration checkpoint passed **1,549 Python tests**, **208 frontend tests** and **142 guarded HTTP checks / 0 failures / 6 expected external or physical blockers**, plus Ruff, ESLint, route types, TypeScript and an isolated production build. Actual Chrome checks covered WebGL, source/layout filters, layers, keyboard orbit and scrubbing, playback completion, close/reopen cleanup and a 390 px viewport. A separate live Chalk explanation used the exact saved comparison/evaluation and preserved Unknown source identity and zero physical trials. The [local verification receipt](docs/grok-evidence/tank3d-local-verification.json) identifies the tested source hashes; hosted CI must be checked for the exact subsequent commit.
-
-The HYCOM/NOAA matched-current workflow now has distinct trusted v1/v2 identities, acquisition/forecast/score artifacts and pure read-only result readers. `GET /api/v1/research/matched-current?study_version=v2` selects the completed amendment; omission retains v1 API compatibility. Operator-protected `POST /api/v1/research/matched-current/investigate` binds `study_version`, `report_sha256` and `protocol_sha256` before a bounded Chalk turn and rechecks the full snapshot afterward. It never acquires, scores or mutates cases. The [Grok review continuation](docs/grok-evidence-continuation.md) retains static advice and corrections separately from local execution. The earlier [design](docs/matched-current-study-plan.md) preserves its original proposal chronology; [v2 results](docs/matched-current-v2-results.md) describe the actual completed attempt. Existing six-group NOAA scores and ocean/tank physics remain unchanged.
+An optional server-side xAI Voice adapter and deterministic evidence briefing exist, but funded live Voice/Imagine API use and sponsor-track qualification remain unverified. The landing narration was removed. No API-credit redemption, billing enablement or background xAI request is required by this README. The requested ongoing automation is **GitHub checks on pushes and pull requests**; the earlier recurring Grok research schedule is not a claim of active unattended training.
 
 ## Datasets: what Nemo actually uses
 
@@ -269,7 +361,7 @@ Read the [saved manifest, exact source URLs and licence](data/current_fields/pac
 
 The v1 attempt downloaded current bytes but blocked both trajectory requests after metadata admission failed; its result remains **0/36**. The separate v2 amendment acquired both 31-row buoy trajectories and scored **36/36** model/hour cells. The later initial-residual diagnostic reuses v2's two groups and current inputs; it adds a fourth candidate and **no new scientific acquisition**.
 
-**Tank relevance:** matching model currents with buoy motion helps investigate the forecasting calculation. A 15 m ocean product cannot measure shallow tank circulation, and a drogued buoy is not equivalent to loose surface plastic or the team's foam token. An initial observed-motion residual can combine object response, forcing error and processing differences; it is not an identified tank drag or windage coefficient.
+**Tank relevance:** matching model currents with buoy motion helps investigate the forecasting calculation. A 15 m ocean product cannot measure shallow tank circulation, and a drogued buoy is not equivalent to loose surface plastic or the team's controlled green cap. An initial observed-motion residual can combine object response, forcing error and processing differences; it is not an identified tank drag or windage coefficient.
 
 Read [v1 acquisition receipts](data/research/matched-current-v1/manifest.json), [v2 acquisition receipts](data/research/matched-current-v2/manifest.json), [actual HYCOM support](docs/matched-current-v2-results.md#5-actual-current-support-not-an-expanded-nominal-tile), and [the separate exploratory residual result](docs/origin-residual-results.md).
 
@@ -306,7 +398,7 @@ Generated forecasts, cached API responses, public-showcase snapshots and replay 
 
 The bundled tank demonstration contains **synthetic** flow samples, a generated drift field, synthetic observations and separately stored evaluator-only release truth. The OpenCV replay uses generated red-token frames. Analytic current fields and hand-authored trial-ledger scenarios test numerical and software behavior. None of those fixtures is measured tank footage, a physical release or an observed capture outcome.
 
-The real experiment still needs its own fixed overhead camera, independently checked water-surface mapping, separate drift-fitting and validation recordings for each layout, and new known-source releases under a frozen protocol. Every token must be accounted for, including unresolved outcomes. A verified release-time/identity anchor is additionally required before matched-time positional error is reported. The current 3D tank is a schematic replay of saved surface paths; it does not manufacture these missing measurements.
+A measured experiment requires the existing fixed overhead camera, an independently checked current water-surface mapping, separate drift-fitting and validation recordings for each layout, and new known-source releases under a frozen protocol. Every token must be accounted for, including unresolved outcomes. A verified release-time/identity anchor is additionally required before matched-time positional error is reported. The current 3D tank is a schematic replay of saved surface paths; it does not manufacture these missing measurements.
 
 Read [synthetic fixture declarations](data/sample_runs/README.md), [field commissioning](docs/field-commissioning.md), [physical validation protocol](docs/prevention-validation-protocol.md), and [3D replay limitations](docs/tank-simulator.md).
 
@@ -334,9 +426,36 @@ OpenDrift/Leeway and OceanParcels are researched model frameworks and examples, 
 The repository also contains **Natural Earth 1:110 million land**: a commit-pinned, public-domain GeoJSON with **127 land polygons**, **5,143 coordinate pairs** and **138,160 original bytes**. It supports globe presentation, not coastline navigation, mapped reef boundaries, current measurements or tank calculations. Its display role is separate from all four environmental products above. Read [the map provenance](docs/research-evidence/landing-globe-natural-earth.json).
 
 
+## Frozen results: what the comparisons actually show
+
+| Study / task | Saved outcome | Interpretation |
+| --- | --- | --- |
+| Initial 1987 NOAA day, six-hour position-only forecast | ADE: stationary **3,855.0 m**, last drift **4,385.8 m**, ridge **3,557.4 m**; ridge endpoint error **7,561.2 m** versus stationary **6,774.6 m** | One selected day; better average error does not mean better final error or generalization |
+| Fresh six-group / five-model study | ADE: last drift **1,573.423 m**, fixed Kalman **1,655.662 m**, own-prefix ridge **1,772.130 m** | Last drift performs best on mean error in this cohort; no automatic promotion or retuning |
+| Matched-current **v1** | **0/36** model/hour cells after compatibility failures | Preserve the failed attempt; do not silently replace it with v2 |
+| Matched-current **v2** | **36/36** cells. Equal-ID macro ADE: stationary **3,490.119 m**, last drift **1,510.232 m**, HYCOM current-only **5,063.020 m** | Current-only does not improve on last drift on this small retrospective sample |
+| Initial-residual diagnostic | Fourth fixed candidate; **48/48** model/hour outcomes reuse 12 already-viewed targets. Residual ADE **1,030.0495 m**, FDE **2,355.9582 m** | Descriptive improvement after viewing outcomes; no new data, independent validation or automatic promotion |
+| Six-hour reverse-current **06:00 → 00:00** | Mean earlier-position miss: current-only **8,696.822 m**, last drift **2,197.726 m**, stationary **6,069.353 m** | Reversing a forward model is not by itself an accurate source finder |
+| Filtered three-fix tutorial anchored at **03:00** | GDP `300234066836710`: backward error **403.531 m**, final forward error **860.020 m**. GDP `300534061292930`: **389.248 m** / **1,023.657 m** | Different, shorter retrospective task; eight evaluation cells share two already-viewed buoy groups |
+| Ocean prevention downstream what-if | **6/6** entries without interception, **2/6** with A, **4/6** with B | Same six hypothetical releases; ideal first-contact capture; receiving proxy selected after viewing forecast |
+| Original ocean prevention control | Preserved zero-entry tie | A zero-entry tie must remain visible, not be replaced by a favorable scenario |
+| Real physical source/interception | No independently validated result | Camera visibility and saved dimensions are prerequisites, not source-accuracy or collection-benefit measurements |
+
+The [fresh study](docs/fresh-noaa-study.md), [matched-current v2 results](docs/matched-current-v2-results.md), [residual results](docs/origin-residual-results.md) and [ocean-source results](docs/ocean-source-research.md) preserve complete metrics, cohort definitions, hashes and limitations. The 25-case lookback perturbation paths are a sensitivity envelope, not calibrated uncertainty. Numerical forward/backward closure measures solver consistency, separately from distance to the actual earlier buoy fix.
+
 ## Scientific formulas, explained through the tank experiment
 
 This is the implemented scientific stack. **Source tracing stays first:** measure a floating token's path, compare plausible release regions, preserve Unknown when the evidence is insufficient, then compare interventions. Ocean movement studies test a different scale and object. The equations below do not make a buoy a piece of plastic or turn a software replay into a physical experiment.
+
+### Which equation belongs to which feature?
+
+| Feature | Calculation | Units and boundary |
+| --- | --- | --- |
+| Tank candidate-source comparison | Forward stochastic particles under $u_{token}(x,y)+b$, dispersion and retention; compare full permitted histories | cm / s; each layout needs its own independently checked drift data |
+| Position-only NOAA benchmark | Stationary, last/mean drift, ridge AR(1), fixed constant-velocity Kalman | m / s; no ocean-current forcing added to those frozen baselines |
+| NOAA bidirectional walkthrough | Causal three-fix Kalman anchor, then HYCOM plus one fixed filtered-motion offset, integrated by RK4 | Geographic position / m/s; earlier/later hypotheses, no source-release proof |
+| Ocean prevention | PacIOOS changing-current advection, $b=0$, no stochastic dispersion; idealized first-contact layouts | Geographic position / m/s; hypothetical releases and reef proxy |
+| 3D tank view | Render saved surface paths and report counts | Declared synthetic centimetres; no second fluid solver |
 
 ### Symbols and units
 
@@ -352,15 +471,21 @@ This is the implemented scientific stack. **Source tracing stays first:** measur
 
 The camera homography $H_{\rm camera}$ is a **3×3 mapping**; the Kalman observation matrix $H_K$ is **2×4**. They share a conventional letter but are unrelated. Observation quality $g_i$ below is also different from Kalman acceleration spectral density $q$.
 
-### F1. Find the red token and map pixels to centimetres
+### F1. Detect a controlled marker and map pixels to centimetres
 
-OpenCV's 8-bit HSV mask accepts hue $[0,10]\cup[170,179]$, saturation $S\ge100$ and brightness $V\ge70$. A 3×3 opening and closing clean the mask. Contours must occupy 25 pixels² to 5% of the frame. Their image centre is:
+The **current saved-rig live display** uses `saved_green_marker_preview_v2`: OpenCV HSV hue **35–85**, saturation **80–255**, value **20–255**, a 3×3 opening and 5×5 closing. A candidate must satisfy aspect ratio ≤2, circularity ≥0.45, solidity ≥0.75 and an area range **0.35–3 times** a saved same-size development marker area. These are declared policies, not calibrated probabilities. The display does not approve a new physical token-size measurement.
+
+For contour area $A$, perimeter $L$ and convex-hull area $A_h$:
 
 $$
-u_{px}=m_{10}/m_{00},\qquad v_{px}=m_{01}/m_{00}.
+\operatorname{circularity}=\frac{4\pi A}{L^2},\qquad
+\operatorname{solidity}=\frac{A}{A_h},\qquad
+u_{px}=\frac{m_{10}}{m_{00}},\quad v_{px}=\frac{m_{01}}{m_{00}}.
 $$
 
-The water-plane homography then gives:
+The separate surface-v2 recording/replay detector adds foreground, green-marker, complete-component/tank-outline and compact-shape gates. Legacy `red_hsv` remains for the original red-marker pipeline and generated replay: hue $[0,10]\cup[170,179]$, $S\ge100$, $V\ge70$, 3×3 opening/closing and area 25 pixels²–5% of frame. Those red settings do not describe today's direct green display.
+
+For a valid water-plane mapping:
 
 $$
 \begin{bmatrix}\tilde x\\\tilde y\\w\end{bmatrix}
@@ -368,9 +493,44 @@ $$
 \qquad x_{cm}=\tilde x/w,\quad y_{cm}=\tilde y/w.
 $$
 
-Independent mapping checks use $e_i=\|\hat p_i-p_i\|_2$ and $e_{\max}=\max_i e_i$. Approval requires the declared maximum-error threshold; the default is **0.5 cm**, with at least **four fit pairs and three separate noncollinear check pairs**. A missed or ambiguous token breaks the track. Association also breaks for nonpositive time, gaps over 0.5 s, or displacement greater than $20\Delta t$ cm.
+Independent checks use $e_i=\|\hat p_i-p_i\|_2$ and $e_{\max}=\max_i e_i$. Measured approval requires the declared threshold (default **0.5 cm**) with at least **four fit pairs and three separate noncollinear check pairs**. This is a maximum point-error check, not an accuracy confidence interval.
 
-**In our tank:** measure marks at the actual water surface, keep the webcam fixed, and use independent marks to test the map. Moving the camera or waterline requires revalidation. This is planar mapping; it does not recover depth or correct all lens/refraction effects. Accepted detector `quality=1` is a declared value, not calibrated confidence. [Mapping code](apps/vision/reeftrace_vision/calibration.py), [tracking code](apps/vision/reeftrace_vision/tracking.py).
+The estimated live display can register historical/current images with ORB features and a bounded translation: at least 15 inliers, inlier fraction ≥0.5, residual ≤3 px and translation ≤64 px under the saved policy. This is **image alignment estimation**, not independent water-plane calibration. It cannot confer measured-flow/source/trial eligibility.
+
+The registration uses matched feature displacements and their componentwise median:
+
+$$
+d_i=p_{i,\mathrm{current}}-p_{i,\mathrm{reference}},\qquad
+\hat d=\operatorname{median}_i d_i,\qquad
+\mathrm{inlier}_i=\mathbf1\{\|d_i-\hat d\|_2\le3\ \mathrm{px}\}.
+$$
+
+After the two bounded median/inlier refinements, accepted translation is applied only above 0.5 px. Estimated centimetres normalize
+$H_{\rm camera}[u_{px}-\hat d_x,\ v_{px}-\hat d_y,\ 1]^T$; the grid shifts into the current view. A failed registration can leave green pixels visible while withholding centimetres/grid. Rotation, perspective and waterline changes are not calibrated by a translation.
+
+**Foreground/reference math.** For 5–60 empty-scene frames, let $B_{Lab}(p)$ be their componentwise median Lab color, and $r_j(p)=\|I_{j,Lab}(p)-B_{Lab}(p)\|_2$. The stored robust variation is
+
+$$
+\sigma_{ref}(p)=\operatorname{GaussianBlur}_{5\times5}
+\left[1.4826\operatorname{median}_j r_j(p)\right].
+$$
+
+For the phase-aligned current frame, the small global exposure adjustment is
+$g=\operatorname{median}(I_{gray})/\max(\operatorname{median}(B_{gray}),1)$.
+Using the separately stored median BGR image $B_{BGR}$, the foreground mask before morphology is
+
+$$
+F(p)=\mathbf1\left\{
+\|Lab(I_{aligned}(p))-Lab(\operatorname{clip}(gB_{BGR}(p),0,255))\|_2
+>\max(18,6\sigma_{ref}(p))
+\right\}.
+$$
+
+The ROI/border mask also applies. A global brightness change over 20%, confident translation over 8 px or more than 15% changed pixels refuses/gaps the current frame. Reference capture itself rejects confident drift over 1.5 px or excessive busy pixels. Surface-v2 intersects this unchanged foreground mask with green HSV **H 35–85 / S ≥80 / V ≥40**, then applies complete-component, shape and area gates. Zero or several admitted candidates remain gaps. The current direct green **display** instead permits V ≥20 without requiring background subtraction; that deliberate display path does not weaken measured-record admission. [Foreground implementation](apps/vision/reeftrace_vision/foreground.py).
+
+A missed/ambiguous observation breaks a track. The original associated tracker also breaks for nonpositive time, a gap over 0.5 s or displacement greater than $20\Delta t$ cm. The legacy associated tracker assigns accepted `quality=1`; this is a declared value, not calibrated detection confidence. The display-only preview does not publish a calibrated confidence score.
+
+**In our tank:** reuse the measured tray dimensions and historical artifacts, keep the webcam fixed, and verify current alignment for measured work. Planar mapping does not recover depth or correct every lens/refraction effect. [Current green display](apps/api/reeftrace_api/services/detector_preview.py) · [Surface detector](apps/vision/reeftrace_vision/surface_token.py) · [Mapping](apps/vision/reeftrace_vision/calibration.py) · [Tracking](apps/vision/reeftrace_vision/tracking.py).
 
 ### F2. Measure drift from the observed path
 
@@ -402,7 +562,7 @@ $$
 
 Node scatter and validation error use $\sqrt{\operatorname{mean}\|v_{pred}-v_{obs}\|^2}$. Validation RMSE includes supported validation samples only, so its coverage must also be shown. The reusable fitter defaults to **5 cm cells / 10 cm radius**; the recorded-flow API defaults to **1 cm / 3 cm**. These are different entry points, not competing measured estimates.
 
-**In our tank:** use separate recordings to fit and check each layout's drift. Current tank flow is a frozen spatial field $u(x,y)$; changing pump conditions are not a commissioned time-varying tank model. A numerical velocity outside support is not usable measured evidence. [Flow model](apps/transport/reeftrace_transport/flow.py).
+**In our tank:** use separate recordings to fit and check each layout's drift. The measured tank model uses a frozen spatial field $u(x,y)$; changing pump conditions are not a commissioned time-varying tank model. A numerical velocity outside support is not usable measured evidence. [Flow model](apps/transport/reeftrace_transport/flow.py).
 
 ### F4. Simulate forward from each candidate source
 
@@ -445,7 +605,7 @@ C_{ij}=\frac{\sigma_z^2e^{-|t_i-t_j|/\tau}}{\sqrt{g_ig_j}}
 +\sigma_m^2+\mathbf1_{i=j}\frac{0.05\sigma_z^2}{g_i}.
 $$
 
-Defaults: position bandwidth $\sigma_z=0.7$ cm, shared model bandwidth $\sigma_m=0.3$ cm, correlation time $\tau=0.8$ s. The shared-offset term contributes to **every** covariance entry. Many adjacent observations cannot average it away. Gaussian factors common to sources are omitted; this is a compatibility kernel, not a calibrated density.
+Library defaults: position bandwidth $\sigma_z=0.7$ cm, shared model bandwidth $\sigma_m=0.3$ cm, correlation time $\tau=0.8$ s. Registered profiles retain their own frozen parameters; these defaults are not measurements of physical camera noise. The shared-offset term contributes to **every** covariance entry. Many adjacent observations cannot average it away. Gaussian factors common to sources are omitted; this is a compatibility kernel, not a calibrated density.
 
 For a first-seen-retained endpoint, only already-retained simulated particles contribute:
 
@@ -481,7 +641,7 @@ The implementation uses log-sum-exp to avoid numerical underflow. $A$ is a lengt
 | Trajectory evidence | At least 3 points over 0.5 s; at most 20 selected points |
 | Calibration, token, retention and sensitivity | Must satisfy their explicit contracts; changed leader or status under a declared sensitivity variant withholds acceptance |
 
-**In our tank:** `ranked` with a non-null `ranked_source` is an accepted identification. `unknown` is abstention, even with a leading source and bars; `invalid` rejects unusable input. Record every attempt. High relative support cannot guarantee that an unlisted true source will be detected as unknown. [Source gates](apps/estimation/reeftrace_estimation/estimator.py), [mission and source-validation plan](docs/source-tracing-mission.md).
+**In our tank:** `ranked` with a non-null `ranked_source` is an accepted model ranking within the declared candidates. `unknown` is abstention, even with a leading source and bars; `invalid` rejects unusable input. Record every attempt. High relative support cannot guarantee that an unlisted true source will be detected as unknown. [Source gates](apps/estimation/reeftrace_estimation/estimator.py), [mission and source-validation plan](docs/source-tracing-mission.md).
 
 ### F7. Follow changing geographic currents without mixing degrees and metres
 
@@ -718,7 +878,7 @@ The historical one-time scoring command was `.venv/bin/python -m scripts.evaluat
 
 | Step | What the team actually measures or freezes | Formulas and evidence | Passing software does not replace |
 | --- | --- | --- | --- |
-| 1. Set the physical conditions | Inside dimensions, waterline/depth, fixed dry camera, token class, pump outlet and manual setting | Real geometry and session identity | Measuring the team's own bin; the synthetic 40×30 cm map is not its dimensions |
+| 1. Set the physical conditions | Inside dimensions, waterline/depth, fixed dry camera, token class, pump outlet and manual setting | Real geometry and session identity | Reusing the recorded 35.56×22.86 cm tray bounds; the synthetic 40×30 cm map is not its dimensions |
 | 2. Approve the water-plane map | ≥4 fit marks plus ≥3 independent check marks at the water surface | F1, maximum error and saved map | A physically checked centimetre mapping |
 | 3. Measure each layout's drift | Separate fitting and validation recordings, valid associations and timestamps | F2–F3, validation RMSE plus coverage | Pure water-current measurements or an ocean-to-tank conversion |
 | 4. Freeze source inference | Candidate polygons, priors, release-age window, noise/dispersion, gates, variants and full release plan | F4–F6; source/time truth kept evaluator-only | Known-source, independently recorded releases |
@@ -727,7 +887,7 @@ The historical one-time scoring command was `.venv/bin/python -m scripts.evaluat
 | 7. Compare interventions | Same protected region, independent layout fields, frozen counterbalanced release plan | F14 predicted events; F15 separately logged actual outcomes | Collector efficiency, flow feedback and ecological benefit |
 | 8. Review and preserve evidence | Original timestamps/recordings, map/profile IDs, hashes, settings, all trials and missing slots | F12–F15; explicit Chalk explanation bound to evidence | A model answer is not a measurement or permission to change an outcome |
 
-**Current boundary:** physical tank source/interception trials remain zero. NOAA/HYCOM/PacIOOS support separate ocean movement research. They cannot supply missing centimetre calibration, source labels, a plastic response model or measured reef protection. The next source-labelled experiment must keep complete runs/sessions disjoint, freeze decisions before outcomes and never rerun or retune until a favorable answer appears.
+**Current boundary:** no independently validated physical tank source/interception trial result has been established. NOAA/HYCOM/PacIOOS support separate ocean movement research. They cannot supply missing centimetre calibration, source labels, a plastic response model or measured reef protection. The next source-labelled experiment must keep complete runs/sessions disjoint, freeze decisions before outcomes and never rerun or retune until a favorable answer appears.
 
 
 ## Application states and evidence freshness
@@ -745,6 +905,8 @@ Numerical status, case state, agent action and delivery status are separate cont
 | Chalk result | Case agent actions include `REPORT`, `UNKNOWN`, `OBSERVE_MORE`, `REQUEST_APPROVAL`, `STOP`; a research review permits only `REPORT`/`STOP`. An agent's STOP ends that turn without authorizing an action; it is not automatically a case STOP. Revision/snapshot checks reject results made stale while a model was responding. |
 | Photon | Inbox `pending → processing → done/failed`; outbox `pending → sending → accepted/failed`, with leases and immutable-key/body retries for retryable transport failures. `accepted` means HTTP 202, not Delivered/read. Strict authorized `STOP`, `CANCEL`, `APPROVE` commands bypass conversational generation; quoted prose is not a command. |
 
+Manual collection proposals and approval also recheck the current LIVE camera session, calibration, rig state and target-observation freshness (default 5 s), as well as the 60 s proposal expiry. An invalid source blocks a proposal; Unknown does not by itself forbid collecting a visible token when all manual-task gates pass. Manual recovery does not require or establish a confident source identity.
+
 STOP never erases saved evidence and does not cut external pump power. The software contains no pump, gantry or autonomous robot actuator. Public research loads are read-only; source/prevention model calls and state changes require local operator access.
 
 ### Two export/validation contracts
@@ -753,33 +915,89 @@ The current-case `analysis_bundle_v1` export has `payload_sha256` and `payload_c
 
 Trace 2's offline validator uses its distinct `content_hash` envelope and full immutable method inputs. Its published synthetic alternatives are alternative outcomes for the same fixture, not additive independent trials. Do not rename hashes or treat a redacted product export as a complete method-replay bundle. [The export-contract audit](docs/software-export-contract.md), [validation protocol](docs/prevention-validation-protocol.md), [Trace 3 contract](docs/trace3-research-and-contract.md), and [Aarush's merged rehearsal](docs/experiment-validation-v2.md) explain the boundary.
 
-## Merged software team work and next steps
+## API and evidence reference
 
-The two software-only assignments in [software handoffs](docs/software-handoffs.md) are merged into `main`:
+The running [OpenAPI reference](http://127.0.0.1:8000/docs) describes exact request schemas. Public result readers are different from operator-protected writes and live model calls. The primary API code is [FastAPI main](apps/api/reeftrace_api/main.py) and the [versioned endpoint modules](apps/api/reeftrace_api/api/v1/endpoints/).
 
-- **Megana — [PR #6](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/6):** [browser demo acceptance matrix](docs/software-demo-acceptance.md), four frontend regressions, explicit button types, step descriptions and a stronger guide focus outline. The matrix distinguishes browser, Node, Python, HTTP, code inspection and blocked scopes.
-- **Aarush — [PR #7](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/7):** [export/validator contract audit](docs/software-export-contract.md) and 30 synthetic regressions covering missing/unresolved outcomes, retries, conflicting identities, quota/order accounting, stale receipts and the distinction between product accounting and numerical method replay. This PR does not implement the full current-case method bridge.
+| Family | Purpose and identity boundary |
+| --- | --- |
+| `/api/v1/health`, `/api/v1/status` | Process/readiness checks; ordinary polling does not invoke providers |
+| Cases, estimates, sensitivity, investigations and actions | Selected case/revision, immutable evidence ID, operator authentication and stale-result rejection |
+| Camera, token references, saved calibrations, rehearsals and field sessions | Local-only capture/reference/session contracts; cloud capture is disabled |
+| Prevention comparisons, trials, evaluations and exports | Exact source evidence/layout/profile/plan; immutable row keys, full denominators and archival rules |
+| `/api/v1/research/real-data` and other historical diagnostics | Pinned NOAA results with observed/predicted/vector/uncertainty disclosures |
+| `/api/v1/research/ocean-prevention` | One of two fixed scenario presets; snapshot, method, scenario and report hashes |
+| `/api/v1/research/matched-current` | Explicit `study_version=v2` for the completed amendment; omission preserves v1 API compatibility |
+| `/api/v1/research/ocean-source` | Saved retrospective source-research result, filtered walkthrough and lookback sensitivity |
+| Research `.../investigate` routes | Bounded read-only Chalk review bound to the exact selected result and protocol hashes |
+| Satellite context / case briefing | Separate heat-stress context and immutable deterministic text; optional explicit audio request is separately gated |
+| `/api/v1/integrations/photon/verify` | Explicit hosted read-only project authentication; no message send/list/worker enablement |
 
-These assignments do not depend on a webcam, pump, calibration or new physical data. Jose owns shared application state, scientific interfaces, live provider configuration and final integration. Earlier [four-person](docs/four-person-build-plan.md) and [three-person](docs/team-handoff-prompts.md) plans remain history; they do not expand these current software-only scopes.
+Four hashes bind an ocean comparison: **source snapshot**, **method**, **scenario** and **complete report**. Other studies retain their own protocol/report/selection/implementation identities. Result readers reject stale pins before provider access and recheck lineage afterward. Changing a case clears obsolete investigator/sensitivity/approval displays; STOP rejects a late response. A good-looking old answer cannot silently attach to new evidence.
 
-Jose's integration follow-up strengthens global/login keyboard focus, moves focus to the source Chalk heading from the Overview guide, announces completed Data Lab reviews and prevention freeze/save results, and removes duplicated no-live-response text. The Prevention URL's `case` parameter retains the source-case context used by the advanced creation form; the loaded comparison has its own visible identity and may be a separate synthetic example.
+## Deployment and private configuration
 
-Next work is concrete: commission the physical camera/mapping and separately measured flow layouts; freeze and run independent source/interception trials; implement and review a complete current-case-to-method-input bridge before claiming numerical method replay for a product export; and verify assistive-technology behavior on real screen readers and additional browsers. The [optional synthetic first-passage bookkeeping audit](docs/algorithm-contract-audit.md#11-next-synthetic-audit-first-passage-bookkeeping) remains a proposal, not an implemented change to frozen algorithms. Retain provider-failure/stale-response behavior and inspect CI for each exact commit. Grok is used interactively for review; its recurring research schedule remains paused. GitHub checks run on code changes. Funded xAI Voice validation and sponsor-track eligibility remain unverified; a chat subscription or unredeemed credit code is not an API result.
+The actual full software demo is [nemo-software-demo.onrender.com](https://nemo-software-demo.onrender.com/). It uses the repository's production package: Next.js and a single private Python API behind one public origin. The internal API port is not published. This live URL was exercised by the Ask Chalk check above; configuration files alone would not establish deployment success.
 
-## Updated physical rig guide
+| Environment | Available | Explicit boundary |
+| --- | --- | --- |
+| Local Mac | OpenCV capture, private references/footage/store, measured/estimated camera workflows, optional authorized Photon worker and Chalk | Camera starts only by operator action; private artifacts stay local |
+| Hosted Render demo | Workspace, committed research/synthetic reports, bounded Chalk review, browser preview, explicit read-only Photon authentication | No laptop USB/OpenCV capture, physical rig action, cloud messaging worker or xAI narration |
+| Read-only ocean showcase | Separate public presentation target documented in `docs/public-ocean-showcase.md` | Not the full local experiment service or proof of a current Vercel deployment |
 
-The [11-page rig guide](docs/tideward-rig-guide.pdf) replaces the earlier clipped build guide. It distinguishes reported inventory from items still needing purchase or confirmation, specifies the earlier planned C920s USB camera and actual pump-adapter check, and gives assembly, mapping, separate layout measurements and first-trial steps. The available **C270 now supplies the live preview**; buying a C920s is not required for that step. See [the current camera guide](docs/camera-preview.md). [Connection diagram](docs/assets/tideward-rig-connections.png) · [measured tank map](docs/assets/tideward-rig-measured-map.png).
+The Free demo store is disposable across lifecycle events; do not use it as the only copy of an experiment. Export trial evidence before restart/redeploy and use a deliberately provisioned persistent local/block volume for durable operation. Automatic deployment is disabled in the declared Render configuration; a Git push alone does not prove that the running service changed. Check the deployed revision and perform a smoke test after a reviewed software release. [Deployment and process-isolation guide](deploy/README.md).
 
-Use the webcam's USB connection to the laptop and the pump's original, separately operated AC cord. The return tube carries water within the same bin; the original cord goes over the rim without cutting the tank. Decorative coral, 3D printing and the unused Arduino/ESP32 boards are not required by this selected plan. The guide is a planned build, not a claim that the rig or any physical trial has been completed. Megana and Aarush's current handoffs remain software-only.
+Start with [.env.example](.env.example). Never commit `.env`, operator tokens, provider keys, routing identities, raw handoffs or local databases. There is no public demo token in this README.
 
-## Reproduce software checks
+| Variable / configuration | Job |
+| --- | --- |
+| `REEFTRACE_DATA_DIR` | Local/private evidence store; never mount one directory for two Photon projects |
+| `REEFTRACE_LOCAL_TOKEN` | Server-side operator authentication; enter only the matching local/hosted token privately |
+| `REEFTRACE_ALLOWED_ORIGINS` | Exact allowed dashboard origins; an allowed CORS/preflight is not authorization to mutate |
+| `REEFTRACE_CAMERA_STALE_S`, `REEFTRACE_CAMERA_SAMPLE_HZ` | Freshness and tracking cadence; not a promise of measured exposure timing |
+| `CHALK_ENABLED` | Explicit enable flag; false in offline tests |
+| `CHALK_ROUTER_BASE_URL`, `CHALK_ROUTER_API_KEY`, `CHALK_ENV_ID`, `CHALK_MODEL` | Existing server-only gateway endpoint, scoped key, environment and permitted model/route |
+| `PHOTON_ENABLED`, `PHOTON_API_KEY`, `PHOTON_PROJECT_ID`, `PHOTON_ROUTES_JSON` | Local worker configuration and exact authorized direct routes/cases |
+| `PHOTON_READONLY_API_KEY`, `PHOTON_READONLY_PROJECT_ID` | Separate hosted project verifier; never enables a reply runtime |
+| `GROK_VOICE_ENABLED`, `XAI_API_KEY` | Optional explicit server-side speech; disabled in the documented demo/cloud profile |
 
-The safest complete software rehearsal starts its own temporary API/store on a random loopback port and guards every provider, camera and Photon path:
+Provider credentials reach Python only, not the Next child or `NEXT_PUBLIC_` variables. Starting/restarting a server is not required for reading this documentation and must not interrupt an active recording. After deliberately changing environment settings, follow the service's restart procedure; a browser reload cannot update Python's environment.
+
+## Verification and reproducible checks
+
+### Current evidence checkpoint
+
+The code baseline **`c6365f74b0735c306f116c312adabc23c315d45a`** passed all three jobs in [GitHub run 39104053232](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/actions/runs/39104053232):
+
+| Scope | Recorded result | What it proves |
+| --- | --- | --- |
+| Python/scientific suite | **2,354 passed, 1 skipped, 1 warning** | The assertions and saved replays for that exact uploaded source |
+| Deployment unit tests | **12 passed** | Offline packaging/isolation/process contracts, not a deployed-service uptime guarantee |
+| Frontend Node tests | **394 passed** | State, freshness, graph and UI contract regressions; these are not browser clicks |
+| Isolated HTTP workflow | **241 PASS, 0 FAIL, 6 expected BLOCKED** | Real HTTP against its own disposable guarded child; no camera/provider/message side effects |
+| Lint / dependencies / types / build | Passed in that run | Ruff, dependency consistency, ESLint, generated route types, TypeScript and production compilation |
+| Fresh live hosted Chalk | REPORT, live label, correct evidence and successful evidence tools | One authenticated deployed integration turn on a saved synthetic case |
+| Fresh local Photon + Chalk | Natural question, live REPORT, durable accepted reply and visible received message | One authorized pinned synthetic-case conversation round trip |
+| Physical scientific accuracy | **Not established** | Requires separate measured-flow and blind source/interception trials |
+
+Counts are tied to the stated code checkpoint, not advertised as timeless totals. The [live-integration receipt](docs/research-evidence/nemo-live-integration-verification-20261018.json) and [image manifest](docs/assets/nemo/manifest.json) separate CI, UI observation, provider success and physical evidence. Older dated receipts in `docs/research-evidence/` and `docs/grok-evidence/` remain historical evidence, not current instructions or proof of a later commit.
+
+### Safe complete software rehearsal
+
+The isolated HTTP runner starts its **own** child API/store on a random loopback port with credentials stripped and camera/provider/Photon guards. It does not test against or restart the user's live API.
 
 ```sh
-.venv/bin/python scripts/e2e_offline.py --output work/offline-http-audit.json
-.venv/bin/python scripts/evaluate_fresh_drifter_study.py --output work/fresh-noaa-replay.json
-.venv/bin/python -m ruff check apps adapters scripts tests
+.venv/bin/python scripts/e2e_offline.py --timeout-seconds 240 --output work/offline-http-audit.json
+.venv/bin/python -m ruff check apps adapters scripts tests deploy
+.venv/bin/python -m pip check
+.venv/bin/python -m unittest discover -s deploy -p 'test_*.py' -v
+```
+
+For the full pytest suite, use a clean source copy and isolated data/environment matching [CI](docs/ci.md), not a private live store. Install `.[dev,sponsors,evaluations,ocean]` so optional contract tests do not skip only because an SDK is absent.
+
+```sh
+CHALK_ENABLED=false PHOTON_ENABLED=false PHOTON_ROUTES_JSON='[]' GROK_VOICE_ENABLED=false \
+  .venv/bin/python -m pytest -q --strict-config --strict-markers -ra
 cd dashboard
 node --test tests/*.test.mjs
 npm run lint
@@ -788,22 +1006,81 @@ npx tsc --noEmit
 npm run build
 ```
 
-For the full Python suite and optional SDK/NetCDF dependencies, use the isolated recipe in [CI](docs/ci.md); use a source copy without private `.env` or a live store. `.[ocean]` enables the prepared Copernicus/NetCDF readers, not automatic downloads. `.[evaluations]` enables explicit Chalk remote-evaluation tooling; importing/deploying real cloud tasks is outside the offline demo.
+The checked-in [workflow](.github/workflows/ci.yml) also clears provider credentials/models/routes, uses temporary evidence directories, verifies optional SDK imports, replays pinned results without acquisition and rejects fixture rewrites. It runs on pushes and pull requests. Check the **exact new commit's three jobs**, not just an older green run.
 
-The older live-server commands `scripts/e2e_demo.py` and `scripts/e2e_prevention.py` can contact a configured Chalk gateway and read private local settings. They do not send Photon messages or open a camera, but they are distinct from the guarded offline runner. A passing local suite is not a completed hosted CI run, a live provider response or a physical accuracy measurement.
+### Read or reproduce saved research without a new experiment
 
-Ocean integration verification on 17 October 2026: **1,263 Python tests, 163 frontend tests and 137 guarded HTTP checks passed**, with zero HTTP failures and six explicitly blocked external/physical scopes. ESLint, TypeScript and the production build passed. Browser checks covered the single graph, layer and release filters, fixed scales, changing arrow times, scenario reset, the preserved tie, tank access and a 390 px viewport without horizontal overflow. A separate live Chalk `REPORT` cited the displayed comparison and method; these software checks do not establish physical protection or model accuracy.
+```sh
+.venv/bin/python scripts/evaluate_real_data.py --output work/real-data-replay.json
+.venv/bin/python scripts/evaluate_motion_ablation.py --output work/motion-ablation-replay.json
+.venv/bin/python scripts/evaluate_multidrifter_study.py --output work/multidrifter-replay.json
+.venv/bin/python scripts/evaluate_fresh_drifter_study.py --output work/fresh-drifter-replay.json
+.venv/bin/python -m scripts.evaluate_matched_current_study --directory data/research/matched-current-v1 --output work/matched-v1-read.json
+.venv/bin/python -m scripts.verify_matched_current_v2_portable --output work/matched-v2-portable.json
+.venv/bin/python -m scripts.evaluate_origin_residual_diagnostic
+.venv/bin/python -m scripts.evaluate_ocean_source
+```
 
-## Reference map
+Run from the repository root; outputs are derived artifacts in ignored `work/`. The readers preserve data, methods, forecast-before-score lineage and frozen result pins. The portability verifier bounds computed floating-point differences; it does not rewrite the evaluator or saved scientific result. Do **not** run acquisition, protocol-freeze, `--first-score`, retuning or replacement-result commands merely to demonstrate an existing study.
 
-Historical RK4 numerical-quality checkpoint: **1,365 Python tests, 191 frontend tests and 137 guarded HTTP checks passed**, with zero HTTP failures and six expected blocked external/physical scopes. Ruff, ESLint, route types, TypeScript and an isolated production build passed. Browser checks covered Data Lab/Prevention, layer/release controls, fixed axes, current times, scenario reset and the control tie. A separate live Chalk `REPORT` cited the exact final comparison/method and explained numerical precision separately from physical accuracy. The [safe local receipt](docs/grok-evidence/rk4-final-local-verification.json) records source hashes and scope; inspect hosted CI for the exact pushed commit separately. No physical trial or xAI API call was performed. Later verification checkpoints are recorded above.
+The older `e2e_demo.py` and `e2e_prevention.py` are live-server tools with different guards and can invoke a configured Chalk gateway. They are not interchangeable with the offline runner. A configured Photon worker should not be switched off just to read documentation or run the separately guarded offline audit.
 
-The [original matched-current design](docs/matched-current-study-plan.md) is preserved as historical planning. The executed [v1 attempt](docs/matched-current-results.md) retains **0/36 scored cells** after compatibility failures; the separately frozen [v2 compatibility amendment and results](docs/matched-current-v2-results.md) completed **36/36** across two buoy groups and a fixed six-hour horizon. Current-only RK4 had larger mean errors than last observed drift on this small retrospective sample. Neither result changes the earlier six-group NOAA study, promotes a model or validates the physical tank.
+**Test meanings:** PASS verifies that assertion; FAIL is a defect to investigate; BLOCKED identifies a scope the deliberately isolated run did not exercise. The six expected offline blockers do not cancel separately observed live successes, and they must not be counted as passed physical/provider tests. Numerical closure, Node tests, browser checks, CI, a live model answer and blind physical accuracy are different evidence categories.
 
-- [Complete product and team guide](docs/tideward-product-guide.md): every workspace feature, graph, integration, API family, evidence contract and remaining validation task; the team-facing copy is published in Trov.
-- [Architecture](docs/architecture.md), [algorithm/contract audit](docs/algorithm-contract-audit.md), [physics](docs/physics.md), [prevention physics](docs/prevention-physics.md).
-- [Integrated demo](docs/integrated-team-demo.txt), [ocean prevention](docs/ocean-prevention.md), [tank prevention workflow](docs/prevention-workflow.md), [verification](docs/verification.md), [CI](docs/ci.md).
-- [Live camera and future calibration](docs/camera-preview.md), [read-only public ocean showcase](docs/public-ocean-showcase.md).
-- [Fresh NOAA study](docs/fresh-noaa-study.md), [datasets](docs/datasets.md), [original real-data research](docs/research-real-data.md), [motion-vector research](docs/motion-vector-research.txt), [current Grok build record](docs/grok-fresh-build.md), [earlier Kalman build record](docs/grok-kalman-build.md).
-- [Chalk/Photon contracts and live-verification history](docs/integrations.md), [satellite/Grok Voice contract](docs/grok-space-context.md).
-- [Later field commissioning](docs/field-commissioning.md), [original execution plan](docs/execution-plan.md). Camera frames, contacts, raw physical recordings and credentials stay in ignored local storage; no electronics purchase or physical experiment is required for the current software handoffs.
+## Team contributions and remaining work
+
+Merged work includes Megana's [PR #6](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/6) demo acceptance/accessibility work, Aarush's [PR #7](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/7) export/accounting audit and synthetic regressions, and Megana's [PR #9](https://github.com/Jose-Gael-Cruz-Lopez/reeftrace/pull/9) commissioning measurements/detector work. Later integration added calibration handoff/reuse, estimated rehearsals, surface replay, session-bound green display, low-light visibility and the hosted/local camera boundary. The current repository, not an old handoff, is the implementation reference.
+
+| Remaining work | Concrete completion evidence |
+| --- | --- |
+| Current measured alignment and drift | Reuse known dimensions/landmarks; independently check current mapping; fit and validate separate recordings for each fixed layout |
+| Blind source validation | Freeze candidates/priors/noise/gates and complete planned releases; evaluator hides source truth until each answer is saved |
+| Source uncertainty | Report wrong accepted, correct accepted, Unknown, Invalid, missing and coverage; do not turn support bars into calibrated probabilities |
+| Physical interception | Counterbalanced planned releases, independent layout fields and observed zone-entry/mesh-retention outcomes |
+| Automatic grid/boundary workflow | Aarush's Trove #3: robust reference registration, boundary layers and stale-mapping behavior; independently validate measured coordinates |
+| Export-to-method bridge | Complete reviewed immutable inputs for the full numerical method; current product validation proves identity/accounting only |
+| Better ocean inference | More appropriate surface forcing and object response, independent release-labelled histories, prospective availability/coverage checks and frozen evaluation |
+| Accessible/operational use | Additional real screen-reader/browser checks, persistent deployment evidence, provider latency/failure observation and reviewed release procedures |
+
+The earlier [four-person plan](docs/four-person-build-plan.md), [software handoffs](docs/software-handoffs.md) and [team prompts](docs/team-handoff-prompts.md) retain their original assignments. They do not authorize new hardware actions, cloud billing, autonomous messaging or unbounded model research. Grok review can inform a new preregistered study, but viewed outcomes are never relabelled as unseen evidence.
+
+## Full documentation map
+
+| Topic | Primary references |
+| --- | --- |
+| Mission and every feature | [Source-first mission](docs/source-tracing-mission.md), [complete product handbook](docs/tideward-product-guide.md), [scientific demo](docs/nemo-scientific-demo.md), [integrated runbook](docs/integrated-team-demo.txt) |
+| Numerical/source contracts | [Algorithm audit](docs/algorithm-contract-audit.md), [tank physics](docs/physics.md), [prevention physics](docs/prevention-physics.md), [transport research](docs/research-transport-physics.md) |
+| Camera and actual rig | [Camera preview](docs/camera-preview.md), [commissioning run log](docs/rig-commissioning-run-log.md), [saved calibration reuse](docs/reuse-saved-tank-calibration.md), [surface detector replay](docs/surface-detector-replay.md), [field commissioning](docs/field-commissioning.md), [rig PDF](docs/tideward-rig-guide.pdf) |
+| Data and ML evaluation | [Dataset catalogue](docs/datasets.md), [original real data](docs/research-real-data.md), [fresh NOAA study](docs/fresh-noaa-study.md), [ML audit](docs/ml-experiment-audit.txt), [training diagnostic](docs/grok-ml-diagnostic.md), [motion-vector research](docs/motion-vector-research.txt) |
+| Changing currents / numerical accuracy | [Current-driven prediction](docs/current-driven-prediction.md), [ocean prevention](docs/ocean-prevention.md), [RK4 quality](docs/rk4-numerical-quality.md) |
+| Historical matched-current results | [Original design](docs/matched-current-study-plan.md), [v1 result](docs/matched-current-results.md), [compatibility diagnosis](docs/matched-current-v1-compatibility-diagnosis.md), [v2 amendment](docs/matched-current-v2-amendment.md), [v2 result](docs/matched-current-v2-results.md), [portable verifier](docs/matched-current-v2-portable-verification.md) |
+| Residual / bidirectional research | [Residual result](docs/origin-residual-results.md), [residual Data Lab](docs/origin-residual-datalab.md), [ocean source research](docs/ocean-source-research.md) |
+| Prevention, trials and 3D | [Workflow](docs/prevention-workflow.md), [3D contract](docs/tank-simulator.md), [physical protocol](docs/prevention-validation-protocol.md), [team validation rehearsal](docs/experiment-validation-v2.md) |
+| Exports and team algorithms | [Export contract](docs/software-export-contract.md), [Trace 3 contract](docs/trace3-research-and-contract.md), [Trace 3 implementation](docs/trace3-implementation.md) |
+| AI and messaging | [Chalk guide](docs/chalk-user-guide.md), [integration contracts/history](docs/integrations.md), [Photon adapter](adapters/photon/README.md), [satellite/optional Voice](docs/grok-space-context.md) |
+| Grok development evidence | [Contribution ledger](docs/grok-contribution-ledger.md), [canonical bundle](docs/grok-evidence-bundle.md), [review continuation](docs/grok-evidence-continuation.md), [evidence manifest](docs/grok-evidence/manifest.json) |
+| Deployment and verification | [Production package](deploy/README.md), [CI](docs/ci.md), [verification runbook](docs/verification.md), [acceptance matrix](docs/software-demo-acceptance.md), [read-only showcase](docs/public-ocean-showcase.md) |
+| UI and media provenance | [Design notes](docs/interface-design.md), [landing/globe/video](docs/ocean-landing-journey.md), [this README's media manifest](docs/assets/nemo/manifest.json) |
+| Future studies | [Learning plan](docs/research-learning-plan.md), [next current-data study](docs/next-current-data-study.md), [Grok ML next study](docs/grok-ml-next-study.md) |
+| Trov documentation | [Archive navigation](docs/trov-export/README.md), [manifest](docs/trov-export/manifest.json), [source-first publication receipt](docs/research-evidence/nemo-source-first-trov-publication-20261018.json) |
+
+Trov exports are **dated snapshots**: their captured source revisions, hashes and historical DRAFT labels remain intact. This README is the current repository entry point; it does not silently rewrite an old exported archive or claim that a newer repository edit has already been republished to Trov.
+
+## Plain-language glossary
+
+| Term | Meaning in Nemo |
+| --- | --- |
+| Source / A, B, C | Declared possible places where an object entered the tank; not a chemical detector reading or a named polluter |
+| Green cap / token | The controlled floating object observed by the camera |
+| Current / drift | A velocity vector: direction and speed at a place/time; token drift can differ from pure water motion |
+| Pump flow rate | Volume per unit time; a pump's GPH label is not the velocity at each grid point |
+| Observed / filtered / modeled | A recorded position / a state estimate using permitted observations / a simulated hypothesis |
+| Kalman | A position-and-velocity estimator that balances assumed model and measurement uncertainty |
+| RK4 | A four-stage numerical integrator; it is not a learned model or new current measurement |
+| Relative source support | Conditional compatibility among the declared candidates; not geographic probability |
+| ADE / FDE | Average / final distance miss in a stated forecast experiment; neither is source-identification accuracy |
+| Reef proxy | A hypothetical receiving-area polygon used in the software comparison, not a surveyed protected reef |
+| Capture | Ideal first contact in a simulation, or a separately recorded physical outcome; the two must not be merged |
+| Unknown / Invalid | Insufficient distinguishing evidence / unusable input; useful outcomes, not failures to hide |
+| 3D simulation | A schematic view of the same saved surface paths and reports, not CFD |
+| Chalk / Photon / Grok | Evidence explanation / authorized messaging channel / development research and review assistance |

@@ -1,0 +1,86 @@
+{
+  "schema_version": "nemo_readme_media_v1",
+  "documented_at": "2026-10-18",
+  "code_baseline": "c6365f74b0735c306f116c312adabc23c315d45a",
+  "description": "Static team-approved public presentation captures. Pixel bytes copied without altering messages or scientific plots. Private contact headers are absent from the published Photon crop. Captures document specific observations, not current service availability or physical accuracy.",
+  "assets": [
+    {
+      "path": "docs/assets/nemo/real-hardware.png",
+      "sha256": "79f0fb17114d9a760b4d4dacea62e68b626e51ad91dd194c25fff7b66a8043ef",
+      "bytes": 1188932,
+      "scope": "Real physical tray and hardware; not an accepted source trial."
+    },
+    {
+      "path": "docs/assets/nemo/live-green-marker.jpg",
+      "sha256": "d9947e6b3075f66c591aa581d7fb1d4c45b2450f01025127b19e765d221bab1b",
+      "bytes": 100823,
+      "scope": "Real local green-cap detection; estimated grid and unvalidated current centimetres."
+    },
+    {
+      "path": "docs/assets/nemo/synthetic-source.jpg",
+      "sha256": "cfdacd204da6275936d4152d48d5f987d75c894995f6076f80f5f3da57a2448c",
+      "bytes": 40442,
+      "scope": "Saved synthetic candidate-source comparison; conditional support for C."
+    },
+    {
+      "path": "docs/assets/nemo/noaa-observations.jpg",
+      "sha256": "1df9c2cdae53a12da598ae8890b769cd90508fd7faf2f05e47c36e4f0069e5a4",
+      "bytes": 29844,
+      "scope": "Archived processed NOAA buoy positions; not observed plastic."
+    },
+    {
+      "path": "docs/assets/nemo/noaa-kalman.jpg",
+      "sha256": "2acd1afce4570dc2610b9d7104c547de0f535866b78a7dc822c63cb5c571dd9d",
+      "bytes": 29466,
+      "scope": "Causal position-and-velocity estimate from permitted historical positions."
+    },
+    {
+      "path": "docs/assets/nemo/noaa-bidirectional.jpg",
+      "sha256": "7d1e1daaf3d5b28d854164f4a87cb59af23e5fe3cda9426012fa2e954f38d78e",
+      "bytes": 36145,
+      "scope": "Earlier/later modeled hypotheses; not a verified pollution release."
+    },
+    {
+      "path": "docs/assets/nemo/noaa-forecast.jpg",
+      "sha256": "b72e7d6641631afe66c7cb7c2ecebc3757591db179c9682e944785f89b56a420",
+      "bytes": 41122,
+      "scope": "Separate position-only six-hour motion forecast versus reserved NOAA observations."
+    },
+    {
+      "path": "docs/assets/nemo/noaa-model-results.jpg",
+      "sha256": "be205699f9c2b472bf1621a7aeb02f713e2d8247a7b2a1ddb6e7e34536c39dbc",
+      "bytes": 22710,
+      "scope": "Frozen five-model/six-group historical NOAA comparison."
+    },
+    {
+      "path": "docs/assets/nemo/ocean-layouts.jpg",
+      "sha256": "775a4e763511379e19b3a3f332af6c507ce7297685386b8ff62c09828863cd78",
+      "bytes": 48359,
+      "scope": "Six simulated releases, idealized interception and hypothetical reef proxy."
+    },
+    {
+      "path": "docs/assets/nemo/tank-3d.jpg",
+      "sha256": "761a0bd6bba50cf74a97044840fb1f9e60c073cf6741cb067f65f1afd617b833",
+      "bytes": 25931,
+      "scope": "Synthetic 40 by 30 cm schematic surface-path replay; not the measured tray."
+    },
+    {
+      "path": "docs/assets/nemo/ask-chalk-hosted-live.jpg",
+      "sha256": "8ac883a4f7ece4961dd9db00ef63a31c6f3f95c718744833552031cda48c0d4b",
+      "bytes": 80060,
+      "scope": "Genuine hosted Ask Chalk REPORT observed 2026-10-18; saved synthetic case."
+    },
+    {
+      "path": "docs/assets/nemo/photon-source-question.png",
+      "sha256": "37a0742e608caf57640c7684cf1e33277459cb98cbc8a53232535d2468d979b3",
+      "bytes": 303706,
+      "scope": "Genuine natural question and automated live-Chalk reply in authorized conversation; contacts cropped."
+    },
+    {
+      "path": "docs/assets/nemo/workflow.png",
+      "sha256": "70dc865280a96d13f2e8e8e0f95fa36f6e9b766af901c6f1b34bc4a8b67fe6e1",
+      "bytes": 163514,
+      "scope": "Simple gray-box diagram separating real, synthetic and historical evidence."
+    }
+  ]
+}
