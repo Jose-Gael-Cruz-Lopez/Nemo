@@ -1,25 +1,25 @@
-TIDEWARD — INTEGRATED DEMO GUIDE
-17 October 2026
+NEMO — INTEGRATED DEMO GUIDE
+18 October 2026
 
-Tideward is the current product identity. The repository, API identifiers, environment variables and saved ReefTrace evidence remain compatible.
+Nemo is the current product identity. The repository, API identifiers, environment variables and saved ReefTrace evidence remain compatible.
 
-Tideward compares interception layouts before floating pollution reaches a protected area. Its default ocean view uses a real changing-current model, hypothetical releases and an illustrative reef proxy. The separate tank workflow observes a floating token, compares plausible entry points using a measured/frozen drift model, and keeps predictions separate from recorded outcomes.
+Nemo starts with source tracing: compare an observed path with plausible entry regions, preserve uncertainty, then compare interception layouts. Its ocean view uses a real changing-current model, hypothetical releases and an illustrative reef proxy. The measured tank workflow requires a checked mapping and frozen drift model; the live green-cap display below is an estimated preview, not that measured workflow.
 
-The current product is a software prototype with a planned controlled tank experiment. The ocean comparison does not use a real mapped reef boundary or prove measured interception benefit. Tideward does not identify an exact polluter, reconstruct a unique journey from an already-stuck object, or establish coral survival benefits.
+The current product is a prototype whose controlled tank source accuracy remains unvalidated. The ocean comparison does not use a real mapped reef boundary or prove measured interception benefit. Nemo does not identify an exact polluter, reconstruct a unique journey from an already-stuck object, or establish coral survival benefits.
 
 START HERE
 
 Dashboard: http://127.0.0.1:3000/
 Local API reference: http://127.0.0.1:8000/docs
 
-If services need starting, run this from the reeftrace repository:
-  .venv/bin/python scripts/dev.py
+For the currently authorized local demo, keep Photon replies ON using the existing private project and paired route. If services need starting, run this from the reeftrace repository:
+  PHOTON_ENABLED=true GROK_VOICE_ENABLED=false .venv/bin/python scripts/dev.py --allow-photon
 
-The prepared Photon-enabled startup requires the explicit --allow-photon flag. Do not restart an already running service just to follow this guide. The default launcher does not silently enable messaging.
+Run only one local API and Photon worker. Do not start another worker or restart a healthy service just to follow this guide. Check Settings for “Automatic replies on”; a configured key or .env flag alone does not prove the running worker is enabled. The command does not reconfigure an already running API. Keep the existing authorized route and case allowlist private. The hosted Render service verifies Photon project authentication read-only; live replies run on this Mac, not Render.
 
 The root page is the public introduction. Choose “Start your experiment” to use /login and verify the shared local operator token, or “Explore NOAA evidence” for public Data Lab research. This is local operator access, not individual email accounts. The token stays in React memory during in-app navigation; a reload clears it. The workspace’s “Operator access” dialog can also connect access for loading tank demos, computing evidence, saving trials and asking Chalk. Provider keys stay on the server; public research replays need no operator token.
 
-This software-only presentation does not require a camera, pump or new physical recording. Leave capture off. The software has no pump actuator; “Stop task” stops software work, not external AC power. The current software-only teammate prompts are in docs/software-handoffs.md; the later physical instructions below are not part of those assignments.
+The source and prevention software demos do not require a camera, pump or new physical recording. The live-display branch below uses the connected camera and saved setup without repeating the ruler survey. The software has no pump actuator; “Stop task” stops software work, not external AC power. The current software-only teammate prompts are in docs/software-handoffs.md; measured physical commissioning remains a separate task.
 
 OVERVIEW: FOLLOW THE EVIDENCE
 
@@ -135,13 +135,24 @@ Each alternative contains eight synthetic releases. They reuse trial identities 
 
 The transport envelope is prevention_method_replay_v1. It deliberately leaves the existing Trace 3 export/receipt contract unchanged. A genuine current-case numerical validation needs full immutable flow inputs plus protocols, frozen selections and recording/session receipts captured before validation releases. The current redacted export does not contain all of that information; do not manufacture it at import time.
 
-4. LATER FIELD COMMISSIONING: NOT PART OF THE SOFTWARE HANDOFFS
+4A. LIVE GREEN-CAP DISPLAY USING THE SAVED SETUP
 
-Open “Camera”. The Field commissioning wizard appears before the legacy controls. Keep the camera/pump off during a software-only presentation. Missing hardware is a reason to leave physical commissioning incomplete, not to use synthetic results as a substitute.
+1) Open the local “Camera” page and connect local operator access privately. If the external webcam is stopped, choose its actual device index and press “Start webcam”. Confirm the live image shows the intended tray. On the hosted page, “Open local camera workspace” opens this companion and closes the browser-owned preview; frames are not uploaded to Render.
+2) Press “Show live detector with saved setup”. This loads the existing compatible saved mapping, background and green-cap area estimate from private development footage. It does not repeat the calibration placements, ruler survey, background capture or physical cap-size measurement.
+3) Use the green cap already visible in the saved rig setup. No new placement or movement is required for this walkthrough. Read the green-marker box on the same live frame. This finds a declared green marker by colour and shape; it does not classify plastic. Similar green objects can remain ambiguous.
+4) Use “Estimated grid (cm)”, “Green-marker box” and “Ambiguous candidates” to control the overlay. The grid reuses the historical mapping with a bounded image-translation estimate; its current centimetre accuracy is unvalidated. If image registration fails, only pixel positions are shown and the grid/centimetres are withheld.
+5) A “Saved background changed” notice means the explicit green-marker display is operating independently of background subtraction. The measured detector still rejects that changed scene. “Live display · unvalidated” creates no recording, token-size approval, measured calibration, flow profile, source case or trial receipt. Frames stay on this Mac.
+6) Return to Investigations for the saved source-case story, Chalk and Photon. The cap box is not a newly inferred pollution origin. The current authorized Photon route still answers about its saved synthetic case; it does not follow this live cap or whichever dashboard case is selected.
+
+“Hide live detector” stops overlay polling. It does not disable Photon replies or change pump power. For checked measured work, use the separate workflow below and docs/reuse-saved-tank-calibration.md.
+
+4B. MEASURED FIELD COMMISSIONING: SEPARATE FROM THE LIVE DISPLAY
+
+Open the collapsed tank commissioning controls in local “Camera”. Reuse the saved centimetre measurements; verify current alignment before admitting measured evidence. Missing hardware or failed checks leave physical commissioning incomplete. The estimated display and synthetic results cannot substitute for those checks.
 
 When the actual rig is assembled, the sequence is:
 1) Explicitly start the selected USB webcam and use its current session.
-2) Map the water surface: at least four mapping correspondences and three separate check points, measured in the explicitly chosen unit. Camera pixels are not centimetres.
+2) Reuse the saved mapping and surveyed centimetre coordinates, then check current alignment. If a refit is needed, use current pixels for the existing mapping marks and separate check marks; do not repeat the ruler survey of unchanged marks. Camera pixels are not centimetres.
 3) Record separate training and validation drift runs. Do not split neighboring frames from one run into supposedly independent trials.
 4) Fit the recorded flow with the declared geometry and coverage settings.
 5) Admit a measured profile only after independent drift error and coverage gates pass. Declare the limits before evaluating the validation run.
@@ -236,11 +247,11 @@ in docs/motion-vector-research.txt, not newly acquired or validated ocean eviden
 
 6. PHOTON STATUS: WHAT WAS ACTUALLY PROVED
 
-Settings distinguishes configuration from whether the automatic worker is actually running; “Automatic replies on” requires the running-worker status. Read the current status rather than inferring it from a past test. This guide does not change configuration, enable replies or request additional messages.
+For this authorized demo, leave the single local Photon worker ON. Settings distinguishes configuration from whether it is actually running; “Automatic replies on” requires the running-worker status. Read that status rather than inferring it from a past test. Use only the existing private paired route and its saved synthetic case. A new question in that authorized conversation can trigger a reply; do not treat the camera overlay as its source evidence. Render’s hosted connection check remains read-only and cannot prove pairing or delivery.
 
-The live automatic path is now VERIFIED for one synthetic demo case and the paired line. The user explicitly approved one additional automated test. A fresh human question was sent from the paired Mac; the restarted, corrected worker processed it, saved one immutable outbox response, and the provider accepted the first send attempt with HTTP 202 and no error. A separate read-only check through the official SDK confirmed exactly one matching delivered message, with the exact response body in the authorized conversation and to the authorized recipient. The send did not use an unsupported parent-thread field.
+The live automatic path was verified again on 18 October 2026 for the existing synthetic demo case and paired line. A fresh question from the paired Mac produced one saved outbox response, accepted on its first send attempt. The new automated reply was visibly delivered in Mac Messages and cited the same immutable source report used by the dashboard Chalk investigation. The single local worker remained enabled after verification. Earlier delivery tests are separate historical events.
 
-This verifies that specific automatic question-to-response path. It does not establish universal delivery, reliability across other lines or channels, or performance under every failure condition. No additional messages are requested by this guide.
+This verifies that historical automatic question-to-response path. It does not establish universal delivery, reliability across other lines or channels, or performance under every failure condition. For a current demo message, distinguish a saved reply, provider acceptance and actual delivery. Do not retry failed historical replies, delete deduplication history or start a second worker to force a result.
 
 The earlier manually delivered reply through the official Photon dashboard is a separate event. It followed an API rejection involving parentMessageId and must not be counted as the later automatic delivery. The earlier failed outbox row remains failed; its history was not rewritten as successful. The request-contract correction is also covered by tests.
 
