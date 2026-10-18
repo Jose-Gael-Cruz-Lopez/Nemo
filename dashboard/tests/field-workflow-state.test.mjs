@@ -175,3 +175,20 @@ test("green-token recording needs a measured empty-tank reference from the same 
   assert.equal(decode(JSON.stringify({ ...draft, detector: "blue" })), null);
   assert.throws(() => parseTokenReference({ ...saved, detector: "red_hsv" }), /incomplete/);
 });
+
+
+test("a measured token size can be carried to a new empty-tank capture in the same session", async () => {
+  const { parseTokenReference, referenceCaptureBody, setTokenReference, withTokenSize, newDraft: fresh } = await import("../app/components/field-workflow-state.ts");
+  const saved = { detector: "foreground_reference_v1", reference_id: "ref-aaaaaaaaaaaaaaaa-s1", camera_session_id: "usb-s1", image_size_px: [1280, 720] };
+  let draft = { ...fresh(), cameraSessionId: "usb-s1" };
+  assert.deepEqual(referenceCaptureBody(draft, true), { frame_count: 10 }, "nothing to carry yet");
+  const calm = withTokenSize(parseTokenReference(saved), { reference_id: saved.reference_id, token_area_px: 3200, token_area_px_range: [1120, 9600] });
+  draft = setTokenReference(draft, calm);
+  assert.deepEqual(referenceCaptureBody(draft, true), { frame_count: 10, token_size_from: saved.reference_id });
+  assert.deepEqual(referenceCaptureBody(draft, false), { frame_count: 10 });
+  assert.deepEqual(referenceCaptureBody({ ...draft, cameraSessionId: "usb-s2" }, true), { frame_count: 10 }, "never across sessions");
+  const running = parseTokenReference({ ...saved, reference_id: "ref-bbbbbbbbbbbbbbbb-s1", token_size: { reference_id: "ref-bbbbbbbbbbbbbbbb-s1", token_area_px: 3200, token_area_px_range: [1120, 9600] } });
+  assert.deepEqual(running.token_area_px_range, [1120, 9600]);
+  const mismatched = parseTokenReference({ ...saved, reference_id: "ref-cccccccccccccccc-s1", token_size: { reference_id: "ref-other", token_area_px: 3200, token_area_px_range: [1120, 9600] } });
+  assert.equal(mismatched.token_area_px_range, null, "a size for another reference is ignored");
+});

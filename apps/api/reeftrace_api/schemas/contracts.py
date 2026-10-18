@@ -72,6 +72,8 @@ class RecordInput(StrictModel):
 class TokenReferenceInput(StrictModel):
     frame_count: int = Field(default=10, ge=5, le=60)
     roi_polygon_px: list[tuple[FiniteFloat, FiniteFloat]] | None = Field(default=None, min_length=3, max_length=32)
+    # Reuse the token size measured with an earlier reference from this camera session.
+    token_size_from: str | None = Field(default=None, min_length=1, max_length=100)
 
 
 class RecordingCaseInput(StrictModel):

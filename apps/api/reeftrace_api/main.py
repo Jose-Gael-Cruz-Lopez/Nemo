@@ -447,7 +447,8 @@ def create_app(settings: Settings | None = None):
     async def capture_token_reference(body: TokenReferenceInput):
         """Capture the empty tank (no token, pump on) from the current camera session."""
         polygon = [list(point) for point in body.roi_polygon_px] if body.roi_polygon_px else None
-        return await runtime.token_detection.capture_reference(body.frame_count, polygon)
+        return await runtime.token_detection.capture_reference(body.frame_count, polygon,
+                                                               body.token_size_from)
 
     @app.post("/api/v1/camera/reference/{reference_id}/token-size", dependencies=[Depends(operator)])
     async def measure_token_size(reference_id: str):

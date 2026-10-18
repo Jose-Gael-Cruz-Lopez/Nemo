@@ -10,7 +10,7 @@ import {
   ATTESTATION_KEYS, DRAFT_KEY, addRecording, buildCalibrationRequest, buildFieldRequest, buildFlowRequest, buildProfile, canFreeze,
   decodeDraft, deriveSteps, encodeDraft, failureNotice, invalidateAfter, newDraft, parseCalibration, parseCameraStatus, parseCase,
   parseFlow, parseManifestDetail, parsePreflight, parseProfile, parseRecording, parseRigCheck, requestKey,
-  detectionFields, parseTokenReference, setTokenReference, withTokenSize,
+  detectionFields, parseTokenReference, referenceCaptureBody, setTokenReference, withTokenSize,
   type AttestationKey, type TokenDetector, type CalibrationReport, type CameraStatus, type Draft, type LengthUnit, type ManifestDetail, type Preflight, type StepId, type StepView,
 } from "./field-workflow-state";
 import styles from "./field-workflow.module.css";
@@ -79,6 +79,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [keepTokenSize, setKeepTokenSize] = useState(true);
   const [pickTarget, setPickTarget] = useState<"mapping" | "check">("mapping");
   const [rigChecks, setRigChecks] = useState<Record<string, boolean>>({});
   const mounted = useRef(true);
@@ -209,9 +210,11 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
               <p className={styles.explain}>This finds whatever new object floats in the tank, so green caps work. It does not recognise plastic. First remove every token, turn the pump on, and keep hands out of view; then capture the empty tank. Next, place one cap in open water and measure it.</p>
               <div className={styles.actions}>
                 <button className="secondary-button" disabled={locked || !sessionCurrent} onClick={() => void run("Capturing the empty tank", async () => {
-                  const reference = parseTokenReference(await request<unknown>("/camera/reference", { frame_count: 10 }));
+                  const reference = parseTokenReference(await request<unknown>("/camera/reference", referenceCaptureBody(draft, keepTokenSize)));
                   update(current => setTokenReference(current, reference));
-                  setNotice(`Empty tank captured as ${reference.reference_id}. Now place one cap in open water and measure it.`);
+                  setNotice(reference.token_area_px_range
+                    ? `Empty tank captured as ${reference.reference_id}, keeping the measured token size (${Math.round(reference.token_area_px!)} px).`
+                    : `Empty tank captured as ${reference.reference_id}. Now place one cap in open water and measure it.`);
                 })}>Capture empty tank</button>
                 <button className="secondary-button" disabled={locked || !sessionCurrent || !draft.tokenReference} onClick={() => void run("Measuring one token", async () => {
                   const reference = draft.tokenReference!;
@@ -220,6 +223,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
                   setNotice(`One token measured at ${Math.round(measured.token_area_px!)} px. Recordings will accept blobs of ${Math.round(measured.token_area_px_range![0])}–${Math.round(measured.token_area_px_range![1])} px.`);
                 })}>Measure one token</button>
               </div>
+              {draft.tokenReference?.token_area_px_range && <label className={styles.check}><input type="checkbox" checked={keepTokenSize} disabled={locked} onChange={event => setKeepTokenSize(event.target.checked)} /><span>Keep the measured token size when capturing the empty tank again (for example after measuring with the pump off, capture again with the pump on). The server refuses this if the camera moved.</span></label>}
               {draft.tokenReference && <p className={styles.explain}>Reference <code>{draft.tokenReference.reference_id}</code>{draft.tokenReference.token_area_px ? ` · one token ≈ ${Math.round(draft.tokenReference.token_area_px)} px` : " · token not measured yet"}. Moving the camera or lamp, or a rig disturbance, means capturing it again.</p>}
             </>}
           </fieldset>

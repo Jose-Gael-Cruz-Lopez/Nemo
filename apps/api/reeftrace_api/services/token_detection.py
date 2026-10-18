@@ -11,10 +11,13 @@ from __future__ import annotations
 import asyncio
 import time
 
+import cv2
 import numpy as np
 
 from apps.vision.reeftrace_vision.foreground import (
     DETECTOR_ID,
+    MAX_ALIGN_SHIFT_PX,
+    MIN_SHIFT_CONFIDENCE,
     EmptyTankReference,
     detect_foreground,
     measure_token_area,
@@ -63,12 +66,33 @@ class TokenDetectionService:
             await asyncio.sleep(1 / self.runtime.settings.camera_sample_hz)
         return frames
 
-    async def capture_reference(self, frame_count=10, roi_polygon_px=None):
+    async def capture_reference(self, frame_count=10, roi_polygon_px=None, token_size_from=None):
+        """Capture the empty tank; optionally carry a token size measured with an earlier reference.
+
+        A token's apparent size depends on the camera, not on whether the water is moving,
+        so a size measured with a calm (pump off) reference may be reused for a running
+        (pump on) one: same camera session, same image size, and the two references must
+        show the camera within the allowed creep of each other.
+        """
         if self.runtime.record_lock.locked():
             raise ValueError("A recording is active; capture the reference before recording")
         status = self._fresh_session()
+        source = source_size = None
+        if token_size_from:
+            source, source_reference = self._reference(token_size_from)
+            self._check_current(source, status["session_id"])
+            source_size = self._token_size(token_size_from)
+            if source_size is None:
+                raise ValueError("Measure one token with the earlier reference before carrying its size over")
         frames = await self._frames(frame_count, status["session_id"])
         reference = EmptyTankReference(frames, roi_polygon_px=roi_polygon_px)
+        if source is not None:
+            if list(source["image_size_px"]) != [reference.shape[1], reference.shape[0]]:
+                raise ValueError("The earlier reference used a different image size")
+            (dx, dy), confidence = cv2.phaseCorrelate(source_reference.gray.copy(), reference.gray.copy(),
+                                                      source_reference._window)
+            if confidence >= MIN_SHIFT_CONFIDENCE and np.hypot(dx, dy) > MAX_ALIGN_SHIFT_PX:
+                raise ValueError("The camera moved between the two empty-tank captures; measure the token again")
         reference_id = reference.fingerprint + "-" + status["session_id"][-8:]
         path = self._folder / f"{reference_id}.npz"
         np.savez_compressed(path, **reference.to_arrays())
@@ -77,9 +101,17 @@ class TokenDetectionService:
                   "content_id": reference.fingerprint, "camera_session_id": status["session_id"],
                   "captured_at": time.time(), "rig_change_at_capture": self._latest_rig_change()}
         try:
-            return self.runtime.store.put(REFERENCE_KIND, record, reference_id)
+            saved = self.runtime.store.put(REFERENCE_KIND, record, reference_id)
         except ValueError:  # Identical content from the same session: reuse the saved record.
-            return self.runtime.store.get(REFERENCE_KIND, reference_id)
+            saved = self.runtime.store.get(REFERENCE_KIND, reference_id)
+        if source_size is not None and self._token_size(reference_id) is None:
+            self.runtime.store.put(TOKEN_SIZE_KIND, {
+                "reference_id": reference_id, "camera_session_id": status["session_id"],
+                "token_area_px": source_size["token_area_px"],
+                "token_area_px_range": source_size["token_area_px_range"],
+                "measured_at": source_size["measured_at"], "carried_from_reference_id": token_size_from})
+        size = self._token_size(reference_id)
+        return {**saved, "token_size": size}
 
     def _reference(self, reference_id):
         record = self.runtime.store.get(REFERENCE_KIND, reference_id)

@@ -362,10 +362,19 @@ function checkTokenReference(value: unknown): TokenReference {
   return value as TokenReference;
 }
 
-/** POST /camera/reference: a new reference never carries a token size. */
+/** POST /camera/reference. A carried-over token size (same session, camera unmoved) is kept. */
 export function parseTokenReference(value: unknown): TokenReference {
   if (!isObject(value) || value.detector !== "foreground_reference_v1") fail("Empty-tank reference was incomplete");
-  return checkTokenReference({ reference_id: value.reference_id, camera_session_id: value.camera_session_id, image_size_px: value.image_size_px, token_area_px: null, token_area_px_range: null });
+  const size = isObject(value.token_size) && value.token_size.reference_id === value.reference_id ? value.token_size : null;
+  return checkTokenReference({ reference_id: value.reference_id, camera_session_id: value.camera_session_id, image_size_px: value.image_size_px,
+    token_area_px: size ? size.token_area_px : null, token_area_px_range: size ? size.token_area_px_range : null });
+}
+
+/** Body for POST /camera/reference: reuse the measured size when asked and still valid. */
+export function referenceCaptureBody(draft: Draft, keepTokenSize: boolean): { frame_count: number; token_size_from?: string } {
+  const previous = draft.tokenReference;
+  return keepTokenSize && previous?.token_area_px_range && previous.camera_session_id === draft.cameraSessionId
+    ? { frame_count: 10, token_size_from: previous.reference_id } : { frame_count: 10 };
 }
 
 /** POST /camera/reference/{id}/token-size, applied only to the matching reference. */

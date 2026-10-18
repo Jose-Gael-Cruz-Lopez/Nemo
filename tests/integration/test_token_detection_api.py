@@ -250,3 +250,25 @@ def test_small_camera_creep_and_a_passing_hand_do_not_discard_the_run(env):
     reasons = [p.get("reason") for p in run["points"] if not p["observed"]]
     assert "VIEW_OBSTRUCTED" in reasons
     assert sum(p["observed"] for p in run["points"]) >= len(run["points"]) // 2
+
+
+def test_token_size_measured_calm_can_carry_to_a_running_reference(env):
+    client, runtime, _ = env
+    _, calibration_id, calm, size = prepared(client, runtime.camera)   # calm reference + measured cap
+    runtime.camera.cap = None
+    running = post(client, "/camera/reference", {"frame_count": 6, "token_size_from": calm["reference_id"]})
+    assert running["token_size"]["token_area_px"] == size["token_area_px"]
+    assert running["token_size"]["carried_from_reference_id"] == calm["reference_id"]
+    runtime.camera.place(6, 10, 3.0, 0.0)
+    run = post(client, "/camera/record", {"calibration_id": calibration_id, "duration_s": 1,
+               "detector": "foreground_reference_v1", "reference_id": running["reference_id"]})
+    assert sum(p["observed"] for p in run["points"]) > 0
+
+    runtime.camera.cap = None
+    runtime.camera.shift_px = 12                     # camera moved: the size is not carried over
+    detail = post(client, "/camera/reference", {"frame_count": 6, "token_size_from": calm["reference_id"]}, 409)["detail"]
+    assert "moved" in detail
+    unmeasured = post(client, "/camera/reference", {"frame_count": 6})
+    runtime.camera.shift_px = 0
+    detail = post(client, "/camera/reference", {"frame_count": 6, "token_size_from": unmeasured["reference_id"]}, 409)["detail"]
+    assert "Measure one token" in detail
