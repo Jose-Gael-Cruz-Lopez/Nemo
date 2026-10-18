@@ -268,8 +268,8 @@ The **current saved-rig live display** uses `saved_green_marker_preview_v2`: Ope
 For contour area $A$, perimeter $L$ and convex-hull area $A_h$:
 
 $$
-\operatorname{circularity}=\frac{4\pi A}{L^2},\qquad
-\operatorname{solidity}=\frac{A}{A_h},\qquad
+\mathrm{circularity}=\frac{4\pi A}{L^2},\qquad
+\mathrm{solidity}=\frac{A}{A_h},\qquad
 u_{px}=\frac{m_{10}}{m_{00}},\quad v_{px}=\frac{m_{01}}{m_{00}}.
 $$
 
@@ -291,8 +291,8 @@ The registration uses matched feature displacements and their componentwise medi
 
 $$
 d_i=p_{i,\mathrm{current}}-p_{i,\mathrm{reference}},\qquad
-\hat d=\operatorname{median}_i d_i,\qquad
-\mathrm{inlier}_i=\mathbf1\{\|d_i-\hat d\|_2\le3\ \mathrm{px}\}.
+\hat d=\mathrm{median}_i d_i,\qquad
+\mathrm{inlier}_i=\mathbf{1}\{\|d_i-\hat d\|_2\le3\ \mathrm{px}\}.
 $$
 
 After the two bounded median/inlier refinements, accepted translation is applied only above 0.5 px. Estimated centimetres normalize
@@ -301,19 +301,21 @@ $H_{\rm camera}[u_{px}-\hat d_x,\ v_{px}-\hat d_y,\ 1]^T$; the grid shifts into 
 **Foreground/reference math.** For 5–60 empty-scene frames, let $B_{Lab}(p)$ be their componentwise median Lab color, and $r_j(p)=\|I_{j,Lab}(p)-B_{Lab}(p)\|_2$. The stored robust variation is
 
 $$
-\sigma_{ref}(p)=\operatorname{GaussianBlur}_{5\times5}
-\left[1.4826\operatorname{median}_j r_j(p)\right].
+\sigma_{ref}(p)=\mathrm{GaussianBlur}_{5\times5}
+\left[1.4826\mathrm{median}_j r_j(p)\right].
 $$
 
 For the phase-aligned current frame, the small global exposure adjustment is
-$g=\operatorname{median}(I_{gray})/\max(\operatorname{median}(B_{gray}),1)$.
+$g=\mathrm{median}(I_{gray})/\max(\mathrm{median}(B_{gray}),1)$.
 Using the separately stored median BGR image $B_{BGR}$, the foreground mask before morphology is
 
 $$
-F(p)=\mathbf1\left\{
-\|Lab(I_{aligned}(p))-Lab(\operatorname{clip}(gB_{BGR}(p),0,255))\|_2
->\max(18,6\sigma_{ref}(p))
-\right\}.
+\delta_{Lab}(p)=
+\|Lab(I_{aligned}(p))-Lab(\mathrm{clip}(gB_{BGR}(p),0,255))\|_2.
+$$
+
+$$
+F(p)=\mathbf{1}\left[\delta_{Lab}(p)>\max(18,6\sigma_{ref}(p))\right].
 $$
 
 The ROI/border mask also applies. A global brightness change over 20%, confident translation over 8 px or more than 15% changed pixels refuses/gaps the current frame. Reference capture itself rejects confident drift over 1.5 px or excessive busy pixels. Surface-v2 intersects this unchanged foreground mask with green HSV **H 35–85 / S ≥80 / V ≥40**, then applies complete-component, shape and area gates. Zero or several admitted candidates remain gaps. The current direct green **display** instead permits V ≥20 without requiring background subtraction; that deliberate display path does not weaken measured-record admission. [Foreground implementation](apps/vision/reeftrace_vision/foreground.py).
@@ -347,10 +349,10 @@ $$
 Exact-node queries return that node's velocity. Defaults are eight neighbours and $\alpha=2$. Support is separate:
 
 $$
-S(p)=\mathbf1\{p\text{ inside tank bounds and }\min_j\|p-p_j\|\le r\}.
+S(p)=\mathbf{1}\{p\text{ inside tank bounds and }\min_j\|p-p_j\|\le r\}.
 $$
 
-Node scatter and validation error use $\sqrt{\operatorname{mean}\|v_{pred}-v_{obs}\|^2}$. Validation RMSE includes supported validation samples only, so its coverage must also be shown. The reusable fitter defaults to **5 cm cells / 10 cm radius**; the recorded-flow API defaults to **1 cm / 3 cm**. These are different entry points, not competing measured estimates.
+Node scatter and validation error use $\sqrt{\mathrm{mean}\|v_{pred}-v_{obs}\|^2}$. Validation RMSE includes supported validation samples only, so its coverage must also be shown. The reusable fitter defaults to **5 cm cells / 10 cm radius**; the recorded-flow API defaults to **1 cm / 3 cm**. These are different entry points, not competing measured estimates.
 
 **Connection to the tank:** each layout profile has distinct fitting and validation record identities. The measured tank model uses a frozen spatial field $u(x,y)$; changing pump conditions are not a commissioned time-varying tank model. A numerical velocity outside support is not usable measured evidence. [Flow model](apps/transport/reeftrace_transport/flow.py).
 
@@ -392,7 +394,7 @@ The shared temporal residual covariance is:
 
 $$
 C_{ij}=\frac{\sigma_z^2e^{-|t_i-t_j|/\tau}}{\sqrt{g_ig_j}}
-+\sigma_m^2+\mathbf1_{i=j}\frac{0.05\sigma_z^2}{g_i}.
++\sigma_m^2+\mathbf{1}_{i=j}\frac{0.05\sigma_z^2}{g_i}.
 $$
 
 Library defaults: position bandwidth $\sigma_z=0.7$ cm, shared model bandwidth $\sigma_m=0.3$ cm, correlation time $\tau=0.8$ s. Registered profiles retain their own frozen parameters; these defaults are not measurements of physical camera noise. The shared-offset term contributes to **every** covariance entry. Many adjacent observations cannot average it away. Gaussian factors common to sources are omitted; this is a compatibility kernel, not a calibrated density.
@@ -400,7 +402,7 @@ Library defaults: position bandwidth $\sigma_z=0.7$ cm, shared model bandwidth $
 For a first-seen-retained endpoint, only already-retained simulated particles contribute:
 
 $$
-L_s=\sum_aw_a\frac1N\sum_n\mathbf1_{\rm retained}
+L_s=\sum_aw_a\frac1N\sum_n\mathbf{1}_{\rm retained}
 \exp[-\|X_{sn}(a)-z\|^2/(2\sigma^2)],
 \qquad \sigma^2=\sigma_z^2/g+\sigma_m^2.
 $$
@@ -485,7 +487,7 @@ The existing NOAA baseline implementations assume hourly cadence. They are not a
 
 ### F9. Ridge velocity AR(1) and pooled transfer diagnostic
 
-Centre velocity samples by mean $\mu$ and divide by one scalar scale $s=\max(\sqrt{\operatorname{mean}((v-\mu)^2)},10^{-9})$. Earlier and next samples form $X,Y$:
+Centre velocity samples by mean $\mu$ and divide by one scalar scale $s=\max(\sqrt{\mathrm{mean}((v-\mu)^2)},10^{-9})$. Earlier and next samples form $X,Y$:
 
 $$
 A=(X^TX+\alpha I)^{-1}X^TY,\quad\alpha=1,
@@ -574,12 +576,12 @@ $$
 Velocity differences use actual successive predicted positions, not future-observation resets:
 
 $$
-r_v=v_{pred}-v_{obs},\quad RMSE_v=\sqrt{\operatorname{mean}\|r_v\|^2},
+r_v=v_{pred}-v_{obs},\quad RMSE_v=\sqrt{\mathrm{mean}\|r_v\|^2},
 \quad b_{speed}=\|v_{pred}\|-\|v_{obs}\|,
-\quad MAE_{speed}=\operatorname{mean}|b_{speed}|.
+\quad MAE_{speed}=\mathrm{mean}|b_{speed}|.
 $$
 
-Tank direction error is $\arccos[\operatorname{clip}((v_p\cdot v_o)/(\|v_p\|\|v_o\|),-1,1)]$. Ocean headings use $\operatorname{atan2}(v_E,v_N)\bmod360^\circ$ and the wrapped absolute heading difference. Direction is withheld below 0.01 cm/s in the tank diagnostic or 0.005 m/s in the ocean diagnostic.
+Tank direction error is $\arccos[\mathrm{clip}((v_p\cdot v_o)/(\|v_p\|\|v_o\|),-1,1)]$. Ocean headings use $\mathrm{atan2}(v_E,v_N)\bmod360^\circ$ and the wrapped absolute heading difference. Direction is withheld below 0.01 cm/s in the tank diagnostic or 0.005 m/s in the ocean diagnostic.
 
 $$
 skill=1-\frac{\sum e_{model}}{\sum e_{baseline}}.
@@ -587,7 +589,7 @@ $$
 
 The zero-baseline denominator gives null skill. Positive skill is a descriptive reduction in miss, not significance. Equal-group summaries weight complete drifter groups equally; primary results are withheld when required coverage is incomplete.
 
-**Connection to the tank:** the diagnostic reports error and coverage while retaining gapped samples. The separate recorded-path diagnostic forecasts from the first position only using deterministic reflected forward Euler, $X_{k+1}=\operatorname{Reflect}[X_k+u(X_k)\Delta t]$, with $D=0$ and no traps or later position updates. It checks continuous reflected-segment support; the frozen source/prevention engines use finite-node support. [Vector diagnostics](apps/vision/reeftrace_vision/vector_diagnostic.py), [recorded-path diagnostic](apps/vision/reeftrace_vision/field_trajectory_diagnostic.py), [ocean metrics](apps/ocean/reeftrace_ocean/vector_diagnostics.py).
+**Connection to the tank:** the diagnostic reports error and coverage while retaining gapped samples. The separate recorded-path diagnostic forecasts from the first position only using deterministic reflected forward Euler, $X_{k+1}=\mathrm{Reflect}[X_k+u(X_k)\Delta t]$, with $D=0$ and no traps or later position updates. It checks continuous reflected-segment support; the frozen source/prevention engines use finite-node support. [Vector diagnostics](apps/vision/reeftrace_vision/vector_diagnostic.py), [recorded-path diagnostic](apps/vision/reeftrace_vision/field_trajectory_diagnostic.py), [ocean metrics](apps/ocean/reeftrace_ocean/vector_diagnostics.py).
 
 ### F13. Distinguish model spread from validated uncertainty
 
