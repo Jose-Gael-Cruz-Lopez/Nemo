@@ -81,6 +81,24 @@
       "sha256": "70dc865280a96d13f2e8e8e0f95fa36f6e9b766af901c6f1b34bc4a8b67fe6e1",
       "bytes": 163514,
       "scope": "Simple gray-box diagram separating real, synthetic and historical evidence."
+    },
+    {
+      "path": "docs/assets/nemo/pump-tube-catcher.png",
+      "sha256": "54819c86ed2aae43676b00b4cbd5334a11e64655e1728de07232f75aaeab8f1a",
+      "bytes": 110710,
+      "scope": "Schematic hardware placement; arrows show intended circulation, not a measured field."
+    },
+    {
+      "path": "docs/assets/nemo/pump-tubing-route.png",
+      "sha256": "402f38423be81ba9f42c447b5dda6d619aab6671f2d36d641a3f4c99e35fdcfc",
+      "bytes": 97517,
+      "scope": "Second schematic view of pump outlet and tubing route."
+    },
+    {
+      "path": "docs/assets/nemo/pump-no-tube-alternative.png",
+      "sha256": "0cb53c79e0d7289d0bc89571294a66a424bebbdad66e9e7fb40a0aa25ef984fe",
+      "bytes": 110621,
+      "scope": "Alternative illustrative pump orientation without tubing."
     }
   ]
 }

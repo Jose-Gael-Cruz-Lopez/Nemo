@@ -4,7 +4,7 @@ Updated 16 October 2026 for the USB webcam build on branch `codex/software-execu
 
 ## Start the team workspace
 
-From the repository root, with the installation in [README](../README.md#start-locally) completed:
+From the repository root, with the installation in [local-development guide](local-development.md#start-locally) completed:
 
 ```sh
 .venv/bin/python scripts/dev.py --check
