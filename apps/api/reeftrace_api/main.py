@@ -36,6 +36,7 @@ from .schemas.contracts import (
     RecordingCaseInput,
     RecordInput,
     SensitivityInput,
+    TokenReferenceInput,
 )
 from .schemas.prevention import ComparisonInput, TrialInput
 from .schemas.validation_reports import PreventionQuestion, ValidationReportInput
@@ -439,7 +440,24 @@ def create_app(settings: Settings | None = None):
 
     @app.post("/api/v1/camera/record", dependencies=[Depends(operator)])
     async def record(body: RecordInput):
-        return await runtime.record(body.profile_id, body.duration_s, body.calibration_id)
+        return await runtime.record(body.profile_id, body.duration_s, body.calibration_id,
+                                    detector=body.detector, reference_id=body.reference_id)
+
+    @app.get("/api/v1/camera/reference")
+    def token_reference_status():
+        return runtime.token_detection.status()
+
+    @app.post("/api/v1/camera/reference", dependencies=[Depends(operator)])
+    async def capture_token_reference(body: TokenReferenceInput):
+        """Capture the empty tank (no token, pump on) from the current camera session."""
+        polygon = [list(point) for point in body.roi_polygon_px] if body.roi_polygon_px else None
+        return await runtime.token_detection.capture_reference(body.frame_count, polygon,
+                                                               body.token_size_from)
+
+    @app.post("/api/v1/camera/reference/{reference_id}/token-size", dependencies=[Depends(operator)])
+    async def measure_token_size(reference_id: str):
+        """Measure one token in view against the reference, fixing the accepted blob size."""
+        return await runtime.token_detection.measure_token(reference_id)
 
     @app.get("/api/v1/recordings")
     def recordings():

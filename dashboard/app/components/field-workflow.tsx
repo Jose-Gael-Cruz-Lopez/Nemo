@@ -10,7 +10,8 @@ import {
   ATTESTATION_KEYS, DRAFT_KEY, addRecording, buildCalibrationRequest, buildFieldRequest, buildFlowRequest, buildProfile, canFreeze,
   decodeDraft, deriveSteps, encodeDraft, failureNotice, invalidateAfter, newDraft, parseCalibration, parseCameraStatus, parseCase,
   parseFlow, parseManifestDetail, parsePreflight, parseProfile, parseRecording, parseRigCheck, requestKey,
-  type AttestationKey, type CalibrationReport, type CameraStatus, type Draft, type LengthUnit, type ManifestDetail, type Preflight, type StepId, type StepView,
+  detectionFields, parseTokenReference, referenceCaptureBody, setTokenReference, withTokenSize,
+  type AttestationKey, type TokenDetector, type CalibrationReport, type CameraStatus, type Draft, type LengthUnit, type ManifestDetail, type Preflight, type StepId, type StepView,
 } from "./field-workflow-state";
 import styles from "./field-workflow.module.css";
 import { RecordedFlowVectors } from "./recorded-flow-vectors";
@@ -78,6 +79,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const [busy, setBusy] = useState("");
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const [keepTokenSize, setKeepTokenSize] = useState(true);
   const [pickTarget, setPickTarget] = useState<"mapping" | "check">("mapping");
   const [rigChecks, setRigChecks] = useState<Record<string, boolean>>({});
   const mounted = useRef(true);
@@ -137,7 +139,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const durationValid = Number.isFinite(duration) && duration >= 1 && duration <= 20;
 
   async function record(body: Record<string, unknown>) {
-    return parseRecording(await request<unknown>("/camera/record", { ...body, duration_s: duration }));
+    return parseRecording(await request<unknown>("/camera/record", { ...body, ...detectionFields(draft), duration_s: duration }));
   }
 
   function pick([x, y]: Point) {
@@ -198,11 +200,38 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
 
       <Step item={view("drift_recordings")} n={3}>
         <div className={styles.form}>
+          <fieldset className={styles.form}>
+            <legend>How the camera finds the token</legend>
+            <label>Token detector<select value={draft.detector} disabled={locked} onChange={event => update(current => ({ ...setTokenReference(current, current.tokenReference), detector: event.target.value as TokenDetector }))}>
+              <option value="foreground_reference_v1">Any colour: compare with the empty tank</option>
+              <option value="red_hsv">Red marker only</option>
+            </select></label>
+            {draft.detector === "foreground_reference_v1" && <>
+              <p className={styles.explain}>This finds whatever new object floats in the tank, so green caps work. It does not recognise plastic. First remove every token, turn the pump on, and keep hands out of view; then capture the empty tank. Next, place one cap in open water and measure it.</p>
+              <div className={styles.actions}>
+                <button className="secondary-button" disabled={locked || !sessionCurrent} onClick={() => void run("Capturing the empty tank", async () => {
+                  const reference = parseTokenReference(await request<unknown>("/camera/reference", referenceCaptureBody(draft, keepTokenSize)));
+                  update(current => setTokenReference(current, reference));
+                  setNotice(reference.token_area_px_range
+                    ? `Empty tank captured as ${reference.reference_id}, keeping the measured token size (${Math.round(reference.token_area_px!)} px).`
+                    : `Empty tank captured as ${reference.reference_id}. Now place one cap in open water and measure it.`);
+                })}>Capture empty tank</button>
+                <button className="secondary-button" disabled={locked || !sessionCurrent || !draft.tokenReference} onClick={() => void run("Measuring one token", async () => {
+                  const reference = draft.tokenReference!;
+                  const measured = withTokenSize(reference, await request<unknown>(`/camera/reference/${encodeURIComponent(reference.reference_id)}/token-size`, {}));
+                  update(current => setTokenReference(current, measured));
+                  setNotice(`One token measured at ${Math.round(measured.token_area_px!)} px. Recordings will accept blobs of ${Math.round(measured.token_area_px_range![0])}–${Math.round(measured.token_area_px_range![1])} px.`);
+                })}>Measure one token</button>
+              </div>
+              {draft.tokenReference?.token_area_px_range && <label className={styles.check}><input type="checkbox" checked={keepTokenSize} disabled={locked} onChange={event => setKeepTokenSize(event.target.checked)} /><span>Keep the measured token size when capturing the empty tank again (for example after measuring with the pump off, capture again with the pump on). The server refuses this if the camera moved.</span></label>}
+              {draft.tokenReference && <p className={styles.explain}>Reference <code>{draft.tokenReference.reference_id}</code>{draft.tokenReference.token_area_px ? ` · one token ≈ ${Math.round(draft.tokenReference.token_area_px)} px` : " · token not measured yet"}. Moving the camera or lamp, or a rig disturbance, means capturing it again.</p>}
+            </>}
+          </fieldset>
           <p className={styles.explain}>After mapping: vₓ = (x₂ − x₁) / Δt and vᵧ = (y₂ − y₁) / Δt, in cm/s. The software uses recorded timestamps and never converts pump GPH into token speed. A live image alone does not supply measured velocity.</p>
           <label>Recording length (1–20 s)<input inputMode="decimal" value={draft.durationS} disabled={locked} onChange={event => field("durationS")(event.target.value)} /></label>
           <p className={styles.explain}>Release one token per run and keep it in view. Gaps or a second token split the track; they are never joined.</p>
           <div className={styles.actions}>
-            {(["training", "validation"] as const).map(split => <button key={split} className="secondary-button" disabled={locked || !sessionCurrent || !draft.calibration?.approved || !durationValid} onClick={() => void run(`Recording ${split} drift`, async () => {
+            {(["training", "validation"] as const).map(split => <button key={split} className="secondary-button" disabled={locked || !sessionCurrent || !draft.calibration?.approved || !durationValid || draft.detector === "foreground_reference_v1" && !draft.tokenReference?.token_area_px_range} onClick={() => void run(`Recording ${split} drift`, async () => {
               const result = await record({ calibration_id: draft.calibration!.calibration_id });
               update(current => addRecording(current, split, result.id));
               setNotice(`${split === "training" ? "Training" : "Validation"} run ${result.id}: ${result.observed}/${result.frames} frames observed, ${result.gaps} gap${result.gaps === 1 ? "" : "s"}, ${result.tracks} track${result.tracks === 1 ? "" : "s"}.`);

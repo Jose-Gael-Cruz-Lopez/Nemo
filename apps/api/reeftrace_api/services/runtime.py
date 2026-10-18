@@ -10,7 +10,7 @@ import os
 import time
 
 from apps.vision.reeftrace_vision.capture import Camera
-from apps.vision.reeftrace_vision.tracking import SingleTokenTracker, detect_red, in_polygon
+from apps.vision.reeftrace_vision.tracking import SingleTokenTracker, in_polygon
 
 from .investigation import CaseBackend, conditional_report
 from .store import Store, uid
@@ -30,6 +30,8 @@ class Runtime:
         self.photon_task = None
         from .prevention import PreventionService
         self.prevention = PreventionService(self)
+        from .token_detection import TokenDetectionService
+        self.token_detection = TokenDetectionService(self)
 
     def grok_settings(self):
         from adapters.grok import GrokVoiceSettings
@@ -457,7 +459,8 @@ class Runtime:
                 {k: report[k] for k in ("id", "status", "relative_support", "reason_codes") if k in report})
         return (result.get("explanation", "Investigation unavailable") + numerical)[:4000]
 
-    async def record(self, profile_id, duration_s, calibration_id=None, *, active_case=None):
+    async def record(self, profile_id, duration_s, calibration_id=None, *, active_case=None,
+                     detector="red_hsv", reference_id=None):
         if self.record_lock.locked():
             raise ValueError("A recording is already active")
         async with self.record_lock:
@@ -474,6 +477,10 @@ class Runtime:
             if calibration.get("camera_session_id") != self.camera.session_id:
                 raise ValueError("Camera session does not match calibration")
             session_id = self.camera.session_id
+            # Red HSV stays the default; the foreground detector needs a current
+            # empty-tank reference and a measured token size from this session.
+            detect, detection = self.token_detection.detector(
+                detector, reference_id, session_id, calibration.get("image_size_px"))
             tracker = SingleTokenTracker()
             run_id, start, previous = uid("recording"), time.monotonic(), None
             folder = self.settings.data_dir / "frames" / run_id
@@ -498,7 +505,18 @@ class Runtime:
                     if frame["received_mono_s"] < start:
                         await asyncio.sleep(1 / self.settings.camera_sample_hz)
                         continue
-                    point = tracker.update(detect_red(image), frame["received_mono_s"] - start, calibration)
+                    from apps.vision.reeftrace_vision.foreground import ViewObstructed
+                    try:
+                        found = detect(image)
+                    except ViewObstructed:
+                        # A hand or other large object briefly covers the view: the token
+                        # cannot be located in this frame, so it is a gap, not a guess.
+                        found = None
+                    except ValueError as error:
+                        raise ValueError(f"Recording discarded: {error}") from None
+                    t_rel = frame["received_mono_s"] - start
+                    point = (tracker.update(found, t_rel, calibration) if found is not None
+                             else {**tracker.update([], t_rel, calibration), "reason": "VIEW_OBSTRUCTED"})
                     self.store.put("frame", {"profile_id": profile_id,
                         "camera_session_id": frame["session_id"], "path": str(path),
                         "sequence": frame["sequence"], "received_utc": frame["received_utc"],
@@ -518,4 +536,4 @@ class Runtime:
                 "calibration_id": calibration_id,
                 "recorded_at": time.time(),
                 "evidence_frame_ids": frame_ids, "data_origin": "MEASURED_TANK",
-                "timestamp_kind": "host_receipt_not_exposure"}, run_id)
+                "timestamp_kind": "host_receipt_not_exposure", "detection": detection}, run_id)
