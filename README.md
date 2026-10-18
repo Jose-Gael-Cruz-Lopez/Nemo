@@ -237,9 +237,6 @@ The software tests exercise source states, evidence freshness, authentication, N
 
 Nemo's calculation chain connects image pixels and timestamps to a declared motion model, candidate-source support and interception outcomes. Tank calculations use centimetres and seconds; ocean studies use geographic coordinates, metres and seconds. These equations describe the implemented methods and the scope of each displayed result.
 
-<details>
-<summary>Expand every formula, its symbols, units, implementation and connection to the tank</summary>
-
 ### Which equation belongs to which feature?
 
 | Feature | Calculation | Units and boundary |
@@ -458,8 +455,12 @@ Here $a=6378137$ m, $f=1/298.257223563$, $e^2=f(2-f)$. Code uses equivalent metr
 For $\dot X=f(t,X)$, classical RK4 advances:
 
 $$
-k_1=f(t,X),\quad k_2=f(t+h/2,X+hk_1/2),\quad
-k_3=f(t+h/2,X+hk_2/2),\quad k_4=f(t+h,X+hk_3),
+\begin{aligned}
+k_1&=f(t,X),\\
+k_2&=f(t+h/2,X+hk_1/2),\\
+k_3&=f(t+h/2,X+hk_2/2),\\
+k_4&=f(t+h,X+hk_3).
+\end{aligned}
 $$
 
 $$
@@ -504,9 +505,15 @@ Code solves the linear system rather than explicitly inverting it. If spectral r
 The research state is $x=[p_x,p_y,v_x,v_y]^T$, in metres and m/s:
 
 $$
-F=\begin{bmatrix}I_2&\Delta tI_2\\0&I_2\end{bmatrix},\quad
-Q=q\begin{bmatrix}\Delta t^3I_2/3&\Delta t^2I_2/2\\\Delta t^2I_2/2&\Delta tI_2\end{bmatrix},
-\quad H_K=[I_2\ 0],\quad R=\sigma_p^2I_2.
+F=\begin{bmatrix}I_2&\Delta tI_2\\0&I_2\end{bmatrix}.
+$$
+
+$$
+Q=q\begin{bmatrix}\Delta t^3I_2/3&\Delta t^2I_2/2\\\Delta t^2I_2/2&\Delta tI_2\end{bmatrix}.
+$$
+
+$$
+H_K=[I_2\ 0],\qquad R=\sigma_p^2I_2.
 $$
 
 Fixed assumptions: $\sigma_p=100$ m, **$R=10000I_2$ m²**, $q=10^{-6}$ m²/s³. This is continuous white acceleration, not the alternative constant-acceleration-per-interval noise convention.
@@ -521,8 +528,11 @@ $$
 Predict, then update using permitted context positions:
 
 $$
-x^-=Fx,\quad P^-=FPF^T+Q,\quad S=H_KP^-H_K^T+R,
-\quad K=P^-H_K^TS^{-1},
+x^-=Fx,\qquad P^-=FPF^T+Q.
+$$
+
+$$
+S=H_KP^-H_K^T+R,\qquad K=P^-H_K^TS^{-1}.
 $$
 
 $$
@@ -661,7 +671,6 @@ The saved study retains its forecast-before-score ordering, artifact identities 
 
 **Connection to the tank:** observed/filtered/hypothesis labels distinguish the display layers. Tank inference uses its own centimetre field and timing, separately from HYCOM and ocean-scale noise. The forward candidate-source engine compares possible histories even when retention affects the available observations. [Full ocean-source method, visual stages, API and validation boundary](docs/ocean-source-research.md).
 
-</details>
 
 ## Datasets: what Nemo actually uses
 
