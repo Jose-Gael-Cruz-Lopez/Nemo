@@ -13,8 +13,8 @@ from apps.api.reeftrace_api.core.settings import Settings
 from apps.api.reeftrace_api.main import create_app
 from apps.api.reeftrace_api.schemas.evidence_export import AnalysisBundle, canonical_json
 from apps.api.reeftrace_api.schemas.prevention import ComparisonInput, TrialInput
-from apps.api.reeftrace_api.services.evidence_export import export_comparison
-from apps.api.reeftrace_api.services.prevention import COMPARISON_KIND
+from apps.api.reeftrace_api.services.evidence_export import _check_plan, export_comparison
+from apps.api.reeftrace_api.services.prevention import COMPARISON_KIND, digest
 from apps.transport.reeftrace_transport import fit_flow
 
 AUTH = {"Authorization": "Bearer export-test-only"}
@@ -106,6 +106,79 @@ def test_bundle_is_deterministic_round_trippable_bounded_and_redacted(app):
     assert runtime.store.list("prevention_investigation") == []
     assert runtime.photon_settings().enabled is False
     assert runtime.camera.status()["running"] is False
+
+
+def test_reordered_source_records_create_scene_export_and_validation_template(app):
+    runtime = app.state.runtime
+    original = seed(runtime)["comparison"]
+    baseline = runtime.store.get("profile", original["baseline_profile_id"])
+    intervention = runtime.store.get("profile", original["intervention_profile_id"])
+    reordered = copy.deepcopy(intervention)
+    reordered.pop("id")
+    reordered["sources"].reverse()
+    reordered = runtime.store.put("profile", reordered)
+    body = {key: original[key] for key in ComparisonInput.model_fields}
+    body.update(intervention_profile_id=reordered["id"], name="Reordered source policy fixture")
+
+    with TestClient(app) as client:
+        response = client.post("/api/v1/prevention/comparisons", headers=AUTH, json=body)
+        assert response.status_code == 200, response.text
+        detail = response.json()
+        comparison = detail["comparison"]
+        base = f"/api/v1/prevention/comparisons/{comparison['id']}"
+        # The template requires an actual ledger row, explicitly synthetic here.
+        detail = add_trial(runtime, comparison["id"])
+        snapshot_hash = detail["evaluation"]["snapshot_hash"]
+        response = client.get(base + "/scene", params={"evaluation_snapshot_hash": snapshot_hash})
+        assert response.status_code == 200, response.text
+        scene = response.json()
+        response = client.get(base + "/export", headers=AUTH)
+        assert response.status_code == 200, response.text
+        bundle = response.json()
+        response = client.get(base + "/validation-template?origin=SYNTHETIC_DEMO", headers=AUTH)
+        assert response.status_code == 200, response.text
+        manifest = response.json()
+
+    assert scene["evaluation_snapshot_hash"] == snapshot_hash
+    assert manifest["evaluation_snapshot_hash"] == snapshot_hash
+    assert manifest["input_payload_sha256"] == bundle["payload_sha256"]
+    assert manifest["validation_trial_ids"] == [detail["trials"][0]["id"]]
+    assert scene["physical_validation"] is False
+    assert scene["actual"]["reported_physical_trial_count"] == 0
+    for layout, profile in (("baseline", baseline), ("intervention", reordered)):
+        # Comparison normalizes equality only; stored order and hash bytes stay exact.
+        assert runtime.store.get("profile", profile["id"]) == profile
+        expected_hash = digest(profile)
+        assert comparison["numerical_report"]["layouts"][layout]["profile_hash"] == expected_hash
+        scene_layout = next(item for item in scene["geometry"]["layouts"] if item["id"] == layout)
+        assert scene_layout["profile_hash"] == expected_hash
+        exported = bundle["payload"]["provenance"]["layouts"][layout]
+        assert exported["profile_hash"] == expected_hash
+        assert [source["id"] for source in exported["sources"]] == [
+            source["id"] for source in profile["sources"]]
+    assert runtime.store.get("profile", intervention["id"]) == intervention
+
+
+@pytest.mark.parametrize("change", ["geometry", "prior", "identity", "extra_field", "duplicate"])
+def test_source_order_equality_still_requires_complete_matching_records(app, change):
+    runtime = app.state.runtime
+    comparison = seed(runtime)["comparison"]
+    baseline = runtime.store.get("profile", comparison["baseline_profile_id"])
+    altered = runtime.store.get("profile", comparison["intervention_profile_id"])
+    altered["sources"].reverse()
+    source = altered["sources"][0]
+    if change == "geometry":
+        source["polygon_cm"][0][0] += 0.1
+    elif change == "prior":
+        source["prior"] = 0.75
+    elif change == "identity":
+        source["id"] = "C"
+    elif change == "extra_field":
+        source["label"] = "Changed source record"
+    else:
+        altered["sources"].append(copy.deepcopy(source))
+    with pytest.raises(ValueError, match="Frozen layout inputs disagree"):
+        _check_plan(comparison, [baseline, altered])
 
 
 def test_browser_numeric_normalization_does_not_invalidate_canonical_bytes(app):

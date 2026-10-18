@@ -107,9 +107,16 @@ def _layout(db, comparison, layout):
 
 def _check_plan(comparison, profiles):
     baseline, intervention = profiles
-    for key in ("data_origin", "bounds", "token_class", "sources"):
+    for key in ("data_origin", "bounds", "token_class"):
         if baseline.get(key) != intervention.get(key):
             raise ValueError("Frozen layout inputs disagree")
+    # Creation compares complete source records by ID, independently of list
+    # order. Preserve the original profile bytes/hashes and reject duplicate IDs.
+    sources = [{str(source["id"]): source for source in profile["sources"]}
+               for profile in profiles]
+    if (sources[0] != sources[1] or any(len(records) != len(profile["sources"])
+            for records, profile in zip(sources, profiles, strict=True))):
+        raise ValueError("Frozen layout inputs disagree")
     source_ids = sorted(source["id"] for source in baseline["sources"])
     sequence = []
     for repeat in range(1, comparison["trials_per_source"] + 1):
