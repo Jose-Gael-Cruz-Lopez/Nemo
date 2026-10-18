@@ -52,6 +52,27 @@ of those variables. Startup and health checks do not invoke a provider. No key o
 billing is provisioned by this package. Photon replies and xAI remain disabled,
 including when contrary values were inherited accidentally.
 
+### Optional read-only Photon project connection
+
+With the operator’s approval, store the existing project credential in Render’s
+server environment as `PHOTON_READONLY_API_KEY` and `PHOTON_READONLY_PROJECT_ID`.
+These application variable names select the read-only verifier; they do not
+reduce the permissions of the underlying provider key. They reach only Python,
+never the Next child or browser. Do not use `NEXT_PUBLIC_` variables for secrets.
+
+In **Settings → Photon**, connect operator access and choose **Verify Photon
+connection**. The cloud-only `POST /api/v1/integrations/photon/verify` checks one
+project GET through the pinned official SDK, with a five-second total deadline,
+one attempt and ten-second cooldown. It returns only a result code, check time
+and authentication scope. Upstream authentication failures do not sign the app’s
+operator out. Startup, health and ordinary status polling make no Photon call.
+
+Successful project authentication does **not** establish phone pairing or message
+delivery. The hosted reply runtime stays disabled, with empty legacy credentials
+and routes, no worker and no inbox/outbox writes. This endpoint cannot send a
+message, list conversations or enable automatic replies. A future messaging
+rollout requires separate authorization and a reviewed hosted transport design.
+
 The image also prepares a public synthetic demo bundle during the build, using
 an empty temporary store and a scrubbed environment with all providers disabled.
 It caches only the three existing labeled synthetic source examples; **it does

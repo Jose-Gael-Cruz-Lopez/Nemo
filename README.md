@@ -16,6 +16,8 @@ Local verification passed **2,017 Python tests, 320 frontend tests and 241 isola
 
 **Next camera task:** [Trove #3, assigned to Aarush](https://trov.dev/nemo/#tickets/3), proposes OpenCV reference-marker registration, a projected centimetre grid, black tray/green filter boundary layers and stale-mapping detection. This is planned work; automatic registration is not shipped or physically validated. Known scale and separate check points remain necessary.
 
+**Hosted integrations:** Chalk investigations use server-only gateway configuration and report whether a live response was obtained. Photon project authentication can be checked explicitly from Settings using a separate server-only verifier; a successful check does not enable replies or prove phone pairing/delivery. The cloud messaging worker remains disabled. See [the hosted integration configuration](deploy/README.md#optional-read-only-photon-project-connection).
+
 ## Hosted camera and Megana’s rig measurements
 
 The hosted **Camera** page offers a browser-owned preview: explicit permission, a camera picker, no audio and no frame uploads. **Open local camera workspace** closes that preview and opens the local companion for Megana’s OpenCV detector, calibration and recording. Render cannot access a laptop’s USB device. Its physical capture routes remain disabled; Photon stays off in the cloud profile.

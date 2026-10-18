@@ -68,13 +68,19 @@ test("Overview has three explicit demo steps, distinguishes separate examples an
   assert.equal((renderToStaticMarkup(React.createElement(DemoGuide, { disabled: true, onTrace: noAction, onPrevention: noAction, onChalk: noAction })).match(/disabled=""/g) ?? []).length, 3);
 });
 
-test("Camera puts the live preview before collapsed tank commissioning and advanced JSON", () => {
+function renderCameraStatus(status = null, view = "camera") {
   const file = resolve("app/workspace/page.tsx");
   const compiled = ts.transpileModule(readFileSync(file, "utf8"), { compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true } }).outputText;
   const mod = { exports: {} };
+  let statusAssigned = false;
   new Function("require", "module", "exports", compiled)(name => {
-    // Select the real Camera branch without opening a browser/device or running effects.
-    if (name === "react") return { ...React, useState: initial => React.useState(initial === "overview" ? "camera" : initial) };
+    // Render the actual capability branch; effects, network and devices stay off.
+    if (name === "react") return { ...React, useState: initial => {
+      let value = initial;
+      if (initial === "overview") value = view;
+      else if (initial === null && !statusAssigned) { statusAssigned = true; value = status; }
+      return React.useState(value);
+    } };
     if (name === "next/navigation") return { useRouter: () => ({ push() {} }) };
     if (name.endsWith(".module.css")) return { __esModule: true, default: new Proxy({}, { get: (_, key) => String(key) }) };
     if (name.startsWith(".")) {
@@ -83,13 +89,47 @@ test("Camera puts the live preview before collapsed tank commissioning and advan
     }
     return require(name);
   }, mod, mod.exports);
-  const html = render(React.createElement(mod.exports.default)), visible = defaultVisible(html);
+  return render(React.createElement(mod.exports.default));
+}
+const localCameraStatus = {
+  camera: { fresh: false, running: false, session_id: null, width: null, height: null, device_index: null },
+  chalk: { ready: false, reasons: ["disabled"] }, photon: { ready: false, enabled: false, reasons: ["disabled"] },
+  operator_configured: true,
+};
+
+test("Camera puts the local live preview before collapsed tank commissioning and advanced JSON", () => {
+  const html = renderCameraStatus(localCameraStatus), visible = defaultVisible(html);
   assert.ok(html.indexOf("<h1>Camera</h1>") < html.indexOf(">Live camera</h2>"));
   assert.ok(html.indexOf(">Live camera</h2>") < html.indexOf("Calibrate a tank and record trials when ready"));
   assert.match(html, /<details class="details-panel"><summary>Calibrate a tank and record trials when ready<\/summary>/);
   assert.ok(html.indexOf("Calibrate a tank and record trials when ready") < html.indexOf("Calibration request JSON"));
   assert.match(visible, /Live USB preview first/);
   assert.doesNotMatch(visible, /Field commissioning|Mapping pixel points|Calibration request JSON|Measured profile/);
+});
+
+test("unknown camera capabilities never expose local USB actions or physical commissioning", () => {
+  const html = renderCameraStatus();
+  assert.match(html, /Checking camera capabilities/);
+  assert.doesNotMatch(html, /Start webcam|Start preview|Capture empty tank|Calibration request JSON|Field commissioning/);
+});
+
+test("the hosted Camera branch offers private browser preview instead of blocked server capture", () => {
+  const html = renderCameraStatus({ ...localCameraStatus, camera: { ...localCameraStatus.camera, available: false } });
+  assert.match(html, /Camera preview/);
+  assert.match(html, /Preview only · frames stay on this device/);
+  assert.match(html, /Start preview/);
+  assert.match(html, /http:\/\/127\.0\.0\.1:3000\/workspace#camera/);
+  assert.doesNotMatch(html, /Start webcam|Capture empty tank|Calibration request JSON|Field commissioning/);
+});
+
+test("hosted Photon project authentication is separate from disabled automatic replies", () => {
+  const html = renderCameraStatus({ ...localCameraStatus, camera: { ...localCameraStatus.camera, available: false } }, "settings");
+  assert.match(html, /Read-only Photon project connection/);
+  assert.match(html, /Verify Photon connection/);
+  assert.match(html, /Automatic replies off/);
+  assert.match(html, /does not check phone pairing or message delivery/);
+  assert.doesNotMatch(html, /Project connection verified|Automatic replies on|missing api key/);
+  assert.doesNotMatch(renderCameraStatus(localCameraStatus, "settings"), /Verify Photon connection/);
 });
 
 test("Data Lab defaults to one changing-current comparison and keeps historical benchmarks closed", () => {

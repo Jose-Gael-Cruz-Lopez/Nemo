@@ -19,6 +19,8 @@ import threading
 import time
 from pathlib import Path
 
+from fastapi import Depends, HTTPException, Request
+
 CLOUD_MARKER = ".nemo-cloud-demo-v1"
 CLOUD_MARKER_CONTENT = "Nemo isolated public software-demo store v1\n"
 CLOUD_DISABLED_REASON = "This hosted demo has no local camera, physical rig, messaging or voice capability."
@@ -193,6 +195,8 @@ def create_cloud_app():
     from adapters.grok import GrokVoiceSettings
     from adapters.photon.transport import PhotonSettings
 
+    from .services.photon_readonly import PhotonReadOnlyVerifier
+
     runtime = app.state.runtime
     runtime.camera = CloudCamera()
     # Keep these disabled even if some later code changes the environment.
@@ -202,6 +206,20 @@ def create_cloud_app():
     app.state.cloud_seed_status = seed_status
     gate = _InvestigationGate(cooldown_s)
     app.state.cloud_investigation_gate = gate
+    photon_verifier = PhotonReadOnlyVerifier(
+        os.environ.get("PHOTON_READONLY_API_KEY", ""),
+        os.environ.get("PHOTON_READONLY_PROJECT_ID", ""))
+
+    def verify_operator(request: Request):
+        if not hmac.compare_digest(request.headers.get("Authorization", "").encode(),
+                                   ("Bearer " + token).encode()):
+            raise HTTPException(401, "Operator token required",
+                                headers={"Cache-Control": "no-store"})
+
+    @app.post("/api/v1/integrations/photon/verify", dependencies=[Depends(verify_operator)])
+    async def verify_photon_connection():
+        return JSONResponse(await photon_verifier.verify(),
+                            headers={"Cache-Control": "no-store"})
 
     @app.middleware("http")
     async def cloud_capabilities(request, call_next):
