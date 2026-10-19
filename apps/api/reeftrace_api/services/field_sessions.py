@@ -181,6 +181,10 @@ class FieldSessionService:
         if camera and [camera.get("width"), camera.get("height")] != list(calibration.get("image_size_px") or []):
             return _step(name, "BLOCKED", "IMAGE_SIZE_CHANGED",
                          "Current frames have different dimensions from the mapping."), None
+        try:
+            self.runtime.registration.assert_current(request.calibration_id)
+        except ValueError as error:
+            return _step(name, "BLOCKED", "MARKER_MAPPING_STALE", str(error)), None
         span = self._mapped_span_cm(calibration)
         if span is None or span > MAX_TABLETOP_SPAN_CM:
             # A mapping entered entirely in millimetres is self-consistent and passes

@@ -32,6 +32,8 @@ class Runtime:
         self.prevention = PreventionService(self)
         from .token_detection import TokenDetectionService
         self.token_detection = TokenDetectionService(self)
+        from .registration import RegistrationService
+        self.registration = RegistrationService(self)
 
     def grok_settings(self):
         from adapters.grok import GrokVoiceSettings
@@ -272,6 +274,7 @@ class Runtime:
         calibration = self.store.get("calibration", profile["calibration_id"])
         if calibration.get("camera_session_id") != status["session_id"]:
             raise ValueError("Validate mapping for this camera session before LIVE use")
+        self.registration.assert_current(profile["calibration_id"])
         changes = self.store.list("rig_change", 1)
         checks = self.store.list("rig_check", 1)
         if changes and (not checks or checks[0]["checked_at"] <= changes[0]["changed_at"]
@@ -476,6 +479,8 @@ class Runtime:
                 raise ValueError("Recording requires an approved water-plane map")
             if calibration.get("camera_session_id") != self.camera.session_id:
                 raise ValueError("Camera session does not match calibration")
+            self.registration.assert_current(calibration_id)
+            registration_provenance = self.registration.provenance(calibration_id)
             session_id = self.camera.session_id
             # Red HSV stays the default; the foreground detector needs a current
             # empty-tank reference and a measured token size from this session.
@@ -498,6 +503,7 @@ class Runtime:
                 if frame["sequence"] != previous:
                     if [frame["width"], frame["height"]] != calibration.get("image_size_px"):
                         raise ValueError("Camera dimensions changed after calibration")
+                    self.registration.assert_current(calibration_id, image=image, frame=frame)
                     previous = frame["sequence"]
                     fid = uid("frame")
                     path = folder / (fid + ".jpg")
@@ -507,7 +513,7 @@ class Runtime:
                         continue
                     from apps.vision.reeftrace_vision.foreground import ViewObstructed
                     try:
-                        found = detect(image)
+                        found = self.registration.supported_detections(calibration_id, detect(image))
                     except ViewObstructed:
                         # A hand or other large object briefly covers the view: the token
                         # cannot be located in this frame, so it is a gap, not a guess.
@@ -517,7 +523,7 @@ class Runtime:
                     t_rel = frame["received_mono_s"] - start
                     point = (tracker.update(found, t_rel, calibration) if found is not None
                              else {**tracker.update([], t_rel, calibration), "reason": "VIEW_OBSTRUCTED"})
-                    self.store.put("frame", {"profile_id": profile_id,
+                    self.store.put("frame", {"profile_id": profile_id, **registration_provenance,
                         "camera_session_id": frame["session_id"], "path": str(path),
                         "sequence": frame["sequence"], "received_utc": frame["received_utc"],
                         "saved_at": time.time(),
@@ -525,6 +531,7 @@ class Runtime:
                     frame_ids.append(fid)
                     observations.append({**point, "frame_id": fid})
                 await asyncio.sleep(1 / self.settings.camera_sample_hz)
+            self.registration.assert_current(calibration_id)
             if self.camera.session_id != session_id:
                 raise ValueError("Camera session changed before recording completion")
             if active_case is not None:
@@ -536,4 +543,5 @@ class Runtime:
                 "calibration_id": calibration_id,
                 "recorded_at": time.time(),
                 "evidence_frame_ids": frame_ids, "data_origin": "MEASURED_TANK",
-                "timestamp_kind": "host_receipt_not_exposure", "detection": detection}, run_id)
+                "timestamp_kind": "host_receipt_not_exposure", "detection": detection,
+                **registration_provenance}, run_id)

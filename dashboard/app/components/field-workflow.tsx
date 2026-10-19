@@ -22,6 +22,8 @@ import { SavedCalibration } from "./saved-calibration";
 import type { SavedCalibrationBundle } from "./saved-calibration-state";
 import { EstimatedTankRehearsal } from "./estimated-tank-rehearsal";
 import { SavedDetectorReplay } from "./saved-detector-replay";
+import { TankRegistration } from "./tank-registration";
+import { registrationMapping, type RegistrationStatus } from "./tank-registration-state";
 
 type Request = <T>(path: string, body?: unknown, options?: { signal?: AbortSignal; independent?: boolean }) => Promise<T>;
 export type FieldWorkflowProps = {
@@ -92,6 +94,7 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [keepTokenSize, setKeepTokenSize] = useState(true);
+  const [registration, setRegistration] = useState<RegistrationStatus | null>(null);
   const [pickTarget, setPickTarget] = useState<"mapping" | "check" | "reuse">("reuse");
   const [rigChecks, setRigChecks] = useState<Record<string, boolean>>({});
   const mounted = useRef(true);
@@ -201,8 +204,17 @@ export function FieldWorkflow({ request, apiBase, operatorConnected, onRequireOp
         <div className={styles.form}>
           <p className={styles.explain}>Megana recorded a 35.56 × 22.86 cm waterline. Origin: the bottom-right inside corner on the pump side; +x runs along the long wall to the left, +y along the right wall away from that corner. Reuse these measurements only for the same tray and waterline.</p>
           <div className={styles.actions}><button className="secondary-button" disabled={locked} onClick={() => { update(applyLoggedTrayMeasurements); setNotice("Megana’s recorded tray bounds and green-cap class are loaded. Camera alignment, source regions and new drift are still checked separately; no physical check was marked as passed."); }}>Use Megana’s recorded tray measurements</button></div>
-          {sessionCurrent && camera?.width && camera.height ? <div className={styles.preview}><CalibrationCameraPreview visible={previewActive} apiBase={apiBase} width={camera.width} height={camera.height} sessionId={camera.session_id} active={sessionCurrent} calibration={estimatedMapping ?? draft.calibration} onPick={pick} /></div> : <p className={styles.explain}>A preview appears when the selected session has fresh frames.</p>}
+          {sessionCurrent && camera?.width && camera.height ? <div className={styles.preview}><CalibrationCameraPreview visible={previewActive} apiBase={apiBase} width={camera.width} height={camera.height} sessionId={camera.session_id} active={sessionCurrent} calibration={registration ? registrationMapping(registration) : estimatedMapping ?? draft.calibration} registration={registration} onPick={pick} /></div> : <p className={styles.explain}>A preview appears when the selected session has fresh frames.</p>}
           <label>Clicking the preview adds to<select value={pickTarget} disabled={locked} onChange={event => setPickTarget(event.target.value as "mapping" | "check" | "reuse")}><option value="reuse">Saved mapping check pixels</option><option value="mapping">New mapping pixel points</option><option value="check">New mapping check pixel points</option></select></label>
+          <TankRegistration request={request} active={sessionCurrent && previewActive} disabled={locked || !operatorConnected} onStatus={setRegistration} onInvalidate={() => {
+            update(current => current.calibration || current.flow ? { ...invalidateAfter(current, "water_plane_mapping"), calibration: null } : current);
+            setEstimatedMapping(null); setPreflight(null); setReceipt(null);
+          }} onApply={calibration => {
+            if (!camera?.fresh || calibration.camera_session_id !== draft.cameraSessionId) return;
+            update(current => ({ ...invalidateAfter(current, "water_plane_mapping"), calibration, maxErrorCm: String(calibration.max_allowed_error_cm) }));
+            setEstimatedMapping(null); setPreflight(null); setReceipt(null);
+            setNotice("Marker mapping approved. Capture new independent drift recordings; existing field admission is still required.");
+          }} />
           <SavedCalibration request={request} camera={sessionCurrent ? camera : null} disabled={!!busy || rehearsalBusy || replayBusy || blocked || !restored || !operatorConnected} onBusyChange={savedCalibrationBusy} checkPixels={reuseCheckPixels} onCheckPixelsChange={setReuseCheckPixels} onSourceChange={source => { setSavedSource(source); setEstimatedMapping(null); }} onCheckStart={() => {
             update(current => ({ ...invalidateAfter(current, "water_plane_mapping"), calibration: null }));
             setPreflight(null); setReceipt(null);

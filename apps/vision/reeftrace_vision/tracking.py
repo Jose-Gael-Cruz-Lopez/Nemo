@@ -41,8 +41,15 @@ class SingleTokenTracker:
         self.max_speed = max_speed_cm_s
         self.previous = None
         self.track_id = None
+        self.calibration_id = None
 
     def update(self, detections, t_s, calibration):
+        # A mapping version break is a track break, never a relabelled old point.
+        identity = calibration.get("calibration_id")
+        if identity != self.calibration_id:
+            self.previous = None
+            self.track_id = None
+            self.calibration_id = identity
         if len(detections) != 1:
             self.previous = None
             self.track_id = None

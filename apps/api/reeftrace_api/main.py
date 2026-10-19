@@ -132,6 +132,8 @@ def create_app(settings: Settings | None = None):
     app.include_router(create_ocean_source_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_origin_residual_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_saved_calibrations_router(runtime, operator), prefix="/api/v1")
+    from .api.v1.endpoints.registration import create_registration_router
+    app.include_router(create_registration_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_estimated_rehearsal_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_detector_replay_router(runtime, operator), prefix="/api/v1")
     app.include_router(create_detector_preview_router(runtime, operator), prefix="/api/v1")

@@ -10,6 +10,8 @@ export type WaterMapping = {
   homography_image_to_cm?: number[][]; plane?: string; units?: string;
   /** Frozen fitting-mark hull, retained by the UI from the submitted correspondences. */
   mapping_polygon_px?: number[][];
+  /** Actual surveyed water outline; may be concave. Clip display/readout to it. */
+  water_region_polygon_px?: number[][];
   /** An operator-authorized visual estimate; never a calibrated measurement. */
   estimated?: boolean;
 };
@@ -55,13 +57,24 @@ export function insideHull(point: Point, hull: Point[]) {
   });
 }
 
+export function insidePolygon(point: Point, polygon: Point[]): boolean {
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const a = polygon[j], b = polygon[i], dx = b[0] - a[0], dy = b[1] - a[1];
+    const cross = dx * (point[1] - a[1]) - dy * (point[0] - a[0]);
+    if (Math.abs(cross) < 1e-7 && point[0] >= Math.min(a[0], b[0]) - 1e-7 && point[0] <= Math.max(a[0], b[0]) + 1e-7 && point[1] >= Math.min(a[1], b[1]) - 1e-7 && point[1] <= Math.max(a[1], b[1]) + 1e-7) return true;
+    if ((a[1] > point[1]) !== (b[1] > point[1]) && point[0] < (b[0] - a[0]) * (point[1] - a[1]) / (b[1] - a[1]) + a[0]) inside = !inside;
+  }
+  return inside;
+}
+
 export function nativePixel(offsetX: number, offsetY: number, shownWidth: number, shownHeight: number, imageWidth: number, imageHeight: number): Point | null {
   if (![offsetX,offsetY,shownWidth,shownHeight,imageWidth,imageHeight].every(Number.isFinite) || shownWidth <= 0 || shownHeight <= 0 || imageWidth < 2 || imageHeight < 2) return null;
   return [Math.min(imageWidth-1,Math.max(0,offsetX*imageWidth/shownWidth)), Math.min(imageHeight-1,Math.max(0,offsetY*imageHeight/shownHeight))];
 }
 
 export type GridLine = { axis: "x" | "y"; value: number; start: Point; end: Point };
-export function metricGrid(mapping: WaterMapping | null | undefined, sessionId: string | null, width: number, height: number): { hull: Point[]; lines: GridLine[]; spacingCm: number; matrix: number[][]; estimated: boolean } | null {
+export function metricGrid(mapping: WaterMapping | null | undefined, sessionId: string | null, width: number, height: number): { hull: Point[]; clipPolygon: Point[]; lines: GridLine[]; spacingCm: number; matrix: number[][]; estimated: boolean } | null {
   const estimated = mapping?.estimated === true && mapping.approved === false && mapping.plane === "estimated_water_surface";
   const measured = mapping?.approved === true && !mapping.estimated && mapping.plane === "measured_water_surface";
   if ((!estimated && !measured) || !mapping || mapping.camera_session_id !== sessionId || mapping.image_size_px[0] !== width || mapping.image_size_px[1] !== height || mapping.units !== "cm") return null;
@@ -97,5 +110,7 @@ export function metricGrid(mapping: WaterMapping | null | undefined, sessionId: 
       }
     }
   }
-  return { hull,lines,spacingCm,matrix,estimated };
+  const clipPolygon = mapping.water_region_polygon_px ?? hull;
+  if (!Array.isArray(clipPolygon) || clipPolygon.length < 3 || clipPolygon.length > 100 || clipPolygon.some(p => !Array.isArray(p) || p.length !== 2 || !p.every(Number.isFinite) || !insideHull(p as Point, hull))) return null;
+  return { hull,clipPolygon: clipPolygon as Point[],lines,spacingCm,matrix,estimated };
 }

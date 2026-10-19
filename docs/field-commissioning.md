@@ -227,3 +227,10 @@ The integration scenarios are:
 - rig disturbance followed by a fresh case after revalidation
 
 No invalid path creates a READY receipt.
+
+## Marker-assisted registration (dry development)
+
+See [the setup, frozen thresholds and real-rig checklist](tank-marker-registration.md)
+for optional ArUco proposals, independent checks and stale-map gates. The manual
+workflow remains available; no physical accuracy or unchanged flow is certified
+by the synthetic demonstration at `/registration-demo`.

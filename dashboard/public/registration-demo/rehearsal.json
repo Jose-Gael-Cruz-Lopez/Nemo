@@ -1,0 +1,906 @@
+{
+  "schema_version": "tank_registration_rehearsal_v1",
+  "data_origin": "SYNTHETIC",
+  "physical_accuracy_validated": false,
+  "policy": {
+    "version": "tank_registration_v1",
+    "interval_s": 0.5,
+    "max_age_s": 1.5,
+    "stable_frames": 3,
+    "max_shift_cm": 0.2,
+    "geometry_shift_cm": 0.3,
+    "min_laplacian_variance": 20,
+    "max_pixels": 2073600,
+    "black_value_max": 65,
+    "green_hsv_lower": [
+      35,
+      80,
+      40
+    ],
+    "green_hsv_upper": [
+      85,
+      255,
+      255
+    ],
+    "min_contour_area_px": 200,
+    "max_contours": 64,
+    "max_vertices": 32
+  },
+  "steps": [
+    {
+      "step": "01-aligned",
+      "status": {
+        "schema_version": "tank_registration_status_v1",
+        "state": "STABLE_APPROVED",
+        "reason": "Operator approved mapping; drift admission is separate",
+        "proposal_id": "d14c7e9fe78518427df0958726659207968805daa1d70e84a74cb69c0ecb2101",
+        "ready_for_approval": true,
+        "mapping_current": true,
+        "data_origin": "SYNTHETIC",
+        "physical_accuracy_validated": false,
+        "stable_frames": 3,
+        "policy": {
+          "version": "tank_registration_v1",
+          "interval_s": 0.5,
+          "max_age_s": 1.5,
+          "stable_frames": 3,
+          "max_shift_cm": 0.2,
+          "geometry_shift_cm": 0.3,
+          "min_laplacian_variance": 20,
+          "max_pixels": 2073600,
+          "black_value_max": 65,
+          "green_hsv_lower": [
+            35,
+            80,
+            40
+          ],
+          "green_hsv_upper": [
+            85,
+            255,
+            255
+          ],
+          "min_contour_area_px": 200,
+          "max_contours": 64,
+          "max_vertices": 32
+        },
+        "proposal": {
+          "calibration": {
+            "homography_image_to_cm": [
+              [
+                0.05000052777726505,
+                4.8795858633401544e-12,
+                -5.975274212185837
+              ],
+              [
+                1.3512806803268327e-11,
+                0.050000860551677365,
+                -5.975361023298666
+              ],
+              [
+                7.517420866481479e-13,
+                2.4500819963907234e-13,
+                1.0
+              ]
+            ],
+            "mean_error_cm": 0.007937215652862092,
+            "max_error_cm": 0.008156480937857483,
+            "validation_count": 12,
+            "max_allowed_error_cm": 0.5,
+            "approved": true,
+            "image_size_px": [
+              1040,
+              840
+            ],
+            "camera_session_id": "synthetic-dry",
+            "plane": "measured_water_surface",
+            "units": "cm",
+            "calibration_id": "cal-bf033175d8a47046"
+          },
+          "fit_pixels": [
+            [
+              39.612491607666016,
+              39.612491607666016
+            ],
+            [
+              79.38751220703125,
+              39.61248779296875
+            ],
+            [
+              79.38751220703125,
+              79.38751220703125
+            ],
+            [
+              39.612491607666016,
+              79.38751220703125
+            ],
+            [
+              959.6124877929688,
+              39.612491607666016
+            ],
+            [
+              999.3875122070312,
+              39.61248779296875
+            ],
+            [
+              999.3875122070312,
+              79.38751220703125
+            ],
+            [
+              959.6124877929688,
+              79.38751220703125
+            ],
+            [
+              959.6124877929688,
+              759.6124877929688
+            ],
+            [
+              999.3875122070312,
+              759.6124877929688
+            ],
+            [
+              999.3875122070312,
+              799.3875122070312
+            ],
+            [
+              959.6124877929688,
+              799.3875122070312
+            ],
+            [
+              39.612491607666016,
+              759.6124877929688
+            ],
+            [
+              79.38751220703125,
+              759.6124877929688
+            ],
+            [
+              79.38751220703125,
+              799.3875122070312
+            ],
+            [
+              39.612491607666016,
+              799.3875122070312
+            ]
+          ],
+          "water_polygon_px": [
+            [
+              119.50422279981662,
+              119.50516362629634
+            ],
+            [
+              919.4957790291074,
+              119.50516341009744
+            ],
+            [
+              919.4957790881547,
+              719.4948374881925
+            ],
+            [
+              119.5042227412632,
+              719.4948373435651
+            ]
+          ],
+          "references": {
+            "2": [
+              [
+                959.6124877929688,
+                759.6124877929688
+              ],
+              [
+                999.3875122070312,
+                759.6124877929688
+              ],
+              [
+                999.3875122070312,
+                799.3875122070312
+              ],
+              [
+                959.6124877929688,
+                799.3875122070312
+              ]
+            ],
+            "6": [
+              [
+                499.61248779296875,
+                759.6124877929688
+              ],
+              [
+                539.3875122070312,
+                759.6124877929688
+              ],
+              [
+                539.3875122070312,
+                799.3875122070312
+              ],
+              [
+                499.61248779296875,
+                799.3875122070312
+              ]
+            ],
+            "3": [
+              [
+                39.612491607666016,
+                759.6124877929688
+              ],
+              [
+                79.38751220703125,
+                759.6124877929688
+              ],
+              [
+                79.38751220703125,
+                799.3875122070312
+              ],
+              [
+                39.612491607666016,
+                799.3875122070312
+              ]
+            ],
+            "5": [
+              [
+                959.6124877929688,
+                399.61248779296875
+              ],
+              [
+                999.3875122070312,
+                399.61248779296875
+              ],
+              [
+                999.3875122070312,
+                439.38751220703125
+              ],
+              [
+                959.6124877929688,
+                439.38751220703125
+              ]
+            ],
+            "1": [
+              [
+                959.6124877929688,
+                39.612491607666016
+              ],
+              [
+                999.3875122070312,
+                39.61248779296875
+              ],
+              [
+                999.3875122070312,
+                79.38751220703125
+              ],
+              [
+                959.6124877929688,
+                79.38751220703125
+              ]
+            ],
+            "4": [
+              [
+                499.61248779296875,
+                39.612491607666016
+              ],
+              [
+                539.3875122070312,
+                39.61248779296875
+              ],
+              [
+                539.3875122070312,
+                79.38751220703125
+              ],
+              [
+                499.61248779296875,
+                79.38751220703125
+              ]
+            ],
+            "0": [
+              [
+                39.612491607666016,
+                39.612491607666016
+              ],
+              [
+                79.38751220703125,
+                39.61248779296875
+              ],
+              [
+                79.38751220703125,
+                79.38751220703125
+              ],
+              [
+                39.612491607666016,
+                79.38751220703125
+              ]
+            ]
+          },
+          "config_sha256": "74e9cfcc389f72a4a3d86717dec8d613079014acac490aaf2ec7cbb4e186b171",
+          "policy_sha256": "b9e8db31acc741893cf838e8eaf2229d7816b0e6f9c3fabc2a1fbdf7d8dea420",
+          "opencv_version": "4.14.0",
+          "frame_pixels_sha256": "6479f4a3e4551f85f98578376d852b37dce75bca488bf90151da8660500e0729",
+          "frame_identity": {
+            "camera_session_id": "synthetic-dry",
+            "sequence": 0,
+            "received_mono_s": 0.0
+          }
+        },
+        "geometry_layers": {
+          "tray_boundary": {
+            "status": "CANDIDATE",
+            "candidates": [
+              {
+                "polygon_px": [
+                  [
+                    120.0,
+                    120.0
+                  ],
+                  [
+                    120.0,
+                    719.0
+                  ],
+                  [
+                    919.0,
+                    719.0
+                  ],
+                  [
+                    919.0,
+                    120.0
+                  ]
+                ],
+                "polygon_cm": [
+                  [
+                    0.024789121668553304,
+                    0.024742244521195157
+                  ],
+                  [
+                    0.0247891245877873,
+                    29.975257706994388
+                  ],
+                  [
+                    39.975210783970184,
+                    29.97525769978672
+                  ],
+                  [
+                    39.975210786914076,
+                    0.024742255303066257
+                  ]
+                ]
+              }
+            ],
+            "operator_confirmed": false
+          },
+          "filter_border": {
+            "status": "CANDIDATE",
+            "candidates": [
+              {
+                "polygon_px": [
+                  [
+                    600.0,
+                    318.0
+                  ],
+                  [
+                    598.0,
+                    520.0
+                  ],
+                  [
+                    640.0,
+                    522.0
+                  ],
+                  [
+                    642.0,
+                    320.0
+                  ]
+                ],
+                "polygon_cm": [
+                  [
+                    24.025042443016666,
+                    9.924912634992559
+                  ],
+                  [
+                    23.92504138735259,
+                    20.025086460100827
+                  ],
+                  [
+                    26.02506355196143,
+                    20.125088181068747
+                  ],
+                  [
+                    26.125064607723083,
+                    10.024914356289125
+                  ]
+                ]
+              }
+            ],
+            "operator_confirmed": false
+          },
+          "protected_zone": {
+            "status": "NOT_ASSIGNED"
+          },
+          "token_track": {
+            "status": "NOT_ANALYZED"
+          }
+        },
+        "calibration_id": "cal-bf033175d8a47046",
+        "flow_admission": "SEPARATE_EXISTING_CONTRACT_REQUIRED"
+      }
+    },
+    {
+      "step": "02-bumped-stale",
+      "status": {
+        "schema_version": "tank_registration_status_v1",
+        "state": "MOVED_STALE",
+        "reason": "Reference displacement exceeds frozen 0.2 cm stability gate",
+        "proposal_id": "d14c7e9fe78518427df0958726659207968805daa1d70e84a74cb69c0ecb2101",
+        "ready_for_approval": false,
+        "mapping_current": false,
+        "data_origin": "SYNTHETIC",
+        "physical_accuracy_validated": false,
+        "stable_frames": 3,
+        "policy": {
+          "version": "tank_registration_v1",
+          "interval_s": 0.5,
+          "max_age_s": 1.5,
+          "stable_frames": 3,
+          "max_shift_cm": 0.2,
+          "geometry_shift_cm": 0.3,
+          "min_laplacian_variance": 20,
+          "max_pixels": 2073600,
+          "black_value_max": 65,
+          "green_hsv_lower": [
+            35,
+            80,
+            40
+          ],
+          "green_hsv_upper": [
+            85,
+            255,
+            255
+          ],
+          "min_contour_area_px": 200,
+          "max_contours": 64,
+          "max_vertices": 32
+        },
+        "proposal": null,
+        "geometry_layers": {},
+        "calibration_id": null,
+        "flow_admission": "SEPARATE_EXISTING_CONTRACT_REQUIRED"
+      }
+    },
+    {
+      "step": "03-realigned-candidate",
+      "status": {
+        "schema_version": "tank_registration_status_v1",
+        "state": "CANDIDATE_MAPPING",
+        "reason": "Independent checks passed; explicit operator approval required",
+        "proposal_id": "f6bbccc4fa89ff8db420408b4a84be9efa3b1931377b6fe6b8f5bd1fc22df33a",
+        "ready_for_approval": true,
+        "mapping_current": false,
+        "data_origin": "SYNTHETIC",
+        "physical_accuracy_validated": false,
+        "stable_frames": 3,
+        "policy": {
+          "version": "tank_registration_v1",
+          "interval_s": 0.5,
+          "max_age_s": 1.5,
+          "stable_frames": 3,
+          "max_shift_cm": 0.2,
+          "geometry_shift_cm": 0.3,
+          "min_laplacian_variance": 20,
+          "max_pixels": 2073600,
+          "black_value_max": 65,
+          "green_hsv_lower": [
+            35,
+            80,
+            40
+          ],
+          "green_hsv_upper": [
+            85,
+            255,
+            255
+          ],
+          "min_contour_area_px": 200,
+          "max_contours": 64,
+          "max_vertices": 32
+        },
+        "proposal": {
+          "calibration": {
+            "homography_image_to_cm": [
+              [
+                0.05004492543646171,
+                -0.0008255007836462723,
+                -7.063556513110029
+              ],
+              [
+                0.0005637666080122438,
+                0.049910284020872595,
+                -6.584763279115651
+              ],
+              [
+                -9.995029769497804e-06,
+                9.869544984040956e-06,
+                0.9999999999999999
+              ]
+            ],
+            "mean_error_cm": 0.01113119437935676,
+            "max_error_cm": 0.014527106005827479,
+            "validation_count": 12,
+            "max_allowed_error_cm": 0.5,
+            "approved": true,
+            "image_size_px": [
+              1040,
+              840
+            ],
+            "camera_session_id": "synthetic-dry",
+            "plane": "measured_water_surface",
+            "units": "cm",
+            "calibration_id": "cal-00f05e2e28275309"
+          },
+          "fit_pixels": [
+            [
+              62.283302307128906,
+              51.34269332885742
+            ],
+            [
+              101.87748718261719,
+              50.73397445678711
+            ],
+            [
+              102.5126724243164,
+              90.49134826660156
+            ],
+            [
+              62.782588958740234,
+              91.00611114501953
+            ],
+            [
+              973.40771484375,
+              41.59455871582031
+            ],
+            [
+              1012.3450317382812,
+              41.406097412109375
+            ],
+            [
+              1013.3297119140625,
+              80.48661804199219
+            ],
+            [
+              974.4105834960938,
+              81.16133880615234
+            ],
+            [
+              990.9903564453125,
+              760.6023559570312
+            ],
+            [
+              1030.341796875,
+              759.7684326171875
+            ],
+            [
+              1031.36376953125,
+              799.658447265625
+            ],
+            [
+              991.990478515625,
+              800.43994140625
+            ],
+            [
+              73.59026336669922,
+              776.7694091796875
+            ],
+            [
+              113.46774291992188,
+              776.1476440429688
+            ],
+            [
+              114.27671813964844,
+              816.4012451171875
+            ],
+            [
+              74.32476043701172,
+              817.273681640625
+            ]
+          ],
+          "water_polygon_px": [
+            [
+              143.29385581861314,
+              130.31340365347987
+            ],
+            [
+              935.9085396072649,
+              121.36034517051566
+            ],
+            [
+              950.4102814647899,
+              720.841493068648
+            ],
+            [
+              153.26361330522752,
+              734.717154590459
+            ]
+          ],
+          "references": {
+            "3": [
+              [
+                73.59026336669922,
+                776.7694091796875
+              ],
+              [
+                113.46774291992188,
+                776.1476440429688
+              ],
+              [
+                114.27671813964844,
+                816.4012451171875
+              ],
+              [
+                74.32476043701172,
+                817.273681640625
+              ]
+            ],
+            "6": [
+              [
+                534.480224609375,
+                768.6177368164062
+              ],
+              [
+                574.0536499023438,
+                767.9172973632812
+              ],
+              [
+                574.7869873046875,
+                808.1318969726562
+              ],
+              [
+                535.3485107421875,
+                808.7322387695312
+              ]
+            ],
+            "2": [
+              [
+                990.9903564453125,
+                760.6023559570312
+              ],
+              [
+                1030.341796875,
+                759.7684326171875
+              ],
+              [
+                1031.36376953125,
+                799.658447265625
+              ],
+              [
+                991.990478515625,
+                800.43994140625
+              ]
+            ],
+            "5": [
+              [
+                982.2490234375,
+                399.6993713378906
+              ],
+              [
+                1021.3394165039062,
+                399.387939453125
+              ],
+              [
+                1022.3092651367188,
+                438.9005126953125
+              ],
+              [
+                983.1704711914062,
+                439.4552307128906
+              ]
+            ],
+            "0": [
+              [
+                62.283302307128906,
+                51.34269332885742
+              ],
+              [
+                101.87748718261719,
+                50.73397445678711
+              ],
+              [
+                102.5126724243164,
+                90.49134826660156
+              ],
+              [
+                62.782588958740234,
+                91.00611114501953
+              ]
+            ],
+            "4": [
+              [
+                519.7213745117188,
+                46.54350662231445
+              ],
+              [
+                559.2127075195312,
+                45.97762680053711
+              ],
+              [
+                560.06103515625,
+                85.46128845214844
+              ],
+              [
+                520.650146484375,
+                86.0608901977539
+              ]
+            ],
+            "1": [
+              [
+                973.40771484375,
+                41.59455871582031
+              ],
+              [
+                1012.3450317382812,
+                41.406097412109375
+              ],
+              [
+                1013.3297119140625,
+                80.48661804199219
+              ],
+              [
+                974.4105834960938,
+                81.16133880615234
+              ]
+            ]
+          },
+          "config_sha256": "74e9cfcc389f72a4a3d86717dec8d613079014acac490aaf2ec7cbb4e186b171",
+          "policy_sha256": "b9e8db31acc741893cf838e8eaf2229d7816b0e6f9c3fabc2a1fbdf7d8dea420",
+          "opencv_version": "4.14.0",
+          "frame_pixels_sha256": "9633d29b32cd34cf1245fb96405a6f72cf7965648026af21ca27f2e4547014de",
+          "frame_identity": {
+            "camera_session_id": "synthetic-dry",
+            "sequence": 0,
+            "received_mono_s": 0.0
+          }
+        },
+        "geometry_layers": {
+          "tray_boundary": {
+            "status": "CANDIDATE",
+            "candidates": [
+              {
+                "polygon_px": [
+                  [
+                    936.0,
+                    121.0
+                  ],
+                  [
+                    143.0,
+                    130.0
+                  ],
+                  [
+                    153.0,
+                    735.0
+                  ],
+                  [
+                    950.0,
+                    721.0
+                  ]
+                ],
+                "polygon_cm": [
+                  [
+                    40.005094998403386,
+                    -0.0180809283502111
+                  ],
+                  [
+                    -0.0144493907704331,
+                    -0.01581004365019475
+                  ],
+                  [
+                    -0.013349572663134981,
+                    30.0137269021825
+                  ],
+                  [
+                    39.97906021763553,
+                    30.007527779089415
+                  ]
+                ]
+              }
+            ],
+            "operator_confirmed": false
+          },
+          "filter_border": {
+            "status": "CANDIDATE",
+            "candidates": [
+              {
+                "polygon_px": [
+                  [
+                    625.0,
+                    323.0
+                  ],
+                  [
+                    627.0,
+                    525.0
+                  ],
+                  [
+                    630.0,
+                    528.0
+                  ],
+                  [
+                    669.0,
+                    527.0
+                  ],
+                  [
+                    667.0,
+                    325.0
+                  ]
+                ],
+                "polygon_cm": [
+                  [
+                    24.021367228391956,
+                    9.918954976188884
+                  ],
+                  [
+                    23.90717201236011,
+                    19.99331769325091
+                  ],
+                  [
+                    24.054999790139984,
+                    20.14491196503859
+                  ],
+                  [
+                    26.020110606131855,
+                    20.125010448437507
+                  ],
+                  [
+                    26.138536358197392,
+                    10.046864290033136
+                  ]
+                ]
+              }
+            ],
+            "operator_confirmed": false
+          },
+          "protected_zone": {
+            "status": "NOT_ASSIGNED"
+          },
+          "token_track": {
+            "status": "NOT_ANALYZED"
+          }
+        },
+        "calibration_id": null,
+        "flow_admission": "SEPARATE_EXISTING_CONTRACT_REQUIRED"
+      }
+    },
+    {
+      "step": "04-missing-reference",
+      "status": {
+        "schema_version": "tank_registration_status_v1",
+        "state": "MOVED_STALE",
+        "reason": "REFERENCE_IDS: missing [0]; unexpected []",
+        "proposal_id": "f6bbccc4fa89ff8db420408b4a84be9efa3b1931377b6fe6b8f5bd1fc22df33a",
+        "ready_for_approval": false,
+        "mapping_current": false,
+        "data_origin": "SYNTHETIC",
+        "physical_accuracy_validated": false,
+        "stable_frames": 3,
+        "policy": {
+          "version": "tank_registration_v1",
+          "interval_s": 0.5,
+          "max_age_s": 1.5,
+          "stable_frames": 3,
+          "max_shift_cm": 0.2,
+          "geometry_shift_cm": 0.3,
+          "min_laplacian_variance": 20,
+          "max_pixels": 2073600,
+          "black_value_max": 65,
+          "green_hsv_lower": [
+            35,
+            80,
+            40
+          ],
+          "green_hsv_upper": [
+            85,
+            255,
+            255
+          ],
+          "min_contour_area_px": 200,
+          "max_contours": 64,
+          "max_vertices": 32
+        },
+        "proposal": null,
+        "geometry_layers": {},
+        "calibration_id": null,
+        "flow_admission": "SEPARATE_EXISTING_CONTRACT_REQUIRED"
+      }
+    }
+  ],
+  "report_sha256": "094820d1eed793f01be2bc011f67b5bf0fdeebacaac88d9eb6d47bc4fabf6098"
+}
