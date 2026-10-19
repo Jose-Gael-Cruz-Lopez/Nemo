@@ -56,3 +56,10 @@ speed = sqrt(vx² + vy²) cm/s
 The software uses recorded frame receipt timestamps; these are not independently measured camera exposure times. One visible red token is tracked at a time. Missing or multiple detections create gaps; the software does not bridge them into invented motion. Pump GPH is not converted into a local token speed.
 
 Actual water-plane measurements, calibrated drift recordings, held-out flow/path error, source trials and interception outcomes are **still required**. They have not been produced by activating this preview. NOAA/PacIOOS ocean trajectories and the illustrative ocean layout comparison remain separate from these future centimetre-scale tank measurements.
+
+## Marker-assisted registration (dry development)
+
+See [the setup, frozen thresholds and real-rig checklist](tank-marker-registration.md)
+for optional ArUco proposals, independent checks and stale-map gates. The manual
+workflow remains available; no physical accuracy or unchanged flow is certified
+by the synthetic demonstration at `/registration-demo`.

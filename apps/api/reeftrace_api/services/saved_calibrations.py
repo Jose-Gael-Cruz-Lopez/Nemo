@@ -68,6 +68,8 @@ class SavedCalibrationService:
 
     def revalidate(self, body):
         source = validate_saved_record(body.source.source_record)
+        if self.runtime.registration.is_managed(source["calibration_id"]):
+            raise ValueError("Marker-managed maps need a new monitored proposal, not detached reuse")
         if not source["approved"]:
             raise ValueError("Only an originally approved saved calibration can be reused")
         self._current_camera(body)

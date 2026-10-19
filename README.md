@@ -846,3 +846,10 @@ The [fresh study](docs/fresh-noaa-study.md), [matched-current v2 results](docs/m
 <a id="start-locally"></a>
 
 Local startup instructions are in the [development guide](docs/local-development.md#start-locally). All screenshots here are static project captures; their manifests preserve exact bytes and scientific context.
+
+### Marker-assisted water-plane mapping
+
+The optional [registration workflow](docs/tank-marker-registration.md) proposes a
+centimetre grid from surveyed ArUco references and withholds it after a camera
+bump. Try `/registration-demo` for a step-by-step constructed-frame rehearsal;
+physical accuracy and layout-specific drift still require separate validation.

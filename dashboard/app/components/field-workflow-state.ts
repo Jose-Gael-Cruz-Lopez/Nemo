@@ -17,7 +17,7 @@ export const MAX_TABLETOP_SPAN_CM = 200;
 export const DRAFT_KEY = "reeftrace.field-workflow.draft.v1";
 
 export type CameraStatus = { running: boolean; session_id: string | null; fresh: boolean; width: number | null; height: number | null; backend: string | null; device_index: number | null };
-export type CalibrationReport = { calibration_id: string; approved: boolean; camera_session_id: string; max_error_cm: number; max_allowed_error_cm: number; mean_error_cm: number; validation_count: number; image_size_px: [number, number]; homography_image_to_cm?: number[][]; plane?: string; units?: string; mapping_polygon_px?: number[][] };
+export type CalibrationReport = { marker_managed?: boolean; water_region_polygon_px?: number[][]; calibration_id: string; approved: boolean; camera_session_id: string; max_error_cm: number; max_allowed_error_cm: number; mean_error_cm: number; validation_count: number; image_size_px: [number, number]; homography_image_to_cm?: number[][]; plane?: string; units?: string; mapping_polygon_px?: number[][] };
 export type RecordingSummary = { id: string; camera_session_id: string; calibration_id: string; profile_id: string | null; frames: number; observed: number; gaps: number; tracks: number };
 export type FlowNode = { x_cm: number; y_cm: number; vx_cm_s: number; vy_cm_s: number };
 export type FlowResult = { id: string; data_origin: string; nodes: FlowNode[]; diagnostics: { validation_rmse_cm_s: number | null; validation_coverage_fraction: number | null; node_count: number; sample_count: number }; provenance: { calibration_id: string; camera_session_id: string; training_recording_ids: string[]; validation_recording_ids: string[] }; [key: string]: unknown };
@@ -139,6 +139,7 @@ export function parseCalibration(value: unknown, fittingPixels?: number[][]): Ca
     ...(value.homography_image_to_cm !== undefined ? { homography_image_to_cm: value.homography_image_to_cm as number[][] } : {}),
     ...(typeof value.plane === "string" ? { plane: value.plane } : {}), ...(typeof value.units === "string" ? { units: value.units } : {}),
     ...(fittingMarks ? { mapping_polygon_px: fittingMarks.map(p => [...p]) } : {}),
+    ...(value.marker_managed === true ? { marker_managed: true } : {}),
   };
 }
 
@@ -359,7 +360,9 @@ export function decodeDraft(raw: string | null): Draft | null {
     if (!["cm", "mm", "in"].includes(merged.unit) || !Number.isInteger(merged.deviceIndex) || !strings(merged.trainingRecordingIds)
       || !strings(merged.validationRecordingIds) || !isObject(merged.attestations) || !Array.isArray(merged.sources)) return null;
     merged.attestations = { ...emptyAttestations(), ...Object.fromEntries(ATTESTATION_KEYS.map(key => [key, (value.attestations as Record<string, unknown>)?.[key] === true])) };
-    if (merged.calibration) merged.calibration = parseCalibration(merged.calibration);
+    if (merged.calibration) {
+      merged.calibration = parseCalibration(merged.calibration);
+    }
     if (merged.flow) merged.flow = parseFlow(merged.flow);
     if (merged.detector !== "red_hsv" && merged.detector !== "foreground_reference_v1" && merged.detector !== "foreground_surface_v2") return null;
     // A retired development detector must not erase the existing ruler survey.
@@ -370,6 +373,7 @@ export function decodeDraft(raw: string | null): Draft | null {
       return { ...invalidateAfter(merged, "water_plane_mapping"), tokenReference: background };
     }
     if (merged.tokenReference) merged.tokenReference = checkTokenReference(merged.tokenReference);
+    if (merged.calibration?.marker_managed) return { ...invalidateAfter(merged, "water_plane_mapping"), calibration: null };
     return merged;
   } catch { return null; }
 }
